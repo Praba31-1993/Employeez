@@ -36,7 +36,7 @@ export default function ProfilesCard() {
 			<div className="flex justify-content-between pb-2">
 				<Menulistitem />
 				<div className="d-flex align-items-center pe-5">
-					<p className="mb-0 para pe-3" style={{ color: useColors.themeRed }}>Supervisee</p>
+					<p className="mb-0 cursorPointer para pe-3" style={{ color: useColors.themeRed }}>Supervisee</p>
 					<Outlinebutton
 						color={useColors.white}
 						border={`1px solid ${useColors.themeRed}`}
@@ -58,7 +58,7 @@ export default function ProfilesCard() {
 								<h6 className="mb-0 textheader heading2">{list.noofholidays}</h6>
 							</div>
 							<p className="para pt-2 text-center mb-0 shade" style={{ color: isLastChild ? useColors.themeRed : undefined }} >
-								{list.holidaysname} {isLastChild && <span><VisibilityOutlinedIcon className="ps-1" /></span>} </p>
+								{list.holidaysname} {isLastChild && <span><VisibilityOutlinedIcon className="ps-1 cursorPointer" /></span>} </p>
 						</div>
 					);
 				})}

@@ -1,8 +1,8 @@
 import React from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 
-function Circle() {
-  return <CircleIcon className="roundDot" sx={{ fill: "#14E002" }} />;
+function Circle({fill}:any) {
+  return <CircleIcon className="roundDot" sx={{ fill: "fill" }} />;
 }
 
 export default Circle;

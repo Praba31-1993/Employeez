@@ -27,19 +27,19 @@ const useColors = Colors();
             <div className="container-fluid my-3">
                 <div className="row ">
                     {/* Profiles Card Section */}
-                    <div className="col-12 col-md-8">
-                        <div className="dashboardcard mb-2   p-3" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
+                    <div className="col-12 mb-3 col-md-8">
+                        <div className="dashboardcard  h-100  p-3" >
                             <ProfilesCard />
                         </div>
                     </div>
                     {/* List Card Section */}
-                    <div className="col-12 col-md-4">
-                        <div className="card shadow rounded">
+                    <div className="col-12 mb-3 col-md-4">
+                        <div className=" dashboardcard  p-3 h-100" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
                             <ListCard />
                         </div>
                     </div>
-                    <div className=" col-12 col-md-4" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
-                        <div className="dashboardcard">
+                    <div className=" col-12 mb-3 col-md-6 " >
+                        <div className="dashboardcard p-3 h-100" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
                          <Pendinginvoice />
                         </div>
                         
