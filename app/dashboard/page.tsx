@@ -20,7 +20,7 @@ const Dashboard = () => {
     return (
 
         <Sidebar>
-            <div className="container-fluid">
+            <div className="container-fluid" style={{border:"1px solid black"}}>
                 <div className="row ">
                     {/* Profiles Card Section */}
                     <div className="col-12 col-md-8">
@@ -38,12 +38,11 @@ const Dashboard = () => {
                 {/* Second Row */}
 
                 <div className="row">
-                    {/* Profiles Card Section */}
                     <div className="card col-12 col-md-4">
                         <Pendinginvoice />
                     </div>
 
-                    <div className="card col-12 col-md-4">
+                    {/* <div className="card col-12 col-md-4">
                         <ListItem>
                             <ListItemText primary="Pending invoices" />
                         </ListItem>
@@ -61,9 +60,9 @@ const Dashboard = () => {
                                 <Divider />
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
-                    <div className="card col-12 col-md-4">
+                    {/* <div className="card col-12 col-md-4">
                         <ListItem>
                             <ListItemText primary="Pending invoices" />
                         </ListItem>
@@ -81,10 +80,9 @@ const Dashboard = () => {
                                 <Divider />
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
-                {/* Third Row */}
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="d-flex gap-3">
                             <Cards />
@@ -96,7 +94,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="col-12 col-md-6">B</div>
-                </div>
+                </div> */}
             </div>
         </Sidebar>
 

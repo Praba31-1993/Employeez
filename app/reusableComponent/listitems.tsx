@@ -7,6 +7,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Checkbox from "@mui/material/Checkbox";
 import Avatar from "@mui/material/Avatar";
 import ClickableChips from "./chips";
+import Menulistitem from "./menulist";
 
 export default function ListCard() {
   return (
@@ -16,20 +17,15 @@ export default function ListCard() {
       {[0, 1].map((value) => {
         const labelId = `checkbox-list-secondary-label-${value}`;
         return (
-          <ListItem>
-            <ListItemButton sx={{ p: 0 }}>
-              <ListItemAvatar>
-                <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
-                />
-              </ListItemAvatar>
-              <ListItemText>
-                Your request for leave on 1 Oct 2024 has been approved
-              </ListItemText>
-            </ListItemButton>
+          <div className="d-flex justify-content-between p-2">
+            <div className="d-flex align-items-center">
+              <Avatar src="" alt="Remy Sharp" />
+
+              <h5 className="para ps-2 mb-0 ">Your request for leave</h5>
+            </div>
+
             <ClickableChips label={"Pending"} />
-          </ListItem>
+          </div>
         );
       })}
     </List>
