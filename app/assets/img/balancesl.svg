@@ -1,0 +1,13 @@
+<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 9171">
+<circle id="Ellipse 9" cx="17.5" cy="17.5" r="17.5" fill="#FD6584"/>
+<g id="airline_seat_flat">
+<mask id="mask0_625_10634" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="6" y="5" width="24" height="24">
+<rect id="Bounding box" x="6" y="5" width="24" height="24" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_625_10634)">
+<path id="airline_seat_flat_2" d="M15 19V12H24C25.1 12 26.0417 12.3917 26.825 13.175C27.6083 13.9583 28 14.9 28 16V19H15ZM8 22V20H28V22H8ZM11 19C10.1667 19 9.45833 18.7083 8.875 18.125C8.29167 17.5417 8 16.8333 8 16C8 15.1667 8.29167 14.4583 8.875 13.875C9.45833 13.2917 10.1667 13 11 13C11.8333 13 12.5417 13.2917 13.125 13.875C13.7083 14.4583 14 15.1667 14 16C14 16.8333 13.7083 17.5417 13.125 18.125C12.5417 18.7083 11.8333 19 11 19Z" fill="white"/>
+</g>
+</g>
+</g>
+</svg>
