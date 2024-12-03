@@ -69,9 +69,9 @@ const useColors = Colors();
                                 <Divider />
                             </div>
                         ))}
-                    </div>
+                    </div> 
 
-                    <div className="card col-12 col-md-4">
+                    {/* <div className="card col-12 col-md-4">
                         <ListItem>
                             <ListItemText primary="Pending invoices" />
                         </ListItem>
@@ -89,10 +89,9 @@ const useColors = Colors();
                                 <Divider />
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
-                {/* Third Row */}
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="d-flex gap-3">
                             <Cards />
@@ -104,7 +103,7 @@ const useColors = Colors();
                         </div>
                     </div>
                     <div className="col-12 col-md-6">B</div>
-                </div>
+                </div> */}
             </div>
         </Sidebar>
 
@@ -112,4 +111,4 @@ const useColors = Colors();
 };
 
 export default Dashboard
-    ;
+    
