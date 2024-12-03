@@ -47,12 +47,12 @@ export default function ProfilesCard() {
 
 				</div>
 			</div>
-			<div className="d-flex pt-2  pe-2" style={{ gap: "4%" }}>
+			<div className="d-flex pt-2  pe-2 gap-lg-3 gap-xxl-5" >
 				{arrayList?.map((list: any, index: number) => {
 					const isLastChild = index === arrayList.length - 1;
 
 					return (
-						<div key={index} className="d-flex my-2 flex-column">
+						<div key={index} className="d-flex my-2 flex-column ">
 							<div className="d-flex gap-2 align-items-center">
 								<Image src={list.img} alt="" />
 								<h6 className="mb-0 textheader heading2">{list.noofholidays}</h6>
