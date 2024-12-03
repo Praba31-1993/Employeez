@@ -11,10 +11,10 @@ import Circle from "../reusableComponent/circle";
 
 function Pendinginvoice() {
     const arrayList = [
-        { invoicename: "Weekly", fill: "32", },
-        { invoicename: "Fortnightly", fill: "11", },
-        { invoicename: "Monthly", fill: "12", },
-        { invoicename: "Custom", fill: "12", },
+        { invoicename: "Weekly", fill: "#16B1FF", },
+        { invoicename: "Fortnightly", fill: "#FFB300", },
+        { invoicename: "Monthly", fill: "#FF4C51", },
+        { invoicename: "Custom", fill: "#6C63FF", },
     ];
     return (
         <>
@@ -40,7 +40,7 @@ function Pendinginvoice() {
                             <div className="col-sm-12 col-md-6 mt-2">
                                 <div key={index} className={`d-flex justify-content-between gap-3 `} >
                                     <div className="">
-                                        <p className="mb-0"><span className="pe-2"><Circle /></span>{list.invoicename}</p>
+                                        <p className="mb-0"><span className="pe-2"><Circle fill={list.fill} /></span>{list.invoicename}</p>
                                         <p className="mb-0 ps-3">12</p>
                                     </div>
                                 </div>
