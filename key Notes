@@ -1,0 +1,25 @@
+Font awesome NPM Command 
+
+npm install --save @fortawesome/fontawesome-svg-core       @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome 
+
+https://docs.fontawesome.com/web/use-with/react/use-with 
+ 
+React UI Material NPM Command 
+ 
+npm install @mui/material @emotion/react @emotion/styled @emotion/server 
+
+For Styles (https://v4.mui.com/styles/basics/)
+
+npm install @material-ui/styles
+
+
+ 
+
+Pending work on 21/11/2024:
+
+ 1. when Ipad and mobile screen menu icon will show by default. When I click sidebar will show for Sidebar 
+ 2. Validation for Credential Screen.
+ 3. Creating api screen and Bearer Token.
+
+
+ 

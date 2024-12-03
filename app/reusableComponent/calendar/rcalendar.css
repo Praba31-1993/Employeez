@@ -1,0 +1,19 @@
+.dates {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem;
+    opacity: 0;
+    
+  }
+  
+  .dates:hover {
+    background: blue!important;
+    border: 2px solid red;
+    pointer-events: auto; /* Allows interaction on hover */
+  }
+  

@@ -1,0 +1,27 @@
+.normalTextStyles {
+  color: "#707070";
+  font-family: Inter;
+  font-size: 12px !important;
+  font-weight: 400;
+}
+
+.draggable {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.draggable:active {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
