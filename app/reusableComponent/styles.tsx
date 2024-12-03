@@ -11,8 +11,8 @@ type TextStylesType = {
 
 export const Colors = () => {
   const selectedColor = useSelector((state: RootState) => state.color.color);
-  const selectedborder = useSelector((state: RootState) => state.color.color);
-  const selectedshadow = useSelector((state: RootState) => state.color.color);
+  const selectedborder = useSelector((state: RootState) => state.color.border);
+  const selectedshadow = useSelector((state: RootState) => state.color.shadow);
 
   return {
     themeRed: selectedColor,

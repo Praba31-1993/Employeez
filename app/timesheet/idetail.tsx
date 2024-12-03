@@ -58,7 +58,7 @@ export function Idetails({ show, close, customsheetlist }: any) {
                                     </div>
                                 </div>
                                 <FontAwesomeIcon
-                                    className="my-2"
+                                    className="my-2 textheader"
                                     icon={faXmark}
                                     onClick={close}
                                 />
