@@ -112,7 +112,10 @@ a {
     background: var(--add-details-timesheet, #8c57ff);
     color: #ffffff;
 }
-
+.dashboardcard{
+    border-radius: 10px;
+background: #FFF;
+}
 .normalTextStyles {
     color: red;
     font-family: Inter;
