@@ -10,18 +10,33 @@ import Outlinebutton from "../reusableComponent/outlinebtn";
 import { Colors } from "../reusableComponent/styles";
 import Button from "@mui/material/Button";
 import Menulistitem from "../reusableComponent/menulist";
+import usedholiday from "@/app/assets/img/usedholidays.svg";
+import totalholidays from "@/app/assets/img/totalholidays.svg";
+import balanceholidays from "@/app/assets/img/balanceholidays.svg";
+import balancecl from "@/app/assets/img/balancecl.svg";
+import balancesl from "@/app/assets/img/balancesl.svg";
+import contact from "@/app/assets/img/contact.svg";
+import Image from "next/image";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 export default function ProfilesCard() {
 	const useColors = Colors();
 
-	const arrayList = ["A", "B", "C", "D", "E", "F"];
+	const arrayList = [
+		{ holidaysname: "Total Holiday", noofholidays: "32", img: totalholidays },
+		{ holidaysname: "Used Holiday", noofholidays: "11", img: usedholiday },
+		{ holidaysname: "Balance Holiday", noofholidays: "12", img: balanceholidays },
+		{ holidaysname: "Balance CL", noofholidays: "12", img: balancecl },
+		{ holidaysname: "Balance SL", noofholidays: "08", img: balancesl },
+		{ holidaysname: "Important contact", noofholidays: "20", img: contact },
+	];
 
 	return (
 		<>
 			<div className="flex justify-content-between pb-2">
 				<Menulistitem />
 				<div className="d-flex align-items-center pe-5">
-					<p className="mb-0 textheader pe-3">Supervisor</p>
+					<p className="mb-0 cursorPointer para pe-3" style={{ color: useColors.themeRed }}>Supervisee</p>
 					<Outlinebutton
 						color={useColors.white}
 						border={`1px solid ${useColors.themeRed}`}
@@ -32,16 +47,22 @@ export default function ProfilesCard() {
 
 				</div>
 			</div>
-			<div className="row p-0">
-				{arrayList?.map((list: any) => (
-					<div className="col">
-						<div className="d-flex gap-2 align-items-center">
-							<Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-							<div>34</div>
+			<div className="d-flex pt-2  pe-2" style={{ gap: "4%" }}>
+				{arrayList?.map((list: any, index: number) => {
+					const isLastChild = index === arrayList.length - 1;
+
+					return (
+						<div key={index} className="d-flex my-2 flex-column">
+							<div className="d-flex gap-2 align-items-center">
+								<Image src={list.img} alt="" />
+								<h6 className="mb-0 textheader heading2">{list.noofholidays}</h6>
+							</div>
+							<p className="para pt-2 text-center mb-0 shade" style={{ color: isLastChild ? useColors.themeRed : undefined }} >
+								{list.holidaysname} {isLastChild && <span><VisibilityOutlinedIcon className="ps-1 cursorPointer" /></span>} </p>
 						</div>
-						<div>John Kumar</div>
-					</div>
-				))}
+					);
+				})}
+
 			</div>
 		</>
 	);
