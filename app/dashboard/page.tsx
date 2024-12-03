@@ -13,18 +13,22 @@ import ImageIcon from "@mui/icons-material/Image";
 import DropdownComponent from "../reusableComponent/dropdown";
 import { Divider } from "@mui/material";
 import Cards from "../reusableComponent/cards";
+import { Colors } from "../reusableComponent/styles";
+
 
 const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
+const useColors = Colors();
+
 
     return (
 
         <Sidebar>
-            <div className="container-fluid">
+            <div className="container-fluid my-3">
                 <div className="row ">
                     {/* Profiles Card Section */}
                     <div className="col-12 col-md-8">
-                        <div className="card shadow rounded p-3">
+                        <div className="dashboardcard mb-2   p-3" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
                             <ProfilesCard />
                         </div>
                     </div>
@@ -34,14 +38,18 @@ const Dashboard = () => {
                             <ListCard />
                         </div>
                     </div>
+                    <div className=" col-12 col-md-4" style={{border:useColors.border,boxShadow:useColors.boxshadow}}>
+                        <div className="dashboardcard">
+                         <Pendinginvoice />
+                        </div>
+                        
+                    </div>
                 </div>
                 {/* Second Row */}
 
                 <div className="row">
                     {/* Profiles Card Section */}
-                    <div className="card col-12 col-md-4">
-                        <Pendinginvoice />
-                    </div>
+                   
 
                     <div className="card col-12 col-md-4">
                         <ListItem>

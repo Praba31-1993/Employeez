@@ -44,7 +44,7 @@ export function Skincustomization() {
                 </div>
 
                 {/* Border Style */}
-                <div onClick={() => handleSelectStyle("0.5px solid #CCC", "0px")}>
+                <div onClick={() => handleSelectStyle("0.5px solid #CCC", "unset")}>
                     <Image
                         src={Border}
                         alt="Border"
