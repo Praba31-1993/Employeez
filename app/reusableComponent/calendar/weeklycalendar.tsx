@@ -90,8 +90,8 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
 
   return (
-    <div className="border-t border-l py-4">
-      <div className="flex gap-3 mx-3">
+    <div className=" pb-4 pe-3">
+      <div className="flex ">
         <FormControl sx={{ width: "fit-content" }}>
           <Select
             labelId="demo-simple-select-label"
@@ -100,6 +100,13 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
             onChange={handleRangeChange}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
           >
             {dropdownRanges.map((range, index) => (
               <MenuItem key={index} value={range}>
@@ -115,6 +122,13 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
             id="year-select"
             value={selectedYear.toString()} // Convert number to string for Material-UI compatibility
             onChange={handleYearChange}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
           >
             {Array.from({ length: 10 }, (_, i) => {
               const year = new Date().getFullYear() - 5 + i; // Generates a range of 10 years
@@ -131,7 +145,7 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
       {/* Weekdays */}
       <div className="grid grid-cols-7 items-center justify-center text-center">
         {weeks.map((week, index) => (
-          <Cell key={index} className="text-xs font-bold uppercase">
+          <Cell key={index} className="para2 unselectcolor">
             {week}
           </Cell>
         ))}
@@ -151,6 +165,7 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
             <Cell
               key={index}
               isActive={isCurrentDate}
+              className="relative para2 textheader"
               onClick={() => {
                 setSelectedDate(date);
                 onChange(date);
