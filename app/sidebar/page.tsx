@@ -494,7 +494,7 @@ const Sidebar = ({ children }: SidebarProps) => {
           </div>
           <div style={{ padding: "0 50px 0 20px" }}>
             {children}
-            {/* <DraggableComponent /> */}
+            <DraggableComponent />
           </div>
         </main>
         <ToastContainer />
