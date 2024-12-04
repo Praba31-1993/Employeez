@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import loginSlice from "./slices/loginSlice";
 import dataSlice from "./slices/testdataSlice";
-import colorReducer from "./slices/colorSlice";
-import modeReducer from "./slices/modeSlice"; // Import the modeSlice reducer
+import colorSlice from "./slices/colorSlice";
+import modeSlice from "./slices/modeSlice";
+import dashboardLayoutSlice from "./slices/dashboardLayoutSlice"
 
 // Create a store and add all reducers
 export const store = configureStore({
   reducer: {
     login: loginSlice,
     testdata: dataSlice,
-    color: colorReducer,
-    mode: modeReducer, // Add the mode reducer here
+    color: colorSlice,
+    mode: modeSlice,
+    dashboardLayout:dashboardLayoutSlice
   },
 });
 
