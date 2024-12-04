@@ -57,9 +57,9 @@ const MonthlyCalendar: React.FC<Props> = ({
   // Define the start and end of the selected range
   const [startRange, endRange] = dropdownRange
     ? dropdownRange.split(" - ").map((date) => {
-        const [day, month, year] = date.split("/").map(Number);
-        return new Date(year, month - 1, day);
-      })
+      const [day, month, year] = date.split("/").map(Number);
+      return new Date(year, month - 1, day);
+    })
     : [new Date(), new Date()];
 
   const totalDaysInRange =
@@ -139,19 +139,29 @@ const MonthlyCalendar: React.FC<Props> = ({
 
 
   console.log('clikcedData', clickedDateData);
-  
+
 
   return (
-    <div className="border-t border-l py-4">
-      <div className="flex gap-3 mx-3">
+    <div className=" pb-4 pe-3">
+      <div className="flex gap-3 me-5">
         <FormControl fullWidth>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
+            className="textheader para"
             value={selectedMonth}
             displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
+            inputProps={{
+              "aria-label": "Without label",
+              style: { border: "none", outline: "none" }, // Apply directly to the input
+            }}
             onChange={handleMonthChange}
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
           >
             {Array.from({ length: 12 }, (_, i) => (
               <MenuItem key={i} value={i}>
@@ -159,14 +169,23 @@ const MonthlyCalendar: React.FC<Props> = ({
               </MenuItem>
             ))}
           </Select>
+
         </FormControl>
 
         <FormControl fullWidth>
           <Select
             labelId="year-select-label"
             id="year-select"
+            className="textheader  para"
             value={selectedYear.toString()}
             onChange={handleYearChange}
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+             
+            }}
           >
             {Array.from({ length: 10 }, (_, i) => {
               const year = new Date().getFullYear() - 5 + i;
@@ -183,7 +202,7 @@ const MonthlyCalendar: React.FC<Props> = ({
       {/* Weekdays */}
       <div className="grid grid-cols-7 items-center justify-center text-center">
         {weeks.map((week, index) => (
-          <Cell key={index} className="text-xs font-bold uppercase">
+          <Cell key={index} className="para2 unselectcolor">
             {week}
           </Cell>
         ))}
@@ -207,12 +226,12 @@ const MonthlyCalendar: React.FC<Props> = ({
               isActive={isCurrentDate}
               onClick={() => handleDateClick(date)}
               isHighlighted={!!valueForDate} // Highlight if data exists
-              className="relative"
+              className="relative para2 textheader"
             >
               {format(date, "d")}
               {/* Show value on hover with inline styles */}
               {valueForDate && (
-                <div className="dates">{valueForDate.value}</div>
+                <div className="dates ">{valueForDate.value}</div>
               )}
             </Cell>
           );

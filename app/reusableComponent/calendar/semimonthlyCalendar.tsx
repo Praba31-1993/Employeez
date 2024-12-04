@@ -100,12 +100,17 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
   const startDay = (startRange.getDay() === 0 ? 7 : startRange.getDay()); // If Sunday, treat it as 7 (Monday start)
   
   return (
-    <div className="border-t border-l py-4">
-      <div className="flex gap-3 mx-3">
+    <div className=" pb-4 pe-3">
+      <div className="flex">
         <FormControl sx={{ width: "fit-content" }}>
           <Select
-            className="heading2 ms-1 textheader bg-transparent"
-            sx={{ outline: "0px !important" }}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
             value={splitMonths.find(
               (m) => m.monthIndex === selectedMonthPart.monthIndex && m.part === selectedMonthPart.part
             )?.label}
@@ -121,8 +126,13 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
 
         <FormControl sx={{ width: "fit-content" }}>
           <Select
-            className="heading2 ms-3 textheader bg-transparent"
-            sx={{ outline: "0px !important" }}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
             value={selectedYear}
             onChange={handleYearChange}
           >
@@ -138,7 +148,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
       {/* Weekdays */}
       <div className="grid grid-cols-7 items-center justify-center text-center">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((week, index) => (
-          <Cell key={index} className="text-xs font-bold uppercase">
+          <Cell key={index}  className="para2 unselectcolor">
             {week}
           </Cell>
         ))}
@@ -157,6 +167,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
             <Cell
               key={index}
               isActive={isCurrentDate}
+              className="relative para2 textheader"
               onClick={() => {
                 setSelectedDate(date);
                 onChange(date);
