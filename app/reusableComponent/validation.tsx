@@ -11,9 +11,7 @@ export function validateUserId(userId :any) {
     const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
     if (!password) {
       return "Password is required.";
-    } else if (!passwordPattern.test(password)) {
-      return "Password must contain at least one uppercase letter, one special character, and be at least 8 characters long.";
-    }
+    } 
     return "";
   }
   

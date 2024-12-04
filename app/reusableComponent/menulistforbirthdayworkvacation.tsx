@@ -5,21 +5,35 @@ import ClickableChips from "./chips";
 
 interface MenulistforbirthdayworkvacationProps {
   headerImage: any;
-  title:string;
-  items:any
+  title: string;
+  items: any;
+  isSalesReport?: boolean;
+  lastmonthReport?: string;
 }
 function Menulistforbirthdayworkvacation({
   headerImage,
   title,
-  items
+  items,
+  isSalesReport,
+  lastmonthReport,
 }: MenulistforbirthdayworkvacationProps) {
- 
   return (
     <div>
       <div className="d-flex justify-content-between ">
-        <p className="textheader heading2">{title}</p>
+        <p className="textheader heading2">
+          {isSalesReport ? (
+            <>
+              {lastmonthReport}
+              <p className="para2">Last month balance {lastmonthReport}</p>{" "}
+            </>
+          ) : (
+            title
+          )}
+        </p>
 
-        <Image src={headerImage} alt="" style={{ marginTop: "-30px" }} />
+        {!isSalesReport && (
+          <Image src={headerImage} alt="" style={{ marginTop: "-30px" }} />
+        )}
       </div>
       <div>
         {items?.map((bday: any) => (
@@ -28,7 +42,9 @@ function Menulistforbirthdayworkvacation({
               <Avatar src="" alt="Remy Sharp" />
               <div>
                 <h5 className="para ps-2 mb-0 ">{bday?.name}</h5>
-                <p className="shade para2 ps-2 mb-0 ">{bday?.role}</p>
+                <p className="shade para2 ps-2 mb-0 ">
+                  {isSalesReport ? bday?.sales : bday?.role}
+                </p>
               </div>
             </div>
             <p className="para2 mb-0 text-start w-20">{bday?.day}</p>
