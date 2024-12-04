@@ -72,6 +72,13 @@ code {
     font-family: "Inter", sans-serif;
     font-size: 12px !important;
 }
+.ellipsis-applied {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
 
 .mutlicolourbtn {
     color: #ffffff;
