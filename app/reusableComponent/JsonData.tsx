@@ -1796,3 +1796,16 @@ export const sampleSummaryView = [
     days: [] as string[],
   },
 ];
+
+export const dashboardLayoutData = [
+  { id: "p1", label: "profile", checked: true },
+  { id: "rs1", label: "Request status", checked: true },
+  { id: "pe1", label: "Project extension", checked: true },
+  { id: "vr1", label: "Vacation report", checked: true },
+  { id: "oj1", label: "Open jobs", checked: true },
+  { id: "iv1", label: "I-9 Verify", checked: true },
+  { id: "sr1", label: "Sales report", checked: true },
+  { id: "ph1", label: "Pending HR action", checked: true },
+  { id: "pp1", label: "Policy/Procedure", checked: true },
+  { id: "cu1", label: "contact-us", checked: true },
+];
