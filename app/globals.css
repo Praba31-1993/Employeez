@@ -59,7 +59,7 @@ code {
 }
 
 .textheader {
-    color: #6d6777 ;
+    color: #6d6777 !important;
 }
 
 .para {
