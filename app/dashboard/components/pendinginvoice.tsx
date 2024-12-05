@@ -28,7 +28,7 @@ function Pendinginvoice() {
 
             <div className="row">
                 <div className="col-lg-7 col-xxl-6">
-                    <div className="chart-wrapper" style={{ width: "100%", height: "300px" }}>
+                    <div className="chart-wrapper" style={{ width: "100%", height: "200px" }}>
                         <Piechart data={arrayList} />
                     </div>
                 </div>
@@ -74,7 +74,7 @@ export function Piechart({ data }: { data: any[] }) {
                 },
             ]}
             width={10}  // Adjust width
-            height={400} // Adjust height
+            height={300} // Adjust height
         />
     );
 }
