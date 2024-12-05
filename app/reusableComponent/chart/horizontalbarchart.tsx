@@ -14,14 +14,13 @@ const chartSetting = {
 
 export default function HorizontalBars() {
   return (
-    <div style={{ overflowX: "auto", width: "100%" }}>
-      <BarChart
-        dataset={datasetData}
-        yAxis={[{ scaleType: "band", dataKey: "month" }]}
-        series={[{ dataKey: "seoul", label: "Seoul rainfall", valueFormatter }]}
-        layout="horizontal"
-        {...chartSetting}
-      />
-    </div>
+    <BarChart
+      dataset={datasetData}
+      yAxis={[{ scaleType: "band", dataKey: "month" }]}
+      series={[{ dataKey: "seoul", label: "Seoul rainfall", valueFormatter }]}
+      layout="horizontal"
+      {...chartSetting}
+      height={245}
+    />
   );
 }
