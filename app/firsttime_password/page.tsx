@@ -7,6 +7,7 @@ import * as React from 'react';
 import  "../assets/img/login.css";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
+import Logintextanimation from "../reusableComponent/logintextanimation";
 
 
 export default function FirstTimepassword() {
@@ -19,13 +20,15 @@ export default function FirstTimepassword() {
     };
     return <section className="login">
         <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
-				<div className="row h-100 w-100">
-					<div className="col-md-6 logogif p-0 d-flex align-items-center justify-content-center" style={{background:useColors.themeRed}}>
+        <div className="row h-100 w-100">
+					<div className="col-md-6 logogif p-0 d-flex align-items-center flex-column  h-100 justify-content-center" style={{ background: useColors.themeRed }}>
+						<h1 className="heading fw-bold text-center py-3 text-white">HR on Cloud</h1>
 						<Player
 							autoplay
 							loop={true} // Stops animation after completing one cycle
 							animationData={loginanimationData} // Use animationData for the Player
-							style={{ height: "80%", width: "80%" }} />
+							style={{ height: "60%", width: "60%" }} />
+						<Logintextanimation />
 					</div>
                 <div className='col-sm-6 align-items-center  d-flex' >
                     <div className='logincard ps-md-5 ms-md-5'>
