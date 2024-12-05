@@ -13,6 +13,7 @@ import ToDoIcon from "@/app/assets/img/todo.svg";
 import Image from "next/image";
 import Outlinebutton from "../../reusableComponent/outlinebtn";
 import Hrdatas from "../components/hrdatas";
+import InterestsIcon from '@mui/icons-material/Interests';
 import {
   arrayList,
   salesReportDatas,
@@ -47,15 +48,15 @@ const SuperAdminDashboard = () => {
 
                 {/*My Request Card  */}
                 <div className="col-12 mb-3 col-md-4">
-                    <div className="dashboardcard  p-3 h-100" style={borderAndBoxShadowStyles}>
+                    <div className="dashboardcard  p-3 h-100  " style={borderAndBoxShadowStyles}>
                         <ListCard />
                     </div>
                 </div>
 
                 {/* Pending Invoice */}
-                <div className=" col-12 mb-3 col-md-5 ">
+                <div className=" col-12 mb-3 col-md-5 "  >
                     <div
-                        className="dashboardcard p-3 h-100"
+                        className="dashboardcard p-3  h-100"
                         style={borderAndBoxShadowStyles}
                     >
                         <Pendinginvoice />
@@ -68,7 +69,8 @@ const SuperAdminDashboard = () => {
                         className="dashboardcard p-3 h-100"
                         style={borderAndBoxShadowStyles}
                     >
-                        <ToDoList />
+                                   <ToDoList title={"My Request"} />{" "}
+ 
                     </div>
                 </div>
 
@@ -103,8 +105,8 @@ const SuperAdminDashboard = () => {
 
         {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
         <div className=" col-12 mb-3 col-md-6 ">
-          <div className="row p-3 g-4">
-            <div className="col-sm-12 col-md-6 h-100 ">
+          <div className="row  h-100 align-content-between">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -119,7 +121,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100">
+            <div className="col-sm-12 col-md-6 ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -134,7 +136,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100 ">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -149,7 +151,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100 ">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{

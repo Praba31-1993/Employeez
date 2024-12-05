@@ -16,7 +16,7 @@ function ToDoList({ title }: ToDoListProps) {
     <div>
       <div>{title}</div>
 
-      {[0, 1, 2,3].map((value) => {
+      {[0, 1, 2,].map((value) => {
         return (
           <>
             <div className="d-flex align-items-start mt-3 p-1 todoList">
