@@ -21,8 +21,9 @@ import {
   HiringCounts,
 } from "../reusableComponent/JsonData";
 import { loginResponse } from "../reusableComponent/JsonData";
-import SuperAdminDashboard from "./superAdminDashboard";
 import Login from "../login/page";
+import SuperAdminDashboard from "./screens/superadmin";
+import HrDashboard from "./screens/hr";
 
 const Dashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -38,7 +39,7 @@ const Dashboard = () => {
 
   return (
     <Sidebar>
-      <SuperAdminDashboard />
+      <SuperAdminDashboard/>
     </Sidebar>
   );
 };
