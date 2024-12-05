@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import ClickableChips from "./chips";
-import user from "../assets/img/Ellipse 14.svg";
-import { Colors } from "./styles";
+import ClickableChips from "../../reusableComponent/chips";
+import user from '@/app/assets/img/Ellipse 14.svg'
+import { Colors } from "../../reusableComponent/styles";
 
 
 interface MenulistforbirthdayworkvacationProps {

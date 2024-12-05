@@ -8,13 +8,13 @@ interface HrdatasProps {
 }
 function Hrdatas({ hrList, isPendingHrData }: HrdatasProps) {
   return (
-    <div>
+    <div className="mb-3">
       {isPendingHrData ? (
-        <div className="d-flex align-items-center mb-1">
+        <div className="dashboardcard p-3 d-flex align-items-center mb-1">
         <Image src={ToDoIcon} alt="" />
 
         <div>
-          {/* <h5 className="para ps-2 mb-0 ">{hrList?.counts}</h5> */}
+          <h5 className="para ps-2 mb-0 ">{hrList?.count}</h5>
           <p className="shade para ps-2 mb-0 ">{hrList?.label}</p>
         </div>
       </div>
@@ -23,7 +23,7 @@ function Hrdatas({ hrList, isPendingHrData }: HrdatasProps) {
           <Image src={ToDoIcon} alt="" />
 
           <div>
-            <h5 className="para ps-2 mb-0 ">{hrList?.counts}</h5>
+            {/* <h5 className="para ps-2 mb-0 ">{hrList?.counts}</h5> */}
             <p className="shade para2 ps-2 mb-0 ">{hrList?.label}</p>
           </div>
         </div>

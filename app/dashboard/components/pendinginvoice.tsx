@@ -1,13 +1,13 @@
 import React from "react";
-import DropdownComponent from "../reusableComponent/dropdown";
+import DropdownComponent from "../../reusableComponent/dropdown";
 import InvoiceChartIcon from "@/app/assets/img/invoicechart.svg";
 import Image from "next/image";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./dashboard.css";
-import { TextStyles } from "../reusableComponent/styles";
-import Circle from "../reusableComponent/circle";
+import { TextStyles } from "../../reusableComponent/styles";
+import Circle from "../../reusableComponent/circle";
 
 function Pendinginvoice() {
     const arrayList = [
