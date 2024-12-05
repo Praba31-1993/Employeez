@@ -3,6 +3,29 @@ import dashboardGrey from "../assets/img/dashboard-grey.svg";
 import timesheetGrey from "../assets/img/timesheet_grey.svg";
 import timesheetWhite from "../assets/img/timesheet_white.svg";
 
+export const loginResponse1 =[
+  {
+    "userInfo": {
+      "id": 36,
+      "empId": "ADM07",
+      "firstName": "Bill",
+      "middleName": "",
+      "lastName": "Thomas",
+      "etype": "EMPH",
+      "paySchedule": "Monthly",
+      "role": "SAB",
+      "hiringDate": "2011-02-08",
+      "hiringModelCode": "W2H",
+      "partialTS": null,
+      "punchIn": "N",
+      "businessUnit": "USA",
+      "projBasedTS": "X",
+      "countryCode": "US"
+    },
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGV2Iiwicm9sZSI6IlNBIiwicGF5c2NoZWR1bGUiOiJNb250aGx5IiwiZXR5cGUiOiJFTVBIIiwiYnVzaW5lc3NVbml0IjoiVVNBIiwicHVuY2hfaW4iOiJOIiwiUHJvakJhc2VkVFMiOiJYIiwiQ291bnRyeUNvZGUiOiJVUyIsIkhpcmluZ01vZGVsQ29kZSI6IlcySCIsImlhdCI6MTczMjU0MjIxMCwiZXhwIjoxNzMzMTQ3MDEwfQ.sRXo4CnW6y3DU1MOiQaraHyPCu_u7ZCmd9gCSgnOb9W_Nmij7RgJTxPUmNHaO4_tH0LyNHzKz-A0AsW_s4w9rQ"
+  }
+]
+
 export const loginResponse =[
   {
     "userInfo": {
@@ -1808,4 +1831,55 @@ export const dashboardLayoutData = [
   { id: "ph1", label: "Pending HR action", checked: true },
   { id: "pp1", label: "Policy/Procedure", checked: true },
   { id: "cu1", label: "contact-us", checked: true },
+];
+
+export const arrayList: any = [
+  {
+    name: "Gloria mehckilm",
+    role: "Assistant manager",
+    day: "Today",
+  },
+  {
+    name: "David mechkam",
+    role: "HR",
+    day: "Tomorrow",
+  },
+];
+
+export const salesReportDatas = [
+  {
+    name: "Total Sales",
+    sales: "$48,568.20",
+  },
+  {
+    name: "Total Income",
+    sales: "$38,453.25",
+  },
+  {
+    name: "Total Expenses",
+    sales: "$2,453.45",
+  },
+  {
+    name: "Pendiing",
+    sales: "$482.85k",
+  },
+];
+
+export const HiringCounts = [
+  {
+    label: "Prehire",
+    count: 22,
+  },
+  {
+    label: "Hiring",
+    count: 22,
+  },
+  {
+    label: "Onboarding",
+    count: 108,
+  },
+  {
+    label: "Supplier Onboarding",
+    count: 22,
+  },
 ];

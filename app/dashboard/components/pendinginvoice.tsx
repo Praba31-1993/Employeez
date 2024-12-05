@@ -1,6 +1,6 @@
 import React from "react";
-import Circle from "../reusableComponent/circle";
 import { PieChart } from "@mui/x-charts/PieChart";
+import Circle from "@/app/reusableComponent/circle";
 
 function Pendinginvoice() {
     const arrayList = [

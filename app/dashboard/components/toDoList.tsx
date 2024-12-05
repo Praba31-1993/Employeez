@@ -8,7 +8,7 @@ import accured from "@/app/assets/img/accured CL.svg";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import "./dashboard.css";
-import { Colors } from "../reusableComponent/styles";
+import { Colors } from "../../reusableComponent/styles";
 
 function ToDoList() {
     const useColors = Colors();
