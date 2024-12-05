@@ -21,10 +21,11 @@ import { RootState, AppDispatch } from "../redux/store";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import { LoginApi } from "../api/Listingapis";
+import Logintextanimation from "../reusableComponent/logintextanimation";
 
 
 export default function Login() {
-	const useColors = Colors(); 
+	const useColors = Colors();
 	const loginanimationData = require("../assets/EmployEz-login-animation.json");
 	const [checked, setChecked] = useState(false);
 	const [userId, setUserId] = useState("");
@@ -67,13 +68,13 @@ export default function Login() {
 			document.cookie = "auth=true; path=/; max-age=86400";
 			toast.success("Login successful!");
 			router.push("/dashboard");
-			
+
 			const params = {
 				usernameOrEmail: "adm07",
 				password: "Test123",
-			  };
-			  
-			  LoginApi(params)
+			};
+
+			LoginApi(params)
 		}
 	};
 
@@ -81,13 +82,15 @@ export default function Login() {
 		<section className="login">
 			<div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
 				<div className="row h-100 w-100">
-					<div className="col-md-6 logogif p-0 d-flex align-items-center flex-column  h-100 justify-content-center" style={{background:useColors.themeRed}}>
+					<div className="col-md-6 logogif p-0 d-flex align-items-center flex-column  h-100 justify-content-center" style={{ background: useColors.themeRed }}>
 						<h1 className="heading fw-bold text-center py-3 text-white">HR on Cloud</h1>
 						<Player
 							autoplay
 							loop={true} // Stops animation after completing one cycle
 							animationData={loginanimationData} // Use animationData for the Player
-							style={{ height: "80%", width: "80%" }} />
+							style={{ height: "60%", width: "60%" }} />
+						<Logintextanimation />
+
 					</div>
 					<div className="col-md-6 d-flex align-items-center justify-content-center">
 						<div className="logincard">
@@ -157,7 +160,7 @@ export default function Login() {
 										control={
 											<Checkbox defaultChecked
 												sx={{
-													cursor:'pointer',
+													cursor: 'pointer',
 													'&.Mui-checked': {
 														color: useColors.themeRed, // Changes the checkmark color
 													}

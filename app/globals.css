@@ -64,7 +64,7 @@ code {
 
 .para {
     font-family: "Inter", sans-serif !important;
-    font-size: 14px;
+    font-size: 14px !important;
     font-weight: 500;
 }
 
