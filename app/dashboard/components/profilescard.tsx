@@ -1,15 +1,7 @@
 import * as React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import Outlinebutton from "../../reusableComponent/outlinebtn";
-import { Colors } from "../../reusableComponent/styles";
-import Button from "@mui/material/Button";
-import Menulistitem from "../../reusableComponent/menulist";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import Menulistitem from "@/app/reusableComponent/menulist";
+import { Colors } from "@/app/reusableComponent/styles";
 import usedholiday from "@/app/assets/img/usedholidays.svg";
 import totalholidays from "@/app/assets/img/totalholidays.svg";
 import balanceholidays from "@/app/assets/img/balanceholidays.svg";
@@ -56,7 +48,7 @@ export default function ProfilesCard() {
           />
         </div>
       </div>
-      <div className="d-flex pt-2  pe-2 gap-lg-3 gap-xxl-5">
+      <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5">
         {arrayList?.map((list: any, index: number) => {
           const isLastChild = index === arrayList.length - 1;
 

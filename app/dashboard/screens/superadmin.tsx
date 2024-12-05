@@ -1,27 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Sidebar from "../sidebar/page";
-import ListCard from "../reusableComponent/listitems";
-import ProfilesCard from "./components/profilescard";
-import Pendinginvoice from "./components/pendinginvoice";
-import { Colors } from "../reusableComponent/styles";
-import ToDoList from "./components/toDoList";
-import Menulistforbirthdayworkvacation from "./components/menulistforbirthdayworkvacation";
+import Sidebar from "../../sidebar/page";
+import ListCard from "../../reusableComponent/listitems";
+import ProfilesCard from "../components/profilescard";
+import Pendinginvoice from "../components/pendinginvoice";
+import { Colors } from "../../reusableComponent/styles";
+import ToDoList from "../components/toDoList";
+import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
 import birthday from "@/app/assets/img/birthday.svg";
 import anniversary from "@/app/assets/img/anniversary.svg";
-import BarChartComponent from "../reusableComponent/chart/barchart";
-import HorizontalBars from "../reusableComponent/chart/horizontalbarchart";
+import BarChartComponent from "../../reusableComponent/chart/barchart";
+import HorizontalBars from "../../reusableComponent/chart/horizontalbarchart";
 import ToDoIcon from "@/app/assets/img/todo.svg";
 import Image from "next/image";
-import Outlinebutton from "../reusableComponent/outlinebtn";
-import Hrdatas from "./components/hrdatas";
+import Outlinebutton from "../../reusableComponent/outlinebtn";
+import Hrdatas from "../components/hrdatas";
 import {
   arrayList,
   salesReportDatas,
   HiringCounts,
-} from "../reusableComponent/JsonData";
+} from "../../reusableComponent/JsonData";
 
-const HrDashboard = () => {
+const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -244,4 +244,4 @@ const HrDashboard = () => {
   );
 };
 
-export default HrDashboard;
+export default SuperAdminDashboard;
