@@ -47,7 +47,7 @@ export default function ProfilesCard() {
 
 				</div>
 			</div>
-			<div className="d-flex pt-2  pe-2 gap-lg-3 gap-xxl-5" >
+			<div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5" >
 				{arrayList?.map((list: any, index: number) => {
 					const isLastChild = index === arrayList.length - 1;
 
