@@ -48,7 +48,7 @@ const SuperAdminDashboard = () => {
 
                 {/*My Request Card  */}
                 <div className="col-12 mb-3 col-md-4">
-                    <div className="dashboardcard  p-3 h-100">
+                    <div className="dashboardcard  p-3 h-100" style={borderAndBoxShadowStyles}>
                         <ListCard />
                     </div>
                 </div>
@@ -75,7 +75,7 @@ const SuperAdminDashboard = () => {
 
                 {/* Upcoming birthday and Work Anniversary */}
                 <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
-                    <div className="row h-100 align-items-between">
+                    <div className="row h-100 align-content-between">
                         <div className="col-12">
                             <div
                                 className="dashboardcard p-2 mb-3"
