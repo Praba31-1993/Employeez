@@ -57,7 +57,7 @@ const HrDashboard = () => {
         {/* Pending HR action */}
 
         <div className="col-12 mb-3 col-md-4 ">
-          <div className="dashboardcard p-3">
+          <div className="dashboardcard p-3 h-100">
             <p className="textheader heading2">Pending HR action</p>
 
             <div style={{ overflowX: "auto", width: "100%", height:'auto' }}>
@@ -67,11 +67,14 @@ const HrDashboard = () => {
         </div>
 
         <div className="col-12 mb-3 col-md-2 ">
+          <div className="row h-100 align-content-between">
+            
           {HiringCounts?.map((list: any, index: number) => (
-            <>
+            <div className="col-12 ">
               <Hrdatas hrList={list} isPendingHrData={true} />
-            </>
+            </div>
           ))}
+          </div>
         </div>
 
         {/* To Do List */}

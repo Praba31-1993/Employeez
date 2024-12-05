@@ -9,8 +9,8 @@ const Dashboard = () => {
   return (
     <Sidebar>
       {/* <SuperAdminDashboard /> */}
-      <HrDashboard/>
-      {/* <ManagerDashboard /> */}
+      {/* <HrDashboard/> */}
+      <ManagerDashboard />
     </Sidebar>
   );
 };

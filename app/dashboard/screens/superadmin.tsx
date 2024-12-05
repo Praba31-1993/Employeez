@@ -87,7 +87,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-12" style={{ alignSelf: "baseline" }}>
+            <div className="col-12" style={{ alignSelf: "end" }}>
               <div
                 className="dashboardcard p-2"
                 style={borderAndBoxShadowStyles}
@@ -169,10 +169,11 @@ const SuperAdminDashboard = () => {
         </div>
 
         {/* Sales Report */}
-        <div className=" col-12 mb-3 col-md-6 p-0">
+        <div className=" col-12 mb-3 col-md-6">
           <div className="dashboardcard p-3">
             <div className="row">
-              <p className="textheader heading2">Sales Report</p>
+            <p className="textheader heading2">Sales Report</p>
+
               <div className=" col-12 mb-3 col-md-7 ">
                 <BarChartComponent />
               </div>

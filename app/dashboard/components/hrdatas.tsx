@@ -8,7 +8,7 @@ interface HrdatasProps {
 }
 function Hrdatas({ hrList, isPendingHrData }: HrdatasProps) {
   return (
-    <div className="mb-3">
+    <div >
       {isPendingHrData ? (
         <div className="dashboardcard p-3 d-flex align-items-center mb-1">
         <Image src={ToDoIcon} alt="" />

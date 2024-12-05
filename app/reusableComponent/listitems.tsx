@@ -12,7 +12,7 @@ export default function ListCard() {
     <List dense sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
       <div className="pb-2 textheader heading2" >My Request</div>
 
-      {[0, 1,2,3].map((value) => {
+      {[0, 1,2].map((value) => {
         const labelId = `checkbox-list-secondary-label-${value}`;
         return (
           <div className="d-flex justify-content-between mt-2 align-items-center pb-2">
