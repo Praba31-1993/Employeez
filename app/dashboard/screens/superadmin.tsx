@@ -13,6 +13,7 @@ import ToDoIcon from "@/app/assets/img/todo.svg";
 import Image from "next/image";
 import Outlinebutton from "../../reusableComponent/outlinebtn";
 import Hrdatas from "../components/hrdatas";
+import InterestsIcon from '@mui/icons-material/Interests';
 import {
   arrayList,
   salesReportDatas,
@@ -32,80 +33,80 @@ const SuperAdminDashboard = () => {
     setbirthdayAnniversaryReport(arrayList);
   }, []);
 
-  return (
-    <div className="container-fluid my-3">
-      <div className="row ">
-        {/* ProfileCard */}
-        <div className="col-12 mb-3 col-md-8">
-          <div
-            className="dashboardcard  h-100  p-3"
-            style={borderAndBoxShadowStyles}
-          >
-            <ProfilesCard />
-          </div>
-        </div>
+    return (
+        <div className="container-fluid my-3">
+            <div className="row ">
+                {/* ProfileCard */}
+                <div className="col-12 mb-3 col-md-8">
+                    <div
+                        className="dashboardcard  h-100  p-3"
+                        style={borderAndBoxShadowStyles}
+                    >
+                        <ProfilesCard />
+                    </div>
+                </div>
 
-        {/*My Request Card  */}
-        <div className="col-12 mb-3 col-md-4">
-          <div className="dashboardcard  p-3 h-100">
-            <ListCard />
-          </div>
-        </div>
+                {/*My Request Card  */}
+                <div className="col-12 mb-3 col-md-4">
+                    <div className="dashboardcard  p-3 h-100  " style={borderAndBoxShadowStyles}>
+                        <ListCard />
+                    </div>
+                </div>
 
-        {/* Pending Invoice */}
-        <div className=" col-12 mb-3 col-md-5 ">
-          <div
-            className="dashboardcard p-3 h-100"
-            style={borderAndBoxShadowStyles}
-          >
-            <Pendinginvoice />
-          </div>
-        </div>
+                {/* Pending Invoice */}
+                <div className=" col-12 mb-3 col-md-5 "  >
+                    <div
+                        className="dashboardcard p-3  h-100"
+                        style={borderAndBoxShadowStyles}
+                    >
+                        <Pendinginvoice />
+                    </div>
+                </div>
 
-        {/* To Do List */}
-        <div className=" col-12 mb-3 col-xxl-3 col-md-4 ">
-          <div
-            className="dashboardcard p-3 h-100"
-            style={borderAndBoxShadowStyles}
-          >
-            <ToDoList title={"My Request"} />{" "}
-          </div>
-        </div>
+                {/* To Do List */}
+                <div className=" col-12 mb-3 col-xxl-3 col-md-4 ">
+                    <div
+                        className="dashboardcard p-3 h-100"
+                        style={borderAndBoxShadowStyles}
+                    >
+                                   <ToDoList title={"My Request"} />{" "}
+ 
+                    </div>
+                </div>
 
-        {/* Upcoming birthday and Work Anniversary */}
-        <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
-          <div className="row h-100 align-items-between">
-            <div className="col-12">
-              <div
-                className="dashboardcard p-2 mb-3"
-                style={borderAndBoxShadowStyles}
-              >
-                <Menulistforbirthdayworkvacation
-                  title={"Upcoming birthday"}
-                  headerImage={birthday}
-                  items={birthdayAnniversaryReport}
-                />
-              </div>
-            </div>
-            <div className="col-12" style={{ alignSelf: "end" }}>
-              <div
-                className="dashboardcard p-2"
-                style={borderAndBoxShadowStyles}
-              >
-                <Menulistforbirthdayworkvacation
-                  title={"Work anniversary"}
-                  headerImage={anniversary}
-                  items={birthdayAnniversaryReport}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+                {/* Upcoming birthday and Work Anniversary */}
+                <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
+                    <div className="row h-100 align-content-between">
+                        <div className="col-12">
+                            <div
+                                className="dashboardcard p-2 mb-3"
+                                style={borderAndBoxShadowStyles}
+                            >
+                                <Menulistforbirthdayworkvacation
+                                    title={"Upcoming birthday"}
+                                    headerImage={birthday}
+                                    items={birthdayAnniversaryReport}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-12" style={{alignSelf:"baseline"}}>
+                            <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+                                <Menulistforbirthdayworkvacation
+                                    title={"Work anniversary"}
+                                    headerImage={anniversary}
+                                    items={birthdayAnniversaryReport}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
 
         {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
         <div className=" col-12 mb-3 col-md-6 ">
-          <div className="row p-3 g-4">
-            <div className="col-sm-12 col-md-6 h-100 ">
+          <div className="row  h-100 align-content-between">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -120,7 +121,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100">
+            <div className="col-sm-12 col-md-6 ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -135,7 +136,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100 ">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{
@@ -150,7 +151,7 @@ const SuperAdminDashboard = () => {
                 />
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 h-100 ">
+            <div className="col-sm-12 col-md-6  ">
               <div
                 className="dashboardcard p-3"
                 style={{
