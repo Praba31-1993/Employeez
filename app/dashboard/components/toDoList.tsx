@@ -7,13 +7,16 @@ import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import "../dashboard.css";
 import { Colors } from "../../reusableComponent/styles";
 
-function ToDoList() {
+interface ToDoListProps {
+  title: string;
+}
+function ToDoList({ title }: ToDoListProps) {
   const useColors = Colors();
   return (
     <div>
-      <div>My Request</div>
+      <div>{title}</div>
 
-      {[0, 1, 2].map((value) => {
+      {[0, 1, 2,3].map((value) => {
         return (
           <>
             <div className="d-flex align-items-start mt-3 p-1 todoList">

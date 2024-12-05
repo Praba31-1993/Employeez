@@ -20,6 +20,7 @@ import {
   salesReportDatas,
   HiringCounts,
 } from "../../reusableComponent/JsonData";
+import NewHireCandidate from "../components/newhirecandidate";
 
 const HrDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -34,173 +35,135 @@ const HrDashboard = () => {
   }, []);
 
   return (
-      <div className="container-fluid my-3">
-        <div className="row ">
-          {/* ProfileCard */}
-          <div className="col-12 mb-3 col-md-8">
-            <div
-              className="dashboardcard  h-100  p-3"
-              style={borderAndBoxShadowStyles}
-            >
-              <ProfilesCard />
+    <div className="container-fluid my-3">
+      <div className="row ">
+        {/* ProfileCard */}
+        <div className="col-12 mb-3 col-md-8">
+          <div
+            className="dashboardcard  h-100  p-3"
+            style={borderAndBoxShadowStyles}
+          >
+            <ProfilesCard />
+          </div>
+        </div>
+
+        {/*My Request Card  */}
+        <div className="col-12 mb-3 col-md-4">
+          <div className="dashboardcard  p-3 h-100">
+            <ListCard />
+          </div>
+        </div>
+
+        {/* Pending HR action */}
+
+        <div className="col-12 mb-3 col-md-4 ">
+          <div className="dashboardcard p-3">
+            <p className="textheader heading2">Pending HR action</p>
+
+            <div style={{ overflowX: "auto", width: "100%", height:'auto' }}>
+              <HorizontalBars />
             </div>
           </div>
+        </div>
 
-          {/*My Request Card  */}
-          <div className="col-12 mb-3 col-md-4">
-            <div className="dashboardcard  p-3 h-100">
-              <ListCard />
-            </div>
+        <div className="col-12 mb-3 col-md-2 ">
+          {HiringCounts?.map((list: any, index: number) => (
+            <>
+              <Hrdatas hrList={list} isPendingHrData={true} />
+            </>
+          ))}
+        </div>
+
+        {/* To Do List */}
+        <div className=" col-12 mb-3 col-md-3 ">
+          <div
+            className="dashboardcard p-3 h-auto"
+            style={borderAndBoxShadowStyles}
+          >
+            <ToDoList title={"My Request"}/>
           </div>
+        </div>
 
-          {/* Pending Invoice */}
-          <div className=" col-12 mb-3 col-md-5 ">
-            <div
-              className="dashboardcard p-3 h-100"
-              style={borderAndBoxShadowStyles}
-            >
-              <Pendinginvoice />
-            </div>
+        {/* Upcoming birthday and Work Anniversary */}
+        <div className=" col-12 mb-3 col-md-3 ">
+          <div
+            className="dashboardcard p-2 mb-3"
+            style={borderAndBoxShadowStyles}
+          >
+            <Menulistforbirthdayworkvacation
+              title={"Upcoming birthday"}
+              headerImage={birthday}
+              items={birthdayAnniversaryReport}
+            />
           </div>
-
-          {/* To Do List */}
-          <div className=" col-12 mb-3 col-md-4 ">
-            <div
-              className="dashboardcard p-3 h-100"
-              style={borderAndBoxShadowStyles}
-            >
-              <ToDoList />
-            </div>
+          <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+            <Menulistforbirthdayworkvacation
+              title={"Work anniversary"}
+              headerImage={anniversary}
+              items={birthdayAnniversaryReport}
+            />
           </div>
+        </div>
 
-          {/* Upcoming birthday and Work Anniversary */}
-          <div className=" col-12 mb-3 col-md-3 ">
-            <div
-              className="dashboardcard p-2 mb-3"
-              style={borderAndBoxShadowStyles}
-            >
-              <Menulistforbirthdayworkvacation
-                title={"Upcoming birthday"}
-                headerImage={birthday}
+        <div className=" col-12 mb-3 col-md-2">
+          <div className="d-flex flex-column gap-3">
+            <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+              <NewHireCandidate
+                title={"New hire candidate"}
+                headerImage={anniversary}
                 items={birthdayAnniversaryReport}
               />
             </div>
             <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
-              <Menulistforbirthdayworkvacation
-                title={"Work anniversary"}
+              <NewHireCandidate
+                title={"Prehire candidate"}
                 headerImage={anniversary}
                 items={birthdayAnniversaryReport}
               />
             </div>
           </div>
+        </div>
 
-          {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
-          <div className=" col-12 mb-3 col-md-6 ">
-            <div className="row p-3 g-4">
-              <div className="col-sm-12 col-md-6 h-100 ">
-                <div
-                  className="dashboardcard p-3"
-                  style={{
-                    border: useColors.border,
-                    boxShadow: useColors.boxshadow,
-                  }}
-                >
-                  <Menulistforbirthdayworkvacation
-                    title={"Project extension"}
-                    headerImage={anniversary}
-                    items={birthdayAnniversaryReport}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-12 col-md-6 h-100">
-                <div
-                  className="dashboardcard p-3"
-                  style={{
-                    border: useColors.border,
-                    boxShadow: useColors.boxshadow,
-                  }}
-                >
-                  <Menulistforbirthdayworkvacation
-                    title={"Vacation report"}
-                    headerImage={anniversary}
-                    items={birthdayAnniversaryReport}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-12 col-md-6 h-100 ">
-                <div
-                  className="dashboardcard p-3"
-                  style={{
-                    border: useColors.border,
-                    boxShadow: useColors.boxshadow,
-                  }}
-                >
-                  <Menulistforbirthdayworkvacation
-                    title={"Open jobs"}
-                    headerImage={anniversary}
-                    items={birthdayAnniversaryReport}
-                  />
-                </div>
-              </div>
-              <div className="col-sm-12 col-md-6 h-100 ">
-                <div
-                  className="dashboardcard p-3"
-                  style={{
-                    border: useColors.border,
-                    boxShadow: useColors.boxshadow,
-                  }}
-                >
-                  <Menulistforbirthdayworkvacation
-                    title={"I-9 Verify"}
-                    headerImage={anniversary}
-                    items={birthdayAnniversaryReport}
-                  />
-                </div>
-              </div>
+        <div className=" col-12 mb-3 col-md-3">
+          <div
+            className="dashboardcard p-2 h-100"
+            style={borderAndBoxShadowStyles}
+          >
+            {/* <NewHireCandidate
+              title={"Pending Timesheet"}
+              headerImage={anniversary}
+              items={birthdayAnniversaryReport}
+            /> */}
+              <ToDoList  title={"Pending Timesheet"}/>
+          </div>
+        </div>
+
+        {/* I9-Verify and E-verify */}
+        <div className=" col-12 mb-3 col-md-3">
+          <div className="d-flex flex-column gap-3">
+            <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+              <NewHireCandidate
+                title={"New hire candidate"}
+                headerImage={anniversary}
+                items={birthdayAnniversaryReport}
+              />
+            </div>
+            <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+              <NewHireCandidate
+                title={"New hire candidate"}
+                headerImage={anniversary}
+                items={birthdayAnniversaryReport}
+              />
             </div>
           </div>
+        </div>
 
-          {/* Sales Report */}
-          <div className=" col-12 mb-3 col-md-6 p-0">
-            <div className="dashboardcard p-3">
-              <div className="row">
-                <p className="textheader heading2">Sales Report</p>
-                <div className=" col-12 mb-3 col-md-7 ">
-                  <BarChartComponent />
-                </div>
-                <div className=" col-12 mb-3 col-md-5 ">
-                  <Menulistforbirthdayworkvacation
-                    title={"Work anniversary"}
-                    headerImage={anniversary}
-                    items={salesReportDatas}
-                    isSalesReport={true}
-                    lastmonthReport={"$2845K"}
-                  />
-                </div>
-              </div>
+        {/*My Request Card  */}
+        <div className="col-12 mb-3 col-md-4">
+          <div className="d-flex flex-column gap-3">
+            <div className="dashboardcard p-3 h-100">
+              <ListCard />
             </div>
-          </div>
-
-          {/* Pending HR action */}
-
-          <div className="col-12 mb-3 col-md-4 ">
-            <div className="dashboardcard p-3">
-              <p className="textheader heading2">Pending HR action</p>
-
-              <HorizontalBars />
-            </div>
-          </div>
-
-          <div className="col-12 mb-3 col-md-2 ">
-            {HiringCounts?.map((list: any, index: number) => (
-              <>
-                <Hrdatas hrList={list} isPendingHrData={true} />
-              </>
-            ))}
-          </div>
-
-          {/* Policy/Procedure  */}
-          <div className="col-12 mb-3 col-md-3">
             <div className="dashboardcard p-3">
               <p className="textheader heading2">Policy/Procedure </p>
               <div
@@ -217,30 +180,63 @@ const HrDashboard = () => {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Need help? */}
-          <div className="col-12 mb-3 col-md-3">
-            <div className="dashboardcard p-3">
-              <div className="d-flex justify-content-between ">
-                <p className="textheader heading2">Need help?</p>
+        {/* Vacation Report */}
+        <div className="col-12 mb-3 col-md-2">
+          <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+            <Menulistforbirthdayworkvacation
+              title={"Vacation Report"}
+              headerImage={anniversary}
+              items={birthdayAnniversaryReport}
+            />
+          </div>
+        </div>
 
-                <Image src={ToDoIcon} alt="" />
-              </div>
-              <p className="para shade">
-                Do you face any problem while using EmployEz?
-              </p>
-              <Outlinebutton
-                color={useColors.white}
-                border={`1px solid ${useColors.themeRed}`}
-                text="Contact us"
-                fontSize="12px"
-                background={useColors.themeRed}
-                isDashboardIcon={false}
-              />
+        {/* Termination list */}
+        <div className="col-12 mb-3 col-md-3">
+          <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+            <Menulistforbirthdayworkvacation
+              title={"Termination list"}
+              headerImage={anniversary}
+              items={birthdayAnniversaryReport}
+            />
+          </div>
+        </div>
+
+        <div className="col-12 mb-3 col-md-3">
+          <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
+            <Menulistforbirthdayworkvacation
+              title={"Termination list"}
+              headerImage={anniversary}
+              items={birthdayAnniversaryReport}
+            />
+          </div>
+        </div>
+
+        {/* Need help? */}
+        <div className="col-12 mb-3 col-md-3">
+          <div className="dashboardcard p-3">
+            <div className="d-flex justify-content-between ">
+              <p className="textheader heading2">Need help?</p>
+
+              <Image src={ToDoIcon} alt="" />
             </div>
+            <p className="para shade">
+              Do you face any problem while using EmployEz?
+            </p>
+            <Outlinebutton
+              color={useColors.white}
+              border={`1px solid ${useColors.themeRed}`}
+              text="Contact us"
+              fontSize="12px"
+              background={useColors.themeRed}
+              isDashboardIcon={false}
+            />
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
