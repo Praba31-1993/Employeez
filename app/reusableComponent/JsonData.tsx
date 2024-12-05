@@ -1882,6 +1882,7 @@ export const HiringCounts = [
     label: "Supplier Onboarding",
     count: 22,
   },
+ 
 ];
 
 

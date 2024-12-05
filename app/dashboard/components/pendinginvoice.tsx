@@ -17,7 +17,7 @@ function Pendinginvoice() {
                 <select
                     className="form-select form-select-lg mb-3 cursorPointer para2"
                     aria-label=".form-select-lg example"
-                    style={{ width: "fit-content" }}
+                    style={{ width: "fit-content",boxShadow:"none !imporatant" }}
                 >
                     <option selected>Select</option>
                     <option value="1">One</option>
@@ -25,52 +25,56 @@ function Pendinginvoice() {
                     <option value="3">Three</option>
                 </select>
             </div>
+
             <div className="row">
-                <div className="col-lg-12 col-xxl-6">
-                <div className="chart-container d-flex justify-content-between">
-                    <PieChart
-                        series={[
-                            {
-                                data: arrayList.map(item => ({
-                                    id: item.invoicename,
-                                    value: item.value,
-                                    color: item.fill, // Optional: If your library supports custom colors
-                                })),
-                                innerRadius: 60,
-                                outerRadius: 100,
-                                startAngle: 0,
-                                endAngle: 360,
-                            },
-                        ]}
-                    />
+                <div className="col-lg-7 col-xxl-6">
+                    <div className="chart-wrapper" style={{ width: "100%", height: "300px" }}>
+                        <Piechart data={arrayList} />
+                    </div>
                 </div>
-                </div>
-                
-                <div className="col-lg-12 col-xxl-6" style={{alignSelf:"center"}}>
-                    <div className="row ">
+
+                <div className="col-lg-5 px-0 col-xxl-6" style={{ alignSelf: "center" }}>
+                    <div className="row">
                         {arrayList.map((list, index) => (
-                            <div key={index} className="col-6 ">
-                                <div className="d-flex ps-4 justify-content-between ">
+                            <div key={index} className="col-lg-6 px-0 pt-3 ">
+                                <div className="d-flex justify-content-between">
                                     <div>
-                                        <p className="mb-0">
-                                            <span className="pe-2 para">
+                                        <p className="mb-0 textheader para">
+                                            <span className="pe-1 ">
                                                 <Circle fill={list.fill} />
                                             </span>
                                             {list.invoicename}
                                         </p>
-                                        <p className="mb-0 ps-3">12</p>
+                                        <p className="mb-0 para2 ps-3 textheader">{list.value}</p>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-
-
                 </div>
             </div>
-
         </>
     );
 }
 
 export default Pendinginvoice;
+
+export function Piechart({ data }: { data: any[] }) {
+    return (
+        <PieChart
+            series={[
+                {
+                    data: data.map((item) => ({
+                        id: item.invoicename,
+                        value: item.value,
+                        color: item.fill,
+                    })),
+                    innerRadius: 50,
+                    outerRadius: 90,
+                },
+            ]}
+            width={10}  // Adjust width
+            height={400} // Adjust height
+        />
+    );
+}
