@@ -8,8 +8,8 @@ import ManagerDashboard from "./screens/manager";
 const Dashboard = () => {
   return (
     <Sidebar>
-      <SuperAdminDashboard />
-      {/* <HrDashboard/> */}
+      {/* <SuperAdminDashboard /> */}
+      <HrDashboard/>
       {/* <ManagerDashboard /> */}
     </Sidebar>
   );
