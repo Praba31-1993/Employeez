@@ -4,7 +4,6 @@ import ListCard from "../../reusableComponent/listitems";
 import ProfilesCard from "../components/profilescard";
 import Pendinginvoice from "../components/pendinginvoice";
 import { Colors } from "../../reusableComponent/styles";
-import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
 import birthday from "@/app/assets/img/birthday.svg";
 import anniversary from "@/app/assets/img/anniversary.svg";
@@ -19,6 +18,7 @@ import {
   salesReportDatas,
   HiringCounts,
 } from "../../reusableComponent/JsonData";
+import ToDoList from "../components/toDoList";
 
 const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -63,33 +63,42 @@ const SuperAdminDashboard = () => {
         </div>
 
         {/* To Do List */}
-        <div className=" col-12 mb-3 col-md-4 ">
+        <div className=" col-12 mb-3 col-xxl-3 col-md-4 ">
           <div
             className="dashboardcard p-3 h-100"
             style={borderAndBoxShadowStyles}
           >
-            <ToDoList />
+            <ToDoList title={"My Request"} />{" "}
           </div>
         </div>
 
         {/* Upcoming birthday and Work Anniversary */}
-        <div className=" col-12 mb-3 col-md-3 ">
-          <div
-            className="dashboardcard p-2 mb-3"
-            style={borderAndBoxShadowStyles}
-          >
-            <Menulistforbirthdayworkvacation
-              title={"Upcoming birthday"}
-              headerImage={birthday}
-              items={birthdayAnniversaryReport}
-            />
-          </div>
-          <div className="dashboardcard p-2" style={borderAndBoxShadowStyles}>
-            <Menulistforbirthdayworkvacation
-              title={"Work anniversary"}
-              headerImage={anniversary}
-              items={birthdayAnniversaryReport}
-            />
+        <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
+          <div className="row h-100 align-items-between">
+            <div className="col-12">
+              <div
+                className="dashboardcard p-2 mb-3"
+                style={borderAndBoxShadowStyles}
+              >
+                <Menulistforbirthdayworkvacation
+                  title={"Upcoming birthday"}
+                  headerImage={birthday}
+                  items={birthdayAnniversaryReport}
+                />
+              </div>
+            </div>
+            <div className="col-12" style={{ alignSelf: "baseline" }}>
+              <div
+                className="dashboardcard p-2"
+                style={borderAndBoxShadowStyles}
+              >
+                <Menulistforbirthdayworkvacation
+                  title={"Work anniversary"}
+                  headerImage={anniversary}
+                  items={birthdayAnniversaryReport}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -186,9 +195,7 @@ const SuperAdminDashboard = () => {
           <div className="dashboardcard p-3">
             <p className="textheader heading2">Pending HR action</p>
 
-            <div style={{ overflowX: "auto", width: "100%"}}>
-              <HorizontalBars />
-            </div>
+            <HorizontalBars />
           </div>
         </div>
 
