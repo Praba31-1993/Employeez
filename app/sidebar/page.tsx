@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ReactNode, useEffect, isValidElement } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +25,6 @@ import { RootState } from "../redux/store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Messages } from "../reusableComponent/messages";
-// import { makeStyles } from "@material-ui/core/styles";
 import menuIcon from "@/app/assets/img/menu.svg";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
