@@ -5,7 +5,6 @@ const protectedRoutes = ["/sidebar", "/dashboard", "/timesheet"];
 export default function middleware(req: NextRequest) {
   // Get the 'auth' cookie from the request headers
   const authCookie = req.cookies.get("auth");
-  console.log('adfsd',authCookie);
   
 
   // If the 'auth' cookie is not present and the user is trying to access a protected route

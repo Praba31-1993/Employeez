@@ -30,7 +30,6 @@ function ManagerDashboard() {
     (state: RootState) => state.dashboardLayout
   );
 
-  console.log("dashboard", dashboardLayout);
 
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);

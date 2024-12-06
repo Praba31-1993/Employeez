@@ -45,7 +45,6 @@ const Sidebar = ({ children }: SidebarProps) => {
   const pathname = usePathname();
 
   const selectedColor = useSelector((state: RootState) => state.color.color);
-  // const classes = useStyles({ visibleMenus, isOpen });
 
   useEffect(() => {
     const pinned = localStorage.getItem("pinned");
@@ -87,8 +86,6 @@ const Sidebar = ({ children }: SidebarProps) => {
     } as React.ChangeEvent<HTMLInputElement>); // Call the second function
   };
 
-  console.log("visibleMenus", visibleMenus);
-
   const handleToggleChange = (
     roleIndex: number,
     itemIndex: number,
@@ -109,15 +106,12 @@ const Sidebar = ({ children }: SidebarProps) => {
       roleItems: list.roleItems.filter((item) => item.checked),
     }));
 
-    console.log("newList", newList);
     setMenuLists(newList);
     sethideToggle(false);
     toast.success(Messages.success.approved);
   };
 
   const RejectedToggle = () => {
-    console.log("menuListsinRejected ", menuLists);
-
     const newList = menuLists.map((list) => ({
       ...list,
       roleItems: list.roleItems.map((item) => ({
@@ -133,8 +127,6 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const RefreshToggle = () => {
-    console.log("menuItemrefresh", menuItem);
-
     const newList = menuItem.map((list) => ({
       ...list,
       roleItems: list.roleItems.map((item) => ({
@@ -149,7 +141,6 @@ const Sidebar = ({ children }: SidebarProps) => {
     toast.success(Messages.success.restored);
   };
   const useColors = Colors();
-  console.log("visible", visibleMenus);
 
   return (
     <>

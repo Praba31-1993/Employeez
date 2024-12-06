@@ -25,7 +25,8 @@ function NewHireCandidate({
         <p className="textheader heading2 mb-0">{title} </p>
       </div>
       <div>
-        {items?.map((bday: any) => (
+        {items?.map((bday: any, index:number) => (
+          <div key={index}>
           <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
             <div className="d-flex align-items-center">
               <Image className="" src={user} alt={""} />
@@ -37,6 +38,7 @@ function NewHireCandidate({
                 </p>
               </div>
             </div>
+          </div>
           </div>
         ))}
       </div>
