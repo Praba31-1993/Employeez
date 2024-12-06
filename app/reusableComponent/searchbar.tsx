@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -52,8 +52,6 @@ interface searchProps {
   list: any[];
 }
 export default function SearchBar({ list }: searchProps) {
-    console.log('list',list);
-    
   const [selectedFilm, setSelectedFilm] = useState<any | null>(null);
 
   const handleSearchChange = (
@@ -63,15 +61,11 @@ export default function SearchBar({ list }: searchProps) {
     setSelectedFilm(value);
   };
 
-  console.log("selectedFiles", selectedFilm);
-
   return (
-    <Stack spacing={5} sx={{ width: 300,  }}>
+    <Stack spacing={5} sx={{ width: 300 }}>
       <Autocomplete
         options={list}
-        getOptionLabel={(option: any) =>
-          `${option.title} (${option.year})`
-        }
+        getOptionLabel={(option: any) => `${option.title} (${option.year})`}
         id="movie-customized-option-demo"
         disableCloseOnSelect
         onChange={handleSearchChange}
@@ -95,7 +89,7 @@ export default function SearchBar({ list }: searchProps) {
                   fontSize: "12px",
                   fontFamily: "Inter",
                   color: "#707070",
-                  marginTop:"6px"
+                  marginTop: "6px",
                 },
               }}
             />
@@ -105,7 +99,3 @@ export default function SearchBar({ list }: searchProps) {
     </Stack>
   );
 }
-
-
-
-

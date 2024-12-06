@@ -1,12 +1,3 @@
-// const userIdError = validateUserId("testUser");
-// const passwordError = validatePassword("Test@123");
-// const emailError = validateEmail("user@example.com");
-// const mobileNumberError = validateMobileNumber("1234567890");
-// const otpError = validateOTP("123456");
-
-// // Log errors if any
-// console.log({ userIdError, passwordError, emailError, mobileNumberError, otpError });
-
 export const Messages = {
     // Success Messages
     success: {

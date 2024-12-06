@@ -1,28 +1,26 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logogif from "../assets/img/loginanimation.gif";
 import logo from "../assets/img/employeez.png";
 import lock from "../assets/img/lock.png";
 import React, { useState, useEffect } from "react";
-import Router from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import "../assets/img/login.css";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import Logintextanimation from "../reusableComponent/logintextanimation";
-
-
+import { validateField } from "../reusableComponent/validation";
 
 export default function forgetpassword() {
   const loginanimationData = require("../assets/EmployEz-login-animation.json");
   const [otpVisible, setOtpVisible] = useState(false);
+  const [emailOrPassword, setEmailOrPassword] = useState<string>("");
+  const [emailOrPasswordError, setEmailOrPasswordError] = useState<string>("");
   const [timer, setTimer] = useState(30); // Timer state initialized to 30 seconds
   const router = useRouter();
-  const useColors = Colors(); 
+  const useColors = Colors();
   // Timer effect
   useEffect(() => {
     if (otpVisible && timer > 0) {
@@ -37,35 +35,40 @@ export default function forgetpassword() {
 
   // Handler for Verify button click
   const handleVerifyClick = () => {
-    setOtpVisible(true);
-    setTimer(30); // Reset timer when OTP is shown
+    const error = validateField(emailOrPassword);
+    setEmailOrPasswordError(error);
+    if (!error) {
+      setOtpVisible(true);
+      setTimer(30); // Reset timer when OTP is shown
+    }
   };
 
   // Function to be executed when the button is clicked
   const handleClick = () => {
-    // Your custom logic here (e.g., validate OTP, log analytics, etc.)
-    console.log("OTP verification clicked");
-    // Now manually navigate to the /setpassword page
     router.push("/set_password");
-
   };
   // State to control visibility of OTP input and Verify button
 
   return (
     <section className="login">
       <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
-      <div className="row h-100 w-100">
-					<div className="col-md-6 logogif p-0 d-flex align-items-center flex-column  h-100 justify-content-center" style={{ background: useColors.themeRed }}>
-						<h1 className="heading fw-bold text-center py-3 text-white">HR on Cloud</h1>
-						<Player
-							autoplay
-							loop={true} // Stops animation after completing one cycle
-							animationData={loginanimationData} // Use animationData for the Player
-							style={{ height: "60%", width: "60%" }} />
-						<Logintextanimation />
+        <div className="row h-100 w-100">
+          <div
+            className="col-md-6 logogif p-0 d-flex align-items-center flex-column  h-100 justify-content-center"
+            style={{ background: useColors.themeRed }}
+          >
+            <h1 className="heading fw-bold text-center py-3 text-white">
+              HR on Cloud
+            </h1>
+            <Player
+              autoplay
+              loop={true} // Stops animation after completing one cycle
+              animationData={loginanimationData} // Use animationData for the Player
+              style={{ height: "60%", width: "60%" }}
+            />
+            <Logintextanimation />
+          </div>
 
-					</div>
-          
           <div className="col-sm-6 align-items-center  d-flex">
             <div className="logincard ps-md-5 ms-md-5">
               <div className="logo">
@@ -84,7 +87,12 @@ export default function forgetpassword() {
                   className="ps-3 py-2 mt-2"
                   type="text"
                   placeholder="Enter your Verified email or Number"
+                  value={emailOrPassword}
+                  onChange={(e) => setEmailOrPassword(e.target.value)}
                 />
+                {emailOrPasswordError && (
+                  <p className="error-text mt-1">{emailOrPasswordError}</p>
+                )}
 
                 {/* Conditionally render OTP input based on otpVisible */}
                 {otpVisible && (
@@ -115,13 +123,13 @@ export default function forgetpassword() {
 
                 {/* Verify button only shown when OTP is not visible */}
                 {!otpVisible && (
-                  <div
+                  <button
                     className="mutlicolourbtn mt-3 py-1 text-center"
                     onClick={handleVerifyClick} // Trigger the state change on click
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", width: "100%" }}
                   >
                     Continue
-                  </div>
+                  </button>
                 )}
 
                 {otpVisible && (
