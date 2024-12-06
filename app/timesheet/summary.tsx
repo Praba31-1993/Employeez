@@ -66,8 +66,6 @@ const Summary: React.FC<Props> = ({
 
   // Function to calculate summary details
   const calculateSummaryDetails = (): void => {
-    console.log("test - calculateSummaryDetails");
-
     const updatedSummary: SummaryView[] = summaryView.map(
       (summary: SummaryView) => ({
         ...summary,
@@ -166,7 +164,6 @@ const Summary: React.FC<Props> = ({
       <div className="row mt-3">
         {summaryView.map((summary: SummaryView, index: number) => (
           <div key={index} className="col-lg-3 py-2 ">
-          
             <Summarycards leaveData={summary} />
           </div>
         ))}

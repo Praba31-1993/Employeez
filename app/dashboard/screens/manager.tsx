@@ -14,16 +14,22 @@ import Policyprocedure from "../components/policyprocedure";
 import Image from "next/image";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import ToDoIcon from "@/app/assets/img/todo.svg";
-
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
 
 function ManagerDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
-
+  const [isToggleChecked, setIsToggleChecked] = useState<boolean>(false);
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border: useColors.border,
     boxShadow: useColors.boxshadow,
   };
+
+  const dashboardLayout = useSelector(
+    (state: RootState) => state.dashboardLayout
+  );
+
 
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);
@@ -31,6 +37,9 @@ function ManagerDashboard() {
 
   return (
     <div className="container-fluid my-3">
+      <button onClick={() => setIsToggleChecked(!isToggleChecked)}>
+        Click
+      </button>
       <div className="row">
         <div className="col-12 col-md-8 mb-3">
           <div
@@ -40,7 +49,8 @@ function ManagerDashboard() {
             <ProfilesCard />
           </div>
         </div>
-        <div className="col-12 col-md-4 mb-3">
+        
+        <div className="col-12 col-md-4 mb-3" >
           <div className="dashboardcard p-3 h-100">
             <ListCard />
           </div>
@@ -57,7 +67,7 @@ function ManagerDashboard() {
         </div>
 
         {/* To Do List */}
-        <div className=" col-12 col-xxl-3 col-md-4 mb-3">
+        <div className=" col-12 col-xxl-3 col-md-4 mb-3" >
           <div
             className="dashboardcard p-3 h-100"
             style={borderAndBoxShadowStyles}

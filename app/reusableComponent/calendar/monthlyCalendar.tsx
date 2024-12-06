@@ -57,9 +57,9 @@ const MonthlyCalendar: React.FC<Props> = ({
   // Define the start and end of the selected range
   const [startRange, endRange] = dropdownRange
     ? dropdownRange.split(" - ").map((date) => {
-      const [day, month, year] = date.split("/").map(Number);
-      return new Date(year, month - 1, day);
-    })
+        const [day, month, year] = date.split("/").map(Number);
+        return new Date(year, month - 1, day);
+      })
     : [new Date(), new Date()];
 
   const totalDaysInRange =
@@ -96,21 +96,6 @@ const MonthlyCalendar: React.FC<Props> = ({
     return acc;
   }, {});
 
-  // const handleDateClick = (date: Date) => {
-  //   const formattedDate = format(date, "yyyy-MM-dd");
-  //   const dataForDate = calendardataMap[formattedDate];
-
-  //   if (dataForDate) {
-  //     setClickedDateData(dataForDate); // Store clicked date's data
-  //     console.log(dataForDate); // Log it to the console
-  //   }
-
-  //   setSelectedDate(date);
-  //   onChange(date);
-  // };
-
-  // console.log('clickedDate',clickedDateData);
-
   const handleDateClick = (date: Date) => {
     const formattedDate = format(date, "yyyy-MM-dd");
     const dataForDate = calendardataMap[formattedDate];
@@ -136,10 +121,6 @@ const MonthlyCalendar: React.FC<Props> = ({
     setSelectedDate(date);
     onChange(date);
   };
-
-
-  console.log('clikcedData', clickedDateData);
-
 
   return (
     <div className=" pb-4 pe-3">
@@ -169,7 +150,6 @@ const MonthlyCalendar: React.FC<Props> = ({
               </MenuItem>
             ))}
           </Select>
-
         </FormControl>
 
         <FormControl fullWidth>
@@ -184,7 +164,6 @@ const MonthlyCalendar: React.FC<Props> = ({
                 border: "none", // Remove border from the outline
               },
               outline: "none",
-             
             }}
           >
             {Array.from({ length: 10 }, (_, i) => {

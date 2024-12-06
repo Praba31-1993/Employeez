@@ -47,4 +47,11 @@ export function validateUserId(userId :any) {
     }
     return "";
   }
-  
+
+  // Validate Fields
+  export function validateField(value: any): string {
+    if (!value) {
+      return "Field is required.";
+    }
+    return "";
+  }

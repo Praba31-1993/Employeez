@@ -21,8 +21,6 @@ export function Skincustomization() {
     };
 
     useEffect(() => {
-        console.log("Updated border:", selectedborder);
-        console.log("Updated shadow:", selectedshadow);
     }, [selectedborder, selectedshadow]);
 
     return (
