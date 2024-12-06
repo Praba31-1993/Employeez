@@ -6,6 +6,7 @@ import user from '@/app/assets/img/Ellipse 14.svg'
 import { Colors } from "../../reusableComponent/styles";
 
 
+
 interface MenulistforbirthdayworkvacationProps {
     headerImage: any;
     title: string;
