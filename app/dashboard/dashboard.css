@@ -19,3 +19,13 @@
 .MuiChartsLegend-mark {
   border-radius: 50%; /* Make legend marks circular */
 }
+.userimages {
+  width: 35px;
+  height: 35px;
+  
+}
+.userimages img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
