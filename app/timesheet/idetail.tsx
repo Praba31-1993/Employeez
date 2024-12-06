@@ -34,14 +34,7 @@ export function Idetails({ show, close, customsheetlist }: any) {
             width: 260,
             editable: true,
         },
-        // {
-        //     field: 'fullName',
-        //     headerName: 'Full Name',
-        //     description: 'This column combines first and last names.',
-        //     sortable: false,
-        //     width: 160,
-        //     valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-        // },
+      
     ];
     return (
         <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
