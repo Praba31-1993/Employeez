@@ -29,3 +29,22 @@
   height: 100%;
   object-fit: cover;
 }
+.pendinghrsolution .css-1qdzy9k-MuiBarElement-root:nth-child(4){
+  fill: #FFBA27 !important;
+}
+.pendinghrsolution .css-1qdzy9k-MuiBarElement-root:nth-child(3){
+  fill: #41A4FF !important;
+}
+.pendinghrsolution .css-1qdzy9k-MuiBarElement-root:nth-child(2){
+  fill: #00FF47 !important;
+}
+.pendinghrsolution .css-1qdzy9k-MuiBarElement-root:nth-child(1){
+  fill: #935AFF !important;
+}
+.MuiBarLabel-root{
+  color: white !important;
+}
+/* Custom styling for BarChart labels */
+text{
+  color: white !important;
+}

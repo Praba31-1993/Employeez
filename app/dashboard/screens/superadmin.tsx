@@ -12,8 +12,7 @@ import BarChartComponent, {
 } from "../../reusableComponent/chart/barchart";
 import HorizontalBars from "../../reusableComponent/chart/horizontalbarchart";
 import ToDoIcon from "@/app/assets/img/todo.svg";
-import Image from "next/image";
-import Outlinebutton from "../../reusableComponent/outlinebtn";
+
 import Hrdatas from "../components/hrdatas";
 import InterestsIcon from "@mui/icons-material/Interests";
 import {
@@ -27,6 +26,9 @@ import ProjectExtension from "../components/projectsextension";
 import Vacationreport from "../components/vacationreport";
 import Openjobs from "../components/openjobs";
 import Inineverify from "../components/inineverify";
+import Policyprocedure from "../components/policyprocedure";
+import Needhelp from "../components/needhelp";
+
 
 const SuperAdminDashboard = () => {
     const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -165,11 +167,11 @@ const SuperAdminDashboard = () => {
 
                 {/* Sales Report */}
                 <div className=" col-12 mb-3 col-md-6">
-                    <div className="dashboardcard h-100 p-3">
+                    <div className="dashboardcard h-100 p-3" >
                         <div className="row">
                             <p className="textheader heading2">Sales Report</p>
 
-                            <div className=" col-12 mb-3 col-md-8 ">
+                            <div className=" col-12 mb-3 col-md-8 " >
                                 <BarChartComponent />
                             </div>
                             <div
@@ -184,20 +186,19 @@ const SuperAdminDashboard = () => {
 
                 {/* Pending HR action */}
 
-                <div className="col-12 mb-3 col-md-4 ">
-                    <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
-                        <p className="textheader heading2">Pending HR action</p>
-
-                        <HorizontalBars />
+                <div className="col-12 mb-3 pendinghrsolution col-md-4 ">
+                    <div className="dashboardcard  p-3" style={borderAndBoxShadowStyles}>
+                        <p className="textheader mb-0 heading2">Pending HR action</p>
+                        <div className="" style={{ overflowX: "auto" }}>
+                            <HorizontalBars />
+                        </div>
                     </div>
                 </div>
 
                 <div className="col-12 mb-3 col-md-2 ">
-                    <div className="row h-100 gap-2">
+                    <div className="row h-100 align-content-between">
 
-                        <div className="col-12">
-                            <Hrdatas />
-                        </div>
+                        <Hrdatas />
                     </div>
                 </div>
 
@@ -207,14 +208,10 @@ const SuperAdminDashboard = () => {
                         <p className="textheader heading2">Policy/Procedure </p>
                         <div
                             className="d-flex flex-wrap flex-column gap-3"
-                            style={{ height: "10rem" }}
+
                         >
                             <div className="row p-0 mb-0">
-                                {/* {HiringCounts?.map((list: any, index: number) => (
-                  <div className="col-12 col-md-6">
-                    <Hrdatas hrList={list} isPendingHrData={false} />
-                  </div>
-                ))} */}
+                                <Policyprocedure />
                             </div>
                         </div>
                     </div>
@@ -223,22 +220,7 @@ const SuperAdminDashboard = () => {
                 {/* Need help? */}
                 <div className="col-12 mb-3 col-md-3">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
-                        <div className="d-flex justify-content-between ">
-                            <p className="textheader heading2">Need help?</p>
-
-                            <Image src={ToDoIcon} alt="" />
-                        </div>
-                        <p className="para shade">
-                            Do you face any problem while using EmployEz?
-                        </p>
-                        <Outlinebutton
-                            color={useColors.white}
-                            border={`1px solid ${useColors.themeRed}`}
-                            text="Contact us"
-                            fontSize="12px"
-                            background={useColors.themeRed}
-                            isDashboardIcon={false}
-                        />
+                        <Needhelp />
                     </div>
                 </div>
             </div>

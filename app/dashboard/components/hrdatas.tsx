@@ -21,26 +21,23 @@ function Hrdatas() {
         boxShadow: useColors.boxshadow,
       };
     return (
-        <div >
-
-            <div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
-                <div
-                    className="headingicons rounded"
-                    style={{
-                        background: "#FFEFCD",
-                        height: "fit-content",
-                        width: "fit-content",
-                    }}
-                >
-                    <BadgeOutlinedIcon className="m-1" sx={{ color: "#FFBA27" }} />
-                </div>
-
-                <div>
-                    <h5 className="heading2 ps-2 mb-0 ">{arrayList[0]?.value}</h5>
-                    <p className="shade para2 ps-2 mb-0 ">{arrayList[0]?.hractionlist}</p>
-                </div>
+        <><div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
+            <div
+                className="headingicons rounded"
+                style={{
+                    background: "#FFEFCD",
+                    height: "fit-content",
+                    width: "fit-content",
+                }}
+            >
+                <BadgeOutlinedIcon className="m-1" sx={{ color: "#FFBA27" }} />
             </div>
-            <div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
+
+            <div>
+                <h5 className="heading2 ps-2 mb-0 ">{arrayList[0]?.value}</h5>
+                <p className="shade para2 ps-2 mb-0 ">{arrayList[0]?.hractionlist}</p>
+            </div>
+        </div><div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
                 <div
                     className="headingicons rounded"
                     style={{
@@ -56,8 +53,7 @@ function Hrdatas() {
                     <h5 className="heading2 ps-2 mb-0 ">{arrayList[1]?.value}</h5>
                     <p className="shade para2 ps-2 mb-0 ">{arrayList[1]?.hractionlist}</p>
                 </div>
-            </div>
-            <div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
+            </div><div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
                 <div
                     className="headingicons rounded"
                     style={{
@@ -73,8 +69,7 @@ function Hrdatas() {
                     <h5 className="heading2 ps-2 mb-0 ">{arrayList[2]?.value}</h5>
                     <p className="shade para2 ps-2 mb-0 ">{arrayList[2]?.hractionlist}</p>
                 </div>
-            </div>
-            <div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
+            </div><div className="dashboardcard p-3 d-flex align-items-center" style={borderAndBoxShadowStyles}>
                 <div
                     className="headingicons rounded"
                     style={{
@@ -90,9 +85,8 @@ function Hrdatas() {
                     <h5 className="heading2 ps-2 mb-0 ">{arrayList[3]?.value}</h5>
                     <p className="shade para2 ps-2 mb-0 ">{arrayList[3]?.hractionlist}</p>
                 </div>
-            </div>
+            </div></>
 
-        </div>
     );
 }
 

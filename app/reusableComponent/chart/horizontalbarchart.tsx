@@ -22,20 +22,20 @@ const chartSetting = {
 export default function HorizontalBars() {
   return (
     <BarChart
-      dataset={arrayList.reverse()}  // Reverse the dataset for Y-axis order
+      dataset={arrayList.reverse()}  // Pass the entire dataset to the chart
       yAxis={[
         {
           scaleType: 'band',
-          dataKey: 'id', // Map Y-axis to the 'hractionlist' field
+          dataKey: 'id', // Use 'hractionlist' for Y-axis labels
         },
       ]}
       series={[
         {
-          dataKey: 'value',  // Set the value key for bar height
-          color:"fill",
+          dataKey: 'value', // Set the value key for bar height
         },
       ]}
       layout="horizontal"
+      barLabel={({ value, dataIndex }) => arrayList[dataIndex].hractionlist} // Access the 'hractionlist' using dataIndex
       {...chartSetting}
     />
   );
