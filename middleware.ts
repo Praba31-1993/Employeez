@@ -8,11 +8,11 @@ export default function middleware(req: NextRequest) {
   
 
   // If the 'auth' cookie is not present and the user is trying to access a protected route
-  if ((authCookie?.value==='false' || authCookie?.value===undefined) && protectedRoutes.includes(req.nextUrl.pathname)) {
-    // Redirect user to the login page
+  if (authCookie?.value !== "true" && protectedRoutes.includes(req.nextUrl.pathname)) {
     const absoluteUrl = new URL("/login", req.nextUrl.origin);
     return NextResponse.redirect(absoluteUrl.toString());
   }
+  
 
   return NextResponse.next();
 }
