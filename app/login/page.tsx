@@ -18,7 +18,11 @@ import "../assets/img/login.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
-import { LoginApi } from "../api/Listingapis";
+import {
+  LoginApi,
+  getLoginUserDatas,
+  refreshAccessToken,
+} from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 
 export default function Login() {
@@ -30,6 +34,7 @@ export default function Login() {
   const [errors, setErrors] = useState({ userId: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  var refreshInterval: any;
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
@@ -63,7 +68,17 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    // Call refreshToken every 1 minute (60,000 ms)
+    const intervalId = setInterval(() => {
+      refreshAccessToken();
+    }, 60000); // 1 minute
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
     const passwordError = validatePassword(password);
 
@@ -74,16 +89,33 @@ export default function Login() {
         localStorage.setItem("rememberedUserId", userId);
         localStorage.setItem("rememberedUserPassword", password);
       }
-      document.cookie = "auth=true; path=/; max-age=86400";
-      toast.success("Login successful!");
-      router.push("/dashboard");
 
       const params = {
-        usernameOrEmail: "adm07",
-        password: "Test123",
+        email: "john@mail.com",
+        password: "changeme",
       };
 
-      LoginApi(params);
+      const loginResponse = await LoginApi(params);
+
+      document.cookie = "auth=true; path=/; max-age=86400";
+
+      if (loginResponse?.data?.access_token) {
+        document.cookie = `authToken=${loginResponse?.data?.access_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
+        document.cookie = `refreshToken=${loginResponse?.data?.refresh_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
+
+        toast.success("Login API successful!");
+        router.push("/dashboard");
+        console.log("dssjfsdds", document.cookie);
+
+        const refreshParams = {
+          refreshToken: loginResponse?.data?.refresh_token,
+        };
+        setInterval(() => {
+          refreshAccessToken(refreshParams);
+        }, 60000);
+      } else {
+        router.push("/login");
+      }
     }
   };
 
