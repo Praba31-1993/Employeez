@@ -10,7 +10,6 @@ import BarChartComponent, {
   Salesreport,
 } from "../../reusableComponent/chart/barchart";
 import HorizontalBars from "../../reusableComponent/chart/horizontalbarchart";
-
 import Hrdatas from "../components/hrdatas";
 import { arrayList } from "../../reusableComponent/JsonData";
 import ToDoList from "../components/toDoList";

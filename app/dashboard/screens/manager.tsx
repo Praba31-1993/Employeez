@@ -16,10 +16,10 @@ import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import ToDoIcon from "@/app/assets/img/todo.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
+import Workanniversary from "../components/workanniversary";
 
 function ManagerDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
-  const [isToggleChecked, setIsToggleChecked] = useState<boolean>(false);
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border: useColors.border,
@@ -30,6 +30,7 @@ function ManagerDashboard() {
     (state: RootState) => state.dashboardLayout
   );
 
+  console.log("dashboardLaout", dashboardLayout);
 
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);
@@ -37,154 +38,67 @@ function ManagerDashboard() {
 
   return (
     <div className="container-fluid my-3">
-      <button onClick={() => setIsToggleChecked(!isToggleChecked)}>
-        Click
-      </button>
       <div className="row">
-        <div className="col-12 col-md-8 mb-3">
-          <div
-            className="dashboardcard h-100  p-3"
-            style={borderAndBoxShadowStyles}
-          >
-            <ProfilesCard />
-          </div>
-        </div>
-        
-        <div className="col-12 col-md-4 mb-3" >
-          <div className="dashboardcard p-3 h-100">
-            <ListCard />
-          </div>
-        </div>
-
-        {/* Pending Invoice */}
-        <div className=" col-12 col-md-5 mb-3">
-          <div
-            className="dashboardcard p-3 h-100"
-            style={borderAndBoxShadowStyles}
-          >
-            <Pendinginvoice />
-          </div>
-        </div>
-
-        {/* To Do List */}
-        <div className=" col-12 col-xxl-3 col-md-4 mb-3" >
-          <div
-            className="dashboardcard p-3 h-100"
-            style={borderAndBoxShadowStyles}
-          >
-            <ToDoList title={"My Request"} />{" "}
-          </div>
-        </div>
-
-        {/* Upcoming birthday and Work Anniversary */}
-        <div className=" col-12 col-xxl-4 col-md-3 mb-3">
-          <div className="row h-100 align-items-between">
+        <div className="col-md-8 col-12">
+          <div className="row mb-3">
             <div className="col-12">
               <div
-                className="dashboardcard p-2 mb-3"
+                className="dashboardcard  h-100  p-3 mb-3"
                 style={borderAndBoxShadowStyles}
               >
-                <Menulistforbirthdayworkvacation
-                  title={"Upcoming birthday"}
-                  headerImage={birthday}
-                  items={birthdayAnniversaryReport}
-                />
-              </div>
-            </div>
-            <div className="col-12" style={{ alignSelf: "end" }}>
-              <div
-                className="dashboardcard p-2"
-                style={borderAndBoxShadowStyles}
-              >
-                <Menulistforbirthdayworkvacation
-                  title={"Work anniversary"}
-                  headerImage={anniversary}
-                  items={birthdayAnniversaryReport}
-                />
+                <ProfilesCard />
               </div>
             </div>
           </div>
-        </div>
-        <div className="col-12 col-xxl-4 col-md-5 mb-3">
-          <div className="dashboardcard p-3 h-100">
-            <div className="row">
-              <p className="textheader heading2">Sales Report</p>
-              <div className=" col-12 mb-3 col-md-7 ">
-                <BarChartComponent />
-              </div>
-              <div className=" col-12 mb-3 col-md-5 ">
-                <Menulistforbirthdayworkvacation
-                  title={"Work anniversary"}
-                  headerImage={anniversary}
-                  items={salesReportDatas}
-                  isSalesReport={true}
-                  lastmonthReport={"$2845K"}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-xxl-4 col-md-4 mb-3">
-          <div className="dashboardcard p-3 h-100">
-            <PendingTimeSheet title={"My Request"} />{" "}
-          </div>
-        </div>
-        <div className=" col-12 col-xxl-4 col-md-3 mb-3">
-          <div className="row h-100 align-items-between">
-            <div className="col-12">
-              <div
-                className="dashboardcard p-2 mb-3"
-                style={borderAndBoxShadowStyles}
-              >
-                <Menulistforbirthdayworkvacation
-                  title={"Vacation report"}
-                  headerImage={birthday}
-                  items={birthdayAnniversaryReport}
-                />
-              </div>
-            </div>
-            <div className="col-12" style={{ alignSelf: "end" }}>
-              <div
-                className="dashboardcard p-2"
-                style={borderAndBoxShadowStyles}
-              >
-                <Menulistforbirthdayworkvacation
-                  title={"Open jobs"}
-                  headerImage={anniversary}
-                  items={birthdayAnniversaryReport}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-9 mb-3">
-          <div
-            className="dashboardcard h-100  p-3"
-            style={borderAndBoxShadowStyles}
-          >
-            <p className="textheader heading2">Policy/Procedure </p>
 
-            <Policyprocedure />
+          <div className="row ">
+            <div className="col-6">
+              <div
+                className="dashboardcard p-3  h-100 mb-3"
+                style={borderAndBoxShadowStyles}
+              >
+                <Pendinginvoice />
+              </div>
+            </div>
+
+            <div className="col-6">
+              <div
+                className="dashboardcard p-3 h-100 mb-3"
+                style={borderAndBoxShadowStyles}
+              >
+                <ToDoList title={"My Request"} />{" "}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="col-12 mb-3 col-md-3 ">
-          <div className="dashboardcard p-3">
-            <div className="d-flex justify-content-between ">
-              <p className="textheader heading2">Need help?</p>
-
-              <Image src={ToDoIcon} alt="" />
+        <div className="col-md-4 col-12">
+          <div className="row mb-3">
+            <div
+              className="col=12 dashboardcard  p-3 h-100  "
+              style={borderAndBoxShadowStyles}
+            >
+              <ListCard />
             </div>
-            <p className="para shade">
-              Do you face any problem while using EmployEz?
-            </p>
-            <Outlinebutton
-              color={useColors.white}
-              border={`1px solid ${useColors.themeRed}`}
-              text="Contact us"
-              fontSize="12px"
-              background={useColors.themeRed}
-              variant={"outlined"}
-            />
+          </div>
+          <div className="row mb-3">
+            <div
+              className="col=12 dashboardcard  p-3 h-100  "
+              style={borderAndBoxShadowStyles}
+            >
+              <Menulistforbirthdayworkvacation
+                title={"Upcoming birthday"}
+                headerImage={birthday}
+                items={birthdayAnniversaryReport}
+              />
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div
+              className="col=12 dashboardcard  p-3 h-100  "
+              style={borderAndBoxShadowStyles}
+            >
+              <Workanniversary/>
+            </div>
           </div>
         </div>
       </div>

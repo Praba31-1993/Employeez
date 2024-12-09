@@ -60,7 +60,7 @@ const HrDashboard = () => {
           <div className="dashboardcard p-3 h-100">
             <p className="textheader heading2">Pending HR action</p>
 
-            <div style={{ overflowX: "auto", width: "100%", height:'auto' }}>
+            <div style={{ overflowX: "auto", width: "100%", height: "auto" }}>
               <HorizontalBars />
             </div>
           </div>
@@ -68,12 +68,10 @@ const HrDashboard = () => {
 
         <div className="col-12 mb-3 col-md-2 ">
           <div className="row h-100 align-content-between">
-            
-          {HiringCounts?.map((list: any, index: number) => (
             <div className="col-12 ">
-              <Hrdatas hrList={list} isPendingHrData={true} />
+              {/* <Hrdatas hrList={list} isPendingHrData={true} /> */}
+              <Hrdatas />
             </div>
-          ))}
           </div>
         </div>
 
@@ -83,7 +81,7 @@ const HrDashboard = () => {
             className="dashboardcard p-3 h-auto"
             style={borderAndBoxShadowStyles}
           >
-            <ToDoList title={"My Request"}/>
+            <ToDoList title={"My Request"} />
           </div>
         </div>
 
@@ -137,7 +135,7 @@ const HrDashboard = () => {
               headerImage={anniversary}
               items={birthdayAnniversaryReport}
             /> */}
-              <ToDoList  title={"Pending Timesheet"}/>
+            <ToDoList title={"Pending Timesheet"} />
           </div>
         </div>
 
@@ -174,11 +172,9 @@ const HrDashboard = () => {
                 style={{ height: "10rem" }}
               >
                 <div className="row p-0 mb-0">
-                  {HiringCounts?.map((list: any, index: number) => (
-                    <div className="col-12 col-md-6">
-                      <Hrdatas hrList={list} isPendingHrData={false} />
-                    </div>
-                  ))}
+                  <div className="col-12 col-md-6">
+                    <Hrdatas />
+                  </div>
                 </div>
               </div>
             </div>
