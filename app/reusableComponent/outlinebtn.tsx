@@ -1,7 +1,6 @@
 import Image from "next/image";
 import * as React from "react";
 import Button from "@mui/material/Button";
-import arrowIcon from "@/app/assets/img/arrowicon.svg";
 export default function Outlinebutton({
   disabled,
   text,
@@ -10,13 +9,14 @@ export default function Outlinebutton({
   fontSize,
   background,
   onClick,
-  isDashboardIcon
+  icon,
+  variant
 }: any) {
   return (
     <>
       {disabled ? (
         <Button
-          variant="outlined"
+          variant={variant}
           disabled={disabled}
           onClick={onClick}
           sx={{
@@ -32,7 +32,7 @@ export default function Outlinebutton({
         </Button>
       ) : (
         <Button
-          variant="outlined"
+          variant={variant}
           disabled={disabled}
           onClick={onClick}
           sx={{
@@ -43,7 +43,7 @@ export default function Outlinebutton({
             textTransform: "unset",
             backgroundColor: { background },
           }}
-          endIcon={isDashboardIcon ? <Image src={arrowIcon} alt="" /> : ""}
+          endIcon={<Image src={icon} alt="" />}
         >
           {text}
         </Button>

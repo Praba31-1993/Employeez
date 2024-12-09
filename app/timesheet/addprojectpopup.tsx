@@ -90,6 +90,8 @@ export function Addprojectpopup({
                     fontSize="12px"
                     background="transparent"
                     onClick={close}
+                    variant={"outlined"}
+
                   />
                 </div>
                 <div className="ms-3">
@@ -100,6 +102,8 @@ export function Addprojectpopup({
                     fontSize="12px"
                     background="#FF6F6F"
                     onClick={handleSave}
+                    variant={"outlined"}
+
                   />
                 </div>
               </div>

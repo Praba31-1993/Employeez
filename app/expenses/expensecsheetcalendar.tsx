@@ -76,6 +76,8 @@ export default function Summaryheetcalendar() {
               text="Save"
               fontSize="12px"
               background="transparent"
+              variant={"outlined"}
+
             />
           </div>
           <div className="ms-3">
@@ -85,6 +87,8 @@ export default function Summaryheetcalendar() {
               text="Submit"
               fontSize="12px"
               background={useColors.themeRed}
+              variant={"outlined"}
+
             />
           </div>
         </div>

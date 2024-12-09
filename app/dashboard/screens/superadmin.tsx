@@ -238,7 +238,7 @@ const SuperAdminDashboard = () => {
               text="Contact us"
               fontSize="12px"
               background={useColors.themeRed}
-              isDashboardIcon={false}
+              variant={"outlined"}
             />
           </div>
         </div>

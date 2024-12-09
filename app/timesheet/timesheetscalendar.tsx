@@ -8,6 +8,7 @@ import Uploadfiles from "./uploadfiles";
 import { use, useEffect, useState } from "react";
 import Summarydetails from "./summarydetails";
 import Button from "@mui/material/Button";
+import plusIcon from "@/app/assets/img/plus-redcircle.svg";
 
 // import Colors from '@/app/reusableComponent/styles'
 import { Colors } from "../reusableComponent/styles";
@@ -119,18 +120,21 @@ export default function Timesheetcalendar({
             <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
           </div>
 
-          <Button
-            variant="outlined"
-            className="outlinebtn ms-4 px-3 py-1"
+          <div
             onClick={() => setOpen((prev) => !prev)}
-            disabled={true}
-            sx={{
-              color: useColors.themeRed,
-              border: `1px solid ${useColors.themeRed}`,
-            }}
+            className="ms-4 px-3 py-1"
           >
-            Upload <FontAwesomeIcon className="ms-2" icon={faCirclePlus} />
-          </Button>
+            <Outlinebutton
+              color={useColors.themeRed}
+              border={`1px solid ${useColors.themeRed}`}
+              text="Upload"
+              fontSize="12px"
+              isDashboardIcon={false}
+              disabled={false}
+              icon={plusIcon}
+              variant={"outlined"}
+            />
+          </div>
         </div>
       </div>
       <div className="row mt-2">
@@ -176,17 +180,7 @@ export default function Timesheetcalendar({
           ))}
         </div>
         <div className="col-12 d-flex  justify-content-end mt-4">
-          <div className="ms-3">
-            {/* <Outlinebutton
-              color="#FFF"
-              border="1px solid #8c57ff"
-              text="I details"
-              fontSize="12px"
-              background="#8c57ff"
-              onClick={openideatail}
-              disabled={true}
-            /> */}
-          </div>
+          <div className="ms-3"></div>
           <div className="ms-3">
             <Outlinebutton
               color={useColors.themeRed}
@@ -194,6 +188,7 @@ export default function Timesheetcalendar({
               text="Save"
               fontSize="12px"
               background="transparent"
+              variant={"outlined"}
             />
           </div>
           <div className="ms-3">
@@ -204,6 +199,7 @@ export default function Timesheetcalendar({
               fontSize="12px"
               background={useColors.themeRed}
               disabled={true}
+              variant={"outlined"}
             />
           </div>
         </div>

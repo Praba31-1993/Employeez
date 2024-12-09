@@ -20,7 +20,6 @@ import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import {
   LoginApi,
-  getLoginUserDatas,
   refreshAccessToken,
 } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
