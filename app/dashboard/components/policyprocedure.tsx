@@ -1,43 +1,105 @@
 import React from "react";
-import Image from "next/image";
 import { Colors } from "@/app/reusableComponent/styles";
-import totalholidays from "@/app/assets/img/totalholidays.svg";
-import balanceholidays from "@/app/assets/img/balanceholidays.svg";
-import balancecl from "@/app/assets/img/balancecl.svg";
-import balancesl from "@/app/assets/img/balancesl.svg";
-import contact from "@/app/assets/img/contact.svg";
-import usedholiday from "@/app/assets/img/usedholidays.svg";
+import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
+import DownhillSkiingOutlinedIcon from '@mui/icons-material/DownhillSkiingOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined';
 
 function Policyprocedure() {
-  const useColors = Colors();
+    const useColors = Colors();
 
-  const arrayList = [
-    { holidaysname: "Total Holiday", noofholidays: "32", img: totalholidays },
-    { holidaysname: "Used Holiday", noofholidays: "11", img: usedholiday },
-    {
-      holidaysname: "Balance Holiday",
-      noofholidays: "12",
-      img: balanceholidays,
-    },
-    { holidaysname: "Balance CL", noofholidays: "12", img: balancecl },
-    { holidaysname: "Balance SL", noofholidays: "08", img: balancesl },
-    { holidaysname: "Important contact", noofholidays: "20", img: contact },
-  ];
 
-  return (
-    <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 gap-3 flex-wrap">
-      {arrayList?.map((list: any, index: number) => {
-        return (
-          <div key={index} className="d-flex my-2 flex-column ">
-            <div className="d-flex gap-2 align-items-center">
-              <Image src={list.img} alt="" />
-              <h6 className="mb-0 textheader heading2">{list.noofholidays}</h6>
+
+    return (
+        <><div className="col-lg-12 col-xxl-6 mt-3">
+            <div className="  d-flex align-items-center">
+                <div
+                    className="headingicons rounded"
+                    style={{
+                        background: "#FFCC5F",
+                        height: "fit-content",
+                        width: "fit-content",
+                    }}
+                >
+                    <AccountBalanceOutlinedIcon className="m-1 text-white" />
+                </div>
+
+                <div>
+                    <h5 className="para textheader ps-2 mb-0 ">Federal holiday</h5>
+                </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+        </div><div className="col-lg-12 col-xxl-6 mt-3">
+                <div className="  d-flex align-items-center">
+                    <div
+                        className="headingicons rounded"
+                        style={{
+                            background: "#6C63FF",
+                            height: "fit-content",
+                            width: "fit-content",
+                        }}
+                    >
+                        <DownhillSkiingOutlinedIcon className="m-1 text-white" />
+                    </div>
+
+                    <div>
+                        <h5 className="para textheader ps-2 mb-0 "> Vacation policy</h5>
+                    </div>
+                </div>
+            </div><div className="col-lg-12 col-xxl-6 mt-3">
+                <div className="  d-flex align-items-center">
+                    <div
+                        className="headingicons rounded"
+                        style={{
+                            background: "#FF6970",
+                            height: "fit-content",
+                            width: "fit-content",
+                        }}
+                    >
+                        <PersonAddAltOutlinedIcon className="m-1 text-white" />
+                    </div>
+
+                    <div>
+                        <h5 className="para textheader ps-2 mb-0 ">Recruitment process</h5>
+                    </div>
+                </div>
+            </div><div className="col-lg-12 col-xxl-6 mt-3">
+                <div className="  d-flex align-items-center">
+                    <div
+                        className="headingicons rounded"
+                        style={{
+                            background: "#16B1FF",
+                            height: "fit-content",
+                            width: "fit-content",
+                        }}
+                    >
+                        <ApartmentOutlinedIcon className="m-1 text-white" />
+                    </div>
+
+                    <div>
+                        <h5 className="para textheader ps-2 mb-0 ">Marvel</h5>
+                    </div>
+                </div>
+            </div>
+            <div className="col-lg-12 col-xxl-6 mt-3">
+            <div className="  d-flex align-items-center" >
+                <div
+                    className="headingicons rounded"
+                    style={{
+                        background: "#FFB054",
+                        height: "fit-content",
+                        width: "fit-content",
+                    }}
+                >
+                    <AutoStoriesOutlinedIcon className="m-1 text-white" />
+                </div>
+
+                <div>
+                    <h5 className="para textheader ps-2 mb-0 ">Handbook</h5>
+                </div>
+            </div>
+        </div></>
+    );
 }
 
 export default Policyprocedure;

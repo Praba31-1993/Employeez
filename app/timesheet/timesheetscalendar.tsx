@@ -119,7 +119,7 @@ export default function Timesheetcalendar({
             />
             <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
           </div>
-
+              {/* Annula leave summary */}
           <div
             onClick={() => setOpen((prev) => !prev)}
             className="ms-4 px-3 py-1"
