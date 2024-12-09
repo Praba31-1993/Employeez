@@ -17,7 +17,7 @@ import {
 
 export function Totalsummary({ showsummarycards }: any) {
   return (
-    <div onClick={showsummarycards}>
+    <div onClick={showsummarycards} className="px-3">
       <div
         className="d-flex pt-2 align-items-center"
         // onClick={showsummarycards}

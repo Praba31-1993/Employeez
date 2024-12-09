@@ -7,13 +7,15 @@ import { Colors } from "../../reusableComponent/styles";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
 import birthday from "@/app/assets/img/birthday.svg";
 import anniversary from "@/app/assets/img/anniversary.svg";
-import BarChartComponent, { Salesreport } from "../../reusableComponent/chart/barchart";
+import BarChartComponent, {
+    Salesreport,
+} from "../../reusableComponent/chart/barchart";
 import HorizontalBars from "../../reusableComponent/chart/horizontalbarchart";
 import ToDoIcon from "@/app/assets/img/todo.svg";
 import Image from "next/image";
 import Outlinebutton from "../../reusableComponent/outlinebtn";
 import Hrdatas from "../components/hrdatas";
-import InterestsIcon from '@mui/icons-material/Interests';
+import InterestsIcon from "@mui/icons-material/Interests";
 import {
     arrayList,
     salesReportDatas,
@@ -53,13 +55,16 @@ const SuperAdminDashboard = () => {
 
                 {/*My Request Card  */}
                 <div className="col-12 mb-3 col-md-4">
-                    <div className="dashboardcard  p-3 h-100  " style={borderAndBoxShadowStyles}>
+                    <div
+                        className="dashboardcard  p-3 h-100  "
+                        style={borderAndBoxShadowStyles}
+                    >
                         <ListCard />
                     </div>
                 </div>
 
                 {/* Pending Invoice */}
-                <div className=" col-12 mb-3 col-md-5  col-xxl-4"  >
+                <div className=" col-12 mb-3 col-md-5  col-xxl-4">
                     <div
                         className="dashboardcard p-3  h-100"
                         style={borderAndBoxShadowStyles}
@@ -75,7 +80,6 @@ const SuperAdminDashboard = () => {
                         style={borderAndBoxShadowStyles}
                     >
                         <ToDoList title={"My Request"} />{" "}
-
                     </div>
                 </div>
 
@@ -95,13 +99,14 @@ const SuperAdminDashboard = () => {
                             </div>
                         </div>
                         <div className="col-12" style={{ alignSelf: "baseline" }}>
-                            <div className="dashboardcard p-2 p-xxl-3" style={borderAndBoxShadowStyles}>
+                            <div
+                                className="dashboardcard p-2 p-xxl-3"
+                                style={borderAndBoxShadowStyles}
+                            >
                                 <Workanniversary />
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
@@ -129,19 +134,29 @@ const SuperAdminDashboard = () => {
                                 <Openjobs />
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div className=" col-12 mb-3 col-md-3 ">
                     <div className="row  h-100 align-content-between">
                         <div className="col-sm-12  mb-2">
-                            <div className="dashboardcard p-3" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }} >
+                            <div
+                                className="dashboardcard p-3"
+                                style={{
+                                    border: useColors.border,
+                                    boxShadow: useColors.boxshadow,
+                                }}
+                            >
                                 <Vacationreport />
                             </div>
                         </div>
                         <div className="col-sm-12  ">
-                            <div className="dashboardcard p-3" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }} >
+                            <div
+                                className="dashboardcard p-3"
+                                style={{
+                                    border: useColors.border,
+                                    boxShadow: useColors.boxshadow,
+                                }}
+                            >
                                 <Inineverify />
                             </div>
                         </div>
@@ -157,7 +172,10 @@ const SuperAdminDashboard = () => {
                             <div className=" col-12 mb-3 col-md-8 ">
                                 <BarChartComponent />
                             </div>
-                            <div className=" col-12 mb-3 col-md-4 "style={{ borderLeft: "1px solid #A8A8A8" }}>
+                            <div
+                                className=" col-12 mb-3 col-md-4 "
+                                style={{ borderLeft: "1px solid #A8A8A8" }}
+                            >
                                 <Salesreport />
                             </div>
                         </div>
@@ -167,7 +185,7 @@ const SuperAdminDashboard = () => {
                 {/* Pending HR action */}
 
                 <div className="col-12 mb-3 col-md-4 ">
-                    <div className="dashboardcard p-3">
+                    <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
                         <p className="textheader heading2">Pending HR action</p>
 
                         <HorizontalBars />
@@ -175,27 +193,28 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 <div className="col-12 mb-3 col-md-2 ">
-                    {HiringCounts?.map((list: any, index: number) => (
-                        <>
-                            <Hrdatas hrList={list} isPendingHrData={true} />
-                        </>
-                    ))}
+                    <div className="row h-100 gap-2">
+
+                        <div className="col-12">
+                            <Hrdatas />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Policy/Procedure  */}
                 <div className="col-12 mb-3 col-md-3">
-                    <div className="dashboardcard p-3">
+                    <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
                         <p className="textheader heading2">Policy/Procedure </p>
                         <div
                             className="d-flex flex-wrap flex-column gap-3"
                             style={{ height: "10rem" }}
                         >
                             <div className="row p-0 mb-0">
-                                {HiringCounts?.map((list: any, index: number) => (
-                                    <div className="col-12 col-md-6">
-                                        <Hrdatas hrList={list} isPendingHrData={false} />
-                                    </div>
-                                ))}
+                                {/* {HiringCounts?.map((list: any, index: number) => (
+                  <div className="col-12 col-md-6">
+                    <Hrdatas hrList={list} isPendingHrData={false} />
+                  </div>
+                ))} */}
                             </div>
                         </div>
                     </div>
@@ -203,7 +222,7 @@ const SuperAdminDashboard = () => {
 
                 {/* Need help? */}
                 <div className="col-12 mb-3 col-md-3">
-                    <div className="dashboardcard p-3">
+                    <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
                         <div className="d-flex justify-content-between ">
                             <p className="textheader heading2">Need help?</p>
 
