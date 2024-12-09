@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,13 +8,13 @@ import Menu from "@mui/material/Menu";
 import SearchIcon from "@/app/assets/img/search.svg";
 import SearchBar from "./searchbar";
 import digitalIcon from "@/app/assets/img/digitallogo.svg";
-import notificationIcon from "@/app/assets/img/notifications_unread.svg";
 import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
 import questionIcon from "@/app/assets/img/question.svg";
 import DropdownComponent from "./dropdown";
-import { Colors } from '../reusableComponent/styles';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import { Colors } from "../reusableComponent/styles";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import { useRouter } from "next/navigation";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -27,8 +26,26 @@ export default function NavbarComponent() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
 
+  const router = useRouter();
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleLogOut = () => {
+    document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie =
+      "authToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie =
+      "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+    localStorage.removeItem("rememberedUserId");
+    localStorage.removeItem("rememberedUserPassword");
+    localStorage.removeItem("pin"); // Assuming you stored the sidebar pin state in localStorage
+
+    sessionStorage.clear();
+
+    router.push("/login");
+  };
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -65,7 +82,7 @@ export default function NavbarComponent() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
     </Menu>
   );
   const useColors = Colors();
@@ -99,10 +116,22 @@ export default function NavbarComponent() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-                         <div className="d-flex" style={{position:"relative"}}>
-                  <NotificationsNoneOutlinedIcon sx={{ color: useColors.themeRed }} />
-                  <div className="notificationround" style={{position:"absolute", width:"6px",height:"6px",borderRadius:"50%",background:useColors.themeRed,right:"14%",top:"10%",border:"1px solid white"}} ></div>
-                </div>
+          <div className="d-flex" style={{ position: "relative" }}>
+            <NotificationsNoneOutlinedIcon sx={{ color: useColors.themeRed }} />
+            <div
+              className="notificationround"
+              style={{
+                position: "absolute",
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                background: useColors.themeRed,
+                right: "14%",
+                top: "10%",
+                border: "1px solid white",
+              }}
+            ></div>
+          </div>
         </IconButton>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -150,11 +179,24 @@ export default function NavbarComponent() {
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
-                <div className="d-flex" style={{position:"relative"}}>
-                  <NotificationsNoneOutlinedIcon sx={{ color: useColors.themeRed }} />
-                  <div className="notificationround" style={{position:"absolute", width:"6px",height:"6px",borderRadius:"50%",background:useColors.themeRed,right:"14%",top:"10%",border:"1px solid white"}} ></div>
+                <div className="d-flex" style={{ position: "relative" }}>
+                  <NotificationsNoneOutlinedIcon
+                    sx={{ color: useColors.themeRed }}
+                  />
+                  <div
+                    className="notificationround"
+                    style={{
+                      position: "absolute",
+                      width: "6px",
+                      height: "6px",
+                      borderRadius: "50%",
+                      background: useColors.themeRed,
+                      right: "14%",
+                      top: "10%",
+                      border: "1px solid white",
+                    }}
+                  ></div>
                 </div>
-
               </IconButton>
               <IconButton
                 size="large"
