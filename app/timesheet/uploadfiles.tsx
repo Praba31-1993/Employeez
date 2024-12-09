@@ -50,6 +50,8 @@ export default function Uploadfiles({ show, close }: any) {
                     border="1px solid #8C57FF"
                     text="Browse File"
                     fontSize="12px"
+                    variant={"outlined"}
+
                   />
                   <input
                     type="file"

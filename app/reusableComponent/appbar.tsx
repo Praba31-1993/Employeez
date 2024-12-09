@@ -15,6 +15,7 @@ import DropdownComponent from "./dropdown";
 import { Colors } from "../reusableComponent/styles";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useRouter } from "next/navigation";
+import Logout from "./logout";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -82,7 +83,9 @@ export default function NavbarComponent() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+      <MenuItem>
+        <Logout />
+      </MenuItem>
     </Menu>
   );
   const useColors = Colors();

@@ -10,6 +10,8 @@ import balancesl from "@/app/assets/img/balancesl.svg";
 import contact from "@/app/assets/img/contact.svg";
 import Image from "next/image";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import arrowIcon from "@/app/assets/img/arrowicon.svg";
+
 
 export default function ProfilesCard() {
   const useColors = Colors();
@@ -45,6 +47,10 @@ export default function ProfilesCard() {
             fontSize="12px"
             background={useColors.themeRed}
             isDashboardIcon={true}
+            disabled={false}
+            icon={arrowIcon}
+            variant={"contained"}
+
           />
         </div>
       </div>

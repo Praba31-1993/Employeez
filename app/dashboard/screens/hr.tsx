@@ -234,7 +234,7 @@ const HrDashboard = () => {
               text="Contact us"
               fontSize="12px"
               background={useColors.themeRed}
-              isDashboardIcon={false}
+              variant={"contained"}
             />
           </div>
         </div>
