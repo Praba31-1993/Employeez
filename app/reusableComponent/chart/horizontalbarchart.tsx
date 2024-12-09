@@ -18,11 +18,12 @@ const chartSetting = {
   width: 500,
   height: 300,
 };
+const arrayLists =arrayList.reverse()
 
 export default function HorizontalBars() {
   return (
     <BarChart
-      dataset={arrayList.reverse()}  // Pass the entire dataset to the chart
+      dataset={arrayLists}  // Pass the entire dataset to the chart
       yAxis={[
         {
           scaleType: 'band',
@@ -35,7 +36,7 @@ export default function HorizontalBars() {
         },
       ]}
       layout="horizontal"
-      barLabel={({ value, dataIndex }) => arrayList[dataIndex].hractionlist} // Access the 'hractionlist' using dataIndex
+      // barLabel={({ value, dataIndex }) => arrayList[dataIndex].hractionlist} 
       {...chartSetting}
     />
   );
