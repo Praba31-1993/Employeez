@@ -5,6 +5,10 @@ import user2 from "@/app/assets/img/user2.svg";
 import { Colors } from "@/app/reusableComponent/styles";
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
+interface InineverifyProps{
+title : string
+}
+
 function Inineverify() {
     const useColors = Colors();
     return (
