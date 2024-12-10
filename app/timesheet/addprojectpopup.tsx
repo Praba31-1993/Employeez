@@ -57,8 +57,8 @@ export function Addprojectpopup({
                   <h5 className="heading2 me-3 textheader mb-0">
                     Add projects
                   </h5>
-                  <FontAwesomeIcon
-                    className="my-2"
+                  <FontAwesomeIcon style={{cursor:"pointer"}}
+                    className="my-2 textheader"
                     icon={faXmark}
                     onClick={close}
                   />
