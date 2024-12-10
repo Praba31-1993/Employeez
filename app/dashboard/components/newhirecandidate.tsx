@@ -36,6 +36,10 @@ function NewHireCandidate({
                   {bday?.role}
 
                 </p>
+                <p className="shade para2 ps-2 mb-0 ">
+                  2024-12-05
+
+                </p>
               </div>
             </div>
           </div>

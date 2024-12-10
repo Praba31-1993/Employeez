@@ -5,31 +5,24 @@ import ListCard from "@/app/reusableComponent/listitems";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
 import birthday from "@/app/assets/img/birthday.svg";
-import Pendinginvoice from "../components/pendinginvoice";
 import { arrayList } from "@/app/reusableComponent/JsonData";
-import BarChartComponent, {
-  Salesreport,
-} from "@/app/reusableComponent/chart/barchart";
-import Policyprocedure from "../components/policyprocedure";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
 import Workanniversary from "../components/workanniversary";
 import PendingTimeSheet from "../components/pendingTimesheet";
-import Vacationreport from "../components/vacationreport";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
+import anniversary from "@/app/assets/img/anniversary.svg";
+import NewHireCandidate from "../components/newhirecandidate";
+import PayRoleExecutive from "./payrollexecutive";
+import PayrollReport from "../components/payrollreport";
+import OverTimeCost from "../components/overtimecost";
 
-function ManagerDashboard() {
+function PayrollAdmin() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border: useColors.border,
     boxShadow: useColors.boxshadow,
   };
-
-  const dashboardLayout = useSelector(
-    (state: RootState) => state.dashboardLayout
-  );
 
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);
@@ -49,49 +42,91 @@ function ManagerDashboard() {
               </div>
             </div>
 
-            <div className="col-6 mb-3">
-              <div
-                className="dashboardcard p-3  h-100 mb-3"
-                style={borderAndBoxShadowStyles}
-              >
-                <Pendinginvoice />
+            <div className="col-12 col-lg-8 mb-3">
+              <div className="row mb-3">
+                <div className="col-6">
+                  <div
+                    className="dashboardcard  p-3 h-100  "
+                    style={borderAndBoxShadowStyles}
+                  >
+                    <NewHireCandidate
+                      title={"New hire candidate"}
+                      headerImage={anniversary}
+                      items={birthdayAnniversaryReport}
+                    />
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div
+                    className="dashboardcard  p-3 h-100  "
+                    style={borderAndBoxShadowStyles}
+                  >
+                    <NewHireCandidate
+                      title={"Prehire candidate"}
+                      headerImage={anniversary}
+                      items={birthdayAnniversaryReport}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <div
+                    className="dashboardcard  p-3 h-100  "
+                    style={borderAndBoxShadowStyles}
+                  >
+                    <Menulistforbirthdayworkvacation
+                      title={"Bonus due"}
+                      headerImage={birthday}
+                      items={birthdayAnniversaryReport}
+                    />
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div
+                    className="dashboardcard  p-3 h-100  "
+                    style={borderAndBoxShadowStyles}
+                  >
+                    <Menulistforbirthdayworkvacation
+                      title={"Expense record"}
+                      headerImage={birthday}
+                      items={birthdayAnniversaryReport}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="col-6 mb-3">
+            <div className="col-12 col-md-6 col-lg-4 mb-3">
               <div
-                className="dashboardcard p-3 h-100 mb-3"
+                className="dashboardcard p-3 h-100  "
                 style={borderAndBoxShadowStyles}
               >
                 <ToDoList title={"My Request"} />{" "}
               </div>
             </div>
-            <div className="col-8 mb-3">
-              <div className="dashboardcard h-100 p-3">
-                <div className="row">
-                  <p className="textheader heading2">Sales Report</p>
 
-                  <div className="col-12 mb-3 col-md-8 ">
-                    <BarChartComponent />
-                  </div>
-                  <div
-                    className="col-4 "
-                    style={{ borderLeft: "1px solid #A8A8A8" }}
-                  >
-                    <Salesreport />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-4 mb-3">
-              <div className="dashboardcard h-100 p-3">
+            <div className="col-12 col-md-6 col-lg-4 mb-3">
+              <div
+                className="dashboardcard p-3 h-100  "
+                style={borderAndBoxShadowStyles}
+              >
                 <PendingTimeSheet title="Pending Timesheet" />
               </div>
             </div>
-            <div className="col-12">
-              <div className="dashboardcard h-100 p-3">
-                <p className="textheader heading2">Policy/Procedure </p>
-                <Policyprocedure isManagerScreen={true} />
+            <div className="col-12 col-md-6 col-lg-4 mb-3">
+              <div
+                className="dashboardcard p-3 h-100  "
+                style={borderAndBoxShadowStyles}
+              >
+                <PayrollReport title="Payroll report"  items={birthdayAnniversaryReport} />
+              </div>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 mb-3">
+              <div
+                className="dashboardcard p-3 h-100  "
+                style={borderAndBoxShadowStyles}
+              >
+                <OverTimeCost title="Overtime cost"  items={birthdayAnniversaryReport} />
               </div>
             </div>
           </div>
@@ -132,14 +167,6 @@ function ManagerDashboard() {
                 className="dashboardcard  p-3 h-100  "
                 style={borderAndBoxShadowStyles}
               >
-                <Vacationreport />
-              </div>
-            </div>
-            <div className="col-12 mb-3">
-              <div
-                className="dashboardcard  p-3 h-100  "
-                style={borderAndBoxShadowStyles}
-              >
                 <Openjobs />
               </div>
             </div>
@@ -159,4 +186,4 @@ function ManagerDashboard() {
   );
 }
 
-export default ManagerDashboard;
+export default PayrollAdmin;
