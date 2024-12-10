@@ -20,6 +20,7 @@ import Openjobs from "../components/openjobs";
 import Inineverify from "../components/inineverify";
 import Policyprocedure from "../components/policyprocedure";
 import Needhelp from "../components/needhelp";
+import { Verify } from "crypto";
 
 const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -150,14 +151,14 @@ const SuperAdminDashboard = () => {
                   boxShadow: useColors.boxshadow,
                 }}
               >
-                <Inineverify />
+                <Inineverify title={"I-9 Verify"}/>
               </div>
             </div>
           </div>
         </div>
 
         {/* Sales Report */}
-        <div className=" col-12 mb-3 col-md-6">
+        <div className="col-12 mb-3 col-md-6">
           <div className="dashboardcard h-100 p-3">
             <div className="row">
               <p className="textheader heading2">Sales Report</p>

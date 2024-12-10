@@ -11,25 +11,17 @@ import BarChartComponent, {
   Salesreport,
 } from "@/app/reusableComponent/chart/barchart";
 import Policyprocedure from "../components/policyprocedure";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
 import Workanniversary from "../components/workanniversary";
-import PendingTimeSheet from "../components/pendingTimesheet";
-import Vacationreport from "../components/vacationreport";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
 
-function ManagerDashboard() {
+function SalesManager() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border: useColors.border,
     boxShadow: useColors.boxshadow,
   };
-
-  const dashboardLayout = useSelector(
-    (state: RootState) => state.dashboardLayout
-  );
 
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);
@@ -85,13 +77,8 @@ function ManagerDashboard() {
             </div>
             <div className="col-4 mb-3">
               <div className="dashboardcard h-100 p-3">
-                <PendingTimeSheet title="Pending Timesheet" />
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="dashboardcard h-100 p-3">
                 <p className="textheader heading2">Policy/Procedure </p>
-                <Policyprocedure isManagerScreen={true} />
+                <Policyprocedure />{" "}
               </div>
             </div>
           </div>
@@ -127,14 +114,7 @@ function ManagerDashboard() {
                 <Workanniversary />
               </div>
             </div>
-            <div className="col-12 mb-3">
-              <div
-                className="dashboardcard  p-3 h-100  "
-                style={borderAndBoxShadowStyles}
-              >
-                <Vacationreport />
-              </div>
-            </div>
+
             <div className="col-12 mb-3">
               <div
                 className="dashboardcard  p-3 h-100  "
@@ -159,4 +139,4 @@ function ManagerDashboard() {
   );
 }
 
-export default ManagerDashboard;
+export default SalesManager;

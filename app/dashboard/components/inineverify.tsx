@@ -5,12 +5,16 @@ import user2 from "@/app/assets/img/user2.svg";
 import { Colors } from "@/app/reusableComponent/styles";
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
-function Inineverify() {
+interface InineverifyProps{
+title : string
+}
+
+function Inineverify({title}:InineverifyProps) {
     const useColors = Colors();
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">I-9 Verify</p>
+                <p className="textheader heading2 mb-0">{title}</p>
             </div><div>
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex align-items-center">
