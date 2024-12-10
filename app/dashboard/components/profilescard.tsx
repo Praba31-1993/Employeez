@@ -11,52 +11,60 @@ import contact from "@/app/assets/img/contact.svg";
 import Image from "next/image";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import arrowIcon from "@/app/assets/img/arrowicon.svg";
-
+import Timer from "@/app/reusableComponent/timer";
+import downarrowcircle from "@/app/assets/img/downarrrowCircle.svg"
 
 export default function ProfilesCard() {
-    const useColors = Colors();
+  const useColors = Colors();
+  const [punchIn, setPunchIn] = React.useState<Boolean>(false);
+  const [totalTime, setTotalTime] = React.useState<string>('');
 
-    const arrayList = [
-        { holidaysname: "Total Holiday", noofholidays: "32", img: totalholidays },
-        { holidaysname: "Used Holiday", noofholidays: "11", img: usedholiday },
-        {
-            holidaysname: "Balance Holiday",
-            noofholidays: "12",
-            img: balanceholidays,
-        },
-        { holidaysname: "Balance CL", noofholidays: "12", img: balancecl },
-        { holidaysname: "Balance SL", noofholidays: "08", img: balancesl },
-        { holidaysname: "Important contact", noofholidays: "20", img: contact },
-    ];
 
-    return (
-        <>
-            <div className="flex justify-content-between pb-2">
-                <Menulistitem />
-                <div className="d-flex align-items-center pe-5">
-                    <p
-                        className="mb-0 cursorPointer para pe-3"
-                        style={{ color: useColors.themeRed }}
-                    >
-                        Supervisee
-                    </p>
-                    <Outlinebutton
-                        color={useColors.white}
-                        border={`1px solid ${useColors.themeRed}`}
-                        text="Punch in"
-                        fontSize="12px"
-                        background={useColors.themeRed}
-                        isDashboardIcon={true}
-                        disabled={false}
-                        icon={arrowIcon}
-                        variant={"contained"}
+  const arrayList = [
+    { holidaysname: "Total Holiday", noofholidays: "32", img: totalholidays },
+    { holidaysname: "Used Holiday", noofholidays: "11", img: usedholiday },
+    {
+      holidaysname: "Balance Holiday",
+      noofholidays: "12",
+      img: balanceholidays,
+    },
+    { holidaysname: "Balance CL", noofholidays: "12", img: balancecl },
+    { holidaysname: "Balance SL", noofholidays: "08", img: balancesl },
+    { holidaysname: "Important contact", noofholidays: "20", img: contact },
+  ];
+  console.log('timesTotal', totalTime);
+  
 
-                    />
-                </div>
-            </div>
-            <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5  flex-wrap">
-                {arrayList?.map((list: any, index: number) => {
-                    const isLastChild = index === arrayList.length - 1;
+  return (
+    <>
+      <div className="flex justify-content-between pb-2">
+        <Menulistitem />
+        <div className="d-flex align-items-center pe-5">
+          <p
+            className="mb-0 cursorPointer para pe-3"
+            style={{ color: useColors.themeRed }}
+          >
+            Supervisee
+          </p>
+          <div onClick={() => setPunchIn((prev)=>!prev)}>
+            <Outlinebutton
+              color={useColors.white}
+              border={`1px solid ${useColors.themeRed}`}
+              text={punchIn?"Punch out" : "Punch in"}
+              fontSize="12px"
+              background={useColors.themeRed}
+              isDashboardIcon={true}
+              disabled={false}
+              icon={punchIn? downarrowcircle :arrowIcon}
+              variant={"contained"}
+            />
+          </div>
+          {punchIn && <Timer starttime={punchIn} timevalue={(data:any)=>setTotalTime(data)}/>}
+        </div>
+      </div>
+      <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 gap-3 flex-wrap">
+        {arrayList?.map((list: any, index: number) => {
+          const isLastChild = index === arrayList.length - 1;
 
                     return (
                         <div key={index} className="d-flex my-2 flex-column ">

@@ -15,6 +15,7 @@ import PayrollAdmin from "./screens/payrolladmin";
 const Dashboard = () => {
   return (
     <Sidebar>
+      
       <SuperAdminDashboard />
       {/* <HrDashboard/> */}
       {/* <ManagerDashboard /> */}
