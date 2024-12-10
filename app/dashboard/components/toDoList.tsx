@@ -14,14 +14,14 @@ function ToDoList({ title }: ToDoListProps) {
   const useColors = Colors();
   return (
     <div>
-      <div>{title}</div>
+      <h4 className="textheader heading2">To do list</h4>
 
       {[0, 1, 2,].map((value) => {
         return (
           <>
             <div className="d-flex align-items-start mt-3 p-1 todoList">
               <Image src={ToDoIcon} alt="" />
-              <div className="ps-1 w-100">
+              <div className="ps-2 w-100">
                 <p className="para textheader mb-0 ellipsis-applied">
                   I-9 for contractor Alpha (AP001) has been due{" "}
                 </p>

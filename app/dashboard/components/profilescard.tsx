@@ -66,29 +66,29 @@ export default function ProfilesCard() {
         {arrayList?.map((list: any, index: number) => {
           const isLastChild = index === arrayList.length - 1;
 
-          return (
-            <div key={index} className="d-flex my-2 flex-column ">
-              <div className="d-flex gap-2 align-items-center">
-                <Image src={list.img} alt="" />
-                <h6 className="mb-0 textheader heading2">
-                  {list.noofholidays}
-                </h6>
-              </div>
-              <p
-                className="para pt-2 text-center mb-0 shade"
-                style={{ color: isLastChild ? useColors.themeRed : undefined }}
-              >
-                {list.holidaysname}{" "}
-                {isLastChild && (
-                  <span>
-                    <VisibilityOutlinedIcon className="ps-1 cursorPointer" />
-                  </span>
-                )}{" "}
-              </p>
+                    return (
+                        <div key={index} className="d-flex my-2 flex-column ">
+                            <div className="d-flex gap-2 align-items-center">
+                                <Image src={list.img} alt="" />
+                                <h6 className="mb-0 textheader heading2">
+                                    {list.noofholidays}
+                                </h6>
+                            </div>
+                            <p
+                                className="para pt-2 text-center mb-0 shade"
+                                style={{ color: isLastChild ? useColors.themeRed : undefined }}
+                            >
+                                {list.holidaysname}{" "}
+                                {isLastChild && (
+                                    <span>
+                                        <VisibilityOutlinedIcon className="ps-1 cursorPointer" />
+                                    </span>
+                                )}{" "}
+                            </p>
+                        </div>
+                    );
+                })}
             </div>
-          );
-        })}
-      </div>
-    </>
-  );
+        </>
+    );
 }

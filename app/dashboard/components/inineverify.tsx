@@ -9,12 +9,12 @@ interface InineverifyProps{
 title : string
 }
 
-function Inineverify({title}:InineverifyProps) {
+function Inineverify() {
     const useColors = Colors();
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">{title}</p>
+                <p className="textheader heading2 mb-0">I-9 Verify</p>
             </div><div>
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex align-items-center">
