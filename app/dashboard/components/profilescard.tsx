@@ -11,10 +11,14 @@ import contact from "@/app/assets/img/contact.svg";
 import Image from "next/image";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import arrowIcon from "@/app/assets/img/arrowicon.svg";
-
+import Timer from "@/app/reusableComponent/timer";
+import downarrowcircle from "@/app/assets/img/downarrrowCircle.svg"
 
 export default function ProfilesCard() {
   const useColors = Colors();
+  const [punchIn, setPunchIn] = React.useState<Boolean>(false);
+  const [totalTime, setTotalTime] = React.useState<string>('');
+
 
   const arrayList = [
     { holidaysname: "Total Holiday", noofholidays: "32", img: totalholidays },
@@ -28,6 +32,8 @@ export default function ProfilesCard() {
     { holidaysname: "Balance SL", noofholidays: "08", img: balancesl },
     { holidaysname: "Important contact", noofholidays: "20", img: contact },
   ];
+  console.log('timesTotal', totalTime);
+  
 
   return (
     <>
@@ -40,18 +46,20 @@ export default function ProfilesCard() {
           >
             Supervisee
           </p>
-          <Outlinebutton
-            color={useColors.white}
-            border={`1px solid ${useColors.themeRed}`}
-            text="Punch in"
-            fontSize="12px"
-            background={useColors.themeRed}
-            isDashboardIcon={true}
-            disabled={false}
-            icon={arrowIcon}
-            variant={"contained"}
-
-          />
+          <div onClick={() => setPunchIn((prev)=>!prev)}>
+            <Outlinebutton
+              color={useColors.white}
+              border={`1px solid ${useColors.themeRed}`}
+              text={punchIn?"Punch out" : "Punch in"}
+              fontSize="12px"
+              background={useColors.themeRed}
+              isDashboardIcon={true}
+              disabled={false}
+              icon={punchIn? downarrowcircle :arrowIcon}
+              variant={"contained"}
+            />
+          </div>
+          {punchIn && <Timer starttime={punchIn} timevalue={(data:any)=>setTotalTime(data)}/>}
         </div>
       </div>
       <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 gap-3 flex-wrap">
