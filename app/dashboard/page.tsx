@@ -18,13 +18,6 @@ const Dashboard = () => {
       <SuperAdminDashboard />
       {/* <HrDashboard/> */}
       {/* <ManagerDashboard /> */}
-      {/* <Employee/> */}
-      {/* <Recruiter/> */}
-      {/* <SalesManager/> */}
-      {/* <Immigratorcoordinator/> */}
-      {/* <Timecoordinator/> */}
-      {/* <PayRoleExecutive/> */}
-      {/* <PayrollAdmin/> */}
     </Sidebar>
   );
 };

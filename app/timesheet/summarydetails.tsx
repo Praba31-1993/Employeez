@@ -36,8 +36,8 @@ export default function Summarydetails({ showpop, close, LeaveTypes }: any) {
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 text-end">
-                <FontAwesomeIcon
-                  className="my-2"
+                <FontAwesomeIcon style={{cursor:"pointer"}}
+                  className="my-2 textheader"
                   icon={faXmark}
                   onClick={close}
                 />

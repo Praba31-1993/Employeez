@@ -10,8 +10,7 @@ export default function ListCard() {
   const useColors = Colors();
   return (
     <List dense sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
-      <div className="pb-2 textheader heading2" >My Request</div>
-
+      <h4 className="textheader heading2 pb-2">My Request</h4>
       {[0, 1, 2].map((value) => {
         const labelId = `checkbox-list-secondary-label-${value}`;
         return (

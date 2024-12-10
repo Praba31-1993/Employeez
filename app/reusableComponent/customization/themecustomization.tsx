@@ -56,8 +56,8 @@ export function Themecustomization({ show, close }: any) {
                   <RestartAltIcon className="shade mx-1 " />
                 </div>
                 <div className="col-1 pb-2 pt-1">
-                  <FontAwesomeIcon
-                    className=""
+                  <FontAwesomeIcon style={{cursor:"pointer"}}
+                    className="textheader"
                     icon={faXmark}
                     onClick={close}
                   />

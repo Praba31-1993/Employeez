@@ -28,8 +28,8 @@ export default function Uploadfiles({ show, close }: any) {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 text-end">
-              <FontAwesomeIcon
-                className="my-2"
+              <FontAwesomeIcon 
+                className="my-2 textheader" style={{cursor:"pointer"}}
                 icon={faXmark}
                 onClick={close}
               />

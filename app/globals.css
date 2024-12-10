@@ -21,7 +21,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .dark {
-  background-color: #1b1a1a !important;
+  background-color: #28243D !important;
 }
 
 body {
@@ -123,6 +123,10 @@ a {
   border-radius: 10px;
   background: #fff;
 }
+.dark .dashboardcard {
+    border-radius: 10px;
+    background: #312D4B;
+  }
 .normalTextStyles {
   color: red;
   font-family: Inter;
@@ -162,6 +166,33 @@ body {
   color: white !important;
   background: #eda1a1;
 }
+
+.summarysection {
+    background: white;
+    width: 47%;
+    margin-left: auto;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .dark .summarysection {
+    background: #28243D !important;
+    box-shadow: rgba(38, 38, 40, 0.1) 0px 0px 16px;
+  }
+  
+  .showpopup {
+    position: fixed;
+    width: 100%;
+    right: 0;
+    top: 0;
+    background: rgba(27, 26, 26, 0.288);
+    z-index: 1132;
+    height: 100%;
+    transform: translate3d(100%, 0, 0);
+    transition: transform 0.5s ease;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+  }
 
 @media (max-width: "600px") {
   .theme {

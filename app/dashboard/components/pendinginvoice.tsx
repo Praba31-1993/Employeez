@@ -15,9 +15,9 @@ function Pendinginvoice() {
             <div className="d-flex justify-content-between">
                 <p className="textheader heading2">Pending Invoices</p>
                 <select
-                    className="form-select form-select-lg mb-3 cursorPointer para2"
+                    className="form-select form-select-lg mb-3 textheader cursorPointer para2"
                     aria-label=".form-select-lg example"
-                    style={{ width: "fit-content",boxShadow:"none !imporatant" }}
+                    style={{ width: "fit-content",boxShadow:"unset ",backgroundColor:"transparent" }}
                 >
                     <option selected>Select</option>
                     <option value="1">One</option>

@@ -50,7 +50,7 @@ export function Idetails({ show, close, customsheetlist }: any) {
                                         <p className="para2 ps-2 mb-0 mt-1 shade">Timesheet approver</p>
                                     </div>
                                 </div>
-                                <FontAwesomeIcon
+                                <FontAwesomeIcon style={{cursor:"pointer"}}
                                     className="my-2 textheader"
                                     icon={faXmark}
                                     onClick={close}
