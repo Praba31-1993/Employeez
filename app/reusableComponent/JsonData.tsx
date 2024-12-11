@@ -1885,4 +1885,27 @@ export const HiringCounts = [
  
 ];
 
+export const ContactsList = [
+  { id: '001', name: 'Rose', role: 'HR', mail: 'rose@gmail.com' },
+  { id: '002', name: 'John', role: 'Developer', mail: 'john@gmail.com' },
+  { id: '003', name: 'Emma', role: 'Designer', mail: 'emma@gmail.com' },
+  { id: '004', name: 'Michael', role: 'Project Manager', mail: 'michael@gmail.com' },
+  { id: '005', name: 'Sophia', role: 'QA Engineer', mail: 'sophia@gmail.com' },
+  { id: '006', name: 'Liam', role: 'DevOps Engineer', mail: 'liam@gmail.com' },
+  { id: '007', name: 'Olivia', role: 'Business Analyst', mail: 'olivia@gmail.com' },
+  { id: '008', name: 'Noah', role: 'Product Owner', mail: 'noah@gmail.com' },
+  { id: '009', name: 'Ava', role: 'Scrum Master', mail: 'ava@gmail.com' },
+  { id: '010', name: 'Elijah', role: 'Technical Lead', mail: 'elijah@gmail.com' },
+  { id: '011', name: 'Charlotte', role: 'Software Architect', mail: 'charlotte@gmail.com' },
+  { id: '012', name: 'James', role: 'Database Administrator', mail: 'james@gmail.com' },
+  { id: '013', name: 'Amelia', role: 'System Analyst', mail: 'amelia@gmail.com' },
+  { id: '014', name: 'William', role: 'Frontend Developer', mail: 'william@gmail.com' },
+  { id: '015', name: 'Mia', role: 'Backend Developer', mail: 'mia@gmail.com' },
+  { id: '016', name: 'Benjamin', role: 'Cloud Engineer', mail: 'benjamin@gmail.com' },
+  { id: '017', name: 'Harper', role: 'Security Analyst', mail: 'harper@gmail.com' },
+  { id: '018', name: 'Lucas', role: 'IT Support', mail: 'lucas@gmail.com' },
+  { id: '019', name: 'Evelyn', role: 'Network Engineer', mail: 'evelyn@gmail.com' },
+  { id: '020', name: 'Henry', role: 'UX Researcher', mail: 'henry@gmail.com' },
+];
+
 
