@@ -12,7 +12,7 @@ import { Colors } from "../reusableComponent/styles";
 export default function Summaryheetcalendar() {
   const useColors = Colors();
   const [open, setOpen] = useState(false);
-  const [openpopups, openPopUp] = useState(false);
+  const [openpopups, setopenPopUp] = useState(false);
 
   const Expenseslist = [
     { id: 1, expenses: "Car rental" },
@@ -29,7 +29,7 @@ export default function Summaryheetcalendar() {
     <>
       {open && <Uploadfiles show={open} close={() => setOpen(false)} />}
       {openpopups && (
-        <Summarydetails showpop={openpopups} close={() => openPopUp(false)} />
+        <Summarydetails showpop={openpopups} close={() => setopenPopUp(false)} />
       )}
 
       <div className="  d-flex align-items-center justify-content-between mt-3">

@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useState } from "react";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import Menulistitem from "@/app/reusableComponent/menulist";
 import { Colors } from "@/app/reusableComponent/styles";
@@ -13,11 +14,14 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import arrowIcon from "@/app/assets/img/arrowicon.svg";
 import Timer from "@/app/reusableComponent/timer";
 import downarrowcircle from "@/app/assets/img/downarrrowCircle.svg"
+import Contacts from "./contacts";
 
 export default function ProfilesCard() {
   const useColors = Colors();
+  const [open, setOpen] = useState(false);
   const [punchIn, setPunchIn] = React.useState<Boolean>(false);
   const [totalTime, setTotalTime] = React.useState<string>('');
+ 
 
 
   const arrayList = [
@@ -37,6 +41,7 @@ export default function ProfilesCard() {
 
   return (
     <>
+     {open && <Contacts  show={open} close={() => setOpen(false)} />}
       <div className="flex justify-content-between pb-2">
         <Menulistitem />
         <div className="d-flex align-items-center pe-5">
@@ -80,11 +85,14 @@ export default function ProfilesCard() {
                             >
                                 {list.holidaysname}{" "}
                                 {isLastChild && (
-                                    <span>
-                                        <VisibilityOutlinedIcon className="ps-1 cursorPointer" />
+                                    <span  >
+                                        <VisibilityOutlinedIcon className="ps-1 cursorPointer" onClick={() => setOpen((prev) => !prev)} />
                                     </span>
                                 )}{" "}
                             </p>
+                       
+                      
+
                         </div>
                     );
                 })}

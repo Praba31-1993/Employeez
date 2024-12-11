@@ -49,7 +49,7 @@ function Immigratorcoordinator() {
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
                   >
-                    <Inineverify title={"I-9 Verify"}/>
+                    <Inineverify />
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@ function Immigratorcoordinator() {
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
                   >
-                    <Inineverify title={"I-Verify"}/>
+                    <Inineverify />
                   </div>
                 </div>
               </div>

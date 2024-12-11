@@ -1,12 +1,13 @@
 import React from "react";
 import Sidebar from "../sidebar/page";
-import TestPage from "../expenses/page";
+import Contacts from "../dashboard/components/contacts";
 
 function About() {
   return (
     <Sidebar>
       <p>Profile</p>
-      <TestPage />
+      <Contacts/>
+    
     </Sidebar>
   );
 }
