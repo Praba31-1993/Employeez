@@ -19,68 +19,14 @@ const style: React.CSSProperties = {
   border: 0,
 };
 
-interface ContactsProps {
-  showpop: boolean;
-  close: () => void;
-}
-function Contacts({ showpop, close }: ContactsProps) {
-  console.log("show", showpop);
+
+export default function Contacts({ show, close }: any)  {
+  console.log("show", show);
 
   return (
     <>
-      {/* <Modal
-        open={show}
-        onClose={close}
-        sx={{ "& .MuiBackdrop-root": { backgroundColor: "#0600000d" } }} // Transparent backdrop
-      >
-        <div style={style}>
-          <div className="card p-2" style={{ outline: "0px !important" }}>
-            <div className="card-body">
-              <div className="text-end d-flex justify-content-between">
-                <div>
-                  <p className="heading2 mb-0 text-start">
-                    Important contact (20)
-                  </p>
-                  <p className="shade para mb-0">
-                    All important contacts displayed here
-                  </p>
-                </div>
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  style={{ cursor: "pointer", color: "red" }} // Set color directly here
-                  className="my-2"
-                  onClick={() => close()}
-                />
-              </div>
-              <hr />
-              {ContactsList?.map((contact: any, index: number) => (
-                <div
-                  className="d-flex align-items-center mb-3"
-                  key={contact?.id}
-                >
-                  <div className="userimages">
-                    <Image className="" src={user} alt={""} />
-                  </div>
-                  <div className="ps-2">
-                    <h5 className="para2 textheader mb-0">
-                      {contact?.name} ({contact?.role})
-                    </h5>
-                    <p className="shade para2 mb-0">
-                      <MailOutlineOutlinedIcon sx={{ color: "#D9D9D9" }} />{" "}
-                      <span>{contact?.mail}</span>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Modal> */}
-
-      {/*  */}
-
-      <section className={`showpopup ${showpop ? "showpopupactive" : ""}`}>
-        <div className="summarysection">
+      <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
+        <div className="summarysection" style={{width:"20vw"}}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 text-end">
@@ -130,4 +76,4 @@ function Contacts({ showpop, close }: ContactsProps) {
   );
 }
 
-export default Contacts;
+

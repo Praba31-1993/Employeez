@@ -7,7 +7,7 @@ main {
 }
 .dark .sidebar {
     background: #312D4B  !important;
-    color: #6c6a6a;
+    color: #E7E3FC !important;
     height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border: 1px solid #6962621f;
@@ -60,6 +60,9 @@ main {
     border-bottom-right-radius: 50px;
     /* Add rounded bottom-right corner */
     margin-bottom: 15px;
+}
+.dark .link{
+    color: #E7E3FC;
 }
 
 
