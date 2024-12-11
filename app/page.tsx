@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
-  const animationData = require("../app/assets/EZ animation.json"); // Ensure JSON path is correct
+  const animationData = require("@/public/assets/EmployEz-login-animation.json"); // Ensure JSON path is correct
+
 
   useEffect(() => {
     // Set timeout for 10 seconds

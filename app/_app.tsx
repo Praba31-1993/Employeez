@@ -1,12 +1,15 @@
-"use client"
+"use client";
+import { StrictMode } from "react";
 import { AppProps } from "next/app";
 import NewSidebar from "./sidebar/page";
 
-function MyApp({ Component, pageProps }:AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <NewSidebar>
-      <Component {...pageProps} />
-    </NewSidebar>
+    <StrictMode>
+      <NewSidebar>
+        <Component {...pageProps} />
+      </NewSidebar>
+    </StrictMode>
   );
 }
 

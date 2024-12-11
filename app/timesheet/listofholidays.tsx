@@ -1,12 +1,13 @@
-import calendar from "../assets/img/calendar_icon.png";
-import carry from "../assets/img/carry_on_bag_icon.png";
-import gift from "../assets/img/gift_icon.png";
-import user from "../assets/img/Ellipse 14.svg";
+import calendar from "/assets/img/calendar_icon.png";
+import carry from "/assets/img/carry_on_bag_icon.png";
+import gift from "/assets/img/gift_icon.png";
+
 import Image from "next/image";
 import Avatar from "@mui/material/Avatar";
 import Summarydetails from "./summarydetails";
 import { useState } from "react";
 import { Colors } from "../reusableComponent/styles";
+import ImageComponent from "../reusableComponent/image";
 
 export default function Listofholidays() {
   const useColors = Colors();
@@ -17,7 +18,8 @@ export default function Listofholidays() {
 
         {/* list of holidays */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
-          <Image src={gift} alt={""} />
+          {/* <Image src={gift} alt={""} /> */}
+          <ImageComponent user={"/assets/img/lock.png"} />
           <p className="para ps-2 mb-0 unselectcolor">List of holidays</p>
         </div>
         <div className="d-flex pt-1 align-items-center">
@@ -36,7 +38,9 @@ export default function Listofholidays() {
         </div>
         {/* vacation */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
-          <Image src={carry} alt={""} />
+          {/* <Image src={carry} alt={""} /> */}
+          <ImageComponent user={"/assets/img/lock.png"} />
+
           <p className="para ps-2 mb-0 unselectcolor">Vacations</p>
         </div>
         <div className="d-flex pt-1 align-items-center">
@@ -56,12 +60,17 @@ export function Timesheetaproover() {
   return (
     <>
       <div className="timesheetdetails  align-items-center d-flex mt-4">
-        <Image src={calendar} alt={""} />
+        {/* <Image src={calendar} alt={""} /> */}
+        <ImageComponent user={"/assets/img/lock.png"} />
+
         <p className="para ps-2 mb-0 unselectcolor">Timesheet approver</p>
       </div>
       <div className="approverlist  align-items-center d-flex mt-2">
         <div style={{ width: "35px", height: "35px" }}>
-          <Image className="w-100 h-100" src={user} alt={""} />
+          {/* <Image className="w-100 h-100" src={user} alt={""} /> */}
+          <div className="w-100 h-100">
+            <ImageComponent user={"/assets/img/lock.png"} />
+          </div>
         </div>
 
         {/* <Avatar src='' /> */}

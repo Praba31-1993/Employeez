@@ -116,8 +116,8 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
             )?.label}
             onChange={handleMonthPartChange}
           >
-            {splitMonths.map((month) => (
-              <MenuItem key={month.label} value={month.label}>
+            {splitMonths.map((month:any, index:number) => (
+              <MenuItem key={index} value={month.label}>
                 {month.label}
               </MenuItem>
             ))}

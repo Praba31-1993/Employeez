@@ -58,7 +58,7 @@
 }
 
 .accordion-button:after {
-  background-image: url(../assets/img/keyboard_arrow_down.png) !important;
+  background-image: url(/assets/img/keyboard_arrow_down.png) !important;
 }
 
 

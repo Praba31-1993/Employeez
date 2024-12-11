@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
-import ToDoIcon from "@/app/assets/img/todo.svg";
+import ToDoIcon from "/assets/img/todo.svg";
 import Image from "next/image";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import "../dashboard.css";
 import { Colors } from "../../reusableComponent/styles";
+import ImageComponent from "@/app/reusableComponent/image";
 
 interface ToDoListProps {
   title: string;
@@ -16,11 +17,12 @@ function ToDoList({ title }: ToDoListProps) {
     <div>
       <h4 className="textheader heading2">To do list</h4>
 
-      {[0, 1, 2,].map((value) => {
+      {[0, 1, 2,].map((value, index) => {
         return (
-          <>
+          <div key={index}>
             <div className="d-flex align-items-start mt-3 p-1 todoList">
-              <Image src={ToDoIcon} alt="" />
+              {/* <Image src={ToDoIcon} alt="" /> */}
+              <ImageComponent user={"/assets/img/todo.svg"}/>
               <div className="ps-2 w-100">
                 <p className="para textheader mb-0 ellipsis-applied">
                   I-9 for contractor Alpha (AP001) has been due{" "}
@@ -44,7 +46,7 @@ function ToDoList({ title }: ToDoListProps) {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         );
       })}
     </div>

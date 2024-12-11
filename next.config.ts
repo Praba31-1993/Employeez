@@ -1,9 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   devIndicators: {
-    appIsrStatus: false, // defaults to true, set explicitly if needed
-   
+    appIsrStatus: false, // Disables ISR status indicator in development
+  },
+  webpack(config, { dev }) {
+    if (dev) {
+      config.devtool = false; // Disables source maps in development for better performance
+    }
+    return config;
   },
 };
 

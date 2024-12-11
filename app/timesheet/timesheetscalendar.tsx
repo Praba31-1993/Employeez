@@ -8,7 +8,7 @@ import Uploadfiles from "./uploadfiles";
 import { use, useEffect, useState } from "react";
 import Summarydetails from "./summarydetails";
 import Button from "@mui/material/Button";
-import plusIcon from "@/app/assets/img/plus-redcircle.svg";
+import plusIcon from "/assets/img/plus-redcircle.svg";
 
 // import Colors from '@/app/reusableComponent/styles'
 import { Colors } from "../reusableComponent/styles";
@@ -119,7 +119,7 @@ export default function Timesheetcalendar({
             />
             <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
           </div>
-              {/* Annula leave summary */}
+          {/* Annula leave summary */}
           <div
             onClick={() => setOpen((prev) => !prev)}
             className="ms-4 px-3 py-1"
@@ -131,7 +131,7 @@ export default function Timesheetcalendar({
               fontSize="12px"
               isDashboardIcon={false}
               disabled={false}
-              icon={plusIcon}
+              icon={"/assets/img/plus-redcircle.svg"}
               variant={"outlined"}
             />
           </div>
@@ -170,13 +170,15 @@ export default function Timesheetcalendar({
               </div>
             </div>
           </div>
-          {timesheetList[2]?.map((timesheet: any) => (
-            <TimesheetExpenceAndHoursField
-              text={timesheet?.codeLabel}
-              timesheetData={timesheetList}
-              weekListDataList={weekListDatas}
-              calendardatas={calendardatas}
-            />
+          {timesheetList[2]?.map((timesheet: any, index: number) => (
+            <div key={index}>
+              <TimesheetExpenceAndHoursField
+                text={timesheet?.codeLabel}
+                timesheetData={timesheetList}
+                weekListDataList={weekListDatas}
+                calendardatas={calendardatas}
+              />
+            </div>
           ))}
         </div>
         <div className="col-12 d-flex  justify-content-end mt-4">

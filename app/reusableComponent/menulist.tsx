@@ -1,13 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import { Avatar } from '@mui/material'
-import user2 from "@/app/assets/img/user2.svg";
+import user2 from "/assets/img/Group 9244.svg";
+import ImageComponent from './image';
 function Menulistitem() {
     return (
         <>
             <div className="approverlist  align-items-center d-flex mt-2">
                 <div className="userimages">
-                    <Image className="" src={user2} alt={""} />
+                    {/* <Image className="" src={user2} alt={""} /> */}
+                    <ImageComponent user={"/assets/img/lock.png"}/>
                 </div>
                 <div className="roles ps-2">
                     <h5 className="para textheader  mb-0 ">Timesheet approver</h5>

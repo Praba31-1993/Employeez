@@ -1,10 +1,10 @@
-import training from '../assets/img/model_training.png';
-import sick from '../assets/img/sick.png';
-import casual from '../assets/img/energy_savings_leaf.png';
-import dollar from '../assets/img/dollar.png';
-import bag from '../assets/img/carry_on_bag.png';
-import maternity from '../assets/img/pregnancy.png';
-import paternity from '../assets/img/account_child_invert.png';
+import training from '/assets/img/model_training.png';
+import sick from '/assets/img/sick.png';
+import casual from '/assets/img/energy_savings_leaf.png';
+import dollar from '/assets/img/dollar.png';
+import bag from '/assets/img/carry_on_bag.png';
+import maternity from '/assets/img/pregnancy.png';
+import paternity from '/assets/img/account_child_invert.png';
 import { Colors } from '../reusableComponent/styles';
 
 

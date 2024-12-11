@@ -13,7 +13,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     borderRadius: 0, // Remove border radius
     position: "relative",
-    backgroundColor: '#f4f4f4',
+    backgroundColor: "#f4f4f4",
     border: "none", // Remove border
     fontSize: 16,
     padding: "10px 26px 10px 12px",
@@ -64,14 +64,15 @@ export default function DropdownComponent() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {dropdownData.map((item) => (
-            <MenuItem key={item.id} value={item.label}>
-              {item.label}
-            </MenuItem>
+          {dropdownData.map((item:any, index:number) => (
+            <div key={index}>
+              <MenuItem key={item.id} value={item.label}>
+                {item.label}
+              </MenuItem>
+            </div>
           ))}
         </Select>
       </FormControl>
-     
     </div>
   );
 }

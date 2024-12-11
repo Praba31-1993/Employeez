@@ -2,15 +2,17 @@ import Image from "next/image";
 import React from "react";
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import WorkOutlineRoundedIcon from '@mui/icons-material/WorkOutlineRounded';
-import headerImage from "@/app/assets/img/openjobs.svg";
+import headerImage from "/assets/img/openjobs.svg";
 import { Colors } from "@/app/reusableComponent/styles";
+import ImageComponent from "@/app/reusableComponent/image";
 function Openjobs() {
     const useColors = Colors();
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
                 <p className="textheader heading2 mb-0"> Open jobs</p>
-                <Image src={headerImage} alt="" />
+                {/* <Image src={headerImage} alt="" /> */}
+                <ImageComponent user={"/assets/img/openjobs.svg"}/>
             </div><div>
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex ">

@@ -7,11 +7,11 @@ import Pendinginvoice from "../components/pendinginvoice";
 import { Colors } from "../../reusableComponent/styles";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "@/app/assets/img/birthday.svg";
-import anniversary from "@/app/assets/img/anniversary.svg";
+import birthday from "/assets/img/birthday.svg";
+import anniversary from "/assets/img/anniversary.svg";
 import BarChartComponent from "../../reusableComponent/chart/barchart";
 import HorizontalBars from "../../reusableComponent/chart/horizontalbarchart";
-import ToDoIcon from "@/app/assets/img/todo.svg";
+import ToDoIcon from "/assets/img/todo.svg";
 import Image from "next/image";
 import Outlinebutton from "../../reusableComponent/outlinebtn";
 import Hrdatas from "../components/hrdatas";
@@ -21,6 +21,7 @@ import {
   HiringCounts,
 } from "../../reusableComponent/JsonData";
 import NewHireCandidate from "../components/newhirecandidate";
+import ImageComponent from "@/app/reusableComponent/image";
 
 const HrDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -93,7 +94,7 @@ const HrDashboard = () => {
           >
             <Menulistforbirthdayworkvacation
               title={"Upcoming birthday"}
-              headerImage={birthday}
+              headerImage={"/assets/img/birthday.svg"}
               items={birthdayAnniversaryReport}
             />
           </div>
@@ -219,7 +220,9 @@ const HrDashboard = () => {
             <div className="d-flex justify-content-between ">
               <p className="textheader heading2">Need help?</p>
 
-              <Image src={ToDoIcon} alt="" />
+              {/* <Image src={ToDoIcon} alt="" /> */}
+              <ImageComponent user={"/assets/img/todo.svg"}/>
+
             </div>
             <p className="para shade">
               Do you face any problem while using EmployEz?

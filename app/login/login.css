@@ -1,0 +1,137 @@
+
+.login {
+    
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+  }
+  
+  
+.error-text{
+  color:#FF6363;
+  font-size: '12px';
+  font-family: Inter;
+  font-weight: 500;
+}
+
+  .logincard {
+    width: 70% !important;
+    border-radius: 10px;
+  }
+  
+  .logogif img {
+    width: 100%;
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .logo img {
+    width: 35%;
+  }
+  
+.logincard {
+  width: 60%;
+}
+
+.form_filed input {
+  width: 100%;
+  outline: 0;
+  border: 1px solid #707070;
+  border-radius: 5px;
+}
+
+.form_filed input::placeholder {
+  color: #A8A8A8;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.forgetpassword {
+    color: blue;
+  }
+  
+  .timer {
+    justify-content: space-between;
+  }
+  @media (min-width:300px) and (max-width:600px) {
+    .logogif{
+      display: none !important;
+    }
+    .login {
+      background: #ffffff;
+    }
+  
+    .logo img {
+      width: 34%;
+    }
+  
+    .logogif {
+      display: none;
+    }
+  
+    .logincard {
+      width: 92%;
+    }
+  
+    .logincard {
+      width: 100% !important;
+    }
+    .login .col-sm-6:nth-child(2){
+      justify-content:center ;
+    }
+  }  
+  .rotatingText-content { 
+    position: relative;
+    width: 100%;
+  }
+
+  .rotatingText-adjective { 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    left: 0;
+    margin-bottom: 0;
+    margin-top: 30px;
+    opacity: 0;
+    color: white;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    animation: rotate-text-up 6s linear infinite;
+  
+    @media (min-width: 768px) { 
+      font-size: 70px;
+    }
+  }
+  
+  .rotatingText-adjective:nth-of-type(1) { 
+    animation-delay: 0s; 
+  }
+  
+  .rotatingText-adjective:nth-of-type(2) { 
+    animation-delay: 2s; 
+  }
+  
+  .rotatingText-adjective:nth-of-type(3) { 
+    animation-delay: 4s; 
+  }
+  
+  @keyframes rotate-text-up { 
+    0%, 20% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    
+    30%, 100% {
+      transform: translate3d(0, -40px, 0);
+      opacity: 0;
+    }
+  }
+  
+  
+
