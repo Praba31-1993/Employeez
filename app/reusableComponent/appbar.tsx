@@ -17,6 +17,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { useRouter } from "next/navigation";
 import Logout from "./logout";
 import ImageComponent from "./image";
+import { dropdownData } from "./JsonData";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -112,7 +113,7 @@ export default function NavbarComponent() {
         <ImageComponent width={30}  height={30} user={"/assets/img/digitallogo.svg"} />
       </MenuItem>
       <MenuItem>
-        <DropdownComponent />
+        <DropdownComponent dropdownlist={dropdownData}/>
       </MenuItem>
 
       <MenuItem>
@@ -172,7 +173,7 @@ export default function NavbarComponent() {
               {/* <Image src={digitalIcon} alt="" /> */}
               <ImageComponent width={100}  height={100} user={"/assets/img/digitallogo.svg"} />
 
-              <DropdownComponent />
+              <DropdownComponent dropdownlist={dropdownData}/>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {/* <Image src={questionIcon} alt="" /> */}
                 <ImageComponent width={30}  height={30} user={"/assets/img/question.svg"} />

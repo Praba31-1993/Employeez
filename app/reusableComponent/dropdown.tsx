@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import InputBase from "@mui/material/InputBase";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
@@ -36,17 +36,10 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// Dummy JSON data
-const dropdownData = [
-  { id: 1, label: "INDIA" },
-  { id: 2, label: "USA" },
-  { id: 3, label: "KOREA" },
-];
+export default function DropdownComponent({ dropdownlist }: any) {
+  const [selectedOption, setSelectedOption] = React.useState<string>("");
 
-export default function DropdownComponent() {
-  const [selectedOption, setSelectedOption] = React.useState("");
-
-  const handleChange = (event: { target: { value: string } }) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setSelectedOption(event.target.value);
   };
 
@@ -64,12 +57,10 @@ export default function DropdownComponent() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {dropdownData.map((item:any, index:number) => (
-            <div key={index}>
-              <MenuItem key={item.id} value={item.label}>
-                {item.label}
-              </MenuItem>
-            </div>
+          {dropdownlist?.map((item: any) => (
+            <MenuItem key={item.id} value={item.label}>
+              {item.label}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
