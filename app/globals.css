@@ -22,6 +22,7 @@ body {
 }
 .dark {
   background-color: #28243D !important;
+  color: whitesmoke !important;
 }
 
 body {
@@ -61,6 +62,15 @@ code {
 
 .textheader {
   color: #6d6777 !important;
+}
+.dark .textheader {
+  color: #E7E3FC !important;
+}
+.dark .unselectcolor{
+  color: #B0ACC7 !important;
+}
+.dark .shade{
+  color: #747089 !important;
 }
 
 .para {

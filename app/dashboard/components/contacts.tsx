@@ -18,15 +18,14 @@ const style: React.CSSProperties = {
   border: 0,
 };
 
-interface ContactsProps {
-  showpop: boolean;
-  close: () => void;
-}
-function Contacts({ showpop, close }: ContactsProps) {
+
+export default function Contacts({ show, close }: any)  {
+  console.log("show", show);
+
   return (
     <>
-      <section className={`showpopup ${showpop ? "showpopupactive" : ""}`}>
-        <div className="summarysection">
+      <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
+        <div className="summarysection" style={{width:"20vw"}}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 text-end">
@@ -76,4 +75,4 @@ function Contacts({ showpop, close }: ContactsProps) {
   );
 }
 
-export default Contacts;
+

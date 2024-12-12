@@ -18,9 +18,9 @@ import ImageComponent from "@/app/reusableComponent/image";
 
 export default function ProfilesCard() {
   const useColors = Colors();
+  const [open, setOpen] = useState(false);
   const [punchIn, setPunchIn] = React.useState<Boolean>(false);
   const [totalTime, setTotalTime] = React.useState<string>('');
-  const [openpopups, setopenPopUp] = useState(false);
  
 
 
@@ -40,6 +40,7 @@ export default function ProfilesCard() {
 
   return (
     <>
+     {open && <Contacts  show={open} close={() => setOpen(false)} />}
       <div className="flex justify-content-between pb-2">
         <Menulistitem />
         <div className="d-flex align-items-center pe-5">
@@ -84,13 +85,13 @@ export default function ProfilesCard() {
                             >
                                 {list.holidaysname}{" "}
                                 {isLastChild && (
-                                    <span onClick={()=>setopenPopUp(true)}>
-                                        <VisibilityOutlinedIcon className="ps-1 cursorPointer" />
+                                    <span  >
+                                        <VisibilityOutlinedIcon className="ps-1 cursorPointer" onClick={() => setOpen((prev) => !prev)} />
                                     </span>
                                 )}{" "}
                             </p>
                        
-                       {openpopups && <Contacts showpop={openpopups} close={() => setopenPopUp(false)}/>}
+                      
 
                         </div>
                     );
