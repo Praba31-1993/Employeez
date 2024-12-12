@@ -139,7 +139,7 @@ export default function Timesheetcalendar({
       </div>
       <div className="row mt-2">
         <div className="col-12">
-          <div className="timesheetlist mb-1 align-items-center py-2">
+          {/* <div className="timesheetlist mb-1 align-items-center py-2">
             <div className="d-flex">
               <select
                 className="projectlist para ms-3 bg-transparent"
@@ -169,7 +169,7 @@ export default function Timesheetcalendar({
                 </h2>
               </div>
             </div>
-          </div>
+          </div> */}
           {timesheetList[2]?.map((timesheet: any, index: number) => (
             <div key={index}>
               <TimesheetExpenceAndHoursField
