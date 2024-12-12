@@ -5,7 +5,6 @@ import axios from "axios";
 const base_url = "https://api.escuelajs.co/api";
 
 const accessToken = localStorage.getItem('authToken');
-console.log('access',accessToken);
 
 
 // Create Axios instance
@@ -34,7 +33,6 @@ axiosInstance.interceptors.request.use(
     config.headers["X-Custom-Header"] = "CustomHeaderValue";
 
     if (process.env.NODE_ENV === 'development') {
-      console.log("Request Config:", config);
     }
 
     return config;

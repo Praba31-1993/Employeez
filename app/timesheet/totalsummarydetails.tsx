@@ -1,10 +1,10 @@
-import training from "../assets/img/model_training.png";
-import sick from "../assets/img/sick.png";
-import casual from "../assets/img/energy_savings_leaf.png";
-import dollar from "../assets/img/dollar.png";
-import bag from "../assets/img/carry_on_bag.png";
-import maternity from "../assets/img/pregnancy.png";
-import paternity from "../assets/img/account_child_invert.png";
+import training from "/assets/img/model_training.png";
+import sick from "/assets/img/sick.png";
+import casual from "/assets/img/energy_savings_leaf.png";
+import dollar from "/assets/img/dollar.png";
+import bag from "/assets/img/carry_on_bag.png";
+import maternity from "/assets/img/pregnancy.png";
+import paternity from "/assets/img/account_child_invert.png";
 import Summarycards from "./summarycards";
 import { Colors } from "../reusableComponent/styles";
 import Summary from "./summary";
@@ -44,15 +44,15 @@ export function Totalsummary({ showsummarycards }: any) {
 export function Totalsummarycards() {
   const useColors = Colors();
   const LeaveTypes = [
-    { name: "LOP", noOfLeave: "12", img: dollar },
-    { name: "Maternity leave", noOfLeave: "23", img: maternity },
-    { name: "Sick leave", noOfLeave: "32", img: sick },
-    { name: "Comp Off", noOfLeave: "22", img: dollar },
-    { name: "Holiday", noOfLeave: "2", img: bag },
-    { name: "Traning", noOfLeave: "30", img: training },
-    { name: "Earned leave", noOfLeave: "24", img: sick },
-    { name: "Paternity leave", noOfLeave: "22", img: paternity },
-    { name: "Casual leave", noOfLeave: "80", img: casual },
+    { name: "LOP", noOfLeave: "12", img: "/assets/img/account_child_invert.png" },
+    { name: "Maternity leave", noOfLeave: "23", img: "/assets/img/account_child_invert.png" },
+    { name: "Sick leave", noOfLeave: "32", img: "/assets/img/account_child_invert.png" },
+    { name: "Comp Off", noOfLeave: "22", img: "/assets/img/account_child_invert.png" },
+    { name: "Holiday", noOfLeave: "2", img: "/assets/img/account_child_invert.png" },
+    { name: "Traning", noOfLeave: "30", img: "/assets/img/account_child_invert.png" },
+    { name: "Earned leave", noOfLeave: "24", img: "/assets/img/account_child_invert.png" },
+    { name: "Paternity leave", noOfLeave: "22", img: "/assets/img/account_child_invert.png" },
+    { name: "Casual leave", noOfLeave: "80", img: "/assets/img/account_child_invert.png" },
   ];
   return (
     <>

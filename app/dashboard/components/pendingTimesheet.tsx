@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ToDoIcon from "@/app/assets/img/todo.svg";
+import ToDoIcon from "/assets/img/todo.svg";
 import Image from "next/image";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import "../dashboard.css";
@@ -16,9 +16,9 @@ function PendingTimeSheet({ title }: PendingTimeSheetProps) {
     <div>
       <div>{title}</div>
 
-      {[0, 1, 2].map((value) => {
+      {[0, 1, 2].map((value, index) => {
         return (
-          <>
+          <div key={index}>
             <div className="d-flex align-items-start mt-3 p-1">
               <Avatar src="" alt="Remy Sharp" />
 
@@ -37,7 +37,7 @@ function PendingTimeSheet({ title }: PendingTimeSheetProps) {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         );
       })}
     </div>

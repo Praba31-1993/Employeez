@@ -1,13 +1,12 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import user from "@/app/assets/img/Ellipse 14.svg";
+
 import { ContactsList } from "@/app/reusableComponent/JsonData";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
+import ImageComponent from "@/app/reusableComponent/image";
 
 const style: React.CSSProperties = {
   position: "absolute",
@@ -55,7 +54,7 @@ export default function Contacts({ show, close }: any)  {
                   key={contact?.id}
                 >
                   <div className="userimages">
-                    <Image className="" src={user} alt={""} />
+                    <ImageComponent width={0}  height={0} user={"/assets/img/basicmenu.svg"} />
                   </div>
                   <div className="ps-2">
                     <h5 className="para2 textheader mb-0">

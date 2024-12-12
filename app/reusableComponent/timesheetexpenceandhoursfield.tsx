@@ -1,3 +1,4 @@
+"use client";
 import { Colors } from "./styles";
 import React, { useState } from "react";
 import "./stylessheetforreusablecomponent.css";

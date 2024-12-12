@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -69,13 +70,13 @@ export function Themecustomization({ show, close }: any) {
             <Modecustomization />
             <div>
               <h5 className="para  mb-0">Dashboard customization</h5>
-              {layoutDatas?.map((layout: any) => (
-                <>
+              {layoutDatas?.map((layout: any, index:number) => (
+                <div key={index}>
                   <Dashboardcustomization
                     dashboardLayout={layout}
                     toggleChange={handleToggleChange}
                   />
-                </>
+                </div>
               ))}
             </div>
           </div>

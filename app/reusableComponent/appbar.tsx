@@ -5,17 +5,18 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import SearchIcon from "@/app/assets/img/search.svg";
+import SearchIcon from "/assets/img/search.svg";
 import SearchBar from "./searchbar";
-import digitalIcon from "@/app/assets/img/digitallogo.svg";
+import digitalIcon from "/assets/img/digitallogo.svg";
 import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
-import questionIcon from "@/app/assets/img/question.svg";
+import questionIcon from "/assets/img/question.svg";
 import DropdownComponent from "./dropdown";
 import { Colors } from "../reusableComponent/styles";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useRouter } from "next/navigation";
 import Logout from "./logout";
+import ImageComponent from "./image";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -107,7 +108,8 @@ export default function NavbarComponent() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Image src={digitalIcon} alt="" />
+        {/* <Image src={digitalIcon} alt="" /> */}
+        <ImageComponent width={30}  height={30} user={"/assets/img/digitallogo.svg"} />
       </MenuItem>
       <MenuItem>
         <DropdownComponent />
@@ -167,14 +169,18 @@ export default function NavbarComponent() {
             <Box sx={{ flexGrow: 1 }} />
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Image src={digitalIcon} alt="" />
+              {/* <Image src={digitalIcon} alt="" /> */}
+              <ImageComponent width={100}  height={100} user={"/assets/img/digitallogo.svg"} />
+
               <DropdownComponent />
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                <Image src={questionIcon} alt="" />
+                {/* <Image src={questionIcon} alt="" /> */}
+                <ImageComponent width={30}  height={30} user={"/assets/img/question.svg"} />
               </Box>
 
               <Box sx={{ display: { xs: "block", sm: "none" } }}>
-                <Image src={SearchIcon} alt="" />
+                {/* <Image src={SearchIcon} alt="" /> */}
+                <ImageComponent width={15}  height={15} user={"/assets/img/search.svg"} />
               </Box>
 
               <IconButton

@@ -1,20 +1,20 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../assets/img/employeez.png";
-import lock from "../assets/img/lock.png";
+import logo from "/assets/img/employeez.png";
+import lock from "/assets/img/lock.png";
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
-import "../assets/img/login.css";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import { validateField } from "../reusableComponent/validation";
+import ImageComponent from "../reusableComponent/image";
 
 export default function forgetpassword() {
-  const loginanimationData = require("../assets/EmployEz-login-animation.json");
+  const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
   const [otpVisible, setOtpVisible] = useState(false);
   const [emailOrPassword, setEmailOrPassword] = useState<string>("");
   const [emailOrPasswordError, setEmailOrPasswordError] = useState<string>("");
@@ -72,11 +72,14 @@ export default function forgetpassword() {
           <div className="col-sm-6 align-items-center  d-flex">
             <div className="logincard ps-md-5 ms-md-5">
               <div className="logo">
-                <Image src={logo} alt={""} />
+                {/* <Image src={logo} alt={""} /> */}
+                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"}/>
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Forgot password
-                <Image src={lock} className="" alt={""} />{" "}
+                {/* <Image src={lock} className="" alt={""} />{" "} */}
+                <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"}/>
+
               </h4>
               <p className="shade para pt-1">
                 Please enter your registered email or mobile no{" "}

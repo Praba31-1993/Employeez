@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import search from "@/app/assets/img/search.svg";
+import search from "/assets/img/search.svg";
 import TextField from "@mui/material/TextField";
 import Image from "next/image"; // Assuming you're using Next.js
 import SearchIcon from "@mui/icons-material/Search"; // Optionally use an MUI icon
@@ -14,6 +14,7 @@ import {
   ThemeProvider,
   Theme,
 } from "@mui/material/styles";
+import ImageComponent from "./image";
 
 // Theme.ts
 const customTheme = (outerTheme: Theme) =>
@@ -71,7 +72,8 @@ export default function SearchBar({ list }: searchProps) {
         onChange={handleSearchChange}
         renderInput={(params) => (
           <div style={{ display: "flex", gap: "0.5em" }}>
-            <Image src={search} alt="" />
+            {/* <Image src={search} alt="" /> */}
+            <ImageComponent width={15}  height={15} user={"/assets/img/search.svg"}/>
 
             <TextField
               {...params}

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import user from "@/app/assets/img/Ellipse 14.svg";
-import user2 from "@/app/assets/img/user2.svg";
+
 import { Colors } from "@/app/reusableComponent/styles";
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import ImageComponent from "@/app/reusableComponent/image";
 
 interface InineverifyProps{
 title : string
@@ -19,7 +19,8 @@ function Inineverify() {
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex align-items-center">
                         <div className="userimages">
-                            <Image className="" src={user} alt={""} />
+                              {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} /> */}
+                              <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
                         </div>
                         <div className="ps-2">
                             <h5 className="para2 textheader  mb-0 ">David mechkam</h5>
@@ -31,7 +32,8 @@ function Inineverify() {
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex align-items-center">
                         <div className="userimages">
-                            <Image className="" src={user2} alt={""} />
+                            <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
+
                         </div>
                         <div className="ps-2">
                             <h5 className="para2 textheader  mb-0 ">David mechkam</h5>

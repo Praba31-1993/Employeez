@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import user from "@/app/assets/img/Ellipse 14.svg";
+
 import { Colors } from "../../reusableComponent/styles";
+import ImageComponent from "@/app/reusableComponent/image";
 
 interface OverTimeCostProps {
   headerImage?: any;
@@ -24,7 +25,8 @@ function OverTimeCost({ title, items }: OverTimeCostProps) {
             <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
               <div className="d-flex align-items-center">
                 <div className="userimages">
-                  <Image className="" src={user} alt={""} />
+                  {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} />  */}
+                  <ImageComponent width={0}  height={0} user={"/assets/img/openjobs.svg"} />
                 </div>
                 <div className="ps-2">
                   <h5 className="para2 textheader  mb-0 ">{bday?.name}</h5>

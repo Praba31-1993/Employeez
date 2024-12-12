@@ -11,10 +11,10 @@ export default function ListCard() {
   return (
     <List dense sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
       <h4 className="textheader heading2 pb-2">My Request</h4>
-      {[0, 1, 2].map((value) => {
+      {[0, 1, 2]?.map((value, index) => {
         const labelId = `checkbox-list-secondary-label-${value}`;
         return (
-          <div className="d-flex justify-content-between mt-2 align-items-center pb-2">
+          <div key={index} className="d-flex justify-content-between mt-2 align-items-center pb-2" >
             <div className="d-flex align-items-center">
               <div className="rounded-circle text-white" style={{background:useColors.themeRed}}>
                 <EditNoteIcon className="m-1" />

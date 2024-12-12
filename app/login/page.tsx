@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../assets/img/employeez.png";
-import handwave from "../assets/img/hi.png";
+import logo from "/assets/img/employeez.png";
+import handwave from "/assets/img/hi.png";
 import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,19 +14,16 @@ import {
 } from "../reusableComponent/validation";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import "../assets/img/login.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
-import {
-  LoginApi,
-  refreshAccessToken,
-} from "../api/Listingapis";
+import { LoginApi, refreshAccessToken } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
+import ImageComponent from "../reusableComponent/image";
 
 export default function Login() {
   const useColors = Colors();
-  const loginanimationData = require("../assets/EmployEz-login-animation.json");
+  const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
   const [checked, setChecked] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -104,7 +101,6 @@ export default function Login() {
 
         toast.success("Login API successful!");
         router.push("/dashboard");
-        console.log("dssjfsdds", document.cookie);
 
         const refreshParams = {
           refreshToken: loginResponse?.data?.refresh_token,
@@ -140,11 +136,13 @@ export default function Login() {
           <div className="col-md-6 d-flex align-items-center justify-content-center">
             <div className="logincard">
               <div className="logo text-center">
-                <Image src={logo} alt="EmployEZ Logo" />
+                {/* <Image src={logo} alt="EmployEZ Logo" /> */}
+                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} />
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Welcome to EmployEZ!{" "}
-                <Image src={handwave} className="ms-2" alt="Wave" />
+                {/* <Image src={handwave} className="ms-2" alt="Wave" /> */}
+                <ImageComponent width={0}  height={0} user={"/assets/img/hi.png"} />
               </h4>
               <p className="shade para pt-1">
                 Please sign in to your account and start the adventure.

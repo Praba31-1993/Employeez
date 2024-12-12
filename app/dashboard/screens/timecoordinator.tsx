@@ -4,7 +4,7 @@ import ProfilesCard from "../components/profilescard";
 import ListCard from "@/app/reusableComponent/listitems";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "@/app/assets/img/birthday.svg";
+import birthday from "/assets/img/birthday.svg";
 import { arrayList } from "@/app/reusableComponent/JsonData";
 import Policyprocedure from "../components/policyprocedure";
 import Workanniversary from "../components/workanniversary";
@@ -87,7 +87,7 @@ function Timecoordinator() {
               >
                 <Menulistforbirthdayworkvacation
                   title={"Upcoming birthday"}
-                  headerImage={birthday}
+                     headerImage={"/assets/img/birthday.svg"}
                   items={birthdayAnniversaryReport}
                 />
               </div>

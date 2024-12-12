@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import ImageComponent from "./image";
 export default function Outlinebutton({
   disabled,
   text,
@@ -43,7 +44,7 @@ export default function Outlinebutton({
             textTransform: "unset",
             backgroundColor: { background },
           }}
-          endIcon={<Image src={icon} alt="" />}
+          endIcon={<ImageComponent user={icon}  width={20} height={20}/>}
         >
           {text}
         </Button>

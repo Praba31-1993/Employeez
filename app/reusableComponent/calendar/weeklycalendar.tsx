@@ -1,3 +1,4 @@
+"use client";
 import { add, format, startOfYear, endOfYear } from "date-fns";
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";

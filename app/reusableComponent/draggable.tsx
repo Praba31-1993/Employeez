@@ -33,6 +33,8 @@ const DraggableComponent = () => {
         }
     }, [position]);
 
+
+
     const onDrag = (e: MouseEvent) => {
         if (ref.current) {
             const rect = ref.current.getBoundingClientRect();
@@ -72,15 +74,17 @@ const DraggableComponent = () => {
         document.addEventListener("mouseup", handleMouseUp);
     };
 
+    console.log('open',open);
+    
     return (
         <>
             {open && <Themecustomization show={open} close={() => setOpen(false)} />}
             <div
                 className="p-3"
                 ref={ref}
-               
-                onMouseDown={handleMouseDown}
                 
+                onMouseDown={handleMouseDown}
+                onClick={() => setOpen((prev) => !prev)}
                 style={{
                     background: useColors.themeRed,
                     position: "fixed",
@@ -95,7 +99,7 @@ const DraggableComponent = () => {
                     borderBottomRightRadius: isDragging ? "50%" : position.x <= 50 ? "30px" : "0px",
                 }}
             >
-                <DashboardCustomizeIcon className="text-white"  onClick={() => setOpen((prev) => !prev)} />
+                <DashboardCustomizeIcon className="text-white"   />
             </div>
         </>
     );

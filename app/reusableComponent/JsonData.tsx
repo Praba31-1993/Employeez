@@ -1,7 +1,7 @@
-import dashboardWhite from "../assets/img/dashboard-white.svg";
-import dashboardGrey from "../assets/img/dashboard-grey.svg";
-import timesheetGrey from "../assets/img/timesheet_grey.svg";
-import timesheetWhite from "../assets/img/timesheet_white.svg";
+import dashboardWhite from "@/public/assets/img/dashboard-white.svg";
+import dashboardGrey from "@/public/assets/img/dashboard-grey.svg";
+import timesheetGrey from "@/public/assets/img/timesheet_grey.svg";
+import timesheetWhite from "@/public/assets/img/timesheet_white.svg";
 
 export const loginResponse1 =[
   {

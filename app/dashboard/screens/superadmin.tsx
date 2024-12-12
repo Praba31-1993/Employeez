@@ -5,7 +5,7 @@ import ProfilesCard from "../components/profilescard";
 import Pendinginvoice from "../components/pendinginvoice";
 import { Colors } from "../../reusableComponent/styles";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "@/app/assets/img/birthday.svg";
+import birthday from "/assets/img/birthday.svg";
 import BarChartComponent, {
     Salesreport,
 } from "../../reusableComponent/chart/barchart";
@@ -87,7 +87,7 @@ const SuperAdminDashboard = () => {
                             >
                                 <Menulistforbirthdayworkvacation
                                     title={"Upcoming birthday"}
-                                    headerImage={birthday}
+                                       headerImage={"/assets/img/birthday.svg"}
                                     items={birthdayAnniversaryReport}
                                 />
                             </div>

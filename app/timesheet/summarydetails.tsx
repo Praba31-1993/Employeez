@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import training from "../assets/img/model_training.png";
-import sick from "../assets/img/sick.png";
-import casual from "../assets/img/energy_savings_leaf.png";
-import dollar from "../assets/img/dollar.png";
-import bag from "../assets/img/carry_on_bag.png";
-import maternity from "../assets/img/pregnancy.png";
-import paternity from "../assets/img/account_child_invert.png";
-import eligiblePtoel from "@/app/assets/img/eligiblePTOEL.svg";
+import training from "/assets/img/model_training.png";
+import sick from "/assets/img/sick.png";
+import casual from "/assets/img/energy_savings_leaf.png";
+import dollar from "/assets/img/dollar.png";
+import bag from "/assets/img/carry_on_bag.png";
+import maternity from "/assets/img/pregnancy.png";
+import paternity from "/assets/img/account_child_invert.png";
+import eligiblePtoel from "/assets/img/eligiblePTOEL.svg";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -25,7 +25,7 @@ export default function Summarydetails({ showpop, close, LeaveTypes }: any) {
   }, [LeaveTypes]);
 
   const leaveTypeImages = [
-    { label: "Eligible PTO/EL", img: "@/app/assets/img/eligiblePTOEL.svg" },
+    { label: "Eligible PTO/EL", img: "/assets/img/eligiblePTOEL.svg" },
   ];
 
   return (

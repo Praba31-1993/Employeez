@@ -1,16 +1,17 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Colors } from "../../reusableComponent/styles";
 import ProfilesCard from "../components/profilescard";
 import ListCard from "@/app/reusableComponent/listitems";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "@/app/assets/img/birthday.svg";
+import birthday from "/assets/img/birthday.svg";
 import { arrayList } from "@/app/reusableComponent/JsonData";
 import Workanniversary from "../components/workanniversary";
 import PendingTimeSheet from "../components/pendingTimesheet";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
-import anniversary from "@/app/assets/img/anniversary.svg";
+import anniversary from "/assets/img/anniversary.svg";
 import NewHireCandidate from "../components/newhirecandidate";
 
 function PayRoleExecutive() {
@@ -73,7 +74,7 @@ function PayRoleExecutive() {
                   >
                     <Menulistforbirthdayworkvacation
                       title={"Bonus due"}
-                      headerImage={birthday}
+                         headerImage={"/assets/img/birthday.svg"}
                       items={birthdayAnniversaryReport}
                     />
                   </div>
@@ -85,7 +86,7 @@ function PayRoleExecutive() {
                   >
                     <Menulistforbirthdayworkvacation
                       title={"Expense record"}
-                      headerImage={birthday}
+                         headerImage={"/assets/img/birthday.svg"}
                       items={birthdayAnniversaryReport}
                     />
                   </div>
@@ -137,7 +138,7 @@ function PayRoleExecutive() {
               >
                 <Menulistforbirthdayworkvacation
                   title={"Upcoming birthday"}
-                  headerImage={birthday}
+                     headerImage={"/assets/img/birthday.svg"}
                   items={birthdayAnniversaryReport}
                 />
               </div>

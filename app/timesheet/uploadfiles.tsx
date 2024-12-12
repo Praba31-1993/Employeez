@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import uploadicon from "../assets/img/upload-2-line.png";
+import uploadicon from "/assets/img/upload-2-line.png";
 import Outlinebutton from "../reusableComponent/outlinebtn";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { useState } from "react";
 import Listicon from "../reusableComponent/listicon";
+import ImageComponent from "../reusableComponent/image";
 
 export default function Uploadfiles({ show, close }: any) {
   const [files, setFiles] = useState<File[]>([]); // Explicitly define type as File[]
@@ -40,7 +41,8 @@ export default function Uploadfiles({ show, close }: any) {
               <div className="summarydetails p-3 m-2">
                 <h5 className="para  textheader">Choose file </h5>
                 <div className="fileupload py-4 d-flex align-items-center flex-column justify-content-center mt-3">
-                  <Image src={uploadicon} alt={""} />
+                  {/* <Image src={uploadicon} alt={""} /> */}
+                  <ImageComponent width={0}  height={0} user={"/assets/img/upload-2-line.png"} />
                   <h2 className="heading2 mt-2 textheader">
                     Drag and drop your file here
                   </h2>

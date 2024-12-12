@@ -1,10 +1,11 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Colors } from "../../reusableComponent/styles";
 import ProfilesCard from "../components/profilescard";
 import ListCard from "@/app/reusableComponent/listitems";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "@/app/assets/img/birthday.svg";
+import birthday from "/assets/img/birthday.svg";
 import { arrayList } from "@/app/reusableComponent/JsonData";
 import Policyprocedure from "../components/policyprocedure";
 import Workanniversary from "../components/workanniversary";
@@ -14,7 +15,7 @@ import Needhelp from "../components/needhelp";
 import HorizontalBars from "@/app/reusableComponent/chart/horizontalbarchart";
 import Hrdatas from "../components/hrdatas";
 import NewHireCandidate from "../components/newhirecandidate";
-import anniversary from "@/app/assets/img/anniversary.svg";
+import anniversary from "/assets/img/anniversary.svg";
 import Inineverify from "../components/inineverify";
 
 function Immigratorcoordinator() {
@@ -105,7 +106,7 @@ function Immigratorcoordinator() {
               >
                 <Menulistforbirthdayworkvacation
                   title={"Upcoming birthday"}
-                  headerImage={birthday}
+                     headerImage={"/assets/img/birthday.svg"}
                   items={birthdayAnniversaryReport}
                 />
               </div>
