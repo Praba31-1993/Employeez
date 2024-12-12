@@ -44,7 +44,7 @@ export default function Outlinebutton({
             textTransform: "unset",
             backgroundColor: { background },
           }}
-          endIcon={<Image src={"/assets/img/lock.png"} alt="" width={0} height={0}/>}
+          endIcon={<ImageComponent user={icon}  width={20} height={20}/>}
         >
           {text}
         </Button>

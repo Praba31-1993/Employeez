@@ -55,7 +55,7 @@ function Contacts({ showpop, close }: ContactsProps) {
                   key={contact?.id}
                 >
                   <div className="userimages">
-                    <ImageComponent user={"/assets/img/basicmenu.svg"} />
+                    <ImageComponent width={0}  height={0} user={"/assets/img/basicmenu.svg"} />
                   </div>
                   <div className="ps-2">
                     <h5 className="para2 textheader mb-0">

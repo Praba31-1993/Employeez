@@ -13,7 +13,7 @@ function Needhelp() {
         <p className="textheader heading2">Need help?</p>
 
         {/* <Image src={help} alt="" /> */}
-        <ImageComponent user={"/assets/img/help.svg"} />
+        <ImageComponent width={0}  height={0} user={"/assets/img/help.svg"} />
       </div>
       <p className="para shade">
         Do you face any problem while using EmployEz?

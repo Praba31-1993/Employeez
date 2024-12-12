@@ -9,7 +9,7 @@ function Menulistitem() {
             <div className="approverlist  align-items-center d-flex mt-2">
                 <div className="userimages">
                     {/* <Image className="" src={user2} alt={""} /> */}
-                    <ImageComponent user={"/assets/img/lock.png"}/>
+                    <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
                 </div>
                 <div className="roles ps-2">
                     <h5 className="para textheader  mb-0 ">Timesheet approver</h5>

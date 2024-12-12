@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Colors } from "../../reusableComponent/styles";
 import ProfilesCard from "../components/profilescard";

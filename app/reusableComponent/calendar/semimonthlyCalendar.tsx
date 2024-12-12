@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, ChangeEvent } from "react";
 import { Select, MenuItem, FormControl } from "@mui/material";
 import { add, format, endOfMonth } from "date-fns";

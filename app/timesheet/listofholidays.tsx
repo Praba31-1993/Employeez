@@ -19,7 +19,7 @@ export default function Listofholidays() {
         {/* list of holidays */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
           {/* <Image src={gift} alt={""} /> */}
-          <ImageComponent user={"/assets/img/lock.png"} />
+          <ImageComponent width={0}  height={0} user={"/assets/img/gift_icon.png"} />
           <p className="para ps-2 mb-0 unselectcolor">List of holidays</p>
         </div>
         <div className="d-flex pt-1 align-items-center">
@@ -39,7 +39,7 @@ export default function Listofholidays() {
         {/* vacation */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
           {/* <Image src={carry} alt={""} /> */}
-          <ImageComponent user={"/assets/img/lock.png"} />
+          <ImageComponent width={0}  height={0} user={"/assets/img/carry_on_bag_icon.png"} />
 
           <p className="para ps-2 mb-0 unselectcolor">Vacations</p>
         </div>
@@ -61,7 +61,7 @@ export function Timesheetaproover() {
     <>
       <div className="timesheetdetails  align-items-center d-flex mt-4">
         {/* <Image src={calendar} alt={""} /> */}
-        <ImageComponent user={"/assets/img/lock.png"} />
+        <ImageComponent width={20}  height={20} user={"/assets/img/calendar_icon.png"} />
 
         <p className="para ps-2 mb-0 unselectcolor">Timesheet approver</p>
       </div>
@@ -69,7 +69,7 @@ export function Timesheetaproover() {
         <div style={{ width: "35px", height: "35px" }}>
           {/* <Image className="w-100 h-100" src={user} alt={""} /> */}
           <div className="w-100 h-100">
-            <ImageComponent user={"/assets/img/lock.png"} />
+            <ImageComponent width={30}  height={30} user={"/assets/img/Ellipse 14.svg"} />
           </div>
         </div>
 

@@ -69,7 +69,7 @@ export default function Setpassword() {
             <div className="logincard ps-md-5 ms-md-5">
               <div className="logo">
                 {/* <Image src={logo} alt="Logo" /> */}
-                <ImageComponent user={"/assets/img/lock.png"}/>
+                <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"}/>
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Setup password

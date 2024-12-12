@@ -26,7 +26,7 @@ function OverTimeCost({ title, items }: OverTimeCostProps) {
               <div className="d-flex align-items-center">
                 <div className="userimages">
                   {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} />  */}
-                  <ImageComponent user={"/assets/img/openjobs.svg"} />
+                  <ImageComponent width={0}  height={0} user={"/assets/img/openjobs.svg"} />
                 </div>
                 <div className="ps-2">
                   <h5 className="para2 textheader  mb-0 ">{bday?.name}</h5>

@@ -1,3 +1,4 @@
+"use client";
 import React,{useState} from "react";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import Menulistitem from "@/app/reusableComponent/menulist";
@@ -24,16 +25,16 @@ export default function ProfilesCard() {
 
 
   const arrayList = [
-    { holidaysname: "Total Holiday", noofholidays: "32", img: "/assets/img/balancecl.svg" },
-    { holidaysname: "Used Holiday", noofholidays: "11", img: "/assets/img/balancecl.svg" },
+    { holidaysname: "Total Holiday", noofholidays: "32", img: "/assets/img/usedholidays.svg" },
+    { holidaysname: "Used Holiday", noofholidays: "11", img: "/assets/img/totalholidays.svg" },
     {
       holidaysname: "Balance Holiday",
       noofholidays: "12",
-      img: "/assets/img/balancecl.svg",
+      img: "/assets/img/balanceholidays.svg",
     },
     { holidaysname: "Balance CL", noofholidays: "12", img: "/assets/img/balancecl.svg" },
-    { holidaysname: "Balance SL", noofholidays: "08", img: "/assets/img/balancecl.svg" },
-    { holidaysname: "Important contact", noofholidays: "20", img: "/assets/img/balancecl.svg" },
+    { holidaysname: "Balance SL", noofholidays: "08", img: "/assets/img/balancesl.svg" },
+    { holidaysname: "Important contact", noofholidays: "20", img: "/assets/img/contact.svg" },
   ];
   
 
@@ -57,7 +58,7 @@ export default function ProfilesCard() {
               background={useColors.themeRed}
               isDashboardIcon={true}
               disabled={false}
-              icon={punchIn? "/assets/img/downarrrowCircle.svg" :"/assets/img/downarrrowCircle.svg"}
+              icon={punchIn?"/assets/img/downarrrowCircle.svg" :  "/assets/img/rightarrow.svg"}
               variant={"contained"}
             />
           </div>
@@ -72,7 +73,7 @@ export default function ProfilesCard() {
                         <div key={index} className="d-flex my-2 flex-column ">
                             <div className="d-flex gap-2 align-items-center">
                                 {/* <Image src={list.img} alt="" /> */}
-                                <ImageComponent user={list?.img} />
+                                <ImageComponent width={0}  height={0} user={list?.img} />
                                 <h6 className="mb-0 textheader heading2">
                                     {list.noofholidays}
                                 </h6>

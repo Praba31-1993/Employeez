@@ -42,7 +42,7 @@ export default function Uploadfiles({ show, close }: any) {
                 <h5 className="para  textheader">Choose file </h5>
                 <div className="fileupload py-4 d-flex align-items-center flex-column justify-content-center mt-3">
                   {/* <Image src={uploadicon} alt={""} /> */}
-                  <ImageComponent user={"/assets/img/lock.png"} />
+                  <ImageComponent width={0}  height={0} user={"/assets/img/upload-2-line.png"} />
                   <h2 className="heading2 mt-2 textheader">
                     Drag and drop your file here
                   </h2>

@@ -221,7 +221,7 @@ const HrDashboard = () => {
               <p className="textheader heading2">Need help?</p>
 
               {/* <Image src={ToDoIcon} alt="" /> */}
-              <ImageComponent user={"/assets/img/todo.svg"}/>
+              <ImageComponent width={0}  height={0} user={"/assets/img/todo.svg"}/>
 
             </div>
             <p className="para shade">

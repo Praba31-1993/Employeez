@@ -41,7 +41,7 @@ export default function FirstTimepassword() {
               <div className="logo">
                 {/* <Image src={logo} alt={""} /> */}
 
-                <ImageComponent user={"/assets/img/employeez.png"} />
+                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} />
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 First-time password update

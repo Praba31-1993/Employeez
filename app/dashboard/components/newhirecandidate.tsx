@@ -30,7 +30,7 @@ function NewHireCandidate({
           <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
             <div className="d-flex align-items-center">
                 {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} /> */}
-                <ImageComponent user={"/assets/img/Ellipse 14.svg"}/>
+                <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
 
               <div>
                 <h5 className="para2 textheader ps-1 mb-0 ">{bday?.name}</h5>

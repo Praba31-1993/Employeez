@@ -20,7 +20,7 @@ function Inineverify() {
                     <div className="d-flex align-items-center">
                         <div className="userimages">
                               {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} /> */}
-                              <ImageComponent user={"/assets/img/Ellipse 14.svg"}/>
+                              <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
                         </div>
                         <div className="ps-2">
                             <h5 className="para2 textheader  mb-0 ">David mechkam</h5>
@@ -32,7 +32,7 @@ function Inineverify() {
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex align-items-center">
                         <div className="userimages">
-                            <ImageComponent user={"/assets/img/Ellipse 14.svg"}/>
+                            <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
 
                         </div>
                         <div className="ps-2">

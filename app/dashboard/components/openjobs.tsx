@@ -12,7 +12,7 @@ function Openjobs() {
             <div className="d-flex justify-content-between align-items-center">
                 <p className="textheader heading2 mb-0"> Open jobs</p>
                 {/* <Image src={headerImage} alt="" /> */}
-                <ImageComponent user={"/assets/img/openjobs.svg"}/>
+                <ImageComponent width={0}  height={0} user={"/assets/img/openjobs.svg"}/>
             </div><div>
                 <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
                     <div className="d-flex ">

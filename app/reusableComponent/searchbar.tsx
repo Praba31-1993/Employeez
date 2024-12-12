@@ -73,7 +73,7 @@ export default function SearchBar({ list }: searchProps) {
         renderInput={(params) => (
           <div style={{ display: "flex", gap: "0.5em" }}>
             {/* <Image src={search} alt="" /> */}
-            <ImageComponent user={"/assets/img/lock.png"}/>
+            <ImageComponent width={15}  height={15} user={"/assets/img/search.svg"}/>
 
             <TextField
               {...params}

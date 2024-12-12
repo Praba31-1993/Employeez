@@ -109,7 +109,7 @@ export default function NavbarComponent() {
     >
       <MenuItem>
         {/* <Image src={digitalIcon} alt="" /> */}
-        <ImageComponent user={"/assets/img/lock.png"} />
+        <ImageComponent width={30}  height={30} user={"/assets/img/digitallogo.svg"} />
       </MenuItem>
       <MenuItem>
         <DropdownComponent />
@@ -170,17 +170,17 @@ export default function NavbarComponent() {
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {/* <Image src={digitalIcon} alt="" /> */}
-              <ImageComponent user={"/assets/img/lock.png"} />
+              <ImageComponent width={100}  height={100} user={"/assets/img/digitallogo.svg"} />
 
               <DropdownComponent />
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {/* <Image src={questionIcon} alt="" /> */}
-                <ImageComponent user={"/assets/img/lock.png"} />
+                <ImageComponent width={30}  height={30} user={"/assets/img/question.svg"} />
               </Box>
 
               <Box sx={{ display: { xs: "block", sm: "none" } }}>
                 {/* <Image src={SearchIcon} alt="" /> */}
-                <ImageComponent user={"/assets/img/lock.png"} />
+                <ImageComponent width={15}  height={15} user={"/assets/img/search.svg"} />
               </Box>
 
               <IconButton

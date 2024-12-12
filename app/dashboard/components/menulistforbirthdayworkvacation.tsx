@@ -29,7 +29,7 @@ function Menulistforbirthdayworkvacation({
 
         {!isSalesReport && (
           // <Image src={headerImage} alt="" />
-          <ImageComponent user={headerImage} />
+          <ImageComponent width={0}  height={0} user={headerImage} />
         )}
       </div>
       <div>
@@ -39,7 +39,7 @@ function Menulistforbirthdayworkvacation({
               <div className="d-flex align-items-center">
                 <div className="userimages">
                   {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} />  */}
-                  <ImageComponent user={"/assets/img/basicmenu.svg"} />
+                  <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"} />
                 </div>
                 <div className="ps-2">
                   <h5 className="para2 textheader  mb-0 ">{bday?.name}</h5>

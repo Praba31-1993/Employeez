@@ -137,12 +137,12 @@ export default function Login() {
             <div className="logincard">
               <div className="logo text-center">
                 {/* <Image src={logo} alt="EmployEZ Logo" /> */}
-                <ImageComponent user={"/assets/img/lock.png"} />
+                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} />
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Welcome to EmployEZ!{" "}
                 {/* <Image src={handwave} className="ms-2" alt="Wave" /> */}
-                <ImageComponent user={"/assets/img/lock.png"} />
+                <ImageComponent width={0}  height={0} user={"/assets/img/hi.png"} />
               </h4>
               <p className="shade para pt-1">
                 Please sign in to your account and start the adventure.

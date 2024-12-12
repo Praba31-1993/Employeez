@@ -166,11 +166,19 @@ const Sidebar = ({ children }: SidebarProps) => {
             >
               {isOpen ? (
                 // <Image src={logo} alt="Logo" />
-                <ImageComponent user={"/assets/img/employeez1.png"} />
+                <ImageComponent
+                  width={0}
+                  height={0}
+                  user={"/assets/img/employeez1.png"}
+                />
               ) : (
                 // <Image src={EZlogo} alt="Logo" style={{ margin: "0 auto" }} />
                 <div style={{ margin: "0 auto" }}>
-                  <ImageComponent user={"/assets/img/Ez.svg"} />
+                  <ImageComponent
+                    width={0}
+                    height={0}
+                    user={"/assets/img/Ez.svg"}
+                  />
                 </div>
               )}
 
@@ -489,10 +497,13 @@ const Sidebar = ({ children }: SidebarProps) => {
               //   onClick={() => handleMenuToggle()}
               // />
               <div onClick={() => handleMenuToggle()}>
-                <ImageComponent user={"/assets/img/menu.svg"} />
+                <ImageComponent
+                  width={0}
+                  height={0}
+                  user={"/assets/img/menu.svg"}
+                />
               </div>
             }
-            <NavbarComponent />
           </div>
           <div className="mainContentNavbar">
             <NavbarComponent />

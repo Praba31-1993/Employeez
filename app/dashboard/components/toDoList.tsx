@@ -22,7 +22,7 @@ function ToDoList({ title }: ToDoListProps) {
           <div key={index}>
             <div className="d-flex align-items-start mt-3 p-1 todoList">
               {/* <Image src={ToDoIcon} alt="" /> */}
-              <ImageComponent user={"/assets/img/todo.svg"}/>
+              <ImageComponent width={0}  height={0} user={"/assets/img/todo.svg"}/>
               <div className="ps-2 w-100">
                 <p className="para textheader mb-0 ellipsis-applied">
                   I-9 for contractor Alpha (AP001) has been due{" "}

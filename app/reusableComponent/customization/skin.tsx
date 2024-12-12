@@ -59,7 +59,7 @@ export function Skincustomization() {
                   : "2px solid transparent",
             }}
           >
-            <ImageComponent user={"/assets/img/default.svg"} />
+            <ImageComponent width={0}  height={0} user={"/assets/img/default.svg"} />
           </div>
           <p className="mb-0 py-1 shade" style={{ fontSize: "10px" }}>
             Default
@@ -95,7 +95,7 @@ export function Skincustomization() {
                   : " 2px solid transparent",
             }}
           >
-            <ImageComponent user={"/assets/img/border.svg"} />
+            <ImageComponent width={0}  height={0} user={"/assets/img/border.svg"} />
           </div>
           <p className="mb-0 py-1 shade" style={{ fontSize: "10px" }}>
             Border

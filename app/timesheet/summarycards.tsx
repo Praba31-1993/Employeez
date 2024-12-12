@@ -11,7 +11,7 @@ export default function Summarycards({ leaveData, leaveTypeimages }: any) {
           <div className="p-1 icons">
             {/* <Image src={bag} alt={""} width={"50"} height={"50"} /> */}
             {/* <Avatar src="" alt="Remy Sharp" /> */}
-            <ImageComponent user={"/assets/img/lock.png"} />
+            <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"} />
 
             
           </div>
