@@ -16,9 +16,7 @@ const ImageComponent = ({ user, width, height }: ImageComponentProps) => {
       alt="User Profile"
       width={width != 0 ? width : 40}
       height={height != 0 ? height : 40}
-      onError={(e) =>
-        (e.currentTarget.src = "/assets/img/approved.svg")
-      } // Set fallback image if the src fails
+      onError={(e) => (e.currentTarget.src = "/assets/img/approved.svg")}
     />
   );
 };
