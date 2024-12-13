@@ -30,7 +30,6 @@ export default function Login() {
   const [errors, setErrors] = useState({ userId: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  var refreshInterval: any;
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");

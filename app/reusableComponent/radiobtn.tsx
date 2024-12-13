@@ -1,23 +1,48 @@
-import * as React from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import * as React from "react";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { typeOfDaysProps } from "./interfacetypes";
 
-export default function RowRadioButtons() {
+interface RowRadioButtonsProps {
+  list: typeOfDaysProps[];
+  selectedValue: string; // Receive the selected value from the parent
+  newDayTypevalue: (data: string) => void;
+}
+
+export default function RowRadioButtons({
+  list,
+  selectedValue,
+  newDayTypevalue,
+}: RowRadioButtonsProps) {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    newDayTypevalue(value);
+  };
+
   return (
     <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+      <FormLabel id="demo-row-radio-buttons-group-label">
+        Duration Type
+      </FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        value={selectedValue} // Control the value from the parent component
+        onChange={handleChange} // Handle the change event
       >
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="other" control={<Radio />} label="Other" />
-        
+        {list.map((item) => (
+          <div key={item.id}>
+            <FormControlLabel
+              value={item.name} // The value for the radio button
+              control={<Radio />}
+              label={item.name} // The label displayed next to the radio button
+            />
+          </div>
+        ))}
       </RadioGroup>
     </FormControl>
   );
