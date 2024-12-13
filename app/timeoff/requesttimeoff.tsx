@@ -27,11 +27,13 @@ function Requesttimeoff() {
       </div>
 
       {/* Main Section */}
-      <div className="col-12 col-md-6">
-        <Typeofduration />
-      </div>
-      <div className="col-12 col-md-6">
-        <Timeoffstatus />
+      <div className="row">
+        <div className="col-12 col-md-6">
+          <Typeofduration />
+        </div>
+        <div className="col-12 col-md-6">
+          <Timeoffstatus />
+        </div>
       </div>
     </div>
   );

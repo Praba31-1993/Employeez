@@ -2,6 +2,7 @@ import dashboardWhite from "@/public/assets/img/dashboard-white.svg";
 import dashboardGrey from "@/public/assets/img/dashboard-grey.svg";
 import timesheetGrey from "@/public/assets/img/timesheet_grey.svg";
 import timesheetWhite from "@/public/assets/img/timesheet_white.svg";
+import { typeOfDaysProps } from "./interfacetypes";
 
 export const loginResponse1 = [
   {
@@ -226,21 +227,21 @@ export const menuItem: IRoleGroup[] = [
       },
       {
         name: "Time Off",
-        path: "/Timeoff",
+        path: "/timeoff",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Project status",
-        path: "/Projectstatus",
+        path: "/projectstatus",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Employee list",
-        path: "/Employee list",
+        path: "/employeelist",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -357,14 +358,14 @@ export const menuItem: IRoleGroup[] = [
       },
       {
         name: "Project status approval",
-        path: "/project status approval",
+        path: "/projectstatusapproval",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Disciplinary action",
-        path: "/disciplinary action",
+        path: "/disciplinaryaction",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -376,14 +377,14 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Employee Prehire",
-        path: "/employee prehire",
+        path: "/employeeprehire",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Employee create/Edit",
-        path: "/employee create/Edit",
+        path: "/employeecreate/Edit",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -397,7 +398,7 @@ export const menuItem: IRoleGroup[] = [
       },
       {
         name: "Employee doc resources",
-        path: "/employee doc resources",
+        path: "/employeedocresources",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -409,7 +410,7 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Immigration docs",
-        path: "/immigration docs",
+        path: "/immigrationdocs",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -421,14 +422,14 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Work order",
-        path: "/work order",
+        path: "/workorder",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Job posting",
-        path: "/job posting",
+        path: "/jobposting",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -440,14 +441,14 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Onboarding dashboard",
-        path: "/onboarding dashboard",
+        path: "/onboardingdashboard",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "Onboarding request",
-        path: "/onboarding request",
+        path: "/onboardingrequest",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -478,14 +479,14 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Extract payroll",
-        path: "/extract payroll ",
+        path: "/extractpayroll ",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
       {
         name: "India payroll",
-        path: "/india payroll",
+        path: "/indiapayroll",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -509,7 +510,7 @@ export const menuItem: IRoleGroup[] = [
     roleItems: [
       {
         name: "Employee subscription",
-        path: "/employee subscription",
+        path: "/employeesubscription",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
@@ -1985,3 +1986,24 @@ export const TimeOffRequestList = [
   { id: "1889", name: "Study Leave", count: "14", hrs: "8" },
   { id: "1890", name: "Emergency Leave", count: "3", hrs: "8" },
 ];
+
+export const Logindata = [
+  {name : "Ganesh", DOB : '2024-1-08', number:"95632451566", country:'USA'},
+  {name : "Suresh", DOB : '2024-10-08', number:"956324515", country:'INDIA'},
+
+]
+
+export const typeOfDays: typeOfDaysProps[] = [
+    {
+      id: 1,
+      name: "Full Day",
+    },
+    {
+      id: 2,
+      name: "Partial Day",
+    },
+    {
+      id: 3,
+      name: "Multiple Days",
+    },
+  ];
