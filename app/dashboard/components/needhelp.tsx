@@ -24,7 +24,8 @@ function Needhelp() {
         text="Contact us"
         fontSize="12px"
         background={useColors.themeRed}
-        isDashboardIcon={false}
+        
+        iscontactus={true}
       />
     </>
   );

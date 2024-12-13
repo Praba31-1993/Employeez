@@ -1,6 +1,6 @@
 "use client";
 import React,{useState} from "react";
-import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import Outlinebutton, { IconOutlinebutton } from "@/app/reusableComponent/outlinebtn";
 import Menulistitem from "@/app/reusableComponent/menulist";
 import { Colors } from "@/app/reusableComponent/styles";
 import usedholiday from "/assets/img/usedholidays.svg";
@@ -51,13 +51,12 @@ export default function ProfilesCard() {
             Supervisee
           </p>
           <div onClick={() => setPunchIn((prev)=>!prev)}>
-            <Outlinebutton
+            <IconOutlinebutton
               color={useColors.white}
               border={`1px solid ${useColors.themeRed}`}
               text={punchIn?"Punch out" : "Punch in"}
               fontSize="12px"
               background={useColors.themeRed}
-              isDashboardIcon={true}
               disabled={false}
               icon={punchIn?"/assets/img/downarrrowCircle.svg" :  "/assets/img/rightarrow.svg"}
               variant={"contained"}
@@ -66,7 +65,7 @@ export default function ProfilesCard() {
           {punchIn && <Timer starttime={punchIn} timevalue={(data:any)=>setTotalTime(data)}/>}
         </div>
       </div>
-      <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 gap-3 flex-wrap">
+      <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 flex-wrap">
         {arrayList?.map((list: any, index: number) => {
           const isLastChild = index === arrayList.length - 1;
 

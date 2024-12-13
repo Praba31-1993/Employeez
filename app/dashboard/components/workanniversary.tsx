@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import user2 from "/assets/img/Group 9244.svg";
-import headerImage from "/assets/img/anniversary.svg";
+import headerImage from "@/public/assets/img/anniversary.svg";
 import { Colors } from "@/app/reusableComponent/styles";
 import ImageComponent from "@/app/reusableComponent/image";
 function Workanniversary() {
@@ -11,8 +11,8 @@ function Workanniversary() {
     <>
       <div className="d-flex justify-content-between align-items-center">
         <p className="textheader heading2 mb-0"> Work anniversary </p>
-        {/* <Image src={headerImage} alt="" /> */}
-        <ImageComponent width={0}  height={0} user={"/assets/img/todo.svg"} />
+        <Image src={headerImage} alt="" />
+        {/* <ImageComponent width={0}  height={0} user={"/assets/img/todo.svg"} /> */}
       </div>
       <div>
         <div className="d-flex mt-3 justify-content-between align-items-center pb-2">

@@ -3,7 +3,7 @@ import {
   faCirclePlus,
   faFileCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import Outlinebutton from "../reusableComponent/outlinebtn";
+import Outlinebutton, { IconOutlinebutton } from "../reusableComponent/outlinebtn";
 import Uploadfiles from "./uploadfiles";
 import { use, useEffect, useState } from "react";
 import Summarydetails from "./summarydetails";
@@ -124,12 +124,11 @@ export default function Timesheetcalendar({
             onClick={() => setOpen((prev) => !prev)}
             className="ms-4 px-3 py-1"
           >
-            <Outlinebutton
+            <IconOutlinebutton
               color={useColors.themeRed}
               border={`1px solid ${useColors.themeRed}`}
               text="Upload"
               fontSize="12px"
-              isDashboardIcon={false}
               disabled={false}
               icon={"/assets/img/plus-redcircle.svg"}
               variant={"outlined"}

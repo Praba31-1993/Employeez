@@ -1,5 +1,5 @@
-import Default from "/assets/img/default.svg";
-import Border from "/assets/img/border.svg";
+import Default from "@/public/assets/img/default.svg";
+import Border from "@/public/assets/img/border.svg";
 
 import { Colors } from "../styles";
 import Image from "next/image";
@@ -59,7 +59,7 @@ export function Skincustomization() {
                   : "2px solid transparent",
             }}
           >
-            <ImageComponent width={0}  height={0} user={"/assets/img/default.svg"} />
+                                            <Image className="p-1" src={Default} alt="default" />
           </div>
           <p className="mb-0 py-1 shade" style={{ fontSize: "10px" }}>
             Default
@@ -95,7 +95,8 @@ export function Skincustomization() {
                   : " 2px solid transparent",
             }}
           >
-            <ImageComponent width={0}  height={0} user={"/assets/img/border.svg"} />
+            {/* <ImageComponent width={0}  height={0} user={"/assets/img/border.svg"} /> */}
+            <Image className="p-1" src={Border} alt="Border" />
           </div>
           <p className="mb-0 py-1 shade" style={{ fontSize: "10px" }}>
             Border

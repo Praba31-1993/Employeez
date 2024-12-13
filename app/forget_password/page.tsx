@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "/assets/img/employeez.png";
-import lock from "/assets/img/lock.png";
+import logo from "@/public/assets/img/employeez.png";
+import lock from "@/public/assets/img/lock.png";
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
@@ -72,13 +72,13 @@ export default function forgetpassword() {
           <div className="col-sm-6 align-items-center  d-flex">
             <div className="logincard ps-md-5 ms-md-5">
               <div className="logo">
-                {/* <Image src={logo} alt={""} /> */}
-                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"}/>
+                <Image src={logo} alt={""} />
+                {/* <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"}/> */}
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Forgot password
-                {/* <Image src={lock} className="" alt={""} />{" "} */}
-                <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"}/>
+                <Image src={lock} className="" alt={""} />
+                {/* <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"}/> */}
 
               </h4>
               <p className="shade para pt-1">
