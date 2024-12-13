@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logogif from "/assets/img/loginanimation.gif";
-import logo from "/assets/img/employeez.png";
+import logo from "@/public/assets/imgemployeez.png";
 import * as React from "react";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
@@ -39,9 +39,9 @@ export default function FirstTimepassword() {
           <div className="col-sm-6 align-items-center  d-flex">
             <div className="logincard ps-md-5 ms-md-5">
               <div className="logo">
-                {/* <Image src={logo} alt={""} /> */}
+                <Image src={logo} alt={""} />
 
-                <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} />
+                {/* <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} /> */}
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 First-time password update
