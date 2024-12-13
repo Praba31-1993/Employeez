@@ -34,7 +34,7 @@ export default function RowRadioButtons({
         value={selectedValue} // Control the value from the parent component
         onChange={handleChange} // Handle the change event
       >
-        {list.map((item) => (
+        {list?.map((item) => (
           <div key={item.id}>
             <FormControlLabel
               value={item.name} // The value for the radio button
