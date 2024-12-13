@@ -3,6 +3,7 @@ import ImageComponent from "../reusableComponent/image";
 import Typeofduration from "./typeofduration";
 import Timeoffstatus from "./timeoffstatus";
 import { TimeOffRequestList } from "../reusableComponent/JsonData";
+import RowRadioButtons from "../reusableComponent/radiobtn";
 
 function Requesttimeoff() {
   return (
@@ -27,11 +28,26 @@ function Requesttimeoff() {
       </div>
 
       {/* Main Section */}
-      <div className="row">
-        <div className="col-12 col-md-6">
+      <div className="row mt-5">
+        <div className="col-12 col-md-6 px-3">
           <Typeofduration />
         </div>
-        <div className="col-12 col-md-6">
+        <div className="dashboardcard col-12 col-md-6 h-75">
+          <p>Time off Status (Self)</p>
+          <RowRadioButtons
+            list={[
+              {
+                id: 1,
+                name: "Status",
+              },
+              {
+                id: 2,
+                name: "History",
+              },
+            ]}
+            selectedValue={""}
+            newDayTypevalue={(data: string) => {}}
+          />
           <Timeoffstatus />
         </div>
       </div>

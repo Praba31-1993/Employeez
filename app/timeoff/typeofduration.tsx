@@ -37,8 +37,8 @@ function Typeofduration() {
               <DatePickerComponent />
             </div>
           </div>
-          <div className="col-6">
-            <div className="w-75 text-end ">
+          <div className="col-6 d-flex justify-content-end">
+            <div className="w-75  ">
               <TimePickerComponent />
             </div>
           </div>
@@ -52,12 +52,12 @@ function Typeofduration() {
               <DatePickerComponent />
             </div>
           </div>
-          <div className="col-6  mb-4">
-            <div className="w-75 text-end">
+          <div className="col-6 d-flex justify-content-end mb-4">
+            <div className="w-75 ">
               <TimePickerComponent />
             </div>
           </div>
-          <div className="col-6  text-end">
+          <div className="col-6">
             <div className="w-75" style={{ background: "white" }}>
               <Select
                 labelId="demo-simple-select-helper-label"
@@ -96,12 +96,12 @@ function Typeofduration() {
               <DatePickerComponent />
             </div>
           </div>
-          <div className="col-6  mb-4">
-            <div className="w-75 text-end">
+          <div className="col-6  d-flex justify-content-end mb-4">
+            <div className="w-75 ">
               <DatePickerComponent />
             </div>
           </div>
-          <div className="col-6  text-end">
+          <div className="col-6  ">
             <div className="w-75" style={{ background: "white" }}>
               <Select
                 labelId="demo-simple-select-helper-label"
