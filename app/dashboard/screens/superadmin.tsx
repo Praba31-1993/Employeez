@@ -159,7 +159,10 @@ const SuperAdminDashboard = () => {
 
                 {/* Sales Report */}
                 <div className=" col-12 mb-3 col-md-6">
-                    <div className="dashboardcard h-100 p-3">
+                    <div className="dashboardcard h-100 p-3"  style={{
+                                    border: useColors.border,
+                                    boxShadow: useColors.boxshadow,
+                                }}>
                         <div className="row">
                             <p className="textheader heading2">Sales Report</p>
 

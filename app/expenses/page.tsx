@@ -20,8 +20,10 @@ import SemiMonthlyCalendar from "../reusableComponent/calendar/semimonthlyCalend
 import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
+import { Colors } from "../reusableComponent/styles";
 
-export default function Expenses() {
+export default function Expenses({ weekListDatas,}:any) {
+   const useColors = Colors();
   // State to toggle visibility of components
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -29,7 +31,7 @@ export default function Expenses() {
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
   const [isWeeklyListupdated, setIsWeeklyListUpdated] =
     useState<boolean>(false);
-
+    const lastIndex = weekListDatas?.length - 1;
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
   // Filter for objects with codeId and codeLabel (relevant data)
@@ -122,6 +124,20 @@ export default function Expenses() {
               </div>
               {/* timesheet */}
               <div className="col-xxl-9 col-lg-8 col-md-12">
+              <div className="d-flex px-3 justify-content-between">
+                        <div className="d-flex justify-content-between" style={{ width: "80%" }}>
+                            {weekListDatas?.map((weeklist: any, index: number) => (
+                                <div key={index}>
+                                    <p className="para2 mb-1 textheader text-center" >
+                                        {weeklist?.monthDay} {weeklist?.day}
+                                    </p>
+                                </div>))}
+                        </div>
+                        <div style={{ width: "20%" }}>
+                            <p className="para2 mb-1 ms-2 text-center" style={{ color: useColors.themeRed }}>
+                                Week Total</p>
+                        </div>
+                    </div>
                 {timesheetList[2]?.map((timesheet: any, index: number) => (
                   <div key={index}>
                     <TimesheetExpenceAndHoursField
