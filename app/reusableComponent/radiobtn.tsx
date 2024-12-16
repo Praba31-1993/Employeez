@@ -17,6 +17,9 @@ export default function RowRadioButtons({
   selectedValue,
   newDayTypevalue,
 }: RowRadioButtonsProps) {
+  // Set the first item as the default value if none is provided
+  const defaultSelectedValue = selectedValue || (list[0] && list[0].name);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     newDayTypevalue(value);
@@ -24,14 +27,12 @@ export default function RowRadioButtons({
 
   return (
     <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">
-        Duration Type
-      </FormLabel>
+      <FormLabel id="demo-row-radio-buttons-group-label">Duration Type</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
-        value={selectedValue} // Control the value from the parent component
+        value={defaultSelectedValue} // Set the default value
         onChange={handleChange} // Handle the change event
       >
         {list?.map((item) => (

@@ -1886,76 +1886,86 @@ export const HiringCounts = [
 ];
 
 export const ContactsList = [
-  { id: "001", name: "Rose", role: "HR", mail: "rose@gmail.com" },
-  { id: "002", name: "John", role: "Developer", mail: "john@gmail.com" },
-  { id: "003", name: "Emma", role: "Designer", mail: "emma@gmail.com" },
+  { id: "001", name: "Rose", role: "HR", mail: "rose@gmail.com", img:"/assets/img/user2.svg" },
+  { id: "002", name: "John", role: "Developer", mail: "john@gmail.com",  img:"/assets/img/Ellipse 14.svg" },
+  { id: "003", name: "Emma", role: "Designer", mail: "emma@gmail.com",img:"/assets/img/user2.svg" },
   {
     id: "004",
     name: "Michael",
     role: "Project Manager",
     mail: "michael@gmail.com",
+    img:"/assets/img/user2.svg"
   },
-  { id: "005", name: "Sophia", role: "QA Engineer", mail: "sophia@gmail.com" },
-  { id: "006", name: "Liam", role: "DevOps Engineer", mail: "liam@gmail.com" },
+  { id: "005", name: "Sophia", role: "QA Engineer", mail: "sophia@gmail.com", img:"/assets/img/user2.svg" },
+  { id: "006", name: "Liam", role: "DevOps Engineer", mail: "liam@gmail.com", img:"" },
   {
     id: "007",
     name: "Olivia",
     role: "Business Analyst",
     mail: "olivia@gmail.com",
+    img:'',
   },
-  { id: "008", name: "Noah", role: "Product Owner", mail: "noah@gmail.com" },
-  { id: "009", name: "Ava", role: "Scrum Master", mail: "ava@gmail.com" },
+  { id: "008", name: "Noah", role: "Product Owner", mail: "noah@gmail.com",img:"/assets/img/user2.svg" },
+  { id: "009", name: "Ava", role: "Scrum Master", mail: "ava@gmail.com",img:"/assets/img/Ellipse.svg" },
   {
     id: "010",
     name: "Elijah",
     role: "Technical Lead",
     mail: "elijah@gmail.com",
+    img:""
   },
   {
     id: "011",
     name: "Charlotte",
     role: "Software Architect",
     mail: "charlotte@gmail.com",
+    img:"/assets/img/user2.svg"
   },
   {
     id: "012",
     name: "James",
     role: "Database Administrator",
     mail: "james@gmail.com",
+    img:"/assets/img/Ellipse.svg"
   },
   {
     id: "013",
     name: "Amelia",
     role: "System Analyst",
     mail: "amelia@gmail.com",
+    img:"/assets/img/user2.svg"
   },
   {
     id: "014",
     name: "William",
     role: "Frontend Developer",
     mail: "william@gmail.com",
+    img:"/assets/img/user2.svg"
   },
-  { id: "015", name: "Mia", role: "Backend Developer", mail: "mia@gmail.com" },
+  { id: "015", name: "Mia", role: "Backend Developer", mail: "mia@gmail.com",img:"/assets/img/user2.svg" },
   {
     id: "016",
     name: "Benjamin",
     role: "Cloud Engineer",
     mail: "benjamin@gmail.com",
+    img:"/assets/img/Ellipse 14.svg"
   },
   {
     id: "017",
     name: "Harper",
     role: "Security Analyst",
     mail: "harper@gmail.com",
+    img:''
   },
-  { id: "018", name: "Lucas", role: "IT Support", mail: "lucas@gmail.com" },
+  { id: "018", name: "Lucas", role: "IT Support", mail: "lucas@gmail.com",img:"/assets/img/user2.svg" },
   {
     id: "019",
     name: "Evelyn",
     role: "Network Engineer",
     mail: "evelyn@gmail.com",
+    img:""
   },
-  { id: "020", name: "Henry", role: "UX Researcher", mail: "henry@gmail.com" },
+  { id: "020", name: "Henry", role: "UX Researcher", mail: "henry@gmail.com",img:'' },
 ];
 
 export const dropdownData = [
@@ -2007,3 +2017,128 @@ export const typeOfDays: typeOfDaysProps[] = [
       name: "Multiple Days",
     },
   ];
+
+
+
+  export const dummyJson = [
+    { name: 'Rajesh', countryCode: 'USD' },
+    { name: 'Suresh', countryCode: 'INR' },
+    { name: 'Ganesh', countryCode: 'EUR' },
+    { name: 'Priya', countryCode: 'GBP' },
+    { name: 'Anjali', countryCode: 'JPY' },
+    { name: 'Ramesh', countryCode: 'AUD' },
+    { name: 'Vikram', countryCode: 'CAD' },
+    { name: 'Kiran', countryCode: 'SGD' },
+    { name: 'Deepa', countryCode: 'CHF' },
+    { name: 'Meera', countryCode: 'CNY' }
+];
+
+export const currencyCode = [
+    { countryCode: 'USD', currency: '$' },
+    { countryCode: 'INR', currency: '₹' },
+    { countryCode: 'EUR', currency: '€' },
+    { countryCode: 'GBP', currency: '£' },
+    { countryCode: 'JPY', currency: '¥' },
+    { countryCode: 'AUD', currency: 'A$' },
+    { countryCode: 'CAD', currency: 'C$' },
+    { countryCode: 'SGD', currency: 'S$' },
+    { countryCode: 'CHF', currency: 'CHF' },
+    { countryCode: 'CNY', currency: '¥' }
+];
+
+export const dateFormatCode = [
+  { countryCode: 'USD', dateFormat: 'MM/DD/YYYY' },
+  { countryCode: 'INR', dateFormat: 'DD/MM/YYYY' },
+  { countryCode: 'EUR', dateFormat: 'DD.MM.YYYY' },
+  { countryCode: 'GBP', dateFormat: 'DD/MM/YYYY' },
+  { countryCode: 'JPY', dateFormat: 'YYYY/MM/DD' },
+  { countryCode: 'AUD', dateFormat: 'DD/MM/YYYY' },
+  { countryCode: 'CAD', dateFormat: 'YYYY-MM-DD' },
+  { countryCode: 'SGD', dateFormat: 'DD/MM/YYYY' },
+  { countryCode: 'CHF', dateFormat: 'DD.MM.YYYY' },
+  { countryCode: 'CNY', dateFormat: 'YYYY/MM/DD' }
+]
+;
+
+export const tableData = [
+  {
+    id: 1,
+    datefrom: "2024-01-10",
+    dateto: "2024-01-15",
+    timeOfftype: "LOP",
+    status: "Accepted",
+    reason: "Applied to HR"
+  },
+  {
+    id: 2,
+    datefrom: "2024-01-11",
+    dateto: "2024-01-16",
+    timeOfftype: "Sick Leave",
+    status: "Pending",
+    reason: "Medical Emergency"
+  },
+  {
+    id: 3,
+    datefrom: "2024-01-12",
+    dateto: "2024-01-17",
+    timeOfftype: "Casual Leave",
+    status: "Rejected",
+    reason: "Personal Reasons"
+  },
+  {
+    id: 4,
+    datefrom: "2024-01-13",
+    dateto: "2024-01-18",
+    timeOfftype: "Vacation",
+    status: "Accepted",
+    reason: "Vacation"
+  },
+  {
+    id: 5,
+    datefrom: "2024-01-14",
+    dateto: "2024-01-19",
+    timeOfftype: "Sick Leave",
+    status: "Pending",
+    reason: "Medical Emergency"
+  },
+  {
+    id: 6,
+    datefrom: "2024-01-15",
+    dateto: "2024-01-20",
+    timeOfftype: "LOP",
+    status: "Accepted",
+    reason: "Applied to HR"
+  },
+  {
+    id: 7,
+    datefrom: "2024-01-16",
+    dateto: "2024-01-21",
+    timeOfftype: "Casual Leave",
+    status: "Rejected",
+    reason: "Personal Reasons"
+  },
+  {
+    id: 8,
+    datefrom: "2024-01-17",
+    dateto: "2024-01-22",
+    timeOfftype: "Vacation",
+    status: "Accepted",
+    reason: "Vacation"
+  },
+  {
+    id: 9,
+    datefrom: "2024-01-18",
+    dateto: "2024-01-23",
+    timeOfftype: "Sick Leave",
+    status: "Pending",
+    reason: "Medical Emergency"
+  },
+  {
+    id: 10,
+    datefrom: "2024-01-19",
+    dateto: "2024-01-24",
+    timeOfftype: "LOP",
+    status: "Accepted",
+    reason: "Applied to HR"
+  }
+];

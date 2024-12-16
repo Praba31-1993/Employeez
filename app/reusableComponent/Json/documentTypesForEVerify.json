@@ -1,0 +1,53 @@
+[
+	{
+		"document_A": {
+			"Foreign Passport with Form I94": "FOREIGN_PASSPORT_WITH_FORM_I94",
+			"Foreign Passport with I551 Stamp": "FOREIGN_PASSPORT_WITH_I551_STAMP",
+			"Form I551": "FORM_I551",
+			"Form I766": "FORM_I766",
+			"Form I94 Receipt": "FORM_I94_RECEIPT",
+			"US Passport": "US_PASSPORT"
+		},
+		"document_B": {
+			"Canadian Drivers License": "CANADIAN_DRIVERS_LICENSE",
+			"Day care record": "DAY_CARE_RECORD",
+			"Drivers License": "DRIVERS_LICENSE",
+			"Government Id card": "GOVERNMENT_ID_CARD",
+			"Hospital Record": "HOSPITAL_RECORD",
+			"Military Department Id card": "MILITARY_DEPENDENT_ID_CARD",
+			"Native American tribal document": "NATIVE_AMERICAN_TRIBAL_DOCUMENT",
+			"School Id Card": "SCHOOL_ID_CARD",
+			"School Record": "SCHOOL_RECORD",
+			"US Coast guardCard": "US_COAST_GUARD_CARD",
+			"US Military Card": "US_MILITARY_CARD",
+			"Voter Registration Card": "VOTER_REGISTRATION_CARD"
+		},
+		"document_C": {
+			"DS 1350": "DS_1350",
+			"Employment Authorization Document": "EMPLOYMENT_AUTHORIZATION_DOCUMENT",
+			"Form I179": "FORM_I179",
+			"Form I197": "FORM_I197",
+			"FS 240": "FS_240",
+			"FS 545": "FS_545",
+			"Native American Tribal Document": "NATIVE_AMERICAN_TRIBAL_DOCUMENT",
+			"Social Security Card": "SOCIAL_SECURITY_CARD",
+			"US Birth Certificate": "US_BIRTH_CERTIFICATE"
+		},
+		"reasonForDelayCodes": {
+			"Awaiting Social Security": "AWAITING_SOCIAL_SECURITY_NUMBER",
+			"Technical Problems": "TECHNICAL_PROBLEMS",
+			"Audit Revealed that NewHire was not Run": "AUDIT_REVEALED_THAT_NEW_HIRE_WAS_NOT_RUN",
+			"Federal Contactor": "FEDERAL_CONTRACTOR",
+			"Awaiting Response on Case with Incorrect Info": "AWAITING_RESPONSE_ON_CASE_WITH_INCORRECT_INFO",
+			"Other Reasons": "OTHER"
+		},
+		"citizenship_statuses": 
+        {
+            "U.S. Citizen": "US_CITIZEN",
+            "Non U.S. Citizen": "NONCITIZEN",
+            "Lawful Permanent Resident": "LAWFUL_PERMANENT_RESIDENT",
+            "Alien Authorized to Work": "ALIEN_AUTHORIZED_TO_WORK"
+         }
+     }
+	
+]

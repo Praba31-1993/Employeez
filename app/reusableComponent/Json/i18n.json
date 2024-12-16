@@ -1,0 +1,18 @@
+[  
+   {  
+      "dateCode":"en",
+      "dateLabel":"mm/dd/yyyy"
+   },
+   {  
+      "dateCode":"en-gb",
+      "dateLabel":"dd/mm/yyyy"
+   },
+   {  
+      "dateCode":"en-ie",
+      "dateLabel":"dd-mm-yyyy"
+   },
+   {  
+      "dateCode":"en-ca",
+      "dateLabel":"yyyy-mm-dd"
+   }
+]

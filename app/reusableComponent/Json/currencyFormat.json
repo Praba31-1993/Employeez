@@ -1,0 +1,30 @@
+[{
+	"currencyFormat": "USD",
+	"currencySymbol": "$"
+},{
+	"currencyFormat": "INR",
+	"currencySymbol": "₹"
+},
+{
+	"currencyFormat": "CAD",
+	"currencySymbol": "$"
+},{
+	"currencyFormat": "SGD",
+	"currencySymbol": "$"
+},{
+	"currencyFormat": "GBP",
+	"currencySymbol": "£"
+},{
+	"currencyFormat": "AUD",
+	"currencySymbol": "$"
+}
+,{
+	"currencyFormat": "UAE",
+	"currencySymbol": "\u062f.\u0625"
+
+}
+,{
+	"currencyFormat": "MXN",
+	"currencySymbol": "$"
+}
+]

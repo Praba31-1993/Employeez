@@ -1,0 +1,46 @@
+[{
+	"countryCode": "US",
+	"countryMobPattern": "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+	"countryMobPlaceHolder":"xxx-xxx-xxxx",
+	"countryMobPatternGen":"0,2-3,5-6,9"
+},{
+	"countryCode": "CA",
+	"countryMobPattern": "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+	"countryMobPlaceHolder":"xxx-xxx-xxxx",
+	"countryMobPatternGen":"0,2-3,5-6,9"
+},
+{
+	"countryCode": "IN",
+	"countryMobPattern":  "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+	"countryMobPlaceHolder":"xxx-xxx-xxxx",
+	"countryMobPatternGen":"0,2-3,5-6,9"
+},{
+	"countryCode": "SG",
+	"countryMobPattern": "[0-9]{4}-[0-9]{5}",
+	"countryMobPlaceHolder":"xxxx-xxxxx",
+	"countryMobPatternGen":"0,3-4,8"
+},{
+	"countryCode": "GB",
+	"countryMobPattern": "[0-9]{10}",
+	"countryMobPlaceHolder":"xxxxxxxxxx",
+	"countryMobPatternGen":"0,9"
+} 
+,{
+	"countryCode": "GB",
+	"countryMobPattern": "[0-9]{10}",
+	"countryMobPlaceHolder":"xxxxxxxxxx",
+	"countryMobPatternGen":"0,9"
+},{
+	"countryCode": "AE",
+	"countryMobPattern": "[0-9]{3}-[0-9]{6}",
+	"countryMobPlaceHolder":"xxx-xxxxxx",
+	"countryMobPatternGen":"0,2-3,8"
+}
+,{
+	"countryCode": "MX",
+	"countryMobPattern": "[0-9]{3}-[0-9]{3}-[0-9]{4}",
+	"countryMobPlaceHolder":"xxx-xxx-xxxx",
+	"countryMobPatternGen":"0,2-3,5-6,9"
+}
+
+]

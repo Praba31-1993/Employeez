@@ -1,11 +1,3 @@
-import calendar from "/assets/img/calendar_icon.png";
-import carry from "/assets/img/carry_on_bag_icon.png";
-import gift from "/assets/img/gift_icon.png";
-
-import Image from "next/image";
-import Avatar from "@mui/material/Avatar";
-import Summarydetails from "./summarydetails";
-import { useState } from "react";
 import { Colors } from "../reusableComponent/styles";
 import ImageComponent from "../reusableComponent/image";
 
@@ -19,7 +11,7 @@ export default function Listofholidays() {
         {/* list of holidays */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
           {/* <Image src={gift} alt={""} /> */}
-          <ImageComponent width={0}  height={0} user={"/assets/img/gift_icon.png"} />
+          <ImageComponent width={24}  height={24} user={"/assets/img/gift_icon.png"} />
           <p className="para ps-2 mb-0 unselectcolor">List of holidays</p>
         </div>
         <div className="d-flex pt-1 align-items-center">
@@ -39,7 +31,7 @@ export default function Listofholidays() {
         {/* vacation */}
         <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
           {/* <Image src={carry} alt={""} /> */}
-          <ImageComponent width={0}  height={0} user={"/assets/img/carry_on_bag_icon.png"} />
+          <ImageComponent width={24}  height={24} user={"/assets/img/carry_on_bag_icon.png"} />
 
           <p className="para ps-2 mb-0 unselectcolor">Vacations</p>
         </div>
