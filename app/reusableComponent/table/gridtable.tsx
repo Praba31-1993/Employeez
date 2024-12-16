@@ -9,6 +9,7 @@ import {
 } from '@mui/x-data-grid-premium';
 import { useDemoData } from '@mui/x-data-grid-generator';
 
+
 const visibleFields = [
   'commodity',
   'quantity',
@@ -24,6 +25,49 @@ const visibleFields = [
 ];
 
 export default function DataGridTable() {
+  const { data, loading } = useDemoData({
+    dataSet: 'Commodity',
+    rowLength: 100,
+    editable: true,
+    visibleFields,
+  });
+  const apiRef = useGridApiRef();
+
+  const initialState = useKeepGroupedColumnsHidden({
+    apiRef,
+    initialState: {
+      ...data.initialState,
+      rowGrouping: {
+        ...data.initialState?.rowGrouping,
+        model: ['commodity'],
+      },
+      sorting: {
+        sortModel: [{ field: GRID_ROW_GROUPING_SINGLE_GROUPING_FIELD, sort: 'asc' }],
+      },
+      aggregation: {
+        model: {
+          quantity: 'sum',
+        },
+      },
+    },
+  });
+
+  return (
+    <Box sx={{ height: 520, width: '100%' }}>
+      <DataGridPremium
+        {...data}
+        apiRef={apiRef}
+        loading={loading}
+        disableRowSelectionOnClick
+        initialState={initialState}
+        slots={{ toolbar: GridToolbar }}
+      />
+    </Box>
+  );
+}
+
+
+export  function DataGridPremiumDemo() {
   const { data, loading } = useDemoData({
     dataSet: 'Commodity',
     rowLength: 100,
