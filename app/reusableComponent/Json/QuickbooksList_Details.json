@@ -1,0 +1,10 @@
+[
+	{
+		"Account": "ACCOUNT_TYPE",
+		"Payment Method": "PAYMENT_METHOD_TYPE",
+		"Invoice Service": "INVOICE_SERVICE_TYPE",
+		"Payable Service": "PAYABLE_SERVICE_TYPE",
+		"Resolve Type": "CREDIT_MEMO_SERVICE_TYPE",
+		"Payment Term": "PAYMENT_TERM_TYPE"
+	}
+]

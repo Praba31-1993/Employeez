@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImageComponent from "../reusableComponent/image";
 import Typeofduration from "./typeofduration";
 import Timeoffstatus from "./timeoffstatus";
@@ -6,6 +6,8 @@ import { TimeOffRequestList } from "../reusableComponent/JsonData";
 import RowRadioButtons from "../reusableComponent/radiobtn";
 
 function Requesttimeoff() {
+  const [statusHistory, setStatusHistory] = useState<string>("");
+
   return (
     <div>
       <div className="d-flex gap-3 flex-wrap">
@@ -45,8 +47,8 @@ function Requesttimeoff() {
                 name: "History",
               },
             ]}
-            selectedValue={""}
-            newDayTypevalue={(data: string) => {}}
+            selectedValue={statusHistory}
+            newDayTypevalue={(data: string) => setStatusHistory(data)}
           />
           <Timeoffstatus />
         </div>

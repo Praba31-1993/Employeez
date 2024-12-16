@@ -8,7 +8,7 @@ interface ImageComponentProps {
 }
 
 const ImageComponent = ({ user, width, height }: ImageComponentProps) => {
-  const imageUrl = user || "/assets/img/approved.svg"; // Fallback to the default image if 'user' is not provided
+  const imageUrl = user || "/assets/img/avatarblack.svg"; // Fallback to the default image if 'user' is not provided
 
   return (
     <Image
@@ -16,7 +16,7 @@ const ImageComponent = ({ user, width, height }: ImageComponentProps) => {
       alt="User Profile"
       width={width != 0 ? width : 40}
       height={height != 0 ? height : 40}
-      onError={(e) => (e.currentTarget.src = "/assets/img/approved.svg")}
+      onError={(e) => (e.currentTarget.src = "/assets/img/avatarblack.svg")}
     />
   );
 };

@@ -35,6 +35,7 @@ function Employee() {
   useEffect(() => {
     setbirthdayAnniversaryReport(arrayList);
   }, []);
+  
   return (
     <div className="container-fluid my-3">
       <div className="row">

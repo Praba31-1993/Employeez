@@ -1,0 +1,26 @@
+[  
+   {  
+      "tableId":"EI",
+      "tableName":"Employee Information",
+      "csvFile":"",
+      "status":false
+   },
+   {  
+      "tableId":"VI",
+      "tableName":"Vendor Information",
+      "csvFile":"",
+      "status":false
+   },
+   {
+   	  "tableId":"VU",
+      "tableName":"Vacation Upload",
+      "csvFile":"",
+      "status":false
+   },
+   {
+   	  "tableId":"VD",
+      "tableName":"Vacation Dates",
+      "csvFile":"",
+      "status":false
+   }
+]

@@ -54,9 +54,9 @@ export default function Contacts({ show, close }: any)  {
                   key={contact?.id}
                 >
                   <div className="userimages">
-                    <ImageComponent width={0}  height={0} user={"/assets/img/basicmenu.svg"} />
+                  <ImageComponent width={0}  height={0} user={contact?.img}/>
                   </div>
-                  <div className="ps-2">
+                  <div className="ps-4">
                     <h5 className="para2 textheader mb-0">
                       {contact?.name} ({contact?.role})
                     </h5>

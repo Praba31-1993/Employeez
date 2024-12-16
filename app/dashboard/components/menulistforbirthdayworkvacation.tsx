@@ -28,7 +28,6 @@ function Menulistforbirthdayworkvacation({
         <p className="textheader heading2 mb-0">{title} </p>
 
         {!isSalesReport && (
-          // <Image src={headerImage} alt="" />
           <ImageComponent width={0}  height={0} user={headerImage} />
         )}
       </div>
