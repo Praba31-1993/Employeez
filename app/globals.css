@@ -350,6 +350,9 @@ font-weight: 400;
     opacity: 0;
   }
 }
-
+select{
+  outline: 0 !important;
+  border: 0 !important;
+}
 
 
