@@ -10,12 +10,13 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 
 export default function BreadcrumbsComponent() {
   return (
-    <div role="presentation" onClick={handleClick}>
+    <div role="presentation para2" className='my-1' onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
+        <Link underline="hover" className='para2' color="inherit" href="/">
           MUI
         </Link>
         <Link
+        className='para2'
           underline="hover"
           color="inherit"
           href="/material-ui/getting-started/installation/"
@@ -23,6 +24,7 @@ export default function BreadcrumbsComponent() {
           Core
         </Link>
         <Link
+        className='para2'
           underline="hover"
           color="text.primary"
           href="/material-ui/react-breadcrumbs/"

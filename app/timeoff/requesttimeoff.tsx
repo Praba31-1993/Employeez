@@ -4,6 +4,8 @@ import Typeofduration from "./typeofduration";
 import Timeoffstatus from "./timeoffstatus";
 import { TimeOffRequestList } from "../reusableComponent/JsonData";
 import RowRadioButtons from "../reusableComponent/radiobtn";
+import { year } from "../reusableComponent/JsonData";
+import DropdownComponent from "../reusableComponent/dropdown";
 
 function Requesttimeoff() {
   const [statusHistory, setStatusHistory] = useState<string>("");
@@ -11,7 +13,7 @@ function Requesttimeoff() {
   return (
     <div>
       <div className="d-flex gap-3 flex-wrap">
-        {TimeOffRequestList.map((timeoffrequest: any) => (
+        {TimeOffRequestList?.map((timeoffrequest: any) => (
           <div
             key={timeoffrequest?.id}
             className="dashboardcard d-flex  flex-column w-40 h-30 p-2 "
@@ -34,8 +36,12 @@ function Requesttimeoff() {
         <div className="col-12 col-md-6 px-3">
           <Typeofduration />
         </div>
-        <div className="dashboardcard col-12 col-md-6 h-75">
-          <p>Time off Status (Self)</p>
+        <div className="dashboardcard col-12 col-md-6 h-75 p-3">
+          <div className="d-flex justify-content-between">
+            <p>Time off Status (Self)</p>
+
+            <DropdownComponent dropdownlist={year} isYear={true}/>
+          </div>
           <RowRadioButtons
             list={[
               {
@@ -50,7 +56,7 @@ function Requesttimeoff() {
             selectedValue={statusHistory}
             newDayTypevalue={(data: string) => setStatusHistory(data)}
           />
-          <Timeoffstatus />
+          <Timeoffstatus statusHistory={statusHistory} />
         </div>
       </div>
     </div>

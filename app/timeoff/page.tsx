@@ -12,12 +12,14 @@ function TimeOff() {
       <Sidebar>
         <BreadcrumbsComponent />
         <div className="row ">
-          <div className="col-6">Time off</div>
+          <div className="col-6">
+            <p className=" textheader heading my-2">Time off</p>
+          </div>
           <div className="col-6 text-end">
             <DropdownComponent dropdownlist={timeOff} />
           </div>
         </div>
-        <div className="d-flex gap-3 w-100 flex-wrap">
+        <div className="d-flex mt-2 gap-3 w-100 flex-wrap">
           <Requesttimeoff />
         </div>
 
