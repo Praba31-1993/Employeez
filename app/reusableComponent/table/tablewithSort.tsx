@@ -64,7 +64,7 @@ const TableWithSort: React.FC<TableProps> = ({
 
   return (
     <table className="table-auto w-full border border-gray-300">
-      <thead className="bg-gray-100">
+      <thead className="bg-gray-200">
         <tr>
           {columns.map((column) => (
             <th
@@ -106,7 +106,7 @@ const TableWithSort: React.FC<TableProps> = ({
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className="dashboardcard">
         {data.map((row, rowIndex) => (
           <tr key={rowIndex} className="border-b border-gray-200">
             {columns.map((column) => (

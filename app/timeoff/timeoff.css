@@ -2,20 +2,17 @@
   background: white;
   height: fit-content;
 }
-.searchbar {
-  width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white !important; /* Ensures background stays white */
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-}
 
-.searchbar:focus,
-.searchbar:active {
-  background-color: white !important; /* Force background color on focus/active */
-  outline: none; /* Optional: Remove the blue border outline */
+.searchbar{
+     background: white;
+     border-radius: 10px !important;
+}
+.searchbar input{
+     border: 0 !important;
+     background: transparent;
+     padding-left: 40px; /* Space for the icon */
+     width: 100%;
+     height: 40px; /* Adjust height if necessary */
+     outline: none;
+     font-size: 16px; /* Adjust font size if necessary */
 }
