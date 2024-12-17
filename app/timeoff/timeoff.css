@@ -1,4 +1,21 @@
-.dayType{
-     background: white;
-     height: fit-content;
+.dayType {
+  background: white;
+  height: fit-content;
+}
+.searchbar {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white !important; /* Ensures background stays white */
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+.searchbar:focus,
+.searchbar:active {
+  background-color: white !important; /* Force background color on focus/active */
+  outline: none; /* Optional: Remove the blue border outline */
 }

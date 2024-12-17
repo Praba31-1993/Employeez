@@ -73,30 +73,32 @@ const TableWithSort: React.FC<TableProps> = ({
               onClick={() => handleSort(column.key)}
             >
               <div className="flex items-center justify-center gap-1">
-                {" "}
-                {/* Flexbox to align text and icon in the same line */}
-                <span>{column.label}</span>
-                {/* Conditional rendering for sorting icons */}
-                {sortConfig.key === column.key ? (
-                  sortConfig.direction === "asc" ? (
-                    <NorthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{ fill: "#CCC", height: "15px" }}
-                    />
-                  ) : (
-                    <SouthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{ fill: "#CCC", height: "15px" }}
-                    />
-                  )
-                ) : (
-                  <NorthSharpIcon
-                    fontSize="small"
-                    className="inline-block"
-                    sx={{ fill: "#CCC", height: "15px" }}
-                  />
+                <span>{column.label === "Action" ? "" : column.label}</span>
+
+                {column.label !== "Action" && (
+                  <div>
+                    {sortConfig.key === column.key ? (
+                      sortConfig.direction === "asc" ? (
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{ fill: "#CCC", height: "15px" }}
+                        />
+                      ) : (
+                        <SouthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{ fill: "#CCC", height: "15px" }}
+                        />
+                      )
+                    ) : (
+                      <NorthSharpIcon
+                        fontSize="small"
+                        className="inline-block"
+                        sx={{ fill: "#CCC", height: "15px" }}
+                      />
+                    )}
+                  </div>
                 )}
               </div>
             </th>

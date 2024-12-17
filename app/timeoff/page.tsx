@@ -5,6 +5,7 @@ import Sidebar from "../sidebar/page";
 import DropdownComponent from "../reusableComponent/dropdown";
 import { timeOff, TimeOffRequestList } from "../reusableComponent/JsonData";
 import Requesttimeoff from "./requesttimeoff";
+import Reporteee from "./reporteee";
 
 function TimeOff() {
   return (
@@ -17,11 +18,13 @@ function TimeOff() {
             <DropdownComponent dropdownlist={timeOff} />
           </div>
         </div>
-        <div className="d-flex gap-3 w-100 flex-wrap">
+        {/* <div className="d-flex gap-3 w-100 flex-wrap">
           <Requesttimeoff />
-        </div>
+        </div> */}
 
-        {/* <DirectReportee/> */}
+       
+          <Reporteee />
+       
       </Sidebar>
     </div>
   );

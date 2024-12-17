@@ -8,7 +8,7 @@ import { year } from "../reusableComponent/JsonData";
 import DropdownComponent from "../reusableComponent/dropdown";
 
 function Requesttimeoff() {
-  const [statusHistory, setStatusHistory] = useState<string>("");
+  const [statusHistory, setStatusHistory] = useState<string>("Status");
 
   return (
     <div>
