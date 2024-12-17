@@ -275,6 +275,9 @@ font-weight: 400;
 .timer {
   justify-content: space-between;
 }
+
+
+
 @media (min-width:300px) and (max-width:600px) {
   .logogif{
     display: none !important;
