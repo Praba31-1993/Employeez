@@ -206,7 +206,7 @@ const MonthlyCalendar: React.FC<Props> = ({
               isActive={isCurrentDate}
               onClick={() => handleDateClick(date)}
               isHighlighted={!!valueForDate} // Highlight if data exists
-              className="relative para2 textheader"
+              className="relative para2 rounded textheader"
             >
               {format(date, "d")}
               {/* Show value on hover with inline styles */}

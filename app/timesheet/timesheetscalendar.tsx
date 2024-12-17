@@ -142,7 +142,7 @@ export default function Timesheetcalendar({
             <div className="row mt-2">
                 <div className="col-12">
                     <div className="d-flex px-3 justify-content-between">
-                        <div className="d-flex justify-content-between" style={{ width: "80%" }}>
+                        <div className="d-flex w-lg-100 justify-content-between" style={{ width: "85%" }}>
                             {weekListDatas?.map((weeklist: any, index: number) => (
                                 <div key={index}>
                                     <p className="para2 mb-1  textheader text-center" >
@@ -150,7 +150,7 @@ export default function Timesheetcalendar({
                                     </p>
                                 </div>))}
                         </div>
-                        <div style={{ width: "20%" }}>
+                        <div style={{ width: "15%" }}>
                             <p className="para2 mb-1 ms-2 text-center" style={{ color: useColors.themeRed }}>
                                 Week Total</p>
                         </div>
