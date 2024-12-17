@@ -1,19 +1,18 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import InputBase from "@mui/material/InputBase";
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
+const BootstrapInput = styled(InputBase)(({ theme, isYear }: { theme: any; isYear: boolean }) => ({
   "label + &": {
     marginTop: 0,
   },
   "& .MuiInputBase-input": {
     borderRadius: 0, // Remove border radius
     position: "relative",
-    backgroundColor: "#f4f4f4",
+    backgroundColor: isYear ? "white" : "#f4f4f4", // Conditional background color based on isYear prop
     border: "none", // Remove border
     fontSize: 16,
     padding: "10px 26px 10px 12px",
@@ -36,7 +35,12 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function DropdownComponent({ dropdownlist }: any) {
+interface DropdownComponentProps {
+  dropdownlist: any;
+  isYear?: boolean; // Optional boolean for isYear
+}
+
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ dropdownlist, isYear = false }) => {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -46,13 +50,12 @@ export default function DropdownComponent({ dropdownlist }: any) {
   return (
     <div>
       <FormControl sx={{ m: 1 }} variant="standard">
-        <InputLabel id="dynamic-dropdown-label">Select an Option</InputLabel>
         <Select
           labelId="dynamic-dropdown-label"
           id="dynamic-dropdown"
           value={selectedOption}
           onChange={handleChange}
-          input={<BootstrapInput />}
+          // input={<BootstrapInput isYear={isYear} />} s
         >
           <MenuItem value="">
             <em>None</em>
@@ -66,4 +69,6 @@ export default function DropdownComponent({ dropdownlist }: any) {
       </FormControl>
     </div>
   );
-}
+};
+
+export default DropdownComponent;

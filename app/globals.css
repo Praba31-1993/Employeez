@@ -72,6 +72,9 @@ code {
 .dark .shade{
   color: #747089 !important;
 }
+.sorttablecolor{
+  color:#707070 !important
+}
 
 .para {
   font-family: "Inter", sans-serif !important;

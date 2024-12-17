@@ -27,7 +27,7 @@ export default function RowRadioButtons({
 
   return (
     <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">Duration Type</FormLabel>
+      
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
