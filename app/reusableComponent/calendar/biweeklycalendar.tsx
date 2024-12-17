@@ -165,7 +165,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => 
             <Cell
               key={index}
               isActive={isCurrentDate}
-              className="relative para2 textheader"
+              className="relative rounded para2 textheader"
               onClick={() => {
                 setSelectedDate(date);
                 onChange(date);

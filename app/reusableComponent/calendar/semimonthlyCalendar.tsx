@@ -168,7 +168,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
             <Cell
               key={index}
               isActive={isCurrentDate}
-              className="relative para2 textheader"
+              className="relative rounded para2 textheader"
               onClick={() => {
                 setSelectedDate(date);
                 onChange(date);
