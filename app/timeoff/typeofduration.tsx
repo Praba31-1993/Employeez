@@ -36,12 +36,12 @@ function Typeofduration() {
             {dayType === "Full Day" && (
                 <div className="row justify-content-between">
                     <div className="col-6">
-                        <div className="w-75">
+                        <div className="" style={{width:"90%"}}>
                             <DatePickerComponent />
                         </div>
                     </div>
                     <div className="col-6 d-flex justify-content-end">
-                        <div className="w-75  ">
+                        <div className="  "  style={{width:"90%"}}>
                             <TimePickerComponent />
                         </div>
                     </div>
@@ -51,17 +51,17 @@ function Typeofduration() {
             {dayType === "Partial Day" && (
                 <div className="row justify-content-between">
                     <div className="col-6 mb-4">
-                        <div className="w-75">
+                        <div style={{width:"90%"}}>
                             <DatePickerComponent />
                         </div>
                     </div>
                     <div className="col-6 d-flex justify-content-end mb-4">
-                        <div className="w-75 ">
+                        <div style={{width:"90%"}}>
                             <TimePickerComponent />
                         </div>
                     </div>
                     <div className="col-6">
-                        <div className="w-75" style={{ background: "white" }}>
+                        <div style={{width:"90%",background: "white"}} >
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
@@ -94,18 +94,18 @@ function Typeofduration() {
 
             {dayType === "Multiple Days" && (
                 <div className="row justify-content-between">
-                    <div className="col-6 mb-4">
-                        <div className="w-75">
+                    <div className="col-6 mb-3">
+                        <div style={{width:"90%"}}>
                             <DatePickerComponent />
                         </div>
                     </div>
-                    <div className="col-6  d-flex justify-content-end mb-4">
-                        <div className="w-75 ">
+                    <div className="col-6  d-flex justify-content-end mb-3">
+                        <div style={{width:"90%"}}>
                             <DatePickerComponent />
                         </div>
                     </div>
                     <div className="col-6  ">
-                        <div className="w-75" style={{ background: "white" }}>
+                        <div style={{width:"90%",background: "white"}} >
                             <Select
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
@@ -137,7 +137,7 @@ function Typeofduration() {
             )}
             <div className="row px-2">
                 <textarea
-                    className="form-control mt-5"
+                    className="form-control mt-3 w-100"
                     id="exampleFormControlTextarea1"
                     rows={5}
                 ></textarea>
