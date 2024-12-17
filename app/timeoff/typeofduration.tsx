@@ -24,6 +24,7 @@ function Typeofduration() {
 
   return (
     <div>
+      <p id="demo-row-radio-buttons-group-label">Duration Type</p>
       <RowRadioButtons
         list={typeOfDays}
         selectedValue={dayType} // Pass the current selection as a prop

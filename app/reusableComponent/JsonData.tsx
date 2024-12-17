@@ -2142,3 +2142,12 @@ export const tableData = [
     reason: "Applied to HR"
   }
 ];
+
+
+export const year = [
+  { id: 1, label: "2022" },
+  { id: 2, label: "2023" },
+  { id: 3, label: "2024" },
+  { id: 3, label: "2025" },
+
+];
