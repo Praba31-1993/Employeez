@@ -3,19 +3,16 @@ import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import SouthSharpIcon from "@mui/icons-material/SouthSharp";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import ClickableChips from "../chips";
 
 interface Column {
   key: string;
   label: string;
 }
 
-interface RowData {
-  [key: string]: string | number | null; // Support for any key-value pairs in the row data
-}
-
 interface TableProps {
   columns: Column[];
-  rows: RowData[];
+  rows: any;
   dataforicons: any;
 }
 
@@ -32,7 +29,7 @@ const TableWithSort: React.FC<TableProps> = ({
     direction: "asc",
   });
 
-  const [data, setData] = useState<RowData[]>(rows);
+  const [data, setData] = useState<any>(rows);
 
   // Effect to handle sorting based on sortConfig
   useEffect(() => {
@@ -62,22 +59,24 @@ const TableWithSort: React.FC<TableProps> = ({
     setSortConfig({ key, direction: newDirection });
   };
 
+  console.log("rows", rows);
+
   return (
     <table className="table-auto w-full border border-gray-300">
       <thead className="bg-gray-200">
         <tr>
-          {columns.map((column) => (
+          {columns?.map((column) => (
             <th
-              key={column.key}
+              key={column?.key}
               className="p-2 text-center align-middle cursor-pointer heading2 textheader"
               onClick={() => handleSort(column.key)}
             >
               <div className="flex items-center justify-center gap-1">
                 <span>{column.label === "Action" ? "" : column.label}</span>
 
-                {column.label !== "Action" && (
+                {column?.label !== "Action" && (
                   <div>
-                    {sortConfig.key === column.key ? (
+                    {sortConfig?.key === column.key ? (
                       sortConfig.direction === "asc" ? (
                         <NorthSharpIcon
                           fontSize="small"
@@ -107,17 +106,21 @@ const TableWithSort: React.FC<TableProps> = ({
       </thead>
 
       <tbody className="dashboardcard">
-        {data.map((row, rowIndex) => (
+        {data?.map((row: any, rowIndex: number) => (
           <tr key={rowIndex} className="border-b border-gray-200">
-            {columns.map((column) => (
+            {columns?.map((column) => (
               <td
-                key={`${rowIndex}-${column.key}`}
-                className="p-3 text-center align-middle" // Ensure consistent padding and vertical alignment for cells
+                key={column?.key}
+                className="p-3 text-center align-middle" // Consistent padding and vertical alignment for cells
               >
                 <div className="flex justify-center items-center gap-3">
-                  <p className="mb-0">
-                    {row[column.key] !== null ? row[column.key] : ""}
-                  </p>
+                  {column.key === "status" ? (
+                    <ClickableChips label={row?.status} />
+                  ) : (
+                    <p className="mb-0">
+                      {row[column?.key] !== null ? row[column.key] : ""}
+                    </p>
+                  )}
 
                   {/* Check if the current column is the 'action' column */}
                   {column.key === "action" && (

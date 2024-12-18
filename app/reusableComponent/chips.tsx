@@ -18,7 +18,9 @@ export default function ClickableChips({ label }: chipsProps) {
         onClick={handleClick}
         sx={{
           color:
-            label === "Accepted"
+            label === "Accepted" ||
+            label === "Approved" ||
+            label === "Submitted"
               ? "#56CA00"
               : label === "Pending"
               ? "#FFB400"
@@ -26,7 +28,9 @@ export default function ClickableChips({ label }: chipsProps) {
               ? "#FE4343"
               : "#000000", // Default color
           background:
-            label === "Accepted"
+            label === "Accepted" ||
+            label === "Approved" ||
+            label === "Submitted"
               ? "#E4F6D6"
               : label === "Pending"
               ? "#FFF3D6"
