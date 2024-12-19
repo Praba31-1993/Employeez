@@ -8,14 +8,14 @@ interface RowData {
   status: string;
 }
 
-const Timeoffstatus = ({statusHistory}:any) => {
+const Timeoffstatus = ({ statusHistory }: any) => {
   const columns = [
-    { key: "date_from", label: "Date From" },
-    { key: "date_to", label: "Date To" },
-    { key: "time_off_type", label: "Time off Type" },
-    { key: "status", label: "Status" },
-    { key: "reason", label: "Reason" },
-    { key: "action", label: "Action" },
+    { id: 1, key: "date_from", label: "Date From", checked: true },
+    { id: 2, key: "date_to", label: "Date To", checked: true },
+    { id: 3, key: "time_off_type", label: "Time off Type", checked: true },
+    { id: 4, key: "status", label: "Status", checked: true },
+    { id: 5, key: "reason", label: "Reason", checked: true },
+    { id: 6, key: "action", label: "Action", checked: true },
   ];
 
   const rows = [
@@ -63,7 +63,11 @@ const Timeoffstatus = ({statusHistory}:any) => {
 
   return (
     <>
-      <TableWithSort columns={columns} rows={rows} dataforicons={statusHistory}/>
+      <TableWithSort
+        columns={columns}
+        rows={rows}
+        dataforicons={statusHistory}
+      />
     </>
   );
 };
