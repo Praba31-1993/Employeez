@@ -62,13 +62,13 @@ const TableWithSort: React.FC<TableProps> = ({
   console.log("rows", rows);
 
   return (
-    <table className="table-auto w-full border border-gray-300">
-      <thead className="bg-gray-200">
+    <table className="">
+      <thead className="" style={{backgroundColor:"#F6F7FB"}}>
         <tr>
           {columns?.map((column) => (
             <th
               key={column?.key}
-              className="p-2 text-center align-middle cursor-pointer heading2 textheader"
+              className="py-2 text-center align-middle cursor-pointer para textheader"
               onClick={() => handleSort(column.key)}
             >
               <div className="flex items-center justify-center gap-1">

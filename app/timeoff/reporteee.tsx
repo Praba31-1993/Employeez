@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import BreadcrumbsComponent from "../reusableComponent/breadcrumbs";
 import DropdownComponent from "../reusableComponent/dropdown";

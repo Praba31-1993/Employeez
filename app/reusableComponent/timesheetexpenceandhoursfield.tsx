@@ -29,7 +29,7 @@ export function TimesheetExpenceAndHoursField({
 
     return (
         <>
-          
+
 
             <div
                 className={`timesheetlist ${text === "Holiday" ? "holiday" : ""
@@ -40,9 +40,11 @@ export function TimesheetExpenceAndHoursField({
                 </div>
                 {weekListDataList?.length > 0 ? (
                     <div className="d-flex align-items-end px-3 mt-2 inputfield">
-                        {weekListDataList?.map((weeklist: any, index: number) => (
-                            <div className="pe-1 inputdats position-relative" key={index}>
-
+                        {weekListDataList.map((weeklist: any, index: number) => (
+                            <div
+                                className="pe-1 inputdats position-relative"
+                                key={`${weeklist.date}-${index}`}
+                            >
                                 <div className="input-icon-wrapper">
                                     <input
                                         type="number"
@@ -54,6 +56,7 @@ export function TimesheetExpenceAndHoursField({
                                 </div>
                             </div>
                         ))}
+
                         <div className="pe-1 inputdats ms-2">
                             {/* <p className="para2 mb-1 text-center" style={{ color: "red" }}>
               Week Total
