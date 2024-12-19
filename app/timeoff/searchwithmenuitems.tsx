@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./timeoff.css";
 
 import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
@@ -11,20 +11,27 @@ import DropdownComponent from "../reusableComponent/dropdown";
 import { year } from "../reusableComponent/JsonData";
 import search from "@/public/assets/img/search.svg";
 import ImageComponent from "../reusableComponent/image";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import TableWithSort from "../reusableComponent/table/tablewithSort";
+import { Checkbox } from "@mui/material";
+import { relative } from "path";
 function Searchwithmenuitems() {
+  const [ShowColumns, setShowColumns] = useState<boolean>(false);
+  const [tableColumns, setTableColumns] = useState<any>();
+  const [tableRows, setTableRows] = useState<any>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   const columns = [
-    { key: "employeeID", label: "Employee ID" },
-    { key: "employeename", label: "Employee Name" },
-    { key: "date_from", label: "Date From" },
-    { key: "date_to", label: "Date To" },
-    { key: "time_off_type", label: "Time off Type" },
-    { key: "status", label: "Status" },
-    { key: "reason", label: "Reason" },
-    { key: "action", label: "Action" },
+    { id: 1, key: "employeeID", label: "Employee ID", checked: true },
+    { id: 2, key: "employeename", label: "Employee Name", checked: false },
+    { id: 3, key: "date_from", label: "Date From", checked: true },
+    { id: 4, key: "date_to", label: "Date To", checked: true },
+    { id: 5, key: "time_off_type", label: "Time off Type", checked: false },
+    { id: 6, key: "status", label: "Status", checked: true },
+    { id: 7, key: "reason", label: "Reason", checked: true },
+    { id: 8, key: "action", label: "Action", checked: true },
   ];
-  
+
   const rows = [
     {
       employeeID: "SR389",
@@ -227,17 +234,55 @@ function Searchwithmenuitems() {
       action: "",
     },
   ];
-  
+
+  const handleChecked = (id: any) => {
+    const updatedColumns = tableColumns.map((columnsList: any) => {
+      if (columnsList.id === id) {
+        return {
+          ...columnsList,
+          checked: !columnsList.checked,
+        };
+      }
+      return columnsList;
+    });
+    setTableColumns(updatedColumns);
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+  };
+
+  useEffect(() => {
+    setTableColumns(columns);
+    setTableRows(rows);
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      setTableRows(rows);
+    } else {
+      const filteredRows = rows.filter((row: any) =>
+        Object.values(row).join(" ").toLowerCase().includes(searchQuery)
+      );
+      setTableRows(filteredRows);
+    }
+  }, [searchQuery]);
+
   return (
     <>
       <div className="container-fluid">
         <div className="row align-items-center">
           <div className="col-12 col-md-9">
             <ul className="d-flex flex-wrap gap-2 heading2 textheader cursorPointer">
-              <li className="d-flex align-items-center">
+              <li
+                className="d-flex align-items-center"
+                onClick={() => setShowColumns((prev) => !prev)}
+              >
                 <CalendarViewWeekIcon />
                 <span className="mx-2">Column</span>
               </li>
+
               <li className="d-flex align-items-center">
                 <FilterListIcon />
                 <span className="mx-2">Filters</span>
@@ -264,15 +309,60 @@ function Searchwithmenuitems() {
           <div className="col-12 col-md-3 mt-3 mt-md-0">
             <div className="d-flex gap-1 searchbar p-2 align-items-center">
               <div className="mt-1">
-                <SearchIcon/>
+                <SearchIcon />
               </div>
-              <input type="text" placeholder="Search" className="p-2 w-100" />
+              <input
+                type="text"
+                placeholder="Search"
+                className="p-2 w-100"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
             </div>
           </div>
         </div>
+
+        <div className="">
+          {ShowColumns && (
+            <div
+              className="dashboardcard"
+              style={{
+                padding: "10px",
+                position: "absolute",
+                top: "17em",
+                width: "30%",
+              }}
+            >
+              <div
+                className="d-flex gap-1  p-2 align-items-center"
+                style={{ border: "1px solid blue" }}
+              >
+                <div className="mt-1">
+                  <SearchIcon />
+                </div>
+                <input type="text" placeholder="Search" className="p-2 w-100" />
+              </div>
+
+              {tableColumns?.map((columnList: any) => (
+                <div className="checkboxwithList">
+                  <Checkbox
+                    checked={columnList?.checked}
+                    onChange={() => handleChecked(columnList?.id)}
+                  />{" "}
+                  <span>{columnList?.key}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div className="row mt-3">
           <div className="col-12">
-          <TableWithSort columns={columns} rows={rows} dataforicons={false}/>
+            <TableWithSort
+              columns={tableColumns}
+              rows={tableRows}
+              dataforicons={false}
+            />
           </div>
         </div>
       </div>
