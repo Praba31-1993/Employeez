@@ -71,11 +71,10 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
               className="py-2 text-center align-middle cursor-pointer para textheader"
               onClick={() => handleSort(column.key)}
             >
-              <div className="flex items-center justify-center gap-1">
-                <span>{column.label === "Action" ? "" : column.label}</span>
+                <span>{column.label === "Action" ? "" : column.label}
 
                 {column.label !== "Action" && (
-                  <div>
+                  <span>
                     {sortConfig.key === column.key ? (
                       sortConfig.direction === "asc" ? (
                         <NorthSharpIcon
@@ -97,9 +96,11 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
                         sx={{ fill: "#CCC", height: "15px" }}
                       />
                     )}
-                  </div>
+                  </span>
                 )}
-              </div>
+                </span>
+
+               
             </th>
           ))}
         </tr>

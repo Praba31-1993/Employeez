@@ -208,7 +208,10 @@ body {
     overflow-y: auto;
     display: flex;
   }
-
+  .showpopupactive {
+    transform: translateZ(0);
+  }
+  
 @media (max-width: "600px") {
   .theme {
     width: 50vw !important;
@@ -251,6 +254,7 @@ font-weight: 500;
 .logo img {
   width: 35%;
 }
+
 
 .logincard {
 width: 60%;
