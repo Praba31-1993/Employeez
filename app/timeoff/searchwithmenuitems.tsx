@@ -269,7 +269,6 @@ function Searchwithmenuitems() {
     setSearchList(columns);
   }, []);
 
-  console.log("searchQuery", searchQuery);
 
   return (
     <>
