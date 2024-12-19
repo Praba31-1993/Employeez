@@ -18,6 +18,7 @@ import { relative } from "path";
 function Searchwithmenuitems() {
   const [ShowColumns, setShowColumns] = useState<boolean>(false);
   const [tableColumns, setTableColumns] = useState<any>();
+  const [searchList, setSearchList] = useState<any>();
   const [tableRows, setTableRows] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -246,32 +247,36 @@ function Searchwithmenuitems() {
       return columnsList;
     });
     setTableColumns(updatedColumns);
+    setSearchList(updatedColumns)
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
+    console.log("searchList", searchQuery, "searchDAta", searchList);
+
+    const filteredData = searchList.filter(
+      (column: any) => column?.key === query
+    );
+
+    console.log("filteredData", filteredData);
+    setSearchList(filteredData);
   };
 
   useEffect(() => {
     setTableColumns(columns);
     setTableRows(rows);
+    setSearchList(columns);
   }, []);
 
-  useEffect(() => {
-    if (searchQuery === "") {
-      setTableRows(rows);
-    } else {
-      const filteredRows = rows.filter((row: any) =>
-        Object.values(row).join(" ").toLowerCase().includes(searchQuery)
-      );
-      setTableRows(filteredRows);
-    }
-  }, [searchQuery]);
+  console.log("searchQuery", searchQuery);
 
   return (
     <>
-      <div className="container-fluid">
+      <div
+        className="container-fluid"
+        // onClick={() => setShowColumns(!ShowColumns)}
+      >
         <div className="row align-items-center">
           <div className="col-12 col-md-9">
             <ul className="d-flex flex-wrap gap-2 heading2 textheader cursorPointer">
@@ -331,6 +336,7 @@ function Searchwithmenuitems() {
                 position: "absolute",
                 top: "17em",
                 width: "30%",
+                zIndex: 1,
               }}
             >
               <div
@@ -340,15 +346,21 @@ function Searchwithmenuitems() {
                 <div className="mt-1">
                   <SearchIcon />
                 </div>
-                <input type="text" placeholder="Search" className="p-2 w-100" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="p-2 w-100"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                />
               </div>
 
-              {tableColumns?.map((columnList: any) => (
-                <div className="checkboxwithList">
+              {searchList?.map((columnList: any) => (
+                <div className="checkboxwithList" key={columnList?.id}>
                   <Checkbox
                     checked={columnList?.checked}
                     onChange={() => handleChecked(columnList?.id)}
-                  />{" "}
+                  />
                   <span>{columnList?.key}</span>
                 </div>
               ))}
