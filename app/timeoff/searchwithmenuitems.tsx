@@ -12,7 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TableWithSort from "../reusableComponent/table/tablewithSort";
 import { Checkbox } from "@mui/material";
 import { rows, columns } from "../reusableComponent/JsonData";
-import { SearchLogic } from "../reusableComponent/commonlogic";
+import { SearchLogic, handleCSVExport } from "../reusableComponent/commonlogic";
 
 function Searchwithmenuitems() {
   const [ShowColumns, setShowColumns] = useState<boolean>(false);
@@ -23,6 +23,7 @@ function Searchwithmenuitems() {
   const [search, setSearch] = useState<string>("");
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
+  const headers = rows.length > 0 ? Object.keys(rows[0]) : [];
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -44,12 +45,12 @@ function Searchwithmenuitems() {
         columnRef.current &&
         !columnRef.current.contains(event.target as Node)
       ) {
-        setShowColumns(false); // Close the menu if clicking outside
+        setShowColumns(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside); // Listen for clicks
-    return () => document.removeEventListener("mousedown", handleClickOutside); // Cleanup the listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -144,7 +145,10 @@ function Searchwithmenuitems() {
                 <FilterListIcon />
                 <span className="mx-2">Filters</span>
               </li>
-              <li className="d-flex align-items-center">
+              <li
+                className="d-flex align-items-center"
+                onClick={() => handleCSVExport(headers, rows)}
+              >
                 <SaveAltIcon />
                 <span className="mx-2">Export</span>
               </li>
