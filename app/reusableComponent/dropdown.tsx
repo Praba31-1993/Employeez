@@ -4,10 +4,12 @@ import * as React from "react";
 interface DropdownComponentProps {
   dropdownlist: Array<{ id: string | number; label: string }>; // Strongly typed dropdownlist
   isYear?: boolean; // Optional boolean for isYear
+  removepadding?:boolean;
 }
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
   dropdownlist,
   isYear = false,
+  removepadding,
 }) => {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
 
@@ -18,7 +20,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   return (
     <div>
       <select
-        className="textheader PARA"
+        className="textheader para"
         id="dynamic-dropdown"
         value={selectedOption}
         onChange={handleChange}
@@ -26,7 +28,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
           borderRadius: isYear ? "0" : "4px",
           backgroundColor: isYear ? "" : "#f4f4f4",
           border: "1px solid #ccc",
-          padding: "10px",
+          padding: removepadding? '0 px' : "10px",
           fontSize: "16px",
         }}
       >
