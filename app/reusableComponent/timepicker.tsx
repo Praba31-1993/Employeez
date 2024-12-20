@@ -5,7 +5,7 @@ export default function TimePickerComponent() {
     <div>
       <input
         type="time"
-        className="form-control p-3"
+        className="form-control p-3 textheader"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
         placeholder="Enter email"
