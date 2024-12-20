@@ -364,3 +364,11 @@ select{
 }
 
 
+.sorttable.table > :not(caption) > * > *{
+  background-color: transparent !important;
+}
+.form-control:focus {
+  border-color: transparent !important;
+  outline: 0;
+  box-shadow: none !important;
+}

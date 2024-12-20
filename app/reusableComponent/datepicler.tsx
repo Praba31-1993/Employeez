@@ -5,7 +5,7 @@ export default function DatePickerComponent() {
     <div>
       <input
         type="date"
-        className="form-control p-3 "
+        className="form-control p-3 textheader"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
         placeholder="Enter email"
