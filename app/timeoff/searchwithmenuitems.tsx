@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./timeoff.css";
 
 import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
@@ -21,6 +21,8 @@ function Searchwithmenuitems() {
   const [searchList, setSearchList] = useState<any>();
   const [tableRows, setTableRows] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const columnRef = useRef<HTMLDivElement>(null); // Ref for the column container
+
 
   const columns = [
     { id: 1, key: "employeeID", label: "Employee ID", checked: true },
@@ -247,21 +249,24 @@ function Searchwithmenuitems() {
       return columnsList;
     });
     setTableColumns(updatedColumns);
-    setSearchList(updatedColumns)
+    setSearchList(updatedColumns);
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
-    setSearchQuery(query);
-    console.log("searchList", searchQuery, "searchDAta", searchList);
-
-    const filteredData = searchList.filter(
-      (column: any) => column?.key === query
-    );
-
-    console.log("filteredData", filteredData);
-    setSearchList(filteredData);
+    
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (columnRef.current && !columnRef.current.contains(event.target as Node)) {
+        setShowColumns(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     setTableColumns(columns);
@@ -269,16 +274,75 @@ function Searchwithmenuitems() {
     setSearchList(columns);
   }, []);
 
-
   return (
     <>
       <div
         className="container-fluid"
         // onClick={() => setShowColumns(!ShowColumns)}
       >
-        <div className="row align-items-center">
-          <div className="col-12 col-md-9">
-            <ul className="d-flex flex-wrap gap-2 heading2 textheader cursorPointer">
+        <div className="">
+          {ShowColumns && (
+            <div
+              className="dashboardcard"
+              style={{
+                padding: "10px",
+                position: "absolute",
+                top: "17em",
+                width: "30%",
+                zIndex: 1,
+              }}
+              ref={columnRef}
+            >
+              <div
+                className="d-flex gap-1  p-2 align-items-center"
+                style={{ border: "1px solid blue" }}
+              >
+                <div className="mt-1">
+                  <SearchIcon />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="p-2 w-100"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                  
+                />
+              </div>
+
+              {searchList?.map((columnList: any) => (
+                <div className="checkboxwithList" key={columnList?.id}>
+                  <Checkbox
+                    checked={columnList?.checked}
+                    onChange={() => handleChecked(columnList?.id)}
+                  />
+                  <span>{columnList?.key}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="row justify-content-end">
+          <div className="col-12 col-md-3 ">
+            <div className="d-flex gap-1 searchbar ps-2 align-items-center">
+              <div className="mt-1">
+                <SearchIcon />
+              </div>
+              <input
+                type="text"
+                placeholder="Search"
+                className="p-2 w-100"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row justify-content-between">
+          <div className="col-12 col-md-6">
+            <ul className="d-flex flex-wrap gap-2 heading2 textheader cursorPointer p-0">
               <li
                 className="d-flex align-items-center"
                 onClick={() => setShowColumns((prev) => !prev)}
@@ -297,77 +361,19 @@ function Searchwithmenuitems() {
               </li>
               <li className="d-flex align-items-center">
                 <HistoryIcon />
-                <div className="ms-2" style={{ marginTop: "-5px" }}>
+                <div className="ms-2">
                   <DropdownComponent dropdownlist={year} />
                 </div>
               </li>
               <li className="d-flex align-items-center">
                 <CalendarMonthIcon />
-                <div className="ms-2" style={{ marginTop: "-5px" }}>
+                <div className="ms-2">
                   <DropdownComponent dropdownlist={year} />
                 </div>
               </li>
             </ul>
           </div>
 
-          <div className="col-12 col-md-3 mt-3 mt-md-0">
-            <div className="d-flex gap-1 searchbar p-2 align-items-center">
-              <div className="mt-1">
-                <SearchIcon />
-              </div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="p-2 w-100"
-                value={searchQuery}
-                onChange={handleSearch}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="">
-          {ShowColumns && (
-            <div
-              className="dashboardcard"
-              style={{
-                padding: "10px",
-                position: "absolute",
-                top: "17em",
-                width: "30%",
-                zIndex: 1,
-              }}
-            >
-              <div
-                className="d-flex gap-1  p-2 align-items-center"
-                style={{ border: "1px solid blue" }}
-              >
-                <div className="mt-1">
-                  <SearchIcon />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="p-2 w-100"
-                  value={searchQuery}
-                  onChange={handleSearch}
-                />
-              </div>
-
-              {searchList?.map((columnList: any) => (
-                <div className="checkboxwithList" key={columnList?.id}>
-                  <Checkbox
-                    checked={columnList?.checked}
-                    onChange={() => handleChecked(columnList?.id)}
-                  />
-                  <span>{columnList?.key}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="row mt-3">
           <div className="col-12">
             <TableWithSort
               columns={tableColumns}

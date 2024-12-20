@@ -17,44 +17,43 @@ interface TableProps {
   dataforicons: any;
 }
 
-const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) => {
+const TableWithSort: React.FC<TableProps> = ({
+  columns,
+  rows,
+  dataforicons,
+}) => {
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
   }>({
-    key: "", // Set default sorting by the first column
+    key: "",
     direction: "asc",
   });
 
   const [data, setData] = useState<any[]>(rows || []);
 
+  const visibleColumns = columns?.filter((column) => column.checked);
 
-  // **Filter only checked columns**
-  const visibleColumns = columns?.filter(column => column.checked);
-
-  // Effect to handle sorting based on sortConfig
   useEffect(() => {
-    if (!Array.isArray(rows)) return; // Exit if rows is not an array
+    if (!Array.isArray(rows)) return;
     const sortedData = [...rows]?.sort((a, b) => {
       const aValue = a[sortConfig.key] ?? "";
       const bValue = b[sortConfig.key] ?? "";
-  
+
       if (typeof aValue === "string" && typeof bValue === "string") {
         return sortConfig.direction === "asc"
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
       }
-  
+
       if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
       if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
       return 0;
     });
-  
+
     setData(sortedData);
   }, [sortConfig, rows]);
-  
 
-  // Handle sorting when a column header is clicked
   const handleSort = (key: string) => {
     const newDirection =
       sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
@@ -62,16 +61,17 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
   };
 
   return (
-    <table className="">
-      <thead className="" style={{backgroundColor:"#F6F7FB"}}>
+    <table className="w-100" style={{overflowX:'auto'}}>
+      <thead className="" style={{ backgroundColor: "#F6F7FB" }}>
         <tr>
           {visibleColumns?.map((column) => (
             <th
               key={column?.key}
-              className="py-2 text-center align-middle cursor-pointer para textheader"
+              className="cursor-pointer para textheader py-3 px-4"
               onClick={() => handleSort(column.key)}
             >
-                <span>{column.label === "Action" ? "" : column.label}
+              <span>
+                {column.label === "Action" ? "" : column.label}
 
                 {column.label !== "Action" && (
                   <span>
@@ -98,9 +98,7 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
                     )}
                   </span>
                 )}
-                </span>
-
-               
+              </span>
             </th>
           ))}
         </tr>
@@ -110,11 +108,8 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
         {data?.map((row, rowIndex) => (
           <tr key={rowIndex} className="border-b border-gray-200">
             {visibleColumns?.map((column) => (
-              <td
-                key={column.key}
-                className="p-3 text-center align-middle"
-              >
-                <div className="flex justify-center items-center gap-3">
+              <td key={column.key} className="py-3 px-4">
+                <div className="flex">
                   {column.key === "status" ? (
                     <ClickableChips label={row[column.key]} />
                   ) : (
