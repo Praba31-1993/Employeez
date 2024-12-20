@@ -62,20 +62,19 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
   };
 
   return (
-    <table className="table-auto w-full border border-gray-300">
-      <thead className="bg-gray-200">
+    <table className="">
+      <thead className="" style={{backgroundColor:"#F6F7FB"}}>
         <tr>
           {visibleColumns?.map((column) => (
             <th
-              key={column.key}
-              className="p-2 text-center align-middle cursor-pointer heading2 textheader"
-              onClick={() => handleSort(column?.key)}
+              key={column?.key}
+              className="py-2 text-center align-middle cursor-pointer para textheader"
+              onClick={() => handleSort(column.key)}
             >
-              <div className="flex items-center justify-center gap-1">
-                <span>{column.label === "Action" ? "" : column.label}</span>
+                <span>{column.label === "Action" ? "" : column.label}
 
                 {column.label !== "Action" && (
-                  <div>
+                  <span>
                     {sortConfig.key === column.key ? (
                       sortConfig.direction === "asc" ? (
                         <NorthSharpIcon
@@ -97,9 +96,11 @@ const TableWithSort: React.FC<TableProps> = ({ columns, rows, dataforicons }) =>
                         sx={{ fill: "#CCC", height: "15px" }}
                       />
                     )}
-                  </div>
+                  </span>
                 )}
-              </div>
+                </span>
+
+               
             </th>
           ))}
         </tr>
