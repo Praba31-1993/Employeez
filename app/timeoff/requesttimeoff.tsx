@@ -38,7 +38,7 @@ export default function Requesttimeoff() {
                     <Typeofduration />
                 </div>
                 <div className=" col-12 col-md-7  ">
-                    <div className="dashboardcard p-3" style={{overflowX:"auto"}}>
+                    <div className="dashboardcard p-3">
                     <div className="d-flex justify-content-between">
                         <p>Time off Status (Self)</p>
 
