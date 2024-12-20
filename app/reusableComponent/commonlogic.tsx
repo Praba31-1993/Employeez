@@ -1,10 +1,8 @@
-interface SearchItemProps {
-    id: number;
-    name: string; // Use lowercase "string" instead of "String"
-  }
-  
-  export const SearchLogic = (arr: SearchItemProps[], search: string) => {
-    const filteredResults = arr.filter((item) => item.name.includes(search));
-    return filteredResults
-  };
-  
+export const SearchLogic = (arr: any[], search: string) => {
+  const filteredRows = arr.filter((row: any) =>
+    Object.values(row).some((value) =>
+      String(value).toLowerCase().includes(search.toLowerCase())
+    )
+  );
+  return filteredRows;
+};
