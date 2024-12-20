@@ -3,16 +3,28 @@
   height: fit-content;
 }
 
-.searchbar{
-     background: white;
-     border-radius: 10px !important;
+.searchbar {
+  background: white;
+  border-radius: 10px !important;
 }
-.searchbar input{
-     border: 0 !important;
-     background: transparent;
-     padding-left: 40px; /* Space for the icon */
-     width: 100%;
-     height: 40px; /* Adjust height if necessary */
-     outline: none;
-     font-size: 16px; /* Adjust font size if necessary */
+.searchbar input {
+  border: 0 !important;
+  background: transparent;
+  padding-left: 40px; /* Space for the icon */
+  width: 100%;
+  height: 40px; /* Adjust height if necessary */
+  outline: none;
+  font-size: 16px; /* Adjust font size if necessary */
+}
+
+.columnListCard {
+  padding: 10px;
+  position: absolute;
+  top: 19em;
+  width: 15%;
+  z-index: 1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  overflow-y: auto;
+  height: 20%;
+  
 }
