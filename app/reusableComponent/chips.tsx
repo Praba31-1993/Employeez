@@ -21,21 +21,21 @@ export default function ClickableChips({ label }: chipsProps) {
             label === "Accepted" ||
             label === "Approved" ||
             label === "Submitted"
-              ? "#56CA00"
+              ? "#56CA00 !important"
               : label === "Pending"
-              ? "#FFB400"
+              ? "#FFB400 !important"
               : label === "Rejected"
-              ? "#FE4343"
+              ? "#FE4343 !important"
               : "#000000", // Default color
           background:
             label === "Accepted" ||
             label === "Approved" ||
             label === "Submitted"
-              ? "#E4F6D6"
+              ? "#E4F6D6 !important"
               : label === "Pending"
-              ? "#FFF3D6"
+              ? "#FFF3D6 !important"
               : label === "Rejected"
-              ? "#FFE2E3"
+              ? "#FFE2E3 !important"
               : "#000000", // Default color
         }}
       />
