@@ -12,7 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TableWithSort from "../reusableComponent/table/tablewithSort";
 import { Checkbox } from "@mui/material";
 import { rows, columns } from "../reusableComponent/JsonData";
-import { SearchLogic } from "../reusableComponent/commonlogic";
+import { handleCSVExport, SearchLogic,handlePrint } from "../reusableComponent/commonlogic";
 
 function Searchwithmenuitems() {
   const [ShowColumns, setShowColumns] = useState<boolean>(false);
@@ -23,6 +23,7 @@ function Searchwithmenuitems() {
   const [search, setSearch] = useState<string>("");
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
+  const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -77,41 +78,6 @@ function Searchwithmenuitems() {
   return (
     <>
       <div className="container-fluid">
-        <div className="">
-          {ShowColumns && (
-            <div
-              className="dashboardcard columnListCard cursorPointer"
-              ref={columnRef}
-            >
-              <div
-                className="d-flex gap-1  p-2 align-items-center"
-                style={{ border: "1px solid blue" }}
-              >
-                <div className="mt-1">
-                  <SearchIcon />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="p-2 w-100"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-
-              {searchList?.map((columnList: any) => (
-                <div className="checkboxwithList" key={columnList?.id}>
-                  <Checkbox
-                    checked={columnList?.checked}
-                    onChange={() => handleChecked(columnList?.id)}
-                  />
-                  <span>{columnList?.key}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
         <div className="row justify-content-between">
           <div className="col-12 ">
             <div className="d-flex  justify-content-between mt-3 mb-2">
@@ -121,7 +87,49 @@ function Searchwithmenuitems() {
                   onClick={() => setShowColumns((prev) => !prev)}
                 >
                   <CalendarViewWeekIcon />
-                  <span className="mx-2 ">Column</span>
+                  {/* <span className="mx-2 ">Column</span> */}
+                  <div className="dropdown mx-2">
+                    <div
+                      role="div"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                    >
+                      Column
+                    </div>
+
+                    <div
+                      className=" cursorPointer dropdown-menu px-1 "
+                      //   ref={columnRef}
+                      aria-labelledby="dropdownMenuLink"
+                      style={{ width: "max-content" }}
+                    >
+                      <div
+                        className="d-flex gap-1  p-2 align-items-center"
+                        style={{ border: "1px solid blue" }}
+                      >
+                        <div className="mt-1">
+                          <SearchIcon />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Search"
+                          className="p-2 w-100"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                      </div>
+
+                      {searchList?.map((columnList: any) => (
+                        <div className="checkboxwithList" key={columnList?.id}>
+                          <Checkbox
+                            checked={columnList?.checked}
+                            onChange={() => handleChecked(columnList?.id)}
+                          />
+                          <span>{columnList?.key}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </li>
 
                 <li className="d-flex align-items-center">
@@ -130,7 +138,28 @@ function Searchwithmenuitems() {
                 </li>
                 <li className="d-flex align-items-center">
                   <SaveAltIcon />
-                  <span className="mx-2">Export</span>
+                  <div className="dropdown mx-2">
+                    <div
+                      role="div"
+                      id="dropdownMenuLink"
+                      data-bs-toggle="dropdown"
+                    >
+                      Export
+                    </div>
+
+                    <div
+                      className="dropdown-menu px-1"
+                      aria-labelledby="dropdownMenuLink"
+                      
+                    >
+                      <p className="m-0"
+                      onClick={() => handleCSVExport(headers, rows)}
+                      >CSV File</p>
+                      {/* <p
+                      onClick={() => handlePrint()}
+                      >Print</p> */}
+                    </div>
+                  </div>
                 </li>
                 <li className="d-flex align-items-center">
                   <HistoryIcon />
@@ -168,7 +197,7 @@ function Searchwithmenuitems() {
             </div>
           </div>
 
-          <div className="col-12">
+          <div className="col-12" id="printSection">
             <TableWithSort
               columns={tableColumns}
               rows={tableRows}
