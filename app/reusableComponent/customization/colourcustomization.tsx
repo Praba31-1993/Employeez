@@ -2,11 +2,24 @@ import ColorLensOutlinedIcon from '@mui/icons-material/ColorLensOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import { setColor } from '@/app/redux/slices/colorSlice';
 import { RootState } from "../../redux/store";
-import Image from "next/image";
+import { useEffect } from "react";
 
 export function Colorcustomization() {
     const selectedColor = useSelector((state: RootState) => state.color.color);
     const dispatch = useDispatch();
+
+    // Check localStorage for saved color and initialize state
+    useEffect(() => {
+        const savedColor = localStorage.getItem("themeColor");
+        if (savedColor) {
+            dispatch(setColor({ color: savedColor })); // Load saved color from localStorage
+        }
+    }, [dispatch]);
+
+    // Update localStorage whenever the color changes
+    useEffect(() => {
+        localStorage.setItem("themeColor", selectedColor);
+    }, [selectedColor]);
 
     const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const color = event.target.value;

@@ -127,9 +127,9 @@ export default function forgetpassword() {
                 {/* Verify button only shown when OTP is not visible */}
                 {!otpVisible && (
                   <button
-                    className="mutlicolourbtn mt-3 py-1 text-center"
+                    className="mutlicolourbtn mt-3 py-1 text-center" 
                     onClick={handleVerifyClick} // Trigger the state change on click
-                    style={{ cursor: "pointer", width: "100%" }}
+                    style={{ cursor: "pointer", width: "100%" , background: useColors.themeRed}}
                   >
                     Continue
                   </button>
@@ -138,7 +138,7 @@ export default function forgetpassword() {
                 {otpVisible && (
                   <div
                     className="mutlicolourbtn mt-3 py-1 text-center"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", background: useColors.themeRed }}
                     onClick={handleClick}
                   >
                     Verify OTP

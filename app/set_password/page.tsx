@@ -101,7 +101,7 @@ export default function Setpassword() {
                   className="mutlicolourbtn mt-2 py-1 text-center"
                   onClick={handleSubmit}
                   disabled={true}
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", background: useColors.themeRed }}
                 >
                   Reset password
                 </button>

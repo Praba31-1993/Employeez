@@ -63,7 +63,7 @@ export default function FirstTimepassword() {
                   type="text"
                   placeholder="Conform password"
                 />
-                <div className="orangebtn mt-3 py-1 text-center">
+                <div className="orangebtn mt-3 py-1 text-center"  style={{ cursor: "pointer", width: "100%" , background: useColors.themeRed}}>
                   Set password
                 </div>
               </div>
