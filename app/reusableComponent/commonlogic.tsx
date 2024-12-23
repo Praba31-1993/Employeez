@@ -27,3 +27,27 @@ export const handleCSVExport = (headers:any, data:any) => {
     document.body.removeChild(link);
   }
 };
+
+// Print Logic
+export const handlePrint = () => {
+  const printSection = document.getElementById("printSection");
+
+  if (printSection) {
+    // Open a new window for printing
+    const printWindow = window.open("", "", "height=500,width=800");
+
+    if (printWindow) {
+      // Write content to the new window
+      printWindow.document.write(
+        "<html><head><title>Print</title></head><body>"
+      );
+      printWindow.document.write(printSection.innerHTML); // Use the content inside the div
+      printWindow.document.write("</body></html>");
+
+      // Close the document and trigger the print dialog
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+    }
+  }
+};
