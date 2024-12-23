@@ -2354,6 +2354,26 @@ export const rows = [
     reason: "Back Pain",
     action: "",
   },
+  {
+    employeeID: "SR407",
+    employeename: "Karthik",
+    date_from: "2023-12-02",
+    date_to: "2023-12-06",
+    time_off_type: "Annual Leave",
+    status: "Approved",
+    reason: "Vacation",
+    action: "",
+  },
+  {
+    employeeID: "SR408",
+    employeename: "Harini",
+    date_from: "2024-12-09",
+    date_to: "2024-12-11",
+    time_off_type: "Sick Leave",
+    status: "Approved",
+    reason: "Back Pain",
+    action: "",
+  },
 ];
 
 
