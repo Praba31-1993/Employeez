@@ -4,6 +4,7 @@ import SouthSharpIcon from "@mui/icons-material/SouthSharp";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ClickableChips from "../chips";
+import PaginationComponent from "../paginationcomponent";
 
 interface Column {
   key: string;

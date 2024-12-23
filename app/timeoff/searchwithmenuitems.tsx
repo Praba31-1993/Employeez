@@ -12,7 +12,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import TableWithSort from "../reusableComponent/table/tablewithSort";
 import { Checkbox } from "@mui/material";
 import { rows, columns } from "../reusableComponent/JsonData";
-import { handleCSVExport, SearchLogic,handlePrint } from "../reusableComponent/commonlogic";
+import {
+  handleCSVExport,
+  SearchLogic,
+  handlePrint,
+} from "../reusableComponent/commonlogic";
+import PaginationComponent from "../reusableComponent/paginationcomponent";
 
 function Searchwithmenuitems() {
   const [ShowColumns, setShowColumns] = useState<boolean>(false);
@@ -23,7 +28,10 @@ function Searchwithmenuitems() {
   const [search, setSearch] = useState<string>("");
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
+
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -74,6 +82,20 @@ function Searchwithmenuitems() {
       setSearchList(columns);
     }
   }, [searchQuery, columns]);
+
+   // Calculate total pages
+   const totalPages = Math.ceil(tableRows.length / itemsPerPage);
+
+   // Get items for the current page
+   const currentItems = tableRows.slice(
+     (currentPage - 1) * itemsPerPage,
+     currentPage * itemsPerPage
+   );
+ 
+   // Handle page change
+   const goToPage = (page: number) => {
+     setCurrentPage(page);
+   };
 
   return (
     <>
@@ -150,11 +172,13 @@ function Searchwithmenuitems() {
                     <div
                       className="dropdown-menu px-1"
                       aria-labelledby="dropdownMenuLink"
-                      
                     >
-                      <p className="m-0"
-                      onClick={() => handleCSVExport(headers, rows)}
-                      >CSV File</p>
+                      <p
+                        className="m-0"
+                        onClick={() => handleCSVExport(headers, rows)}
+                      >
+                        CSV File
+                      </p>
                       {/* <p
                       onClick={() => handlePrint()}
                       >Print</p> */}
@@ -200,9 +224,17 @@ function Searchwithmenuitems() {
           <div className="col-12" id="printSection">
             <TableWithSort
               columns={tableColumns}
-              rows={tableRows}
+              rows={currentItems}
               dataforicons={false}
             />
+            <div className="d-flex justify-content-end my-3">
+              <PaginationComponent
+                 data={tableRows}  // Data is still the full array for pagination control
+                 itemsPerPage={itemsPerPage}
+                 currentPage={currentPage}
+                 goToPage={goToPage}
+              />
+            </div>
           </div>
         </div>
       </div>
