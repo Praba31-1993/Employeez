@@ -170,11 +170,11 @@ function Searchwithmenuitems() {
                     </div>
 
                     <div
-                      className="dropdown-menu px-1"
+                      className="dropdown-menu p-2"
                       aria-labelledby="dropdownMenuLink"
                     >
                       <p
-                        className="m-0"
+                        className="m-0 para textheader"
                         onClick={() => handleCSVExport(headers, rows)}
                       >
                         CSV File

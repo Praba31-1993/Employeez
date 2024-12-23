@@ -225,7 +225,7 @@ export default function Login() {
                 </div>
                 <div
                   className="mutlicolourbtn mt-3 py-2 text-center"
-                  onClick={handleSubmit}
+                  onClick={handleSubmit} style={{ background: useColors.themeRed}}
                 >
                   {" "}
                   Login{" "}

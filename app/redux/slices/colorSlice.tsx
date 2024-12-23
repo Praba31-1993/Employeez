@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  color: "#FF7074", // Default theme color
+  color: localStorage.getItem("themeColor") || "#FF7074", // Default to "#FF7074" if no saved color
   border: "0px", // Default border
   shadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // Default shadow
 };
+
 
 const colorSlice = createSlice({
   name: "color",
