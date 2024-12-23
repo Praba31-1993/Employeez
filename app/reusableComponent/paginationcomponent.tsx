@@ -1,6 +1,7 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./stylessheetforreusablecomponent.css";
+import { Colors } from "../reusableComponent/styles";
 interface PaginationProps {
   data: any;
   itemsPerPage: number;
@@ -14,6 +15,7 @@ function PaginationComponent({
   currentPage,
   goToPage,
 }: PaginationProps) {
+  const useColors = Colors();
   const totalPages = Math.ceil(data?.length / itemsPerPage);
 
   const goToPreviousPage = () => {
@@ -48,7 +50,7 @@ function PaginationComponent({
           key={pageNumber}
           onClick={() => goToPage(pageNumber + 1)}
           style={{
-            backgroundColor: currentPage === pageNumber + 1 ? "red" : "",
+            backgroundColor: currentPage === pageNumber + 1 ? useColors.themeRed : "",
             color: currentPage === pageNumber + 1 ? "white" : "black",
             borderRadius: "50px",
             height: "30px",

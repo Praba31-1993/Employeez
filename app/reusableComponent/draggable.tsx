@@ -89,7 +89,7 @@ const DraggableComponent = () => {
                     background: useColors.themeRed,
                     position: "fixed",
                     top: `${position.y}%`,
-                    left: position.x > 50 ? undefined : `${position.x}%`,
+                    left: position.x > 50 ? undefined : `0%`,
                     right: position.x > 50 ? `${100 - position.x}%` : undefined,
                     transform: "translateY(-50%)",
                     zIndex: 111111111,
