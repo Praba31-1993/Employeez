@@ -14,7 +14,7 @@ export const loginResponse1 = [
       lastName: "Thomas",
       etype: "EMPH",
       paySchedule: "Monthly",
-      role: "SAB",
+      role: "E",
       hiringDate: "2011-02-08",
       hiringModelCode: "W2H",
       partialTS: null,
@@ -49,6 +49,65 @@ export const loginResponse = [
     },
     token:
       "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGV2Iiwicm9sZSI6IlNBIiwicGF5c2NoZWR1bGUiOiJNb250aGx5IiwiZXR5cGUiOiJFTVBIIiwiYnVzaW5lc3NVbml0IjoiVVNBIiwicHVuY2hfaW4iOiJOIiwiUHJvakJhc2VkVFMiOiJYIiwiQ291bnRyeUNvZGUiOiJVUyIsIkhpcmluZ01vZGVsQ29kZSI6IlcySCIsImlhdCI6MTczMjU0MjIxMCwiZXhwIjoxNzMzMTQ3MDEwfQ.sRXo4CnW6y3DU1MOiQaraHyPCu_u7ZCmd9gCSgnOb9W_Nmij7RgJTxPUmNHaO4_tH0LyNHzKz-A0AsW_s4w9rQ",
+  },
+];
+
+export const roleManagement = [
+  {
+    roleid: "A",
+    description: "Accounting",
+  },
+  {
+    roleid: "E",
+    description: "Employee",
+  },
+  {
+    roleid: "HR",
+    description: "Human Resource",
+  },
+  {
+    roleid: "ICO",
+    description: "Immigration Coordinator",
+  },
+  {
+    roleid: "M",
+    description: "Manager",
+  },
+  {
+    roleid: "PH",
+    description: "Pre Hire",
+  },
+  {
+    roleid: "PM",
+    description: "Management Role",
+  },
+  {
+    roleid: "R",
+    description: "Recruiter",
+  },
+  {
+    roleid: "SA",
+    description: "Super Admin",
+  },
+  {
+    roleid: "SHR",
+    description: "HR Director",
+  },
+  {
+    roleid: "SHR",
+    description: "Super HR",
+  },
+  {
+    roleid: "SM",
+    description: "Sales Manager",
+  },
+  {
+    roleid: "TC",
+    description: "OffShore AP/AR",
+  },
+  {
+    roleid: "TC",
+    description: "Time Coordinator",
   },
 ];
 export const authenticateJsonData = {
@@ -1886,86 +1945,146 @@ export const HiringCounts = [
 ];
 
 export const ContactsList = [
-  { id: "001", name: "Rose", role: "HR", mail: "rose@gmail.com", img:"/assets/img/user2.svg" },
-  { id: "002", name: "John", role: "Developer", mail: "john@gmail.com",  img:"/assets/img/Ellipse 14.svg" },
-  { id: "003", name: "Emma", role: "Designer", mail: "emma@gmail.com",img:"/assets/img/user2.svg" },
+  {
+    id: "001",
+    name: "Rose",
+    role: "HR",
+    mail: "rose@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
+  {
+    id: "002",
+    name: "John",
+    role: "Developer",
+    mail: "john@gmail.com",
+    img: "/assets/img/Ellipse 14.svg",
+  },
+  {
+    id: "003",
+    name: "Emma",
+    role: "Designer",
+    mail: "emma@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
   {
     id: "004",
     name: "Michael",
     role: "Project Manager",
     mail: "michael@gmail.com",
-    img:"/assets/img/user2.svg"
+    img: "/assets/img/user2.svg",
   },
-  { id: "005", name: "Sophia", role: "QA Engineer", mail: "sophia@gmail.com", img:"/assets/img/user2.svg" },
-  { id: "006", name: "Liam", role: "DevOps Engineer", mail: "liam@gmail.com", img:"" },
+  {
+    id: "005",
+    name: "Sophia",
+    role: "QA Engineer",
+    mail: "sophia@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
+  {
+    id: "006",
+    name: "Liam",
+    role: "DevOps Engineer",
+    mail: "liam@gmail.com",
+    img: "",
+  },
   {
     id: "007",
     name: "Olivia",
     role: "Business Analyst",
     mail: "olivia@gmail.com",
-    img:'',
+    img: "",
   },
-  { id: "008", name: "Noah", role: "Product Owner", mail: "noah@gmail.com",img:"/assets/img/user2.svg" },
-  { id: "009", name: "Ava", role: "Scrum Master", mail: "ava@gmail.com",img:"/assets/img/Ellipse.svg" },
+  {
+    id: "008",
+    name: "Noah",
+    role: "Product Owner",
+    mail: "noah@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
+  {
+    id: "009",
+    name: "Ava",
+    role: "Scrum Master",
+    mail: "ava@gmail.com",
+    img: "/assets/img/Ellipse.svg",
+  },
   {
     id: "010",
     name: "Elijah",
     role: "Technical Lead",
     mail: "elijah@gmail.com",
-    img:""
+    img: "",
   },
   {
     id: "011",
     name: "Charlotte",
     role: "Software Architect",
     mail: "charlotte@gmail.com",
-    img:"/assets/img/user2.svg"
+    img: "/assets/img/user2.svg",
   },
   {
     id: "012",
     name: "James",
     role: "Database Administrator",
     mail: "james@gmail.com",
-    img:"/assets/img/Ellipse.svg"
+    img: "/assets/img/Ellipse.svg",
   },
   {
     id: "013",
     name: "Amelia",
     role: "System Analyst",
     mail: "amelia@gmail.com",
-    img:"/assets/img/user2.svg"
+    img: "/assets/img/user2.svg",
   },
   {
     id: "014",
     name: "William",
     role: "Frontend Developer",
     mail: "william@gmail.com",
-    img:"/assets/img/user2.svg"
+    img: "/assets/img/user2.svg",
   },
-  { id: "015", name: "Mia", role: "Backend Developer", mail: "mia@gmail.com",img:"/assets/img/user2.svg" },
+  {
+    id: "015",
+    name: "Mia",
+    role: "Backend Developer",
+    mail: "mia@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
   {
     id: "016",
     name: "Benjamin",
     role: "Cloud Engineer",
     mail: "benjamin@gmail.com",
-    img:"/assets/img/Ellipse 14.svg"
+    img: "/assets/img/Ellipse 14.svg",
   },
   {
     id: "017",
     name: "Harper",
     role: "Security Analyst",
     mail: "harper@gmail.com",
-    img:''
+    img: "",
   },
-  { id: "018", name: "Lucas", role: "IT Support", mail: "lucas@gmail.com",img:"/assets/img/user2.svg" },
+  {
+    id: "018",
+    name: "Lucas",
+    role: "IT Support",
+    mail: "lucas@gmail.com",
+    img: "/assets/img/user2.svg",
+  },
   {
     id: "019",
     name: "Evelyn",
     role: "Network Engineer",
     mail: "evelyn@gmail.com",
-    img:""
+    img: "",
   },
-  { id: "020", name: "Henry", role: "UX Researcher", mail: "henry@gmail.com",img:'' },
+  {
+    id: "020",
+    name: "Henry",
+    role: "UX Researcher",
+    mail: "henry@gmail.com",
+    img: "",
+  },
 ];
 
 export const dropdownData = [
@@ -1998,67 +2117,63 @@ export const TimeOffRequestList = [
 ];
 
 export const Logindata = [
-  {name : "Ganesh", DOB : '2024-1-08', number:"95632451566", country:'USA'},
-  {name : "Suresh", DOB : '2024-10-08', number:"956324515", country:'INDIA'},
-
-]
+  { name: "Ganesh", DOB: "2024-1-08", number: "95632451566", country: "USA" },
+  { name: "Suresh", DOB: "2024-10-08", number: "956324515", country: "INDIA" },
+];
 
 export const typeOfDays: typeOfDaysProps[] = [
-    {
-      id: 1,
-      name: "Full Day",
-    },
-    {
-      id: 2,
-      name: "Partial Day",
-    },
-    {
-      id: 3,
-      name: "Multiple Days",
-    },
-  ];
+  {
+    id: 1,
+    name: "Full Day",
+  },
+  {
+    id: 2,
+    name: "Partial Day",
+  },
+  {
+    id: 3,
+    name: "Multiple Days",
+  },
+];
 
-
-
-  export const dummyJson = [
-    { name: 'Rajesh', countryCode: 'USD' },
-    { name: 'Suresh', countryCode: 'INR' },
-    { name: 'Ganesh', countryCode: 'EUR' },
-    { name: 'Priya', countryCode: 'GBP' },
-    { name: 'Anjali', countryCode: 'JPY' },
-    { name: 'Ramesh', countryCode: 'AUD' },
-    { name: 'Vikram', countryCode: 'CAD' },
-    { name: 'Kiran', countryCode: 'SGD' },
-    { name: 'Deepa', countryCode: 'CHF' },
-    { name: 'Meera', countryCode: 'CNY' }
+export const dummyJson = [
+  { name: "Rajesh", countryCode: "USD" },
+  { name: "Suresh", countryCode: "INR" },
+  { name: "Ganesh", countryCode: "EUR" },
+  { name: "Priya", countryCode: "GBP" },
+  { name: "Anjali", countryCode: "JPY" },
+  { name: "Ramesh", countryCode: "AUD" },
+  { name: "Vikram", countryCode: "CAD" },
+  { name: "Kiran", countryCode: "SGD" },
+  { name: "Deepa", countryCode: "CHF" },
+  { name: "Meera", countryCode: "CNY" },
 ];
 
 export const currencyCode = [
-    { countryCode: 'USD', currency: '$' },
-    { countryCode: 'INR', currency: '₹' },
-    { countryCode: 'EUR', currency: '€' },
-    { countryCode: 'GBP', currency: '£' },
-    { countryCode: 'JPY', currency: '¥' },
-    { countryCode: 'AUD', currency: 'A$' },
-    { countryCode: 'CAD', currency: 'C$' },
-    { countryCode: 'SGD', currency: 'S$' },
-    { countryCode: 'CHF', currency: 'CHF' },
-    { countryCode: 'CNY', currency: '¥' }
+  { countryCode: "USD", currency: "$" },
+  { countryCode: "INR", currency: "₹" },
+  { countryCode: "EUR", currency: "€" },
+  { countryCode: "GBP", currency: "£" },
+  { countryCode: "JPY", currency: "¥" },
+  { countryCode: "AUD", currency: "A$" },
+  { countryCode: "CAD", currency: "C$" },
+  { countryCode: "SGD", currency: "S$" },
+  { countryCode: "CHF", currency: "CHF" },
+  { countryCode: "CNY", currency: "¥" },
 ];
 
 export const dateFormatCode = [
-  { countryCode: 'USD', dateFormat: 'MM/DD/YYYY' },
-  { countryCode: 'INR', dateFormat: 'DD/MM/YYYY' },
-  { countryCode: 'EUR', dateFormat: 'DD.MM.YYYY' },
-  { countryCode: 'GBP', dateFormat: 'DD/MM/YYYY' },
-  { countryCode: 'JPY', dateFormat: 'YYYY/MM/DD' },
-  { countryCode: 'AUD', dateFormat: 'DD/MM/YYYY' },
-  { countryCode: 'CAD', dateFormat: 'YYYY-MM-DD' },
-  { countryCode: 'SGD', dateFormat: 'DD/MM/YYYY' },
-  { countryCode: 'CHF', dateFormat: 'DD.MM.YYYY' },
-  { countryCode: 'CNY', dateFormat: 'YYYY/MM/DD' }
-]
-;
+  { countryCode: "USD", dateFormat: "MM/DD/YYYY" },
+  { countryCode: "INR", dateFormat: "DD/MM/YYYY" },
+  { countryCode: "EUR", dateFormat: "DD.MM.YYYY" },
+  { countryCode: "GBP", dateFormat: "DD/MM/YYYY" },
+  { countryCode: "JPY", dateFormat: "YYYY/MM/DD" },
+  { countryCode: "AUD", dateFormat: "DD/MM/YYYY" },
+  { countryCode: "CAD", dateFormat: "YYYY-MM-DD" },
+  { countryCode: "SGD", dateFormat: "DD/MM/YYYY" },
+  { countryCode: "CHF", dateFormat: "DD.MM.YYYY" },
+  { countryCode: "CNY", dateFormat: "YYYY/MM/DD" },
+];
 
 export const tableData = [
   {
@@ -2067,7 +2182,7 @@ export const tableData = [
     dateto: "2024-01-15",
     timeOfftype: "LOP",
     status: "Accepted",
-    reason: "Applied to HR"
+    reason: "Applied to HR",
   },
   {
     id: 2,
@@ -2075,7 +2190,7 @@ export const tableData = [
     dateto: "2024-01-16",
     timeOfftype: "Sick Leave",
     status: "Pending",
-    reason: "Medical Emergency"
+    reason: "Medical Emergency",
   },
   {
     id: 3,
@@ -2083,7 +2198,7 @@ export const tableData = [
     dateto: "2024-01-17",
     timeOfftype: "Casual Leave",
     status: "Rejected",
-    reason: "Personal Reasons"
+    reason: "Personal Reasons",
   },
   {
     id: 4,
@@ -2091,7 +2206,7 @@ export const tableData = [
     dateto: "2024-01-18",
     timeOfftype: "Vacation",
     status: "Accepted",
-    reason: "Vacation"
+    reason: "Vacation",
   },
   {
     id: 5,
@@ -2099,7 +2214,7 @@ export const tableData = [
     dateto: "2024-01-19",
     timeOfftype: "Sick Leave",
     status: "Pending",
-    reason: "Medical Emergency"
+    reason: "Medical Emergency",
   },
   {
     id: 6,
@@ -2107,7 +2222,7 @@ export const tableData = [
     dateto: "2024-01-20",
     timeOfftype: "LOP",
     status: "Accepted",
-    reason: "Applied to HR"
+    reason: "Applied to HR",
   },
   {
     id: 7,
@@ -2115,7 +2230,7 @@ export const tableData = [
     dateto: "2024-01-21",
     timeOfftype: "Casual Leave",
     status: "Rejected",
-    reason: "Personal Reasons"
+    reason: "Personal Reasons",
   },
   {
     id: 8,
@@ -2123,7 +2238,7 @@ export const tableData = [
     dateto: "2024-01-22",
     timeOfftype: "Vacation",
     status: "Accepted",
-    reason: "Vacation"
+    reason: "Vacation",
   },
   {
     id: 9,
@@ -2131,7 +2246,7 @@ export const tableData = [
     dateto: "2024-01-23",
     timeOfftype: "Sick Leave",
     status: "Pending",
-    reason: "Medical Emergency"
+    reason: "Medical Emergency",
   },
   {
     id: 10,
@@ -2139,19 +2254,16 @@ export const tableData = [
     dateto: "2024-01-24",
     timeOfftype: "LOP",
     status: "Accepted",
-    reason: "Applied to HR"
-  }
+    reason: "Applied to HR",
+  },
 ];
-
 
 export const year = [
   { id: 1, label: "2022" },
   { id: 2, label: "2023" },
   { id: 3, label: "2024" },
   { id: 3, label: "2025" },
-
 ];
-
 
 export const rows = [
   {
@@ -2375,7 +2487,6 @@ export const rows = [
     action: "",
   },
 ];
-
 
 export const columns = [
   { id: 1, key: "employeeID", label: "Employee ID", checked: true },
