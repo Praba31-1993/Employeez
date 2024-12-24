@@ -8,27 +8,32 @@ import Requesttimeoff from "./requesttimeoff";
 import Reporteee from "./reporteee";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { Colors } from "@/app/reusableComponent/styles";
 
 export default function TimeOff() {
-  // State to store selected time off option
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
-
-  // Retrieve the role from the Redux store
   const role: string = useSelector((state: RootState) => state.role.role);
+  const useColors = Colors(); // Declare useColors once
 
-  // Log the selected time off for debugging purposes
-  console.log("role", role);
+  // Set default value for selectedTimeOff only once
+  useEffect(() => {
+    if (selectedTimeOff === "") {
+      setSelectedTimeOff("Request Time Off");
+    }
+  }, []);
 
-  // Ensure we render the correct content based on selectedTimeOff and role
 
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent />
+        <BreadcrumbsComponent
+          selectedTab={
+            selectedTimeOff === "" ? "Request Time Off" : selectedTimeOff
+          }
+        />
         <div className="row">
           <div className="col-6">
             <p className="textheader heading my-2">Time off</p>
-            {/* <p>{role}</p> */}
           </div>
 
           {/* Dropdown to select time off options, displayed based on role */}
@@ -37,6 +42,7 @@ export default function TimeOff() {
               <DropdownComponent
                 dropdownlist={timeOff}
                 selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
+                color={useColors.themeRed}
               />
             </div>
           )}

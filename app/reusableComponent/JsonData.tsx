@@ -307,7 +307,7 @@ export const menuItem: IRoleGroup[] = [
       },
       {
         name: "Report",
-        path: "/report",
+        path: "/report/self",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
