@@ -1,5 +1,5 @@
 import DropdownComponent from '@/app/reusableComponent/dropdown';
-import React from 'react';
+import React, { useState } from 'react';
 import { year } from "../../../reusableComponent/JsonData";
 import TableWithSort from '@/app/reusableComponent/table/tablewithSort';
 import TableWithoutSort from '@/app/reusableComponent/table/tablewithoutsort';
@@ -31,7 +31,8 @@ function SummaryView() {
         accessor: leave.name.toLowerCase().replace(/ /g, "_").replace(/\//g, "_"), // Fix slashes in the accessor
         checked: true,
     }));
-
+    const [selectedTimeOff, setSelectedTimeOff] = useState("");
+ 
     // Define the type for the row object
     type Row = Record<string, string>;
 
@@ -58,7 +59,7 @@ const rows = [row];  // This creates an array with the `row` object
                     <p className="textheader para my-2">Summary View</p>
                 </div>
                 <div className="col-6 text-end">
-                    <DropdownComponent dropdownlist={year} />
+                    <DropdownComponent dropdownlist={year} selectedDatafunction={(data: any) => setSelectedTimeOff(data)}/>
                 </div>
             </div>
             <div className="row">
