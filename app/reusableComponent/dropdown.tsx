@@ -6,12 +6,15 @@ interface DropdownComponentProps {
   isYear?: boolean; // Optional boolean for isYear
   removepadding?: boolean;
   selectedDatafunction: (data: any) => void;
+  color?: string;
+ 
 }
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
   dropdownlist,
   isYear = false,
   removepadding,
   selectedDatafunction,
+  color
 }) => {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
 
@@ -36,7 +39,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   return (
     <div>
       <select
-        className="textheader para"
+        className="dropdowncolor para"
         id="dynamic-dropdown"
         value={selectedOption}
         onChange={handleChange}
@@ -46,6 +49,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
           border: "1px solid #ccc",
           padding: removepadding ? "0 px" : "10px",
           fontSize: "16px",
+          color:color
         }}
       >
         {dropdownlist && dropdownlist.length > 0 ? (

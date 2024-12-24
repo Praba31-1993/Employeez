@@ -59,6 +59,9 @@ code {
 .unselectcolor {
   color: #808080 !important;
 }
+.dropdowncolor{
+  color: #6d6777 ;
+}
 
 .textheader {
   color: #6d6777 !important;
@@ -71,6 +74,9 @@ code {
 }
 .dark .shade{
   color: #747089 !important;
+}
+.dark  .dropdowncolor{
+  color: #E7E3FC;
 }
 .sorttablecolor{
   color:#707070 !important
@@ -211,7 +217,9 @@ body {
   .showpopupactive {
     transform: translateZ(0);
   }
-  
+  .tabletype th{
+    background-color: transparent !important;
+  }
 @media (max-width: "600px") {
   .theme {
     width: 50vw !important;

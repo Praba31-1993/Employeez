@@ -2097,7 +2097,13 @@ export const timeOff = [
   { id: 1, label: "Request Time Off" },
   { id: 2, label: "Time Off Status" },
 ];
-
+export const selfrepots = [
+  { id: 1, label: "Vacation report" },
+  { id: 2, label: "Change report" },
+  { id: 3, label: "Download report" },
+  { id: 4, label: "Disciplinary report" },
+  { id: 5, label: "Punch in/Out report" },
+];
 export const TimeOffRequestList = [
   { id: "1876", name: "Eligible PTO/EL", count: "20", hrs: "4" },
   { id: "1877", name: "Sick Leave", count: "15", hrs: "2" },
