@@ -28,10 +28,10 @@ function Searchwithmenuitems() {
   const [search, setSearch] = useState<string>("");
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
+   const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
-
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -83,19 +83,19 @@ function Searchwithmenuitems() {
     }
   }, [searchQuery, columns]);
 
-   // Calculate total pages
-   const totalPages = Math.ceil(tableRows.length / itemsPerPage);
+  // Calculate total pages
+  const totalPages = Math.ceil(tableRows.length / itemsPerPage);
 
-   // Get items for the current page
-   const currentItems = tableRows.slice(
-     (currentPage - 1) * itemsPerPage,
-     currentPage * itemsPerPage
-   );
- 
-   // Handle page change
-   const goToPage = (page: number) => {
-     setCurrentPage(page);
-   };
+  // Get items for the current page
+  const currentItems = tableRows.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  // Handle page change
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
@@ -191,6 +191,7 @@ function Searchwithmenuitems() {
                     <DropdownComponent
                       dropdownlist={year}
                       removepadding={true}
+                      selectedDatafunction={(data:any)=>setSelectedTimeOff(data)}
                     />
                   </div>
                 </li>
@@ -200,6 +201,7 @@ function Searchwithmenuitems() {
                     <DropdownComponent
                       dropdownlist={year}
                       removepadding={true}
+                      selectedDatafunction={(data:any)=>setSelectedTimeOff(data)}
                     />
                   </div>
                 </li>
@@ -229,10 +231,10 @@ function Searchwithmenuitems() {
             />
             <div className="d-flex justify-content-end my-3">
               <PaginationComponent
-                 data={tableRows}  // Data is still the full array for pagination control
-                 itemsPerPage={itemsPerPage}
-                 currentPage={currentPage}
-                 goToPage={goToPage}
+                data={tableRows} // Data is still the full array for pagination control
+                itemsPerPage={itemsPerPage}
+                currentPage={currentPage}
+                goToPage={goToPage}
               />
             </div>
           </div>

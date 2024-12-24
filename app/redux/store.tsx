@@ -5,6 +5,7 @@ import colorSlice from "./slices/colorSlice";
 import modeSlice from "./slices/modeSlice";
 import dashboardLayoutSlice from "./slices/dashboardLayoutSlice"
 import userCurrencySlice from "./slices/currencySlice"
+import roleSlice from "./slices/roleSlice"
 
 // Create a store and add all reducers
 export const store = configureStore({
@@ -14,7 +15,8 @@ export const store = configureStore({
     color: colorSlice,
     mode: modeSlice,
     dashboardLayout:dashboardLayoutSlice,
-    currency:userCurrencySlice
+    currency:userCurrencySlice,
+    role:roleSlice,
   },
 });
 

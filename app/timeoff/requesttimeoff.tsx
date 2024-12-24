@@ -10,6 +10,7 @@ import DropdownComponent from "../reusableComponent/dropdown";
 
 export default function Requesttimeoff() {
     const [statusHistory, setStatusHistory] = useState<string>("Status");
+    const [selectedTimeOff, setSelectedTimeOff] = useState("");
 
     return (
         <div>
@@ -42,7 +43,9 @@ export default function Requesttimeoff() {
                     <div className="d-flex justify-content-between">
                         <p>Time off Status (Self)</p>
 
-                        <DropdownComponent dropdownlist={year} isYear={true} />
+                        <DropdownComponent dropdownlist={year} isYear={true} 
+                         selectedDatafunction={(data:any)=>setSelectedTimeOff(data)}
+                        />
                     </div>
                     <RowRadioButtons
                         list={[

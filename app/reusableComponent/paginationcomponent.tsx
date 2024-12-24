@@ -1,5 +1,5 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import "./stylessheetforreusablecomponent.css";
 import { Colors } from "../reusableComponent/styles";
 interface PaginationProps {
@@ -38,7 +38,7 @@ function PaginationComponent({
 
   return (
     <div className="d-flex justify-content-between gap-2 align-items-center cursorpointer">
-      <ArrowBackIosIcon
+      <KeyboardDoubleArrowLeftIcon
         onClick={gotoFirstPage}
         sx={{ fontSize: "15px", cursor: "pointer" }}
       />
@@ -50,7 +50,8 @@ function PaginationComponent({
           key={pageNumber}
           onClick={() => goToPage(pageNumber + 1)}
           style={{
-            backgroundColor: currentPage === pageNumber + 1 ? useColors.themeRed : "",
+            backgroundColor:
+              currentPage === pageNumber + 1 ? useColors.themeRed : "",
             color: currentPage === pageNumber + 1 ? "white" : "black",
             borderRadius: "50px",
             height: "30px",
@@ -63,7 +64,7 @@ function PaginationComponent({
       <button onClick={goToNextPage} disabled={currentPage === totalPages}>
         Next
       </button>
-      <ArrowForwardIosIcon
+      <KeyboardDoubleArrowRightIcon
         onClick={gotoLastPage}
         sx={{ fontSize: "15px", cursor: "pointer" }}
       />

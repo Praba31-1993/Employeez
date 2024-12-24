@@ -20,6 +20,9 @@ import { Colors } from "../reusableComponent/styles";
 import { LoginApi, refreshAccessToken } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import ImageComponent from "../reusableComponent/image";
+import { initializeRole } from "../redux/slices/roleSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
 
 export default function Login() {
   const useColors = Colors();
@@ -30,6 +33,9 @@ export default function Login() {
   const [errors, setErrors] = useState({ userId: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const dispatch: AppDispatch = useDispatch();
+  const role = useSelector((state: RootState) => state.role.role);
+  console.log("role", role);
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
@@ -91,6 +97,7 @@ export default function Login() {
       };
 
       const loginResponse = await LoginApi(params);
+      console.log("loginRes", loginResponse);
 
       document.cookie = "auth=true; path=/; max-age=86400";
 
@@ -100,7 +107,6 @@ export default function Login() {
 
         toast.success("Login API successful!");
         router.push("/dashboard");
-
 
         const refreshParams = {
           refreshToken: loginResponse?.data?.refresh_token,
@@ -113,6 +119,33 @@ export default function Login() {
       }
     }
   };
+  const dummyUserProfileList = [
+    {
+      userInfo: {
+        id: 36,
+        empId: "ADM07",
+        firstName: "Bill",
+        middleName: "",
+        lastName: "Thomas",
+        etype: "EMPH",
+        paySchedule: "Monthly",
+        role: "SM",
+        hiringDate: "2011-02-08",
+        hiringModelCode: "W2H",
+        partialTS: null,
+        punchIn: "N",
+        businessUnit: "USA",
+        projBasedTS: "X",
+        countryCode: "US",
+      },
+      token:
+        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGV2Iiwicm9sZSI6IlNBIiwicGF5c2NoZWR1bGUiOiJNb250aGx5IiwiZXR5cGUiOiJFTVBIIiwiYnVzaW5lc3NVbml0IjoiVVNBIiwicHVuY2hfaW4iOiJOIiwiUHJvakJhc2VkVFMiOiJYIiwiQ291bnRyeUNvZGUiOiJVUyIsIkhpcmluZ01vZGVsQ29kZSI6IlcySCIsImlhdCI6MTczMjU0MjIxMCwiZXhwIjoxNzMzMTQ3MDEwfQ.sRXo4CnW6y3DU1MOiQaraHyPCu_u7ZCmd9gCSgnOb9W_Nmij7RgJTxPUmNHaO4_tH0LyNHzKz-A0AsW_s4w9rQ",
+    },
+  ];
+
+  useEffect(() => {
+    dispatch(initializeRole(dummyUserProfileList));
+  }, [role]);
 
   return (
     <section className="login">
@@ -225,7 +258,8 @@ export default function Login() {
                 </div>
                 <div
                   className="mutlicolourbtn mt-3 py-2 text-center"
-                  onClick={handleSubmit} style={{ background: useColors.themeRed}}
+                  onClick={handleSubmit}
+                  style={{ background: useColors.themeRed }}
                 >
                   {" "}
                   Login{" "}
