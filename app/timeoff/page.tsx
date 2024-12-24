@@ -20,10 +20,10 @@ export default function TimeOff() {
                         <DropdownComponent dropdownlist={timeOff} />
                     </div>
                 </div>
-                {/* <div className="d-flex gap-3 mb-3 w-100 flex-wrap">
+                <div className="d-flex gap-3 mb-3 w-100 flex-wrap">
                     <Requesttimeoff />
-                </div> */}
-                <Reporteee />
+                </div>
+                {/* <Reporteee /> */}
             </Sidebar>
         </div>
     )

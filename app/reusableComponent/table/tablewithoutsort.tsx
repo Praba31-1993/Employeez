@@ -10,15 +10,17 @@ interface Column {
   key: string;
   label: string;
   checked: boolean; // Added checked property to the Column interface
+  accessor: string;  // Add accessor here
 }
 
 interface TableProps {
   columns: Column[];
   rows: Record<string, any>[]; // Ensures that rows is always an array of objects
   dataforicons: any;
+
 }
 
-const TableWithSort: React.FC<TableProps> = ({
+const TableWithoutSort: React.FC<TableProps> = ({
   columns,
   rows,
   dataforicons,
@@ -63,7 +65,7 @@ const TableWithSort: React.FC<TableProps> = ({
 
   return (
     <div className="w-100" style={{ overflowX: "auto" }}>
-      <table className="w-100">
+      <table className="" style={{ overflowX: "auto" }}>
         <thead className="" style={{ backgroundColor: "#F6F7FB" }}>
           <tr>
             {visibleColumns?.map((column) => (
@@ -72,34 +74,11 @@ const TableWithSort: React.FC<TableProps> = ({
                 className="cursor-pointer para textheader py-3 "
                 onClick={() => handleSort(column.key)}
               >
-                <div className="d-flex">
+                <div className="d-flex mx-3">
                   {column.label === "Action" ? "" : column.label}
 
-                  {column.label !== "Action" && (
-                    <span>
-                      {sortConfig.key === column.key ? (
-                        sortConfig.direction === "asc" ? (
-                          <NorthSharpIcon
-                            fontSize="small"
-                            className="inline-block"
-                            sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                          />
-                        ) : (
-                          <SouthSharpIcon
-                            fontSize="small"
-                            className="inline-block"
-                            sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                          />
-                        )
-                      ) : (
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                        />
-                      )}
-                    </span>
-                  )}
+                 
+                  
                 </div>
               </th>
             ))}
@@ -107,36 +86,42 @@ const TableWithSort: React.FC<TableProps> = ({
         </thead>
 
         <tbody className="">
-          {data?.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-b border-gray-200 dashboardcard  ">
-              {visibleColumns?.map((column) => (
-                <td key={column.key} className="py-3 pe-1">
-                  <div className="flex">
-                    {column.key === "status" ? (
-                      <ClickableChips label={row[column.key]} />
-                    ) : (
-                      <p className="mb-0 textheader para">
-                        {row[column.key] !== null ? row[column.key] : ""}
-                      </p>
-                    )}
+  {data?.map((row, rowIndex) => (
+    <tr key={rowIndex} className="border-b border-gray-200 dashboardcard">
+      {visibleColumns?.map((column) => (
+        <td key={column.key} className="py-3 pe-1">
+          <div className="flex justify-content-center">
+            {/* Check if the key is "status", and render a clickable chip */}
+            {column.key === "status" ? (
+              <ClickableChips label={row[column.accessor] || ""} />
+            ) : (
+              <p className="mb-0 textheader para">
+                {/* Safely access the row data using accessor */}
+                {row[column.accessor] !== null && row[column.accessor] !== undefined
+                  ? row[column.accessor]
+                  : ""}
+              </p>
+            )}
 
-                    {column.key === "action" && (
-                      <div className="flex gap-3">
-                        <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
-                        {dataforicons === "Status" && (
-                          <HighlightOffIcon sx={{ color: "#FF4C51" }} />
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+            {/* Handle action column (with icons) */}
+            {column.key === "action" && (
+              <div className="flex gap-3">
+                <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                {dataforicons === "Status" && (
+                  <HighlightOffIcon sx={{ color: "#FF4C51" }} />
+                )}
+              </div>
+            )}
+          </div>
+        </td>
+      ))}
+    </tr>
+  ))}
+</tbody>
+
       </table>
     </div>
   );
 };
 
-export default TableWithSort;
+export default TableWithoutSort;

@@ -275,10 +275,10 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         <Link
                                             href={item.path}
                                             className={`link ${pathname === item.path && !hideToggle
-                                                    ? "active"
-                                                    : pathname === item.path && hideToggle
-                                                        ? "activewithNoBackground"
-                                                        : ""
+                                                ? "active"
+                                                : pathname === item.path && hideToggle
+                                                    ? "activewithNoBackground"
+                                                    : ""
                                                 } mb-0 w-100`}
                                             style={{
                                                 display: "flex",
@@ -421,25 +421,13 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                 <Link
                                                                     key={childIndex}
                                                                     href={child.path}
-                                                                    className={`link ${pathname === child.path ? "active" : ""
-                                                                        } mb-0 w-100 `}
+                                                                    className={`link ${pathname === child.path ? "active" : ""} mb-0 w-100`}
                                                                     style={{
                                                                         display: "flex",
                                                                         alignItems: "center",
+                                                                        color: pathname === child.path ? useColors.themeRed : "", // Apply themeRed to the active link
                                                                     }}
                                                                 >
-                                                                    {/* <Image
-                                    src={
-                                      pathname === child.path
-                                        ? child.icon ??
-                                          "/assets/img/basicmenu.svg"
-                                        : child.inactive ??
-                                          "/assets/img/basicmenu.svg"
-                                    }
-                                    alt={`${child.name} Icon`}
-                                    width={20}
-                                    height={20}
-                                  /> */}
                                                                     <Image
                                                                         src={"/assets/img/basicmenu.svg"}
                                                                         alt={`${child.name} Icon`}
@@ -448,6 +436,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                     />
                                                                     <div>{child.name}</div>
                                                                 </Link>
+
                                                             </div>
                                                         ))}
                                                     </div>
