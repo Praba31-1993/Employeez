@@ -28,8 +28,8 @@ export function Themecustomization({ show, close }: any) {
   }, [dashboardLayout]);
 
   return (
-    <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
-      <div className="summarysection theme" style={{ width: "30vw" }}>
+    <section className={`showpopup ${show ? "showpopupactive" : ""}`} onClick={close}>
+      <div className="summarysection theme" style={{ width: "30vw" }}  onClick={(e) => e.stopPropagation()}>
         <div className="container-fluid">
           <div className="row px-2 summary" style={{ borderBottom: "0px" }}>
             <div className="col-12">

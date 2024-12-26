@@ -32,20 +32,20 @@ function SummaryView() {
         checked: true,
     }));
     const [selectedTimeOff, setSelectedTimeOff] = useState("");
- 
+
     // Define the type for the row object
     type Row = Record<string, string>;
 
     // Define rows: Creating a single row containing the count for each leave type
-  // Define rows: Creating a single row containing the count for each leave type
-const row: Row = TimeOffRequestList.reduce((acc, { name, count }) => {
-    // Use name as key (lowercase and with underscores) and count as value
-    acc[name.toLowerCase().replace(/ /g, "_").replace(/\//g, "_")] = count;
-    return acc;
-}, {} as Row);
+    // Define rows: Creating a single row containing the count for each leave type
+    const row: Row = TimeOffRequestList.reduce((acc, { name, count }) => {
+        // Use name as key (lowercase and with underscores) and count as value
+        acc[name.toLowerCase().replace(/ /g, "_").replace(/\//g, "_")] = count;
+        return acc;
+    }, {} as Row);
 
-// Wrap row in an array to pass to TableWithSort
-const rows = [row];  // This creates an array with the `row` object
+    // Wrap row in an array to pass to TableWithSort
+    const rows = [row];  // This creates an array with the `row` object
 
 
     // Debugging: Log columns and rows to make sure data is correct
@@ -59,16 +59,15 @@ const rows = [row];  // This creates an array with the `row` object
                     <p className="textheader para my-2">Summary View</p>
                 </div>
                 <div className="col-6 text-end">
-                    <DropdownComponent dropdownlist={year} selectedDatafunction={(data: any) => setSelectedTimeOff(data)}/>
+                    <DropdownComponent dropdownlist={year} selectedDatafunction={(data: any) => setSelectedTimeOff(data)} />
                 </div>
             </div>
-            <div className="row">
-                <TableWithoutSort
-                    columns={columns}
-                    rows={rows} // Passing the rows containing count for each leave type
-                    dataforicons={TimeOffRequestList}
-                />
-            </div>
+            {/* table */}
+            <TableWithoutSort
+                columns={columns}
+                rows={rows} // Passing the rows containing count for each leave type
+                dataforicons={TimeOffRequestList}
+            />
         </>
     );
 }
