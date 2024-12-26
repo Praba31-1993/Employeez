@@ -31,8 +31,11 @@ export default function Summarydetails({ showpop, close, LeaveTypes }: any) {
   return (
     <>
       {/* summary of period */}
-      <section className={`showpopup ${showpop ? "showpopupactive" : ""}`}>
-        <div className="summarysection">
+      <section className={`showpopup ${showpop ? "showpopupactive" : ""}`} onClick={close}>
+    <div
+        className="summarysection "
+        onClick={(e) => e.stopPropagation()} // Prevent event propagation
+    >
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 text-end">
