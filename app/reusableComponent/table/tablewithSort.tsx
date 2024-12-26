@@ -138,8 +138,9 @@ const TableWithSort: React.FC<TableProps> = ({
                           onClick={() => setDetails(true)}
                         />
                         {dataforicons === "Status" && (
-                          <HighlightOffIcon sx={{ color: "#FF4C51" }} 
-                          onClick={() => setDelete(true)}
+                          <HighlightOffIcon
+                            sx={{ color: "#FF4C51" }}
+                            onClick={() => setDelete(true)}
                           />
                         )}
                       </div>
@@ -150,16 +151,16 @@ const TableWithSort: React.FC<TableProps> = ({
             </tr>
           ))}
         </tbody>
-        {showdetails && (
-          <CenterPopup show={showdetails} close={() => setDetails(false)} />
-        )}
-        {confirmDelete && (
-          <Deleteconfirmationpopup
-            show={confirmDelete}
-            close={() => setDelete(false)}
-          />
-        )}
       </table>
+      {showdetails && (
+        <CenterPopup show={showdetails} close={() => setDetails(false)} />
+      )}
+      {confirmDelete && (
+        <Deleteconfirmationpopup
+          show={confirmDelete}
+          close={() => setDelete(false)}
+        />
+      )}
     </div>
   );
 };
