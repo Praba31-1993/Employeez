@@ -7,14 +7,13 @@ interface DropdownComponentProps {
   removepadding?: boolean;
   selectedDatafunction: (data: any) => void;
   color?: string;
- 
 }
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
   dropdownlist,
   isYear = false,
   removepadding,
   selectedDatafunction,
-  color
+  color,
 }) => {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
 
@@ -39,7 +38,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   return (
     <div>
       <select
-        className="dropdowncolor para"
+        className="dropdowncolor para cursorPointer"
         id="dynamic-dropdown"
         value={selectedOption}
         onChange={handleChange}
@@ -49,12 +48,17 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
           border: "1px solid #ccc",
           padding: removepadding ? "0 px" : "10px",
           fontSize: "16px",
-          color:color
+          color: color,
+          
         }}
       >
         {dropdownlist && dropdownlist.length > 0 ? (
           dropdownlist.map((item: any, index: number) => (
-            <option key={`${item.id}-${index}`} value={item.label}>
+            <option
+              key={`${item.id}-${index}`}
+              value={item.label}
+              className="cursorPointer"
+            >
               {item.label}
             </option>
           ))

@@ -21,7 +21,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -37,4 +37,25 @@ input[type=number] {
   margin-bottom: 190rem;
   text-align: center;
   text-transform: uppercase;
+}
+
+.deletepopup {
+  align-self: center;
+  width: 400px;
+  border-radius: 8px;
+}
+.deletePopupTopHeaderStyle {
+  background: #FFA5A5;
+  height: 50px;
+}
+.deletePopupContentSection {
+  background: white;
+  height: fit-content;
+  margin-top: -20px;
+}
+.deleteIcon {
+  background: #ff6363;
+  border-radius: 50%;
+  position: relative;
+  top: -30px;
 }

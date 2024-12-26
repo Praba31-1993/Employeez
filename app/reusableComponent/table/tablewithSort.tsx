@@ -5,6 +5,8 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ClickableChips from "../chips";
 import PaginationComponent from "../paginationcomponent";
+import { CenterPopup } from "../popup/centerPopup";
+import Deleteconfirmationpopup from "../popup/deleteconfirmationpopup";
 
 interface Column {
   key: string;
@@ -23,6 +25,10 @@ const TableWithSort: React.FC<TableProps> = ({
   rows,
   dataforicons,
 }) => {
+  const [showdetails, setDetails] = useState(false);
+  const [confirmDelete, setDelete] = useState(false);
+
+  const [openpopups, openPopUp] = useState(false);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc";
@@ -34,6 +40,8 @@ const TableWithSort: React.FC<TableProps> = ({
   const [data, setData] = useState<any[]>(rows || []);
 
   const visibleColumns = columns?.filter((column) => column.checked);
+
+  console.log("columns", visibleColumns);
 
   useEffect(() => {
     if (!Array.isArray(rows)) return;
@@ -108,7 +116,10 @@ const TableWithSort: React.FC<TableProps> = ({
 
         <tbody className="">
           {data?.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-b border-gray-200 dashboardcard  ">
+            <tr
+              key={rowIndex}
+              className="border-b border-gray-200 dashboardcard  "
+            >
               {visibleColumns?.map((column) => (
                 <td key={column.key} className="py-3 pe-1">
                   <div className="flex">
@@ -122,9 +133,14 @@ const TableWithSort: React.FC<TableProps> = ({
 
                     {column.key === "action" && (
                       <div className="flex gap-3">
-                        <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                        <RemoveRedEyeIcon
+                          sx={{ color: "#8A8D93" }}
+                          onClick={() => setDetails(true)}
+                        />
                         {dataforicons === "Status" && (
-                          <HighlightOffIcon sx={{ color: "#FF4C51" }} />
+                          <HighlightOffIcon sx={{ color: "#FF4C51" }} 
+                          onClick={() => setDelete(true)}
+                          />
                         )}
                       </div>
                     )}
@@ -134,6 +150,15 @@ const TableWithSort: React.FC<TableProps> = ({
             </tr>
           ))}
         </tbody>
+        {showdetails && (
+          <CenterPopup show={showdetails} close={() => setDetails(false)} />
+        )}
+        {confirmDelete && (
+          <Deleteconfirmationpopup
+            show={confirmDelete}
+            close={() => setDelete(false)}
+          />
+        )}
       </table>
     </div>
   );
