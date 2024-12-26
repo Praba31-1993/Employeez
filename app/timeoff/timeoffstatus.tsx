@@ -11,7 +11,7 @@ interface RowData {
 const Timeoffstatus = ({ statusHistory }: any) => {
   const columns = [
     { id: 1, key: "date_from", label: "Date From", checked: true },
-    { id: 2, key: "date_to", label: "Date To", checked: true },
+    { id: 2, key: "date_to", label: "Date To", checked: false },
     { id: 3, key: "time_off_type", label: "Time off Type", checked: true },
     { id: 4, key: "status", label: "Status", checked: true },
     { id: 5, key: "reason", label: "Reason", checked: true },
