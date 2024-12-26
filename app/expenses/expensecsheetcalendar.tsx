@@ -29,35 +29,12 @@ export default function Summaryheetcalendar() {
     <>
       {open && <Uploadfiles show={open} close={() => setOpen(false)} />}
       {openpopups && (
-        <Summarydetails showpop={openpopups} close={() => setopenPopUp(false)} />
+        <Summarydetails
+          showpop={openpopups}
+          close={() => setopenPopUp(false)}
+        />
       )}
 
-      <div className="  d-flex align-items-center justify-content-between mt-3">
-        <div className="">
-          <div className="currentweek d-flex align-items-center">
-            <h5 className="heading me-3 textheader mb-0">
-              01-07 November 2024
-            </h5>
-            <div className="approvestatus px-3 py-1 para">Approved</div>
-          </div>
-        </div>
-        <div className=" d-flex align-items-center justify-content-end">
-          {/* <div className="d-flex align-items-center" style={{ cursor: "pointer", }} onClick={() => openPopUp(prev => !prev)} >
-                        <FontAwesomeIcon icon={faFileCircleExclamation} style={{ color: useColors.themeRed }} />
-                        <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
-                    </div> */}
-          <button
-            className="outlinebtn ms-4 px-3 py-1"
-            style={{
-              color: useColors.themeRed,
-              border: `1px solid ${useColors.themeRed}`,
-            }}
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            Upload <FontAwesomeIcon className="ms-2" icon={faCirclePlus} />
-          </button>
-        </div>
-      </div>
       <div className="row mt-2">
         {/* <div className="col-12">
                 {
@@ -77,7 +54,6 @@ export default function Summaryheetcalendar() {
               fontSize="12px"
               background="transparent"
               variant={"outlined"}
-
             />
           </div>
           <div className="ms-3">

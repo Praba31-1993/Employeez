@@ -6,6 +6,7 @@ import Summarydetails from "../timesheet/summarydetails";
 import Listofholidays, { Timesheetaproover } from "../timesheet/listofholidays";
 import Sidebar from "../sidebar/page";
 import Uploadfiles, { Viewfiles } from "../timesheet/uploadfiles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   Totalsummary,
@@ -21,9 +22,14 @@ import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
 import { Colors } from "../reusableComponent/styles";
+import { IconOutlinebutton } from "../reusableComponent/outlinebtn";
+import {
+  faCirclePlus,
+  faFileCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
-export default function Expenses({ weekListDatas,}:any) {
-   const useColors = Colors();
+export default function Expenses({ weekListDatas }: any) {
+  const useColors = Colors();
   // State to toggle visibility of components
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -31,8 +37,11 @@ export default function Expenses({ weekListDatas,}:any) {
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
   const [isWeeklyListupdated, setIsWeeklyListUpdated] =
     useState<boolean>(false);
-    const lastIndex = weekListDatas?.length - 1;
+  const [openpopups, openPopUp] = useState(false);
+
+  const lastIndex = weekListDatas?.length - 1;
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
+  const [open, setOpen] = useState(false);
 
   // Filter for objects with codeId and codeLabel (relevant data)
   const codeItems = timesheetDataConvertedToFetchCalendar?.filter(
@@ -123,21 +132,61 @@ export default function Expenses({ weekListDatas,}:any) {
                 </div>
               </div>
               {/* timesheet */}
+
+              {/* end */}
+
               <div className="col-xxl-9 col-lg-8 col-md-12">
-              <div className="d-flex px-3 justify-content-between">
-                        <div className="d-flex justify-content-between" style={{ width: "80%" }}>
-                            {weekListDatas?.map((weeklist: any, index: number) => (
-                                <div key={index}>
-                                    <p className="para2 mb-1 textheader text-center" >
-                                        {weeklist?.monthDay} {weeklist?.day}
-                                    </p>
-                                </div>))}
-                        </div>
-                        <div style={{ width: "20%" }}>
-                            <p className="para2 mb-1 ms-2 text-center" style={{ color: useColors.themeRed }}>
-                                Week Total</p>
-                        </div>
+                <div className="  d-flex align-items-center justify-content-between mt-3">
+                  <div className="">
+                    <div className="currentweek d-flex align-items-center">
+                      <h5 className="heading me-3 textheader mb-0">
+                        01-07 November 2024
+                      </h5>
+                      <div className="approvestatus px-3 py-1 para">
+                        Approved
+                      </div>
                     </div>
+                  </div>
+                  <div className=" d-flex align-items-center justify-content-end">
+                    {/* <div className="d-flex align-items-center" style={{ cursor: "pointer", }} onClick={() => openPopUp(prev => !prev)} >
+                        <FontAwesomeIcon icon={faFileCircleExclamation} style={{ color: useColors.themeRed }} />
+                        <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
+                    </div> */}
+                    <button
+                      className="outlinebtn ms-4 px-3 py-1"
+                      style={{
+                        color: useColors.themeRed,
+                        border: `1px solid ${useColors.themeRed}`,
+                      }}
+                      onClick={() => setOpen((prev) => !prev)}
+                    >
+                      Upload{" "}
+                      <FontAwesomeIcon className="ms-2" icon={faCirclePlus} />
+                    </button>
+                  </div>
+                </div>
+                <div className="d-flex px-3 justify-content-between">
+                  <div
+                    className="d-flex justify-content-between"
+                    style={{ width: "80%" }}
+                  >
+                    {weekListDatas?.map((weeklist: any, index: number) => (
+                      <div key={index}>
+                        <p className="para2 mb-1 textheader text-center">
+                          {weeklist?.monthDay} {weeklist?.day}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ width: "20%" }}>
+                    <p
+                      className="para2 mb-1 ms-2 text-center"
+                      style={{ color: useColors.themeRed }}
+                    >
+                      Week Total
+                    </p>
+                  </div>
+                </div>
                 {timesheetList[2]?.map((timesheet: any, index: number) => (
                   <div key={index}>
                     <TimesheetExpenceAndHoursField
