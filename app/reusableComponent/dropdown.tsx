@@ -44,7 +44,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         onChange={handleChange}
         style={{
           borderRadius: isYear ? "0" : "4px",
-          backgroundColor: isYear ? "" : "#f4f4f4",
+          backgroundColor: isYear ? "" : "transparent",
           border: "1px solid #ccc",
           padding: removepadding ? "0 px" : "10px",
           fontSize: "16px",

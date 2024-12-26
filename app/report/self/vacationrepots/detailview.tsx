@@ -27,7 +27,7 @@ function Detailview() {
                             <th className='textheader para' scope="col">Hours</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='dashboardcard'>
                         {arrayList.map((item, index) => (
                             <tr key={index}>
                                 <td className='para textheader'>{item.Date}</td>

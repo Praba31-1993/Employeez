@@ -380,3 +380,9 @@ select{
   outline: 0;
   box-shadow: none !important;
 }
+.dark thead{
+  background-color: rgb(91 101 141) !important;
+}
+tbody td{
+  background-color: unset !important;
+}
