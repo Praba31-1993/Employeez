@@ -41,7 +41,6 @@ const TableWithSort: React.FC<TableProps> = ({
 
   const visibleColumns = columns?.filter((column) => column.checked);
 
-  console.log("columns", visibleColumns);
 
   useEffect(() => {
     if (!Array.isArray(rows)) return;
