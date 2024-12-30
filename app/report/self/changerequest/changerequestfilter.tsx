@@ -1,25 +1,25 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import "./timeoff.css";
 import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import HistoryIcon from "@mui/icons-material/History";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DropdownComponent from "../reusableComponent/dropdown";
-import { year } from "../reusableComponent/JsonData";
+import DropdownComponent from "../../../reusableComponent/dropdown";
+import { year } from "../../../reusableComponent/JsonData";
 import SearchIcon from "@mui/icons-material/Search";
-import TableWithSort from "../reusableComponent/table/tablewithSort";
+import TableWithSort from "../../../reusableComponent/table/tablewithSort";
 import { Checkbox } from "@mui/material";
-import { rows, columns } from "../reusableComponent/JsonData";
+import { rows, columns } from "../../../reusableComponent/JsonData";
 import {
     handleCSVExport,
     SearchLogic,
     handlePrint,
-} from "../reusableComponent/commonlogic";
-import PaginationComponent from "../reusableComponent/paginationcomponent";
+} from "../../../reusableComponent/commonlogic";
+import PaginationComponent from "../../../reusableComponent/paginationcomponent";
+import Requesttable from "./requesttable";
 
-function Searchwithmenuitems() {
+function Changereruestfilter() {
 
     const [ShowColumns, setShowColumns] = useState<boolean>(false);
     const [tableColumns, setTableColumns] = useState<any>(columns);
@@ -88,10 +88,10 @@ function Searchwithmenuitems() {
     const totalPages = Math.ceil(tableRows.length / itemsPerPage);
 
     // Get items for the current page
-    const currentItems = tableRows.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    // const currentItems = tableRows.slice(
+    //     (currentPage - 1) * itemsPerPage,
+    //     currentPage * itemsPerPage
+    // );
 
     // Handle page change
     const goToPage = (page: number) => {
@@ -226,11 +226,12 @@ function Searchwithmenuitems() {
                     </div>
 
                     <div className="col-12" id="printSection">
-                        <TableWithSort
+                        {/* <TableWithSort
                             columns={tableColumns}
                             rows={currentItems}
                             dataforicons={false}
-                        />
+                        /> */}
+                         <Requesttable />
                         <div className="d-flex justify-content-end my-3">
                             <PaginationComponent
                                 data={tableRows} // Data is still the full array for pagination control
@@ -246,4 +247,4 @@ function Searchwithmenuitems() {
     );
 }
 
-export default Searchwithmenuitems;
+export default Changereruestfilter;

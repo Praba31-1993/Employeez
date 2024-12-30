@@ -7,6 +7,7 @@ import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { selfrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
 import Vacationreport from "./vacationrepots/vacationreport";
+import Changerequest from "./changerequest/changerequest";
 
 function Self() {
   const useColors = Colors(); // Declare useColors once
@@ -32,7 +33,9 @@ function Self() {
         </div>
       </div>
       <div className="row">
-        <Vacationreport />
+        {/* <Vacationreport /> */}
+        {/* changerequest table */}
+        <Changerequest />
       </div>
     </Sidebar>
   );

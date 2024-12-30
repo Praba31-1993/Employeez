@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TableWithSort from "../reusableComponent/table/tablewithSort";
+import TableWithSort from "../../../reusableComponent/table/tablewithSort";
 
 interface RowData {
     id: number;
@@ -8,55 +8,46 @@ interface RowData {
     status: string;
 }
 
-const Timeoffstatus = ({ statusHistory }: any) => {
+const Requesttable = ({ statusHistory }: any) => {
     const columns = [
-        { id: 1, key: "date_from", label: "Date From", checked: true },
-        { id: 2, key: "date_to", label: "Date To", checked: false },
-        { id: 3, key: "time_off_type", label: "Time off Type", checked: true },
+        { id: 1, key: "time_off_type", label: "Request type", checked: true },
+        { id: 2, key: "date_from", label: "Submitted Date", checked: true },
+        { id: 3, key: "date_to", label: "Approved by", checked: true },
         { id: 4, key: "status", label: "Status", checked: true },
-        { id: 5, key: "reason", label: "Reason", checked: true },
         { id: 6, key: "action", label: "Action", checked: true },
     ];
 
     const rows = [
         {
             date_from: "2024-12-01",
-            date_to: "2024-12-02",
-            time_off_type: "Sick Leave",
+            date_to: "Christopher",
+            time_off_type: "Personal  Contact",
             status: "Approved",
             reason: "Medical",
             action: "",
         },
         {
             date_from: "2024-12-03",
-            date_to: "2024-12-04",
-            time_off_type: "Vacation",
+            date_to: "Venkat",
+            time_off_type: "Worksite address",
             status: "Submitted",
             reason: "Personal",
             action: "",
         },
         {
             date_from: "2024-12-05",
-            date_to: "2024-12-06",
-            time_off_type: "Maternity",
+            date_to: "Melissia",
+            time_off_type: "Emergency address",
             status: "Approved",
             reason: "Family",
             action: "",
         },
         {
             date_from: "2024-12-07",
-            date_to: "2024-12-08",
-            time_off_type: "Holiday",
+            date_to: "Danny mechson",
+            time_off_type: "Personal address",
             status: "Rejected",
             reason: "Festival",
-            action: "",
-        },
-        {
-            date_from: "2024-12-09",
-            date_to: "2024-12-10",
-            time_off_type: "Emergency",
-            status: "Approved",
-            reason: "Unplanned",
             action: "",
         },
     ];
@@ -72,4 +63,4 @@ const Timeoffstatus = ({ statusHistory }: any) => {
     );
 };
 
-export default Timeoffstatus;
+export default Requesttable;

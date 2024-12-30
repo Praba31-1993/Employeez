@@ -16,10 +16,7 @@ export default function Requesttimeoff() {
         <div>
             <div className="d-flex gap-3 flex-wrap">
                 {TimeOffRequestList?.map((timeoffrequest: any) => (
-                    <div
-                        key={timeoffrequest?.id}
-                        className="dashboardcard d-flex  flex-column  p-3 "
-                    >
+                    <div key={timeoffrequest?.id} className="dashboardcard d-flex  flex-column  p-3 " >
                         <div className="d-flex gap-2 align-items-center">
                             <ImageComponent width={0} height={0} user={""} />
                             <h6 className="mb-0 textheader heading2">
@@ -40,30 +37,30 @@ export default function Requesttimeoff() {
                 </div>
                 <div className=" col-12 col-md-7  ">
                     <div className="dashboardcard p-3">
-                    <div className="d-flex justify-content-between">
-                        <p>Time off Status (Self)</p>
+                        <div className="d-flex justify-content-between">
+                            <p>Time off Status (Self)</p>
 
-                        <DropdownComponent dropdownlist={year} isYear={true} 
-                         selectedDatafunction={(data:any)=>setSelectedTimeOff(data)}
+                            <DropdownComponent dropdownlist={year} isYear={true}
+                                selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
+                            />
+                        </div>
+                        <RowRadioButtons
+                            list={[
+                                {
+                                    id: 1,
+                                    name: "Status",
+                                },
+                                {
+                                    id: 2,
+                                    name: "History",
+                                },
+                            ]}
+                            selectedValue={statusHistory}
+                            newDayTypevalue={(data: string) => setStatusHistory(data)}
                         />
+                        <Timeoffstatus statusHistory={statusHistory} />
                     </div>
-                    <RowRadioButtons
-                        list={[
-                            {
-                                id: 1,
-                                name: "Status",
-                            },
-                            {
-                                id: 2,
-                                name: "History",
-                            },
-                        ]}
-                        selectedValue={statusHistory}
-                        newDayTypevalue={(data: string) => setStatusHistory(data)}
-                    />
-                    <Timeoffstatus statusHistory={statusHistory} />
-                    </div>
-                    
+
                 </div>
             </div>
         </div>
