@@ -20,8 +20,6 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
-  console.log("slecOptions", selectedOption);
-
   React.useEffect(() => {
     // Call the function only if it is defined and is a function
     if (typeof selectedDatafunction === "function") {

@@ -37,7 +37,6 @@ export default function BreadcrumbsComponent({ selectedTab }: any) {
       });
     }
 
-    console.log("Breadcrumbs data:", result);
     setUrlData(result);
   };
 

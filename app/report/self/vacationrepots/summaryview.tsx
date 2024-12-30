@@ -48,9 +48,6 @@ function SummaryView() {
     const rows = [row];  // This creates an array with the `row` object
 
 
-    // Debugging: Log columns and rows to make sure data is correct
-    console.log('Columns:', columns);
-    console.log('Rows:', rows);
 
     return (
         <>

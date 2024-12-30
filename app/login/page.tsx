@@ -35,7 +35,6 @@ export default function Login() {
     const router = useRouter();
     const dispatch: AppDispatch = useDispatch();
     const role = useSelector((state: RootState) => state.role.role);
-    console.log("role", role);
 
     useEffect(() => {
         const rememberedUserId = localStorage.getItem("rememberedUserId");
@@ -97,7 +96,6 @@ export default function Login() {
             };
 
             const loginResponse = await LoginApi(params);
-            console.log("loginRes", loginResponse);
 
             document.cookie = "auth=true; path=/; max-age=86400";
 

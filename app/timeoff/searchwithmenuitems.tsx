@@ -17,6 +17,9 @@ import {
   SearchLogic,
   handlePrint,
 } from "../reusableComponent/commonlogic";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import PaginationComponent from "../reusableComponent/paginationcomponent";
 
 function Searchwithmenuitems() {
@@ -32,6 +35,7 @@ function Searchwithmenuitems() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
+  const [openColumn, setOpenColumn] = useState<Boolean>(false);
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -64,7 +68,6 @@ function Searchwithmenuitems() {
   useEffect(() => {
     if (search !== "") {
       const filteredRows = SearchLogic(allRows, search);
-      console.log("Filtered Results:", filteredRows);
       setTableRows(filteredRows?.length > 0 ? filteredRows : allRows);
     } else {
       setTableRows(allRows);
@@ -97,6 +100,8 @@ function Searchwithmenuitems() {
     setCurrentPage(page);
   };
 
+  console.log("searchList", searchList);
+
   return (
     <>
       <div className="container-fluid">
@@ -110,47 +115,11 @@ function Searchwithmenuitems() {
                 >
                   <CalendarViewWeekIcon />
                   {/* <span className="mx-2 ">Column</span> */}
-                  <div className="dropdown show mx-2">
-                    <div
-                      role="button"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                    >
-                      Column
-                    </div>
-
-                    <div
-                      className=" cursorPointer dropdown-menu px-1 "
-                      //   ref={columnRef}
-                      aria-labelledby="dropdownMenuLink"
-                      style={{ width: "max-content" }}
-                    >
-                      <div
-                        className="d-flex gap-1  p-2 align-items-center"
-                        style={{ border: "1px solid blue" }}
-                      >
-                        <div className="mt-1">
-                          <SearchIcon />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Search"
-                          className="p-2 w-100"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                      </div>
-
-                      {searchList?.map((columnList: any) => (
-                        <div className="checkboxwithList" key={columnList?.id}>
-                          <Checkbox
-                            checked={columnList?.checked}
-                            onChange={() => handleChecked(columnList?.id)}
-                          />
-                          <span>{columnList?.key}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <div
+                    className="show mx-2"
+                    onClick={() => setOpenColumn((p) => !p)}
+                  >
+                    <div>Column</div>
                   </div>
                 </li>
 
@@ -222,6 +191,51 @@ function Searchwithmenuitems() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div
+            className=""
+            style={{ position: "relative" }}
+            onClick={() => setOpenColumn(true)}
+          >
+            {openColumn && (
+              <div
+                className=" cursorPointer px-1 "
+                aria-labelledby="dropdownMenuLink"
+                style={{
+                  width: "max-content",
+                  background: "white",
+                  position: "absolute",
+                  boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+                }}
+              >
+                <div
+                  className="d-flex gap-1  p-2 align-items-center"
+                  style={{ border: "1px solid blue" }}
+                >
+                  <div className="mt-1">
+                    <SearchIcon />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="p-2 w-100"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+
+                {searchList?.map((columnList: any) => (
+                  <div className="checkboxwithList" key={columnList?.id}>
+                    <Checkbox
+                      checked={columnList?.checked}
+                      onChange={() => handleChecked(columnList?.id)}
+                    />
+                    <span>{columnList?.key}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="col-12" id="printSection">
