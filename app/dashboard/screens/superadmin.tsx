@@ -46,7 +46,6 @@ const SuperAdminDashboard = () => {
         setDummyUser(dummyUserData);
     }, [dummyUserData]);
 
-    console.log("user", dummyUser);
 
     return (
         <div className="container-fluid my-3">

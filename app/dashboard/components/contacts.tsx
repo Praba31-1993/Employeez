@@ -20,7 +20,6 @@ const style: React.CSSProperties = {
 
 
 export default function Contacts({ show, close }: any)  {
-  console.log("show", show);
 
   return (
     <>
