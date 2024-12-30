@@ -23,7 +23,6 @@ import MenuItem from "@mui/material/MenuItem";
 import PaginationComponent from "../reusableComponent/paginationcomponent";
 
 function Searchwithmenuitems() {
-  const [ShowColumns, setShowColumns] = useState<boolean>(false);
   const [tableColumns, setTableColumns] = useState<any>(columns);
   const [searchList, setSearchList] = useState<any>(columns);
   const [tableRows, setTableRows] = useState<any>(rows);
@@ -31,11 +30,14 @@ function Searchwithmenuitems() {
   const [search, setSearch] = useState<string>("");
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
+  const ExportRef = useRef<HTMLDivElement>(null);
+
   const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
   const [openColumn, setOpenColumn] = useState<Boolean>(false);
+  const [openExport, setOpenExport] = useState<Boolean>(false);
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -57,12 +59,19 @@ function Searchwithmenuitems() {
         columnRef.current &&
         !columnRef.current.contains(event.target as Node)
       ) {
-        setShowColumns(false); // Close the menu if clicking outside
+        setOpenColumn(false);
+      }
+
+      if (
+        ExportRef.current &&
+        !ExportRef.current.contains(event.target as Node)
+      ) {
+        setOpenExport(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside); // Listen for clicks
-    return () => document.removeEventListener("mousedown", handleClickOutside); // Cleanup the listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -111,14 +120,10 @@ function Searchwithmenuitems() {
               <ul className="d-flex flex-wrap align-items-end gap-2 heading2 textheader cursorPointer p-0 mb-0">
                 <li
                   className="d-flex align-items-center"
-                  onClick={() => setShowColumns((prev) => !prev)}
+                  onClick={() => setOpenColumn((p) => !p)}
                 >
                   <CalendarViewWeekIcon />
-                  {/* <span className="mx-2 ">Column</span> */}
-                  <div
-                    className="show mx-2"
-                    onClick={() => setOpenColumn((p) => !p)}
-                  >
+                  <div className="show mx-2">
                     <div>Column</div>
                   </div>
                 </li>
@@ -127,20 +132,33 @@ function Searchwithmenuitems() {
                   <FilterListIcon />
                   <span className="mx-2">Filters</span>
                 </li>
-                <li className="d-flex align-items-center">
-                  <SaveAltIcon />
-                  <div className="dropdown mx-2">
-                    <div
-                      role="div"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                    >
-                      Export
+                <li>
+                  <div
+                    className="d-flex align-items-center"
+                    onClick={() => setOpenExport((p) => !p)}
+                  >
+                    <SaveAltIcon />
+                    <div className="dropdown mx-2">
+                      <div
+                        role="div"
+                        id="dropdownMenuLink"
+                        data-bs-toggle="dropdown"
+                      >
+                        Export
+                      </div>
                     </div>
+                  </div>
 
+                  {openExport && (
                     <div
-                      className="dropdown-menu p-2"
-                      aria-labelledby="dropdownMenuLink"
+                      className="p-2"
+                      onClick={() => setOpenExport(true)}
+                      style={{
+                        background: "white",
+                        width: "fit-content",
+                        position: "absolute",
+                      }}
+                      ref={ExportRef}
                     >
                       <p
                         className="m-0 para textheader"
@@ -149,7 +167,7 @@ function Searchwithmenuitems() {
                         CSV File
                       </p>
                     </div>
-                  </div>
+                  )}
                 </li>
                 <li className="d-flex align-items-center">
                   <HistoryIcon />
@@ -197,6 +215,7 @@ function Searchwithmenuitems() {
             className=""
             style={{ position: "relative" }}
             onClick={() => setOpenColumn(true)}
+            ref={columnRef}
           >
             {openColumn && (
               <div
