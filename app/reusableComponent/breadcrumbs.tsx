@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link"; // Use Next.js Link
 import { usePathname } from "next/navigation";
+import { Colors } from "./styles";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -11,13 +12,12 @@ function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
 export default function BreadcrumbsComponent({ selectedTab }: any) {
   const [urldata, setUrlData] = useState<any[]>([]);
   const pathname = usePathname();
+  const useColors = Colors();
 
-  // Capitalize the first letter of each breadcrumb segment
   const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  // Function to handle URL path and generate breadcrumb links
   const handleUrltoBreadcrumbs = () => {
     const data = pathname;
     const result = data
@@ -30,31 +30,32 @@ export default function BreadcrumbsComponent({ selectedTab }: any) {
         };
       });
 
-    // Append the selectedTab as the last breadcrumb item
     if (selectedTab) {
       result.push({
         label: capitalizeFirstLetter(selectedTab),
-        path: "", // No path for the last breadcrumb, since it's just a label
+        path: "",
       });
     }
 
-    console.log("Breadcrumbs data:", result);
     setUrlData(result);
   };
 
   useEffect(() => {
     handleUrltoBreadcrumbs();
-  }, [pathname, selectedTab]); // Trigger effect on pathname or selectedTab change
+  }, [pathname, selectedTab]);
 
   return (
     <div role="presentation" className="my-1" onClick={handleClick}>
-      <Breadcrumbs separator="›" aria-label="breadcrumb">
+      <Breadcrumbs
+        separator={
+          <span className="m-0" style={{ color: useColors.themeRed }}>
+            {"›"}
+          </span>
+        }
+        aria-label="breadcrumb"
+      >
         {urldata.map((url, index) => (
-          <Link
-            key={index}
-            className="para2"
-            href={url.path} // Use the dynamically generated path
-          >
+          <Link key={index} className="para2" href={url.path}>
             {url.label}
           </Link>
         ))}

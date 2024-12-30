@@ -34,7 +34,6 @@ function PaginationComponent({
     goToPage(totalPages);
   };
 
-  console.log("data", data.length);
 
   return (
     <div className="d-flex justify-content-between gap-2 align-items-center cursorpointer">
