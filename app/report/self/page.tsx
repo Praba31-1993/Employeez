@@ -33,9 +33,9 @@ function Self() {
         </div>
       </div>
       <div className="row">
-        {/* <Vacationreport /> */}
+        <Vacationreport />
         {/* changerequest table */}
-        <Changerequest />
+        {/* <Changerequest /> */}
       </div>
     </Sidebar>
   );
