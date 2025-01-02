@@ -72,7 +72,6 @@ const Timeoffstatus = ({ statusHistory }: any) => {
     },
   ]);
 
-  // Constrain sortConfig to the keys of Row
   const [sortConfig, setSortConfig] = useState<{
     key: keyof Row;
     direction: "asc" | "desc";
@@ -97,7 +96,6 @@ const Timeoffstatus = ({ statusHistory }: any) => {
     setRows(sortedRows);
   };
 
-  console.log("sortConfig", sortConfig);
 
   return (
     <>
