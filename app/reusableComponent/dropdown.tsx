@@ -55,7 +55,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
             <option
               key={`${item.id}-${index}`}
               value={item.label}
-              className="cursorPointer"
+              className="cursorPointer textheader"
             >
               {item.label}
             </option>

@@ -41,11 +41,10 @@ input[type="number"] {
 
 .deletepopup {
   align-self: center;
-  width: 400px;
-  border-radius: 8px;
+  width: 500px;
 }
 .deletePopupTopHeaderStyle {
-  background: #FFA5A5;
+ opacity: 0.5;
   height: 50px;
 }
 .deletePopupContentSection {

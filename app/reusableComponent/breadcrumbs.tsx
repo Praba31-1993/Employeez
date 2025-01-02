@@ -48,14 +48,14 @@ export default function BreadcrumbsComponent({ selectedTab }: any) {
     <div role="presentation" className="my-1" onClick={handleClick}>
       <Breadcrumbs
         separator={
-          <span className="m-0" style={{ color: useColors.themeRed }}>
+          <span className="m-0 shade" >
             {"›"}
           </span>
         }
         aria-label="breadcrumb"
       >
         {urldata.map((url, index) => (
-          <Link key={index} className="para2" href={url.path}>
+          <Link key={index} className="para2 shade" href={url.path}>
             {url.label}
           </Link>
         ))}

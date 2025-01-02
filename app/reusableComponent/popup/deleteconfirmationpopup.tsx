@@ -6,12 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import whitecolordelete from "@/public/assets/img/delete_whitecolor.svg";
 import Image from "next/image";
 import "../stylessheetforreusablecomponent.css";
+import { Colors } from "../styles";
 
 function Deleteconfirmationpopup({ show, close }: any) {
   const handleSave = () => {
     close();
   };
-
+ const useColors = Colors();
   return (
     <>
       <div
@@ -19,17 +20,14 @@ function Deleteconfirmationpopup({ show, close }: any) {
         onClick={close}
       >
         <div
-          className="mx-auto deletepopup"
+          className="mx-auto deletepopup" 
           onClick={(e) => e.stopPropagation()}
         >
           <div
-            className="row m-0"
-            style={{
-              borderRadius: "8px",
-            }}
+            className="row m-0 rounded bg-white"
           >
             <div className="col-12 p-0">
-              <div className="d-flex justify-content-end align-items-center pe-2 deletePopupTopHeaderStyle">
+              <div className="d-flex justify-content-end align-items-center pe-2 deletePopupTopHeaderStyle" style={{backgroundColor:useColors.themeRed}}>
                 <FontAwesomeIcon
                   className="my-2 textheader cursorPointer"
                   icon={faXmark}
@@ -41,13 +39,13 @@ function Deleteconfirmationpopup({ show, close }: any) {
               className="col-12 p-0 d-flex justify-content-center "
               style={{ background: "white" }}
             >
-              <div className="deleteIcon">
+              <div className="deleteIcon" style={{backgroundColor:useColors.themeRed}}>
                 <Image
                   src={whitecolordelete}
                   alt=""
                   width={0}
                   height={0}
-                  style={{ cursor: "pointer", margin: "20px" }}
+                  style={{ cursor: "pointer", margin: "14px"  }}
                 />
               </div>
             </div>
@@ -64,24 +62,24 @@ function Deleteconfirmationpopup({ show, close }: any) {
             >
               <div className="ms-3">
                 <Outlinebutton
-                  color="#808080"
-                  border="1px solid #808080"
-                  text="Cancel"
-                  fontSize="14px"
-                  background="transparent"
+                   color={useColors.themeRed}
+                   border={`1px solid ${useColors.themeRed}`}
+                   text="Clear"
+                   fontSize="12px"
+                   background="transparent"
+                   variant={"outlined"}
                   onClick={close}
-                  variant={"outlined"}
                 />
               </div>
               <div className="ms-3">
                 <Outlinebutton
                   color="#FFF"
-                  border="1px solid #FF6F6F"
-                  text="Confirm"
-                  fontSize="14px"
-                  background="#FF6F6F"
-                  onClick={handleSave}
+                  border={`1px solid ${useColors.themeRed}`}
+                  text="Submit"
+                  fontSize="12px"
+                  background={useColors.themeRed}
                   variant={"outlined"}
+                  onClick={handleSave}
                 />
               </div>
             </div>
