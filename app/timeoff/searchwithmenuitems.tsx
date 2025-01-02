@@ -21,7 +21,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PaginationComponent from "../reusableComponent/paginationcomponent";
-
+ 
 function Searchwithmenuitems() {
   const [tableColumns, setTableColumns] = useState<any>(columns);
   const [searchList, setSearchList] = useState<any>(columns);
@@ -31,14 +31,14 @@ function Searchwithmenuitems() {
   const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
   const ExportRef = useRef<HTMLDivElement>(null);
-
+ 
   const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
   const [openColumn, setOpenColumn] = useState<Boolean>(false);
   const [openExport, setOpenExport] = useState<Boolean>(false);
-
+ 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
       if (columnsList.id === id) {
@@ -52,7 +52,7 @@ function Searchwithmenuitems() {
     setTableColumns(updatedColumns);
     setSearchList(updatedColumns);
   };
-
+ 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -61,7 +61,7 @@ function Searchwithmenuitems() {
       ) {
         setOpenColumn(false);
       }
-
+ 
       if (
         ExportRef.current &&
         !ExportRef.current.contains(event.target as Node)
@@ -69,11 +69,11 @@ function Searchwithmenuitems() {
         setOpenExport(false);
       }
     };
-
+ 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+ 
   useEffect(() => {
     if (search !== "") {
       const filteredRows = SearchLogic(allRows, search);
@@ -82,11 +82,11 @@ function Searchwithmenuitems() {
       setTableRows(allRows);
     }
   }, [search, allRows]);
-
+ 
   useEffect(() => {
     if (searchQuery !== "") {
       const filteredSearchQuery = SearchLogic(columns, searchQuery);
-
+ 
       setSearchList(
         filteredSearchQuery.length > 0 ? filteredSearchQuery : columns
       );
@@ -94,23 +94,23 @@ function Searchwithmenuitems() {
       setSearchList(columns);
     }
   }, [searchQuery, columns]);
-
+ 
   // Calculate total pages
   const totalPages = Math.ceil(tableRows.length / itemsPerPage);
-
+ 
   // Get items for the current page
   const currentItems = tableRows.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
+ 
   // Handle page change
   const goToPage = (page: number) => {
     setCurrentPage(page);
   };
-
+ 
   console.log("searchList", searchList);
-
+ 
   return (
     <>
       <div className="container-fluid">
@@ -127,7 +127,7 @@ function Searchwithmenuitems() {
                     <div>Column</div>
                   </div>
                 </li>
-
+ 
                 <li className="d-flex align-items-center">
                   <FilterListIcon />
                   <span className="mx-2">Filters</span>
@@ -148,7 +148,7 @@ function Searchwithmenuitems() {
                       </div>
                     </div>
                   </div>
-
+ 
                   {openExport && (
                     <div
                       className="p-2"
@@ -210,7 +210,7 @@ function Searchwithmenuitems() {
               </div>
             </div>
           </div>
-
+ 
           <div
             className=""
             style={{ position: "relative" }}
@@ -243,7 +243,7 @@ function Searchwithmenuitems() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
-
+ 
                 {searchList?.map((columnList: any) => (
                   <div className="checkboxwithList" key={columnList?.id}>
                     <Checkbox
@@ -256,7 +256,7 @@ function Searchwithmenuitems() {
               </div>
             )}
           </div>
-
+ 
           <div className="col-12" id="printSection">
             <TableWithSort
               columns={tableColumns}
@@ -277,5 +277,5 @@ function Searchwithmenuitems() {
     </>
   );
 }
-
+ 
 export default Searchwithmenuitems;
