@@ -15,24 +15,6 @@ export default function Requesttimeoff() {
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
   const useColors = Colors();
 
-<<<<<<< HEAD
-    return (
-        <div>
-            <div className="d-flex gap-3 flex-wrap">
-                {TimeOffRequestList?.map((timeoffrequest: any) => (
-                    <div key={timeoffrequest?.id} className="dashboardcard d-flex  flex-column  p-3 " >
-                        <div className="d-flex gap-2 align-items-center">
-                            <ImageComponent width={0} height={0} user={""} />
-                            <h6 className="mb-0 textheader heading2">
-                                {timeoffrequest?.count}
-                            </h6>
-                        </div>
-                        <p className="para2 pt-2  mb-0 shade">
-                            {timeoffrequest?.name} ({timeoffrequest?.hrs})
-                        </p>
-                    </div>
-                ))}
-=======
   const handleSubmit = () => {
     alert("Submitted Successfully");
   };
@@ -50,7 +32,6 @@ export default function Requesttimeoff() {
               <h6 className="mb-0 textheader heading2">
                 {timeoffrequest?.count}
               </h6>
->>>>>>> 0ed52d20bdcb60bc8c5a30a24b430b88c6eac32b
             </div>
             <p className="para2 pt-2  mb-0 shade">
               {timeoffrequest?.name} ({timeoffrequest?.hrs})
@@ -59,40 +40,6 @@ export default function Requesttimeoff() {
         ))}
       </div>
 
-<<<<<<< HEAD
-            {/* Main Section */}
-            <div className="row mt-5">
-                <div className="col-12 col-md-5 ">
-                    <Typeofduration />
-                </div>
-                <div className=" col-12 col-md-7  ">
-                    <div className="dashboardcard p-3">
-                        <div className="d-flex justify-content-between">
-                            <p>Time off Status (Self)</p>
-
-                            <DropdownComponent dropdownlist={year} isYear={true}
-                                selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-                            />
-                        </div>
-                        <RowRadioButtons
-                            list={[
-                                {
-                                    id: 1,
-                                    name: "Status",
-                                },
-                                {
-                                    id: 2,
-                                    name: "History",
-                                },
-                            ]}
-                            selectedValue={statusHistory}
-                            newDayTypevalue={(data: string) => setStatusHistory(data)}
-                        />
-                        <Timeoffstatus statusHistory={statusHistory} />
-                    </div>
-
-                </div>
-=======
       {/* Main Section */}
       <div className="row mt-5">
         <div className="col-12 col-md-5 ">
@@ -108,7 +55,6 @@ export default function Requesttimeoff() {
                 background="transparent"
                 variant={"outlined"}
               />
->>>>>>> 0ed52d20bdcb60bc8c5a30a24b430b88c6eac32b
             </div>
             <div className="ms-3">
               <Outlinebutton

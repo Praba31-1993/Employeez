@@ -21,21 +21,24 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PaginationComponent from "../reusableComponent/paginationcomponent";
-
+ 
 function Searchwithmenuitems() {
-    const [ShowColumns, setShowColumns] = useState<boolean>(false);
-    const [tableColumns, setTableColumns] = useState<any>(columns);
-    const [searchList, setSearchList] = useState<any>(columns);
-    const [tableRows, setTableRows] = useState<any>(rows);
-    const [searchQuery, setSearchQuery] = useState<string>("");
-    const [search, setSearch] = useState<string>("");
-    const [allRows, setAllRows] = useState<any>(rows);
-    const columnRef = useRef<HTMLDivElement>(null);
-    const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
-    const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
-
+  const [tableColumns, setTableColumns] = useState<any>(columns);
+  const [searchList, setSearchList] = useState<any>(columns);
+  const [tableRows, setTableRows] = useState<any>(rows);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
+  const [allRows, setAllRows] = useState<any>(rows);
+  const columnRef = useRef<HTMLDivElement>(null);
+  const ExportRef = useRef<HTMLDivElement>(null);
+ 
+  const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
+  const [openColumn, setOpenColumn] = useState<Boolean>(false);
+  const [openExport, setOpenExport] = useState<Boolean>(false);
+ 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
       if (columnsList.id === id) {
@@ -49,7 +52,7 @@ function Searchwithmenuitems() {
     setTableColumns(updatedColumns);
     setSearchList(updatedColumns);
   };
-
+ 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -58,7 +61,7 @@ function Searchwithmenuitems() {
       ) {
         setOpenColumn(false);
       }
-
+ 
       if (
         ExportRef.current &&
         !ExportRef.current.contains(event.target as Node)
@@ -66,11 +69,11 @@ function Searchwithmenuitems() {
         setOpenExport(false);
       }
     };
-
+ 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+ 
   useEffect(() => {
     if (search !== "") {
       const filteredRows = SearchLogic(allRows, search);
@@ -79,11 +82,11 @@ function Searchwithmenuitems() {
       setTableRows(allRows);
     }
   }, [search, allRows]);
-
+ 
   useEffect(() => {
     if (searchQuery !== "") {
       const filteredSearchQuery = SearchLogic(columns, searchQuery);
-
+ 
       setSearchList(
         filteredSearchQuery.length > 0 ? filteredSearchQuery : columns
       );
@@ -91,23 +94,23 @@ function Searchwithmenuitems() {
       setSearchList(columns);
     }
   }, [searchQuery, columns]);
-
+ 
   // Calculate total pages
   const totalPages = Math.ceil(tableRows.length / itemsPerPage);
-
+ 
   // Get items for the current page
   const currentItems = tableRows.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
+ 
   // Handle page change
   const goToPage = (page: number) => {
     setCurrentPage(page);
   };
-
+ 
   console.log("searchList", searchList);
-
+ 
   return (
     <>
       <div className="container-fluid">
@@ -124,7 +127,7 @@ function Searchwithmenuitems() {
                     <div>Column</div>
                   </div>
                 </li>
-
+ 
                 <li className="d-flex align-items-center">
                   <FilterListIcon />
                   <span className="mx-2">Filters</span>
@@ -145,7 +148,7 @@ function Searchwithmenuitems() {
                       </div>
                     </div>
                   </div>
-
+ 
                   {openExport && (
                     <div
                       className="p-2"
@@ -207,7 +210,7 @@ function Searchwithmenuitems() {
               </div>
             </div>
           </div>
-
+ 
           <div
             className=""
             style={{ position: "relative" }}
@@ -240,89 +243,20 @@ function Searchwithmenuitems() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
-
-                                            {searchList?.map((columnList: any) => (
-                                                <div className="checkboxwithList" key={columnList?.id}>
-                                                    <Checkbox
-                                                        checked={columnList?.checked}
-                                                        onChange={() => handleChecked(columnList?.id)}
-                                                    />
-                                                    <span>{columnList?.key}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li className="d-flex align-items-center">
-                                    <FilterListIcon />
-                                    <span className="mx-2">Filters</span>
-                                </li>
-                                <li className="d-flex align-items-center">
-                                    <SaveAltIcon />
-                                    <div className="dropdown mx-2">
-                                        <div
-                                            role="div"
-                                            id="dropdownMenuLink"
-                                            data-bs-toggle="dropdown"
-                                        >
-                                            Export
-                                        </div>
-
-                                        <div
-                                            className="dropdown-menu p-2"
-                                            aria-labelledby="dropdownMenuLink"
-                                        >
-                                            <p
-                                                className="m-0 para textheader"
-                                                onClick={() => handleCSVExport(headers, rows)}
-                                            >
-                                                CSV File
-                                            </p>
-                                            {/* <p
-                      onClick={() => handlePrint()}
-                      >Print</p> */}
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="d-flex align-items-center">
-                                    <HistoryIcon />
-                                    <div className="ms-2">
-                                        <DropdownComponent
-                                            dropdownlist={year}
-                                            removepadding={true}
-                                            selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-                                        />
-                                    </div>
-                                </li>
-                                <li className="d-flex align-items-center">
-                                    <CalendarMonthIcon />
-                                    <div className="ms-2">
-                                        <DropdownComponent
-                                            dropdownlist={year}
-                                            removepadding={true}
-                                            selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-                                        />
-                                    </div>
-                                </li>
-                            </ul>
-                            <div className="col-12 col-md-3 ">
-                                <div className="d-flex gap-1 searchbar ps-2 align-items-center">
-                                    <div className="mt-1">
-                                        <SearchIcon />
-                                    </div>
-                                    <input
-                                        type="text"
-                                        placeholder="Search"
-                                        className="p-2 w-100"
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+ 
+                {searchList?.map((columnList: any) => (
+                  <div className="checkboxwithList" key={columnList?.id}>
+                    <Checkbox
+                      checked={columnList?.checked}
+                      onChange={() => handleChecked(columnList?.id)}
+                    />
+                    <span>{columnList?.key}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+ 
           <div className="col-12" id="printSection">
             <TableWithSort
               columns={tableColumns}
@@ -343,5 +277,5 @@ function Searchwithmenuitems() {
     </>
   );
 }
-
+ 
 export default Searchwithmenuitems;
