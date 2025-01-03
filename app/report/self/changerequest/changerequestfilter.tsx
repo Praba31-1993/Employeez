@@ -120,34 +120,17 @@ function Changereruestfilter() {
                                             Column
                                         </div>
 
-                                        <div
-                                            className=" cursorPointer dropdown-menu px-1 "
-                                            //   ref={columnRef}
-                                            aria-labelledby="dropdownMenuLink"
-                                            style={{ width: "max-content" }}
-                                        >
-                                            <div
-                                                className="d-flex gap-1  p-2 align-items-center"
-                                                style={{ border: "1px solid blue" }}
-                                            >
+                                        <div className=" cursorPointer dropdown-menu px-1 " style={{ width: "max-content" }} >
+                                            <div className="d-flex gap-1  p-2 align-items-center" style={{ border: "1px solid blue" }} >
                                                 <div className="mt-1">
                                                     <SearchIcon />
                                                 </div>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Search"
-                                                    className="p-2 w-100"
-                                                    value={searchQuery}
-                                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                                />
+                                                <input type="text" placeholder="Search" className="p-2 w-100" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                                             </div>
 
                                             {searchList?.map((columnList: any) => (
                                                 <div className="checkboxwithList" key={columnList?.id}>
-                                                    <Checkbox
-                                                        checked={columnList?.checked}
-                                                        onChange={() => handleChecked(columnList?.id)}
-                                                    />
+                                                    <Checkbox checked={columnList?.checked} onChange={() => handleChecked(columnList?.id)} />
                                                     <span>{columnList?.key}</span>
                                                 </div>
                                             ))}
@@ -163,22 +146,12 @@ function Changereruestfilter() {
                                 <li className="d-flex align-items-center">
                                     <SaveAltIcon />
                                     <div className="dropdown mx-2">
-                                        <div
-                                            role="div"
-                                            id="dropdownMenuLink"
-                                            data-bs-toggle="dropdown"
-                                        >
+                                        <div role="div" id="dropdownMenuLink" data-bs-toggle="dropdown" >
                                             Export
                                         </div>
 
-                                        <div
-                                            className="dropdown-menu p-2"
-                                            aria-labelledby="dropdownMenuLink"
-                                        >
-                                            <p
-                                                className="m-0 para textheader"
-                                                onClick={() => handleCSVExport(headers, rows)}
-                                            >
+                                        <div className="dropdown-menu p-2" aria-labelledby="dropdownMenuLink" >
+                                            <p className="m-0 para textheader" onClick={() => handleCSVExport(headers, rows)} >
                                                 CSV File
                                             </p>
                                             {/* <p
@@ -231,7 +204,7 @@ function Changereruestfilter() {
                             rows={currentItems}
                             dataforicons={false}
                         /> */}
-                         <Requesttable />
+                        <Requesttable />
                         <div className="d-flex justify-content-end my-3">
                             <PaginationComponent
                                 data={tableRows} // Data is still the full array for pagination control
