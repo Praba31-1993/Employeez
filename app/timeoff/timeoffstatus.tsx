@@ -79,11 +79,7 @@ const Timeoffstatus = ({ statusHistory }: any) => {
 
     const handleSort = (key: keyof Row) => {
         let direction: "asc" | "desc" = "asc";
-        if (
-            sortConfig &&
-            sortConfig.key === key &&
-            sortConfig.direction === "asc"
-        ) {
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === "asc") {
             direction = "desc";
         }
         setSortConfig({ key, direction });
