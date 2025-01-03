@@ -102,26 +102,32 @@ const MonthlyCalendar: React.FC<Props> = ({
     const dataForDate = calendardataMap[formattedDate];
 
     if (dataForDate) {
-      setClickedDateData(dataForDate);
+        setClickedDateData(dataForDate);
     }
 
     // Calculate the week containing the clicked date
     const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
     const clickedWeekDatas = Array.from({ length: 7 }).map((_, index) => {
-      const currentDate = add(startOfTheWeek, { days: index });
-      return {
-        day: format(currentDate, "EEE"),
-        date: format(currentDate, "dd-MM-yyyy"),
-        month: format(currentDate, "MMMM"),
-        year: format(currentDate, "yyyy"),
-        monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
-      };
+        const currentDate = add(startOfTheWeek, { days: index });
+        return {
+            day: format(currentDate, "EEE"),
+            date: format(currentDate, "dd-MM-yyyy"),
+            month: format(currentDate, "MMMM"),
+            year: format(currentDate, "yyyy"),
+            monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
+        };
     });
 
     setWeekData(clickedWeekDatas);
     setSelectedDate(date);
-    onChange(date);
-  };
+    onChange?.(date); // Notify parent if onChange is provided
+};
+
+// Automatically trigger a "click" on the current date when the component mounts
+useEffect(() => {
+    const today = new Date();
+    handleDateClick(today);
+}, []); // Empty dependency array ensures this runs only once
 
   return (
     <div className=" pb-4 pe-3">
