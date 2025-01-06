@@ -1,5 +1,6 @@
-import { Colors } from "../reusableComponent/styles";
-import ImageComponent from "../reusableComponent/image";
+"use client";
+import ImageComponent from "@/app/reusableComponent/image";
+import { Colors } from "@/app/reusableComponent/styles";
 
 export default function Listofholidays() {
   const useColors = Colors();

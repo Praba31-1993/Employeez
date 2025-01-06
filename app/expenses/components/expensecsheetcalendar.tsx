@@ -1,13 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCirclePlus,
-  faFileCircleExclamation,
-} from "@fortawesome/free-solid-svg-icons";
-import Outlinebutton from "../reusableComponent/outlinebtn";
-import Uploadfiles from "../timesheet/uploadfiles";
+"use client"
+import { Colors } from "@/app/reusableComponent/styles";
 import { useState } from "react";
-import Summarydetails from "../timesheet/summarydetails";
-import { Colors } from "../reusableComponent/styles";
+import Uploadfiles from "@/app/timesheet/components/uploadfiles";
+import Summarydetails from "@/app/timesheet/components/summarydetails";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 
 export default function Summaryheetcalendar() {
   const useColors = Colors();
@@ -36,15 +32,6 @@ export default function Summaryheetcalendar() {
       )}
 
       <div className="row mt-2">
-        {/* <div className="col-12">
-                {
-                    Expenseslist.map((expenses, index) => (
-                        
-                            <Timesheetexpenceandhoursfield key={index}  text={expenses.expenses} />
-                    ))
-                   
-                }
-                </div> */}
         <div className="col-12 d-flex  justify-content-end mt-4">
           <div className="ms-3">
             <Outlinebutton

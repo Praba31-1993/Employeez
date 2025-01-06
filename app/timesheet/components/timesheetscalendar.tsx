@@ -1,29 +1,21 @@
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlus,
   faFileCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import Outlinebutton, {
-  IconOutlinebutton,
-} from "../reusableComponent/outlinebtn";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import Uploadfiles from "./uploadfiles";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
 import Summarydetails from "./summarydetails";
-import Button from "@mui/material/Button";
-import plusIcon from "/assets/img/plus-redcircle.svg";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-
-// import Colors from '@/app/reusableComponent/styles'
-import { Colors } from "../reusableComponent/styles";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { Colors } from "@/app/reusableComponent/styles";
 import { Addprojectpopup } from "./addprojectpopup";
 import { Idetails } from "./idetail";
-import { customsheet } from "../reusableComponent/JsonData";
-import { AssinedProjectlist } from "../reusableComponent/JsonData";
-import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
+import { customsheet } from "@/app/reusableComponent/JsonData";
+import { AssinedProjectlist } from "@/app/reusableComponent/JsonData";
+import { TimesheetExpenceAndHoursField } from "@/app/reusableComponent/timesheetexpenceandhoursfield";
 
 export default function Timesheetcalendar({
-  Customertimesheetdata,
   timesheetList,
   calendardatas,
   weekListDatas,
@@ -61,7 +53,7 @@ export default function Timesheetcalendar({
 
       // Filter out the unselected projects
       const unSelectedData = AssinedProjectlist.filter(
-        (list) => list.projectid !== selectedProject.projectid
+        (list:any) => list.projectid !== selectedProject.projectid
       );
 
       setshowUnSelectedProjectedData(unSelectedData);
@@ -127,15 +119,7 @@ export default function Timesheetcalendar({
             onClick={() => setOpen((prev) => !prev)}
             className="ms-4 px-3 py-1"
           >
-            {/* <IconOutlinebutton
-                            color={useColors.themeRed}
-                            border={`1px solid ${useColors.themeRed}`}
-                            text="Upload"
-                            fontSize="12px"
-                            disabled={false}
-                            icon={"/assets/img/plus-redcircle.svg"}
-                            variant={"outlined"}
-                        /> */}
+           
             <button
               className="outlinebtn ms-4 px-3 py-1"
               style={{

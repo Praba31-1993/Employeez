@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ImageComponent from "../reusableComponent/image";
+import ImageComponent from "@/app/reusableComponent/image";
+import React, {useState } from "react";
 import Typeofduration from "./typeofduration";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import DropdownComponent from "@/app/reusableComponent/dropdown";
+import RowRadioButtons from "@/app/reusableComponent/radiobtn";
 import Timeoffstatus from "./timeoffstatus";
-import { TimeOffRequestList } from "../reusableComponent/JsonData";
-import RowRadioButtons from "../reusableComponent/radiobtn";
-import { year } from "../reusableComponent/JsonData";
-import DropdownComponent from "../reusableComponent/dropdown";
-import Outlinebutton from "../reusableComponent/outlinebtn";
-import { Colors } from "../reusableComponent/styles";
+import { Colors } from "@/app/reusableComponent/styles";
+import { year } from "@/app/reusableComponent/JsonData";
+import { TimeOffRequestList } from "@/app/reusableComponent/JsonData";
 
 export default function Requesttimeoff() {
   const [statusHistory, setStatusHistory] = useState<string>("Status");

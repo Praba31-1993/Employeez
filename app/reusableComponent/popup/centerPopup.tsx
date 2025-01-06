@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Outlinebutton from "../outlinebtn";
-import TimeOffDetails from "@/app/timeoff/timeoffdetails";
+import TimeOffDetails from "@/app/timeoff/components/timeoffdetails";
 
 export function CenterPopup({ show, close, projectLists }: any) {
   const [selectedProjects, setSelectedProjects] = useState<
