@@ -1,12 +1,11 @@
+"use Client"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
-import uploadicon from "/assets/img/upload-2-line.png";
-import Outlinebutton from "../reusableComponent/outlinebtn";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { useState } from "react";
-import Listicon from "../reusableComponent/listicon";
-import ImageComponent from "../reusableComponent/image";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import ImageComponent from "@/app/reusableComponent/image";
+import Listicon from "@/app/reusableComponent/listicon";
 
 export default function Uploadfiles({ show, close }: any) {
   const [files, setFiles] = useState<File[]>([]); // Explicitly define type as File[]

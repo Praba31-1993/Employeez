@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Avatar } from "@mui/material";
-import DataGridDemo from "../reusableComponent/table";
+import DataGridDemo from "@/app/reusableComponent/table";
 import { GridColDef } from "@mui/x-data-grid";
 
 export function Idetails({ show, close, customsheetlist }: any) {
