@@ -1,14 +1,11 @@
 "use client";
 import "./timesheet.css";
-import React, { useState, useEffect } from "react";
-import Summarydetails from "./summarydetails";
-import Listofholidays, { Timesheetaproover } from "./listofholidays";
-import Timesheetcalendar from "./timesheetscalendar";
+import React, { useState} from "react";
+import Listofholidays, { Timesheetaproover } from "./components/listofholidays";
+import Timesheetcalendar from "./components/timesheetscalendar";
 import Sidebar from "../sidebar/page";
-import Uploadfiles, { Viewfiles } from "./uploadfiles";
-
-// import WeeklyCalendar from "./weeklycalendar";
-import { Totalsummary, Totalsummarycards } from "./totalsummarydetails";
+import { Totalsummary, Totalsummarycards } from "./components/totalsummarydetails";
+import Uploadfiles, { Viewfiles } from "./components/uploadfiles";
 import { loginResponse } from "../reusableComponent/JsonData";
 import MonthlyCalendar from "../reusableComponent/calendar/monthlyCalendar";
 import WeeklyCalendar from "../reusableComponent/calendar/weeklycalendar";
@@ -17,14 +14,10 @@ import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 
 export default function Timesheet() {
-  // State to toggle visibility of components
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timesheetList, setTimeSheetList] = useState<any>(TimesheetDataByMonth);
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
-  const [isWeeklyListupdated, setIsWeeklyListUpdated] =
-    useState<boolean>(false);
-
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
   // Filter for objects with codeId and codeLabel (relevant data)

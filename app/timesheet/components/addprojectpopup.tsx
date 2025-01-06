@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Commoncheckbox } from "../reusableComponent/textboxes";
-import Outlinebutton from "../reusableComponent/outlinebtn";
-import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
+import { Commoncheckbox } from "@/app/reusableComponent/textboxes";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import { TimesheetExpenceAndHoursField } from "@/app/reusableComponent/timesheetexpenceandhoursfield";
 
 export function Addprojectpopup({
     show,

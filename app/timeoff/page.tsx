@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import BreadcrumbsComponent from "../reusableComponent/breadcrumbs";
 import Sidebar from "../sidebar/page";
 import DropdownComponent from "../reusableComponent/dropdown";
-import { timeOff, TimeOffRequestList } from "../reusableComponent/JsonData";
-import Requesttimeoff from "./requesttimeoff";
-import Reporteee from "./reporteee";
+import { timeOff } from "../reusableComponent/JsonData";
+// import Requesttimeoff from "./requesttimeoff";
+// import Reporteee from "./reporteee";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { Colors } from "@/app/reusableComponent/styles";
-import { CenterPopup } from "../reusableComponent/popup/centerPopup";
+import Requesttimeoff from "./components/requesttimeoff";
+import Reporteee from "./components/reporteee";
 
 export default function TimeOff() {
   const [selectedTimeOff, setSelectedTimeOff] = useState("");

@@ -6,8 +6,7 @@ import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { selfrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Vacationreport from "./vacationrepots/vacationreport";
-import Changerequest from "./changerequest/changerequest";
+import Vacationreport from "../components/report_vacationreports/reportvacationreport";
 
 function Self() {
   const useColors = Colors(); // Declare useColors once

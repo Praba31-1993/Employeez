@@ -1,32 +1,20 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import "./timeoff.css";
+import "../timeoff.css";
 import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import HistoryIcon from "@mui/icons-material/History";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DropdownComponent from "../reusableComponent/dropdown";
-import { year } from "../reusableComponent/JsonData";
 import SearchIcon from "@mui/icons-material/Search";
-import TableWithSort from "../reusableComponent/table/tablewithSort";
 import { Checkbox } from "@mui/material";
-import { rows, columns } from "../reusableComponent/JsonData";
-import {
-  handleCSVExport,
-  SearchLogic,
-  handlePrint,
-} from "../reusableComponent/commonlogic";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import PaginationComponent from "../reusableComponent/paginationcomponent";
-import ClickableChips from "../reusableComponent/chips";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import Deleteconfirmationpopup from "../reusableComponent/popup/deleteconfirmationpopup";
-import { CenterPopup } from "../reusableComponent/popup/centerPopup";
+import { rows, columns, year } from "@/app/reusableComponent/JsonData";
+import { SearchLogic } from "@/app/reusableComponent/commonlogic";
+import DropdownComponent from "@/app/reusableComponent/dropdown";
+import ClickableChips from "@/app/reusableComponent/chips";
+import { CenterPopup } from "@/app/reusableComponent/popup/centerPopup";
 
 type Row = {
   employeeID: string;
@@ -42,18 +30,14 @@ type Row = {
 function Searchwithmenuitems() {
   const [tableColumns, setTableColumns] = useState<any>(columns);
   const [searchList, setSearchList] = useState<any>(columns);
-  // const [tableRows, setTableRows] = useState<any>(rows);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [search, setSearch] = useState<string>("");
-  // const [allRows, setAllRows] = useState<any>(rows);
   const columnRef = useRef<HTMLDivElement>(null);
   const ExportRef = useRef<HTMLDivElement>(null);
   const [showdetails, setDetails] = useState(false);
-
   const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  // const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
   const [openColumn, setOpenColumn] = useState<Boolean>(false);
   const [openExport, setOpenExport] = useState<Boolean>(false);
 
@@ -113,14 +97,7 @@ function Searchwithmenuitems() {
     }
   }, [searchQuery, columns]);
 
-  // Calculate total pages
-  // const totalPages = Math.ceil(tableRows.length / itemsPerPage);
 
-  // Get items for the current page
-  // const currentItems = tableRows.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );
 
   // Handle page change
   const goToPage = (page: number) => {

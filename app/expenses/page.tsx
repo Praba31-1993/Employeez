@@ -2,18 +2,14 @@
 
 import "../timesheet/timesheet.css";
 import React, { useState, useEffect } from "react";
-import Summarydetails from "../timesheet/summarydetails";
-import Listofholidays, { Timesheetaproover } from "../timesheet/listofholidays";
+import Summarydetails from "../timesheet/components/summarydetails";
+import  { Timesheetaproover } from "../timesheet/components/listofholidays";
 import Sidebar from "../sidebar/page";
-import Uploadfiles, { Viewfiles } from "../timesheet/uploadfiles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import {
-  Totalsummary,
-  Totalsummarycards,
-} from "../timesheet/totalsummarydetails";
-import Summaryheetcalendar from "./expensecsheetcalendar";
-import { Expensestotalsummary } from "./expensesaprroverandtotal";
+import Uploadfiles, { Viewfiles } from "../timesheet/components/uploadfiles";
+import { Totalsummarycards } from "../timesheet/components/totalsummarydetails";
+import Summaryheetcalendar from "./components/expensecsheetcalendar";
+import { Expensestotalsummary } from "./components/expensesaprroverandtotal";
 import { loginResponse } from "../reusableComponent/JsonData";
 import MonthlyCalendar from "../reusableComponent/calendar/monthlyCalendar";
 import WeeklyCalendar from "../reusableComponent/calendar/weeklycalendar";
@@ -22,23 +18,16 @@ import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
 import { Colors } from "../reusableComponent/styles";
-import { IconOutlinebutton } from "../reusableComponent/outlinebtn";
 import {
   faCirclePlus,
-  faFileCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Expenses({ weekListDatas }: any) {
   const useColors = Colors();
-  // State to toggle visibility of components
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timesheetList, setTimeSheetList] = useState<any>(TimesheetDataByMonth);
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
-  const [isWeeklyListupdated, setIsWeeklyListUpdated] =
-    useState<boolean>(false);
-  const [openpopups, openPopUp] = useState(false);
-
   const lastIndex = weekListDatas?.length - 1;
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
   const [open, setOpen] = useState(false);
@@ -148,10 +137,7 @@ export default function Expenses({ weekListDatas }: any) {
                     </div>
                   </div>
                   <div className=" d-flex align-items-center justify-content-end">
-                    {/* <div className="d-flex align-items-center" style={{ cursor: "pointer", }} onClick={() => openPopUp(prev => !prev)} >
-                        <FontAwesomeIcon icon={faFileCircleExclamation} style={{ color: useColors.themeRed }} />
-                        <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
-                    </div> */}
+
                     <button
                       className="outlinebtn ms-4 px-3 py-1"
                       style={{
