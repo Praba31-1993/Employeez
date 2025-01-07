@@ -1,74 +1,48 @@
-import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import "./stylessheetforreusablecomponent.css";
-import { Colors } from "../reusableComponent/styles";
+import React from 'react';
+
 interface PaginationProps {
-  data: any;
-  itemsPerPage: number;
   currentPage: number;
-  goToPage: (page: number) => void;
+  currentPageFunction: (page: number) => void;
+  pages: (number | string)[]; 
+  totalPages: number;
 }
 
-function PaginationComponent({
-  data,
-  itemsPerPage,
+const Paginationcomponent: React.FC<PaginationProps> = ({
   currentPage,
-  goToPage,
-}: PaginationProps) {
-  const useColors = Colors();
-  const totalPages = Math.ceil(data?.length / itemsPerPage);
-
-  const goToPreviousPage = () => {
-    if (currentPage > 1) goToPage(currentPage - 1);
-  };
-
-  const goToNextPage = () => {
-    if (currentPage < totalPages) goToPage(currentPage + 1);
-  };
-
-  const gotoFirstPage = () => {
-    goToPage(1);
-  };
-
-  const gotoLastPage = () => {
-    goToPage(totalPages);
-  };
-
-
+  currentPageFunction,
+  pages,
+  totalPages,
+}) => {
   return (
-    <div className="d-flex justify-content-between gap-2 align-items-center cursorpointer">
-      <KeyboardDoubleArrowLeftIcon
-        onClick={gotoFirstPage}
-        sx={{ fontSize: "15px", cursor: "pointer" }}
-      />
-      <button onClick={goToPreviousPage} disabled={currentPage === 1}>
-        Prev
-      </button>
-      {[...Array(totalPages).keys()].map((pageNumber) => (
-        <button
-          key={pageNumber}
-          onClick={() => goToPage(pageNumber + 1)}
-          style={{
-            backgroundColor:
-              currentPage === pageNumber + 1 ? useColors.themeRed : "",
-            color: currentPage === pageNumber + 1 ? "white" : "black",
-            borderRadius: "50px",
-            height: "30px",
-            width: "30px",
-          }}
+    <div>
+      <div className="d-flex align-items-center gap-2 justify-content-end">
+        <div
+          className="page-item"
+          style={{ cursor: 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
+          onClick={() => currentPage > 1 && currentPageFunction(currentPage - 1)}
         >
-          {pageNumber + 1}
-        </button>
-      ))}
-      <button onClick={goToNextPage} disabled={currentPage === totalPages}>
-        Next
-      </button>
-      <KeyboardDoubleArrowRightIcon
-        onClick={gotoLastPage}
-        sx={{ fontSize: "15px", cursor: "pointer" }}
-      />
+          Prev
+        </div>
+        {pages.map((page, index) => (
+          <div
+            key={index}
+            className={`page-item ${currentPage === page ? 'active' : ''}`}
+            style={{ cursor: 'pointer' }}
+            onClick={() => typeof page === 'number' && currentPageFunction(page)}
+          >
+            {page}
+          </div>
+        ))}
+        <div
+          className="page-item"
+          style={{ cursor: 'pointer', opacity: currentPage === totalPages ? 0.5 : 1 }}
+          onClick={() => currentPage < totalPages && currentPageFunction(currentPage + 1)}
+        >
+          Next
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default PaginationComponent;
+export default Paginationcomponent;

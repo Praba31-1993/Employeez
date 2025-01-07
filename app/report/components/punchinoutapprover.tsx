@@ -4,7 +4,7 @@ import {
   rowsForApprover,
   columnForApprover,
 } from "@/app/reusableComponent/JsonData";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -16,6 +16,7 @@ import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
 import Image from "next/image";
 import favourite from "@/public/assets/img/favourite.svg";
+import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 
 interface ApproverRow {
   employeeId: string;
@@ -39,6 +40,11 @@ function Punchinoutapprover() {
   const [rowsList, setRows] = useState<ApproverRow[]>(rowsForApprover);
   const columnRef = useRef<HTMLDivElement>(null);
   const [showdetails, setDetails] = useState(false);
+  const [pages, setPages] = useState([]);
+  const [countPerPage, setCountForPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalCount = rowsList.length;
+  const totalPages = Math.ceil(totalCount / countPerPage);
 
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ApproverRow;
@@ -59,6 +65,15 @@ function Punchinoutapprover() {
     setSearchList(updatedColumns);
   };
 
+  useEffect(() => {
+    const arr: any = [];
+    for (let i = 1; i <= totalPages; i++) {
+      arr.push(i);
+    }
+    setPages(arr);
+  }, [totalPages]);
+
+
   const handleSort = (key: keyof ApproverRow) => {
     let direction: "asc" | "desc" = "asc";
     if (
@@ -78,6 +93,17 @@ function Punchinoutapprover() {
     setRows(sortedRows);
   };
 
+  const currentPageItems = rowsList.slice(
+    (currentPage - 1) * countPerPage,
+    currentPage * countPerPage
+  );
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
+  };
+
+  console.log('currentPageItems', currentPageItems);
+  
   return (
     <div>
       <div className="d-flex  justify-content-between mt-3 mb-2">
@@ -303,7 +329,7 @@ function Punchinoutapprover() {
             </tr>
           </thead>
           <tbody className="dashboardcard">
-            {rowsList?.map((item, index) => (
+            {currentPageItems?.map((item, index) => (
               <tr key={index}>
                 <td className="para textheader">{item?.employeeId}</td>
                 <td className="para textheader">{item?.employeename}</td>
@@ -321,6 +347,12 @@ function Punchinoutapprover() {
         </table>
       </div>
       {/* table ends */}
+      <Paginationcomponent
+        currentPage={currentPage}
+        currentPageFunction={handlePageChange}
+        pages={pages}
+        totalPages={totalPages}
+      />
     </div>
   );
 }

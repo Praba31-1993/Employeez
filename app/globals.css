@@ -370,6 +370,34 @@ font-weight: 400;
   animation-delay: 4s; 
 }
 
+/* Paginatinon CSS */
+.page-item{
+  color:#707070;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: fit-content;
+  padding: 8px 12px;
+}
+
+.page-item.active{
+  color:white;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: red;
+  border: none;
+  border-radius: 50%;
+  height: fit-content;
+  padding: 8px 12px;
+
+}
+
+
 @keyframes rotate-text-up { 
   0%, 20% {
     transform: translate3d(0, 0, 0);
