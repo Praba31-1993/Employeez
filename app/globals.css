@@ -220,6 +220,21 @@ body {
   .tabletype th{
     background-color: transparent !important;
   }
+
+  .searchbar {
+    background: white;
+    border-radius: 10px !important;
+  }
+  .searchbar input {
+    border: 0 !important;
+    background: transparent;
+    padding-left: 40px; 
+    width: 100%;
+    height: 40px; 
+    outline: none;
+    font-size: 16px;
+  }
+  
 @media (max-width: "600px") {
   .theme {
     width: 50vw !important;
@@ -354,6 +369,34 @@ font-weight: 400;
 .rotatingText-adjective:nth-of-type(3) { 
   animation-delay: 4s; 
 }
+
+/* Paginatinon CSS */
+.page-item{
+  color:#707070;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: fit-content;
+  padding: 8px 12px;
+}
+
+.page-item.active{
+  color:white;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: red;
+  border: none;
+  border-radius: 50%;
+  height: fit-content;
+  padding: 8px 12px;
+
+}
+
 
 @keyframes rotate-text-up { 
   0%, 20% {

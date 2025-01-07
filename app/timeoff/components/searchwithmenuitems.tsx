@@ -15,6 +15,7 @@ import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import ClickableChips from "@/app/reusableComponent/chips";
 import { CenterPopup } from "@/app/reusableComponent/popup/centerPopup";
+import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 
 type Row = {
   employeeID: string;
@@ -36,10 +37,19 @@ function Searchwithmenuitems() {
   const ExportRef = useRef<HTMLDivElement>(null);
   const [showdetails, setDetails] = useState(false);
   const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  
   const [openColumn, setOpenColumn] = useState<Boolean>(false);
   const [openExport, setOpenExport] = useState<Boolean>(false);
+  const [pages, setPages] = useState([]);
+  const [sortConfig, setSortConfig] = useState<{
+    key: keyof Row;
+    direction: "asc" | "desc";
+  } | null>(null);
+  const [countPerPage, setCountForPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsList, setRows] = useState<Row[]>(rows);
+  const totalCount = rowsList.length;
+  const totalPages = Math.ceil(totalCount / countPerPage);
 
   const handleChecked = (id: any) => {
     const updatedColumns = tableColumns.map((columnsList: any) => {
@@ -76,15 +86,6 @@ function Searchwithmenuitems() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // useEffect(() => {
-  //   if (search !== "") {
-  //     const filteredRows = SearchLogic(allRows, search);
-  //     setTableRows(filteredRows?.length > 0 ? filteredRows : allRows);
-  //   } else {
-  //     setTableRows(allRows);
-  //   }
-  // }, [search, allRows]);
-
   useEffect(() => {
     if (searchQuery !== "") {
       const filteredSearchQuery = SearchLogic(columns, searchQuery);
@@ -97,19 +98,10 @@ function Searchwithmenuitems() {
     }
   }, [searchQuery, columns]);
 
-
-
   // Handle page change
   const goToPage = (page: number) => {
     setCurrentPage(page);
   };
-
-  const [rowsList, setRows] = useState<Row[]>(rows);
-
-  const [sortConfig, setSortConfig] = useState<{
-    key: keyof Row;
-    direction: "asc" | "desc";
-  } | null>(null);
 
   const handleSort = (key: keyof Row) => {
     let direction: "asc" | "desc" = "asc";
@@ -128,6 +120,22 @@ function Searchwithmenuitems() {
       return 0;
     });
     setRows(sortedRows);
+  };
+  useEffect(() => {
+    const arr: any = [];
+    for (let i = 1; i <= totalPages; i++) {
+      arr.push(i);
+    }
+    setPages(arr);
+  }, [totalPages]);
+
+  const currentPageItems = rowsList.slice(
+    (currentPage - 1) * countPerPage,
+    currentPage * countPerPage
+  );
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -179,12 +187,12 @@ function Searchwithmenuitems() {
                       }}
                       ref={ExportRef}
                     >
-                      {/* <p
+                      <p
                         className="m-0 para textheader"
-                        onClick={() => handleCSVExport(headers, rows)}
+                        // onClick={() => handleCSVExport(headers, rows)}
                       >
                         CSV File
-                      </p> */}
+                      </p>
                     </div>
                   )}
                 </li>
@@ -358,7 +366,7 @@ function Searchwithmenuitems() {
                   </tr>
                 </thead>
                 <tbody className="dashboardcard">
-                  {rowsList?.map((item, index) => (
+                  {currentPageItems?.map((item, index) => (
                     <tr key={index}>
                       <td className="para textheader">{item?.employeeID}</td>
                       <td className="para textheader">{item?.employeename}</td>
@@ -382,12 +390,12 @@ function Searchwithmenuitems() {
               </table>
             </div>
             <div className="d-flex justify-content-end my-3">
-              {/* <PaginationComponent
-                data={tableRows} 
-                itemsPerPage={itemsPerPage}
+              <Paginationcomponent
                 currentPage={currentPage}
-                goToPage={goToPage}
-              /> */}
+                currentPageFunction={handlePageChange}
+                pages={pages}
+                totalPages={totalPages}
+              />
             </div>
           </div>
         </div>
