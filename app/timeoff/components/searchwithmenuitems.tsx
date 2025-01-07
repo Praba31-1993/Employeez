@@ -179,12 +179,12 @@ function Searchwithmenuitems() {
                       }}
                       ref={ExportRef}
                     >
-                      {/* <p
+                      <p
                         className="m-0 para textheader"
-                        onClick={() => handleCSVExport(headers, rows)}
+                        // onClick={() => handleCSVExport(headers, rows)}
                       >
                         CSV File
-                      </p> */}
+                      </p>
                     </div>
                   )}
                 </li>
