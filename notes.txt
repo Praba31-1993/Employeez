@@ -1,0 +1,32 @@
+To call Pagination component You need to copy/paste those lines also  
+
+  const [pages, setPages] = useState([])
+  const [countPerPage, setCountForPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalCount = requestTable.length;
+  const totalPages = Math.ceil(totalCount / countPerPage);
+
+  
+  const currentPageItems = requestTable.slice(
+    (currentPage - 1) * countPerPage,
+    currentPage * countPerPage
+  );
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
+  };
+
+    useEffect(() => {
+    const arr: any = [];
+    for (let i = 1; i <= totalPages; i++) {
+      arr.push(i);
+    }
+    setPages(arr);
+  }, [totalPages]);
+  
+  <PaginationComponent
+  currentPage={currentPage}
+  currentPageFunction={handlePageChange}
+  pages={pages}
+  totalPages={totalPages}
+/>
