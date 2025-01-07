@@ -62,9 +62,10 @@ export default function ProfilesCard() {
       {open && <Contacts show={open} close={() => setOpen(false)} />}
       <div className="flex justify-content-between pb-2">
         <Menulistitem />
-        <div className="d-flex align-items-center pe-5">
+      
+        <div className="d-flex align-items-center pe-sm-5">
           <p
-            className="mb-0 cursorPointer para pe-3"
+            className="mb-0 cursorPointer para pe-3 d-sm-block d-none"
             style={{ color: useColors.themeRed }}
           >
             Supervisee
@@ -93,7 +94,7 @@ export default function ProfilesCard() {
           )}
         </div>
       </div>
-      <div className="d-flex pt-2  pe-2 justify-content-lg-between justify-content-xxl-start gap-xxl-5 flex-wrap">
+      <div className="d-flex pt-2  pe-2 justify-content-between justify-content-xxl-start gap-xxl-5 flex-wrap">
         {arrayList?.map((list: any, index: number) => {
           const isLastChild = index === arrayList.length - 1;
 

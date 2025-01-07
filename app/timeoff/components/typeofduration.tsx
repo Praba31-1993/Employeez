@@ -52,7 +52,7 @@ function Typeofduration() {
             </div>
           </div>
           <div className="col-6">
-            <div style={{ width: "90%", background: "white" }}>
+            <div style={{ width: "90%",  }}>
               <select className="w-100 p-3 rounded textheader" name="" id="">
                 <option value={10}>Ten</option>
                 <option value={20}>Twenty</option>

@@ -25,6 +25,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Colors } from "../reusableComponent/styles";
 import ImageComponent from "../reusableComponent/image";
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 
 interface SidebarProps {
     children: ReactNode;
@@ -460,28 +461,18 @@ const Sidebar = ({ children }: SidebarProps) => {
                     }}
                     className="contentSection"
                 >
-                    <div className="mainContentMenuBarWithNavbar ms-2">
+                    <div className="mainContentMenuBarWithNavbar py-2 ps-2">
                         {
-                            // <Image
-                            //   src={menuIcon || null}
-                            //   alt=""
-                            //   width={25}
-                            //   height={25}
-                            //   onClick={() => handleMenuToggle()}
-                            // />
+                         
                             <div onClick={() => handleMenuToggle()}>
-                                <ImageComponent
-                                    width={0}
-                                    height={0}
-                                    user={"/assets/img/menu.svg"}
-                                />
+                              < MenuOutlinedIcon className="textheader " sx={{fontSize:"30px  "}} />
                             </div>
                         }
                     </div>
                     <div className="mainContentNavbar">
                         <NavbarComponent />
                     </div>
-                    <div style={{ padding: "0 50px 0 20px" }}>{children}</div>
+                    <div style={{ padding: "0 10px 0 10px" }}>{children}</div>
                 </main>
                 <ToastContainer />
             </div>

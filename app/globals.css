@@ -386,3 +386,14 @@ select{
 tbody td{
   background-color: unset !important;
 }
+.dark select {
+  background-color: #312d4b !important;
+}
+.dark input {
+  background-color: #312d4b !important;
+  border: 0px !important;
+}
+.dark textarea {
+  background-color: #312d4b !important;
+  border: 0px !important;
+}
