@@ -1,6 +1,8 @@
 import * as React from "react";
+import { Colors } from "./styles";
 
 export default function DatePickerComponent() {
+    const useColors = Colors();
   return (
     <div>
       <input

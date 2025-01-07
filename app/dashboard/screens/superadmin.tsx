@@ -94,7 +94,7 @@ const SuperAdminDashboard = () => {
                 <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
                     <div className="row h-100 align-content-between">
                         <div className="col-12">
-                            <div className="dashboardcard p-2 p-xxl-3 mb-3"  style={borderAndBoxShadowStyles}>
+                            <div className="dashboardcard p-lg-2 p-3 p-xxl-3 mb-3"  style={borderAndBoxShadowStyles}>
                                 <Menulistforbirthdayworkvacation
                                     title={"Upcoming birthday"}
                                     headerImage={"/assets/img/birthday.svg"}
@@ -103,7 +103,7 @@ const SuperAdminDashboard = () => {
                             </div>
                         </div>
                         <div className="col-12" style={{ alignSelf: "baseline" }}>
-                            <div className="dashboardcard p-2 p-xxl-3" style={borderAndBoxShadowStyles} >
+                            <div className="dashboardcard p-lg-2 p-3 p-xxl-3" style={borderAndBoxShadowStyles} >
                                 <Workanniversary />
                             </div>
                         </div>
@@ -114,7 +114,7 @@ const SuperAdminDashboard = () => {
                 <div className=" col-12 mb-3 col-md-3 ">
                     <div className="row  h-100 align-content-between">
                         <div className="col-sm-12 ">
-                            <div className="dashboardcard p-3" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }} >
+                            <div className="dashboardcard p-3 mb-3 mb-sm-0" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }} >
                                 <ProjectExtension />
                             </div>
                         </div>
@@ -148,7 +148,7 @@ const SuperAdminDashboard = () => {
                             <div className=" col-12 mb-3 col-md-8 ">
                                 <BarChartComponent />
                             </div>
-                            <div className="col-12 mb-3 col-md-4 " style={{ borderLeft: "1px solid #A8A8A8" }}>
+                            <div className="col-12 mb-3 col-md-4 border-start-0 border-start-sm-1" style={{ borderLeft: "1px solid #A8A8A8" }}>
                                 <Salesreport />
                             </div>
                         </div>
@@ -167,7 +167,7 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 <div className="col-12 mb-3 col-md-2 ">
-                    <div className="row h-100 align-content-between">
+                    <div className="row w-100 m-0 h-100 align-content-between">
                         <Hrdatas />
                     </div>
                 </div>

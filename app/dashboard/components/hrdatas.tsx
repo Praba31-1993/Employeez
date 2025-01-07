@@ -21,7 +21,8 @@ function Hrdatas() {
         boxShadow: useColors.boxshadow,
       };
     return (
-        <><div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
+        <>
+        <div className="dashboardcard p-3 d-flex align-items-center mb-3" style={borderAndBoxShadowStyles}>
             <div
                 className="headingicons rounded"
                 style={{
