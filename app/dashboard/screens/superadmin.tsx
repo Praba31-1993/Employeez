@@ -127,7 +127,7 @@ const SuperAdminDashboard = () => {
                 </div>
                 <div className=" col-12 mb-3 col-md-3 ">
                     <div className="row  h-100 align-content-between">
-                        <div className="col-sm-12  mb-2">
+                        <div className="col-sm-12  mb-sm-2 mb-3">
                             <div className="dashboardcard p-3" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }}>
                                 <Vacationreport />
                             </div>
