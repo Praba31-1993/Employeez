@@ -332,6 +332,9 @@ font-weight: 400;
   .login .col-sm-6:nth-child(2){
     justify-content:center ;
   }
+  .draggable .summarysection{
+    width: 100% !important;
+  }
 }  
 .rotatingText-content { 
   position: relative;
