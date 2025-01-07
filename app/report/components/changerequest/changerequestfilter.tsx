@@ -99,7 +99,6 @@ function Changereruestfilter() {
     }
   }, [searchQuery, columns]);
 
-  console.log("totalPages", totalPages);
 
   useEffect(() => {
     const arr: any = [];
