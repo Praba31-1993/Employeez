@@ -234,11 +234,17 @@ body {
     outline: none;
     font-size: 16px;
   }
-  
+  .leftborders{
+    border-left: 1px solid #8d8d8d4f;
+  }
+  .borderright {
+    border-right: 1px solid #8d8d8d4f;
+  }
 @media (max-width: "600px") {
   .theme {
     width: 50vw !important;
   }
+ 
 }
 
 
@@ -303,8 +309,13 @@ font-weight: 400;
 .timer {
   justify-content: space-between;
 }
-
-
+.row{
+  width: 100%;
+  margin: 0px !important;
+}
+th{
+  white-space: nowrap !important;
+}
 
 @media (min-width:300px) and (max-width:600px) {
   .logogif{
@@ -334,6 +345,12 @@ font-weight: 400;
   }
    .summarysection{
     width: 100% !important;
+  }
+  .leftborders{
+    border-left: 0px solid #8d8d8d4f;
+  }
+  .borderright {
+    border-right: 0px solid #8d8d8d4f;
   }
 }  
 .rotatingText-content { 

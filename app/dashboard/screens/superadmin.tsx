@@ -91,7 +91,7 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 {/* Upcoming birthday and Work Anniversary */}
-                <div className=" col-12 mb-3 col-xxl-4 col-md-3 ">
+                <div className=" col-12 mb-3 col-xxl-4 col-md-3 px-0">
                     <div className="row h-100 align-content-between">
                         <div className="col-12">
                             <div className="dashboardcard p-lg-2 p-3 p-xxl-3 mb-3"  style={borderAndBoxShadowStyles}>
@@ -111,7 +111,7 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
-                <div className=" col-12 mb-3 col-md-3 ">
+                <div className=" col-12 mb-3 col-md-3 px-0">
                     <div className="row  h-100 align-content-between">
                         <div className="col-sm-12 ">
                             <div className="dashboardcard p-3 mb-3 mb-sm-0" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }} >
@@ -125,7 +125,7 @@ const SuperAdminDashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" col-12 mb-3 col-md-3 ">
+                <div className=" col-12 mb-3 col-md-3 px-0">
                     <div className="row  h-100 align-content-between">
                         <div className="col-sm-12  mb-sm-2 mb-3">
                             <div className="dashboardcard p-3" style={{ border: useColors.border, boxShadow: useColors.boxshadow, }}>
@@ -148,7 +148,7 @@ const SuperAdminDashboard = () => {
                             <div className=" col-12 mb-3 col-md-8 ">
                                 <BarChartComponent />
                             </div>
-                            <div className="col-12 mb-3 col-md-4 border-start-0 border-start-sm-1" style={{ borderLeft: "1px solid #A8A8A8" }}>
+                            <div className="col-12 mb-3 col-md-4  leftborders" >
                                 <Salesreport />
                             </div>
                         </div>
