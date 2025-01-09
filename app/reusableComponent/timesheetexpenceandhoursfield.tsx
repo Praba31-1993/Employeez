@@ -48,7 +48,7 @@ export function TimesheetExpenceAndHoursField({
                                 <div className="input-icon-wrapper">
                                     <input
                                         type="number"
-                                        className="py-3 px-2 with-icon"
+                                        className="py-sm-3 py-2 px-2 with-icon"
                                         value={values[index]}
                                         onChange={(e) => handleInputChange(index, e.target.value)}
                                         disabled={text === "LOP" || text === "PTO/EL"}
@@ -61,7 +61,7 @@ export function TimesheetExpenceAndHoursField({
                             {/* <p className="para2 mb-1 text-center" style={{ color: "red" }}>
               Week Total
             </p> */}
-                            <input type="text" className="py-3 px-2" value={total} readOnly />
+                            <input type="text" className="py-sm-3 py-2 px-2" value={total} readOnly />
                         </div>
                     </div>
                 ) : (
@@ -69,9 +69,7 @@ export function TimesheetExpenceAndHoursField({
                         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
                             (day, index) => (
                                 <div className="pe-1 inputdats position-relative" key={index}>
-                                    {/* <p className="para2 mb-1 textheader text-center">{`Nov 0${
-                  index + 1
-                } (${day})`}</p> */}
+
                                     <div className="input-icon-wrapper">
                                         <input
                                             type="number"
