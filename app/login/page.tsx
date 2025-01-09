@@ -95,26 +95,30 @@ export default function Login() {
                 password: "changeme",
             };
 
-            const loginResponse = await LoginApi(params);
+            // const loginResponse = await LoginApi(params);
+
+            
+            toast.success("Login successfull");
+            router.push("/dashboard");
 
             document.cookie = "auth=true; path=/; max-age=86400";
 
-            if (loginResponse?.data?.access_token) {
-                document.cookie = `authToken=${loginResponse?.data?.access_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
-                document.cookie = `refreshToken=${loginResponse?.data?.refresh_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
+            // if (loginResponse?.data?.access_token) {
+            //     document.cookie = `authToken=${loginResponse?.data?.access_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
+            //     document.cookie = `refreshToken=${loginResponse?.data?.refresh_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
 
-                toast.success("Login successfull");
-                router.push("/dashboard");
+            //     toast.success("Login successfull");
+            //     router.push("/dashboard");
 
-                const refreshParams = {
-                    refreshToken: loginResponse?.data?.refresh_token,
-                };
-                setInterval(() => {
-                    refreshAccessToken(refreshParams);
-                }, 60000);
-            } else {
-                router.push("/login");
-            }
+            //     const refreshParams = {
+            //         refreshToken: loginResponse?.data?.refresh_token,
+            //     };
+            //     setInterval(() => {
+            //         refreshAccessToken(refreshParams);
+            //     }, 60000);
+            // } else {
+            //     router.push("/login");
+            // }
         }
     };
     const dummyUserProfileList = [

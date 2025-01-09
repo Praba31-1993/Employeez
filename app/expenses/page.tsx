@@ -3,7 +3,7 @@
 import "../timesheet/timesheet.css";
 import React, { useState, useEffect } from "react";
 import Summarydetails from "../timesheet/components/summarydetails";
-import  { Timesheetaproover } from "../timesheet/components/listofholidays";
+import { Timesheetaproover } from "../timesheet/components/listofholidays";
 import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Uploadfiles, { Viewfiles } from "../timesheet/components/uploadfiles";
@@ -18,9 +18,7 @@ import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
 import { Colors } from "../reusableComponent/styles";
-import {
-  faCirclePlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function Expenses({ weekListDatas }: any) {
   const useColors = Colors();
@@ -79,11 +77,15 @@ export default function Expenses({ weekListDatas }: any) {
                   <div className="col-lg-12 px-0 col-sm-6">
                     <div className="calendar">
                       {loginResponse[0].userInfo?.paySchedule === "Monthly" ? (
-                        <MonthlyCalendar
+                        // <MonthlyCalendar
+                        //   value={currentDate}
+                        //   onChange={setCurrentDate}
+                        //   calendardatas={ConvertedTimeSheetForCalendar}
+                        //   weeklyList={handleWeekList}
+                        // />
+                        <WeeklyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
-                          calendardatas={ConvertedTimeSheetForCalendar}
-                          weeklyList={handleWeekList}
                         />
                       ) : loginResponse[0].userInfo?.paySchedule ===
                         "Weekly" ? (
@@ -137,7 +139,6 @@ export default function Expenses({ weekListDatas }: any) {
                     </div>
                   </div>
                   <div className=" d-flex align-items-center justify-content-end">
-
                     <button
                       className="outlinebtn ms-4 px-3 py-1"
                       style={{
