@@ -2666,7 +2666,6 @@ export const columns = [
   { id: 8, key: "action", label: "Action", checked: true },
 ];
 
-
 export const columnForApprover = [
   { id: 1, key: "employeeId", label: "Employee ID", checked: true },
   { id: 2, key: "employeename", label: "Employee Name", checked: false },
@@ -2820,3 +2819,189 @@ export const requestTable = [
     status: "Approved",
   },
 ];
+
+export const holidayList = [
+  {
+    id: 1,
+    year: "2023",
+    month: "January",
+    day: "26-01-2023",
+    festival: "Republic Day",
+  },
+  { id: 2, year: "2023", month: "March", day: "08-03-2023", festival: "Holi" },
+  {
+    id: 3,
+    year: "2023",
+    month: "April",
+    day: "14-04-2023",
+    festival: "Good Friday",
+  },
+  {
+    id: 4,
+    year: "2023",
+    month: "August",
+    day: "15-08-2023",
+    festival: "Independence Day",
+  },
+  {
+    id: 5,
+    year: "2023",
+    month: "October",
+    day: "24-10-2023",
+    festival: "Dussehra",
+  },
+  {
+    id: 6,
+    year: "2023",
+    month: "November",
+    day: "12-11-2023",
+    festival: "Diwali",
+  },
+
+  {
+    id: 7,
+    year: "2024",
+    month: "January",
+    day: "26-01-2024",
+    festival: "Republic Day",
+  },
+  { id: 8, year: "2024", month: "March", day: "25-03-2024", festival: "Holi" },
+  {
+    id: 9,
+    year: "2024",
+    month: "March",
+    day: "29-03-2024",
+    festival: "Good Friday",
+  },
+  {
+    id: 10,
+    year: "2024",
+    month: "August",
+    day: "15-08-2024",
+    festival: "Independence Day",
+  },
+  {
+    id: 11,
+    year: "2024",
+    month: "October",
+    day: "12-10-2024",
+    festival: "Dussehra",
+  },
+  {
+    id: 12,
+    year: "2024",
+    month: "November",
+    day: "01-11-2024",
+    festival: "Diwali",
+  },
+
+  {
+    id: 13,
+    year: "2025",
+    month: "January",
+    day: "14-01-2025",
+    festival: "Pongal",
+  },
+  {
+    id: 14,
+    year: "2025",
+    month: "January",
+    day: "26-01-2025",
+    festival: "Republic Day",
+  },
+  { id: 15, year: "2025", month: "March", day: "14-03-2025", festival: "Holi" },
+  {
+    id: 16,
+    year: "2025",
+    month: "April",
+    day: "18-04-2025",
+    festival: "Good Friday",
+  },
+  {
+    id: 17,
+    year: "2025",
+    month: "August",
+    day: "15-08-2025",
+    festival: "Independence Day",
+  },
+  {
+    id: 18,
+    year: "2025",
+    month: "October",
+    day: "31-10-2025",
+    festival: "Dussehra",
+  },
+  {
+    id: 19,
+    year: "2025",
+    month: "November",
+    day: "19-11-2025",
+    festival: "Diwali",
+  },
+
+  {
+    id: 20,
+    year: "2026",
+    month: "January",
+    day: "14-01-2026",
+    festival: "Pongal",
+  },
+  {
+    id: 21,
+    year: "2026",
+    month: "January",
+    day: "26-01-2026",
+    festival: "Republic Day",
+  },
+  { id: 22, year: "2026", month: "March", day: "03-03-2026", festival: "Holi" },
+  {
+    id: 23,
+    year: "2026",
+    month: "April",
+    day: "03-04-2026",
+    festival: "Good Friday",
+  },
+  {
+    id: 24,
+    year: "2026",
+    month: "August",
+    day: "15-08-2026",
+    festival: "Independence Day",
+  },
+  {
+    id: 25,
+    year: "2026",
+    month: "October",
+    day: "20-10-2026",
+    festival: "Dussehra",
+  },
+  {
+    id: 26,
+    year: "2026",
+    month: "November",
+    day: "07-11-2026",
+    festival: "Diwali",
+  },
+];
+
+export const vacationList = [
+  { id: 0, year: "2025", month: "January", day: "07-01-2025", reason: "Family Function" },
+  { id: 1, year: "2025", month: "January", day: "18-01-2025", reason: "Tour" },
+  { id: 2, year: "2025", month: "February", day: "14-02-2025", reason: "Wedding Anniversary" },
+  { id: 3, year: "2025", month: "March", day: "22-03-2025", reason: "Child's Birthday" },
+  { id: 4, year: "2025", month: "April", day: "05-04-2025", reason: "Religious Ceremony" },
+  { id: 5, year: "2025", month: "May", day: "15-05-2025", reason: "Family Reunion" },
+
+  { id: 6, year: "2026", month: "June", day: "10-06-2026", reason: "Vacation Trip" },
+  { id: 7, year: "2026", month: "July", day: "20-07-2026", reason: "Medical Appointment" },
+  { id: 8, year: "2026", month: "August", day: "25-08-2026", reason: "Child's School Event" },
+  { id: 9, year: "2026", month: "September", day: "18-09-2026", reason: "Home Renovation" },
+  { id: 10, year: "2026", month: "October", day: "08-10-2026", reason: "Relocation" },
+
+  { id: 11, year: "2027", month: "November", day: "12-11-2027", reason: "Personal Retreat" },
+  { id: 12, year: "2027", month: "December", day: "23-12-2027", reason: "Family Gathering" },
+  { id: 13, year: "2027", month: "January", day: "03-01-2027", reason: "Child's Competition" },
+  { id: 14, year: "2027", month: "February", day: "17-02-2027", reason: "Workshop Attendance" },
+  { id: 15, year: "2027", month: "March", day: "09-03-2027", reason: "Volunteering Activity" }
+];
+

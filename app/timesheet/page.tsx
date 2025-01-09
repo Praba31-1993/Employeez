@@ -1,10 +1,13 @@
 "use client";
 import "./timesheet.css";
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 import Listofholidays, { Timesheetaproover } from "./components/listofholidays";
 import Timesheetcalendar from "./components/timesheetscalendar";
 import Sidebar from "../sidebar/page";
-import { Totalsummary, Totalsummarycards } from "./components/totalsummarydetails";
+import {
+  Totalsummary,
+  Totalsummarycards,
+} from "./components/totalsummarydetails";
 import Uploadfiles, { Viewfiles } from "./components/uploadfiles";
 import { loginResponse } from "../reusableComponent/JsonData";
 import MonthlyCalendar from "../reusableComponent/calendar/monthlyCalendar";
@@ -12,12 +15,16 @@ import WeeklyCalendar from "../reusableComponent/calendar/weeklycalendar";
 import SemiMonthlyCalendar from "../reusableComponent/calendar/semimonthlyCalendar";
 import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
+import moment from "moment";
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timesheetList, setTimeSheetList] = useState<any>(TimesheetDataByMonth);
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
+  const [holidayPerMonth, setHolidayPerMonth] = useState<Array<any>>([]);
+  const [vacationPerMonth, setVacationPerMonth] = useState<Array<any>>([]);
+
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
   // Filter for objects with codeId and codeLabel (relevant data)
