@@ -43,7 +43,7 @@ export default function Requesttimeoff() {
                 <div className="col-12 col-md-5 ">
                     <Typeofduration />
 
-                    <div className="col-12 d-flex justify-content-center gap-5 py-4">
+                    <div className="col-12 d-flex justify-content-end gap-5 py-4">
                         <div className="ms-3">
                             <Outlinebutton
                                 color={useColors.themeRed}

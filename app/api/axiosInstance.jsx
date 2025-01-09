@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Base URL for your API
 // const base_url = process.env.NEXT_PUBLIC_API_URL || "https://api.escuelajs.co/api/";
-const base_url = "https://api.escuelajs.co/api";
+const base_url = "process.env.NEXT_PUBLIC_API_URL";
 
 const accessToken = localStorage.getItem('authToken');
 
