@@ -16,6 +16,7 @@ import SemiMonthlyCalendar from "../reusableComponent/calendar/semimonthlyCalend
 import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import moment from "moment";
+import { holidayList, vacationList } from "../reusableComponent/JsonData";
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
@@ -24,6 +25,8 @@ export default function Timesheet() {
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
   const [holidayPerMonth, setHolidayPerMonth] = useState<Array<any>>([]);
   const [vacationPerMonth, setVacationPerMonth] = useState<Array<any>>([]);
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
 
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
@@ -52,6 +55,29 @@ export default function Timesheet() {
     setgetWeeklyList(weeklistData);
   };
 
+  const handleHolidayandVacationList = (month: any, year: any) => {
+    console.log("month", typeof month, typeof year);
+
+    const holidayresult = holidayList.filter(
+      (list) => list.month === month && list.year === year.toString()
+    );
+    setHolidayPerMonth(holidayresult);
+
+    const vacationresult = vacationList.filter(
+      (list) => list.month === month && list.year === year.toString()
+    );
+    setVacationPerMonth(vacationresult);
+  };
+
+  const handleSelectedMonth = (month: any, year: any) => {
+    let convertedMonth = moment(month + 1, "M").format("MMMM");
+    setSelectedMonth(convertedMonth);
+    setSelectedYear(year);
+  };
+
+  useEffect(() => {
+    handleHolidayandVacationList(selectedMonth, selectedYear);
+  }, [selectedMonth, selectedYear]);
   return (
     <>
       <Sidebar>
@@ -71,6 +97,7 @@ export default function Timesheet() {
                           onChange={setCurrentDate}
                           calendardatas={ConvertedTimeSheetForCalendar}
                           weeklyList={handleWeekList}
+                          handleSelectedMonth={handleSelectedMonth}
                         />
                       ) : loginResponse[0].userInfo?.paySchedule ===
                         "Weekly" ? (
@@ -103,7 +130,10 @@ export default function Timesheet() {
                   </div>
                   <div className="col-lg-12 col-sm-6 d-lg-block d-none">
                     <Timesheetaproover />
-                    <Listofholidays />
+                    <Listofholidays
+                      holidayPerMonth={holidayPerMonth}
+                      vacationPerMonth={vacationPerMonth}
+                    />
                     <Viewfiles />
                   </div>
                 </div>
@@ -122,10 +152,13 @@ export default function Timesheet() {
                 )}
               </div>
               <div className="col-12  d-block d-lg-none">
-                    <Timesheetaproover />
-                    <Listofholidays />
-                    <Viewfiles />
-                  </div>
+                <Timesheetaproover />
+                <Listofholidays
+                  holidayPerMonth={holidayPerMonth}
+                  vacationPerMonth={vacationPerMonth}
+                />
+                <Viewfiles />
+              </div>
             </div>
           </div>
           <Uploadfiles />
