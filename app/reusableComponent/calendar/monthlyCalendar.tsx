@@ -9,21 +9,23 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import "./rcalendar.css";
-
+ 
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
+ 
 type Props = {
   value?: Date;
   onChange: (date: Date) => void;
   calendardatas: any; // Assuming this is an array of data
   weeklyList: (weeklist: any) => void;
+  handleSelectedMonth:(month:any,year:any )=>void;
 };
-
+ 
 const MonthlyCalendar: React.FC<Props> = ({
   value = new Date(),
   onChange,
   calendardatas,
   weeklyList,
+  handleSelectedMonth
 }) => {
   const [selectedDate, setSelectedDate] = useState(value);
   const [selectedMonth, setSelectedMonth] = useState<number>(
@@ -37,24 +39,24 @@ const MonthlyCalendar: React.FC<Props> = ({
   const [weekData, setWeekData] = useState<
     Array<{ day: string; date: string }>
   >([]);
-
+ 
   useEffect(() => {
     const start = new Date(selectedYear, selectedMonth, 1);
     const end = new Date(selectedYear, selectedMonth + 1, 0);
-
+ 
     const newRange = `${format(start, "dd/MM/yyyy")} - ${format(
       end,
       "dd/MM/yyyy"
     )}`;
     setDropdownRange(newRange);
   }, [selectedYear, selectedMonth]);
-
+ 
   useEffect(() => {
     if (weekData.length > 0) {
       weeklyList(weekData); // Pass updated weekData to parent when it changes
     }
   }, [weekData, weeklyList]);
-
+ 
   // Define the start and end of the selected range
   const [startRange, endRange] = dropdownRange
     ? dropdownRange.split(" - ").map((date) => {
@@ -62,49 +64,49 @@ const MonthlyCalendar: React.FC<Props> = ({
         return new Date(year, month - 1, day);
       })
     : [new Date(), new Date()];
-
+ 
   const totalDaysInRange =
     Math.floor(
       (endRange.getTime() - startRange.getTime()) / (1000 * 3600 * 24)
     ) + 1;
-
+ 
   const firstDayOfWeek = startRange.getDay();
   const prefixDays = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
-
+ 
   const handleMonthChange = (event: SelectChangeEvent<number>) => {
     const month = Number(event.target.value);
     setSelectedMonth(month);
   };
-
+ 
   const handleYearChange = (event: SelectChangeEvent<string>) => {
     const year = parseInt(event.target.value, 10);
     setSelectedYear(year);
-
+ 
     const newStart = new Date(year, selectedMonth, startRange.getDate());
     const newEnd = new Date(year, selectedMonth, endRange.getDate());
-
+ 
     setDropdownRange(
       `${format(newStart, "dd/MM/yyyy")} - ${format(newEnd, "dd/MM/yyyy")}`
     );
     setSelectedDate(newStart);
     onChange(newStart);
   };
-
+ 
   // Map calendardatas to a lookup object by calDate for fast access
   const calendardataMap = calendardatas.reduce((acc: any, item: any) => {
     const formattedDate = format(parseISO(item.calDate), "yyyy-MM-dd");
     acc[formattedDate] = item;
     return acc;
   }, {});
-
+ 
   const handleDateClick = (date: Date) => {
     const formattedDate = format(date, "yyyy-MM-dd");
     const dataForDate = calendardataMap[formattedDate];
-
+ 
     if (dataForDate) {
         setClickedDateData(dataForDate);
     }
-
+ 
     // Calculate the week containing the clicked date
     const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
     const clickedWeekDatas = Array.from({ length: 7 }).map((_, index) => {
@@ -117,18 +119,24 @@ const MonthlyCalendar: React.FC<Props> = ({
             monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
         };
     });
-
+ 
     setWeekData(clickedWeekDatas);
     setSelectedDate(date);
     onChange?.(date); // Notify parent if onChange is provided
 };
-
+ 
 // Automatically trigger a "click" on the current date when the component mounts
 useEffect(() => {
     const today = new Date();
     handleDateClick(today);
+ 
 }, []); // Empty dependency array ensures this runs only once
-
+ 
+useEffect(()=>{
+  handleSelectedMonth(selectedMonth, selectedYear)
+ 
+},[selectedMonth,selectedYear])
+ 
   return (
     <div className=" pb-4 pe-3">
       <div className="flex gap-3 me-5">
@@ -158,7 +166,7 @@ useEffect(() => {
             ))}
           </Select>
         </FormControl>
-
+ 
         <FormControl fullWidth>
           <Select
             labelId="year-select-label"
@@ -184,7 +192,7 @@ useEffect(() => {
           </Select>
         </FormControl>
       </div>
-
+ 
       {/* Weekdays */}
       <div className="grid grid-cols-7 items-center justify-center text-center">
         {weeks.map((week, index) => (
@@ -192,12 +200,12 @@ useEffect(() => {
             {week}
           </Cell>
         ))}
-
+ 
         {/* Empty cells before the start of the range */}
         {Array.from({ length: prefixDays }).map((_, index) => (
           <Cell key={index} />
         ))}
-
+ 
         {/* Dates within the specified range */}
         {Array.from({ length: totalDaysInRange }).map((_, index) => {
           const date = add(startRange, { days: index });
@@ -205,7 +213,7 @@ useEffect(() => {
           const isCurrentDate =
             formattedDate === format(selectedDate, "yyyy-MM-dd");
           const valueForDate = calendardataMap[formattedDate];
-
+ 
           return (
             <Cell
               key={index}
@@ -226,5 +234,6 @@ useEffect(() => {
     </div>
   );
 };
-
+ 
 export default MonthlyCalendar;
+ 

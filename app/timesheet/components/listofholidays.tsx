@@ -25,7 +25,7 @@ export default function Listofholidays({
           />
           <p className="para ps-2 mb-0 unselectcolor">List of holidays</p>
         </div>
-        {holidayPerMonth.map((holiday: any) => (
+        {holidayPerMonth?.map((holiday: any) => (
           <div key={holiday?.id}>
             <div className="d-flex pt-1 align-items-center">
               <div
@@ -52,7 +52,7 @@ export default function Listofholidays({
           <p className="para ps-2 mb-0 unselectcolor">Vacations</p>
         </div>
 
-        {vacationPerMonth.map((vacation: any) => (
+        {vacationPerMonth?.map((vacation: any) => (
           <div key={vacation?.id}>
             <div className="d-flex pt-1 align-items-center">
               <div className="vacantionround mr-2"></div>
