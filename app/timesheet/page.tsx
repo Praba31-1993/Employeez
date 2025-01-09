@@ -56,13 +56,13 @@ export default function Timesheet() {
     <>
       <Sidebar>
         <section className="timesheet">
-          <div className="container-fluid px-0 mb-3">
+          <div className="container-fluid px-0  mb-3">
             <div className="row">
               <div className="col-12 pt-3 pb-0">
                 <h2 className="heading textheader mb-0">Timesheet</h2>
               </div>
               <div className="col-lg-4 col-xxl-3 borderright">
-                <div className="row">
+                <div className="row px-0">
                   <div className="col-lg-12 px-0 col-sm-6">
                     <div className="calendar">
                       {loginResponse[0].userInfo?.paySchedule === "Monthly" ? (
@@ -101,7 +101,7 @@ export default function Timesheet() {
                     />
                     {/* <Summarydetails /> */}
                   </div>
-                  <div className="col-lg-12 col-sm-6">
+                  <div className="col-lg-12 col-sm-6 d-lg-block d-none">
                     <Timesheetaproover />
                     <Listofholidays />
                     <Viewfiles />
@@ -121,6 +121,11 @@ export default function Timesheet() {
                   />
                 )}
               </div>
+              <div className="col-12  d-block d-lg-none">
+                    <Timesheetaproover />
+                    <Listofholidays />
+                    <Viewfiles />
+                  </div>
             </div>
           </div>
           <Uploadfiles />
