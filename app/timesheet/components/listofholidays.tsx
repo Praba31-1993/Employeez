@@ -32,8 +32,8 @@ export default function Listofholidays({
                 className="round mr-2"
                 style={{ background: useColors.themeRed }}
               ></div>
-              <span>{holiday?.festival}</span>
-              <span className="ml-3">
+              <span className="para mb-0 textheader">{holiday?.festival}</span>
+              <span className="ml-3 para textheader">
                 {moment(holiday?.day, "DD-MM-YYYY").format("D MMM YYYY")}
               </span>
             </div>
@@ -56,7 +56,7 @@ export default function Listofholidays({
           <div key={vacation?.id}>
             <div className="d-flex pt-1 align-items-center">
               <div className="vacantionround mr-2"></div>
-              <span>
+              <span className="para mb-0 textheader">
                 {moment(vacation?.day, "DD-MM-YYYY").format("D MMM YYYY")}
               </span>
             </div>
