@@ -103,7 +103,7 @@ export default function Login() {
                 document.cookie = `authToken=${loginResponse?.data?.access_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
                 document.cookie = `refreshToken=${loginResponse?.data?.refresh_token}; path=/; max-age=86400; Secure; HttpOnly; SameSite=Lax`;
 
-                toast.success("Login API successful!");
+                toast.success("Login successfull");
                 router.push("/dashboard");
 
                 const refreshParams = {
