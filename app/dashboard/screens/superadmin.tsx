@@ -48,7 +48,7 @@ const SuperAdminDashboard = () => {
 
 
     return (
-        <div className="container-fluid my-3">
+        <div className="container-fluid px-lg-0 my-3">
             {/* <p> {moment("2024-07-30").format(`${dummyUser?.dateFormat}`)}</p>
       <p>{dummyUser?.currency + "15000"}</p>
       */}

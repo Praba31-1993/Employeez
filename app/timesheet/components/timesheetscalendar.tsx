@@ -112,16 +112,16 @@ export default function Timesheetcalendar({
               icon={faFileCircleExclamation}
               style={{ color: useColors.themeRed }}
             />
-            <h2 className="para ms-2 mb-0 shade">Annual leave summary</h2>
+            <h2 className="para ms-2 d-sm-block d-none mb-0 shade">Annual leave summary</h2>
           </div>
           {/* Annula leave summary */}
           <div
             onClick={() => setOpen((prev) => !prev)}
-            className="ms-4 px-3 py-1"
+            className="ms-sm-4 px-3 py-1"
           >
            
             <button
-              className="outlinebtn ms-4 px-3 py-1"
+              className="outlinebtn ms-sm-4 px-3 py-1"
               style={{
                 color: useColors.themeRed,
                 border: `1px solid ${useColors.themeRed}`,
