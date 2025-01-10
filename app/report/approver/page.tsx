@@ -1,6 +1,6 @@
 "use client";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
-import Sidebar from "@/app/sidebar/page";
+import Sidebar from "@/app/sidebar/page1";
 import React, { useState } from "react";
 import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import { approverrepots } from "../../reusableComponent/JsonData";

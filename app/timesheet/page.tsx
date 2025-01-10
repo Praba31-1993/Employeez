@@ -3,7 +3,6 @@ import "./timesheet.css";
 import React, { useEffect, useState } from "react";
 import Listofholidays, { Timesheetaproover } from "./components/listofholidays";
 import Timesheetcalendar from "./components/timesheetscalendar";
-import Sidebar from "../sidebar/page";
 import {
   Totalsummary,
   Totalsummarycards,
@@ -17,6 +16,7 @@ import BiWeeklyCalendar from "../reusableComponent/calendar/biweeklycalendar";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import moment from "moment";
 import { holidayList, vacationList } from "../reusableComponent/JsonData";
+import Sidebar from "../sidebar/page";
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
