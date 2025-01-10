@@ -5,16 +5,15 @@ import ProfilesCard from "../components/profilescard";
 import ListCard from "@/app/reusableComponent/listitems";
 import ToDoList from "../components/toDoList";
 import Menulistforbirthdayworkvacation from "../components/menulistforbirthdayworkvacation";
-import birthday from "/assets/img/birthday.svg";
 import { arrayList } from "@/app/reusableComponent/JsonData";
 import Workanniversary from "../components/workanniversary";
 import PendingTimeSheet from "../components/pendingTimesheet";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
-import anniversary from "/assets/img/anniversary.svg";
+import anniversary from "@/public/assets/img/anniversary.svg";
 import NewHireCandidate from "../components/newhirecandidate";
 
-function PayRoleExecutive() {
+function PayRoleExecutiveDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -41,7 +40,7 @@ function PayRoleExecutive() {
 
             <div className="col-12 col-lg-8 mb-3">
               <div className="row mb-3">
-                <div className="col-6">
+                <div className="col-6 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -67,7 +66,7 @@ function PayRoleExecutive() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-6">
+                <div className="col-6 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -167,4 +166,4 @@ function PayRoleExecutive() {
   );
 }
 
-export default PayRoleExecutive;
+export default PayRoleExecutiveDashboard;

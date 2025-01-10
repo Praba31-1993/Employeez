@@ -15,9 +15,9 @@ import Needhelp from "../components/needhelp";
 import HorizontalBars from "@/app/reusableComponent/chart/horizontalbarchart";
 import Hrdatas from "../components/hrdatas";
 import NewHireCandidate from "../components/newhirecandidate";
-import anniversary from "/assets/img/anniversary.svg";
+import anniversary from "@/public/assets/img/anniversary.svg";
 
-function Recruiter() {
+function RecruiterDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -42,6 +42,12 @@ function Recruiter() {
               </div>
             </div>
 
+            <div className="col-12 col-md-6 col-lg-2 mb-3">
+              <div className="row h-100 align-content-between">
+                <Hrdatas />
+              </div>
+            </div>
+
             <div className="col-12 col-md-6 col-lg-6 mb-3">
               <div
                 className="dashboardcard p-3  h-100 mb-3"
@@ -51,12 +57,6 @@ function Recruiter() {
                 <div className="" style={{ overflowX: "auto" }}>
                   <HorizontalBars />
                 </div>
-              </div>
-            </div>
-
-            <div className="col-12 col-md-6 col-lg-2 mb-3">
-              <div className="row h-100 align-content-between">
-                <Hrdatas />
               </div>
             </div>
 
@@ -70,7 +70,7 @@ function Recruiter() {
             </div>
             <div className="col-4">
               <div className="row mb-3">
-                <div className="col-12">
+                <div className="col-12 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -84,7 +84,7 @@ function Recruiter() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-12">
+                <div className="col-12 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -131,7 +131,7 @@ function Recruiter() {
               >
                 <Menulistforbirthdayworkvacation
                   title={"Upcoming birthday"}
-                     headerImage={"/assets/img/birthday.svg"}
+                  headerImage={"/assets/img/birthday.svg"}
                   items={birthdayAnniversaryReport}
                 />
               </div>
@@ -168,4 +168,4 @@ function Recruiter() {
   );
 }
 
-export default Recruiter;
+export default RecruiterDashboard;

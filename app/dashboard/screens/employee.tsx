@@ -20,7 +20,7 @@ import Vacationreport from "../components/vacationreport";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
 
-function Employee() {
+function EmployeeDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -125,4 +125,4 @@ function Employee() {
   );
 }
 
-export default Employee;
+export default EmployeeDashboard;
