@@ -47,6 +47,7 @@ const Sidebar = ({ children }: SidebarProps) => {
   const [menuLists, setMenuLists] = useState(menuItem);
   const [visibleMenus, setVisibleMenus] = useState(false);
   const pathname = usePathname();
+  const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const selectedColor = useSelector((state: RootState) => state.color.color);
 
@@ -64,6 +65,11 @@ const Sidebar = ({ children }: SidebarProps) => {
     localStorage.setItem("pinned", checked.toString());
     setIsOpen(checked);
   };
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   const toggleChildMenu = (itemName: string) => {
     setExpandedItem((prev) => (prev === itemName ? null : itemName));
@@ -145,12 +151,6 @@ const Sidebar = ({ children }: SidebarProps) => {
     toast.success(Messages.success.restored);
   };
   const useColors = Colors();
-  const [expanded, setExpanded] = React.useState<string | false>(false);
-
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
 
   return (
     <>
@@ -217,262 +217,10 @@ const Sidebar = ({ children }: SidebarProps) => {
 
           {menuLists?.map((roleGroup, index) => (
             <div key={index}>
-              {/* <div
-              className="para2 py-2"
-              style={{
-                display: "flex",
-                margin: "0px 9px",
-                fontStyle: "normal",
-                fontWeight: "100",
-              }}
-            >
-              <Divider
-                textAlign="left"
-                sx={{
-                  "&::before": { content: '""' },
-                  flexGrow: 1,
-                  margin: "0 0 0px 0",
-                }}
-              >
-                {" "}
-                {isOpen && roleGroup.role}{" "}
-              </Divider>
-              {roleGroup.role === "Basic" && (
-                <div
-                  style={{
-                    cursor: "pointer",
-                    display: isOpen ? "block" : "none",
-                  }}
-                >
-                  {hideToggle ? (
-                    <div style={{ display: "flex", gap: "1em" }}>
-                      <Image
-                        src={"/assets/img/approved.svg"}
-                        alt=""
-                        width={20}
-                        height={20}
-                        onClick={ApprovedToggle}
-                      />
-                      <Image
-                        src={"/assets/img/rejected.svg"}
-                        alt=""
-                        width={20}
-                        height={20}
-                        onClick={RejectedToggle}
-                      />
-                      <Image
-                        src={"/assets/img/refresh.svg"}
-                        alt=""
-                        width={20}
-                        height={20}
-                        onClick={RefreshToggle}
-                      />
-                    </div>
-                  ) : (
-                    <div style={{ display: isOpen ? "block" : "none" }}>
-                      <Image
-                        src={"/assets/img/basicmenu.svg"}
-                        alt=""
-                        width={20}
-                        height={20}
-                        onClick={() => sethideToggle((prev) => !prev)}
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-            {roleGroup.roleItems?.map((item, itemIndex) => (
-              <div key={itemIndex}>
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="menuTextStyle"
-                >
-                  <Link
-                    href={item.path}
-                    className={`link ${
-                      pathname === item.path && !hideToggle
-                        ? "active"
-                        : pathname === item.path && hideToggle
-                        ? "activewithNoBackground"
-                        : ""
-                    } mb-0 w-100`}
-                    style={{
-                      display: "flex",
-                      justifyContent:
-                        isOpen || visibleMenus ? "flex-start" : "center",
-                      alignItems: "center",
-                      background:
-                        pathname === item.path && !hideToggle
-                          ? useColors.themeRed
-                          : "transparent",
-                    }}
-                  >
-                    <Image
-                      src={
-                        pathname === item.path && !hideToggle
-                          ? item?.icon ?? "/assets/img/basicmenu.svg"
-                          : item?.inactive ?? "/assets/img/basicmenu.svg"
-                      }
-                      alt={`${item.name} Icon`}
-                      aria-label={`Navigate to ${item.name}`}
-                      width={20}
-                      height={20}
-                    />
-                    <div
-                      className="para"
-                      style={{
-                        display: isOpen || visibleMenus ? "block" : "none",
-                        fontFamily: "Inter, sans-serif !important",
-                        textTransform: TextStyles.textTransform,
-                      }}
-                    >
-                      {item.name}
-                    </div>
-                  </Link>
-
-                  {item.childItems && isOpen && (
-                    <KeyboardArrowRightIcon
-                      onClick={() => toggleChildMenu(item.name)}
-                      style={{
-                        cursor: "pointer",
-                        transform:
-                          expandedItem === item.name
-                            ? "rotate(90deg)"
-                            : "rotate(0)",
-                        transition: "transform 0.3s ease",
-                      }}
-                    />
-                  )}
-                  {!item.childItems && isOpen && hideToggle && (
-                    <ToggleSwitch
-                      isChecked={item?.checked}
-                      onToggle={() =>
-                        handleToggleChange(index, itemIndex, item?.checked)
-                      }
-                    />
-                  )}
-                </div>
-
-                {hideToggle ? (
-                  <>
-                    {item.childItems && isOpen && expandedItem && (
-                      <>
-                        <div
-                          className="para"
-                          style={{
-                            display: "block",
-                            paddingLeft: "30px",
-                            background: "#f4f4f4",
-                            borderLeft: "2px solid #ddd",
-                            color: "#6C6A6A",
-                            fontFamily: "Inter, sans-serif !important",
-                            textTransform: TextStyles.textTransform,
-                          }}
-                        >
-                          {item.childItems?.map((child, childIndex) => (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                              key={childIndex}
-                            >
-                              <Link
-                                key={childIndex}
-                                href={child.path}
-                                className={`link ${
-                                  pathname === child.path ? "active" : ""
-                                }`}
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  padding: "10px 20px",
-                                  textDecoration: "none",
-                                }}
-                              >
-                                <Image
-                                  src={
-                                    pathname === child.path
-                                      ? item?.icon ??
-                                        "/assets/img/basicmenu.svg"
-                                      : child.inactive ??
-                                        "/assets/img/basicmenu.svg"
-                                  }
-                                  alt={`${child.name} Icon`}
-                                  width={20}
-                                  height={20}
-                                />
-                                <div>{child.name}</div>
-                              </Link>
-                              {hideToggle && (
-                                <ToggleSwitch
-                                  isChecked={child?.checked}
-                                  onToggle={() =>
-                                    handleToggleChange(
-                                      index,
-                                      childIndex,
-                                      child?.checked
-                                    )
-                                  }
-                                />
-                              )}{" "}
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {item.childItems && (
-                      <>
-                        <div
-                          className="menudropdown"
-                          style={{
-                            display:
-                              expandedItem === item.name ? "block" : "none",
-                          }}
-                        >
-                          {item.childItems?.map((child, childIndex) => (
-                            <div className="menuTextStyle " key={childIndex}>
-                              <Link
-                                key={childIndex}
-                                href={child.path}
-                                className={`link ${
-                                  pathname === child.path ? "active" : ""
-                                } mb-0 w-100`}
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  color:
-                                    pathname === child.path
-                                      ? useColors.themeRed
-                                      : "", // Apply themeRed to the active link
-                                }}
-                              >
-                                <Image
-                                  src={"/assets/img/basicmenu.svg"}
-                                  alt={`${child.name} Icon`}
-                                  width={20}
-                                  height={20}
-                                />
-                                <div>{child.name}</div>
-                              </Link>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
-            ))} */}
-
               <Accordion
                 sx={{ background: "none !important" }}
-                onChange={handleChange("panel1")}
-                expanded={expanded === "panel1"}
+                expanded={expanded === roleGroup.id}
+                onChange={handleChange(roleGroup.id)}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
