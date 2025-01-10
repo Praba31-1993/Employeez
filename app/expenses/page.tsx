@@ -4,7 +4,6 @@ import "../timesheet/timesheet.css";
 import React, { useState, useEffect } from "react";
 import Summarydetails from "../timesheet/components/summarydetails";
 import { Timesheetaproover } from "../timesheet/components/listofholidays";
-import Sidebar from "../sidebar/page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Uploadfiles, { Viewfiles } from "../timesheet/components/uploadfiles";
 import { Totalsummarycards } from "../timesheet/components/totalsummarydetails";
@@ -19,6 +18,7 @@ import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexpenceandhoursfield";
 import { Colors } from "../reusableComponent/styles";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import Sidebar from "../sidebar/page";
 
 export default function Expenses({ weekListDatas }: any) {
   const useColors = Colors();

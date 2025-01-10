@@ -242,6 +242,7 @@ export const Codes = [
 ];
 
 interface IRoleGroup {
+  id: string;
   role: string;
   roleItems: ISidebarItem[];
 }
@@ -256,6 +257,7 @@ interface ISidebarItem {
 
 export const menuItem: IRoleGroup[] = [
   {
+    id: "1",
     role: "",
     roleItems: [
       {
@@ -268,6 +270,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "2",
     role: "Basic",
     roleItems: [
       {
@@ -380,6 +383,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "17",
     role: "Delegation",
     roleItems: [
       {
@@ -399,6 +403,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "19",
     role: "Manager",
     roleItems: [
       {
@@ -432,6 +437,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: '23',
     role: "Human Resources",
     roleItems: [
       {
@@ -465,6 +471,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "27",
     role: "Immigration",
     roleItems: [
       {
@@ -477,6 +484,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "28",
     role: "Sales",
     roleItems: [
       {
@@ -496,6 +504,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "30",
     role: "Sub-Contract onboarding",
     roleItems: [
       {
@@ -515,6 +524,8 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "32",
+
     role: "Accounting",
     roleItems: [
       {
@@ -534,6 +545,8 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "34",
+
     role: "Payroll",
     roleItems: [
       {
@@ -553,6 +566,8 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "36",
+
     role: "Admin",
     roleItems: [
       {
@@ -565,6 +580,7 @@ export const menuItem: IRoleGroup[] = [
     ],
   },
   {
+    id: "37",
     role: "subscription",
     roleItems: [
       {
@@ -2985,23 +3001,112 @@ export const holidayList = [
 ];
 
 export const vacationList = [
-  { id: 0, year: "2025", month: "January", day: "07-01-2025", reason: "Family Function" },
+  {
+    id: 0,
+    year: "2025",
+    month: "January",
+    day: "07-01-2025",
+    reason: "Family Function",
+  },
   { id: 1, year: "2025", month: "January", day: "18-01-2025", reason: "Tour" },
-  { id: 2, year: "2025", month: "February", day: "14-02-2025", reason: "Wedding Anniversary" },
-  { id: 3, year: "2025", month: "March", day: "22-03-2025", reason: "Child's Birthday" },
-  { id: 4, year: "2025", month: "April", day: "05-04-2025", reason: "Religious Ceremony" },
-  { id: 5, year: "2025", month: "May", day: "15-05-2025", reason: "Family Reunion" },
+  {
+    id: 2,
+    year: "2025",
+    month: "February",
+    day: "14-02-2025",
+    reason: "Wedding Anniversary",
+  },
+  {
+    id: 3,
+    year: "2025",
+    month: "March",
+    day: "22-03-2025",
+    reason: "Child's Birthday",
+  },
+  {
+    id: 4,
+    year: "2025",
+    month: "April",
+    day: "05-04-2025",
+    reason: "Religious Ceremony",
+  },
+  {
+    id: 5,
+    year: "2025",
+    month: "May",
+    day: "15-05-2025",
+    reason: "Family Reunion",
+  },
 
-  { id: 6, year: "2026", month: "June", day: "10-06-2026", reason: "Vacation Trip" },
-  { id: 7, year: "2026", month: "July", day: "20-07-2026", reason: "Medical Appointment" },
-  { id: 8, year: "2026", month: "August", day: "25-08-2026", reason: "Child's School Event" },
-  { id: 9, year: "2026", month: "September", day: "18-09-2026", reason: "Home Renovation" },
-  { id: 10, year: "2026", month: "October", day: "08-10-2026", reason: "Relocation" },
+  {
+    id: 6,
+    year: "2026",
+    month: "June",
+    day: "10-06-2026",
+    reason: "Vacation Trip",
+  },
+  {
+    id: 7,
+    year: "2026",
+    month: "July",
+    day: "20-07-2026",
+    reason: "Medical Appointment",
+  },
+  {
+    id: 8,
+    year: "2026",
+    month: "August",
+    day: "25-08-2026",
+    reason: "Child's School Event",
+  },
+  {
+    id: 9,
+    year: "2026",
+    month: "September",
+    day: "18-09-2026",
+    reason: "Home Renovation",
+  },
+  {
+    id: 10,
+    year: "2026",
+    month: "October",
+    day: "08-10-2026",
+    reason: "Relocation",
+  },
 
-  { id: 11, year: "2027", month: "November", day: "12-11-2027", reason: "Personal Retreat" },
-  { id: 12, year: "2027", month: "December", day: "23-12-2027", reason: "Family Gathering" },
-  { id: 13, year: "2027", month: "January", day: "03-01-2027", reason: "Child's Competition" },
-  { id: 14, year: "2027", month: "February", day: "17-02-2027", reason: "Workshop Attendance" },
-  { id: 15, year: "2027", month: "March", day: "09-03-2027", reason: "Volunteering Activity" }
+  {
+    id: 11,
+    year: "2027",
+    month: "November",
+    day: "12-11-2027",
+    reason: "Personal Retreat",
+  },
+  {
+    id: 12,
+    year: "2027",
+    month: "December",
+    day: "23-12-2027",
+    reason: "Family Gathering",
+  },
+  {
+    id: 13,
+    year: "2027",
+    month: "January",
+    day: "03-01-2027",
+    reason: "Child's Competition",
+  },
+  {
+    id: 14,
+    year: "2027",
+    month: "February",
+    day: "17-02-2027",
+    reason: "Workshop Attendance",
+  },
+  {
+    id: 15,
+    year: "2027",
+    month: "March",
+    day: "09-03-2027",
+    reason: "Volunteering Activity",
+  },
 ];
-

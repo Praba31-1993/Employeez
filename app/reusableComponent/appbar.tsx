@@ -113,7 +113,7 @@ export default function NavbarComponent() {
         <ImageComponent width={30}  height={30} user={"/assets/img/digitallogo.svg"} />
       </MenuItem>
       <MenuItem>
-        <DropdownComponent dropdownlist={dropdownData}/>
+        {/* <DropdownComponent dropdownlist={dropdownData}/> */}
       </MenuItem>
 
       <MenuItem>
@@ -173,7 +173,7 @@ export default function NavbarComponent() {
               {/* <Image src={digitalIcon} alt="" /> */}
               <ImageComponent width={100}  height={100} user={"/assets/img/digitallogo.svg"} />
 
-              <DropdownComponent dropdownlist={dropdownData}/>
+              {/* <DropdownComponent dropdownlist={dropdownData}/> */}
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {/* <Image src={questionIcon} alt="" /> */}
                 <ImageComponent width={30}  height={30} user={"/assets/img/question.svg"} />
