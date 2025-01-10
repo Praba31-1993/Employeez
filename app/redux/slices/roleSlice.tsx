@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../store"; // Import AppDispatch for correct typing
-
+import { User } from "@/app/reusableComponent/interfacetypes";
 const initialState = {
-  role: "SA", // Initialize the role state
+  role: "SA",
 };
 
 const roleSlice = createSlice({
@@ -17,10 +17,9 @@ const roleSlice = createSlice({
 
 // Thunk to initialize the role
 export const initializeRole =
-  (userProfile: { userInfo: { role: string } }[]) =>
-  (dispatch: AppDispatch) => {
-    if (userProfile.length > 0) {
-      const firstUserRole = userProfile[0]?.userInfo?.role; // Extract the first user's role
+  (userProfile: User) => (dispatch: AppDispatch) => {
+    if (userProfile !== undefined) {
+      const firstUserRole = userProfile?.role;
       if (firstUserRole) {
         dispatch(setRole(firstUserRole));
       }
