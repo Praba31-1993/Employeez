@@ -13,7 +13,7 @@ import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
 
 
-function Timecoordinator() {
+function TimecoordinatorDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -116,4 +116,4 @@ function Timecoordinator() {
   );
 }
 
-export default Timecoordinator;
+export default TimecoordinatorDashboard;

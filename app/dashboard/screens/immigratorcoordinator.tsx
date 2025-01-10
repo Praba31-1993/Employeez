@@ -18,7 +18,7 @@ import NewHireCandidate from "../components/newhirecandidate";
 import anniversary from "/assets/img/anniversary.svg";
 import Inineverify from "../components/inineverify";
 
-function Immigratorcoordinator() {
+function ImmigratorcoordinatorDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -45,7 +45,7 @@ function Immigratorcoordinator() {
 
             <div className="col-12 col-md-6 col-lg-4 mb-3">
               <div className="row mb-3">
-                <div className="col-12">
+                <div className="col-12 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -55,7 +55,7 @@ function Immigratorcoordinator() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-12">
+                <div className="col-12 p-0">
                   <div
                     className="dashboardcard  p-3 h-100  "
                     style={borderAndBoxShadowStyles}
@@ -65,7 +65,7 @@ function Immigratorcoordinator() {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-4 mb-3">
+            <div className="col-12 col-md-6 col-lg-4 mb-3 ">
               <div className="dashboardcard h-100 p-3">
                 <Openjobs />
               </div>
@@ -135,4 +135,4 @@ function Immigratorcoordinator() {
   );
 }
 
-export default Immigratorcoordinator;
+export default ImmigratorcoordinatorDashboard;

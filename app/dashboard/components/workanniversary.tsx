@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-
 import user2 from "/assets/img/Group 9244.svg";
 import headerImage from "@/public/assets/img/anniversary.svg";
 import { Colors } from "@/app/reusableComponent/styles";

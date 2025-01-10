@@ -16,7 +16,7 @@ import Workanniversary from "../components/workanniversary";
 import Openjobs from "../components/openjobs";
 import Needhelp from "../components/needhelp";
 
-function SalesManager() {
+function SalesManagerDashboard() {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -140,4 +140,4 @@ function SalesManager() {
   );
 }
 
-export default SalesManager;
+export default SalesManagerDashboard;
