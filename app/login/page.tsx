@@ -69,15 +69,7 @@ export default function Login() {
     }
   };
 
-  useEffect(() => {
-    // Call refreshToken every 1 minute (60,000 ms)
-    const intervalId = setInterval(() => {
-      refreshAccessToken();
-    }, 60000); // 1 minute
 
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
 
   const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
