@@ -17,7 +17,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
-import { LoginApi, refreshAccessToken } from "../api/Listingapis";
+import { LoginApi } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import ImageComponent from "../reusableComponent/image";
 import { initializeRole } from "../redux/slices/roleSlice";
@@ -68,15 +68,7 @@ export default function Login() {
     }
   };
 
-  useEffect(() => {
-    // Call refreshToken every 1 minute (60,000 ms)
-    const intervalId = setInterval(() => {
-      refreshAccessToken();
-    }, 60000); // 1 minute
 
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
 
   const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
