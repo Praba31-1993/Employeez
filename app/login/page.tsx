@@ -69,8 +69,6 @@ export default function Login() {
     }
   };
 
-
-
   const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
     const passwordError = validatePassword(password);
