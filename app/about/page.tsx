@@ -1,44 +1,55 @@
-"use client"
-import React, { useState } from "react";
+import * as React from "react";
+import Typography, { TypographyProps } from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 
-function About() {
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+const variants = [
+  "h1",
+  "h3",
+  "body1",
+  "caption",
+] as readonly TypographyProps["variant"][];
 
-  const getData = async () => {
-    const url = "https://demo2.marvelemployez.com/HRSolutions/getPayrollSchedule";
-    try {
-      const response = await fetch(url);
-      console.log("Response:", response);
+const dummyData = [
+  "Heading 1 Example",
+  "Heading 3 Example",
+  "Body Text Example",
+  "Caption Text Example",
+];
 
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
-      const json = await response.json();
-      console.log("Data received:", json);
-      setData(json);
-      setError(null); // Reset error if successful
-    } catch (err) {
-      console.error("Error:", err);
-      // setError("An error occurred while fetching data.");
-    }
-  };
+function TypographyDemo(props: { loading?: boolean }) {
+  const { loading = false } = props;
 
   return (
     <div>
-      <div onClick={getData} className="cursor-pointer text-blue-500">
-        Click Me
-      </div>
-      {error && <p className="text-red-500">{error}</p>}
-      {data && (
-        <div>
-          <h3>Payroll Schedule Data:</h3>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
+   
+      <Typography component="div" variant="body2" style={{ height: '100px' }}>
+      {loading ? (
+        <Skeleton  />
+      ) : (
+        <>
+        {"Caption text, usually "}
+        <br />
+        {"for small notes or footers.++++"}
+      </>
       )}
+    </Typography>
     </div>
   );
 }
 
-export default About;
+export default function About() {
+  return (
+    <div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <TypographyDemo loading />
+          </div>
+          <div className="col">
+            <TypographyDemo />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
