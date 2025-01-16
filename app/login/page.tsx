@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
+import { Timeloader } from "../reusableComponent/loader/timeloader";
 
 export default function Login() {
   const useColors = Colors();
@@ -32,6 +33,7 @@ export default function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ userId: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const [showPassword, setShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const role = useSelector((state: RootState) => state.role.role);
@@ -70,30 +72,61 @@ export default function Login() {
   };
 
   const handleSubmit = async () => {
+    // Validate user inputs
     const userIdError = validateUserId(userId);
     const passwordError = validatePassword(password);
-
+  
+    // Set errors for form fields
     setErrors({ userId: userIdError, password: passwordError });
-
+  
     if (!userIdError && !passwordError) {
+      // Remember user credentials if the checkbox is checked
       if (checked) {
         localStorage.setItem("rememberedUserId", userId);
         localStorage.setItem("rememberedUserPassword", password);
       }
+  
       const params = {
         usernameOrEmail: userId,
         password: password,
       };
-      const loginResponse = await LoginApi(params);
-      if (loginResponse.status === 200) {
-        toast.success("Login successfull");
-        router.push("/dashboard");
-        setUserDetails(loginResponse.data.userInfo);
+  
+      // Set loading state to true
+      setIsLoading(true);
+  
+      try {
+        // Call the login API
+        const loginResponse = await LoginApi(params);
+  
+        // Handle a successful login
+        if (loginResponse.status === 200) {
+          toast.success("Login successful");
+          setUserDetails(loginResponse.data.userInfo);
+          document.cookie = "auth=true; path=/; max-age=86400";
+  
+          // Delay to display loader for at least 3 seconds
+          setTimeout(() => {
+            router.push("/dashboard");
+            setIsLoading(false); // Stop loading after navigation
+          }, 3000);
+        } 
+        // Handle other responses or errors
+        else if (loginResponse.status === 500) {
+          toast.error("Internal Server Error. Please try again later.");
+          setIsLoading(false);
+        } else {
+          toast.error("Invalid credentials. Please try again.");
+          setIsLoading(false);
+        }
+      } catch (error) {
+        // Handle unexpected errors
+        toast.error("Invalid credentials. Please try again.");
+        setIsLoading(false);
       }
-      document.cookie = "auth=true; path=/; max-age=86400";
     }
   };
-
+  
+  
   useEffect(() => {
     if (userDetails !== undefined) {
       console.log("userDetaos", userDetails);
@@ -104,6 +137,8 @@ export default function Login() {
 
   return (
     <section className="login">
+      {/* Show Timeloader while loading */}
+      {isLoading && <Timeloader />}
       <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
         <div className="row h-100 w-100">
           <div
