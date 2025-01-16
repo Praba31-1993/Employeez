@@ -20,7 +20,8 @@ const axiosInstance = axios.create({
 export const LoginApi = async (params) => {
   try {
     const response = await axiosInstance.post("/api/auth/signin", params);
-    return response.data;
+    
+    return response;
   } catch (error) {
     console.error('Error during API call', error);
     throw error;

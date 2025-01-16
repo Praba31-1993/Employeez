@@ -5,7 +5,6 @@ import Image from "next/image";
 import logo from "@/public/assets/img/employeez.png";
 import handwave from "@/public/assets/img/hi.png";
 import Checkbox from "@mui/material/Checkbox";
-import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -19,22 +18,24 @@ import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import { LoginApi } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
-import ImageComponent from "../reusableComponent/image";
 import { initializeRole } from "../redux/slices/roleSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
+import { User } from "../reusableComponent/interfacetypes";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const useColors = Colors();
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
+  const [userDetails, setUserDetails] = useState<User>();
   const [checked, setChecked] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ userId: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const role = useSelector((state: RootState) => state.role.role);
+  const router = useRouter();
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
@@ -54,7 +55,7 @@ export default function Login() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "userId") setUserId(value);
+    if (name === "usernameOrEmail") setUserId(value);
     if (name === "password") setPassword(value);
   };
 
@@ -68,7 +69,15 @@ export default function Login() {
     }
   };
 
+  useEffect(() => {
+    // Call refreshToken every 1 minute (60,000 ms)
+    const intervalId = setInterval(() => {
+      refreshAccessToken();
+    }, 60000); // 1 minute
 
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
@@ -81,49 +90,27 @@ export default function Login() {
         localStorage.setItem("rememberedUserId", userId);
         localStorage.setItem("rememberedUserPassword", password);
       }
-
       const params = {
-        usernameOrEmail: "adm07",
-        password: "Test123",
+        usernameOrEmail: userId,
+        password: password,
       };
-
       const loginResponse = await LoginApi(params);
-
-      console.log("response", loginResponse);
-
-      toast.success("Login successfull");
-      //   router.push("/dashboard");
-
+      if (loginResponse.status === 200) {
+        toast.success("Login successfull");
+        router.push("/dashboard");
+        setUserDetails(loginResponse.data.userInfo);
+      }
       document.cookie = "auth=true; path=/; max-age=86400";
     }
   };
-  const dummyUserProfileList = [
-    {
-      userInfo: {
-        id: 36,
-        empId: "ADM07",
-        firstName: "Bill",
-        middleName: "",
-        lastName: "Thomas",
-        etype: "EMPH",
-        paySchedule: "Monthly",
-        role: "SM",
-        hiringDate: "2011-02-08",
-        hiringModelCode: "W2H",
-        partialTS: null,
-        punchIn: "N",
-        businessUnit: "USA",
-        projBasedTS: "X",
-        countryCode: "US",
-      },
-      token:
-        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGV2Iiwicm9sZSI6IlNBIiwicGF5c2NoZWR1bGUiOiJNb250aGx5IiwiZXR5cGUiOiJFTVBIIiwiYnVzaW5lc3NVbml0IjoiVVNBIiwicHVuY2hfaW4iOiJOIiwiUHJvakJhc2VkVFMiOiJYIiwiQ291bnRyeUNvZGUiOiJVUyIsIkhpcmluZ01vZGVsQ29kZSI6IlcySCIsImlhdCI6MTczMjU0MjIxMCwiZXhwIjoxNzMzMTQ3MDEwfQ.sRXo4CnW6y3DU1MOiQaraHyPCu_u7ZCmd9gCSgnOb9W_Nmij7RgJTxPUmNHaO4_tH0LyNHzKz-A0AsW_s4w9rQ",
-    },
-  ];
 
   useEffect(() => {
-    dispatch(initializeRole(dummyUserProfileList));
-  }, [role]);
+    if (userDetails !== undefined) {
+      console.log("userDetaos", userDetails);
+
+      dispatch(initializeRole(userDetails));
+    }
+  }, [userDetails, role]);
 
   return (
     <section className="login">
@@ -148,12 +135,10 @@ export default function Login() {
             <div className="logincard">
               <div className="logo text-center">
                 <Image src={logo} alt="EmployEZ Logo" />
-                {/* <ImageComponent width={0}  height={0} user={"/assets/img/employeez.png"} /> */}
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
                 Welcome to EmployEZ!{" "}
                 <Image src={handwave} className="ms-2" alt="Wave" />
-                {/* <ImageComponent width={0}  height={0} user={"/assets/img/hi.png"} /> */}
               </h4>
               <p className="shade para pt-1">
                 Please sign in to your account and start the adventure.
@@ -164,7 +149,7 @@ export default function Login() {
                   className="ps-3 py-2 mt-2"
                   type="text"
                   placeholder="User ID"
-                  name="userId"
+                  name="usernameOrEmail"
                   value={userId}
                   onChange={handleInputChange}
                 />
@@ -216,7 +201,7 @@ export default function Login() {
                         sx={{
                           cursor: "pointer",
                           "&.Mui-checked": {
-                            color: useColors.themeRed, // Changes the checkmark color
+                            color: useColors.themeRed,
                           },
                         }}
                         onChange={(e) => handleChangeCheckbox(e)}
