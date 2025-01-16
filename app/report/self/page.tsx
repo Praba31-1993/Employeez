@@ -1,6 +1,5 @@
 "use client";
 
-import Sidebar from "@/app/sidebar/page1";
 import React, { useState } from "react";
 import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
@@ -8,6 +7,7 @@ import { selfrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
 import Vacationreport from "../components/report_vacationreports/reportvacationreport";
 import Changerequest from "../components/changerequest/changerequest";
+import Sidebar from "@/app/sidebar/page";
 
 function Self() {
   const useColors = Colors(); // Declare useColors once

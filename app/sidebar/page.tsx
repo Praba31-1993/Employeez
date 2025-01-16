@@ -25,15 +25,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Colors } from "../reusableComponent/styles";
 import ImageComponent from "../reusableComponent/image";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import Accordian from "../reusableComponent/accordian";
-import AccordionUsage from "../reusableComponent/accordian";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Button from "@mui/material/Button";
 
 interface SidebarProps {
   children: ReactNode;
