@@ -61,8 +61,7 @@ function Menulistitem() {
                             <p className="para2 mb-0 mt-1 shade">CEO</p>
                             <p
                                 className="mb-0 cursorPointer para pe-3 d-sm-none d-block"
-                                style={{ color: useColors.themeRed }}
-                            >
+                                style={{ color: useColors.themeRed }} >
                                 Supervisee
                             </p>
                         </div>

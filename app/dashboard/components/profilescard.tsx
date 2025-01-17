@@ -65,12 +65,16 @@ export default function ProfilesCard() {
       <div className="flex justify-content-between pb-2">
         <Menulistitem />
         <div className="d-flex align-items-center pe-sm-5">
-          <p
-            className="mb-0 cursorPointer para pe-3 d-sm-block d-none"
-            style={{ color: useColors.themeRed }}
-          >
-            Supervisee
-          </p>
+        {loading ? (
+        <Skeleton height={20} width={100} className="me-2" />
+      ) : (
+        <p
+          className="mb-0 cursorPointer para pe-3 d-sm-block d-none"
+          style={{ color: useColors.themeRed }}
+        >
+          Supervisee
+        </p>
+         )}
           <div onClick={() => setPunchIn((prev) => !prev)}>
             <IconOutlinebutton
               color={useColors.white}
