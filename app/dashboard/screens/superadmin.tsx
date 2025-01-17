@@ -123,7 +123,7 @@ const SuperAdminDashboard = () => {
           <div className="row  h-100 align-content-between">
             <div className="col-sm-12 ">
               <div
-                className="dashboardcard p-3 mb-3 mb-sm-0"
+                className="dashboardcard p-3 mb-3 "
                 style={{
                   border: useColors.border,
                   boxShadow: useColors.boxshadow,
