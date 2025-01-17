@@ -28,6 +28,7 @@ import { Timeloader } from "../reusableComponent/loader/timeloader";
 export default function Login() {
   const useColors = Colors();
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
+
   const [userDetails, setUserDetails] = useState<User>();
   const [checked, setChecked] = useState(false);
   const [userId, setUserId] = useState("");
