@@ -41,8 +41,8 @@ export default function NavbarComponent() {
     document.cookie =
       "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-
     localStorage.removeItem("pin"); // Assuming you stored the sidebar pin state in localStorage
+    localStorage.removeItem("token"); // Assuming you stored the sidebar pin state in localStorage
 
     sessionStorage.clear();
 
@@ -109,7 +109,11 @@ export default function NavbarComponent() {
     >
       <MenuItem>
         {/* <Image src={digitalIcon} alt="" /> */}
-        <ImageComponent width={30}  height={30} user={"/assets/img/digitallogo.svg"} />
+        <ImageComponent
+          width={30}
+          height={30}
+          user={"/assets/img/digitallogo.svg"}
+        />
       </MenuItem>
       <MenuItem>
         {/* <DropdownComponent dropdownlist={dropdownData}/> */}
@@ -170,17 +174,29 @@ export default function NavbarComponent() {
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {/* <Image src={digitalIcon} alt="" /> */}
-              <ImageComponent width={100}  height={100} user={"/assets/img/digitallogo.svg"} />
+              <ImageComponent
+                width={100}
+                height={100}
+                user={"/assets/img/digitallogo.svg"}
+              />
 
               {/* <DropdownComponent dropdownlist={dropdownData}/> */}
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {/* <Image src={questionIcon} alt="" /> */}
-                <ImageComponent width={30}  height={30} user={"/assets/img/question.svg"} />
+                <ImageComponent
+                  width={30}
+                  height={30}
+                  user={"/assets/img/question.svg"}
+                />
               </Box>
 
               <Box sx={{ display: { xs: "block", sm: "none" } }}>
                 {/* <Image src={SearchIcon} alt="" /> */}
-                <ImageComponent width={15}  height={15} user={"/assets/img/search.svg"} />
+                <ImageComponent
+                  width={15}
+                  height={15}
+                  user={"/assets/img/search.svg"}
+                />
               </Box>
 
               <IconButton
