@@ -11,8 +11,7 @@ function Logout() {
     document.cookie =
       "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    localStorage.removeItem("rememberedUserId");
-    localStorage.removeItem("rememberedUserPassword");
+
     localStorage.removeItem("pin"); // Assuming you stored the sidebar pin state in localStorage
 
     sessionStorage.clear();

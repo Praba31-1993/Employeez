@@ -1,70 +1,64 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { axiosInstance } from "@/app/api/axiosInstance";
 
-interface LoginState {
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  user: { id: string; name: string } | null;
-  error: string | null;
-}
-
-// Initial state
-const initialState: LoginState = {
-  isLoggedIn: false,
-  isLoading: false,
-  user: null,
-  error: null,
-};
-
-// Async thunk for handling login API call
+// Async thunk for login API call
 export const loginUser = createAsyncThunk(
-  'login/loginUser',
-  async (credentials: { email: string; password: string }, thunkAPI) => {
+  "auth/loginUser",
+  async (params: { usernameOrEmail: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials),
-      });
-      if (!response.ok) {
-        throw new Error('Invalid login credentials');
+      const response = await axiosInstance.post("/api/auth/signin", params);
+      return response.data;
+    } catch (error) {
+      console.error("Error during API call", error);
+
+      if (error instanceof Error) {
+        // Check for Axios error format
+        const axiosError = error as any;
+        if (axiosError.response) {
+          return rejectWithValue({ status: axiosError.response.status, message: axiosError.response.data.message });
+        }
+        return rejectWithValue({ status: 500, message: error.message });
       }
-      const data = await response.json();
-      return data; // Assuming the API returns user details
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+
+      // Fallback for unknown error types
+      return rejectWithValue({ status: 500, message: "An unknown error occurred" });
     }
   }
 );
 
-// Slice
+// Create a slice
 const loginSlice = createSlice({
-  name: 'login',
-  initialState,
+  name: "auth",
+  initialState: {
+    user: null,
+    status: null as number | null, // Use number for HTTP status codes
+    error: null as string | null, // Allow error to be either string or null
+  },
   reducers: {
-    logout(state) {
-      state.isLoggedIn = false;
+    logout: (state) => {
       state.user = null;
-      state.error = null;
+      state.status = null; // Reset status on logout
+      state.error = null;  // Reset error on logout
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.isLoading = true;
+        state.status = null; // Reset status when request starts
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<{ id: string; name: string }>) => {
-        state.isLoading = false;
-        state.isLoggedIn = true;
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.status = 200; // Assume 200 for successful responses
         state.user = action.payload;
       })
-      .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
-        state.isLoading = false;
-        state.error = action.payload || 'Login failed';
+      .addCase(loginUser.rejected, (state, action) => {
+        const { status, message } = action.payload as { status: number; message: string };
+        state.status = status; // Set the status code from the rejected action
+        state.error = message || "Failed to login"; // Set the error message
       });
   },
 });
 
-// Actions and reducer export
+// Export actions and reducer
 export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;
