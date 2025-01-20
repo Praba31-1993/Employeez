@@ -17,6 +17,9 @@ import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import moment from "moment";
 import { holidayList, vacationList } from "../reusableComponent/JsonData";
 import Sidebar from "../sidebar/page";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { LoginInterface } from "../redux/slices/loginSlice";
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
@@ -27,6 +30,8 @@ export default function Timesheet() {
   const [vacationPerMonth, setVacationPerMonth] = useState<Array<any>>([]);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
+
+  const loginDatas: any = useSelector((state: RootState) => state.login.user);
 
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
@@ -91,7 +96,7 @@ export default function Timesheet() {
                 <div className="row px-0">
                   <div className="col-lg-12 px-0 col-sm-6">
                     <div className="calendar">
-                      {loginResponse[0].userInfo?.paySchedule === "Monthly" ? (
+                      {loginDatas?.userInfo?.paySchedule === "Monthly" ? (
                         <MonthlyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
@@ -99,20 +104,18 @@ export default function Timesheet() {
                           weeklyList={handleWeekList}
                           handleSelectedMonth={handleSelectedMonth}
                         />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
-                        "Weekly" ? (
+                      ) : loginDatas?.userInfo?.paySchedule === "Weekly" ? (
                         // <WeeklyCalendar />
                         <WeeklyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
                         />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
-                        "Bi-Weekly" ? (
+                      ) : loginDatas?.userInfo?.paySchedule === "Bi-Weekly" ? (
                         <BiWeeklyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
                         />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
+                      ) : loginDatas?.userInfo?.paySchedule ===
                         "Semi-Monthly" ? (
                         <SemiMonthlyCalendar
                           value={currentDate}

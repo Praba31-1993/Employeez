@@ -16,7 +16,6 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
-import { LoginApi } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import { initializeRole } from "../redux/slices/roleSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -38,19 +37,18 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const role = useSelector((state: RootState) => state.role.role);
+  const loginDatas = useSelector((state: RootState) => state.login);
+
   const router = useRouter();
+
+  useEffect(() => {
+    console.log("loginDatas", loginDatas);
+  }, [loginDatas]);
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
     const rememberedUserPassword = localStorage.getItem(
       "rememberedUserPassword"
-    );
-
-    console.log(
-      "rememberedUserId",
-      rememberedUserId,
-      "rememberedUserPassword",
-      rememberedUserPassword
     );
 
     if (rememberedUserId && rememberedUserPassword) {
