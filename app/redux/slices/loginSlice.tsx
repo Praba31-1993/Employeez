@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "@/app/api/axiosInstance";
 
+
+
+export interface LoginInterface {
+  token: string;
+  userInfo: any | null; // Ensure userInfo is either UserInfo or null
+}
 // Async thunk for login API call
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
