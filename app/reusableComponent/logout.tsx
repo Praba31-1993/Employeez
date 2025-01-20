@@ -13,6 +13,7 @@ function Logout() {
 
 
     localStorage.removeItem("pin"); // Assuming you stored the sidebar pin state in localStorage
+    localStorage.removeItem("token"); // Assuming you stored the sidebar pin state in localStorage
 
     sessionStorage.clear();
 

@@ -17,9 +17,8 @@ import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 import moment from "moment";
 import { holidayList, vacationList } from "../reusableComponent/JsonData";
 import Sidebar from "../sidebar/page";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
-import { LoginInterface } from "../redux/slices/loginSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
@@ -95,8 +94,8 @@ export default function Timesheet() {
               <div className="col-lg-4 col-xxl-3 borderright">
                 <div className="row px-0">
                   <div className="col-lg-12 px-0 col-sm-6">
-                    <div className="calendar">
-                      {loginDatas?.userInfo?.paySchedule === "Monthly" ? (
+                    {loginDatas === null ? (
+                      <div className="calendar">
                         <MonthlyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
@@ -104,25 +103,38 @@ export default function Timesheet() {
                           weeklyList={handleWeekList}
                           handleSelectedMonth={handleSelectedMonth}
                         />
-                      ) : loginDatas?.userInfo?.paySchedule === "Weekly" ? (
-                        // <WeeklyCalendar />
-                        <WeeklyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : loginDatas?.userInfo?.paySchedule === "Bi-Weekly" ? (
-                        <BiWeeklyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : loginDatas?.userInfo?.paySchedule ===
-                        "Semi-Monthly" ? (
-                        <SemiMonthlyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : null}
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="calendar">
+                        {loginDatas?.userInfo?.paySchedule === "Monthly" ? (
+                          <MonthlyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule === "Weekly" ? (
+                          // <WeeklyCalendar />
+                          <WeeklyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule ===
+                          "Bi-Weekly" ? (
+                          <BiWeeklyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule ===
+                          "Semi-Monthly" ? (
+                          <SemiMonthlyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                          />
+                        ) : null}
+                      </div>
+                    )}
                     {/* Pass the toggle function to Totalsummary */}
                     <Totalsummary
                       showsummarycards={() =>
