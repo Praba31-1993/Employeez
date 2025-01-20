@@ -103,10 +103,10 @@ export default function Login() {
                 setUserDetails(loginResponse.payload.userInfo);
                 toast.success("Login successful");
                 document.cookie = "auth=true; path=/; max-age=86400";
+                router.push("/dashboard");
                 setTimeout(() => {
-                    router.push("/dashboard");
                     setIsLoading(false); // Stop loading after navigation
-                }, 3000);
+                }, 5000);
             } else {
                 toast.error("Invalid credentials. Please try again.");
                 setIsLoading(false);
