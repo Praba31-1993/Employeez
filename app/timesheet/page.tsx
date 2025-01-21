@@ -129,9 +129,6 @@ export default function Timesheet() {
                           <BiWeeklyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
-                            calendardatas={ConvertedTimeSheetForCalendar}
-                            weeklyList={handleWeekList}
-                            handleSelectedMonth={handleSelectedMonth}
                           />
                         ) : loginDatas?.userInfo?.paySchedule ===
                           "Semi-Monthly" ? (
