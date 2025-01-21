@@ -6,19 +6,34 @@ import {
   endOfWeek,
   startOfYear,
   endOfYear,
+  parseISO,
 } from "date-fns";
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 type Props = {
   value?: Date;
   onChange: (date: Date) => void;
+  weeklyList: (weeklist: any) => void;
+  handleSelectedMonth: (month: any, year: any) => void;
+  calendardatas: any;
 };
 
-const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
+const WeeklyCalendar: React.FC<Props> = ({
+  value = new Date(),
+  onChange,
+  weeklyList,
+  handleSelectedMonth,
+  calendardatas,
+}) => {
   // Utility to calculate the start and end of the week
   const getCurrentWeekRange = (date: Date) => {
     const startDate = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
@@ -26,7 +41,10 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
     return {
       startDate,
       endDate,
-      range: `${format(startDate, "dd/MM/yyyy")} - ${format(endDate, "dd/MM/yyyy")}`,
+      range: `${format(startDate, "dd/MM/yyyy")} - ${format(
+        endDate,
+        "dd/MM/yyyy"
+      )}`,
     };
   };
 
@@ -38,8 +56,17 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
   const [selectedDate, setSelectedDate] = useState<Date>(today); // Highlight the current date by default
   const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
   const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
+  const [clickedDateData, setClickedDateData] = useState<any>(null); // Store clicked date's data
+
   const [dropdownRange, setDropdownRange] = useState<string>(
     initialCurrentWeek.range
+  );
+  const [weekData, setWeekData] = useState<
+    Array<{ day: string; date: string }>
+  >([]);
+
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    new Date().getMonth()
   );
 
   // Generate dropdown ranges for all weeks in the year
@@ -78,7 +105,7 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
     });
 
     setDropdownRange(range);
-    // setSelectedDate(start); 
+    // setSelectedDate(start);
     onChange(start); // Trigger onChange callback
   };
 
@@ -109,6 +136,55 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
   };
 
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
+
+  useEffect(() => {
+    if (weekData.length > 0) {
+      weeklyList(weekData); // Pass updated weekData to parent when it changes
+    }
+  }, [weekData, weeklyList]);
+
+  useEffect(() => {
+    handleSelectedMonth(selectedMonth, selectedYear);
+  }, [selectedMonth, selectedYear]);
+
+  // Map calendardatas to a lookup object by calDate for fast access
+  const calendardataMap = calendardatas.reduce((acc: any, item: any) => {
+    const formattedDate = format(parseISO(item.calDate), "yyyy-MM-dd");
+    acc[formattedDate] = item;
+    return acc;
+  }, {});
+
+  const handleDateClick = (date: Date) => {
+    const formattedDate = format(date, "yyyy-MM-dd");
+    const dataForDate = calendardataMap[formattedDate];
+
+    if (dataForDate) {
+      setClickedDateData(dataForDate);
+    }
+
+    // Calculate the week containing the clicked date
+    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
+    const clickedWeekDatas = Array.from({ length: 7 }).map((_, index) => {
+      const currentDate = add(startOfTheWeek, { days: index });
+      return {
+        day: format(currentDate, "EEE"),
+        date: format(currentDate, "dd-MM-yyyy"),
+        month: format(currentDate, "MMMM"),
+        year: format(currentDate, "yyyy"),
+        monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
+      };
+    });
+
+    setWeekData(clickedWeekDatas);
+    setSelectedDate(date);
+    onChange?.(date); // Notify parent if onChange is provided
+  };
+
+  // Automatically trigger a "click" on the current date when the component mounts
+  useEffect(() => {
+    const today = new Date();
+    handleDateClick(today);
+  }, []); // Empty dependency array ensures this runs only once
 
   return (
     <div className="pb-4 pe-3">
@@ -188,10 +264,7 @@ const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
               className={`relative rounded para2 textheader ${
                 isSelectedDate ? "bg-blue-500 text-white" : ""
               }`}
-              onClick={() => {
-                setSelectedDate(date); // Update the selected date
-                onChange(date); // Trigger the onChange callback
-              }}
+              onClick={() => handleDateClick(date)}
             >
               {format(date, "d")}
             </Cell>

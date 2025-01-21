@@ -57,6 +57,8 @@ export default function Timesheet() {
 
   // To dispaly which week need to display in the UI
   const handleWeekList = (weeklistData: any) => {
+    console.log("weeklistDate", weeklistData);
+
     setgetWeeklyList(weeklistData);
   };
 
@@ -108,9 +110,12 @@ export default function Timesheet() {
                           weeklyList={handleWeekList}
                           handleSelectedMonth={handleSelectedMonth}
                         /> */}
-                          <WeeklyCalendar
+                         <BiWeeklyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
                           />
                       </div>
                     ) : (
@@ -127,18 +132,27 @@ export default function Timesheet() {
                           <WeeklyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
                           />
                         ) : loginDatas?.userInfo?.paySchedule ===
                           "Bi-Weekly" ? (
                           <BiWeeklyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
                           />
                         ) : loginDatas?.userInfo?.paySchedule ===
                           "Semi-Monthly" ? (
                           <SemiMonthlyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
                           />
                         ) : null}
                       </div>
