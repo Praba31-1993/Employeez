@@ -38,7 +38,6 @@ const SuperAdminDashboard = () => {
 
     useEffect(() => {
         setbirthdayAnniversaryReport(arrayList);
-
         dispatch(updateUser({ name: "Vikram", countryCode: "CAD" }));
     }, []);
 

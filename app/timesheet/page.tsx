@@ -42,6 +42,9 @@ export default function Timesheet() {
     (item: any) => item.codeId && item.day
   );
 
+  const role = useSelector((state: RootState) => state.role.role);
+  console.log("role", role);
+
   // Merge data by matching codeId
   const ConvertedTimeSheetForCalendar = timesheetItems?.map(
     (timesheetItem: any) => {
@@ -103,20 +106,13 @@ export default function Timesheet() {
                   <div className="col-lg-12 px-0 col-sm-6">
                     {loginDatas === null ? (
                       <div className="calendar">
-                        {/* <MonthlyCalendar
+                        <MonthlyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
                           calendardatas={ConvertedTimeSheetForCalendar}
                           weeklyList={handleWeekList}
                           handleSelectedMonth={handleSelectedMonth}
-                        /> */}
-                         <BiWeeklyCalendar
-                            value={currentDate}
-                            onChange={setCurrentDate}
-                            calendardatas={ConvertedTimeSheetForCalendar}
-                            weeklyList={handleWeekList}
-                            handleSelectedMonth={handleSelectedMonth}
-                          />
+                        />
                       </div>
                     ) : (
                       <div className="calendar">
