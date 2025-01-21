@@ -109,6 +109,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({
     onChange(startDate); // Trigger the onChange callback
   };
 
+  // handle year
   const handleYearChange = (event: SelectChangeEvent<string>) => {
     const year = parseInt(event.target.value, 10);
     setSelectedYear(year);
@@ -138,7 +139,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({
 
   console.log("today", selectedDate);
 
- useEffect(() => {
+  useEffect(() => {
     if (weekData.length > 0) {
       weeklyList(weekData); // Pass updated weekData to parent when it changes
     }
