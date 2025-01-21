@@ -37,13 +37,17 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const role = useSelector((state: RootState) => state.role.role);
-  const loginDatas = useSelector((state: RootState) => state.login);
+  const loginDatas: any = useSelector((state: RootState) => state.login.user);
 
   const router = useRouter();
 
-  useEffect(() => {
-    console.log("loginDatas", loginDatas);
-  }, [loginDatas]);
+  console.log(" loginDatas.token", loginDatas?.token);
+
+  // useEffect(() => {
+  //   if (loginDatas !== null) {
+  //     localStorage.setItem("token", loginDatas?.token);
+  //   }
+  // }, [loginDatas]);
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
