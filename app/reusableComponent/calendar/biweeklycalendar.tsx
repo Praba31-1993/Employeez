@@ -1,4 +1,11 @@
-import { add, format, startOfYear, endOfYear } from "date-fns";
+import {
+  add,
+  format,
+  startOfYear,
+  endOfYear,
+  startOfWeek,
+  parseISO,
+} from "date-fns";
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
 import {
@@ -14,13 +21,28 @@ const today = new Date();
 type Props = {
   value?: Date;
   onChange: (date: Date) => void;
+  weeklyList: (weeklist: any) => void;
+  handleSelectedMonth: (month: any, year: any) => void;
+  calendardatas: any;
 };
 
-const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
+const BiWeeklyCalendar: React.FC<Props> = ({
+  value = today,
+  onChange,
+  weeklyList,
+  handleSelectedMonth,
+  calendardatas,
+}) => {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedMonth, setSelectedMonth] = useState<number>(
     new Date().getMonth()
   );
+  const [clickedDateData, setClickedDateData] = useState<any>(null); // Store clicked date's data
+
+  const [weekData, setWeekData] = useState<
+    Array<{ day: string; date: string }>
+  >([]);
+
   const [selectedYear, setSelectedYear] = useState(value.getFullYear());
   const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
   const [dropdownRange, setDropdownRange] = useState<string>(
@@ -61,12 +83,6 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
     }
   }, [selectedYear]);
 
-  // Update highlighted date when a new date is selected
-  const handleDateClick = (date: Date) => {
-    setSelectedDate(date); // Update the selected date
-    onChange(date); // Trigger the onChange callback
-  };
-
   // Parse date range correctly
   const parseDateRange = (range: string) => {
     if (!range) return { startDate: new Date(), endDate: new Date() }; // Add a fallback
@@ -89,7 +105,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
     const { startDate, endDate } = parseDateRange(range);
 
     setDropdownRange(range); // Update the selected dropdown range
-    // setSelectedDate(startDate); 
+    // setSelectedDate(startDate);
     onChange(startDate); // Trigger the onChange callback
   };
 
@@ -121,6 +137,60 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
 
   console.log("today", selectedDate);
+
+ useEffect(() => {
+    if (weekData.length > 0) {
+      weeklyList(weekData); // Pass updated weekData to parent when it changes
+    }
+  }, [weekData, weeklyList]);
+
+  useEffect(() => {
+    handleSelectedMonth(selectedMonth, selectedYear);
+  }, [selectedMonth, selectedYear]);
+
+  // Map calendardatas to a lookup object by calDate for fast access
+  const calendardataMap = calendardatas.reduce((acc: any, item: any) => {
+    const formattedDate = format(parseISO(item.calDate), "yyyy-MM-dd");
+    acc[formattedDate] = item;
+    return acc;
+  }, {});
+
+  const handleDateClick = (date: Date) => {
+    const formattedDate = format(date, "yyyy-MM-dd");
+    const dataForDate = calendardataMap[formattedDate];
+
+    if (dataForDate) {
+      setClickedDateData(dataForDate);
+    }
+
+    // Calculate the week containing the clicked date
+    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
+    const clickedWeekDatas = Array.from({ length: 7 }).map((_, index) => {
+      const currentDate = add(startOfTheWeek, { days: index });
+      return {
+        day: format(currentDate, "EEE"),
+        date: format(currentDate, "dd-MM-yyyy"),
+        month: format(currentDate, "MMMM"),
+        year: format(currentDate, "yyyy"),
+        monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
+      };
+    });
+
+    setWeekData(clickedWeekDatas);
+    setSelectedDate(date);
+    onChange?.(date); // Notify parent if onChange is provided
+  };
+
+  // Automatically trigger a "click" on the current date when the component mounts
+  useEffect(() => {
+    const today = new Date();
+    handleDateClick(today);
+  }, []); // Empty dependency array ensures this runs only once
+  // Automatically trigger a "click" on the current date when the component mounts
+  useEffect(() => {
+    const today = new Date();
+    handleDateClick(today);
+  }, []); // Empty dependency array ensures this runs only once
 
   return (
     <div className=" pb-4 pe-3">
@@ -195,7 +265,6 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
           // Highlight only the selected date or today if initially loading
           const isSelectedDate =
             format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
-          
 
           return (
             <Cell
