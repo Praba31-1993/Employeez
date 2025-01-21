@@ -1,30 +1,33 @@
-"use client";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { Select, MenuItem, FormControl } from "@mui/material";
-import { add, format, endOfMonth } from "date-fns";
+import { add, format, endOfMonth, startOfMonth } from "date-fns";
 import Cell from "./Cell";
-import { SelectChangeEvent } from "@mui/material"; 
-// Type for the props of the SemiMonthlyCalendar component
+import { SelectChangeEvent } from "@mui/material";
+
 interface SemiMonthlyCalendarProps {
-  value?: Date;  // Optional prop for the initial date
-  onChange: (date: Date) => void;  // Callback function for when the date changes
+  value?: Date;
+  onChange: (date: Date) => void;
 }
 
-// Type for the selected month part (e.g., "first" or "second" part of the month)
 interface MonthPart {
   monthIndex: number;
-  part: "first" | "second"; 
+  part: "first" | "second";
 }
 
 const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new Date(), onChange }) => {
-  const [selectedDate, setSelectedDate] = useState<Date>(value);
-  const [selectedYear, setSelectedYear] = useState<number>(value.getFullYear());
+  const today = new Date();
+  const isSecondPart = today.getDate() > 15;
 
+  const [selectedDate, setSelectedDate] = useState<Date>(today);
+  const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
   const [selectedMonthPart, setSelectedMonthPart] = useState<MonthPart>({
-    monthIndex: 0,
-    part: "first", // Default to "first" part
+    monthIndex: today.getMonth(),
+    part: isSecondPart ? "second" : "first",
   });
 
+  useEffect(() => {
+    onChange(today); // Notify the parent component with the initial date (today)
+  }, []);
   const splitMonths = [
     { label: "Jan 1", monthIndex: 0, part: "first" },
     { label: "Jan 2", monthIndex: 0, part: "second" },
@@ -51,17 +54,16 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
     { label: "Dec 1", monthIndex: 11, part: "first" },
     { label: "Dec 2", monthIndex: 11, part: "second" },
   ];
-
   const calculateRange = (monthIndex: number, part: "first" | "second", year: number) => {
     const startDate = new Date(year, monthIndex, 1);
     let start: Date, end: Date;
 
     if (part === "first") {
       start = startDate;
-      end = new Date(year, monthIndex, 15); // First half: 1st to 15th
+      end = new Date(year, monthIndex, 15);
     } else {
-      start = new Date(year, monthIndex, 16); // Second half: 16th to the end of the month
-      end = endOfMonth(start); // Get the last day of the month
+      start = new Date(year, monthIndex, 16);
+      end = endOfMonth(start);
     }
 
     return { start, end };
@@ -69,46 +71,39 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
 
   const handleMonthPartChange = (event: SelectChangeEvent<string>) => {
     const selected = splitMonths.find((m) => m.label === event.target.value);
-    
-    if (selected && (selected.part === "first" || selected.part === "second")) {
+    if (selected) {
       setSelectedMonthPart({
         monthIndex: selected.monthIndex,
-        part: selected.part, // Now TypeScript knows this is safe
+        part: selected.part as "first" | "second",
       });
-  
-      const { start, end } = calculateRange(selected.monthIndex, selected.part, selectedYear);
-      setSelectedDate(start);
+      const { start } = calculateRange(selected.monthIndex, selected.part as "first" | "second", selectedYear);
+      // setSelectedDate(start);
       onChange(start);
     }
   };
-  
 
   const handleYearChange = (event: SelectChangeEvent<unknown>) => {
-    const year = Number(event.target.value); // Convert string to number
-    setSelectedYear(year); // Now this is a number, so it's compatible with your state
-  
-    const { start, end } = calculateRange(selectedMonthPart.monthIndex, selectedMonthPart.part, year);
-    setSelectedDate(start);
+    const year = Number(event.target.value);
+    setSelectedYear(year);
+    const { start } = calculateRange(selectedMonthPart.monthIndex, selectedMonthPart.part, year);
+    // setSelectedDate(start);
     onChange(start);
   };
 
-  // Calculate startRange and totalDaysInRange
   const { start, end } = calculateRange(selectedMonthPart.monthIndex, selectedMonthPart.part, selectedYear);
   const startRange = start;
-  const totalDaysInRange = (end.getDate() - start.getDate()) + 1; // Calculate total days in the range
+  const totalDaysInRange = end.getDate() - start.getDate() + 1;
+  const startDay = (startRange.getDay() === 0 ? 7 : startRange.getDay());
 
-  // Adjust to start from Monday (where Sunday = 0, Monday = 1)
-  const startDay = (startRange.getDay() === 0 ? 7 : startRange.getDay()); // If Sunday, treat it as 7 (Monday start)
-  
   return (
-    <div className=" pb-4 pe-3">
+    <div className="pb-4 pe-3">
       <div className="flex">
         <FormControl sx={{ width: "fit-content" }}>
           <Select
             className="textheader para"
             sx={{
               "& .MuiOutlinedInput-notchedOutline": {
-                border: "none", // Remove border from the outline
+                border: "none",
               },
               outline: "none",
             }}
@@ -117,7 +112,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
             )?.label}
             onChange={handleMonthPartChange}
           >
-            {splitMonths.map((month:any, index:number) => (
+            {splitMonths.map((month: any, index: number) => (
               <MenuItem key={index} value={month.label}>
                 {month.label}
               </MenuItem>
@@ -130,7 +125,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
             className="textheader para"
             sx={{
               "& .MuiOutlinedInput-notchedOutline": {
-                border: "none", // Remove border from the outline
+                border: "none",
               },
               outline: "none",
             }}
@@ -146,20 +141,17 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({ value = new D
         </FormControl>
       </div>
 
-      {/* Weekdays */}
       <div className="grid grid-cols-7 items-center justify-center text-center">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((week, index) => (
-          <Cell key={index}  className="para2 unselectcolor">
+          <Cell key={index} className="para2 unselectcolor">
             {week}
           </Cell>
         ))}
 
-        {/* Empty cells before the start of the range */}
         {Array.from({ length: startDay - 1 }).map((_, index) => (
           <Cell key={index} />
         ))}
 
-        {/* Dates within the specified range */}
         {Array.from({ length: totalDaysInRange }).map((_, index) => {
           const date = add(startRange, { days: index });
           const isCurrentDate = format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");

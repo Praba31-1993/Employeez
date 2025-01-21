@@ -55,10 +55,12 @@ export default function Timesheet() {
     }
   );
 
+  // To dispaly which week need to display in the UI
   const handleWeekList = (weeklistData: any) => {
     setgetWeeklyList(weeklistData);
   };
 
+  // display holiday and vacation in the UI for the selected Month
   const handleHolidayandVacationList = (month: any, year: any) => {
     console.log("month", typeof month, typeof year);
 
@@ -82,6 +84,9 @@ export default function Timesheet() {
   useEffect(() => {
     handleHolidayandVacationList(selectedMonth, selectedYear);
   }, [selectedMonth, selectedYear]);
+
+  console.log("currentDate", currentDate);
+
   return (
     <>
       <Sidebar>
@@ -119,7 +124,6 @@ export default function Timesheet() {
                             handleSelectedMonth={handleSelectedMonth}
                           />
                         ) : loginDatas?.userInfo?.paySchedule === "Weekly" ? (
-                          // <WeeklyCalendar />
                           <WeeklyCalendar
                             value={currentDate}
                             onChange={setCurrentDate}
