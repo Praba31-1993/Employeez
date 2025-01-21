@@ -16,7 +16,6 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
-import { LoginApi } from "../api/Listingapis";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import { initializeRole } from "../redux/slices/roleSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,42 +26,41 @@ import { Timeloader } from "../reusableComponent/loader/timeloader";
 import { loginUser } from "../redux/slices/loginSlice";
 
 export default function Login() {
-    const useColors = Colors();
-    const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
-    const [userDetails, setUserDetails] = useState<User>();
-    const [checked, setChecked] = useState(false);
-    const [userId, setUserId] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState({ userId: "", password: "" });
-    const [isLoading, setIsLoading] = useState(false); // Add loading state
-    const [showPassword, setShowPassword] = useState(false);
-    const dispatch: AppDispatch = useDispatch();
-    const role = useSelector((state: RootState) => state.role.role);
-    const router = useRouter();
+  const useColors = Colors();
+  const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
+  const [userDetails, setUserDetails] = useState<User>();
+  const [checked, setChecked] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ userId: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [showPassword, setShowPassword] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
+  const role = useSelector((state: RootState) => state.role.role);
+  const loginDatas = useSelector((state: RootState) => state.login);
 
-    useEffect(() => {
-        const rememberedUserId = localStorage.getItem("rememberedUserId");
-        const rememberedUserPassword = localStorage.getItem(
-            "rememberedUserPassword"
-        );
+  const router = useRouter();
 
-        console.log(
-            "rememberedUserId",
-            rememberedUserId,
-            "rememberedUserPassword",
-            rememberedUserPassword
-        );
+  useEffect(() => {
+    console.log("loginDatas", loginDatas);
+  }, [loginDatas]);
 
-        if (rememberedUserId && rememberedUserPassword) {
-            setUserId(rememberedUserId);
-            setPassword(rememberedUserPassword);
-            setChecked(true);
-        } else {
-            setUserId("");
-            setPassword("");
-            setChecked(false);
-        }
-    }, []);
+  useEffect(() => {
+    const rememberedUserId = localStorage.getItem("rememberedUserId");
+    const rememberedUserPassword = localStorage.getItem(
+      "rememberedUserPassword"
+    );
+
+    if (rememberedUserId && rememberedUserPassword) {
+      setUserId(rememberedUserId);
+      setPassword(rememberedUserPassword);
+      setChecked(true);
+    } else {
+      setUserId("");
+      setPassword("");
+      setChecked(false);
+    }
+  }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

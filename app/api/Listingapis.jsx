@@ -16,15 +16,15 @@ const axiosInstance = axios.create({
 
 // Login Api
 // Login API function
-export const LoginApi = async (params) => {
-    try {
-        const response = await axiosInstance.post("/api/auth/signin", params);
+// export const LoginApi = async (params) => {
+//     try {
+//         const response = await axiosInstance.post("/api/auth/signin", params);
 
-        return response;
-    } catch (error) {
-        console.error('Error during API call', error);
-        throw error;
-    }
-};
+//         return response;
+//     } catch (error) {
+//         console.error('Error during API call', error);
+//         throw error;
+//     }
+// };
 
 
