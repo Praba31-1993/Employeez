@@ -1,21 +1,51 @@
-import { add, format, startOfYear, endOfYear } from "date-fns";
+import {
+  startOfWeek,
+  add,
+  format,
+  startOfYear,
+  endOfYear,
+  parseISO,
+} from "date-fns";
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 type Props = {
   value?: Date;
   onChange: (date: Date) => void;
+  weeklyList: (weeklist: any) => void;
+  handleSelectedMonth: (month: any, year: any) => void;
+  calendardatas: any;
 };
 
-const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
+const BiWeeklyCalendar: React.FC<Props> = ({
+  value = new Date(),
+  onChange,
+  weeklyList,
+  handleSelectedMonth,
+  calendardatas,
+}) => {
   const [selectedDate, setSelectedDate] = useState(value);
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    new Date().getMonth()
+  );
   const [selectedYear, setSelectedYear] = useState(value.getFullYear());
   const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
-  const [dropdownRange, setDropdownRange] = useState<string>("01/01/2024 - 07/01/2024"); // Default value
+  const [clickedDateData, setClickedDateData] = useState<any>(null); // Store clicked date's data
+
+  const [dropdownRange, setDropdownRange] = useState<string>(
+    "01/01/2024 - 07/01/2024"
+  ); // Default value
+  const [weekData, setWeekData] = useState<
+    Array<{ day: string; date: string }>
+  >([]);
 
   // This effect will update the dropdown ranges when the selected year changes
   useEffect(() => {
@@ -45,13 +75,58 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => 
     if (!range) return { startDate: new Date(), endDate: new Date() }; // Add a fallback
 
     const [startDateStr, endDateStr] = range.split(" - ");
-    const [startDay, startMonth, startYear] = startDateStr.split("/").map(Number);
+    const [startDay, startMonth, startYear] = startDateStr
+      .split("/")
+      .map(Number);
     const [endDay, endMonth, endYear] = endDateStr.split("/").map(Number);
 
     const startDate = new Date(startYear, startMonth - 1, startDay);
     const endDate = new Date(endYear, endMonth - 1, endDay);
 
     return { startDate, endDate };
+  };
+
+  useEffect(() => {
+    if (weekData.length > 0) {
+      weeklyList(weekData); // Pass updated weekData to parent when it changes
+    }
+  }, [weekData, weeklyList]);
+
+  useEffect(() => {
+    handleSelectedMonth(selectedMonth, selectedYear);
+  }, [selectedMonth, selectedYear]);
+
+  // Map calendardatas to a lookup object by calDate for fast access
+  const calendardataMap = calendardatas.reduce((acc: any, item: any) => {
+    const formattedDate = format(parseISO(item.calDate), "yyyy-MM-dd");
+    acc[formattedDate] = item;
+    return acc;
+  }, {});
+
+  const handleDateClick = (date: Date) => {
+    const formattedDate = format(date, "yyyy-MM-dd");
+    const dataForDate = calendardataMap[formattedDate];
+
+    if (dataForDate) {
+      setClickedDateData(dataForDate);
+    }
+
+    // Calculate the week containing the clicked date
+    const startOfTheWeek = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
+    const clickedWeekDatas = Array.from({ length: 7 }).map((_, index) => {
+      const currentDate = add(startOfTheWeek, { days: index });
+      return {
+        day: format(currentDate, "EEE"),
+        date: format(currentDate, "dd-MM-yyyy"),
+        month: format(currentDate, "MMMM"),
+        year: format(currentDate, "yyyy"),
+        monthDay: `${format(currentDate, "MMM")}${format(currentDate, "dd")}`, // Merge month and day
+      };
+    });
+
+    setWeekData(clickedWeekDatas);
+    setSelectedDate(date);
+    onChange?.(date); // Notify parent if onChange is provided
   };
 
   // Handle range change
@@ -75,7 +150,9 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => 
   const generateDays = () => {
     const { startDate, endDate } = parseDateRange(dropdownRange);
     const totalDaysInRange =
-      Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
+      Math.floor(
+        (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)
+      ) + 1;
 
     const firstDayOfWeek = startDate.getDay();
     const prefixDays = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
@@ -88,6 +165,11 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => 
   };
 
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
+
+  useEffect(() => {
+    const today = new Date();
+    handleDateClick(today);
+  }, []);
 
   return (
     <div className=" pb-4 pe-3">
@@ -166,10 +248,11 @@ const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => 
               key={index}
               isActive={isCurrentDate}
               className="relative rounded para2 textheader"
-              onClick={() => {
-                setSelectedDate(date);
-                onChange(date);
-              }}
+              // onClick={() => {
+              //   setSelectedDate(date);
+              //   onChange(date);
+              // }}
+              onClick={() => handleDateClick(date)}
             >
               {format(date, "d")}
             </Cell>
