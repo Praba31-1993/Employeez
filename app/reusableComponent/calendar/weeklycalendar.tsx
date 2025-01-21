@@ -11,22 +11,6 @@ import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
-// Helper to calculate the current week's range
-const getCurrentWeekRange = (date: Date) => {
-  const startDate = startOfWeek(date, { weekStartsOn: 1 });
-  const endDate = endOfWeek(date, { weekStartsOn: 1 });
-  return {
-    startDate,
-    endDate,
-    range: `${format(startDate, "dd/MM/yyyy")} - ${format(endDate, "dd/MM/yyyy")}`,
-  };
-};
-
-// Get today's date and current week range (calculated once)
-const today = new Date();
-const initialCurrentWeek = getCurrentWeekRange(today);
-const initialCurrentYear = today.getFullYear();
-
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 type Props = {
@@ -34,15 +18,31 @@ type Props = {
   onChange: (date: Date) => void;
 };
 
-const WeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
-  const [selectedDate, setSelectedDate] = useState<Date>(today); // Highlight the current date initially
-  const [selectedYear, setSelectedYear] = useState<number>(initialCurrentYear);
+const WeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
+  // Utility to calculate the start and end of the week
+  const getCurrentWeekRange = (date: Date) => {
+    const startDate = startOfWeek(date, { weekStartsOn: 1 }); // Monday as the first day
+    const endDate = endOfWeek(date, { weekStartsOn: 1 }); // Sunday as the last day
+    return {
+      startDate,
+      endDate,
+      range: `${format(startDate, "dd/MM/yyyy")} - ${format(endDate, "dd/MM/yyyy")}`,
+    };
+  };
+
+  // Initial values for today and its week range
+  const today = new Date();
+  const initialCurrentWeek = getCurrentWeekRange(today);
+
+  // States
+  const [selectedDate, setSelectedDate] = useState<Date>(today); // Highlight the current date by default
+  const [selectedYear, setSelectedYear] = useState<number>(today.getFullYear());
   const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
   const [dropdownRange, setDropdownRange] = useState<string>(
     initialCurrentWeek.range
   );
 
-  // Generate dropdown ranges for the year
+  // Generate dropdown ranges for all weeks in the year
   useEffect(() => {
     const start = startOfYear(new Date(selectedYear, 0, 1));
     const end = endOfYear(new Date(selectedYear, 0, 1));
@@ -62,14 +62,14 @@ const WeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
 
     setDropdownRanges(weeksInYear);
 
-    // Update dropdown and selected date only if needed
-    if (dropdownRange !== initialCurrentWeek.range) {
+    // Ensure the current week is selected by default
+    if (weeksInYear.includes(initialCurrentWeek.range)) {
       setDropdownRange(initialCurrentWeek.range);
-      setSelectedDate(initialCurrentWeek.startDate);
+      setSelectedDate(today); // Highlight the current date
     }
-  }, [selectedYear, dropdownRange]);
+  }, [selectedYear, initialCurrentWeek.range]);
 
-  // Handle range change
+  // Handle dropdown range change
   const handleRangeChange = (event: SelectChangeEvent<string>) => {
     const range = event.target.value;
     const [start] = range.split(" - ").map((date) => {
@@ -78,17 +78,17 @@ const WeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
     });
 
     setDropdownRange(range);
-    setSelectedDate(start);
-    onChange(start); // Trigger onChange callback with the start date
+    // setSelectedDate(start); 
+    onChange(start); // Trigger onChange callback
   };
 
-  // Handle year change
+  // Handle year dropdown change
   const handleYearChange = (event: SelectChangeEvent<string>) => {
     const year = parseInt(event.target.value, 10);
     setSelectedYear(year);
   };
 
-  // Generate days for the selected range
+  // Generate days for the selected week range
   const generateDays = () => {
     const [start, end] = dropdownRange.split(" - ").map((date) => {
       const [day, month, year] = date.split("/").map(Number);
