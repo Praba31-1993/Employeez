@@ -1,183 +1,218 @@
 import { add, format, startOfYear, endOfYear } from "date-fns";
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 const weeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const today = new Date();
 
 type Props = {
-    value?: Date;
-    onChange: (date: Date) => void;
+  value?: Date;
+  onChange: (date: Date) => void;
 };
 
-const BiWeeklyCalendar: React.FC<Props> = ({ value = new Date(), onChange }) => {
-    const [selectedDate, setSelectedDate] = useState(value);
-    const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
-    const [selectedYear, setSelectedYear] = useState(value.getFullYear());
-    const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
-    const [dropdownRange, setDropdownRange] = useState<string>("01/01/2024 - 07/01/2024"); // Default value
+const BiWeeklyCalendar: React.FC<Props> = ({ value = today, onChange }) => {
+  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    new Date().getMonth()
+  );
+  const [selectedYear, setSelectedYear] = useState(value.getFullYear());
+  const [dropdownRanges, setDropdownRanges] = useState<string[]>([]);
+  const [dropdownRange, setDropdownRange] = useState<string>(
+    "01/01/2024 - 07/01/2024"
+  ); // Default value
 
-    // This effect will update the dropdown ranges when the selected year changes
-    useEffect(() => {
-        const start = startOfYear(new Date(selectedYear, 0, 1)); // Start of the selected year
-        const end = endOfYear(new Date(selectedYear, 0, 1)); // End of the selected year
+  // This effect will update the dropdown ranges when the selected year changes
+  useEffect(() => {
+    const start = startOfYear(new Date(selectedYear, 0, 1)); // Start of the selected year
+    const end = endOfYear(new Date(selectedYear, 0, 1)); // End of the selected year
 
-        let weeksInYear: string[] = [];
-        let currentStart = start;
+    let weeksInYear: string[] = [];
+    let currentRange = "";
+    let currentStart = start;
 
-        // Generate weeks in the year
-        while (currentStart <= end) {
-            const currentEnd = add(currentStart, { days: 13 }); // 7-day week range
-            const weekRange = `${format(currentStart, "dd/MM/yyyy")} - ${format(
-                currentEnd,
-                "dd/MM/yyyy"
-            )}`;
-            weeksInYear.push(weekRange);
-            currentStart = add(currentEnd, { days: 1 }); // Move to next week
-        }
+    // Generate biweekly ranges and find the range containing today's date
+    while (currentStart <= end) {
+      const currentEnd = add(currentStart, { days: 13 }); // 14-day range
+      const weekRange = `${format(currentStart, "dd/MM/yyyy")} - ${format(
+        currentEnd,
+        "dd/MM/yyyy"
+      )}`;
+      weeksInYear.push(weekRange);
 
-        setDropdownRanges(weeksInYear); // Update the dropdown ranges
-        setDropdownRange(weeksInYear[0]); // Set the default value to the first range
-    }, [selectedYear]);
+      if (currentStart <= today && today <= currentEnd) {
+        currentRange = weekRange;
+      }
 
-    // Parse date range correctly
-    const parseDateRange = (range: string) => {
-        if (!range) return { startDate: new Date(), endDate: new Date() }; // Add a fallback
+      currentStart = add(currentEnd, { days: 1 }); // Move to next biweekly range
+    }
 
-        const [startDateStr, endDateStr] = range.split(" - ");
-        const [startDay, startMonth, startYear] = startDateStr.split("/").map(Number);
-        const [endDay, endMonth, endYear] = endDateStr.split("/").map(Number);
+    setDropdownRanges(weeksInYear); // Update the dropdown ranges
 
-        const startDate = new Date(startYear, startMonth - 1, startDay);
-        const endDate = new Date(endYear, endMonth - 1, endDay);
+    // Set the default selected range and date
+    if (currentRange) {
+      setDropdownRange(currentRange);
+      setSelectedDate(today); // Highlight today's date
+    }
+  }, [selectedYear]);
 
-        return { startDate, endDate };
+  // Update highlighted date when a new date is selected
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(date); // Update the selected date
+    onChange(date); // Trigger the onChange callback
+  };
+
+  // Parse date range correctly
+  const parseDateRange = (range: string) => {
+    if (!range) return { startDate: new Date(), endDate: new Date() }; // Add a fallback
+
+    const [startDateStr, endDateStr] = range.split(" - ");
+    const [startDay, startMonth, startYear] = startDateStr
+      .split("/")
+      .map(Number);
+    const [endDay, endMonth, endYear] = endDateStr.split("/").map(Number);
+
+    const startDate = new Date(startYear, startMonth - 1, startDay);
+    const endDate = new Date(endYear, endMonth - 1, endDay);
+
+    return { startDate, endDate };
+  };
+
+  // Handle range change
+  const handleRangeChange = (event: SelectChangeEvent<string>) => {
+    const range = event.target.value;
+    const { startDate, endDate } = parseDateRange(range);
+
+    setDropdownRange(range); // Update the selected dropdown range
+    // setSelectedDate(startDate); 
+    onChange(startDate); // Trigger the onChange callback
+  };
+
+  const handleYearChange = (event: SelectChangeEvent<string>) => {
+    const year = parseInt(event.target.value, 10);
+    setSelectedYear(year);
+    setSelectedDate(new Date(year, selectedMonth, 1));
+    onChange(new Date(year, selectedMonth, 1));
+  };
+
+  // Generate the days based on the selected range
+  const generateDays = () => {
+    const { startDate, endDate } = parseDateRange(dropdownRange);
+    const totalDaysInRange =
+      Math.floor(
+        (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)
+      ) + 1;
+
+    const firstDayOfWeek = startDate.getDay();
+    const prefixDays = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+
+    return {
+      totalDaysInRange,
+      startDate,
+      prefixDays,
     };
+  };
 
-    // Handle range change
-    const handleRangeChange = (event: SelectChangeEvent<string>) => {
-        const range = event.target.value;
-        const { startDate, endDate } = parseDateRange(range);
+  const { totalDaysInRange, startDate, prefixDays } = generateDays();
 
-        setDropdownRange(range); // Update the selected dropdown range
-        setSelectedDate(startDate); // Update the selected date
-        onChange(startDate); // Trigger the onChange callback
-    };
+  console.log("today", selectedDate);
 
-    const handleYearChange = (event: SelectChangeEvent<string>) => {
-        const year = parseInt(event.target.value, 10);
-        setSelectedYear(year);
-        setSelectedDate(new Date(year, selectedMonth, 1));
-        onChange(new Date(year, selectedMonth, 1));
-    };
+  return (
+    <div className=" pb-4 pe-3">
+      <div className="flex">
+        <FormControl sx={{ width: "fit-content" }}>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={dropdownRange} // Bind the value of the Select to the state
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            onChange={handleRangeChange}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
+          >
+            {dropdownRanges.map((range, index) => (
+              <MenuItem key={index} value={range}>
+                {range}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-    // Generate the days based on the selected range
-    const generateDays = () => {
-        const { startDate, endDate } = parseDateRange(dropdownRange);
-        const totalDaysInRange =
-            Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) + 1;
+        <FormControl sx={{ width: "fit-content" }}>
+          <Select
+            labelId="year-select-label"
+            id="year-select"
+            value={selectedYear.toString()} // Convert number to string for Material-UI compatibility
+            onChange={handleYearChange}
+            className="textheader para"
+            sx={{
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none", // Remove border from the outline
+              },
+              outline: "none",
+            }}
+          >
+            {Array.from({ length: 10 }, (_, i) => {
+              const year = new Date().getFullYear() - 5 + i; // Generates a range of 10 years
+              return (
+                <MenuItem key={year} value={year.toString()}>
+                  {year}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </div>
 
-        const firstDayOfWeek = startDate.getDay();
-        const prefixDays = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+      {/* Weekdays */}
+      <div className="grid grid-cols-7 items-center justify-center text-center">
+        {weeks.map((week, index) => (
+          <Cell key={index} className="para2 unselectcolor">
+            {week}
+          </Cell>
+        ))}
 
-        return {
-            totalDaysInRange,
-            startDate,
-            prefixDays,
-        };
-    };
+        {/* Empty cells before the start of the range */}
+        {Array.from({ length: prefixDays }).map((_, index) => (
+          <Cell key={index} />
+        ))}
 
-    const { totalDaysInRange, startDate, prefixDays } = generateDays();
+        {/* Dates within the specified range */}
+        {Array.from({ length: totalDaysInRange }).map((_, index) => {
+          const date = add(startDate, { days: index });
 
-    return (
-        <div className=" pb-4 pe-3">
-            <div className="flex">
-                <FormControl sx={{ width: "fit-content" }}>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={dropdownRange} // Bind the value of the Select to the state
-                        displayEmpty
-                        inputProps={{ "aria-label": "Without label" }}
-                        onChange={handleRangeChange}
-                        className="textheader para"
-                        sx={{
-                            "& .MuiOutlinedInput-notchedOutline": {
-                                border: "none", // Remove border from the outline
-                            },
-                            outline: "none",
-                        }}
-                    >
-                        {dropdownRanges.map((range, index) => (
-                            <MenuItem key={index} value={range}>
-                                {range}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+          // Highlight only the selected date or today if initially loading
+          const isSelectedDate =
+            format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
+          
 
-                <FormControl sx={{ width: "fit-content" }}>
-                    <Select
-                        labelId="year-select-label"
-                        id="year-select"
-                        value={selectedYear.toString()} // Convert number to string for Material-UI compatibility
-                        onChange={handleYearChange}
-                        className="textheader para"
-                        sx={{
-                            "& .MuiOutlinedInput-notchedOutline": {
-                                border: "none", // Remove border from the outline
-                            },
-                            outline: "none",
-                        }}
-                    >
-                        {Array.from({ length: 10 }, (_, i) => {
-                            const year = new Date().getFullYear() - 5 + i; // Generates a range of 10 years
-                            return (
-                                <MenuItem key={year} value={year.toString()}>
-                                    {year}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
-            </div>
-
-            {/* Weekdays */}
-            <div className="grid grid-cols-7 items-center justify-center text-center">
-                {weeks.map((week, index) => (
-                    <Cell key={index} className="para2 unselectcolor">
-                        {week}
-                    </Cell>
-                ))}
-
-                {/* Empty cells before the start of the range */}
-                {Array.from({ length: prefixDays }).map((_, index) => (
-                    <Cell key={index} />
-                ))}
-
-                {/* Dates within the specified range */}
-                {Array.from({ length: totalDaysInRange }).map((_, index) => {
-                    const date = add(startDate, { days: index });
-                    const isCurrentDate =
-                        format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
-
-                    return (
-                        <Cell
-                            key={index}
-                            isActive={isCurrentDate}
-                            className="relative rounded para2 textheader"
-                            onClick={() => {
-                                setSelectedDate(date);
-                                onChange(date);
-                            }}
-                        >
-                            {format(date, "d")}
-                        </Cell>
-                    );
-                })}
-            </div>
-        </div>
-    );
+          return (
+            <Cell
+              key={index}
+              isActive={isSelectedDate}
+              className={`relative rounded para2 textheader ${
+                isSelectedDate ? "bg-blue-500 text-white" : ""
+              }`}
+              onClick={() => handleDateClick(date)}
+            >
+              {format(date, "d")}
+            </Cell>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default BiWeeklyCalendar;
