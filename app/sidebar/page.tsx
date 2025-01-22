@@ -31,6 +31,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Login from "../login/page";
 import { useRouter } from "next/navigation";
+import { Timeloader } from "../reusableComponent/loader/timeloader";
 
 interface SidebarProps {
   children: ReactNode;
@@ -166,11 +167,19 @@ const Sidebar = ({ children }: SidebarProps) => {
   return (
     <>
       {!auth ? (
-        <Link href="/login">
-          <Login />
+        <Link
+          href="/login"
+          className="text-blue-500"
+        //   suppressHydrationWarning={true}
+        >
+          <Timeloader />
         </Link>
       ) : (
-        <div className="sidebarContainer" style={{ position: "relative" }}>
+        <div
+          className="sidebarContainer"
+          style={{ position: "relative" }}
+        //   suppressHydrationWarning={true}
+        >
           <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
