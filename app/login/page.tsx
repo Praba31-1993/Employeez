@@ -45,7 +45,7 @@ export default function Login() {
 
   useEffect(() => {
     if (loginDatas?.token) {
-      document.cookie = `token = ${loginDatas?.token}`;
+      localStorage.setItem("token", loginDatas.token);
     }
   }, [loginDatas]);
 
