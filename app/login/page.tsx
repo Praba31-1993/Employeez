@@ -36,18 +36,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const [showPassword, setShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-
-  const loginDatas: any = useSelector((state: RootState) => state.login.user);
-
   const router = useRouter();
-
-  console.log(" loginDatas.token", loginDatas?.token);
-
-  useEffect(() => {
-    if (loginDatas?.token) {
-      localStorage.setItem("token", loginDatas.token);
-    }
-  }, [loginDatas]);
 
   useEffect(() => {
     const rememberedUserId = localStorage.getItem("rememberedUserId");
@@ -104,9 +93,10 @@ export default function Login() {
       setIsLoading(true);
 
       if (loginResponse.payload.status === undefined) {
-        setUserDetails(loginResponse.payload.userInfo);
+        setUserDetails(loginResponse?.payload?.userInfo);
         toast.success("Login successful");
-        // document.cookie = "auth=true; path=/; max-age=86400";
+        localStorage.setItem("token", loginResponse?.payload?.token);
+
         router.push("/dashboard");
         setTimeout(() => {
           setIsLoading(false); // Stop loading after navigation

@@ -159,7 +159,7 @@ const Sidebar = ({ children }: SidebarProps) => {
 
     setMenuLists(newList);
     sethideToggle(false);
-    document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
     toast.success(Messages.success.restored);
   };
   const useColors = Colors();
