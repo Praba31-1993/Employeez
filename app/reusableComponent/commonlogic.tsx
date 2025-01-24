@@ -1,3 +1,4 @@
+
 export const SearchLogic = (arr: any[], search: string) => {
   const filteredRows = arr.filter((row: any) =>
     Object.values(row).some((value) =>

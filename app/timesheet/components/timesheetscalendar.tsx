@@ -53,7 +53,7 @@ export default function Timesheetcalendar({
 
       // Filter out the unselected projects
       const unSelectedData = AssinedProjectlist.filter(
-        (list:any) => list.projectid !== selectedProject.projectid
+        (list: any) => list.projectid !== selectedProject.projectid
       );
 
       setshowUnSelectedProjectedData(unSelectedData);
@@ -112,14 +112,15 @@ export default function Timesheetcalendar({
               icon={faFileCircleExclamation}
               style={{ color: useColors.themeRed }}
             />
-            <h2 className="para ms-2 d-sm-block d-none mb-0 shade">Annual leave summary</h2>
+            <h2 className="para ms-2 d-sm-block d-none mb-0 shade">
+              Annual leave summary
+            </h2>
           </div>
           {/* Annula leave summary */}
           <div
             onClick={() => setOpen((prev) => !prev)}
             className="ms-sm-4 px-3 py-1"
           >
-           
             <button
               className="outlinebtn ms-sm-4 px-3 py-1"
               style={{

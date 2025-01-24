@@ -32,6 +32,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Login from "../login/page";
 import { useRouter } from "next/navigation";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
+import Handloader from "../reusableComponent/loader/handloader";
 
 interface SidebarProps {
   children: ReactNode;
@@ -159,7 +160,7 @@ const Sidebar = ({ children }: SidebarProps) => {
 
     setMenuLists(newList);
     sethideToggle(false);
-    document.cookie = "auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
     toast.success(Messages.success.restored);
   };
   const useColors = Colors();
@@ -172,7 +173,7 @@ const Sidebar = ({ children }: SidebarProps) => {
           className="text-blue-500"
         //   suppressHydrationWarning={true}
         >
-          <Timeloader />
+          <Handloader />
         </Link>
       ) : (
         <div
