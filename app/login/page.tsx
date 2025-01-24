@@ -22,8 +22,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
-import { Timeloader } from "../reusableComponent/loader/timeloader";
 import { loginUser } from "../redux/slices/loginSlice";
+import Handloader from "../reusableComponent/loader/handloader";
+import welcomeAnimationLoader from "@/public/assets/welcome-animation.json";
 
 export default function Login() {
   const useColors = Colors();
@@ -97,10 +98,10 @@ export default function Login() {
         toast.success("Login successful");
         localStorage.setItem("token", loginResponse?.payload?.token);
 
-        router.push("/dashboard");
         setTimeout(() => {
           setIsLoading(false); // Stop loading after navigation
-        }, 5000);
+          router.push("/dashboard");
+        }, 2000);
       } else {
         toast.error("Invalid credentials. Please try again.");
         setIsLoading(false);
@@ -111,7 +112,22 @@ export default function Login() {
   return (
     <section className="login">
       {/* Show Timeloader while loading */}
-      {isLoading && <Timeloader />}
+      {isLoading && <Handloader />}
+
+      {/* {isLoading && (
+        <div
+          className="animation-container h-100 w-100 d-flex justify-content-center align-items-center"
+          style={{ position: "absolute", top: "0px", left: "0px" }}
+        >
+          <Player
+            autoplay
+            loop={false} // Stops animation after completing one cycle
+            animationData={welcomeAnimationLoader} // Use animationData for the Player
+            style={{ height: "50%", width: "50%" }}
+          />
+        </div>
+      )} */}
+
       <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
         <div className="row h-100 w-100">
           <div
