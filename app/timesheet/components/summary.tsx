@@ -164,7 +164,7 @@ const Summary: React.FC<Props> = ({
       <h3>Timesheet Summary</h3>
       <div className="d-flex flex-wrap mt-3">
         {summaryView.map((summary: SummaryView, index: number) => (
-          <div key={index} className=" me-3 py-2 ">
+          <div key={index} className=" me-3  py-2 ">
             <Summarycards leaveData={summary} />
           </div>
         ))}
