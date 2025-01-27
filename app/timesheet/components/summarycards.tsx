@@ -4,7 +4,7 @@ import ImageComponent from "@/app/reusableComponent/image";
 export default function Summarycards({ leaveData, leaveTypeimages }: any) {
   return (
     <>
-      <div className="summarydetailscards  ps-3 py-2">
+      <div className="summarydetailscards w-100 ps-3 py-2">
         <div className="d-flex align-items-center">
           <div className="p-1 icons">
             <ImageComponent
