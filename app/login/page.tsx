@@ -23,8 +23,7 @@ import { AppDispatch, RootState } from "../redux/store";
 import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../redux/slices/loginSlice";
-import Handloader from "../reusableComponent/loader/handloader";
-import welcomeAnimationLoader from "@/public/assets/welcome-animation.json";
+import { Timeloader } from "../reusableComponent/loader/timeloader";
 
 export default function Login() {
   const useColors = Colors();
@@ -112,21 +111,7 @@ export default function Login() {
   return (
     <section className="login">
       {/* Show Timeloader while loading */}
-      {isLoading && <Handloader />}
-
-      {/* {isLoading && (
-        <div
-          className="animation-container h-100 w-100 d-flex justify-content-center align-items-center"
-          style={{ position: "absolute", top: "0px", left: "0px" }}
-        >
-          <Player
-            autoplay
-            loop={false} // Stops animation after completing one cycle
-            animationData={welcomeAnimationLoader} // Use animationData for the Player
-            style={{ height: "50%", width: "50%" }}
-          />
-        </div>
-      )} */}
+      {isLoading && <Timeloader />}
 
       <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
         <div className="row h-100 w-100">
