@@ -29,9 +29,9 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Login from "../login/page";
 import { useRouter } from "next/navigation";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
+import { dashboard } from "../reusableComponent/JsonData";
 
 interface SidebarProps {
   children: ReactNode;
@@ -167,19 +167,11 @@ const Sidebar = ({ children }: SidebarProps) => {
   return (
     <>
       {!auth ? (
-        <Link
-          href="/login"
-          className="text-blue-500"
-        //   suppressHydrationWarning={true}
-        >
+        <Link href="/login" className="text-blue-500">
           <Timeloader />
         </Link>
       ) : (
-        <div
-          className="sidebarContainer"
-          style={{ position: "relative" }}
-        //   suppressHydrationWarning={true}
-        >
+        <div className="sidebarContainer" style={{ position: "relative" }}>
           <div
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -200,7 +192,6 @@ const Sidebar = ({ children }: SidebarProps) => {
                 {isOpen ? (
                   <Image className="p-2" src={logo} alt="Logo" />
                 ) : (
-                  // <Image src={EZlogo} alt="Logo" style={{ margin: "0 auto" }} />
                   <div style={{ margin: "0 auto" }}>
                     <ImageComponent
                       width={0}
@@ -241,7 +232,254 @@ const Sidebar = ({ children }: SidebarProps) => {
                 )}
               </div>
             </div>
+            {/* start */}
+            {dashboard?.map((item: any, index: number) => (
+              <div key={index}>
+                <Accordion
+                  sx={{ background: "none !important" }}
+                  expanded={expanded === item.id}
+                  onChange={handleChange(item.id)}
+                >
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    <div
+                      className="para2 py-2"
+                      style={{
+                        display: "flex",
+                        margin: "0px 9px",
+                        fontStyle: "normal",
+                        fontWeight: "100",
+                      }}
+                    >
+                      <Divider
+                        textAlign="left"
+                        sx={{
+                          "&::before": { content: '""' },
+                          flexGrow: 1,
+                          margin: "0 0 0px 0",
+                        }}
+                      >
+                        {" "}
+                        {isOpen && item.role}{" "}
+                      </Divider>
+                    </div>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {item.roleItems?.map((item: any, itemIndex: number) => (
+                      <div key={itemIndex}>
+                        <div
+                          style={{ display: "flex", alignItems: "center" }}
+                          className="menuTextStyle"
+                        >
+                          <Link
+                            href={item.path}
+                            className={`link ${
+                              pathname === item.path && !hideToggle
+                                ? "active"
+                                : pathname === item.path && hideToggle
+                                ? "activewithNoBackground"
+                                : ""
+                            } mb-0 w-100`}
+                            style={{
+                              display: "flex",
+                              justifyContent:
+                                isOpen || visibleMenus
+                                  ? "flex-start"
+                                  : "center",
+                              alignItems: "center",
+                              background:
+                                pathname === item.path && !hideToggle
+                                  ? useColors.themeRed
+                                  : "transparent",
+                            }}
+                          >
+                            <Image
+                              src={
+                                pathname === item.path && !hideToggle
+                                  ? item?.icon ?? "/assets/img/basicmenu.svg"
+                                  : item?.inactive ??
+                                    "/assets/img/basicmenu.svg"
+                              }
+                              alt={`${item.name} Icon`}
+                              aria-label={`Navigate to ${item.name}`}
+                              width={20}
+                              height={20}
+                            />
+                            <div
+                              className="para"
+                              style={{
+                                display:
+                                  isOpen || visibleMenus ? "block" : "none",
+                                fontFamily: "Inter, sans-serif !important",
+                                textTransform: TextStyles.textTransform,
+                              }}
+                            >
+                              {item.name}
+                            </div>
+                          </Link>
 
+                          {item.childItems && isOpen && (
+                            <KeyboardArrowRightIcon
+                              onClick={() => toggleChildMenu(item.name)}
+                              style={{
+                                cursor: "pointer",
+                                transform:
+                                  expandedItem === item.name
+                                    ? "rotate(90deg)"
+                                    : "rotate(0)",
+                                transition: "transform 0.3s ease",
+                              }}
+                            />
+                          )}
+                          {!item.childItems && isOpen && hideToggle && (
+                            <ToggleSwitch
+                              isChecked={item?.checked}
+                              onToggle={() =>
+                                handleToggleChange(
+                                  index,
+                                  itemIndex,
+                                  item?.checked
+                                )
+                              }
+                            />
+                          )}
+                        </div>
+
+                        {hideToggle ? (
+                          <>
+                            {item.childItems && isOpen && expandedItem && (
+                              <>
+                                <div
+                                  className="para"
+                                  style={{
+                                    display: "block",
+                                    paddingLeft: "30px",
+                                    background: "#f4f4f4",
+                                    borderLeft: "2px solid #ddd",
+                                    color: "#6C6A6A",
+                                    fontFamily: "Inter, sans-serif !important",
+                                    textTransform: TextStyles.textTransform,
+                                  }}
+                                >
+                                  {item.childItems?.map(
+                                    (child: any, childIndex: number) => (
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                        }}
+                                        key={childIndex}
+                                      >
+                                        <Link
+                                          key={childIndex}
+                                          href={child.path}
+                                          className={`link ${
+                                            pathname === child.path
+                                              ? "active"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            padding: "10px 20px",
+                                            textDecoration: "none",
+                                          }}
+                                        >
+                                          <Image
+                                            src={
+                                              pathname === child.path
+                                                ? item?.icon ??
+                                                  "/assets/img/basicmenu.svg"
+                                                : child.inactive ??
+                                                  "/assets/img/basicmenu.svg"
+                                            }
+                                            alt={`${child.name} Icon`}
+                                            width={20}
+                                            height={20}
+                                          />
+                                          <div>{child.name}</div>
+                                        </Link>
+                                        {hideToggle && (
+                                          <ToggleSwitch
+                                            isChecked={child?.checked}
+                                            onToggle={() =>
+                                              handleToggleChange(
+                                                index,
+                                                childIndex,
+                                                child?.checked
+                                              )
+                                            }
+                                          />
+                                        )}{" "}
+                                      </div>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {item.childItems && (
+                              <>
+                                <div
+                                  className="menudropdown"
+                                  style={{
+                                    display:
+                                      expandedItem === item.name
+                                        ? "block"
+                                        : "none",
+                                  }}
+                                >
+                                  {item.childItems?.map(
+                                    (child: any, childIndex: number) => (
+                                      <div
+                                        className="menuTextStyle "
+                                        key={childIndex}
+                                      >
+                                        <Link
+                                          key={childIndex}
+                                          href={child.path}
+                                          className={`link ${
+                                            pathname === child.path
+                                              ? "active"
+                                              : ""
+                                          } mb-0 w-100`}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            color:
+                                              pathname === child.path
+                                                ? useColors.themeRed
+                                                : "", // Apply themeRed to the active link
+                                          }}
+                                        >
+                                          <Image
+                                            src={"/assets/img/basicmenu.svg"}
+                                            alt={`${child.name} Icon`}
+                                            width={20}
+                                            height={20}
+                                          />
+                                          <div>{child.name}</div>
+                                        </Link>
+                                      </div>
+                                    )
+                                  )}
+                                </div>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            ))}
+            {/* end */}
             {menuLists?.map((roleGroup, index) => (
               <div key={index}>
                 <Accordion
