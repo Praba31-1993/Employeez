@@ -68,7 +68,7 @@
 }
 
 .summarydetailscards {
-  width: fit-content !important;
+  width: fit-content ;
   padding: 15px;
 }
 

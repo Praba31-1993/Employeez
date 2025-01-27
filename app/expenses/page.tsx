@@ -19,6 +19,9 @@ import { TimesheetExpenceAndHoursField } from "../reusableComponent/timesheetexp
 import { Colors } from "../reusableComponent/styles";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../sidebar/page";
+import moment from "moment";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export default function Expenses({ weekListDatas }: any) {
   const useColors = Colors();
@@ -29,6 +32,9 @@ export default function Expenses({ weekListDatas }: any) {
   const lastIndex = weekListDatas?.length - 1;
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
   const [open, setOpen] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const loginDatas: any = useSelector((state: RootState) => state.login.user);
 
   // Filter for objects with codeId and codeLabel (relevant data)
   const codeItems = timesheetDataConvertedToFetchCalendar?.filter(
@@ -63,6 +69,12 @@ export default function Expenses({ weekListDatas }: any) {
     };
   }, []);
 
+  const handleSelectedMonth = (month: any, year: any) => {
+    let convertedMonth = moment(month + 1, "M").format("MMMM");
+    setSelectedMonth(convertedMonth);
+    setSelectedYear(year);
+  };
+
   return (
     <>
       <Sidebar>
@@ -75,39 +87,55 @@ export default function Expenses({ weekListDatas }: any) {
               <div className="col-lg-4 col-xxl-3 borderright">
                 <div className="row">
                   <div className="col-lg-12 px-0 col-sm-6">
-                    <div className="calendar">
-                      {loginResponse[0].userInfo?.paySchedule === "Monthly" ? (
-                        // <MonthlyCalendar
-                        //   value={currentDate}
-                        //   onChange={setCurrentDate}
-                        //   calendardatas={ConvertedTimeSheetForCalendar}
-                        //   weeklyList={handleWeekList}
-                        // />
-                        <WeeklyCalendar
+                    {loginDatas === null ? (
+                      <div className="calendar">
+                        <MonthlyCalendar
                           value={currentDate}
                           onChange={setCurrentDate}
+                          calendardatas={ConvertedTimeSheetForCalendar}
+                          weeklyList={handleWeekList}
+                          handleSelectedMonth={handleSelectedMonth}
                         />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
-                        "Weekly" ? (
-                        // <WeeklyCalendar />
-                        <WeeklyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
-                        "Bi-Weekly" ? (
-                        <BiWeeklyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : loginResponse[0].userInfo?.paySchedule ===
-                        "Semi-Monthly" ? (
-                        <SemiMonthlyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                        />
-                      ) : null}
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="calendar">
+                        {loginDatas?.userInfo?.paySchedule === "Monthly" ? (
+                          <MonthlyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule === "Weekly" ? (
+                          <WeeklyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule ===
+                          "Bi-Weekly" ? (
+                          <BiWeeklyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
+                        ) : loginDatas?.userInfo?.paySchedule ===
+                          "Semi-Monthly" ? (
+                          <SemiMonthlyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
+                        ) : null}
+                      </div>
+                    )}
                     {/* Pass the toggle function to Totalsummary */}
                     <Expensestotalsummary
                       showsummarycards={() =>
