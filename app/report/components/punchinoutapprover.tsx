@@ -17,6 +17,9 @@ import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
 import Image from "next/image";
 import favourite from "@/public/assets/img/favourite.svg";
 import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
+import ColumnSorting from "@/app/reusableComponent/columnsorting";
+import Filtersorting from "@/app/reusableComponent/filtersorting";
+import ExportDocuments from "@/app/reusableComponent/exportdocuments";
 
 interface ApproverRow {
   employeeId: string;
@@ -36,7 +39,6 @@ function Punchinoutapprover() {
   const [openExport, setOpenExport] = useState<Boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [tableColumns, setTableColumns] = useState<any>(columnForApprover);
   const [rowsList, setRows] = useState<ApproverRow[]>(rowsForApprover);
   const columnRef = useRef<HTMLDivElement>(null);
   const [showdetails, setDetails] = useState(false);
@@ -51,20 +53,6 @@ function Punchinoutapprover() {
     direction: "asc" | "desc";
   } | null>(null);
 
-  const handleChecked = (id: any) => {
-    const updatedColumns = tableColumns.map((columnsList: any) => {
-      if (columnsList.id === id) {
-        return {
-          ...columnsList,
-          checked: !columnsList.checked,
-        };
-      }
-      return columnsList;
-    });
-    setTableColumns(updatedColumns);
-    setSearchList(updatedColumns);
-  };
-
   useEffect(() => {
     const arr: any = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -72,7 +60,6 @@ function Punchinoutapprover() {
     }
     setPages(arr);
   }, [totalPages]);
-
 
   const handleSort = (key: keyof ApproverRow) => {
     let direction: "asc" | "desc" = "asc";
@@ -102,80 +89,34 @@ function Punchinoutapprover() {
     setCurrentPage(page);
   };
 
-  console.log('currentPageItems', currentPageItems);
-  
+  console.log("currentPageItems", currentPageItems);
+
   return (
     <div>
+      {/* column, filter */}
       <div className="d-flex  justify-content-between mt-3 mb-2">
-        <ul className="d-flex flex-wrap align-items-end gap-2 heading2 textheader cursorPointer p-0 mb-0">
-          <li
-            className="d-flex align-items-center"
-            onClick={() => setOpenColumn((p) => !p)}
-          >
-            <CalendarViewWeekIcon />
-            <div className="show mx-2">
-              <div>Column</div>
-            </div>
-          </li>
-
-          <li className="d-flex align-items-center">
-            <FilterListIcon />
-            <span className="mx-2">Filters</span>
-          </li>
-          <li>
-            <div
-              className="d-flex align-items-center"
-              onClick={() => setOpenExport((p) => !p)}
-            >
-              <SaveAltIcon />
-              <div className="dropdown mx-2">
-                <div role="div" id="dropdownMenuLink" data-bs-toggle="dropdown">
-                  Export
-                </div>
-              </div>
-            </div>
-
-            {openExport && (
-              <div
-                className="p-2"
-                onClick={() => setOpenExport(true)}
-                style={{
-                  background: "white",
-                  width: "fit-content",
-                  position: "absolute",
-                }}
-                ref={ExportRef}
-              >
-                <p
-                  className="m-0 para textheader"
-                  // onClick={() => handleCSVExport(headers, rows)}
-                >
-                  CSV File
-                </p>
-              </div>
-            )}
-          </li>
-          <li className="d-flex align-items-center">
+        <div className="d-flex flex-wrap  gap-2 heading2 textheader cursorPointer p-0 mb-0">
+          <ColumnSorting columnList={searchList} />
+          <Filtersorting columnList={searchList} />
+          <ExportDocuments exportDatas={rowsList} />
+          <div className="d-flex align-items-center">
             <HistoryIcon />
-            <div className="ms-2">
-              <DropdownComponent
-                dropdownlist={year}
-                removepadding={true}
-                selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-              />
-            </div>
-          </li>
-          <li className="d-flex align-items-center">
+            <DropdownComponent
+              dropdownlist={year}
+              removepadding={true}
+              selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
+            />
+          </div>
+          <div className="d-flex align-items-center">
             <CalendarMonthIcon />
-            <div className="ms-2">
-              <DropdownComponent
-                dropdownlist={year}
-                removepadding={true}
-                selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-              />
-            </div>
-          </li>
-        </ul>
+            <DropdownComponent
+              dropdownlist={year}
+              removepadding={true}
+              selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
+            />
+          </div>
+        </div>
+
         <div className="col-12 col-md-3">
           <div className="d-flex gap-3">
             <Image src={favourite} alt="" width={24} height={24} />
@@ -194,52 +135,7 @@ function Punchinoutapprover() {
           </div>
         </div>
       </div>
-      {/* column Function */}
-      <div
-        className=""
-        style={{ position: "relative" }}
-        onClick={() => setOpenColumn(true)}
-        ref={columnRef}
-      >
-        {openColumn && (
-          <div
-            className=" cursorPointer px-1 "
-            aria-labelledby="dropdownMenuLink"
-            style={{
-              width: "max-content",
-              background: "white",
-              position: "absolute",
-              boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-            }}
-          >
-            <div
-              className="d-flex gap-1  p-2 align-items-center"
-              style={{ border: "1px solid blue" }}
-            >
-              <div className="mt-1">
-                <SearchIcon />
-              </div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="p-2 w-100"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
 
-            {searchList?.map((columnList: any) => (
-              <div className="checkboxwithList" key={columnList?.id}>
-                <Checkbox
-                  checked={columnList?.checked}
-                  onChange={() => handleChecked(columnList?.id)}
-                />
-                <span>{columnList?.key}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
       {/* Table Section */}
       <div className="">
         <table className="table tabletype">

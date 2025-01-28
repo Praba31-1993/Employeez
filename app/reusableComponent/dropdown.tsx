@@ -50,8 +50,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
           
         }}
       >
-        {dropdownlist && dropdownlist.length > 0 ? (
-          dropdownlist.map((item: any, index: number) => (
+        {dropdownlist && dropdownlist?.length > 0 ? (
+          dropdownlist?.map((item: any, index: number) => (
             <option
               key={`${item.id}-${index}`}
               value={item.label}
