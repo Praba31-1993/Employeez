@@ -309,7 +309,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         background: "none !important",
                                         alignItems: "center", 
                                         justifyContent:"start",
-                                        color:"#66d777"
+                                        color:"#6d6777 !important"
                                        
                                     }}
                                         expandIcon={null} // Removes the arrow icon
@@ -458,18 +458,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                     textDecoration: "none",
                                                                                 }}
                                                                             >
-                                                                                <Image
-                                                                                    src={
-                                                                                        pathname === child.path
-                                                                                            ? item?.icon ??
-                                                                                            "/assets/img/basicmenu.svg"
-                                                                                            : child.inactive ??
-                                                                                            "/assets/img/basicmenu.svg"
-                                                                                    }
-                                                                                    alt={`${child.name} Icon`}
-                                                                                    width={20}
-                                                                                    height={20}
-                                                                                />
+                                                                                 <DnsOutlinedIcon sx={{color:"#7E7E7E"}} />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                             {hideToggle && (
@@ -570,7 +559,6 @@ const Sidebar = ({ children }: SidebarProps) => {
                     <ToastContainer />
                 </div>
             )}
-
             <DraggableComponent />
         </>
     );
