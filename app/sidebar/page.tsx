@@ -49,6 +49,7 @@ import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import BubbleChartOutlinedIcon from '@mui/icons-material/BubbleChartOutlined';
 import DnsOutlinedIcon from '@mui/icons-material/DnsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 interface SidebarProps {
     children: ReactNode;
 }
@@ -276,7 +277,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 color: pathname === '/dashboard' ? "white" : "",
                             }}
                         >
-                            <DashboardOutlinedIcon className="heading2" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
+                            <DashboardOutlinedIcon className="heading2 ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
                             <div
                                 className="para"
                                 style={{
@@ -527,10 +528,34 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         ))}
                                     </AccordionDetails>
                                 </Accordion>
+                               
                             </div>
+                            
                         ))}
+                        <div 
+                            className={`mb-0 w-100 link`}
+                            style={{
+                                display: "flex",
+                                justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
+                                alignItems: "center",
+                                cursor:"pointer"
+                            }}
+                        >
+                            <LogoutOutlinedIcon className="heading2 ps-1" sx={{ color:"#7E7E7E"}} />
+                            <div
+                                className="para"
+                                style={{
+                                    display: isOpen || visibleMenus ? "block" : "none",
+                                    fontFamily: "Inter, sans-serif",
+                                    textTransform: TextStyles.textTransform,
+                                }}
+                            >
+                                Logout
+                            </div>
+                        </div>
+                        
                     </div>
-
+                    
                     <main
                         style={{
                             paddingLeft: visibleMenus
