@@ -13,7 +13,7 @@ main {
     border: 1px solid #6962621f;
 }
 .sidebar {
-    background: #f4f4f4;
+    background: #fff;
     color: #6c6a6a;
     height: 100vh;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -183,7 +183,9 @@ main {
         transition: transform 0.3s ease, opacity 0.3s ease;
     }
 }
-
+.css-7iurs7-MuiAccordionSummary-content{
+    align-items: center;
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 481px) and (max-width:768px) {
