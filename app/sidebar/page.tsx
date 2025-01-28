@@ -297,6 +297,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     boxShadow: "none !important", // Removes the box shadow
                                     background: "none !important",
                                     justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
+                                    borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
                                 }}
                                
                                     expanded={expanded === roleGroup.id}
