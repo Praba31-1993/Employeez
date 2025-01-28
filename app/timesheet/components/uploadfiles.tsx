@@ -2,11 +2,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import ImageComponent from "@/app/reusableComponent/image";
 import Listicon from "@/app/reusableComponent/listicon";
-
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 export default function Uploadfiles({ show, close }: any) {
     const [files, setFiles] = useState<File[]>([]); // Explicitly define type as File[]
 
@@ -84,41 +84,37 @@ export default function Uploadfiles({ show, close }: any) {
     );
 }
 export function Viewfiles() {
+   
+  
     return (
-        <>
-            {/* view files */}
-            <div
-                className="accordion accordion-flush mt-4"
-                id="accordionFlushExample"
+      <div className="accordion accordion-flush mt-4" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingOne">
+            <button
+              className="accordion-button p-0 unselectcolor para collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
             >
-                <div className="accordion-item">
-                    <h2 className="accordion-header " id="flush-headingOne">
-                        <button
-                            className="accordion-button p-0  unselectcolor para collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne"
-                            aria-expanded="false"
-                            aria-controls="flush-collapseOne"
-                        >
-                            View file
-                        </button>
-                    </h2>
-                    <div
-                        id="flush-collapseOne"
-                        className="accordion-collapse collapse"
-                        aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample"
-                    >
-                        <div className="accordion-body py-2 px-3 mt-3">
-                            <div className="timesheetdetails  align-items-center d-flex ">
-                                <DescriptionOutlinedIcon sx={{ color: "#8C57FF" }} />
-                                <p className="para ps-2 mb-0 unselectcolor">Document</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              View file
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            className="accordion-collapse collapse"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div className="accordion-body py-2 px-3 mt-3">
+              <div className="timesheetdetails align-items-center d-flex">
+                <DescriptionOutlinedIcon sx={{ color: "#8C57FF" }} />
+                <p className="para ps-2 mb-0 unselectcolor">Document</p>
+              </div>
             </div>
-        </>
+          </div>
+        </div>
+      </div>
     );
-}
+  }
