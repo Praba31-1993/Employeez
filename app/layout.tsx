@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Providers from "@/app/redux/Providers";
+
 config.autoAddCss = false;
 // import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 // import { ThemeProvider } from '@mui/material/styles';

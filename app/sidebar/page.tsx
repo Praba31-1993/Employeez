@@ -34,6 +34,22 @@ import { useRouter } from "next/navigation";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import RotateLeftOutlinedIcon from '@mui/icons-material/RotateLeftOutlined';
+import ExtensionOutlinedIcon from '@mui/icons-material/ExtensionOutlined';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import FlightTakeoffOutlinedIcon from '@mui/icons-material/FlightTakeoffOutlined';
+import AddchartOutlinedIcon from '@mui/icons-material/AddchartOutlined';
+import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import BubbleChartOutlinedIcon from '@mui/icons-material/BubbleChartOutlined';
+import DnsOutlinedIcon from '@mui/icons-material/DnsOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 interface SidebarProps {
     children: ReactNode;
 }
@@ -177,7 +193,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                         style={{
-                            width: isOpen ? "250px" : "80px",
+                            width: isOpen ? "250px" : "60px",
                             transition: "none",
                             position: "fixed",
                             height: "100vh",
@@ -188,6 +204,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                             } sidebarlist`}
                     >
                         <div className="top_section mt-3">
+                            
                             <div className="bars d-flex align-items-center justify-content-between">
                                 {isOpen ? (
                                     <Image className="p-2" src={logo} alt="Logo" />
@@ -198,28 +215,10 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     </div>
                                 )}
                                 {hideToggle ? (
-                                    <div style={{ display: "flex", gap: "1em" }}>
-                                        <Image
-                                            src={"/assets/img/approved.svg"}
-                                            alt=""
-                                            width={20}
-                                            height={20}
-                                            onClick={ApprovedToggle}
-                                        />
-                                        <Image
-                                            src={"/assets/img/rejected.svg"}
-                                            alt=""
-                                            width={20}
-                                            height={20}
-                                            onClick={RejectedToggle}
-                                        />
-                                        <Image
-                                            src={"/assets/img/refresh.svg"}
-                                            alt=""
-                                            width={20}
-                                            height={20}
-                                            onClick={RefreshToggle}
-                                        />
+                                    <div style={{ display: "flex", justifyContent: "space-between", width: "35%" }}>
+                                        < CheckCircleOutlineOutlinedIcon sx={{ color: "#22dd1a" }} onClick={ApprovedToggle} />
+                                        < CancelOutlinedIcon sx={{ color: "#fd5454" }} onClick={RejectedToggle} />
+                                        <RotateLeftOutlinedIcon onClick={RefreshToggle} />
                                     </div>
                                 ) : (
                                     <>
@@ -267,8 +266,8 @@ const Sidebar = ({ children }: SidebarProps) => {
                         <Link
                             href="/dashboard"
                             className={`link ${pathname === '/dashboard'
-                                    ? "dashboardActive" // Custom class for /dashboard
-                                    : ""
+                                ? "dashboardActive" // Custom class for /dashboard
+                                : ""
                                 } mb-0 w-100`}
                             style={{
                                 display: "flex",
@@ -278,7 +277,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 color: pathname === '/dashboard' ? "white" : "",
                             }}
                         >
-                            <DashboardOutlinedIcon className="heading2" />
+                            <DashboardOutlinedIcon className="heading2 ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
                             <div
                                 className="para"
                                 style={{
@@ -290,22 +289,46 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 Dashboard
                             </div>
                         </Link>
-
-
-
                         {/* end */}
                         {menuLists?.map((roleGroup, index) => (
                             <div key={index}>
                                 <Accordion
-                                    sx={{ background: "none !important" }}
+                                 sx={{
+                                    boxShadow: "none !important", // Removes the box shadow
+                                    background: "none !important",
+                                    justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
+                                }}
+                               
                                     expanded={expanded === roleGroup.id}
                                     onChange={handleChange(roleGroup.id)}
+
                                 >
                                     <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
+                                    sx={{
+                                        borderBottom: "1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
+                                        boxShadow: "none !important", // Removes the box shadow
+                                        background: "none !important",
+                                        alignItems: "center", 
+                                        justifyContent:"start",
+                                        color:"#6d6777 !important"
+                                       
+                                    }}
+                                        expandIcon={null} // Removes the arrow icon
                                         aria-controls="panel1-content"
                                         id="panel1-header"
-                                    >
+                                        >
+                                        {/* accordian icons */}
+                                        {roleGroup.role === "Basic" && <ExtensionOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Delegation" && <FactCheckOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Manager" && <AnalyticsOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Human Resources" && <GroupsOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Immigration" && <FlightTakeoffOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Sales" && <AddchartOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Sub-Contract onboarding" && <EngineeringOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Accounting" && <AccountBalanceWalletOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Payroll" && <PaidOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Admin" && <AdminPanelSettingsOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Subscription" && <BubbleChartOutlinedIcon sx={{color:"#7E7E7E"}} />}
                                         <div
                                             className="para2 py-2"
                                             style={{
@@ -326,16 +349,9 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                 {" "}
                                                 {isOpen && roleGroup.role}{" "}
                                             </Divider>
-                                            {roleGroup.role === "Basic" && (
-                                                <div
-                                                    style={{
-                                                        cursor: "pointer",
-                                                        display: isOpen ? "block" : "none",
-                                                    }}
-                                                ></div>
-                                            )}
                                         </div>
                                     </AccordionSummary>
+
                                     <AccordionDetails>
                                         {roleGroup.roleItems?.map((item, itemIndex) => (
                                             <div key={itemIndex}>
@@ -364,18 +380,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                     : "transparent",
                                                         }}
                                                     >
-                                                        <Image
-                                                            src={
-                                                                pathname === item.path && !hideToggle
-                                                                    ? item?.icon ?? "/assets/img/basicmenu.svg"
-                                                                    : item?.inactive ??
-                                                                    "/assets/img/basicmenu.svg"
-                                                            }
-                                                            alt={`${item.name} Icon`}
-                                                            aria-label={`Navigate to ${item.name}`}
-                                                            width={20}
-                                                            height={20}
-                                                        />
+
                                                         <div
                                                             className="para"
                                                             style={{
@@ -454,18 +459,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                     textDecoration: "none",
                                                                                 }}
                                                                             >
-                                                                                <Image
-                                                                                    src={
-                                                                                        pathname === child.path
-                                                                                            ? item?.icon ??
-                                                                                            "/assets/img/basicmenu.svg"
-                                                                                            : child.inactive ??
-                                                                                            "/assets/img/basicmenu.svg"
-                                                                                    }
-                                                                                    alt={`${child.name} Icon`}
-                                                                                    width={20}
-                                                                                    height={20}
-                                                                                />
+                                                                                 <DnsOutlinedIcon sx={{color:"#7E7E7E"}} />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                             {hideToggle && (
@@ -520,12 +514,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                             : "", // Apply themeRed to the active link
                                                                                 }}
                                                                             >
-                                                                                <Image
-                                                                                    src={"/assets/img/basicmenu.svg"}
-                                                                                    alt={`${child.name} Icon`}
-                                                                                    width={20}
-                                                                                    height={20}
-                                                                                />
+                                                                               <DnsOutlinedIcon sx={{color:"#7E7E7E"}} />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                         </div>
@@ -539,17 +528,41 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         ))}
                                     </AccordionDetails>
                                 </Accordion>
+                               
                             </div>
+                            
                         ))}
+                        <div 
+                            className={`mb-0 w-100 link`}
+                            style={{
+                                display: "flex",
+                                justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
+                                alignItems: "center",
+                                cursor:"pointer"
+                            }}
+                        >
+                            <LogoutOutlinedIcon className="heading2 ps-1" sx={{ color:"#7E7E7E"}} />
+                            <div
+                                className="para"
+                                style={{
+                                    display: isOpen || visibleMenus ? "block" : "none",
+                                    fontFamily: "Inter, sans-serif",
+                                    textTransform: TextStyles.textTransform,
+                                }}
+                            >
+                                Logout
+                            </div>
+                        </div>
+                        
                     </div>
-
+                    
                     <main
                         style={{
                             paddingLeft: visibleMenus
                                 ? "0px"
                                 : isChecked && isOpen
                                     ? "250px"
-                                    : "80px",
+                                    : "60px",
                         }}
                         className="contentSection"
                     >
@@ -571,7 +584,6 @@ const Sidebar = ({ children }: SidebarProps) => {
                     <ToastContainer />
                 </div>
             )}
-
             <DraggableComponent />
         </>
     );

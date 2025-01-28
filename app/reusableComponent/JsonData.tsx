@@ -569,7 +569,7 @@ export const menuItem: IRoleGroup[] = [
     },
     {
         id: "37",
-        role: "subscription",
+        role: "Subscription",
         roleItems: [
             {
                 name: "Employee subscription",
