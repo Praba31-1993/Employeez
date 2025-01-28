@@ -303,13 +303,13 @@ const Sidebar = ({ children }: SidebarProps) => {
 
                                 >
                                     <AccordionSummary
-                                    className="textheader"
                                     sx={{
                                         borderBottom: "1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
                                         boxShadow: "none !important", // Removes the box shadow
                                         background: "none !important",
                                         alignItems: "center", 
-                                        justifyContent:"start"
+                                        justifyContent:"start",
+                                        color:"#66d777"
                                        
                                     }}
                                         expandIcon={null} // Removes the arrow icon
