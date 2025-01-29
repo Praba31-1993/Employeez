@@ -99,7 +99,7 @@ export default function ProfilesCard() {
                     )}
                 </div>
             </div>
-            <div className="d-flex pt-2 pe-2 justify-content-between justify-content-xxl-start gap-xxl-5 flex-wrap">
+            <div className="d-sm-flex d-none pt-2 pe-2 justify-content-between justify-content-xxl-start gap-xxl-5 flex-wrap">
                 {loading
                     ? // Skeleton Loader for the list items
                     Array(6)
@@ -145,6 +145,58 @@ export default function ProfilesCard() {
                                     )}{" "}
                                 </p>
                             </div>
+                            
+                        );
+                    })}
+            </div>
+            {/* mobile */}
+            <div className="row d-sm-none pt-2 pe-2 ">
+                {loading
+                    ? // Skeleton Loader for the list items
+                    Array(6)
+                        .fill(null)
+                        .map((_, index) => (
+                            <div key={index} className="d-flex my-2 flex-column">
+                                <div className="d-flex gap-2 align-items-center">
+                                    <Skeleton circle={true} height={40} width={40} />
+                                    <Skeleton height={20} width={50} />
+                                </div>
+                                <Skeleton height={20} width={100} className="mt-2" />
+                            </div>
+                        ))
+                    : // Render the actual data
+                    arrayList?.map((list: any, index: number) => {
+                        const isLastChild = index === arrayList.length - 1;
+
+                        return (
+                            <div key={index} className="col-6 my-2 ">
+                                <div className="d-flex gap-2 align-items-center">
+                                    <ImageComponent width={0} height={0} user={list?.img} />
+                                    <h6 className="mb-0 textheader heading2">
+                                        {list.noofholidays}
+                                    </h6>
+                                </div>
+                                <p
+                                    className="para2 pt-2  mb-0 shade"
+                                    style={{
+                                        color: isLastChild ? useColors.themeRed : undefined,
+                                    }}
+                                >
+                                    {list.holidaysname}{" "}
+                                    {isLastChild && (
+                                        <span>
+                                            <VisibilityOutlinedIcon
+                                                className="ps-1 cursorPointer"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setOpen((prev) => !prev);
+                                                }}
+                                            />
+                                        </span>
+                                    )}{" "}
+                                </p>
+                            </div>
+                            
                         );
                     })}
             </div>

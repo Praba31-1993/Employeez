@@ -433,7 +433,9 @@ select{
   outline: 0 !important;
   border: 0 !important;
 }
-
+.tableselector{
+  border:1px solid #dee2e6 !important;
+}
 
 .sorttable.table > :not(caption) > * > *{
   background-color: transparent !important;

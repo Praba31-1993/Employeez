@@ -138,9 +138,8 @@ function Changereruestfilter() {
 
   return (
     <>
-      <div className="container-fluid">
         <div className="row justify-content-between">
-          <div className="col-12 ">
+          <div className="col-12 d-none d-sm-block">
             <div className="d-flex  justify-content-between mt-3 mb-2">
               <ul className="d-flex flex-wrap align-items-end gap-2 heading2 textheader cursorPointer p-0 mb-0">
                 <li
@@ -265,7 +264,8 @@ function Changereruestfilter() {
 
           <div className="col-12" id="printSection">
             {/* <Requesttable /> */}
-            <table className="table tabletype">
+           <div className="" style={{overflowX:"auto"}}>
+           <table className="table tabletype">
               <thead style={{ backgroundColor: "#F6F7FB" }}>
                 <tr>
                   <th className="textheader para" scope="col">
@@ -337,6 +337,7 @@ function Changereruestfilter() {
                 ))}
               </tbody>
             </table>
+           </div>
             <div className="d-flex justify-content-end my-3">
               <PaginationComponent
                 currentPage={currentPage}
@@ -347,7 +348,6 @@ function Changereruestfilter() {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 }

@@ -22,6 +22,7 @@ import Filtersorting from "@/app/reusableComponent/filtersorting";
 import ExportDocuments from "@/app/reusableComponent/exportdocuments";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { relative } from "path";
 
 interface ApproverRow {
   employeeId: string;
@@ -222,7 +223,7 @@ function Punchinoutapprover() {
       </div>
 
       {/* Table Section */}
-      <div className="">
+      <div className="" style={{ overflowX: "auto" }}>
         <table className="table tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
@@ -233,7 +234,7 @@ function Punchinoutapprover() {
                   className="position-relative textheader para"
                 >
                   {key.charAt(0).toUpperCase() + key.slice(1)}
-                  <span className="d-inline-flex gap-2 ms-2">
+                  <span className="d-inline-flex align-items-center gap-2 ms-2">
                     <FontAwesomeIcon
                       icon={faSort}
                       style={{ cursor: "pointer", height: "10px" }}
@@ -241,16 +242,91 @@ function Punchinoutapprover() {
                         handleSort(key as keyof (typeof currentPageItems)[0])
                       }
                     />
-                    <FontAwesomeIcon
-                      icon={faFilter}
-                      style={{ cursor: "pointer", height: "10px" }}
-                      onClick={(event: any) =>
-                        handleFilterToggle(
-                          key as keyof (typeof currentPageItems)[0],
-                          event
-                        )
-                      }
-                    />
+                    <div className="" style={{ position: "relative" }}>
+                      <FontAwesomeIcon
+                        icon={faFilter}
+                        style={{ cursor: "pointer", height: "10px" }}
+                        onClick={(event: any) =>
+                          handleFilterToggle(
+                            key as keyof (typeof currentPageItems)[0],
+                            event
+                          )
+                        }
+                      />
+                      {activeFilterColumn && (
+                        <div
+                          className="card card-body"
+                          style={{
+                            width: "18em",
+                            position: "absolute",
+                            top: "0%",
+                            zIndex: 1000,
+                            backgroundColor: "white",
+                            border: "1px solid #ddd",
+                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          <div className="d-flex flex-column p-2 gap-2">
+                            {filterKey === "date" ? (
+                              <>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterYear}
+                                  onChange={(e) => setFilterYear(e.target.value)}
+                                  placeholder="Enter Year (YYYY)"
+                                />
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterMonth}
+                                  onChange={(e) => setFilterMonth(e.target.value)}
+                                  placeholder="Enter Month (MM)"
+                                />
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterDay}
+                                  onChange={(e) => setFilterDay(e.target.value)}
+                                  placeholder="Enter Day (DD)"
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <select
+                                  className="form-control tableselector"
+
+                                  value={filterOperator}
+                                  onChange={(e) =>
+                                    setFilterOperator(e.target.value as "equal" | "notEqual")
+                                  }
+                                >
+                                  <option value="equal">Equal</option>
+                                  <option value="notEqual">Not Equal To</option>
+                                </select>
+
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterValue}
+                                  onChange={(e) => setFilterValue(e.target.value)}
+                                  placeholder={`Enter ${activeFilterColumn} value`}
+                                />
+                              </>
+                            )}
+                          </div>
+
+                          <div className="d-flex gap-2 justify-content-end mt-2">
+                            <button className="btn btn-primary" onClick={handleFilter}>
+                              Filter
+                            </button>
+                            <button className="btn btn-secondary" onClick={handleClear}>
+                              Clear
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </span>
                 </th>
               ))}
@@ -261,7 +337,7 @@ function Punchinoutapprover() {
               <tr key={item.employeeId}>
                 <td className="para textheader">{item?.employeeId}</td>
                 <td className="para textheader">{item?.employeename}</td>
-                <td className="para textheader">{item?.date}</td>
+                <td className="para textheader" style={{ whiteSpace: "nowrap" }} >{item?.date}</td>
                 <td className="para textheader">
                   {/* <ChipsForLeave label={item?.status} /> */}
                   {item?.status}
@@ -275,79 +351,7 @@ function Punchinoutapprover() {
           </tbody>
         </table>
 
-        {activeFilterColumn && (
-          <div
-            className="card card-body"
-            style={{
-              width: "18em",
-              position: "absolute",
-              top: `${filterBoxPosition.top}px`,
-              left: `${filterBoxPosition.left}px`,
-              zIndex: 1000,
-              backgroundColor: "white",
-              border: "1px solid #ddd",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <div className="d-flex flex-column p-2 gap-2">
-              {filterKey === "date" ? (
-                <>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={filterYear}
-                    onChange={(e) => setFilterYear(e.target.value)}
-                    placeholder="Enter Year (YYYY)"
-                  />
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={filterMonth}
-                    onChange={(e) => setFilterMonth(e.target.value)}
-                    placeholder="Enter Month (MM)"
-                  />
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={filterDay}
-                    onChange={(e) => setFilterDay(e.target.value)}
-                    placeholder="Enter Day (DD)"
-                  />
-                </>
-              ) : (
-                <>
-                  <select
-                    className="form-control"
-                    value={filterOperator}
-                    onChange={(e) =>
-                      setFilterOperator(e.target.value as "equal" | "notEqual")
-                    }
-                  >
-                    <option value="equal">Equal</option>
-                    <option value="notEqual">Not Equal To</option>
-                  </select>
 
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={filterValue}
-                    onChange={(e) => setFilterValue(e.target.value)}
-                    placeholder={`Enter ${activeFilterColumn} value`}
-                  />
-                </>
-              )}
-            </div>
-
-            <div className="d-flex gap-2 justify-content-end mt-2">
-              <button className="btn btn-primary" onClick={handleFilter}>
-                Filter
-              </button>
-              <button className="btn btn-secondary" onClick={handleClear}>
-                Clear
-              </button>
-            </div>
-          </div>
-        )}
       </div>
       {/* table ends */}
       <Paginationcomponent
