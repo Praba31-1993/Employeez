@@ -13,6 +13,7 @@ interface OutlinebuttonProps {
   onClick?: any;
   icon?: any;
   variant?: any;
+  height?:any;
 }
 export default function Outlinebutton({
   disabled,
@@ -24,6 +25,7 @@ export default function Outlinebutton({
   onClick,
   icon,
   variant,
+  height,
   iscontactus,
 }: OutlinebuttonProps) {
   return (
@@ -56,6 +58,7 @@ export default function Outlinebutton({
             fontSize: { fontSize },
             textTransform: "unset",
             backgroundColor: { background },
+            height:{height}
           }}
         >
           {text}
