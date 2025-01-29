@@ -22,7 +22,10 @@ import Filtersorting from "@/app/reusableComponent/filtersorting";
 import ExportDocuments from "@/app/reusableComponent/exportdocuments";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { relative } from "path";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { handleCSVExport } from "@/app/reusableComponent/commonlogic";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import { Colors } from "../../reusableComponent/styles";
 
 interface ApproverRow {
   employeeId: string;
@@ -51,6 +54,8 @@ function Punchinoutapprover() {
   const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [data, setData] = useState(searchList);
+  const useColors = Colors();
+
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "asc" | "desc" | null;
@@ -70,7 +75,6 @@ function Punchinoutapprover() {
   const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(
     null
   );
-
 
   const [filterYear, setFilterYear] = useState("");
   const [filterMonth, setFilterMonth] = useState("");
@@ -151,8 +155,6 @@ function Punchinoutapprover() {
         if (leftPosition + filterBoxWidth > tableRect.right) {
           leftPosition = tableRect.right - filterBoxWidth - 10; // Adjust to fit inside
         }
-
-
       }
       setActiveFilterColumn(key);
     }
@@ -197,20 +199,35 @@ function Punchinoutapprover() {
   return (
     <div>
       {/* column, filter */}
-      <div className="d-flex gap-3 justify-content-end mb-3">
-        <Image src={favourite} alt="" width={24} height={24} />
-        <div className="d-flex gap-1 w-25 searchbar ps-2 align-items-center">
-          <div className="mt-1">
-            <SearchIcon />
+
+      <div className="d-flex gap-5 justify-content-end  mx-3 ">
+        <div className="d-flex gap-3 mb-3">
+          <Image src={favourite} alt="" width={24} height={24} />
+          <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
+            <div className="mt-1">
+              <SearchIcon />
+            </div>
+            <input
+              type="text"
+              placeholder="Search"
+              className="p-2 w-100"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            placeholder="Search"
-            className="p-2 w-100"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
         </div>
+
+        <button
+          className="outlinebtn ms-sm-4 px-3 py-1"
+          style={{
+            color: useColors.themeRed,
+            border: `1px solid ${useColors.themeRed}`,
+            height: "40px",
+          }}
+          onClick={() => handleCSVExport(headers, rowsForApprover)}
+        >
+           Download as CSV File <SaveAltIcon className="ml-2"/>
+        </button>
       </div>
 
       {/* Table Section */}
@@ -264,14 +281,18 @@ function Punchinoutapprover() {
                                   type="text"
                                   className="form-control"
                                   value={filterYear}
-                                  onChange={(e) => setFilterYear(e.target.value)}
+                                  onChange={(e) =>
+                                    setFilterYear(e.target.value)
+                                  }
                                   placeholder="Enter Year (YYYY)"
                                 />
                                 <input
                                   type="text"
                                   className="form-control"
                                   value={filterMonth}
-                                  onChange={(e) => setFilterMonth(e.target.value)}
+                                  onChange={(e) =>
+                                    setFilterMonth(e.target.value)
+                                  }
                                   placeholder="Enter Month (MM)"
                                 />
                                 <input
@@ -288,7 +309,9 @@ function Punchinoutapprover() {
                                   className="form-control tableselector"
                                   value={filterOperator}
                                   onChange={(e) =>
-                                    setFilterOperator(e.target.value as "equal" | "notEqual")
+                                    setFilterOperator(
+                                      e.target.value as "equal" | "notEqual"
+                                    )
                                   }
                                 >
                                   <option value="equal">Equal</option>
@@ -298,7 +321,9 @@ function Punchinoutapprover() {
                                   type="text"
                                   className="form-control"
                                   value={filterValue}
-                                  onChange={(e) => setFilterValue(e.target.value)}
+                                  onChange={(e) =>
+                                    setFilterValue(e.target.value)
+                                  }
                                   placeholder={`Enter ${activeFilterColumn} value`}
                                 />
                               </>
@@ -306,16 +331,21 @@ function Punchinoutapprover() {
                           </div>
 
                           <div className="d-flex gap-2 justify-content-end mt-2">
-                            <button className="btn btn-primary" onClick={handleFilter}>
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleFilter}
+                            >
                               Filter
                             </button>
-                            <button className="btn btn-secondary" onClick={handleClear}>
+                            <button
+                              className="btn btn-secondary"
+                              onClick={handleClear}
+                            >
                               Clear
                             </button>
                           </div>
                         </div>
                       )}
-
                     </div>
                   </span>
                 </th>
@@ -327,7 +357,12 @@ function Punchinoutapprover() {
               <tr key={item.employeeId}>
                 <td className="para textheader">{item?.employeeId}</td>
                 <td className="para textheader">{item?.employeename}</td>
-                <td className="para textheader" style={{ whiteSpace: "nowrap" }} >{item?.date}</td>
+                <td
+                  className="para textheader"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  {item?.date}
+                </td>
                 <td className="para textheader">
                   {/* <ChipsForLeave label={item?.status} /> */}
                   {item?.status}
@@ -340,8 +375,6 @@ function Punchinoutapprover() {
             ))}
           </tbody>
         </table>
-
-
       </div>
       {/* table ends */}
       <Paginationcomponent

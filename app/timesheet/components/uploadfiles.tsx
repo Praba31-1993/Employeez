@@ -7,6 +7,7 @@ import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import ImageComponent from "@/app/reusableComponent/image";
 import Listicon from "@/app/reusableComponent/listicon";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 export default function Uploadfiles({ show, close }: any) {
     const [files, setFiles] = useState<File[]>([]); // Explicitly define type as File[]
 
