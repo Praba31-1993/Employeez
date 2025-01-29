@@ -70,13 +70,7 @@ function Punchinoutapprover() {
   const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(
     null
   );
-  const [filterBoxPosition, setFilterBoxPosition] = useState<{
-    top: number;
-    left: number;
-  }>({
-    top: 0,
-    left: 0,
-  });
+
 
   const [filterYear, setFilterYear] = useState("");
   const [filterMonth, setFilterMonth] = useState("");
@@ -158,10 +152,7 @@ function Punchinoutapprover() {
           leftPosition = tableRect.right - filterBoxWidth - 10; // Adjust to fit inside
         }
 
-        setFilterBoxPosition({
-          top: thRect.bottom + window.scrollY + 5, // Below the header
-          left: leftPosition + window.scrollX, // Adjusted position
-        });
+
       }
       setActiveFilterColumn(key);
     }
@@ -253,7 +244,7 @@ function Punchinoutapprover() {
                           )
                         }
                       />
-                      {activeFilterColumn && (
+                      {activeFilterColumn === key && ( // Ensure only the clicked column shows filter box
                         <div
                           className="card card-body"
                           style={{
@@ -295,7 +286,6 @@ function Punchinoutapprover() {
                               <>
                                 <select
                                   className="form-control tableselector"
-
                                   value={filterOperator}
                                   onChange={(e) =>
                                     setFilterOperator(e.target.value as "equal" | "notEqual")
@@ -304,7 +294,6 @@ function Punchinoutapprover() {
                                   <option value="equal">Equal</option>
                                   <option value="notEqual">Not Equal To</option>
                                 </select>
-
                                 <input
                                   type="text"
                                   className="form-control"
@@ -326,6 +315,7 @@ function Punchinoutapprover() {
                           </div>
                         </div>
                       )}
+
                     </div>
                   </span>
                 </th>
