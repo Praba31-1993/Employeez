@@ -136,7 +136,6 @@ main {
     .mobileSidebar {
         display: block;
         background: #f4f4f4;
-        width: 70% !important;
         z-index: 1 !important;
         height: 100% !important;
         overflow-y: scroll;

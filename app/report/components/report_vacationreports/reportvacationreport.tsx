@@ -5,7 +5,7 @@ import Detailview from './detailview'
 
 function Vacationreport() {
   return (
-    <div>
+    <div className='ps-2'>
       <Summaryview />
       <Detailview />
     </div>

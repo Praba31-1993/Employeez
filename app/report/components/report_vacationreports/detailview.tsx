@@ -18,6 +18,7 @@ function Detailview() {
             </div>
             <div className="row mt-1">
                <div className="col-xxl-8 col-lg-9">
+               <div style={{overflowX:"auto"}}>
                <table className="table tabletype">
                     <thead style={{ backgroundColor: "#F6F7FB" }}>
                         <tr>
@@ -38,6 +39,7 @@ function Detailview() {
                         ))}
                     </tbody>
                 </table>
+               </div>
                </div>
             </div>
         </>
