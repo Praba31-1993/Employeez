@@ -100,16 +100,7 @@ function Punchinoutapprover() {
     setCurrentPage(page);
   };
 
-  const headers = [
-    "employeeId",
-    "employeename",
-    "date",
-    "status",
-    "punchin",
-    "punchout",
-    "duration",
-    "reason",
-  ];
+  const headers = Object.keys(rowsForApprover[0]);
 
   // Sorting function
   const handleSort = (key: keyof ApproverRow) => {
@@ -215,20 +206,20 @@ function Punchinoutapprover() {
     <div>
       {/* column, filter */}
       <div className="d-flex gap-3 justify-content-end mb-3">
-          <Image src={favourite} alt="" width={24} height={24} />
-          <div className="d-flex gap-1 w-25 searchbar ps-2 align-items-center">
-            <div className="mt-1">
-              <SearchIcon />
-            </div>
-            <input
-              type="text"
-              placeholder="Search"
-              className="p-2 w-100"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+        <Image src={favourite} alt="" width={24} height={24} />
+        <div className="d-flex gap-1 w-25 searchbar ps-2 align-items-center">
+          <div className="mt-1">
+            <SearchIcon />
           </div>
+          <input
+            type="text"
+            placeholder="Search"
+            className="p-2 w-100"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
+      </div>
 
       {/* Table Section */}
       <div className="">
