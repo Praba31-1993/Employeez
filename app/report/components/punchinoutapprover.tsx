@@ -1,30 +1,17 @@
-import DropdownComponent from "@/app/reusableComponent/dropdown";
 import {
-  year,
   rowsForApprover,
   columnForApprover,
 } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
-import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import HistoryIcon from "@mui/icons-material/History";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import SearchIcon from "@mui/icons-material/Search";
-import { Checkbox } from "@mui/material";
-import NorthSharpIcon from "@mui/icons-material/NorthSharp";
-import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
 import Image from "next/image";
 import favourite from "@/public/assets/img/favourite.svg";
 import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
-import ColumnSorting from "@/app/reusableComponent/columnsorting";
-import Filtersorting from "@/app/reusableComponent/filtersorting";
-import ExportDocuments from "@/app/reusableComponent/exportdocuments";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { handleCSVExport } from "@/app/reusableComponent/commonlogic";
-import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import { Colors } from "../../reusableComponent/styles";
 
 interface ApproverRow {
@@ -39,15 +26,8 @@ interface ApproverRow {
 }
 function Punchinoutapprover() {
   const [search, setSearch] = useState<string>("");
-  const ExportRef = useRef<HTMLDivElement>(null);
-  const [selectedTimeOff, setSelectedTimeOff] = useState("Punch in/Out report");
-  const [openColumn, setOpenColumn] = useState<Boolean>(false);
-  const [openExport, setOpenExport] = useState<Boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
   const [rowsList, setRows] = useState<ApproverRow[]>(rowsForApprover);
-  const columnRef = useRef<HTMLDivElement>(null);
-  const [showdetails, setDetails] = useState(false);
   const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
