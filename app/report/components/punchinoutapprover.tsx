@@ -198,15 +198,15 @@ function Punchinoutapprover() {
         </div>
 
         <button
-          className="outlinebtn ms-sm-4 px-3 py-1"
+          className="outlinebtn rounded px-3 py-1"
           style={{
             color: useColors.themeRed,
             border: `1px solid ${useColors.themeRed}`,
-            height: "40px",
+            height: "fit-content",
           }}
           onClick={() => handleCSVExport(headers, rowsForApprover)}
         >
-          Download as CSV File <SaveAltIcon className="ml-2" />
+           Export <SaveAltIcon className="ml-2"/>
         </button>
       </div>
 
