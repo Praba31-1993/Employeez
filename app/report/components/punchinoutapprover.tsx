@@ -89,7 +89,6 @@ function Punchinoutapprover() {
     setCurrentPage(page);
   };
 
-  console.log("currentPageItems", currentPageItems);
 
   return (
     <div>
@@ -97,7 +96,7 @@ function Punchinoutapprover() {
       <div className="d-flex  justify-content-between mt-3 mb-2">
         <div className="d-flex flex-wrap  gap-2 heading2 textheader cursorPointer p-0 mb-0">
           <ColumnSorting columnList={searchList} />
-          <Filtersorting columnList={searchList} />
+          <Filtersorting  />
           <ExportDocuments exportDatas={rowsList} />
           <div className="d-flex align-items-center">
             <HistoryIcon />

@@ -59,24 +59,3 @@ input[type="number"] {
   top: -30px;
 }
 
-.table-custom {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 10px; /* Space between table cells */
-}
-
-.table-custom th,
-.table-custom td {
-  text-align: left; /* Align text to the left */
-  vertical-align: middle; /* Vertically center content */
-  padding: 8px; /* Padding inside cells */
-}
-
-.table-custom th {
-  font-weight: bold;
-}
-
-.d-flex {
-  display: flex;
-  justify-content: space-between; /* Add space between child elements */
-}
