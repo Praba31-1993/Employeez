@@ -26,7 +26,12 @@ main {
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border: 1px solid #6962621f;
 }
-
+.dark .menuicons{
+    color: #B0ACC7;
+}
+.menuicons {
+    color: #7E7E7E;
+}
 .MenuLogo {
     display: none;
 }
@@ -64,7 +69,12 @@ main {
 .dark .link{
     color: #E7E3FC;
 }
-
+.accordionmenu {
+    color:#6d6777 !important ;
+}
+.dark .accordionmenu{
+    color: #E7E3FC !important;
+}
 
 .active {
     color: #fff;

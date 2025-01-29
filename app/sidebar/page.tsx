@@ -277,7 +277,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 color: pathname === '/dashboard' ? "white" : "",
                             }}
                         >
-                            <DashboardOutlinedIcon className="heading2 ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
+                            <DashboardOutlinedIcon className="heading2 menuicons ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
                             <div
                                 className="para"
                                 style={{
@@ -304,14 +304,13 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     onChange={handleChange(roleGroup.id)}
 
                                 >
-                                    <AccordionSummary
+                                    <AccordionSummary className="accordionmenu"
                                     sx={{
-                                        borderBottom: "1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
+                                        borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
                                         boxShadow: "none !important", // Removes the box shadow
                                         background: "none !important",
                                         alignItems: "center", 
                                         justifyContent:"start",
-                                        color:"#6d6777 !important"
                                        
                                     }}
                                         expandIcon={null} // Removes the arrow icon
@@ -319,17 +318,17 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         id="panel1-header"
                                         >
                                         {/* accordian icons */}
-                                        {roleGroup.role === "Basic" && <ExtensionOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Delegation" && <FactCheckOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Manager" && <AnalyticsOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Human Resources" && <GroupsOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Immigration" && <FlightTakeoffOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Sales" && <AddchartOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Sub-Contract onboarding" && <EngineeringOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Accounting" && <AccountBalanceWalletOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Payroll" && <PaidOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Admin" && <AdminPanelSettingsOutlinedIcon sx={{color:"#7E7E7E"}} />}
-                                        {roleGroup.role === "Subscription" && <BubbleChartOutlinedIcon sx={{color:"#7E7E7E"}} />}
+                                        {roleGroup.role === "Basic" && <ExtensionOutlinedIcon   className="menuicons" />}
+                                        {roleGroup.role === "Delegation" && <FactCheckOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Manager" && <AnalyticsOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Human Resources" && <GroupsOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Immigration" && <FlightTakeoffOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Sales" && <AddchartOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Sub-Contract onboarding" && <EngineeringOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Accounting" && <AccountBalanceWalletOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Payroll" && <PaidOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Admin" && <AdminPanelSettingsOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Subscription" && <BubbleChartOutlinedIcon  className="menuicons" />}
                                         <div
                                             className="para2 py-2"
                                             style={{
@@ -460,7 +459,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                     textDecoration: "none",
                                                                                 }}
                                                                             >
-                                                                                 <DnsOutlinedIcon sx={{color:"#7E7E7E"}} />
+                                                                                 <DnsOutlinedIcon  className="menuicons" />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                             {hideToggle && (
@@ -515,7 +514,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                             : "", // Apply themeRed to the active link
                                                                                 }}
                                                                             >
-                                                                               <DnsOutlinedIcon sx={{color:"#7E7E7E"}} />
+                                                                               <DnsOutlinedIcon  className="menuicons" />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                         </div>
@@ -542,9 +541,9 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 cursor:"pointer"
                             }}
                         >
-                            <LogoutOutlinedIcon className="heading2 ps-1" sx={{ color:"#7E7E7E"}} />
+                            <LogoutOutlinedIcon className="heading2 menuicons ps-1" />
                             <div
-                                className="para"
+                                className="para "
                                 style={{
                                     display: isOpen || visibleMenus ? "block" : "none",
                                     fontFamily: "Inter, sans-serif",
