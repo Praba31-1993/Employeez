@@ -20,6 +20,8 @@ import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import ColumnSorting from "@/app/reusableComponent/columnsorting";
 import Filtersorting from "@/app/reusableComponent/filtersorting";
 import ExportDocuments from "@/app/reusableComponent/exportdocuments";
+import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ApproverRow {
   employeeId: string;
@@ -47,11 +49,39 @@ function Punchinoutapprover() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
-
+  const [data, setData] = useState(searchList);
   const [sortConfig, setSortConfig] = useState<{
-    key: keyof ApproverRow;
-    direction: "asc" | "desc";
-  } | null>(null);
+    key: string;
+    direction: "asc" | "desc" | null;
+  }>({
+    key: "",
+    direction: null,
+  });
+
+  // Filtering state
+  const [filterKey, setFilterKey] = useState<
+    keyof (typeof currentPageItems)[0] | ""
+  >("");
+  const [filterOperator, setFilterOperator] = useState<"equal" | "notEqual">(
+    "equal"
+  );
+  const [filterValue, setFilterValue] = useState("");
+  const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(
+    null
+  );
+  const [filterBoxPosition, setFilterBoxPosition] = useState<{
+    top: number;
+    left: number;
+  }>({
+    top: 0,
+    left: 0,
+  });
+
+  const [filterYear, setFilterYear] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
+  const [filterDay, setFilterDay] = useState("");
+
+  const tableRef = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
     const arr: any = [];
@@ -60,25 +90,6 @@ function Punchinoutapprover() {
     }
     setPages(arr);
   }, [totalPages]);
-
-  const handleSort = (key: keyof ApproverRow) => {
-    let direction: "asc" | "desc" = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-
-    const sortedRows = [...rowsForApprover].sort((a, b) => {
-      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
-      return 0;
-    });
-    setRows(sortedRows);
-  };
 
   const currentPageItems = rowsList.slice(
     (currentPage - 1) * countPerPage,
@@ -89,148 +100,180 @@ function Punchinoutapprover() {
     setCurrentPage(page);
   };
 
+  const headers = [
+    "employeeId",
+    "employeename",
+    "date",
+    "status",
+    "punchin",
+    "punchout",
+    "duration",
+    "reason",
+  ];
+
+  // Sorting function
+  const handleSort = (key: keyof ApproverRow) => {
+    let direction: "asc" | "desc" = "asc";
+
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+
+    const sortedData = [...rowsList].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortConfig({ key, direction });
+    setRows(sortedData); // Set sorted rows in `rowsList`
+  };
+
+  // Function to toggle the filter box and set its position
+  const handleFilterToggle = (
+    key: keyof (typeof searchList)[0] | any,
+    event: React.MouseEvent
+  ) => {
+    if (activeFilterColumn === key) {
+      setActiveFilterColumn(null); // Close the filter box if the same column is clicked again
+    } else {
+      setFilterKey(key); // Set current filter column
+
+      const target = event.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect(); // Get position of the clicked filter icon
+      const thElement = target.closest("th"); // Get the header cell
+      const tableElement = thElement?.closest("table"); // Find the table
+
+      if (thElement && tableElement) {
+        const thRect = thElement.getBoundingClientRect();
+        const tableRect = tableElement.getBoundingClientRect();
+
+        // Get the first letter position
+        const textNode = thElement.firstChild;
+        let leftPosition = thRect.left;
+
+        if (textNode) {
+          const range = document.createRange();
+          range.setStart(textNode, 0);
+          range.setEnd(textNode, 1); // Select first letter
+          const textRect = range.getBoundingClientRect();
+          leftPosition = textRect.left;
+        }
+
+        // Ensure the filter box stays inside the table
+        const filterBoxWidth = 200; // Adjust based on your filter box width
+        if (leftPosition + filterBoxWidth > tableRect.right) {
+          leftPosition = tableRect.right - filterBoxWidth - 10; // Adjust to fit inside
+        }
+
+        setFilterBoxPosition({
+          top: thRect.bottom + window.scrollY + 5, // Below the header
+          left: leftPosition + window.scrollX, // Adjusted position
+        });
+      }
+      setActiveFilterColumn(key);
+    }
+  };
+
+  // Filtering function
+  const handleFilter = () => {
+    if (!filterKey) return;
+
+    const filteredData = rowsForApprover.filter((item) => {
+      if (filterKey === "date") {
+        const [year, month, day] = item.date.split("-");
+
+        const matchesYear = filterYear ? year === filterYear : true;
+        const matchesMonth = filterMonth ? month === filterMonth : true;
+        const matchesDay = filterDay ? day === filterDay : true;
+
+        return matchesYear && matchesMonth && matchesDay;
+      } else {
+        const itemValue = String(item[filterKey]).trim().toLowerCase();
+        const searchValue = filterValue.trim().toLowerCase();
+
+        return filterOperator === "equal"
+          ? itemValue === searchValue
+          : itemValue !== searchValue;
+      }
+    });
+
+    setRows(filteredData); // Set filtered data in `rowsList`
+    setActiveFilterColumn(null);
+  };
+
+  // Clear filter
+  const handleClear = () => {
+    setFilterKey("");
+    setFilterOperator("equal");
+    setFilterValue("");
+    setData(searchList);
+    setActiveFilterColumn(null);
+  };
 
   return (
     <div>
       {/* column, filter */}
-      <div className="d-flex  justify-content-between mt-3 mb-2">
-        <div className="d-flex flex-wrap  gap-2 heading2 textheader cursorPointer p-0 mb-0">
-          <ColumnSorting columnList={searchList} />
-          <Filtersorting  />
-          <ExportDocuments exportDatas={rowsList} />
-          <div className="d-flex align-items-center">
-            <HistoryIcon />
-            <DropdownComponent
-              dropdownlist={year}
-              removepadding={true}
-              selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-            />
-          </div>
-          <div className="d-flex align-items-center">
-            <CalendarMonthIcon />
-            <DropdownComponent
-              dropdownlist={year}
-              removepadding={true}
-              selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
-            />
-          </div>
-        </div>
-
-        <div className="col-12 col-md-3">
-          <div className="d-flex gap-3">
-            <Image src={favourite} alt="" width={24} height={24} />
-            <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
-              <div className="mt-1">
-                <SearchIcon />
-              </div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="p-2 w-100"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+      <div className="d-flex gap-3 justify-content-end mb-3">
+          <Image src={favourite} alt="" width={24} height={24} />
+          <div className="d-flex gap-1 w-25 searchbar ps-2 align-items-center">
+            <div className="mt-1">
+              <SearchIcon />
             </div>
+            <input
+              type="text"
+              placeholder="Search"
+              className="p-2 w-100"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
         </div>
-      </div>
 
       {/* Table Section */}
       <div className="">
         <table className="table tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
-              <th className="textheader para" scope="col">
-                Employee Id{" "}
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{
-                    fill: "#CCC",
-                    height: "15px",
-                    width: "15px",
-                    transform:
-                      sortConfig?.direction === "asc"
-                        ? "rotate(0deg)"
-                        : "rotate(180deg)",
-                  }}
-                  onClick={() => handleSort("employeeId")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Employee name
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("employeename")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Date
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("date")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Status
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("status")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Punch in
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("punchin")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Punch out
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("punchout")}
-                />
-              </th>
-              <th className="textheader para" scope="col">
-                Duration
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("duration")}
-                />
-              </th>
-
-              <th className="textheader para" scope="col">
-                Reasons
-                <NorthSharpIcon
-                  fontSize="small"
-                  className="inline-block"
-                  sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                  onClick={() => handleSort("reason")}
-                />
-              </th>
+              {headers.map((key) => (
+                <th
+                  key={key}
+                  scope="col"
+                  className="position-relative textheader para"
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                  <span className="d-inline-flex gap-2 ms-2">
+                    <FontAwesomeIcon
+                      icon={faSort}
+                      style={{ cursor: "pointer", height: "10px" }}
+                      onClick={() =>
+                        handleSort(key as keyof (typeof currentPageItems)[0])
+                      }
+                    />
+                    <FontAwesomeIcon
+                      icon={faFilter}
+                      style={{ cursor: "pointer", height: "10px" }}
+                      onClick={(event: any) =>
+                        handleFilterToggle(
+                          key as keyof (typeof currentPageItems)[0],
+                          event
+                        )
+                      }
+                    />
+                  </span>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className="dashboardcard">
             {currentPageItems?.map((item, index) => (
-              <tr key={index}>
+              <tr key={item.employeeId}>
                 <td className="para textheader">{item?.employeeId}</td>
                 <td className="para textheader">{item?.employeename}</td>
                 <td className="para textheader">{item?.date}</td>
                 <td className="para textheader">
-                  <ChipsForLeave label={item?.status} />
+                  {/* <ChipsForLeave label={item?.status} /> */}
+                  {item?.status}
                 </td>
                 <td className="para textheader">{item?.punchin}</td>
                 <td className="para textheader">{item?.punchout}</td>
@@ -240,6 +283,80 @@ function Punchinoutapprover() {
             ))}
           </tbody>
         </table>
+
+        {activeFilterColumn && (
+          <div
+            className="card card-body"
+            style={{
+              width: "18em",
+              position: "absolute",
+              top: `${filterBoxPosition.top}px`,
+              left: `${filterBoxPosition.left}px`,
+              zIndex: 1000,
+              backgroundColor: "white",
+              border: "1px solid #ddd",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <div className="d-flex flex-column p-2 gap-2">
+              {filterKey === "date" ? (
+                <>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={filterYear}
+                    onChange={(e) => setFilterYear(e.target.value)}
+                    placeholder="Enter Year (YYYY)"
+                  />
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={filterMonth}
+                    onChange={(e) => setFilterMonth(e.target.value)}
+                    placeholder="Enter Month (MM)"
+                  />
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={filterDay}
+                    onChange={(e) => setFilterDay(e.target.value)}
+                    placeholder="Enter Day (DD)"
+                  />
+                </>
+              ) : (
+                <>
+                  <select
+                    className="form-control"
+                    value={filterOperator}
+                    onChange={(e) =>
+                      setFilterOperator(e.target.value as "equal" | "notEqual")
+                    }
+                  >
+                    <option value="equal">Equal</option>
+                    <option value="notEqual">Not Equal To</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={filterValue}
+                    onChange={(e) => setFilterValue(e.target.value)}
+                    placeholder={`Enter ${activeFilterColumn} value`}
+                  />
+                </>
+              )}
+            </div>
+
+            <div className="d-flex gap-2 justify-content-end mt-2">
+              <button className="btn btn-primary" onClick={handleFilter}>
+                Filter
+              </button>
+              <button className="btn btn-secondary" onClick={handleClear}>
+                Clear
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       {/* table ends */}
       <Paginationcomponent
