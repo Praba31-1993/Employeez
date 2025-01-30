@@ -2898,6 +2898,7 @@ export const holidayList = [
         day: "01-11-2024",
         festival: "Diwali",
     },
+    { id: 135, year: "2025", month: "January", day: "01-01-2025", festival: "New Year's Day" },
 
     {
         id: 13,
@@ -2907,19 +2908,27 @@ export const holidayList = [
         festival: "Pongal",
     },
     {
-        id: 14,
+        id: 136,
         year: "2025",
         month: "January",
-        day: "26-01-2025",
-        festival: "Republic Day",
+        day: "15-01-2025",
+        festival: "Thiruvalluvar Day",
     },
-    { id: 15, year: "2025", month: "March", day: "14-03-2025", festival: "Holi" },
+
+    {
+        id: 14,
+        year: "2025",
+        month: "March",
+        day: "31-03-2025",
+        festival: "Ramazan",
+    },
+    { id: 15, year: "2025", month: "April", day: "14-04-2025", festival: "Tamil New Year" },
     {
         id: 16,
         year: "2025",
-        month: "April",
-        day: "18-04-2025",
-        festival: "Good Friday",
+        month: "May",
+        day: "01-05-2025",
+        festival: "May Day",
     },
     {
         id: 17,
@@ -2929,20 +2938,33 @@ export const holidayList = [
         festival: "Independence Day",
     },
     {
+        id: 175,
+        year: "2025",
+        month: "August",
+        day: "27-08-2025",
+        festival: "Ganesh Chaturthi",
+    },
+    {
+        id: 183,
+        year: "2025",
+        month: "October",
+        day: "02-10-2025",
+        festival: "Gandhi Jayanti",
+    },
+    {
         id: 18,
         year: "2025",
         month: "October",
-        day: "31-10-2025",
-        festival: "Dussehra",
-    },
-    {
-        id: 19,
-        year: "2025",
-        month: "November",
-        day: "19-11-2025",
+        day: "21-10-2025",
         festival: "Diwali",
     },
-
+    {
+        id: 185,
+        year: "2025",
+        month: "December",
+        day: "25-12-2025",
+        festival: "Christmas Day",
+    },
     {
         id: 20,
         year: "2026",
