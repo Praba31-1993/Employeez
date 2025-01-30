@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import ImageComponent from "@/app/reusableComponent/image";
 import Listicon from "@/app/reusableComponent/listicon";
+import LogoutIcon from '@mui/icons-material/Logout';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Uploadfiles({ show, close }: any) {
@@ -42,7 +43,7 @@ export default function Uploadfiles({ show, close }: any) {
                                 <h5 className="para  textheader">Choose file </h5>
                                 <div className="fileupload py-4 d-flex align-items-center flex-column justify-content-center mt-3">
                                     {/* <Image src={uploadicon} alt={""} /> */}
-                                    <ImageComponent width={0} height={0} user={"/assets/img/upload-2-line.png"} />
+                                    <LogoutIcon className="textheader" sx={{rotate:"-90deg"}} />
                                     <h2 className="heading2 mt-2 textheader">
                                         Drag and drop your file here
                                     </h2>

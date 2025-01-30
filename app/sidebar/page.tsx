@@ -95,10 +95,24 @@ const Sidebar = ({ children }: SidebarProps) => {
         setIsOpen(checked);
     };
 
+    useEffect(() => {
+        const savedExpanded = sessionStorage.getItem("expandedAccordion");
+        if (savedExpanded) {
+            setExpanded(savedExpanded);
+        }
+    }, []);
+    
     const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false);
-        };
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+        const target = event.target as HTMLElement; // Cast to HTMLElement
+
+        if (target.tagName === "A" || target.closest("a")) return; // Prevent toggle if clicking a link
+
+        sessionStorage.setItem("expandedAccordion", isExpanded ? panel : "");
+        setExpanded(isExpanded ? panel : false);
+    };
+
+    
 
     const toggleChildMenu = (itemName: string) => {
         setExpandedItem((prev) => (prev === itemName ? null : itemName));
@@ -181,6 +195,7 @@ const Sidebar = ({ children }: SidebarProps) => {
     };
     const useColors = Colors();
 
+
     return (
         <>
             {!auth ? (
@@ -204,7 +219,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                             } sidebarlist`}
                     >
                         <div className="top_section mt-3">
-                            
+
                             <div className="bars d-flex align-items-center justify-content-between">
                                 {isOpen ? (
                                     <Image className="p-2" src={logo} alt="Logo" />
@@ -277,7 +292,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 color: pathname === '/dashboard' ? "white" : "",
                             }}
                         >
-                            <DashboardOutlinedIcon className="heading2 menuicons ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E"}} />
+                            <DashboardOutlinedIcon className="heading2 menuicons ps-1" sx={{ color: pathname === '/dashboard' ? "white" : "#7E7E7E" }} />
                             <div
                                 className="para"
                                 style={{
@@ -293,42 +308,42 @@ const Sidebar = ({ children }: SidebarProps) => {
                         {menuLists?.map((roleGroup, index) => (
                             <div key={index}>
                                 <Accordion
-                                 sx={{
-                                    boxShadow: "none !important", // Removes the box shadow
-                                    background: "none !important",
-                                    justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
-                                    borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
-                                }}
-                               
+                                    sx={{
+                                        boxShadow: "none !important", // Removes the box shadow
+                                        background: "none !important",
+                                        justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
+                                        borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
+                                    }}
+
                                     expanded={expanded === roleGroup.id}
                                     onChange={handleChange(roleGroup.id)}
 
                                 >
                                     <AccordionSummary className="accordionmenu"
-                                    sx={{
-                                        borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
-                                        boxShadow: "none !important", // Removes the box shadow
-                                        background: "none !important",
-                                        alignItems: "center", 
-                                        justifyContent:"start",
-                                       
-                                    }}
+                                        sx={{
+                                            borderBottom: "0.1px solid var(--Timesheet-holiday, #ede4ff73) !important", // Custom border color
+                                            boxShadow: "none !important", // Removes the box shadow
+                                            background: "none !important",
+                                            alignItems: "center",
+                                            justifyContent: "start",
+
+                                        }}
                                         expandIcon={null} // Removes the arrow icon
                                         aria-controls="panel1-content"
                                         id="panel1-header"
-                                        >
+                                    >
                                         {/* accordian icons */}
-                                        {roleGroup.role === "Basic" && <ExtensionOutlinedIcon   className="menuicons" />}
-                                        {roleGroup.role === "Delegation" && <FactCheckOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Manager" && <AnalyticsOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Human Resources" && <GroupsOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Immigration" && <FlightTakeoffOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Sales" && <AddchartOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Sub-Contract onboarding" && <EngineeringOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Accounting" && <AccountBalanceWalletOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Payroll" && <PaidOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Admin" && <AdminPanelSettingsOutlinedIcon  className="menuicons" />}
-                                        {roleGroup.role === "Subscription" && <BubbleChartOutlinedIcon  className="menuicons" />}
+                                        {roleGroup.role === "Basic" && <ExtensionOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Delegation" && <FactCheckOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Manager" && <AnalyticsOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Human Resources" && <GroupsOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Immigration" && <FlightTakeoffOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Sales" && <AddchartOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Sub-Contract onboarding" && <EngineeringOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Accounting" && <AccountBalanceWalletOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Payroll" && <PaidOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Admin" && <AdminPanelSettingsOutlinedIcon className="menuicons" />}
+                                        {roleGroup.role === "Subscription" && <BubbleChartOutlinedIcon className="menuicons" />}
                                         <div
                                             className="para2 py-2"
                                             style={{
@@ -355,29 +370,25 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     <AccordionDetails>
                                         {roleGroup.roleItems?.map((item, itemIndex) => (
                                             <div key={itemIndex}>
-                                                <div
-                                                    style={{ display: "flex", alignItems: "center" }}
-                                                    className="menuTextStyle"
+                                                <div className="d-flex justify-content-between align-items-center"
                                                 >
                                                     <Link
+                                                        onClick={(e) => {
+                                                            e.stopPropagation(); // Prevents accordion from closing
+                                                            toggleChildMenu(item.name); // Call your function
+                                                        }}
                                                         href={item.path}
                                                         className={`link ${pathname === item.path && !hideToggle
-                                                            ? "active"
-                                                            : pathname === item.path && hideToggle
-                                                                ? "activewithNoBackground"
-                                                                : ""
+                                                                ? "active"
+                                                                : pathname === item.path && hideToggle
+                                                                    ? "activewithNoBackground"
+                                                                    : ""
                                                             } mb-0 w-100`}
                                                         style={{
                                                             display: "flex",
-                                                            justifyContent:
-                                                                isOpen || visibleMenus
-                                                                    ? "flex-start"
-                                                                    : "center",
+                                                            justifyContent: isOpen || visibleMenus ? "space-between" : "center",
                                                             alignItems: "center",
-                                                            background:
-                                                                pathname === item.path && !hideToggle
-                                                                    ? useColors.themeRed
-                                                                    : "transparent",
+                                                            background: pathname === item.path && !hideToggle ? useColors.themeRed : "transparent",
                                                         }}
                                                     >
 
@@ -392,33 +403,34 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                         >
                                                             {item.name}
                                                         </div>
+                                                        {item.childItems && isOpen && (
+                                                            <KeyboardArrowRightIcon
+
+                                                                style={{
+                                                                    cursor: "pointer",
+                                                                    transform:
+                                                                        expandedItem === item.name
+                                                                            ? "rotate(90deg)"
+                                                                            : "rotate(0)",
+                                                                    transition: "transform 0.3s ease",
+                                                                }}
+                                                            />
+                                                        )}
+                                                        {!item.childItems && isOpen && hideToggle && (
+                                                            <ToggleSwitch
+                                                                isChecked={item?.checked}
+                                                                onToggle={() =>
+                                                                    handleToggleChange(
+                                                                        index,
+                                                                        itemIndex,
+                                                                        item?.checked
+                                                                    )
+                                                                }
+                                                            />
+                                                        )}
                                                     </Link>
 
-                                                    {item.childItems && isOpen && (
-                                                        <KeyboardArrowRightIcon
-                                                            onClick={() => toggleChildMenu(item.name)}
-                                                            style={{
-                                                                cursor: "pointer",
-                                                                transform:
-                                                                    expandedItem === item.name
-                                                                        ? "rotate(90deg)"
-                                                                        : "rotate(0)",
-                                                                transition: "transform 0.3s ease",
-                                                            }}
-                                                        />
-                                                    )}
-                                                    {!item.childItems && isOpen && hideToggle && (
-                                                        <ToggleSwitch
-                                                            isChecked={item?.checked}
-                                                            onToggle={() =>
-                                                                handleToggleChange(
-                                                                    index,
-                                                                    itemIndex,
-                                                                    item?.checked
-                                                                )
-                                                            }
-                                                        />
-                                                    )}
+
                                                 </div>
 
                                                 {hideToggle ? (
@@ -459,7 +471,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                     textDecoration: "none",
                                                                                 }}
                                                                             >
-                                                                                 <DnsOutlinedIcon  className="menuicons" />
+                                                                                <DnsOutlinedIcon className="menuicons" />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                             {hideToggle && (
@@ -514,7 +526,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                                                                             : "", // Apply themeRed to the active link
                                                                                 }}
                                                                             >
-                                                                               <DnsOutlinedIcon  className="menuicons" />
+                                                                                <DnsOutlinedIcon className="menuicons" />
                                                                                 <div>{child.name}</div>
                                                                             </Link>
                                                                         </div>
@@ -528,17 +540,17 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         ))}
                                     </AccordionDetails>
                                 </Accordion>
-                               
+
                             </div>
-                            
+
                         ))}
-                        <div 
+                        <div
                             className={`mb-0 w-100 link`}
                             style={{
                                 display: "flex",
                                 justifyContent: isOpen || visibleMenus ? "flex-start" : "center",
                                 alignItems: "center",
-                                cursor:"pointer"
+                                cursor: "pointer"
                             }}
                         >
                             <LogoutOutlinedIcon className="heading2 menuicons ps-1" />
@@ -553,9 +565,9 @@ const Sidebar = ({ children }: SidebarProps) => {
                                 Logout
                             </div>
                         </div>
-                        
+
                     </div>
-                    
+
                     <main
                         style={{
                             paddingLeft: visibleMenus

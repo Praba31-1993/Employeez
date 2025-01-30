@@ -99,7 +99,7 @@ export default function ProfilesCard() {
                     )}
                 </div>
             </div>
-            <div className="d-sm-flex d-none pt-2 pe-2 justify-content-between justify-content-xxl-start gap-xxl-5 flex-wrap">
+            <div className="d-sm-flex d-none  justify-content-between justify-content-xxl-start gap-xxl-5 flex-wrap">
                 {loading
                     ? // Skeleton Loader for the list items
                     Array(6)
@@ -150,7 +150,7 @@ export default function ProfilesCard() {
                     })}
             </div>
             {/* mobile */}
-            <div className="row d-sm-none pt-2 pe-2 ">
+            <div className="row d-sm-none ">
                 {loading
                     ? // Skeleton Loader for the list items
                     Array(6)
@@ -169,7 +169,7 @@ export default function ProfilesCard() {
                         const isLastChild = index === arrayList.length - 1;
 
                         return (
-                            <div key={index} className="col-6 my-2 ">
+                            <div key={index} className="col-6 px-0 my-2 ">
                                 <div className="d-flex gap-2 align-items-center">
                                     <ImageComponent width={0} height={0} user={list?.img} />
                                     <h6 className="mb-0 textheader heading2">

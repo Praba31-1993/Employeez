@@ -84,7 +84,7 @@
   font-family: Inter, sans-serif;
 }
 
-.summarydetailscards svg,
+/* .summarydetailscards svg,
 .summarydetails svg {
   color: white;
   width: 15px;
@@ -94,7 +94,7 @@
   text-align: center;
   background-color: #ff6363;
   border-radius: 50%;
-}
+} */
 
 .summarydetailscards .icons,
 .summarydetails .icons {
