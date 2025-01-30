@@ -1,5 +1,6 @@
 import React from 'react';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 interface PaginationProps {
   currentPage: number;
   currentPageFunction: (page: number) => void;
@@ -15,13 +16,13 @@ const Paginationcomponent: React.FC<PaginationProps> = ({
 }) => {
   return (
     <div>
-      <div className="d-flex align-items-center gap-2 justify-content-end">
+      <div className="d-flex align-items-center mt-2 justify-content-end">
         <div
           className="page-item"
           style={{ cursor: 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
           onClick={() => currentPage > 1 && currentPageFunction(currentPage - 1)}
         >
-          Prev
+         <ArrowBackIosIcon />
         </div>
         {pages.map((page, index) => (
           <div
@@ -38,7 +39,7 @@ const Paginationcomponent: React.FC<PaginationProps> = ({
           style={{ cursor: 'pointer', opacity: currentPage === totalPages ? 0.5 : 1 }}
           onClick={() => currentPage < totalPages && currentPageFunction(currentPage + 1)}
         >
-          Next
+          <ArrowForwardIosIcon />
         </div>
       </div>
     </div>
