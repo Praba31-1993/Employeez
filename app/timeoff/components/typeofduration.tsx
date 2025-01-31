@@ -41,12 +41,12 @@ function Typeofduration() {
 
       {dayType === "Partial Day" && (
         <div className="row px-0 justify-content-between">
-          <div className="col-6 px-0  mb-4">
+          <div className="col-6 px-0  mb-3">
             <div style={{ width: "90%" }}>
               <DatePickerComponent />
             </div>
           </div>
-          <div className="col-6 px-0  d-flex justify-content-end mb-4">
+          <div className="col-6 px-0  d-flex justify-content-end mb-3">
             <div style={{ width: "90%" }}>
               <TimePickerComponent />
             </div>
