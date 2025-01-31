@@ -16,21 +16,21 @@ import {
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
-import { requestTable } from "@/app/reusableComponent/JsonData";
 import ClickableChips from "@/app/reusableComponent/chips";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { downloadreportdata } from "@/app/reusableComponent/JsonData";
 
 type Row = {
-  id: number | string;
-  request_type: string;
-  submitted_date: string;
-  approved_by: string;
-  status: string;
+  id: string;
+  projectname: string;
+  date: string;
+  type: string;
+  totaltime: string;
 };
-function Changerequestfilter() {
+function Downloadreport() {
   const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [rowsList, setRows] = useState<any>(requestTable);
+  const [rowsList, setRows] = useState<any>(downloadreportdata);
   const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,7 +82,9 @@ function Changerequestfilter() {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(requestTable[0]);
+  const headers = Object.keys(downloadreportdata[0]).filter(
+    (key) => key !== "id"
+  );
 
   // Sorting function
   const handleSort = <K extends keyof Row>(key: K) => {
@@ -147,7 +149,7 @@ function Changerequestfilter() {
   const handleFilter = () => {
     if (!filterKey) return;
 
-    const filteredData = requestTable.filter((item: any) => {
+    const filteredData = downloadreportdata.filter((item: any) => {
       if (filterKey === "submitted_date") {
         // Ensure submitted_date is in DD/MM/YYYY format
         const [day, month, year] = item.submitted_date.split("/");
@@ -173,17 +175,17 @@ function Changerequestfilter() {
 
   // Clear filter
   const handleClear = () => {
-    setFilterKey("");
+    setFilterKey;
     setFilterOperator("equal");
     setFilterValue("");
-    setRows(requestTable); // Reset filtered data to original
+    setRows(downloadreportdata); // Reset filtered data to original
     setActiveFilterColumn(null);
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
-    const res = SearchLogic(requestTable, query);
+    const res = SearchLogic(downloadreportdata, query);
     setRows(res);
   };
 
@@ -191,35 +193,52 @@ function Changerequestfilter() {
     <div>
       {/* column, filter */}
 
-      <div className="d-flex gap-5 justify-content-end  mx-3 ">
-        <div className="d-flex gap-3 mb-3">
-          <Image src={favourite} alt="" width={24} height={24} />
-          <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
-            <div className="mt-1">
-              <SearchIcon />
-            </div>
-
-            <input
-              type="text"
-              placeholder="Search..."
-              className="p-2 w-100"
-              value={search}
-              onChange={handleSearch}
-            />
+      <div className="d-flex justify-content-between">
+        <div className="d-flex gap-2 mx-2 align-items-center">
+          <div className="card p-2">
+            <p className="mb-0">
+              <span>Total hours </span> : <span>08</span>
+            </p>
+          </div>
+          <div className="card p-2">
+            <p className="mb-0">
+              <span className="me-2" style={{ color: "red" }}>
+                Overtime hours{" "}
+              </span>{" "}
+              : <span>08</span>
+            </p>
           </div>
         </div>
+        <div className="d-flex gap-5 justify-content-end  mx-3 ">
+          <div className="d-flex gap-3 mb-3">
+            <Image src={favourite} alt="" width={24} height={24} />
+            <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
+              <div className="mt-1">
+                <SearchIcon />
+              </div>
 
-        <button
-          className="outlinebtn rounded px-3 py-1"
-          style={{
-            color: useColors.themeRed,
-            border: `1px solid ${useColors.themeRed}`,
-            height: "fit-content",
-          }}
-          onClick={() => handleCSVExport(headers, requestTable)}
-        >
-          Export <SaveAltIcon className="ml-2" />
-        </button>
+              <input
+                type="text"
+                placeholder="Search..."
+                className="p-2 w-100"
+                value={search}
+                onChange={handleSearch}
+              />
+            </div>
+          </div>
+
+          <button
+            className="outlinebtn rounded px-3 py-1"
+            style={{
+              color: useColors.themeRed,
+              border: `1px solid ${useColors.themeRed}`,
+              height: "fit-content",
+            }}
+            onClick={() => handleCSVExport(headers, downloadreportdata)}
+          >
+            Export <SaveAltIcon className="ml-2" />
+          </button>
+        </div>
       </div>
 
       {/* Table Section */}
@@ -340,30 +359,20 @@ function Changerequestfilter() {
                   </span>
                 </th>
               ))}
-              <th>Action</th>
             </tr>
           </thead>
           <tbody className="dashboardcard">
             {currentPageItems?.map((item: any, index: Number) => (
               <tr key={item.id}>
-                <td className="para textheader">{item?.id}</td>
-                <td className="para textheader">{item?.request_type}</td>
+                <td className="para textheader">{item?.projectname}</td>
                 <td
                   className="para textheader"
                   style={{ whiteSpace: "nowrap" }}
                 >
-                  {item?.submitted_date}
+                  {item?.date}
                 </td>
-                <td className="para textheader">{item?.approved_by}</td>
-                <td className="para textheader">
-                  <ClickableChips label={item?.status} />
-                </td>
-                <td className="para textheader">
-                  <RemoveRedEyeIcon
-                    sx={{ color: "#8A8D93" }}
-                    // onClick={() => setDetails(true)}
-                  />
-                </td>
+                <td className="para textheader">{item?.type}</td>
+                <td className="para textheader">{item?.totaltime}</td>
               </tr>
             ))}
           </tbody>
@@ -380,4 +389,4 @@ function Changerequestfilter() {
   );
 }
 
-export default Changerequestfilter;
+export default Downloadreport;

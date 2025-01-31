@@ -2824,6 +2824,61 @@ export const requestTable = [
     },
 ];
 
+export const punchinandoutreports = [
+    { id: '001', date: '2023-01-10', status: 'present', punchin: '08:00 am', punchout: '17:30 pm', duration: '08 hrs', reason: '' },
+    { id: '002', date: '2023-01-11', status: 'Casual Leave', punchin: '09:00 am', punchout: '18:00 pm', duration: '09 hrs', reason: '' },
+    { id: '003', date: '2023-01-12', status: 'LOP', punchin: '07:30 am', punchout: '16:30 pm', duration: '09 hrs', reason: '' },
+    { id: '004', date: '2023-01-13', status: 'Sick Leave', punchin: '08:30 am', punchout: '17:00 pm', duration: '08.5 hrs', reason: 'I have health concerns' },
+    { id: '005', date: '2023-01-14', status: 'Vacation', punchin: '09:15 am', punchout: '18:15 pm', duration: '09 hrs', reason: '' },
+    { id: '006', date: '2023-01-15', status: 'present', punchin: '08:00 am', punchout: '17:30 pm', duration: '08 hrs', reason: '' },
+    { id: '007', date: '2023-01-16', status: 'Half Day', punchin: '08:45 am', punchout: '17:45 pm', duration: '09 hrs', reason: '' },
+    { id: '008', date: '2023-01-17', status: 'present', punchin: '07:30 am', punchout: '16:00 pm', duration: '08.5 hrs', reason: '' },
+    { id: '009', date: '2023-01-18', status: 'present', punchin: '09:00 am', punchout: '18:00 pm', duration: '09 hrs', reason: '' },
+    { id: '010', date: '2023-01-19', status: 'Vacation', punchin: '08:00 am', punchout: '17:00 pm', duration: '09 hrs', reason: '' },
+    { id: '011', date: '2023-01-20', status: 'present', punchin: '09:30 am', punchout: '18:00 pm', duration: '08.5 hrs', reason: '' },
+    { id: '012', date: '2023-01-21', status: 'Casual Leave', punchin: '08:15 am', punchout: '17:45 pm', duration: '09 hrs', reason: '' },
+    { id: '013', date: '2023-01-22', status: 'present', punchin: '09:00 am', punchout: '18:00 pm', duration: '09 hrs', reason: '' },
+    { id: '014', date: '2023-01-23', status: 'Half Day', punchin: '08:30 am', punchout: '17:30 pm', duration: '09 hrs', reason: '' },
+    { id: '015', date: '2023-01-24', status: 'sick Leave', punchin: '08:00 am', punchout: '17:30 pm', duration: '08.5 hrs', reason: '' }
+];
+
+
+export const disciplinaryactiondata = [
+    { id: '001', discilplinaraction: 'tardiness', location: 'USA LLC', remarks: "I have been working everyday I don’t know when this happened", actionDate: '2024-08-11' },
+    { id: '002', discilplinaraction: 'unprofessional behavior', location: 'USA LLC', remarks: "I was upset after receiving some feedback", actionDate: '2024-08-12' },
+    { id: '003', discilplinaraction: 'absenteeism', location: 'USA LLC', remarks: "Had personal issues that kept me away from work", actionDate: '2024-08-13' },
+    { id: '004', discilplinaraction: 'negligence', location: 'USA LLC', remarks: "I missed a few important deadlines", actionDate: '2024-08-14' },
+    { id: '005', discilplinaraction: 'tardiness', location: 'USA LLC', remarks: "I had trouble managing my commute time", actionDate: '2024-08-15' },
+    { id: '006', discilplinaraction: 'unprofessional behavior', location: 'USA LLC', remarks: "I was frustrated due to a miscommunication", actionDate: '2024-08-16' },
+    { id: '007', discilplinaraction: 'insubordination', location: 'USA LLC', remarks: "I disagreed with the manager's decision", actionDate: '2024-08-17' },
+    { id: '008', discilplinaraction: 'absenteeism', location: 'USA LLC', remarks: "I was not feeling well and couldn't make it to work", actionDate: '2024-08-18' },
+    { id: '009', discilplinaraction: 'tardiness', location: 'USA LLC', remarks: "Traffic delays caused me to be late", actionDate: '2024-08-19' },
+    { id: '010', discilplinaraction: 'unprofessional behavior', location: 'USA LLC', remarks: "I lost my temper during a meeting", actionDate: '2024-08-20' },
+    { id: '011', discilplinaraction: 'negligence', location: 'USA LLC', remarks: "I missed an important email", actionDate: '2024-08-21' },
+    { id: '012', discilplinaraction: 'absenteeism', location: 'USA LLC', remarks: "I had a family emergency that required me to leave work", actionDate: '2024-08-22' },
+    { id: '013', discilplinaraction: 'unprofessional behavior', location: 'USA LLC', remarks: "I failed to communicate my absence in advance", actionDate: '2024-08-23' },
+    { id: '014', discilplinaraction: 'tardiness', location: 'USA LLC', remarks: "I overslept due to alarm malfunction", actionDate: '2024-08-24' },
+    { id: '015', discilplinaraction: 'negligence', location: 'USA LLC', remarks: "I didn’t complete the task on time due to lack of focus", actionDate: '2024-08-25' }
+];
+
+
+export const downloadreportdata = [
+    { id: '001', projectname: 'AK007', date: '2023-01-10', type: 'timesheet', totaltime: '08' },
+    { id: '002', projectname: 'AK008', date: '2023-02-15', type: 'expenses', totaltime: '07' },
+    { id: '003', projectname: 'AK009', date: '2023-03-20', type: 'timesheet', totaltime: '06' },
+    { id: '004', projectname: 'AK010', date: '2023-04-25', type: 'expenses', totaltime: '09' },
+    { id: '005', projectname: 'AK011', date: '2023-05-05', type: 'timesheet', totaltime: '08' },
+    { id: '006', projectname: 'AK012', date: '2023-06-12', type: 'expenses', totaltime: '05' },
+    { id: '007', projectname: 'AK013', date: '2023-07-18', type: 'timesheet', totaltime: '07' },
+    { id: '008', projectname: 'AK014', date: '2023-08-22', type: 'expenses', totaltime: '08' },
+    { id: '009', projectname: 'AK015', date: '2023-09-30', type: 'timesheet', totaltime: '06' },
+    { id: '010', projectname: 'AK016', date: '2023-10-08', type: 'expenses', totaltime: '07' },
+    { id: '011', projectname: 'AK017', date: '2024-01-14', type: 'timesheet', totaltime: '09' },
+    { id: '012', projectname: 'AK018', date: '2024-02-28', type: 'expenses', totaltime: '05' },
+    { id: '013', projectname: 'AK019', date: '2024-03-07', type: 'timesheet', totaltime: '08' },
+    { id: '014', projectname: 'AK020', date: '2024-04-19', type: 'expenses', totaltime: '06' },
+    { id: '015', projectname: 'AK021', date: '2024-05-25', type: 'timesheet', totaltime: '07' }
+];
 export const holidayList = [
     {
         id: 1,

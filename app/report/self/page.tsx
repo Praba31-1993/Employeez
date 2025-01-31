@@ -8,6 +8,9 @@ import { Colors } from "@/app/reusableComponent/styles";
 import Changerequest from "../components/changerequest/changerequest";
 import Sidebar from "@/app/sidebar/page";
 import Vacationreport from "../components/report_vacationreports/reportvacationreport";
+import Downloadreport from "../components/downloadreport";
+import Punchinoutreport from "../components/punchinoutreport";
+import Disciplinaryreport from "../components/disciplinaryreport";
 
 function Self() {
   const useColors = Colors(); // Declare useColors once
@@ -35,8 +38,13 @@ function Self() {
         </div>
       </div>
       <div>
-        {selectedTimeOff === "Vacation report" && <Vacationreport />}
+        {(selectedTimeOff === "" || selectedTimeOff === "Vacation report") && (
+          <Vacationreport />
+        )}
         {selectedTimeOff === "Change report" && <Changerequest />}
+        {selectedTimeOff === "Download report" && <Downloadreport />}
+        {selectedTimeOff === "Punch in/Out report" && <Punchinoutreport />}
+        {selectedTimeOff === "Disciplinary report" && <Disciplinaryreport />}
       </div>
     </Sidebar>
   );
