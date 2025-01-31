@@ -1,104 +1,69 @@
-"use client";
-import React, { useEffect, useState, useRef } from "react";
-import CalendarViewWeekIcon from "@mui/icons-material/CalendarViewWeek";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import {
+  rowsForApprover,
+  columnForApprover,
+} from "@/app/reusableComponent/JsonData";
+import React, { useState, useRef, useEffect } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import HistoryIcon from "@mui/icons-material/History";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import DropdownComponent from "../../../reusableComponent/dropdown";
-import { year } from "../../../reusableComponent/JsonData";
 import SearchIcon from "@mui/icons-material/Search";
-import { Checkbox } from "@mui/material";
-import { rows, columns } from "../../../reusableComponent/JsonData";
+import Image from "next/image";
+import favourite from "@/public/assets/img/favourite.svg";
+import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
+import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import {
   handleCSVExport,
   SearchLogic,
-  handlePrint,
-} from "../../../reusableComponent/commonlogic";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import NorthSharpIcon from "@mui/icons-material/NorthSharp";
-import PaginationComponent from "../../../reusableComponent/paginationcomponent";
+} from "@/app/reusableComponent/commonlogic";
+import { Colors } from "@/app/reusableComponent/styles";
+import { requestTable } from "@/app/reusableComponent/JsonData";
 import ClickableChips from "@/app/reusableComponent/chips";
-import { requestTable } from "../../../reusableComponent/JsonData";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 type Row = {
+  id: number | string;
   request_type: string;
   submitted_date: string;
   approved_by: string;
   status: string;
 };
-
-function Changereruestfilter() {
-  const [ShowColumns, setShowColumns] = useState<boolean>(false);
-  const [tableColumns, setTableColumns] = useState<any>(columns);
-  const [searchList, setSearchList] = useState<any>(columns);
-  const [tableRows, setTableRows] = useState<any>(rows);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+function Changerequestfilter() {
   const [search, setSearch] = useState<string>("");
-  const [allRows, setAllRows] = useState<any>(rows);
-  const columnRef = useRef<HTMLDivElement>(null);
-  const [selectedTimeOff, setSelectedTimeOff] = useState("Request Time Off");
-  const headers = rows?.length > 0 ? Object.keys(rows?.[0]) : [];
-  const [pages, setPages] = useState([])
+  const [searchList, setSearchList] = useState<any>(columnForApprover);
+  const [rowsList, setRows] = useState<any>(requestTable);
+  const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalCount = requestTable.length;
+  const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
+  const [data, setData] = useState(searchList);
+  const useColors = Colors();
+
   const [sortConfig, setSortConfig] = useState<{
-    key: keyof Row;
-    direction: "asc" | "desc";
-  } | null>(null);
+    key: string;
+    direction: "asc" | "desc" | null;
+  }>({
+    key: "",
+    direction: null,
+  });
 
-  const handleChecked = (id: any) => {
-    const updatedColumns = tableColumns.map((columnsList: any) => {
-      if (columnsList.id === id) {
-        return {
-          ...columnsList,
-          checked: !columnsList.checked,
-        };
-      }
-      return columnsList;
-    });
-    setTableColumns(updatedColumns);
-    setSearchList(updatedColumns);
-  };
+  // Filtering state
+  const [filterKey, setFilterKey] = useState<
+    keyof (typeof currentPageItems)[0] | ""
+  >("");
+  const [filterOperator, setFilterOperator] = useState<"equal" | "notEqual">(
+    "equal"
+  );
+  const [filterValue, setFilterValue] = useState("");
+  const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(
+    null
+  );
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        columnRef.current &&
-        !columnRef.current.contains(event.target as Node)
-      ) {
-        setShowColumns(false);
-      }
-    };
+  const [filterYear, setFilterYear] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
+  const [filterDay, setFilterDay] = useState("");
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    if (search !== "") {
-      const filteredRows = SearchLogic(allRows, search);
-      console.log("Filtered Results:", filteredRows);
-      setTableRows(filteredRows?.length > 0 ? filteredRows : allRows);
-    } else {
-      setTableRows(allRows);
-    }
-  }, [search, allRows]);
-
-  useEffect(() => {
-    if (searchQuery !== "") {
-      const filteredSearchQuery = SearchLogic(columns, searchQuery);
-
-      setSearchList(
-        filteredSearchQuery.length > 0 ? filteredSearchQuery : columns
-      );
-    } else {
-      setSearchList(columns);
-    }
-  }, [searchQuery, columns]);
-
+  const tableRef = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
     const arr: any = [];
@@ -108,248 +73,311 @@ function Changereruestfilter() {
     setPages(arr);
   }, [totalPages]);
 
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
-
-  const handleSort = (key: keyof Row) => {
-    let direction: "asc" | "desc" = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
-    }
-    setSortConfig({ key, direction });
-
-    // const sortedRows = [...rows].sort((a, b) => {
-    //   if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-    //   if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
-    //   return 0;
-    // });
-    // setRows(sortedRows);
-  };
-
-  const currentPageItems = requestTable.slice(
+  const currentPageItems = rowsList?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
 
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
+  };
+
+  const headers = Object.keys(requestTable[0]);
+
+  // Sorting function
+  const handleSort = <K extends keyof Row>(key: K) => {
+    let direction: "asc" | "desc" = "asc";
+
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+
+    const sortedData = [...rowsList].sort((a, b) => {
+      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
+      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    setSortConfig({ key, direction });
+    setRows(sortedData);
+  };
+
+  // Function to toggle the filter box and set its position
+  const handleFilterToggle = (
+    key: keyof (typeof searchList)[0] | any,
+    event: React.MouseEvent
+  ) => {
+    if (activeFilterColumn === key) {
+      setActiveFilterColumn(null); // Close the filter box if the same column is clicked again
+    } else {
+      setFilterKey(key); // Set current filter column
+
+      const target = event.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect(); // Get position of the clicked filter icon
+      const thElement = target.closest("th"); // Get the header cell
+      const tableElement = thElement?.closest("table"); // Find the table
+
+      if (thElement && tableElement) {
+        const thRect = thElement.getBoundingClientRect();
+        const tableRect = tableElement.getBoundingClientRect();
+
+        // Get the first letter position
+        const textNode = thElement.firstChild;
+        let leftPosition = thRect.left;
+
+        if (textNode) {
+          const range = document.createRange();
+          range.setStart(textNode, 0);
+          range.setEnd(textNode, 1); // Select first letter
+          const textRect = range.getBoundingClientRect();
+          leftPosition = textRect.left;
+        }
+
+        // Ensure the filter box stays inside the table
+        const filterBoxWidth = 200; // Adjust based on your filter box width
+        if (leftPosition + filterBoxWidth > tableRect.right) {
+          leftPosition = tableRect.right - filterBoxWidth - 10; // Adjust to fit inside
+        }
+      }
+      setActiveFilterColumn(key);
+    }
+  };
+
+  // Filtering function
+  const handleFilter = () => {
+    if (!filterKey) return;
+  
+    const filteredData = requestTable.filter((item: any) => {
+      if (filterKey === "submitted_date") {
+        // Ensure submitted_date is in DD/MM/YYYY format
+        const [day, month, year] = item.submitted_date.split("/");
+  
+        const matchesYear = filterYear ? year === filterYear : true;
+        const matchesMonth = filterMonth ? month === filterMonth : true;
+        const matchesDay = filterDay ? day === filterDay : true;
+  
+        return matchesYear && matchesMonth && matchesDay;
+      } else {
+        const itemValue = String(item[filterKey]).trim().toLowerCase();
+        const searchValue = filterValue.trim().toLowerCase();
+  
+        return filterOperator === "equal"
+          ? itemValue === searchValue
+          : itemValue !== searchValue;
+      }
+    });
+  
+    setRows(filteredData); // Update the list that feeds currentPageItems
+    setActiveFilterColumn(null);
+  };
+  
+  // Clear filter
+  const handleClear = () => {
+    setFilterKey("");
+    setFilterOperator("equal");
+    setFilterValue("");
+    setRows(requestTable); // Reset filtered data to original
+    setActiveFilterColumn(null);
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearch(query);
+    const res = SearchLogic(requestTable, query);
+    setRows(res);
+  };
+
   return (
-    <>
-        <div className="row justify-content-between">
-          <div className="col-12 d-none d-sm-block">
-            <div className="d-flex  justify-content-between mt-3 mb-2">
-              <ul className="d-flex flex-wrap align-items-end gap-2 heading2 textheader cursorPointer p-0 mb-0">
-                <li
-                  className="d-flex align-items-center"
-                  onClick={() => setShowColumns((prev) => !prev)}
-                >
-                  <CalendarViewWeekIcon />
-                  <div className="dropdown mx-2">
-                    <div
-                      role="div"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                    >
-                      Column
-                    </div>
+    <div>
+      {/* column, filter */}
 
-                    <div
-                      className=" cursorPointer dropdown-menu px-1 "
-                      style={{ width: "max-content" }}
-                    >
-                      <div
-                        className="d-flex gap-1  p-2 align-items-center"
-                        style={{ border: "1px solid blue" }}
-                      >
-                        <div className="mt-1">
-                          <SearchIcon />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Search"
-                          className="p-2 w-100"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                      </div>
-
-                      {searchList?.map((columnList: any) => (
-                        <div className="checkboxwithList" key={columnList?.id}>
-                          <Checkbox
-                            checked={columnList?.checked}
-                            onChange={() => handleChecked(columnList?.id)}
-                          />
-                          <span>{columnList?.key}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </li>
-
-                <li className="d-flex align-items-center">
-                  <FilterListIcon />
-                  <span className="mx-2">Filters</span>
-                </li>
-                <li className="d-flex align-items-center">
-                  <SaveAltIcon />
-                  <div className="dropdown mx-2">
-                    <div
-                      role="div"
-                      id="dropdownMenuLink"
-                      data-bs-toggle="dropdown"
-                    >
-                      Export
-                    </div>
-
-                    <div
-                      className="dropdown-menu p-2"
-                      aria-labelledby="dropdownMenuLink"
-                    >
-                      <p
-                        className="m-0 para textheader"
-                        onClick={() => handleCSVExport(headers, rows)}
-                      >
-                        CSV File
-                      </p>
-                      {/* <p
-                      onClick={() => handlePrint()}
-                      >Print</p> */}
-                    </div>
-                  </div>
-                </li>
-                <li className="d-flex align-items-center">
-                  <HistoryIcon />
-                  <div className="ms-2">
-                    <DropdownComponent
-                      dropdownlist={year}
-                      removepadding={true}
-                      selectedDatafunction={(data: any) =>
-                        setSelectedTimeOff(data)
-                      }
-                    />
-                  </div>
-                </li>
-                <li className="d-flex align-items-center">
-                  <CalendarMonthIcon />
-                  <div className="ms-2">
-                    <DropdownComponent
-                      dropdownlist={year}
-                      removepadding={true}
-                      selectedDatafunction={(data: any) =>
-                        setSelectedTimeOff(data)
-                      }
-                    />
-                  </div>
-                </li>
-              </ul>
-              <div className="col-12 col-md-3 ">
-                <div className="d-flex gap-1 searchbar ps-2 align-items-center">
-                  <div className="mt-1">
-                    <SearchIcon />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className="p-2 w-100"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
-              </div>
+      <div className="d-flex gap-5 justify-content-end  mx-3 ">
+        <div className="d-flex gap-3 mb-3">
+          <Image src={favourite} alt="" width={24} height={24} />
+          <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
+            <div className="mt-1">
+              <SearchIcon />
             </div>
-          </div>
 
-          <div className="col-12" id="printSection">
-            {/* <Requesttable /> */}
-           <div className="" style={{overflowX:"auto"}}>
-           <table className="table tabletype">
-              <thead style={{ backgroundColor: "#F6F7FB" }}>
-                <tr>
-                  <th className="textheader para" scope="col">
-                    Request type{" "}
-                    <NorthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{
-                        fill: "#CCC",
-                        height: "15px",
-                        width: "15px",
-                        transform:
-                          sortConfig?.direction === "asc"
-                            ? "rotate(0deg)"
-                            : "rotate(180deg)",
-                      }}
-                      onClick={() => handleSort("request_type")}
-                    />
-                  </th>
-                  <th className="textheader para" scope="col">
-                    Submitted Date
-                    <NorthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                      onClick={() => handleSort("submitted_date")}
-                    />
-                  </th>
-                  <th className="textheader para" scope="col">
-                    Approved by
-                    <NorthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                      onClick={() => handleSort("approved_by")}
-                    />
-                  </th>
-                  <th className="textheader para" scope="col">
-                    Status
-                    <NorthSharpIcon
-                      fontSize="small"
-                      className="inline-block"
-                      sx={{ fill: "#CCC", height: "15px", width: "15px" }}
-                      onClick={() => handleSort("status")}
-                    />
-                  </th>
-
-                  <th className="textheader para" scope="col"></th>
-                </tr>
-              </thead>
-              <tbody className="dashboardcard">
-                {currentPageItems?.map((item: any, index: number) => (
-                  <tr key={index}>
-                    <td className="para textheader">{item?.request_type}</td>
-                    <td className="para textheader">{item?.submitted_date}</td>
-                    <td className="para textheader">{item?.approved_by}</td>
-
-                    <td className="para textheader">
-                      <ClickableChips label={item.status} />
-                    </td>
-                    <td className="para textheader">{item.reason}</td>
-                    <td className="para textheader">
-                      <RemoveRedEyeIcon
-                        sx={{ color: "#8A8D93" }}
-                        //   onClick={() => setDetails(true)}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-           </div>
-            <div className="d-flex justify-content-end my-3">
-              <PaginationComponent
-                currentPage={currentPage}
-                currentPageFunction={handlePageChange}
-                pages={pages}
-                totalPages={totalPages}
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="p-2 w-100"
+              value={search}
+              onChange={handleSearch}
+            />
           </div>
         </div>
-    </>
+
+        <button
+          className="outlinebtn rounded px-3 py-1"
+          style={{
+            color: useColors.themeRed,
+            border: `1px solid ${useColors.themeRed}`,
+            height: "fit-content",
+          }}
+          onClick={() => handleCSVExport(headers, requestTable)}
+        >
+          Export <SaveAltIcon className="ml-2" />
+        </button>
+      </div>
+
+      {/* Table Section */}
+      <div className="" style={{ overflowX: "auto" }}>
+        <table className="table tabletype">
+          <thead style={{ backgroundColor: "#F6F7FB" }}>
+            <tr>
+              {headers.map((key) => (
+                <th
+                  key={key}
+                  scope="col"
+                  className="position-relative textheader para"
+                >
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                  <span className="d-inline-flex align-items-center gap-2 ms-2">
+                    <FontAwesomeIcon
+                      icon={faSort}
+                      style={{ cursor: "pointer", height: "10px" }}
+                      onClick={() => handleSort(key as keyof Row)}
+                    />
+                    <div className="" style={{ position: "relative" }}>
+                      <FontAwesomeIcon
+                        icon={faFilter}
+                        style={{ cursor: "pointer", height: "10px" }}
+                        onClick={(event: any) =>
+                          handleFilterToggle(
+                            key as keyof (typeof currentPageItems)[0],
+                            event
+                          )
+                        }
+                      />
+                      {activeFilterColumn === key && ( // Ensure only the clicked column shows filter box
+                        <div
+                          className="card card-body"
+                          style={{
+                            width: "18em",
+                            position: "absolute",
+                            top: "0%",
+                            zIndex: 1000,
+                            backgroundColor: "white",
+                            border: "1px solid #ddd",
+                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          <div className="d-flex flex-column p-2 gap-2">
+                            {filterKey === "submitted_date" ? (
+                              <>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterYear}
+                                  onChange={(e) =>
+                                    setFilterYear(e.target.value)
+                                  }
+                                  placeholder="Enter Year (YYYY)"
+                                />
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterMonth}
+                                  onChange={(e) =>
+                                    setFilterMonth(e.target.value)
+                                  }
+                                  placeholder="Enter Month (MM)"
+                                />
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterDay}
+                                  onChange={(e) => setFilterDay(e.target.value)}
+                                  placeholder="Enter Day (DD)"
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <select
+                                  className="form-control tableselector"
+                                  value={filterOperator}
+                                  onChange={(e) =>
+                                    setFilterOperator(
+                                      e.target.value as "equal" | "notEqual"
+                                    )
+                                  }
+                                >
+                                  <option value="equal">Equal</option>
+                                  <option value="notEqual">Not Equal To</option>
+                                </select>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={filterValue}
+                                  onChange={(e) =>
+                                    setFilterValue(e.target.value)
+                                  }
+                                  placeholder={`Enter ${activeFilterColumn} value`}
+                                />
+                              </>
+                            )}
+                          </div>
+
+                          <div className="d-flex gap-2 justify-content-end mt-2">
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleFilter}
+                            >
+                              Filter
+                            </button>
+                            <button
+                              className="btn btn-secondary"
+                              onClick={handleClear}
+                            >
+                              Clear
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </span>
+                </th>
+              ))}
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody className="dashboardcard">
+            {currentPageItems?.map((item: any, index: Number) => (
+              <tr key={item.id}>
+                <td className="para textheader">{item?.id}</td>
+                <td className="para textheader">{item?.request_type}</td>
+                <td
+                  className="para textheader"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  {item?.submitted_date}
+                </td>
+                <td className="para textheader">{item?.approved_by}</td>
+                <td className="para textheader">
+                  <ClickableChips label={item?.status} />
+                </td>
+                <td className="para textheader">
+                  <RemoveRedEyeIcon
+                    sx={{ color: "#8A8D93" }}
+                    // onClick={() => setDetails(true)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* table ends */}
+      <Paginationcomponent
+        currentPage={currentPage}
+        currentPageFunction={handlePageChange}
+        pages={pages}
+        totalPages={totalPages}
+      />
+    </div>
   );
 }
 
-export default Changereruestfilter;
+export default Changerequestfilter;
