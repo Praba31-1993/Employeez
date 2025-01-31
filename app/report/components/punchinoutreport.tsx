@@ -1,7 +1,4 @@
-import {
-  rowsForApprover,
-  columnForApprover,
-} from "@/app/reusableComponent/JsonData";
+import { columnForApprover } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,26 +8,24 @@ import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import {
-  handleCSVExport,
-  SearchLogic,
-} from "@/app/reusableComponent/commonlogic";
-import { Colors } from "@/app/reusableComponent/styles";
-import { requestTable } from "@/app/reusableComponent/JsonData";
-import ClickableChips from "@/app/reusableComponent/chips";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { handleCSVExport, SearchLogic } from "@/app/reusableComponent/commonlogic";
+import { Colors } from "../../reusableComponent/styles";
+import { punchinandoutreports } from "@/app/reusableComponent/JsonData";
+import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
 
-type Row = {
-  id: number | string;
-  request_type: string;
-  submitted_date: string;
-  approved_by: string;
+interface ApproverRow {
+  id: string;
+  date: string;
   status: string;
-};
-function Changerequestfilter() {
+  punchin: string;
+  punchout: string;
+  duration: string;
+  reason: string;
+}
+function Punchinoutreport() {
   const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [rowsList, setRows] = useState<any>(requestTable);
+  const [rowsList, setRows] = useState<ApproverRow[]>(punchinandoutreports);
   const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +68,7 @@ function Changerequestfilter() {
     setPages(arr);
   }, [totalPages]);
 
-  const currentPageItems = rowsList?.slice(
+  const currentPageItems = rowsList.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
@@ -82,10 +77,14 @@ function Changerequestfilter() {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(requestTable[0]);
+  const headers = Object.keys(punchinandoutreports[0]).filter(
+    (key) => key !== "id"
+  );
+
+  console.log("headers", headers);
 
   // Sorting function
-  const handleSort = <K extends keyof Row>(key: K) => {
+  const handleSort = (key: keyof ApproverRow) => {
     let direction: "asc" | "desc" = "asc";
 
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -99,7 +98,7 @@ function Changerequestfilter() {
     });
 
     setSortConfig({ key, direction });
-    setRows(sortedData);
+    setRows(sortedData); // Set sorted rows in `rowsList`
   };
 
   // Function to toggle the filter box and set its position
@@ -147,10 +146,9 @@ function Changerequestfilter() {
   const handleFilter = () => {
     if (!filterKey) return;
 
-    const filteredData = requestTable.filter((item: any) => {
-      if (filterKey === "submitted_date") {
-        // Ensure submitted_date is in DD/MM/YYYY format
-        const [day, month, year] = item.submitted_date.split("/");
+    const filteredData = punchinandoutreports.filter((item) => {
+      if (filterKey === "date") {
+        const [year, month, day] = item.date.split("-");
 
         const matchesYear = filterYear ? year === filterYear : true;
         const matchesMonth = filterMonth ? month === filterMonth : true;
@@ -167,7 +165,7 @@ function Changerequestfilter() {
       }
     });
 
-    setRows(filteredData);
+    setRows(filteredData); // Set filtered data in `rowsList`
     setActiveFilterColumn(null);
   };
 
@@ -176,17 +174,17 @@ function Changerequestfilter() {
     setFilterKey("");
     setFilterOperator("equal");
     setFilterValue("");
-    setRows(requestTable); // Reset filtered data to original
+    setData(searchList);
     setActiveFilterColumn(null);
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearch(query);
-    const res = SearchLogic(requestTable, query);
-    setRows(res);
-  };
-
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const query = event.target.value;
+      setSearch(query);
+      const res = SearchLogic(punchinandoutreports, query);
+      setRows(res);
+    };
+  
   return (
     <div>
       {/* column, filter */}
@@ -198,10 +196,9 @@ function Changerequestfilter() {
             <div className="mt-1">
               <SearchIcon />
             </div>
-
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search"
               className="p-2 w-100"
               value={search}
               onChange={handleSearch}
@@ -216,7 +213,7 @@ function Changerequestfilter() {
             border: `1px solid ${useColors.themeRed}`,
             height: "fit-content",
           }}
-          onClick={() => handleCSVExport(headers, requestTable)}
+          onClick={() => handleCSVExport(headers, punchinandoutreports)}
         >
           Export <SaveAltIcon className="ml-2" />
         </button>
@@ -224,7 +221,7 @@ function Changerequestfilter() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
-        <table className="table tabletype">
+        <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               {headers.map((key) => (
@@ -238,7 +235,9 @@ function Changerequestfilter() {
                     <FontAwesomeIcon
                       icon={faSort}
                       style={{ cursor: "pointer", height: "10px" }}
-                      onClick={() => handleSort(key as keyof Row)}
+                      onClick={() =>
+                        handleSort(key as keyof (typeof currentPageItems)[0])
+                      }
                     />
                     <div className="" style={{ position: "relative" }}>
                       <FontAwesomeIcon
@@ -265,7 +264,7 @@ function Changerequestfilter() {
                           }}
                         >
                           <div className="d-flex flex-column p-2 gap-2">
-                            {filterKey === "submitted_date" ? (
+                            {filterKey === "date" ? (
                               <>
                                 <input
                                   type="text"
@@ -340,30 +339,24 @@ function Changerequestfilter() {
                   </span>
                 </th>
               ))}
-              <th>Action</th>
             </tr>
           </thead>
           <tbody className="dashboardcard">
-            {currentPageItems?.map((item: any, index: Number) => (
+            {currentPageItems?.map((item, index) => (
               <tr key={item.id}>
-                <td className="para textheader">{item?.id}</td>
-                <td className="para textheader">{item?.request_type}</td>
+                <td className="para textheader">{item?.date}</td>
+                <td className="para textheader">
+                  <ChipsForLeave label={item?.status} />
+                </td>
                 <td
                   className="para textheader"
                   style={{ whiteSpace: "nowrap" }}
                 >
-                  {item?.submitted_date}
+                  {item?.punchin}
                 </td>
-                <td className="para textheader">{item?.approved_by}</td>
-                <td className="para textheader">
-                  <ClickableChips label={item?.status} />
-                </td>
-                <td className="para textheader">
-                  <RemoveRedEyeIcon
-                    sx={{ color: "#8A8D93" }}
-                    // onClick={() => setDetails(true)}
-                  />
-                </td>
+                <td className="para textheader">{item?.punchout}</td>
+                <td className="para textheader">{item?.duration}</td>
+                <td className="para textheader">{item?.reason}</td>
               </tr>
             ))}
           </tbody>
@@ -380,4 +373,4 @@ function Changerequestfilter() {
   );
 }
 
-export default Changerequestfilter;
+export default Punchinoutreport;
