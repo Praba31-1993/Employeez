@@ -212,7 +212,7 @@ function Punchinoutapprover() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
-        <table className="table tabletype">
+        <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               {headers.map((key) => (

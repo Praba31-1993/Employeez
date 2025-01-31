@@ -1,33 +1,45 @@
 import React from 'react';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Colors } from './styles';
 
 interface PaginationProps {
   currentPage: number;
   currentPageFunction: (page: number) => void;
-  pages: (number | string)[]; 
+  pages: (number | string)[];
   totalPages: number;
 }
 
-const Paginationcomponent: React.FC<PaginationProps> = ({
+
+
+const PaginationComponent: React.FC<PaginationProps> = ({
   currentPage,
   currentPageFunction,
   pages,
   totalPages,
 }) => {
+  const useColors = Colors(); // Assuming useColors.themeRed is accessible
   return (
     <div>
-      <div className="d-flex align-items-center gap-2 justify-content-end">
+      <div className="d-flex align-items-center mt-2 justify-content-end">
         <div
-          className="page-item"
+          className="page-item text-center"
           style={{ cursor: 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
           onClick={() => currentPage > 1 && currentPageFunction(currentPage - 1)}
         >
-          Prev
+          <ArrowBackIosIcon />
         </div>
         {pages.map((page, index) => (
           <div
             key={index}
             className={`page-item ${currentPage === page ? 'active' : ''}`}
-            style={{ cursor: 'pointer' }}
+            style={{
+              cursor: 'pointer',
+              backgroundColor: currentPage === page ? useColors.themeRed : 'transparent',
+              color: currentPage === page ? '#fff' : 'inherit',
+              borderRadius: '50%',
+              margin: '0 5px',
+            }}
             onClick={() => typeof page === 'number' && currentPageFunction(page)}
           >
             {page}
@@ -38,11 +50,11 @@ const Paginationcomponent: React.FC<PaginationProps> = ({
           style={{ cursor: 'pointer', opacity: currentPage === totalPages ? 0.5 : 1 }}
           onClick={() => currentPage < totalPages && currentPageFunction(currentPage + 1)}
         >
-          Next
+          <ArrowForwardIosIcon />
         </div>
       </div>
     </div>
   );
 };
 
-export default Paginationcomponent;
+export default PaginationComponent;

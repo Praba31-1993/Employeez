@@ -353,6 +353,12 @@ th{
     border-right: 0px solid #8d8d8d4f;
   }
 }  
+@media (min-width:600px) and (max-width:1000px) {
+  .summarysection{
+    width: 70% !important;
+  }
+}
+
 .rotatingText-content { 
   position: relative;
   width: 100%;
