@@ -1,12 +1,10 @@
-import React from 'react'
-import Requesttable from './requesttable'
-import Changereruestfilter from './changerequestfilter'
+import React from "react";
+import Requesttable from "./requesttable";
+import Changereruestfilter from "./changerequestfilter";
+import Punchinoutapprover from "../punchinoutapprover";
 
 function Changerequest() {
-    return (
-            <Changereruestfilter />
-       
-    )
+  return <Changereruestfilter />;
 }
 
-export default Changerequest
+export default Changerequest;
