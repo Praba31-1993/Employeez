@@ -175,6 +175,8 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #bcbbbd;
   border-radius: 10px;
+  cursor: pointer !important;
+ 
 }
 
 .roundDot {
@@ -182,6 +184,10 @@ body {
   height: 10px !important;
   border-radius: 50%;
 }
+.dark .notificationround{
+  border: 1px solid #28243d !important;
+}
+
 
 .css-1075y7p-MuiButtonBase-root-MuiButton-root.Mui-disabled {
   color: white !important;
@@ -220,11 +226,17 @@ body {
   .tabletype th{
     background-color: transparent !important;
   }
-
+  th{
+    font-weight: 600 !important;
+  }
   .searchbar {
     background: white;
     border-radius: 10px !important;
   }
+  .dark .searchbar {
+    background: #312d4b ;
+    border-radius: 10px !important;
+}
   .searchbar input {
     border: 0 !important;
     background: transparent;

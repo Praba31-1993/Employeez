@@ -1,5 +1,7 @@
 "use client";
+import Image from "next/image";
 import ImageComponent from "@/app/reusableComponent/image";
+import user from "@/public/assets/img/Ellipse 14.svg";
 import { Colors } from "@/app/reusableComponent/styles";
 import moment from "moment";
 
@@ -82,14 +84,7 @@ export function Timesheetaproover() {
       </div>
       <div className="approverlist  align-items-center d-flex mt-2">
         <div style={{ width: "35px", height: "35px" }}>
-          {/* <Image className="w-100 h-100" src={user} alt={""} /> */}
-          <div className="w-100 h-100">
-            <ImageComponent
-              width={30}
-              height={30}
-              user={"/assets/img/Ellipse 14.svg"}
-            />
-          </div>
+          <Image className="w-100 h-100" src={user} alt={""} />
         </div>
 
         {/* <Avatar src='' /> */}

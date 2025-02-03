@@ -19,7 +19,7 @@ function Detailview() {
             <div className="row mt-1">
                <div className="col-xxl-8 col-lg-9">
                <div style={{overflowX:"auto"}}>
-               <table className="table tabletype">
+               <table className="table mb-0 tabletype">
                     <thead style={{ backgroundColor: "#F6F7FB" }}>
                         <tr>
                             <th className='textheader para' scope="col">Date</th>

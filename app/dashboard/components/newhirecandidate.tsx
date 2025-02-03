@@ -3,7 +3,7 @@ import React from "react";
 import { Colors } from "../../reusableComponent/styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ImageComponent from "@/app/reusableComponent/image";
-
+import user  from "@/public/assets/img/Ellipse 14.svg";
 interface MenulistforbirthdayworkvacationProps {
   headerImage: any;
   title: string;
@@ -29,8 +29,8 @@ function NewHireCandidate({
           <div key={index}>
           <div className="d-flex mt-3 justify-content-between align-items-center pb-2">
             <div className="d-flex align-items-center">
-                {/* <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} /> */}
-                <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/>
+                <Image className="" src={user||'/assets/img/Ellipse 14.svg'} alt={""} />
+                {/* <ImageComponent width={0}  height={0} user={"/assets/img/Ellipse 14.svg"}/> */}
 
               <div>
                 <h5 className="para2 textheader ps-1 mb-0 ">{bday?.name}</h5>
