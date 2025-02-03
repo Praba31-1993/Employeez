@@ -184,6 +184,10 @@ body {
   height: 10px !important;
   border-radius: 50%;
 }
+.dark .notificationround{
+  border: 1px solid #28243d !important;
+}
+
 
 .css-1075y7p-MuiButtonBase-root-MuiButton-root.Mui-disabled {
   color: white !important;
