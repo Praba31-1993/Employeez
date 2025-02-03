@@ -286,7 +286,7 @@ function Searchwithmenuitems() {
 
           <div className="col-12 px-0" id="printSection">
             <div className="w-100" style={{ overflowX: "auto" }}>
-              <table className="table tabletype">
+              <table className="table mb-0 tabletype">
                 <thead style={{ backgroundColor: "#F6F7FB" }}>
                   <tr>
                     <th className="textheader para" scope="col">

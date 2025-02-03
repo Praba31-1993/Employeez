@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import Logout from "./logout";
 import ImageComponent from "./image";
 import { dropdownData } from "./JsonData";
+import user from "@/public/assets/img/Ellipse 14.svg";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -74,6 +75,7 @@ export default function NavbarComponent() {
         vertical: "top",
         horizontal: "right",
       }}
+      sx={{top:"40px",left:"27px"}}
       id={menuId}
       keepMounted
       transformOrigin={{
@@ -143,6 +145,7 @@ export default function NavbarComponent() {
           </div>
         </IconButton>
       </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <Avatar src="" alt="Remy Sharp" />
       </MenuItem>
@@ -223,17 +226,10 @@ export default function NavbarComponent() {
                   ></div>
                 </div>
               </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Avatar src="" alt="Remy Sharp" />
-              </IconButton>
+              <div style={{ width: "35px", height: "35px" }} onClick={handleProfileMenuOpen}>
+                <Image className="w-100 h-100 rounded-circle" src={user} style={{ objectFit: "cover" }} alt={""} />
+              </div>
+
             </Box>
           </Toolbar>
         </AppBar>
