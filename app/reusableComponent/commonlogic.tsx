@@ -1,12 +1,13 @@
-
 export const SearchLogic = (arr: any[], search: string) => {
   const filteredRows = arr.filter((row: any) =>
     Object.values(row).some((value) =>
       String(value).toLowerCase().includes(search.toLowerCase())
     )
   );
-  return filteredRows;
+
+  return filteredRows.length > 0 ? filteredRows : arr; // Return all rows if no match is found
 };
+
 
 // Export CSV files
 export const handleCSVExport = (headers:any, data:any) => {

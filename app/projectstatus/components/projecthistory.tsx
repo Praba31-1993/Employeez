@@ -40,6 +40,7 @@ function ProjectHistory() {
   const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [data, setData] = useState(searchList);
+
   const useColors = Colors();
 
   const [sortConfig, setSortConfig] = useState<{
@@ -78,7 +79,7 @@ function ProjectHistory() {
 
   const currentPageItems = rowsList.slice(
     (currentPage - 1) * countPerPage,
-    currentPage * countPerPage  
+    currentPage * countPerPage
   );
 
   const handlePageChange = (page: any) => {
@@ -182,11 +183,15 @@ function ProjectHistory() {
       setActiveFilterColumn(null);
     }
   };
- const handleFilter = () => {
-    if (!filterKey  || projectHistoryData?.length === 0) return;
+  const handleFilter = () => {
+    if (!filterKey || projectHistoryData?.length === 0) return;
 
     const filteredData = projectHistoryData.filter((item) => {
-      if (filterKey === "start_date" || filterKey === "end_date" || filterKey === "period") {
+      if (
+        filterKey === "start_date" ||
+        filterKey === "end_date" ||
+        filterKey === "period"
+      ) {
         const dateValue = item[filterKey]; // Correctly use the filterKey to access date_from or date_to
         if (!dateValue) return false; // Handle cases where the date field is missing
 
@@ -211,9 +216,6 @@ function ProjectHistory() {
     setActiveFilterColumn(null);
   };
 
-  
-  
-  
   // Clear filter
   const handleClear = () => {
     setFilterKey("");
@@ -388,7 +390,9 @@ function ProjectHistory() {
               ))}
             </tr>
           </thead>
-          <tbody className={projectHistoryData.length > 0 ? "dashboardcard" :""}>
+          <tbody
+            className={projectHistoryData.length > 0 ? "dashboardcard" : ""}
+          >
             {projectHistoryData.length > 0 ? (
               currentPageItems?.map((item, index) => (
                 <tr key={item?.projectId}>
@@ -427,9 +431,11 @@ function ProjectHistory() {
                     {/* <ChipsForLeave label={item?.status} /> */}
                     {item?.download?.[0]}
                   </td>
-                  <td className="para textheader d-flex gap-4">
-                    <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
-                    <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
+                  <td className="para textheader">
+                    <div className="d-flex gap-4">
+                      <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                      <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
+                    </div>
                   </td>
                 </tr>
               ))
