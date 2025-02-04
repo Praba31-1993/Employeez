@@ -132,7 +132,7 @@ const TableWithSort: React.FC<TableProps> = ({
 
                     {column.key === "action" && (
                       <div className="flex gap-3">
-                        <RemoveRedEyeIcon
+                        <RemoveRedEyeIcon className="cursorpointer"
                           sx={{ color: "#8A8D93" }}
                           onClick={() => setDetails(true)}
                         />
