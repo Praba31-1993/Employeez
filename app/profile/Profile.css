@@ -1,0 +1,13 @@
+.profilepicture .Profileimg{
+    width: 100%;
+    height: 13vw;
+}
+.documents{
+    border: 0.2px solid #a8a8a89d;
+}
+@media screen and (max-width:600px) {
+    .profilepicture .Profileimg{
+        width: 100%;
+        height: 70vw;
+    }
+}

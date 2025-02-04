@@ -159,7 +159,7 @@ a {
 body {
   overflow-x: hidden;
 }
-.cursorPointer {
+.cursorpointer {
   cursor: pointer;
 }
 ::-webkit-scrollbar {

@@ -23,48 +23,32 @@ export default function Outlinebutton({
   fontSize,
   background,
   onClick,
-  icon,
+  icon,  // Accept icon as a prop
   variant,
   height,
   iscontactus,
 }: OutlinebuttonProps) {
   return (
-    <>
-      {disabled ? (
-        <Button
-          variant={variant}
-          disabled={disabled}
-          onClick={onClick}
-          sx={{
-            // color: { color },
-            // border: { border },
-            fontFamily: "Inter, sans-serif",
-            fontSize: { fontSize },
-            // textTransform: "unset",
-            // backgroundColor: { background },
-          }}
-        >
-          {text}
-        </Button>
-      ) : (
-        <Button
-          variant={variant}
-          disabled={disabled}
-          onClick={onClick}
-          sx={{
-            color: { color },
-            border: { border },
-            fontFamily: "Inter, sans-serif",
-            fontSize: { fontSize },
-            textTransform: "unset",
-            backgroundColor: { background },
-            height:{height}
-          }}
-        >
-          {text}
-        </Button>
-      )}
-    </>
+    <Button
+      variant={variant}
+      disabled={disabled}
+      onClick={onClick}
+      sx={{
+        color: color,  // Remove unnecessary { }
+        border: border,
+        fontFamily: "Inter, sans-serif",
+        fontSize: fontSize,
+        textTransform: "unset",
+        backgroundColor: background,
+        height: height,
+        display: "flex",         // Ensure proper layout
+        alignItems: "center",
+        gap: "5px",              // Space between icon and text
+      }}
+    >
+      {icon && icon}  {/* Render icon if provided */}
+      {text}
+    </Button>
   );
 }
 export function IconOutlinebutton({
