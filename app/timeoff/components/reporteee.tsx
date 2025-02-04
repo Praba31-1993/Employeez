@@ -151,7 +151,7 @@ function Reporteee() {
 
   // Filtering function
   const handleFilter = () => {
-    if (!filterKey) return;
+    if (!filterKey  || reporteeData?.length === 0) return;
 
     const filteredData = reporteeData.filter((item) => {
       if (filterKey === "date_from" || filterKey === "date_to") {

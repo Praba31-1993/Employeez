@@ -85,7 +85,7 @@ function ProjectHistory() {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(projectHistoryData[0]).filter(
+  const headers = Object.keys(projectHistoryData?.[0]).filter(
     (key) => key !== "id"
   );
 
@@ -152,35 +152,36 @@ function ProjectHistory() {
 
   // Filtering function
   const handleFilter = () => {
-    if (!filterKey) return;
-  
-    const filteredData = projectHistoryData.filter((item) => {
-      if (filterKey === "start_date" || filterKey === "end_date" || filterKey === "period") {
-        const dateValue:any = item[filterKey] as string; // Explicit type assertion
-        if (!dateValue) return false;
-  
-        const [day, month, year] = dateValue.split("-"); // Works correctly now
-  
-        const matchesYear = filterYear ? year === filterYear : true;
-        const matchesMonth = filterMonth ? month === filterMonth : true;
-        const matchesDay = filterDay ? day === filterDay : true;
-  
-        return matchesYear && matchesMonth && matchesDay;
-      } else {
-        const itemValue = String(item[filterKey]).trim().toLowerCase();
-        const searchValue = filterValue.trim().toLowerCase();
-  
-        return filterOperator === "equal"
-          ? itemValue === searchValue
-          : itemValue !== searchValue;
-      }
-    });
-  
-    setRows(filteredData);
-    setActiveFilterColumn(null);
+    if (projectHistoryData.length > 0) {
+      if (!filterKey) return;
+
+      const filteredData = projectHistoryData?.filter((item:any) => {
+        if (
+          filterKey === "start_date" ||
+          filterKey === "end_date" ||
+          filterKey === "period"
+        ) {
+          const [year, month, day] = item.start_date.split("-");
+
+          const matchesYear = filterYear ? year === filterYear : true;
+          const matchesMonth = filterMonth ? month === filterMonth : true;
+          const matchesDay = filterDay ? day === filterDay : true;
+
+          return matchesYear && matchesMonth && matchesDay;
+        } else {
+          const itemValue = String(item[filterKey]).trim().toLowerCase();
+          const searchValue = filterValue.trim().toLowerCase();
+
+          return filterOperator === "equal"
+            ? itemValue === searchValue
+            : itemValue !== searchValue;
+        }
+      });
+
+      setRows(filteredData); // Set filtered data in `rowsList`
+      setActiveFilterColumn(null);
+    }
   };
-  
-  
 
   // Clear filter
   const handleClear = () => {
@@ -234,7 +235,7 @@ function ProjectHistory() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
-        {projectHistoryData.length===0 && <h3>No Project History Found</h3>}
+        {projectHistoryData.length === 0 && <h3>No Project History Found</h3>}
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
@@ -393,7 +394,7 @@ function ProjectHistory() {
                 </td>
                 <td className="para textheader">
                   {/* <ChipsForLeave label={item?.status} /> */}
-                  {item?.download[0]}
+                  {item?.download?.[0]}
                 </td>
                 <td className="para textheader d-flex gap-4">
                   <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />

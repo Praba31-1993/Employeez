@@ -45,7 +45,8 @@ export default function BreadcrumbsComponent({ selectedTab }: any) {
   }, [pathname, selectedTab]);
 
   return (
-    <div role="presentation" className="my-1" onClick={handleClick}>
+    <div role="presentation " className="my-1 row" onClick={handleClick}>
+      <div className="col-12">
       <Breadcrumbs
         separator={
           <span className="m-0 shade" >
@@ -60,6 +61,7 @@ export default function BreadcrumbsComponent({ selectedTab }: any) {
           </Link>
         ))}
       </Breadcrumbs>
+      </div>
     </div>
   );
 }
