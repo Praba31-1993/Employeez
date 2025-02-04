@@ -19,6 +19,7 @@ import Logout from "./logout";
 import ImageComponent from "./image";
 import { dropdownData } from "./JsonData";
 import user from "@/public/assets/img/Ellipse 14.svg";
+import Link from "next/link";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -75,7 +76,7 @@ export default function NavbarComponent() {
         vertical: "top",
         horizontal: "right",
       }}
-      sx={{top:"40px",left:"27px"}}
+      sx={{ top: "40px", left: "27px" }}
       id={menuId}
       keepMounted
       transformOrigin={{
@@ -85,7 +86,11 @@ export default function NavbarComponent() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link className="textheader" href="/profile" passHref>
+          Profile
+        </Link>
+      </MenuItem>
       <MenuItem>
         <Logout />
       </MenuItem>
