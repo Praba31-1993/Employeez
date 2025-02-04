@@ -78,14 +78,14 @@ function ProjectHistory() {
 
   const currentPageItems = rowsList.slice(
     (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
+    currentPage * countPerPage  
   );
 
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(projectHistoryData?.[0]).filter(
+  const headers = Object.keys(projectHistoryData?.[0] || {}).filter(
     (key) => key !== "id"
   );
 
@@ -151,11 +151,11 @@ function ProjectHistory() {
   };
 
   // Filtering function
-  const handleFilter = () => {
+  const handleFilter1 = () => {
     if (projectHistoryData.length > 0) {
       if (!filterKey) return;
 
-      const filteredData = projectHistoryData?.filter((item:any) => {
+      const filteredData = projectHistoryData?.filter((item: any) => {
         if (
           filterKey === "start_date" ||
           filterKey === "end_date" ||
@@ -182,7 +182,38 @@ function ProjectHistory() {
       setActiveFilterColumn(null);
     }
   };
+ const handleFilter = () => {
+    if (!filterKey  || projectHistoryData?.length === 0) return;
 
+    const filteredData = projectHistoryData.filter((item) => {
+      if (filterKey === "start_date" || filterKey === "end_date" || filterKey === "period") {
+        const dateValue = item[filterKey]; // Correctly use the filterKey to access date_from or date_to
+        if (!dateValue) return false; // Handle cases where the date field is missing
+
+        const [year, month, day] = dateValue.split("-");
+
+        const matchesYear = filterYear ? year === filterYear : true;
+        const matchesMonth = filterMonth ? month === filterMonth : true;
+        const matchesDay = filterDay ? day === filterDay : true;
+
+        return matchesYear && matchesMonth && matchesDay;
+      } else {
+        const itemValue = String(item[filterKey]).trim().toLowerCase();
+        const searchValue = filterValue.trim().toLowerCase();
+
+        return filterOperator === "equal"
+          ? itemValue === searchValue
+          : itemValue !== searchValue;
+      }
+    });
+
+    setRows(filteredData); // Set filtered data in `rowsList`
+    setActiveFilterColumn(null);
+  };
+
+  
+  
+  
   // Clear filter
   const handleClear = () => {
     setFilterKey("");
@@ -235,7 +266,6 @@ function ProjectHistory() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
-        {projectHistoryData.length === 0 && <h3>No Project History Found</h3>}
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
@@ -358,50 +388,54 @@ function ProjectHistory() {
               ))}
             </tr>
           </thead>
-          <tbody className="dashboardcard">
-            {currentPageItems?.map((item, index) => (
-              <tr key={item?.projectId}>
-                <td className="para textheader">{item?.projectId}</td>
-                <td className="para textheader">
-                  {/* <ChipsForLeave label={item?.status} /> */}
-                  {item?.project_name}
-                </td>
-                <td
-                  className="para textheader"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {item?.start_date}
-                </td>
-                <td
-                  className="para textheader"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {item?.end_date}
-                </td>
-                <td
-                  className="para textheader"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {item?.period}
-                </td>
-                <td className="para textheader">
-                  <ClickableChips
-                    label={
-                      item?.status.charAt(0).toUpperCase() +
-                      item?.status.slice(1)
-                    }
-                  />
-                </td>
-                <td className="para textheader">
-                  {/* <ChipsForLeave label={item?.status} /> */}
-                  {item?.download?.[0]}
-                </td>
-                <td className="para textheader d-flex gap-4">
-                  <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
-                  <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
-                </td>
-              </tr>
-            ))}
+          <tbody className={projectHistoryData.length > 0 ? "dashboardcard" :""}>
+            {projectHistoryData.length > 0 ? (
+              currentPageItems?.map((item, index) => (
+                <tr key={item?.projectId}>
+                  <td className="para textheader">{item?.projectId}</td>
+                  <td className="para textheader">
+                    {/* <ChipsForLeave label={item?.status} /> */}
+                    {item?.project_name}
+                  </td>
+                  <td
+                    className="para textheader"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    {item?.start_date}
+                  </td>
+                  <td
+                    className="para textheader"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    {item?.end_date}
+                  </td>
+                  <td
+                    className="para textheader"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    {item?.period}
+                  </td>
+                  <td className="para textheader">
+                    <ClickableChips
+                      label={
+                        item?.status.charAt(0).toUpperCase() +
+                        item?.status.slice(1)
+                      }
+                    />
+                  </td>
+                  <td className="para textheader">
+                    {/* <ChipsForLeave label={item?.status} /> */}
+                    {item?.download?.[0]}
+                  </td>
+                  <td className="para textheader d-flex gap-4">
+                    <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                    <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <td className="text-center">No Record Found</td>
+            )}
           </tbody>
         </table>
       </div>
