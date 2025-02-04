@@ -1,19 +1,4 @@
 "use client";
-// import React from "react";
-// import Searchwithmenuitems from "./searchwithmenuitems";
-// import Punchinoutapprover from "@/app/report/components/punchinoutapprover";
-
-// function Reporteee() {
-//   return (
-//     <>
-//       {/* <Searchwithmenuitems /> */}
-//       <Punchinoutapprover/>
-//     </>
-//   );
-// }
-
-// export default Reporteee;
-
 import {
   reporteeData,
   columnForApprover,
@@ -32,10 +17,9 @@ import {
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "../../reusableComponent/styles";
-import { columns, year } from "@/app/reusableComponent/JsonData";
-import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { CenterPopup } from "@/app/reusableComponent/popup/centerPopup";
+import ClickableChips from "@/app/reusableComponent/chips";
 
 type Row = {
   employeeID: string;
@@ -387,7 +371,7 @@ function Reporteee() {
                 </td>
                 <td className="para textheader">{item?.time_off_type}</td>
                 <td className="para textheader">
-                  <ChipsForLeave label={item?.status} />
+                  <ClickableChips label={item?.status} />
                 </td>
                 <td className="para textheader">{item?.reason}</td>
                 <td className="para textheader">
