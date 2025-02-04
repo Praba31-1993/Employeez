@@ -55,7 +55,7 @@ export default function TimeOff() {
                         ) : (
                             <>
                                 {(role === "SM" || role === "SA" || role === "M") && (
-                                    <div className="d-flex gap-3 mb-3 w-100 flex-wrap">
+                                    <div className="w-100 ">
                                         <Reporteee />
                                     </div>
                                 )}
