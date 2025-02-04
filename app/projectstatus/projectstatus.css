@@ -1,0 +1,11 @@
+
+@media screen and (max-width: 576px) {
+  .projectstatuscard {
+    background: transparent;
+    padding: 0!important;
+  }
+
+  .colPadding{
+    padding: 0!important
+  }
+}

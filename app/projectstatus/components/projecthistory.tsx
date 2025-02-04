@@ -1,8 +1,4 @@
-"use client";
-import {
-  reporteeData,
-  columnForApprover,
-} from "@/app/reusableComponent/JsonData";
+import { columnForApprover } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SearchIcon from "@mui/icons-material/Search";
@@ -17,32 +13,33 @@ import {
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "../../reusableComponent/styles";
+import { projectHistoryData } from "@/app/reusableComponent/JsonData";
+
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { CenterPopup } from "@/app/reusableComponent/popup/centerPopup";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import ClickableChips from "@/app/reusableComponent/chips";
 
-type Row = {
-  employeeID: string;
-  employeename: string;
-  date_from: string;
-  date_to: string;
-  time_off_type: string;
+interface ProjectHistory {
+  projectId: string;
+  project_name: string;
+  start_date: string;
+  end_date: string;
+  period: string;
   status: string;
-  reason: string;
+  download: string[];
   action: string;
-};
-function Reporteee() {
+}
+
+function ProjectHistory() {
   const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [rowsList, setRows] = useState<Row[]>(reporteeData);
+  const [rowsList, setRows] = useState<ProjectHistory[]>(projectHistoryData);
   const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [data, setData] = useState(searchList);
-  const [showdetails, setDetails] = useState(false);
-
   const useColors = Colors();
 
   const [sortConfig, setSortConfig] = useState<{
@@ -88,10 +85,14 @@ function Reporteee() {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(reporteeData[0]);
+  const headers = Object.keys(projectHistoryData?.[0]).filter(
+    (key) => key !== "id"
+  );
+
+  console.log("headers", headers);
 
   // Sorting function
-  const handleSort = (key: keyof Row) => {
+  const handleSort = (key: keyof ProjectHistory) => {
     let direction: "asc" | "desc" = "asc";
 
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -151,39 +152,35 @@ function Reporteee() {
 
   // Filtering function
   const handleFilter = () => {
-    if (!filterKey  || reporteeData?.length === 0) return;
+    if (projectHistoryData.length > 0) {
+      if (!filterKey) return;
 
-    const filteredData = reporteeData.filter((item) => {
-      if (filterKey === "date_from" || filterKey === "date_to") {
-        const dateValue = item[filterKey]; // Correctly use the filterKey to access date_from or date_to
-        if (!dateValue) return false; // Handle cases where the date field is missing
+      const filteredData = projectHistoryData?.filter((item:any) => {
+        if (
+          filterKey === "start_date" ||
+          filterKey === "end_date" ||
+          filterKey === "period"
+        ) {
+          const [year, month, day] = item.start_date.split("-");
 
-        const [year, month, day] = dateValue.split("-");
+          const matchesYear = filterYear ? year === filterYear : true;
+          const matchesMonth = filterMonth ? month === filterMonth : true;
+          const matchesDay = filterDay ? day === filterDay : true;
 
-        const matchesYear = filterYear ? year === filterYear : true;
-        const matchesMonth = filterMonth ? month === filterMonth : true;
-        const matchesDay = filterDay ? day === filterDay : true;
+          return matchesYear && matchesMonth && matchesDay;
+        } else {
+          const itemValue = String(item[filterKey]).trim().toLowerCase();
+          const searchValue = filterValue.trim().toLowerCase();
 
-        return matchesYear && matchesMonth && matchesDay;
-      } else {
-        const itemValue = String(item[filterKey]).trim().toLowerCase();
-        const searchValue = filterValue.trim().toLowerCase();
+          return filterOperator === "equal"
+            ? itemValue === searchValue
+            : itemValue !== searchValue;
+        }
+      });
 
-        return filterOperator === "equal"
-          ? itemValue === searchValue
-          : itemValue !== searchValue;
-      }
-    });
-
-    setRows(filteredData); // Set filtered data in `rowsList`
-    setActiveFilterColumn(null);
-  };
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearch(query);
-    const res = SearchLogic(reporteeData, query);
-    setRows(res);
+      setRows(filteredData); // Set filtered data in `rowsList`
+      setActiveFilterColumn(null);
+    }
   };
 
   // Clear filter
@@ -195,12 +192,17 @@ function Reporteee() {
     setActiveFilterColumn(null);
   };
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearch(query);
+    const res = SearchLogic(projectHistoryData, query);
+    setRows(res);
+  };
+
   return (
     <div>
       {/* column, filter */}
-      {showdetails && (
-        <CenterPopup show={showdetails} close={() => setDetails(false)} />
-      )}
+
       <div className="d-flex gap-5 justify-content-end  mx-3 ">
         <div className="d-flex gap-3 mb-3">
           <Image src={favourite} alt="" width={24} height={24} />
@@ -225,7 +227,7 @@ function Reporteee() {
             border: `1px solid ${useColors.themeRed}`,
             height: "fit-content",
           }}
-          onClick={() => handleCSVExport(headers, reporteeData)}
+          onClick={() => handleCSVExport(headers, projectHistoryData)}
         >
           Export <SaveAltIcon className="ml-2" />
         </button>
@@ -233,10 +235,11 @@ function Reporteee() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
+        {projectHistoryData.length === 0 && <h3>No Project History Found</h3>}
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
-              {headers.map((key) => (
+              {headers?.map((key) => (
                 <th
                   key={key}
                   scope="col"
@@ -276,8 +279,9 @@ function Reporteee() {
                           }}
                         >
                           <div className="d-flex flex-column p-2 gap-2">
-                            {filterKey === "date_from" ||
-                            filterKey === "date_to" ? (
+                            {filterKey === "start_date" ||
+                            filterKey === "end_date" ||
+                            filterKey === "period" ? (
                               <>
                                 <input
                                   type="text"
@@ -356,29 +360,45 @@ function Reporteee() {
           </thead>
           <tbody className="dashboardcard">
             {currentPageItems?.map((item, index) => (
-              <tr key={item.employeeID}>
-                <td className="para textheader">{item?.employeeID}</td>
-                <td className="para textheader">{item?.employeename}</td>
+              <tr key={item?.projectId}>
+                <td className="para textheader">{item?.projectId}</td>
+                <td className="para textheader">
+                  {/* <ChipsForLeave label={item?.status} /> */}
+                  {item?.project_name}
+                </td>
                 <td
                   className="para textheader"
                   style={{ whiteSpace: "nowrap" }}
                 >
-                  {item?.date_from}
+                  {item?.start_date}
+                </td>
+                <td
+                  className="para textheader"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  {item?.end_date}
+                </td>
+                <td
+                  className="para textheader"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  {item?.period}
+                </td>
+                <td className="para textheader">
+                  <ClickableChips
+                    label={
+                      item?.status.charAt(0).toUpperCase() +
+                      item?.status.slice(1)
+                    }
+                  />
                 </td>
                 <td className="para textheader">
                   {/* <ChipsForLeave label={item?.status} /> */}
-                  {item?.date_to}
+                  {item?.download?.[0]}
                 </td>
-                <td className="para textheader">{item?.time_off_type}</td>
-                <td className="para textheader">
-                  <ClickableChips label={item?.status} />
-                </td>
-                <td className="para textheader">{item?.reason}</td>
-                <td className="para textheader">
-                  <RemoveRedEyeIcon
-                    sx={{ color: "#8A8D93" }}
-                    onClick={() => setDetails(true)}
-                  />
+                <td className="para textheader d-flex gap-4">
+                  <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                  <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
                 </td>
               </tr>
             ))}
@@ -396,4 +416,4 @@ function Reporteee() {
   );
 }
 
-export default Reporteee;
+export default ProjectHistory;
