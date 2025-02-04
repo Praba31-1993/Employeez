@@ -2283,7 +2283,7 @@ export const year = [
     { id: 3, label: "2025" },
 ];
 
-export const rows = [
+export const reporteeData = [
     {
         employeeID: "SR389",
         employeename: "Rajan",

@@ -11,7 +11,7 @@ import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { handleCSVExport } from "@/app/reusableComponent/commonlogic";
+import { handleCSVExport, SearchLogic } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "../../reusableComponent/styles";
 
 interface ApproverRow {
@@ -167,6 +167,13 @@ function Punchinoutapprover() {
     setActiveFilterColumn(null);
   };
 
+      const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const query = event.target.value;
+        setSearch(query);
+        const res = SearchLogic(rowsForApprover, query);
+        setRows(res);
+      };
+
   // Clear filter
   const handleClear = () => {
     setFilterKey("");
@@ -192,7 +199,7 @@ function Punchinoutapprover() {
               placeholder="Search"
               className="p-2 w-100"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={handleSearch}
             />
           </div>
         </div>
@@ -321,7 +328,7 @@ function Punchinoutapprover() {
                               className="btn btn-secondary"
                               onClick={handleClear}
                             >
-                              Clear
+                              Close
                             </button>
                           </div>
                         </div>
