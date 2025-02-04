@@ -330,7 +330,7 @@ function Punchinoutreport() {
                               className="btn btn-secondary"
                               onClick={handleClear}
                             >
-                              Clear
+                              Close
                             </button>
                           </div>
                         </div>
