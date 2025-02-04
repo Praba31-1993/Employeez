@@ -1,13 +1,15 @@
 import DatePickerComponent from "@/app/reusableComponent/datepicler";
 import RowRadioButtons from "@/app/reusableComponent/radiobtn";
 import TextAreaEditor from "@/app/reusableComponent/textareaeditor";
-import React from "react";
+import React, { useState } from "react";
 import "../projectstatus.css";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import { Colors } from "@/app/reusableComponent/styles";
 
 function CreateProject() {
   const useColors = Colors();
+  const [statusHistory, setStatusHistory] = useState<string>("Green");
+
   const statusSummary: any = [
     {
       id: 1,
@@ -64,8 +66,8 @@ function CreateProject() {
                 </p>
                 <RowRadioButtons
                   list={statusSummary}
-                  selectedValue={""}
-                  newDayTypevalue={() => {}}
+                  selectedValue={statusHistory}
+                  newDayTypevalue={(data: string) => setStatusHistory(data)}
                 />
               </div>
               <div className="col-12 mb-3 colPadding">
