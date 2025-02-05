@@ -1,19 +1,22 @@
 "use client";
 import React, { useState, ReactNode, useEffect } from "react";
-import { Colors } from '../reusableComponent/styles';
+import { Colors } from '../../reusableComponent/styles';
 import Image from "next/image";
 import profilepicture from "@/public/assets/img/profilepic.svg";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import Outlinebutton from "../reusableComponent/outlinebtn";
+import Outlinebutton from "../../reusableComponent/outlinebtn";
 import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
+import Uploadpicture from "./uploadpicture";
 
 
 function Profile_update() {
+    const [open, setOpen] = useState(false);
     const useColors = Colors(); // Declare useColors once
     return (
         <>
+         {open && <Uploadpicture show={open} close={() => setOpen(false)} />}
         <div className='row mt-3'>
             <div className="col-12">
                 <h3 className="heading textheader">My Profile</h3>
@@ -24,7 +27,7 @@ function Profile_update() {
                         <div className="Profileimg" >
                             <Image className="w-100 h-100 rounded" src={profilepicture} style={{ objectFit: "cover" }} alt={""} />
                         </div>
-                        <p className="para text-md-center cursorpointer mt-2" style={{ color: "#8C57FF" }}>Upload Picture <EditOutlinedIcon sx={{ fontSize: "20px" }} /> </p>
+                        <p className="para text-md-center cursorpointer mt-2" style={{ color: "#8C57FF" }}  onClick={() => setOpen((prev) => !prev)} >Upload Picture <EditOutlinedIcon sx={{ fontSize: "20px" }} /> </p>
                     </div>
                 </div>
 

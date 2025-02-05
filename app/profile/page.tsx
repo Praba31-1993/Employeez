@@ -1,13 +1,13 @@
 import React from 'react'
 import Sidebar from '../sidebar/page'
-import Profile_update from './profile_update'
+import Profile_update from './component/profile_update'
 import BreadcrumbsComponent from '../reusableComponent/breadcrumbs'
 import "../profile/Profile.css"
-import Personal_info from './personal_info'
-import Work_status from './work_status'
-import General_document from './general_document'
-import Work_site from './work_site'
-import Emergencycontact_details from './emergencycontact_details'
+import Personal_info from './component/personal_info'
+import Work_status from './component/work_status'
+import General_document from './component/general_document'
+import Work_site from './component/work_site'
+import Emergencycontact_details from './component/emergencycontact_details'
 function Profile() {
     return (
         <div>

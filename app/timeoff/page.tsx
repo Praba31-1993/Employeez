@@ -25,14 +25,13 @@ export default function TimeOff() {
   return (
     <div>
       <Sidebar>
-        <div className="conatiner-fluid ">
+        <BreadcrumbsComponent
+          selectedTab={
+            selectedTimeOff === "" ? "Request Time Off" : selectedTimeOff
+          }
+        />
+        <div className="conatiner-fluid mb-3">
           <div className="row">
-            <BreadcrumbsComponent
-              selectedTab={
-                selectedTimeOff === "" ? "Request Time Off" : selectedTimeOff
-              }
-            />
-
             <div className="col-6">
               <p className="textheader heading my-2">Time off</p>
             </div>
@@ -49,7 +48,7 @@ export default function TimeOff() {
             )}
 
             {selectedTimeOff === "Request Time Off" ||
-            selectedTimeOff === "" ? (
+              selectedTimeOff === "" ? (
               <Requesttimeoff />
             ) : (
               <>

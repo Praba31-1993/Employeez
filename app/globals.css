@@ -459,7 +459,7 @@ select{
   background-color: transparent !important;
 }
 .form-control:focus {
-  border-color: transparent !important;
+  border-color: #00000021 !important;
   outline: 0;
   box-shadow: none !important;
 }

@@ -25,8 +25,8 @@ export default function Uploadfiles({ show, close }: any) {
     };
 
     return (
-        <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
-            <div className="summarysection">
+        <section className={`showpopup ${show ? "showpopupactive" : ""}`}  onClick={close}>
+            <div className="summarysection" onClick={(e) => e.stopPropagation()}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12 text-end">
@@ -37,9 +37,9 @@ export default function Uploadfiles({ show, close }: any) {
                             />
                         </div>
                     </div>
-                    <div className="row mt-3 px-sm-5 ">
-                        <div className="col-12 ">
-                            <div className="summarydetails p-3 m-sm-2">
+                    <div className="row mt-3 px-sm-5 " >
+                        <div className="col-12 " >
+                            <div className="summarydetails p-3 m-sm-2"  >
                                 <h5 className="para  textheader">Choose file </h5>
                                 <div className="fileupload py-4 d-flex align-items-center flex-column justify-content-center mt-3">
                                     {/* <Image src={uploadicon} alt={""} /> */}
@@ -85,6 +85,9 @@ export default function Uploadfiles({ show, close }: any) {
         </section>
     );
 }
+
+
+
 export function Viewfiles() {
    
   
