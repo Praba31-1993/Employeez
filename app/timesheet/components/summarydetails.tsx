@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Summarycards from "./summarycards";
 
 export default function Summarydetails({ showpop, close, LeaveTypes }: any) {
-  // State to control the popup active class
-
   const [typeOfLeaves, setTypeOfLeaves] = useState<any>();
 
   useEffect(() => {
@@ -22,16 +20,16 @@ export default function Summarydetails({ showpop, close, LeaveTypes }: any) {
 
   return (
     <>
-      {/* summary of period */}
-      <section className={`showpopup ${showpop ? "showpopupactive" : ""}`} onClick={close}>
-    <div
-        className="summarysection "
-        onClick={(e) => e.stopPropagation()} // Prevent event propagation
-    >
+      <section
+        className={`showpopup ${showpop ? "showpopupactive" : ""}`}
+        onClick={close}
+      >
+        <div className="summarysection " onClick={(e) => e.stopPropagation()}>
           <div className="container-fluid">
             <div className="row">
               <div className="col-12 text-end">
-                <FontAwesomeIcon style={{cursor:"pointer"}}
+                <FontAwesomeIcon
+                  style={{ cursor: "pointer" }}
                   className="my-2 textheader"
                   icon={faXmark}
                   onClick={close}

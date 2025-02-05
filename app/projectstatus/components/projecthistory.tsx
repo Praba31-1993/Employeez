@@ -18,6 +18,8 @@ import { projectHistoryData } from "@/app/reusableComponent/JsonData";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import ClickableChips from "@/app/reusableComponent/chips";
+import ProjectView from "./projectview";
+import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 
 interface ProjectHistory {
   projectId: string;
@@ -40,6 +42,8 @@ function ProjectHistory() {
   const totalCount = rowsList.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [data, setData] = useState(searchList);
+  const [open, setOpen] = useState(false);
+  const [popupList, setPopupList] = useState<any>();
 
   const useColors = Colors();
 
@@ -151,38 +155,6 @@ function ProjectHistory() {
     }
   };
 
-  // Filtering function
-  const handleFilter1 = () => {
-    if (projectHistoryData.length > 0) {
-      if (!filterKey) return;
-
-      const filteredData = projectHistoryData?.filter((item: any) => {
-        if (
-          filterKey === "start_date" ||
-          filterKey === "end_date" ||
-          filterKey === "period"
-        ) {
-          const [year, month, day] = item.start_date.split("-");
-
-          const matchesYear = filterYear ? year === filterYear : true;
-          const matchesMonth = filterMonth ? month === filterMonth : true;
-          const matchesDay = filterDay ? day === filterDay : true;
-
-          return matchesYear && matchesMonth && matchesDay;
-        } else {
-          const itemValue = String(item[filterKey]).trim().toLowerCase();
-          const searchValue = filterValue.trim().toLowerCase();
-
-          return filterOperator === "equal"
-            ? itemValue === searchValue
-            : itemValue !== searchValue;
-        }
-      });
-
-      setRows(filteredData); // Set filtered data in `rowsList`
-      setActiveFilterColumn(null);
-    }
-  };
   const handleFilter = () => {
     if (!filterKey || projectHistoryData?.length === 0) return;
 
@@ -232,11 +204,31 @@ function ProjectHistory() {
     setRows(res);
   };
 
+  const handleOpen = (id: any) => {
+    console.log("id", id);
+
+    if (rowsList.length > 0) {
+      const filteredList = rowsList?.filter(
+        (list: any) => list?.projectId === id
+      );
+      setPopupList(filteredList);
+      setOpen(true);
+    } else {
+      setPopupList([]);
+      setOpen(false);
+    }
+  };
+
   return (
     <div>
       {/* column, filter */}
 
       <div className="d-flex gap-5 justify-content-end  mx-3 ">
+        <ProjectView
+          show={open}
+          close={() => setOpen(false)}
+          projectlist={popupList}
+        />
         <div className="d-flex gap-3 mb-3">
           <Image src={favourite} alt="" width={24} height={24} />
           <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
@@ -397,10 +389,7 @@ function ProjectHistory() {
               currentPageItems?.map((item, index) => (
                 <tr key={item?.projectId}>
                   <td className="para textheader">{item?.projectId}</td>
-                  <td className="para textheader">
-                    {/* <ChipsForLeave label={item?.status} /> */}
-                    {item?.project_name}
-                  </td>
+                  <td className="para textheader">{item?.project_name}</td>
                   <td
                     className="para textheader"
                     style={{ whiteSpace: "nowrap" }}
@@ -427,13 +416,22 @@ function ProjectHistory() {
                       }
                     />
                   </td>
-                  <td className="para textheader">
-                    {/* <ChipsForLeave label={item?.status} /> */}
-                    {item?.download?.[0]}
+                  <td>
+                    <div className="para textheader d-flex gap-2 align-items-center mt-1">
+                      <InsertDriveFileOutlinedIcon
+                        className="mt-0"
+                        style={{ width: "15px" }}
+                      />
+                      <p className="mb-0">{item?.download?.[0]}</p>
+                      <SaveAltIcon className="mt-0" style={{ width: "15px" }} />
+                    </div>
                   </td>
                   <td className="para textheader">
                     <div className="d-flex gap-4">
-                      <RemoveRedEyeIcon sx={{ color: "#8A8D93" }} />
+                      <RemoveRedEyeIcon
+                        sx={{ color: "#8A8D93" }}
+                        onClick={() => handleOpen(item?.projectId)}
+                      />
                       <EditOutlinedIcon sx={{ color: "#8A8D93" }} />
                     </div>
                   </td>

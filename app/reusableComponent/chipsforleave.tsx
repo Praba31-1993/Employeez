@@ -10,6 +10,7 @@ const chipsColor = [
   { name: "Present", color: "#56CA00", background: "#E1F3D3" },
   { name: "Half Day", color: "#FFBA27", background: "rgba(255, 180, 0, 0.20)" },
   { name: "Late", color: "#FF4C51", background: "rgba(255, 178, 181, 0.70)" },
+  
   {
     name: "Casual Leave",
     color: "#FFBA27",
