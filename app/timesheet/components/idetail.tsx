@@ -38,8 +38,8 @@ export function Idetails({ show, close, customsheetlist }: any) {
       
     ];
     return (
-        <section className={`showpopup ${show ? "showpopupactive" : ""}`}>
-            <div className="summarysection">
+        <section className={`showpopup ${show ? "showpopupactive" : ""}`}  onClick={close}>
+            <div className="summarysection" onClick={(e) => e.stopPropagation()}>
                 <div className="container-fluid">
                     <div className="row px-2 summary">
                         <div className="col-12">
