@@ -1,9 +1,11 @@
 export const SearchLogic = (arr: any[], search: string) => {
-  const filteredRows = arr.filter((row: any) =>
-    Object.values(row).some((value) =>
-      String(value).toLowerCase().includes(search.toLowerCase())
-    )
+  const filteredRows = arr.filter((row) =>
+    Object.values(row).some((value) => {
+      if (typeof value !== "string") return false; // Ignore non-string values
+      return value.toLowerCase().includes(search.trim().toLowerCase());
+    })
   );
+console.log('filteredRos', filteredRows);
 
   return filteredRows.length > 0 ? filteredRows : arr; // Return all rows if no match is found
 };
