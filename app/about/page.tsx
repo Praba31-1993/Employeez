@@ -1,51 +1,58 @@
-"use client";
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
 
-import { useRef } from "react";
-import FormatBoldIcon from "@mui/icons-material/FormatBold";
-import FormatItalicIcon from "@mui/icons-material/FormatItalic";
-import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
-
-const About = () => {
-  const textAreaRef = useRef<HTMLDivElement>(null);
-
-  const handleBold = () => {
-    document.execCommand("bold", false, "");
-  };
-
-  const handleItalic = () => {
-    document.execCommand("italic", false, "");
-  };
-
-  const handleUnderline = () => {
-    document.execCommand("underline", false, "");
-  };
-
+export default function About() {
   return (
-    <div className="p-4 max-w-lg mx-auto">
-      <div className="d-flex gap-2">
-        <div onClick={handleBold}>
-          <FormatBoldIcon />
-        </div>
-        <div onClick={handleItalic}>
-          <FormatItalicIcon />
-        </div>
-        <div onClick={handleUnderline}>
-          <FormatUnderlinedIcon />
-        </div>
-      </div>
-
-      <div
-        ref={textAreaRef}
-        contentEditable
-        className="w-full h-40 p-2 border rounded-md text-lg focus:outline-none"
-        style={{
-          minHeight: "150px",
-          border: "1px solid #ccc",
-          padding: "10px",
-        }}
-      ></div>
+    <div>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component="span">Accordion 1</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          <Typography component="span">Accordion 2</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </AccordionDetails>
+      </Accordion>
+      <Accordion defaultExpanded>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3-content"
+          id="panel3-header"
+        >
+          <Typography component="span">Accordion Actions</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </AccordionDetails>
+        <AccordionActions>
+          <Button>Cancel</Button>
+          <Button>Agree</Button>
+        </AccordionActions>
+      </Accordion>
     </div>
   );
-};
-
-export default About;
+}

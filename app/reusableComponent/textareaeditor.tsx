@@ -32,7 +32,7 @@ const TextAreaEditor = () => {
         ref={textAreaRef}
         contentEditable
         className="w-full min-h-[150px] p-3 border"
-        style={{ border: "1px solid #ccc" }}
+        style={{ border: "1px solid #ccc",  outline:"0px" }}
       ></div>
     </div>
   );

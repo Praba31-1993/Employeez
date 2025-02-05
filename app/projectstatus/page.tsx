@@ -10,7 +10,7 @@ import CreateProject from "./components/createProject";
 import ProjectHistory from "./components/projecthistory";
 
 function ProjectStatus() {
-  const [selectedTab, setSelectedTab] = useState<string>("");
+  const [selectedTab, setSelectedTab] = useState<string>("New Project");
   const role: string = useSelector((state: RootState) => state.role.role);
   const useColors = Colors();
 
@@ -22,11 +22,17 @@ function ProjectStatus() {
   return (
     <div>
       <Sidebar>
+      <BreadcrumbsComponent
+                selectedTab={selectedTab === "" ? "New Project" : selectedTab}
+              />
         <div className="container-fluid">
-          <div className="row">
-            <BreadcrumbsComponent selectedTab={selectedTab} />
 
-            <div className="col-6">
+          <div className="row">
+           
+             
+          
+
+            <div className="col-6 p-0">
               <p className="textheader heading my-2">Project Status</p>
             </div>
 
