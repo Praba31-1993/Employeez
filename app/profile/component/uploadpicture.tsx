@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { Colors } from "../reusableComponent/styles";
-import Outlinebutton from "../reusableComponent/outlinebtn";
+import { Colors } from "../../reusableComponent/styles";
+import Outlinebutton from "../../reusableComponent/outlinebtn";
 import Image from "next/image";
 
 export default function Uploadpicture({ show, close }: any) {

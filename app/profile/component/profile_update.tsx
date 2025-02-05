@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, ReactNode, useEffect } from "react";
-import { Colors } from '../reusableComponent/styles';
+import { Colors } from '../../reusableComponent/styles';
 import Image from "next/image";
 import profilepicture from "@/public/assets/img/profilepic.svg";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import Outlinebutton from "../reusableComponent/outlinebtn";
+import Outlinebutton from "../../reusableComponent/outlinebtn";
 import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
 import Uploadpicture from "./uploadpicture";
 
