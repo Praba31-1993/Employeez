@@ -2282,6 +2282,29 @@ export const year = [
   { id: 3, label: "2025" },
 ];
 
+export const employeeListData = [
+  { employeeId: "emp001", status:"active", name: "Rajesh", role: "employee", department: "IT", manager: "Sendil Kumar", mobile_number: "7845352122", email: "rajesh@gmail.com", joined_date: "2024-10-02" },
+  { employeeId: "emp002", status:"inactive", name: "Anita", role: "manager", department: "HR", manager: "Karthik Rao", mobile_number: "7845123456", email: "anita@gmail.com", joined_date: "2023-08-15" },
+  { employeeId: "emp003", status:"active", name: "Vikram", role: "employee", department: "Finance", manager: "Deepak Sharma", mobile_number: "7856234125", email: "vikram@gmail.com", joined_date: "2022-07-10" },
+  { employeeId: "emp004", status:"active", name: "Sneha", role: "employee", department: "Marketing", manager: "Rohini Iyer", mobile_number: "9876543210", email: "sneha@gmail.com", joined_date: "2021-06-21" },
+  { employeeId: "emp005", status:"inactive", name: "Arjun", role: "team lead", department: "IT", manager: "Sendil Kumar", mobile_number: "7854123678", email: "arjun@gmail.com", joined_date: "2020-05-05" },
+  { employeeId: "emp006", status:"active", name: "Priya", role: "employee", department: "Sales", manager: "Meera Nair", mobile_number: "7984521369", email: "priya@gmail.com", joined_date: "2023-12-11" },
+  { employeeId: "emp007", status:"inactive", name: "Rohan", role: "employee", department: "Support", manager: "Suresh Babu", mobile_number: "7985412369", email: "rohan@gmail.com", joined_date: "2019-03-14" },
+  { employeeId: "emp008", status:"active", name: "Divya", role: "employee", department: "HR", manager: "Karthik Rao", mobile_number: "7845123478", email: "divya@gmail.com", joined_date: "2023-09-30" },
+  { employeeId: "emp009", status:"inactive", name: "Manoj", role: "manager", department: "Finance", manager: "Deepak Sharma", mobile_number: "7985421367", email: "manoj@gmail.com", joined_date: "2018-11-22" },
+  { employeeId: "emp010", status:"active", name: "Neha", role: "employee", department: "IT", manager: "Arjun", mobile_number: "7896541236", email: "neha@gmail.com", joined_date: "2022-04-09" },
+  { employeeId: "emp011", status:"inactive", name: "Rahul", role: "employee", department: "Marketing", manager: "Rohini Iyer", mobile_number: "7854123659", email: "rahul@gmail.com", joined_date: "2020-10-01" },
+  { employeeId: "emp012", status:"active", name: "Ayesha", role: "team lead", department: "Support", manager: "Suresh Babu", mobile_number: "7895123654", email: "ayesha@gmail.com", joined_date: "2017-05-28" },
+  { employeeId: "emp013", status:"active", name: "Sameer", role: "employee", department: "IT", manager: "Arjun", mobile_number: "7985412360", email: "sameer@gmail.com", joined_date: "2021-07-19" },
+  { employeeId: "emp014", status:"active", name: "Pooja", role: "employee", department: "HR", manager: "Karthik Rao", mobile_number: "7854123698", email: "pooja@gmail.com", joined_date: "2022-12-04" },
+  { employeeId: "emp015", status:"inactive", name: "Harish", role: "manager", department: "Sales", manager: "Meera Nair", mobile_number: "7896521478", email: "harish@gmail.com", joined_date: "2016-09-18" },
+  { employeeId: "emp016", status:"active", name: "Sonia", role: "employee", department: "Marketing", manager: "Rohini Iyer", mobile_number: "7845213698", email: "sonia@gmail.com", joined_date: "2020-02-27" },
+  { employeeId: "emp017", status:"inactive", name: "Vishal", role: "team lead", department: "IT", manager: "Sendil Kumar", mobile_number: "7985632147", email: "vishal@gmail.com", joined_date: "2019-06-15" },
+  { employeeId: "emp018", status:"active", name: "Nikita", role: "employee", department: "Support", manager: "Suresh Babu", mobile_number: "7854123697", email: "nikita@gmail.com", joined_date: "2018-01-05" },
+  { employeeId: "emp019", status:"active", name: "Gaurav", role: "employee", department: "Finance", manager: "Deepak Sharma", mobile_number: "7896521475", email: "gaurav@gmail.com", joined_date: "2021-11-12" },
+  { employeeId: "emp020", status:"inactive", name: "Meena", role: "employee", department: "HR", manager: "Karthik Rao", mobile_number: "7856321478", email: "meena@gmail.com", joined_date: "2023-03-08" }
+];
+
 export const projectHistoryData = [
   {
     projectId: "SR323",

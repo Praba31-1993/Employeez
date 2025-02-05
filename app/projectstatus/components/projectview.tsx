@@ -61,7 +61,6 @@ function ProjectView({ show, close, projectlist }: any) {
                     </div>
                     <div className="roles ">
                       <h5 className="heading2 textheader ps-2 mb-2">
-                        {/* Simi Rajan (SR3894) */}
                         {projectData?.project_name + " "}(
                         {projectData?.projectId})
                       </h5>

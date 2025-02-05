@@ -22,16 +22,11 @@ function ProjectStatus() {
   return (
     <div>
       <Sidebar>
-      <BreadcrumbsComponent
-                selectedTab={selectedTab === "" ? "New Project" : selectedTab}
-              />
+        <BreadcrumbsComponent
+          selectedTab={selectedTab === "" ? "New Project" : selectedTab}
+        />
         <div className="container-fluid">
-
           <div className="row">
-           
-             
-          
-
             <div className="col-6 p-0">
               <p className="textheader heading my-2">Project Status</p>
             </div>
