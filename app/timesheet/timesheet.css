@@ -168,22 +168,5 @@
 .dark .holiday .inputdats input {
   background: var(--Timesheet-holiday, #ede4ff) !important;
 }
-.fileupload {
-  border-radius: 5px;
-  border: 1px dashed #8c57ff;
-  background: #fff;
-  position: relative;
-}
-.dark .fileupload{
-  background: #312D4B !important;
-}
 
-.fileupload input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 11;
-}
+
