@@ -8,7 +8,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { SearchLogic } from "../reusableComponent/commonlogic";
 import { employeeListData } from "../reusableComponent/JsonData";
 import WorkIcon from "@mui/icons-material/Work";
-import { Chip } from "@mui/material";
 import EmployeeCard from "./employeecard";
 import PaginationComponent from "../reusableComponent/paginationcomponent";
 
@@ -36,9 +35,9 @@ function EmployeeList() {
   const useColors = Colors();
 
   const tabs = [
-    { id: 1, label: "HR" },
+    { id: 1, label: "Select Department" },
     { id: 2, label: "Super Admin" },
-    { id: 3, label: "Select Department" },
+    { id: 3, label: "HR" },
   ];
 
     useEffect(() => {
