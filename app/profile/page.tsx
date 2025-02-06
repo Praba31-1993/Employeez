@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import Sidebar from '../sidebar/page'
 import Profile_update from './component/profile_update'
