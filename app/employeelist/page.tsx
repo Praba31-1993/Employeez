@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/page";
 import BreadcrumbsComponent from "../reusableComponent/breadcrumbs";
 import DropdownComponent from "../reusableComponent/dropdown";
@@ -10,6 +10,7 @@ import { employeeListData } from "../reusableComponent/JsonData";
 import WorkIcon from "@mui/icons-material/Work";
 import { Chip } from "@mui/material";
 import EmployeeCard from "./employeecard";
+import PaginationComponent from "../reusableComponent/paginationcomponent";
 
 export interface Employee {
   employeeId: string;
@@ -27,7 +28,11 @@ function EmployeeList() {
   const [selectedTab, setSelectedTab] = useState("Employee List");
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<Employee[]>(employeeListData);
-
+  const [countPerPage, setCountForPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalCount = rowsList.length;
+  const totalPages = Math.ceil(totalCount / countPerPage);
+  const [pages, setPages] = useState([]);
   const useColors = Colors();
 
   const tabs = [
@@ -36,6 +41,15 @@ function EmployeeList() {
     { id: 3, label: "Select Department" },
   ];
 
+    useEffect(() => {
+      const arr: any = [];
+      for (let i = 1; i <= totalPages; i++) {
+        arr.push(i);
+      }
+      setPages(arr);
+    }, [totalPages]);
+
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
 
@@ -43,6 +57,16 @@ function EmployeeList() {
     const res = SearchLogic(employeeListData, query);
 
     setRows(res);
+  };
+
+  const currentPageItems = rowsList.slice(
+    (currentPage - 1) * countPerPage,
+    currentPage * countPerPage
+  );
+
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -85,8 +109,8 @@ function EmployeeList() {
             </div>
           </div>
           <div className="row">
-            {rowsList?.length > 0 &&
-              rowsList?.map((employee: any) => (
+            {currentPageItems?.length > 0 &&
+              currentPageItems?.map((employee: any) => (
                 <div
                   className="col-12 col-md-6 col-xxl-3 g-3 "
                   key={employee?.employeeId}
@@ -97,6 +121,12 @@ function EmployeeList() {
               ))}
           </div>
         </div>
+        <PaginationComponent
+          currentPage={currentPage}
+          currentPageFunction={handlePageChange}
+          pages={pages}
+          totalPages={totalPages}
+        />
       </Sidebar>
     </div>
   );

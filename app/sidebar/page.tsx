@@ -173,7 +173,6 @@ const Sidebar = ({ children }: SidebarProps) => {
 
     setMenuLists(newList);
     sethideToggle(false);
-
     toast.success(Messages.success.rejected);
   };
 
@@ -221,7 +220,6 @@ const Sidebar = ({ children }: SidebarProps) => {
                 {isOpen ? (
                   <Image className="p-2" src={logo} alt="Logo" />
                 ) : (
-                  // <Image src={EZlogo} alt="Logo" style={{ margin: "0 auto" }} />
                   <div style={{ margin: "0 auto" }}>
                     <Image className="w-100 p-2" src={logo2} alt="Logo" />
                   </div>
@@ -286,12 +284,11 @@ const Sidebar = ({ children }: SidebarProps) => {
                 )}
               </div>
             </div>
-            {/* start */}
             <Link
               href="/dashboard"
               className={`link ${
                 pathname === "/dashboard"
-                  ? "dashboardActive" // Custom class for /dashboard
+                  ? "dashboardActive" 
                   : ""
               } mb-0 w-100`}
               style={{
