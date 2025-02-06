@@ -8,38 +8,54 @@ import { RootState } from "../redux/store";
 import { Colors } from "@/app/reusableComponent/styles";
 import EmployeeDocumentTable from "./components/employeedocumenttable";
 import ProjectHistory from "../projectstatus/components/projecthistory";
+import ViewEmployeeDocument from "./components/viewemployeedocument";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 function EmployeeDocument() {
   const [selectedTab, setSelectedTab] = useState<string>("Employee Document");
+  const [employeeId, setEmployeeId] = useState<any>("");
   const role: string = useSelector((state: RootState) => state.role.role);
   const useColors = Colors();
 
   const tabs = [
     { id: 1, label: "Employee Document" },
-    { id: 2, label: "Project History" },
+    { id: 2, label: "Employee document submission" },
   ];
 
   return (
     <div>
       <Sidebar>
         <BreadcrumbsComponent
-          selectedTab={selectedTab === "" ? "" : selectedTab}
+          selectedTab={selectedTab === "" ? "" : "Employee document submission"}
         />
+
         <div className="container-fluid">
+          {employeeId !== "" && (
+            <button
+              onClick={() => setEmployeeId("")}
+              className="para textheader"
+            >
+              <ArrowBackOutlinedIcon className="mr-1" />
+              Back
+            </button>
+          )}
           <div className="row">
             <div className="col-6 p-0">
-              <p className="textheader heading my-2">Employee Document</p>
+              <p className="textheader heading my-2">
+                {employeeId === ""
+                  ? "Employee Document"
+                  : "Employee document submission"}
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Corrected conditional rendering */}
-        {selectedTab === "Employee Document" || selectedTab === "" ? (
-          <EmployeeDocumentTable />
+        {employeeId === "" ? (
+          <EmployeeDocumentTable
+            getEmployeeDetails={(data: any) => setEmployeeId(data)}
+          />
         ) : (
-          <>
-            <ProjectHistory />
-          </>
+          <ViewEmployeeDocument employeeId={employeeId} />
         )}
       </Sidebar>
     </div>
