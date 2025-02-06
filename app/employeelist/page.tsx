@@ -13,6 +13,7 @@ import EmployeeCard from "./employeecard";
 
 export interface Employee {
   employeeId: string;
+  status: string;
   name: string;
   role: string;
   department: string;
@@ -40,7 +41,6 @@ function EmployeeList() {
 
     setSearch(query);
     const res = SearchLogic(employeeListData, query);
-    console.log("res", res);
 
     setRows(res);
   };

@@ -1,21 +1,33 @@
 export const SearchLogic = (arr: any[], search: string) => {
-  const filteredRows = arr.filter((row) =>
-    Object.values(row).some((value) => {
-      if (typeof value !== "string") return false; // Ignore non-string values
-      return value.toLowerCase().includes(search.trim().toLowerCase());
-    })
-  );
-console.log('filteredRos', filteredRows);
+  if (!search.trim()) return arr; // Return all if search is empty
 
-  return filteredRows.length > 0 ? filteredRows : arr; // Return all rows if no match is found
+  let filteredRows;
+
+  if (search.toLowerCase() === "active" || search.toLowerCase() === "inactive") {
+    // Exact match for status field
+    filteredRows = arr.filter((employee: any) =>
+      employee.status.toLowerCase() === search.toLowerCase()
+    );
+  } else {
+    // Partial match for any field
+    filteredRows = arr.filter((row) =>
+      Object.values(row).some((value) =>
+        String(value).toLowerCase().includes(search.trim().toLowerCase())
+      )
+    );
+  }
+
+  return filteredRows.length > 0 ? filteredRows : arr; // Return all if no match found
 };
 
 
 // Export CSV files
-export const handleCSVExport = (headers:any, data:any) => {
+export const handleCSVExport = (headers: any, data: any) => {
   const csvContent = [
     headers.join(","),
-    ...data.map((item:any) => headers.map((header:any)=> item[header] || "").join(","))
+    ...data.map((item: any) =>
+      headers.map((header: any) => item[header] || "").join(",")
+    ),
   ].join("\n");
 
   // Create a Blob and trigger a download
