@@ -3,6 +3,10 @@ import React from "react";
 import user from "@/public/assets/img/Ellipse 14.svg";
 import Image from "next/image";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
 function EmployeeCard({ employeelist }: any) {
   return (
@@ -45,32 +49,42 @@ function EmployeeCard({ employeelist }: any) {
 
         <div className="col-6 mb-3">
           <div className="d-flex align-items-center">
-            <CalendarMonthOutlinedIcon />
-            <p className="para ps-2 mb-0 unselectcolor">{employeelist?.department}</p>
+            <ApartmentOutlinedIcon sx={{ color: "#6d6777" }} />
+            <p className="para ps-2 mb-0 unselectcolor">
+              {employeelist?.department}
+            </p>
           </div>
         </div>
         <div className="col-6 mb-3">
-        <div className="d-flex align-items-center">
-            <CalendarMonthOutlinedIcon />
-            <p className="para ps-2 mb-0 unselectcolor">{employeelist?.manager}</p>
+          <div className="d-flex align-items-center">
+            <ManageAccountsOutlinedIcon sx={{ color: "#6d6777" }} />
+            <p className="para ps-2 mb-0 unselectcolor">
+              {employeelist?.manager}
+            </p>
           </div>
         </div>
         <div className="col-6 mb-3">
-        <div className="d-flex align-items-center">
-            <CalendarMonthOutlinedIcon />
-            <p className="para ps-2 mb-0 unselectcolor">{employeelist?.mobile_number}</p>
+          <div className="d-flex align-items-center">
+            <CallOutlinedIcon sx={{ color: "#6d6777" }} />
+            <p className="para ps-2 mb-0 unselectcolor">
+              {employeelist?.mobile_number}
+            </p>
           </div>
         </div>
         <div className="col-6 mb-3">
-        <div className="d-flex align-items-center">
-            <CalendarMonthOutlinedIcon />
-            <p className="para ps-2 mb-0 unselectcolor">{employeelist?.email}</p>
+          <div className="d-flex align-items-center">
+            <MailOutlineOutlinedIcon sx={{ color: "#6d6777" }} />
+            <p className="para ps-2 mb-0 unselectcolor">
+              {employeelist?.email}
+            </p>
           </div>
         </div>
         <div className="col-6">
-        <div className="d-flex align-items-center">
-            Joined at
-            <p className="para ps-2 mb-0 unselectcolor">{employeelist?.joined_date}</p>
+          <div className="d-flex align-items-center">
+            <p className="mb-0">Joined at</p>
+            <p className="para ps-2 mt-1 mb-0 unselectcolor">
+              {employeelist?.joined_date}
+            </p>
           </div>
         </div>
       </div>

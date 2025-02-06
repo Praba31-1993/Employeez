@@ -2,15 +2,16 @@ import axios from "axios";
 
 // const base_url = "http://localhost:8080/employez/";
 const base_url = "http://192.168.10.126:8080/employez/";
+// const base_url="https://demo2.employez.ai/employez" --don't work in this url
+
 
 const accessToken =
-  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGV2Iiwicm9sZSI6IlNBIiwicGF5c2NoZWR1bGUiOiJNb250aGx5IiwiZXR5cGUiOiJFTVBIIiwiYnVzaW5lc3NVbml0IjoiVVNBIiwicHVuY2hfaW4iOiJOIiwiUHJvakJhc2VkVFMiOiJYIiwiQ291bnRyeUNvZGUiOiJVUyIsIkhpcmluZ01vZGVsQ29kZSI6IlcySCIsImlhdCI6MTczNzExODk4NSwiZXhwIjoxNzM3NzIzNzg1fQ.TdbQvQmV-tphGAEzxx5B-oWfc6ed5MASaB-4S3XEySVXw48ifhdwUhlk-Gk3IfarqYxidOscw3FwnW6Vts2aNQ";
-
+  "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBRE0wNyIsImNsaWVudElkIjoiZGVtbzIiLCJyb2xlIjoiU0EiLCJwYXlzY2hlZHVsZSI6Ik1vbnRobHkiLCJldHlwZSI6IkVNUEgiLCJidXNpbmVzc1VuaXQiOiJVU0EiLCJwdW5jaF9pbiI6Ik4iLCJQcm9qQmFzZWRUUyI6IlgiLCJDb3VudHJ5Q29kZSI6IlVTIiwiSGlyaW5nTW9kZWxDb2RlIjoiVzJIIiwiaWF0IjoxNzM4ODQ1NzY5LCJleHAiOjE3Mzk0NTA1Njl9.rHmrtMPI0rqGQYoMmu3kWT67IKLjUheVP_gMcjAQiODVXscZIeWZbHkrM1QaQdfu9RcM4qwnqEe_RFsoelHUww"
 export const axiosInstance = axios.create({
   baseURL: base_url,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
-    clientId: "dev",
+    "Authorization": `Bearer ${accessToken}`,
+    "clientId": "dev",
   },
 });
