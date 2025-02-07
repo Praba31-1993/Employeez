@@ -357,7 +357,7 @@ function Comphistory() {
                                 <td className="para textheader" style={{ whiteSpace: "nowrap" }}>{item?.endDate}</td>
 
                                 <td className="para textheader">
-                                    {item?.amount}
+                                   $ {item?.amount}
                                 </td>
                             </tr>
                         ))}

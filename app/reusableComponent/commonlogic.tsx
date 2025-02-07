@@ -107,7 +107,7 @@ export const handlePrint = () => {
 
 
 export const handleExcelExport = (headers: Record<string, string>, data: any[]) => {
-    if (!data || data.length === 0) {
+    if (!data || data?.length === 0) {
         alert("No data available for export!");
         return;
     }
