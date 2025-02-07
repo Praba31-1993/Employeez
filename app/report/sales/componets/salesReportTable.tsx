@@ -10,7 +10,7 @@ import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import {
-  handleCSVExport,
+  handleCSVExport1,
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
@@ -93,14 +93,26 @@ function SalesReportTable({ salesData }: any) {
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Employee Name": "conName",
-    Company: "vndName",
+    "Company": "vndName",
     "Customer PO Number": "cust_PO_Number",
     "Start Date": "startDate",
     "End Date": "endDate",
-    Rate: "rate",
-    Margin: "margin",
-    Closer: "dealCloser",
-    Recruiter: "recruiter",
+    "Rate": "rate",
+    "Margin": "margin",
+    "Closer": "dealCloser",
+    "Recruiter": "recruiter",
+  };
+
+  const headersQuery: any = {
+    "Employee Name": "conName",
+    "Company": "vndName",
+    "Customer PO Number": "cust_PO_Number",
+    "Start Date": "startDate",
+    "End Date": "endDate",
+    "Rate": "rate",
+    "Margin": "margin",
+    "Closer": "dealCloser",
+    "Recruiter": "recruiter",
   };
 
   console.log("rowList+++", rowsList);
@@ -270,7 +282,7 @@ function SalesReportTable({ salesData }: any) {
             border: `1px solid ${useColors.themeRed}`,
             height: "fit-content",
           }}
-          onClick={() => handleCSVExport(headers, salesData)}
+          onClick={() => handleCSVExport1(headersQuery, salesData)}
         >
           Export <SaveAltIcon className="ml-2" />
         </button>
