@@ -12,8 +12,9 @@ import {
   handleCSVExport,
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
-import { Colors } from "../../reusableComponent/styles";
+
 import { disciplinaryactiondata } from "@/app/reusableComponent/JsonData";
+import { Colors } from "@/app/reusableComponent/styles";
 
 interface ApproverRow {
   id: string;

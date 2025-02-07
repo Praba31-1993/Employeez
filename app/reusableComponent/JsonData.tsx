@@ -2114,7 +2114,23 @@ export const approverrepots = [
   { id: 4, label: "Reportees" },
   { id: 5, label: "Disciplinary action" },
 ];
-
+export const hrrepots = [
+  { id: 1, label: "Vacation" },
+  { id: 2, label: "Benefits" },
+  { id: 3, label: "Comp history" },
+  { id: 4, label: "Anniversary" },
+  { id: 5, label: "Immigration" },
+  { id: 6, label: "Green card" },
+  { id: 7, label: "Location " },
+  { id: 8, label: "Insurance" },
+  { id: 9, label: "Change request" },
+  { id: 10, label: "Equal employee opportunity (EE0) " },
+  { id: 11, label: "Disciplinary" },
+  { id: 12, label: "Employee " },
+  { id: 13, label: "Custom" },
+  { id: 14, label: "Subscription" },
+  { id: 15, label: "New hire report" },
+];
 export const TimeOffRequestList = [
   { id: "1876", name: "Eligible PTO/EL", count: "20", hrs: "4" },
   { id: "1877", name: "Sick Leave", count: "15", hrs: "2" },
