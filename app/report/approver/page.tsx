@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import { approverrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Punchinoutapprover from "../components/punchinoutapprover";
+import Punchinoutapprover from "./components/punchinoutapprover";
 import Sidebar from "@/app/sidebar/page";
 
 function Approver() {

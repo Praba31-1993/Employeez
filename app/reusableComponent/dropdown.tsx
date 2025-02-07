@@ -36,7 +36,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   return (
     <div>
       <select
-        className="dropdowncolor text-end para cursorPointer"
+        className="dropdowncolor para cursorPointer"
         id="dynamic-dropdown"
         value={selectedOption}
         onChange={handleChange}
@@ -55,7 +55,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
             <option
               key={`${item.id}-${index}`}
               value={item.label}
-              className="cursorPointer text-start textheader"
+              className="cursorPointer textheader"
             >
               {item.label}
             </option>

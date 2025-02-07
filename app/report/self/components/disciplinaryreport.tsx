@@ -8,24 +8,25 @@ import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { handleCSVExport, SearchLogic } from "@/app/reusableComponent/commonlogic";
-import { Colors } from "../../reusableComponent/styles";
-import { punchinandoutreports } from "@/app/reusableComponent/JsonData";
-import ChipsForLeave from "@/app/reusableComponent/chipsforleave";
+import {
+  handleCSVExport,
+  SearchLogic,
+} from "@/app/reusableComponent/commonlogic";
+
+import { disciplinaryactiondata } from "@/app/reusableComponent/JsonData";
+import { Colors } from "@/app/reusableComponent/styles";
 
 interface ApproverRow {
   id: string;
-  date: string;
-  status: string;
-  punchin: string;
-  punchout: string;
-  duration: string;
-  reason: string;
+  discilplinaraction: string;
+  location: string;
+  remarks: string;
+  actionDate: string;
 }
-function Punchinoutreport() {
+function Disciplinaryreport() {
   const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [rowsList, setRows] = useState<ApproverRow[]>(punchinandoutreports);
+  const [rowsList, setRows] = useState<ApproverRow[]>(disciplinaryactiondata);
   const [pages, setPages] = useState([]);
   const [countPerPage, setCountForPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -77,7 +78,7 @@ function Punchinoutreport() {
     setCurrentPage(page);
   };
 
-  const headers = Object.keys(punchinandoutreports[0]).filter(
+  const headers = Object.keys(disciplinaryactiondata[0]).filter(
     (key) => key !== "id"
   );
 
@@ -146,8 +147,8 @@ function Punchinoutreport() {
   const handleFilter = () => {
     if (!filterKey) return;
 
-    const filteredData = punchinandoutreports.filter((item) => {
-      if (filterKey === "date") {
+    const filteredData = disciplinaryactiondata.filter((item: any) => {
+      if (filterKey === "actionDate") {
         const [year, month, day] = item.date.split("-");
 
         const matchesYear = filterYear ? year === filterYear : true;
@@ -178,13 +179,13 @@ function Punchinoutreport() {
     setActiveFilterColumn(null);
   };
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const query = event.target.value;
-      setSearch(query);
-      const res = SearchLogic(punchinandoutreports, query);
-      setRows(res);
-    };
-  
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearch(query);
+    const res = SearchLogic(disciplinaryactiondata, query);
+    setRows(res);
+  };
+
   return (
     <div>
       {/* column, filter */}
@@ -213,7 +214,7 @@ function Punchinoutreport() {
             border: `1px solid ${useColors.themeRed}`,
             height: "fit-content",
           }}
-          onClick={() => handleCSVExport(headers, punchinandoutreports)}
+          onClick={() => handleCSVExport(headers, disciplinaryactiondata)}
         >
           Export <SaveAltIcon className="ml-2" />
         </button>
@@ -264,7 +265,7 @@ function Punchinoutreport() {
                           }}
                         >
                           <div className="d-flex flex-column p-2 gap-2">
-                            {filterKey === "date" ? (
+                            {filterKey === "actionDate" ? (
                               <>
                                 <input
                                   type="text"
@@ -344,19 +345,16 @@ function Punchinoutreport() {
           <tbody className="dashboardcard">
             {currentPageItems?.map((item, index) => (
               <tr key={item.id}>
-                <td className="para textheader">{item?.date}</td>
-                <td className="para textheader">
-                  <ChipsForLeave label={item?.status} />
-                </td>
+                <td className="para textheader">{item?.discilplinaraction}</td>
+                <td className="para textheader">{item?.location}</td>
+                <td className="para textheader">{item?.remarks}</td>
+
                 <td
                   className="para textheader"
                   style={{ whiteSpace: "nowrap" }}
                 >
-                  {item?.punchin}
+                  {item?.actionDate}
                 </td>
-                <td className="para textheader">{item?.punchout}</td>
-                <td className="para textheader">{item?.duration}</td>
-                <td className="para textheader">{item?.reason}</td>
               </tr>
             ))}
           </tbody>
@@ -373,4 +371,4 @@ function Punchinoutreport() {
   );
 }
 
-export default Punchinoutreport;
+export default Disciplinaryreport;

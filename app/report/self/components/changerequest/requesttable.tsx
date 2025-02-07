@@ -1,5 +1,6 @@
+import TableWithSort from "@/app/reusableComponent/table/tablewithSort";
 import React, { useState } from "react";
-import TableWithSort from "../../../reusableComponent/table/tablewithSort";
+
 
 interface RowData {
     id: number;
