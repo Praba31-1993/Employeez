@@ -12,7 +12,7 @@ import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { handleCSVExport, SearchLogic } from "@/app/reusableComponent/commonlogic";
-import { Colors } from "../../reusableComponent/styles";
+import { Colors } from "../../../reusableComponent/styles";
 
 interface ApproverRow {
   employeeId: string;
