@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import {
     handleCSVExport,
+    handleExcelExport,
     SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
@@ -223,16 +224,17 @@ function Comphistory() {
                 </div>
 
                 <button
-                    className="outlinebtn rounded px-3 py-1"
-                    style={{
-                        color: useColors.themeRed,
-                        border: `1px solid ${useColors.themeRed}`,
-                        height: "fit-content",
-                    }}
-                    onClick={() => handleCSVExport(headers, getCompHistory)}
-                >
-                    Export <SaveAltIcon className="ml-2" />
-                </button>
+    className="outlinebtn rounded px-3 py-1"
+    style={{
+        color: useColors.themeRed,
+        border: `1px solid ${useColors.themeRed}`,
+        height: "fit-content",
+    }}
+    onClick={() => handleExcelExport(headers, getCompHistory)}
+>
+    Export <SaveAltIcon className="ml-2" />
+</button>
+
             </div>
 
             {/* Table Section */}
