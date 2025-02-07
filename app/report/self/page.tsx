@@ -5,12 +5,13 @@ import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { selfrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Changerequest from "../components/changerequest/changerequest";
 import Sidebar from "@/app/sidebar/page";
-import Vacationreport from "../components/report_vacationreports/reportvacationreport";
-import Downloadreport from "../components/downloadreport";
-import Punchinoutreport from "../components/punchinoutreport";
-import Disciplinaryreport from "../components/disciplinaryreport";
+import Vacationreport from "./components/report_vacationreports/reportvacationreport";
+import Changerequest from "./components/changerequest/changerequest";
+import Downloadreport from "./components/downloadreport";
+import Punchinoutreport from "./components/punchinoutreport";
+import Disciplinaryreport from "./components/disciplinaryreport";
+
 
 function Self() {
   const useColors = Colors(); // Declare useColors once
