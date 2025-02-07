@@ -3560,6 +3560,73 @@ export const columnForApprover = [
   { id: 7, key: "duration", label: "Duration", checked: true },
   { id: 8, key: "reason", label: "Reason", checked: true },
 ];
+export const getCompHistory = [
+    {
+      "currentAmount": null,
+      "component": "Annual Bonus",
+      "endDate": "2022-05-09",
+      "emp_Id": "DB0509",
+      "emp_Name": "Dwayne Bravo",
+      "fromDate": "2022-05-05",
+      "amount": "0.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Salary",
+      "endDate": "2022-05-04",
+      "emp_Id": "DB0509",
+      "emp_Name": "Dwayne Bravo",
+      "fromDate": "2022-05-05",
+      "amount": "0.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Project Bonus",
+      "endDate": "2022-02-07",
+      "emp_Id": "DB0509",
+      "emp_Name": "Dwayne Bravo",
+      "fromDate": "2022-05-05",
+      "amount": "0.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Salary",
+      "endDate": "2022-02-01",
+      "emp_Id": "SL0493",
+      "emp_Name": "Shilo Lotus",
+      "fromDate": "2022-02-02",
+      "amount": "100.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Annual Bonus",
+      "endDate": "2023-06-15",
+      "emp_Id": "AF2041",
+      "emp_Name": "Adobe Fifteen",
+      "fromDate": "2023-06-16",
+      "amount": "200.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Project Bonus",
+      "endDate": "2023-05-09",
+      "emp_Id": "AF2041",
+      "emp_Name": "Adobe Fifteen",
+      "fromDate": "2023-05-10",
+      "amount": "120.00"
+    },
+    {
+      "currentAmount": null,
+      "component": "Salary",
+      "endDate": "2024-12-31",
+      "emp_Id": "ss4268",
+      "emp_Name": "star sk",
+      "fromDate": "2025-01-01",
+      "amount": "0.00"
+    }
+  ]
+  
+
 
 export const requestTable = [
   {
