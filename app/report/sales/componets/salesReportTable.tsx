@@ -12,6 +12,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import {
   handleCSVExport1,
   SearchLogic,
+  handleExcelExport
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
 
@@ -285,6 +286,17 @@ function SalesReportTable({ salesData }: any) {
           onClick={() => handleCSVExport1(headersQuery, salesData)}
         >
           Export <SaveAltIcon className="ml-2" />
+        </button>
+        <button
+          className="outlinebtn rounded px-3 py-1"
+          style={{
+            color: useColors.themeRed,
+            border: `1px solid ${useColors.themeRed}`,
+            height: "fit-content",
+          }}
+          onClick={() => handleExcelExport(headersQuery, salesData)}
+        >
+          Excel <SaveAltIcon className="ml-2" />
         </button>
       </div>
 
