@@ -1,3 +1,7 @@
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
+
 export const SearchLogic = (arr: any[], search: string) => {
   if (!search.trim()) return arr; // Return all if search is empty
 
@@ -66,4 +70,34 @@ export const handlePrint = () => {
       printWindow.print();
     }
   }
+};
+
+export const handleExcelExport = (headers: Record<string, string>, data: any[]) => {
+    if (!data || data.length === 0) {
+        alert("No data available for export!");
+        return;
+    }
+
+    // Convert data to an array of objects with formatted keys
+    const formattedData = data.map((item) => {
+        const row: Record<string, any> = {};
+        Object.entries(headers).forEach(([header, key]) => {
+            row[header] = item[key as keyof typeof item]; // Map correct data fields
+        });
+        return row;
+    });
+
+    // Create a worksheet
+    const ws = XLSX.utils.json_to_sheet(formattedData);
+
+    // Create a new workbook and append the worksheet
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Compensation History");
+
+    // Write the file
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+
+    // Save the file
+    const fileData = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(fileData, "Compensation_History.xlsx");
 };
