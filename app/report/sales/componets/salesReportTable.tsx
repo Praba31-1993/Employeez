@@ -91,57 +91,42 @@ function SalesReportTable({ salesData }: any) {
 
   // const headers = Object.keys(salesData[0]);
 
-  const headers = [
-    "Employee Name",
-    "Company",
-    "Customer PO Number",
-    "Start Date",
-    "End Date",
-    "Rate",
-    "Margin",
-    "Closer",
-    "Recruiter",
-  ];
+  const headers: Record<string, keyof (typeof salesData)[0]> = {
+    "Employee Name": "conName",
+    Company: "vndName",
+    "Customer PO Number": "cust_PO_Number",
+    "Start Date": "startDate",
+    "End Date": "endDate",
+    Rate: "rate",
+    Margin: "margin",
+    Closer: "dealCloser",
+    Recruiter: "recruiter",
+  };
 
-  console.log('rowList+++', rowsList);
-  
+  console.log("rowList+++", rowsList);
+
   // Sorting function
-  const handleSort = (key: keyof ContractDetails) => {
-    const keyMappings: Record<string, keyof ContractDetails> = {
-      "Employee Name": "conName",
-      "Company": "vndName",
-      "Customer PO Number": "cust_PO_Number",
-      "Start Date": "startDate",
-      "End Date": "endDate",
-      "Rate": "rate",
-      "Margin": "margin",
-      "Closer": "dealCloser",
-      "Recruiter": "recruiter",
-    };
-  
-    // If key exists in keyMappings, use its mapped value; otherwise, use the original key
-    const sortKey = keyMappings[key as string] || key;
-  
+  const handleSort = <K extends keyof ContractDetails>(key: K) => {
+    console.log("Sorting by key:", key);
+
     let direction: "asc" | "desc" = "asc";
-  
-    if (sortConfig && sortConfig.key === sortKey && sortConfig.direction === "asc") {
+
+    if (sortConfig?.key === key && sortConfig?.direction === "asc") {
       direction = "desc";
     }
-  
+
     const sortedData = [...rowsList].sort((a, b) => {
-      const aValue = a[sortKey] ?? ""; // Ensure non-null value
-      const bValue = b[sortKey] ?? "";
-  
-      return direction === "asc"
-        ? String(aValue).localeCompare(String(bValue))
-        : String(bValue).localeCompare(String(aValue));
+      const valueA = a[key] ?? ""; // Handle null/undefined values
+      const valueB = b[key] ?? "";
+
+      if (valueA < valueB) return direction === "asc" ? -1 : 1;
+      if (valueA > valueB) return direction === "asc" ? 1 : -1;
+      return 0;
     });
-  
-    setSortConfig({ key: sortKey, direction });
+
+    setSortConfig({ key, direction });
     setRows(sortedData);
   };
-  
-  
 
   // Function to toggle the filter box and set its position
   const handleFilterToggle = (
@@ -187,51 +172,59 @@ function SalesReportTable({ salesData }: any) {
   // Filtering function
   const handleFilter = () => {
     if (!filterKey) return;
-  
+
     console.log("Filter Key:", filterKey);
     console.log("Filter Value:", filterValue);
     console.log("Filter Operator:", filterOperator);
     console.log("Sample Row:", rowsList[0]);
-    console.log('rowlist',rowsList);
-    
-  
+    console.log("rowlist", rowsList);
+
+    const keyMappings = {
+      "Employee Name": "conName",
+      Company: "vndName",
+      "Customer PO Number": "cust_PO_Number",
+      "Start Date": "startDate",
+      "End Date": "endDate",
+      Rate: "rate",
+      Margin: "margin",
+      Closer: "dealCloser",
+      Recruiter: "recruiter",
+    };
+
     const filteredData = rowsList.filter((item: any) => {
-      const itemValue = item["conName"]; // Get the field value
-  
+      const itemValue = item[filterKey]; // Get the field value
+
       // Skip null or undefined values
       if (itemValue == null) return false;
-  
+
       if (filterKey === "startDate" || filterKey === "endDate") {
         const dateStr = itemValue?.toString(); // Convert to string
         if (!dateStr || !dateStr.includes("-")) return false; // Ensure valid date format
-  
+
         const [year, month, day] = dateStr.split("-");
-  
+
         const matchesYear = filterYear ? year === filterYear : true;
         const matchesMonth = filterMonth ? month === filterMonth : true;
         const matchesDay = filterDay ? day === filterDay : true;
-  
+
         return matchesYear && matchesMonth && matchesDay;
       } else {
         const itemValueStr = String(itemValue).trim().toLowerCase();
         const searchValue = filterValue.trim().toLowerCase();
-  
+
         if (!searchValue) return true; // If search is empty, match all
-  
+
         return filterOperator === "equal"
           ? itemValueStr === searchValue
           : itemValueStr !== searchValue;
       }
     });
-  
+
     console.log("Filtered Data:", filteredData);
-  
+
     setRows(filteredData); // Update the filtered rows
     setActiveFilterColumn(null);
   };
-  
-  
-  
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
@@ -288,124 +281,125 @@ function SalesReportTable({ salesData }: any) {
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
-              {headers.map((key) => (
-                <th
-                  key={key}
-                  scope="col"
-                  className="position-relative textheader para"
-                >
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                  <span className="d-inline-flex align-items-center gap-2 ms-2">
-                    <FontAwesomeIcon
-                      icon={faSort}
-                      style={{ cursor: "pointer", height: "10px" }}
-                      onClick={() =>
-                        handleSort(key as keyof (typeof currentPageItems)[0])
-                      }
-                    />
-                    <div className="" style={{ position: "relative" }}>
-                      <FontAwesomeIcon
-                        icon={faFilter}
-                        style={{ cursor: "pointer", height: "10px" }}
-                        onClick={(event: any) =>
-                          handleFilterToggle(
-                            key as keyof (typeof currentPageItems)[0],
-                            event
-                          )
-                        }
-                      />
-                      {activeFilterColumn === key && ( // Ensure only the clicked column shows filter box
-                        <div
-                          className="card card-body"
-                          style={{
-                            width: "18em",
-                            position: "absolute",
-                            top: "0%",
-                            zIndex: 1000,
-                            backgroundColor: "white",
-                            border: "1px solid #ddd",
-                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                          }}
-                        >
-                          <div className="d-flex flex-column p-2 gap-2">
-                            {filterKey === "startDate" ||
-                            filterKey === "endDate" ? (
-                              <>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  value={filterYear}
-                                  onChange={(e) =>
-                                    setFilterYear(e.target.value)
-                                  }
-                                  placeholder="Enter Year (YYYY)"
-                                />
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  value={filterMonth}
-                                  onChange={(e) =>
-                                    setFilterMonth(e.target.value)
-                                  }
-                                  placeholder="Enter Month (MM)"
-                                />
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  value={filterDay}
-                                  onChange={(e) => setFilterDay(e.target.value)}
-                                  placeholder="Enter Day (DD)"
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <select
-                                  className="form-control tableselector"
-                                  value={filterOperator}
-                                  onChange={(e) =>
-                                    setFilterOperator(
-                                      e.target.value as "equal" | "notEqual"
-                                    )
-                                  }
-                                >
-                                  <option value="equal">Equal</option>
-                                  <option value="notEqual">Not Equal To</option>
-                                </select>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  value={filterValue}
-                                  onChange={(e) =>
-                                    setFilterValue(e.target.value)
-                                  }
-                                  placeholder={`Enter ${activeFilterColumn} value`}
-                                />
-                              </>
-                            )}
-                          </div>
+              {Object.keys(headers).map((header) => {
+                const key: any = headers[header as keyof typeof headers]; // Get the actual column key
 
-                          <div className="d-flex gap-2 justify-content-end mt-2">
-                            <button
-                              className="btn btn-primary"
-                              onClick={handleFilter}
-                            >
-                              Filter
-                            </button>
-                            <button
-                              className="btn btn-secondary"
-                              onClick={handleClear}
-                            >
-                              Close
-                            </button>
+                return (
+                  <th
+                    key={key}
+                    scope="col"
+                    className="position-relative textheader para"
+                  >
+                    {header} {/* Display formatted column name */}
+                    <span className="d-inline-flex align-items-center gap-2 ms-2">
+                      <FontAwesomeIcon
+                        icon={faSort}
+                        style={{ cursor: "pointer", height: "10px" }}
+                        onClick={() => handleSort(key as keyof ContractDetails)}
+                      />
+                      <div style={{ position: "relative" }}>
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          style={{ cursor: "pointer", height: "10px" }}
+                          onClick={(event) => handleFilterToggle(key, event)}
+                        />
+                        {activeFilterColumn === key && (
+                          <div
+                            className="card card-body"
+                            style={{
+                              width: "18em",
+                              position: "absolute",
+                              top: "0%",
+                              zIndex: 1000,
+                              backgroundColor: "white",
+                              border: "1px solid #ddd",
+                              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                            }}
+                          >
+                            <div className="d-flex flex-column p-2 gap-2">
+                              {filterKey === "startDate" ? (
+                                <>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    value={filterYear}
+                                    onChange={(e) =>
+                                      setFilterYear(e.target.value)
+                                    }
+                                    placeholder="Enter Year (YYYY)"
+                                  />
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    value={filterMonth}
+                                    onChange={(e) =>
+                                      setFilterMonth(e.target.value)
+                                    }
+                                    placeholder="Enter Month (MM)"
+                                  />
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    value={filterDay}
+                                    onChange={(e) =>
+                                      setFilterDay(e.target.value)
+                                    }
+                                    placeholder="Enter Day (DD)"
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <select
+                                    className="form-control tableselector"
+                                    value={filterOperator}
+                                    onChange={(e) =>
+                                      setFilterOperator(
+                                        e.target.value as "equal" | "notEqual"
+                                      )
+                                    }
+                                  >
+                                    <option value="equal">Equal</option>
+                                    <option value="notEqual">
+                                      Not Equal To
+                                    </option>
+                                  </select>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    value={filterValue}
+                                    onChange={(e) =>
+                                      setFilterValue(e.target.value)
+                                    }
+                                    placeholder={`Enter ${header} value`}
+                                  />
+                                </>
+                              )}
+                            </div>
+
+                            <div className="d-flex gap-2 justify-content-end mt-2">
+                              <button
+                                className="btn btn-primary"
+                                onClick={handleFilter}
+                              >
+                                Filter
+                              </button>
+                              <button
+                                className="btn btn-secondary"
+                                onClick={handleClear}
+                              >
+                                Close
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  </span>
-                </th>
-              ))}
+                        )}
+                      </div>
+                    </span>
+                  </th>
+                );
+              })}
             </tr>
           </thead>
+
           <tbody className="dashboardcard">
             {currentPageItems?.map((item, index) => (
               <tr key={item.conId}>
@@ -426,7 +420,6 @@ function SalesReportTable({ salesData }: any) {
                 <td className="para textheader">{item?.margin}</td>
                 <td className="para textheader">{item?.dealCloser}</td>
                 <td className="para textheader">{item?.recruiter}</td>
-
               </tr>
             ))}
           </tbody>
