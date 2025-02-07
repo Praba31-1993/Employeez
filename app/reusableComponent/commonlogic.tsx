@@ -1,16 +1,18 @@
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-
 export const SearchLogic = (arr: any[], search: string) => {
   if (!search.trim()) return arr; // Return all if search is empty
 
   let filteredRows;
 
-  if (search.toLowerCase() === "active" || search.toLowerCase() === "inactive") {
+  if (
+    search.toLowerCase() === "active" ||
+    search.toLowerCase() === "inactive"
+  ) {
     // Exact match for status field
-    filteredRows = arr.filter((employee: any) =>
-      employee.status.toLowerCase() === search.toLowerCase()
+    filteredRows = arr.filter(
+      (employee: any) => employee.status.toLowerCase() === search.toLowerCase()
     );
   } else {
     // Partial match for any field
@@ -24,28 +26,59 @@ export const SearchLogic = (arr: any[], search: string) => {
   return filteredRows.length > 0 ? filteredRows : arr; // Return all if no match found
 };
 
-
-// Export CSV files
-export const handleCSVExport = (headers: any, data: any) => {
+export const handleCSVExport = (headers: string[], data: any[]) => {
+  // Prepare CSV content
   const csvContent = [
-    headers.join(","),
-    ...data.map((item: any) =>
-      headers.map((header: any) => item[header] || "").join(",")
+    headers.join(","), // CSV Header Row
+    ...data.map((item) =>
+      headers
+        .map((header) =>
+          item[header] !== undefined ? `"${item[header]}"` : `""`
+        )
+        .join(",")
     ),
   ].join("\n");
 
-  // Create a Blob and trigger a download
+  // Create and trigger CSV download
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
-  if (link.download !== undefined) {
-    const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", "data.csv");
-    link.style.visibility = "hidden";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", "export.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+export const handleCSVExport1 = (
+  headers: Record<string, string>,
+  data: any[]
+) => {
+  // Extract CSV headers (Human-readable names)
+  const csvHeaders = Object.keys(headers);
+
+  // Extract corresponding data field names
+  const csvKeys = Object.values(headers);
+
+  // Prepare CSV content
+  const csvContent = [
+    csvHeaders.join(","), // CSV Header Row
+    ...data.map((item) =>
+      csvKeys
+        .map((key) => (item[key] !== undefined ? `"${item[key]}"` : `""`))
+        .join(",")
+    ),
+  ].join("\n");
+
+  // Create and trigger CSV download
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", "export.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 };
 
 // Print Logic
@@ -71,6 +104,7 @@ export const handlePrint = () => {
     }
   }
 };
+
 
 export const handleExcelExport = (headers: Record<string, string>, data: any[]) => {
     if (!data || data.length === 0) {
@@ -100,4 +134,5 @@ export const handleExcelExport = (headers: Record<string, string>, data: any[]) 
     // Save the file
     const fileData = new Blob([excelBuffer], { type: "application/octet-stream" });
     saveAs(fileData, "Compensation_History.xlsx");
+
 };
