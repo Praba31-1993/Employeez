@@ -2,8 +2,6 @@ import { columnForApprover } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SearchIcon from "@mui/icons-material/Search";
-import Image from "next/image";
-import favourite from "@/public/assets/img/favourite.svg";
 import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +25,7 @@ interface DocumentViewInterface {
   attachment: any;
 }
 
-function ViewEmployeeDocument({employeeId}:any) {
+function ViewEmployeeDocument({ employeeId }: any) {
   const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
   const [rowsList, setRows] =
@@ -62,12 +60,6 @@ function ViewEmployeeDocument({employeeId}:any) {
   const [activeFilterColumn, setActiveFilterColumn] = useState<string | null>(
     null
   );
-
-  const [filterYear, setFilterYear] = useState("");
-  const [filterMonth, setFilterMonth] = useState("");
-  const [filterDay, setFilterDay] = useState("");
-
-  const tableRef = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
     const arr: any = [];
@@ -198,8 +190,7 @@ function ViewEmployeeDocument({employeeId}:any) {
     }
   };
 
-  console.log('employeeId',employeeId);
-  
+  console.log("employeeId", employeeId);
 
   return (
     <div>
@@ -315,7 +306,7 @@ function ViewEmployeeDocument({employeeId}:any) {
           <tbody className={employeeDetails.length > 0 ? "dashboardcard" : ""}>
             {currentPageItems.length > 0 ? (
               currentPageItems?.map((item, index) => (
-                <tr key={item?.employeeId}>
+                <tr key={index}>
                   <td className="para textheader">{item?.employeeId}</td>
 
                   <td className="para textheader">{item?.documentname}</td>
