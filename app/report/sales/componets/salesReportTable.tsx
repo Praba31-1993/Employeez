@@ -1,20 +1,12 @@
 "use client";
 import { columnForApprover } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import SearchIcon from "@mui/icons-material/Search";
-import Image from "next/image";
-import favourite from "@/public/assets/img/favourite.svg";
 import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import {
-  handleCSVExport1,
-  SearchLogic,
-  handleExcelExport
-} from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
 interface ContractDetails {
   conName: string;
@@ -37,14 +29,8 @@ interface ContractDetails {
 }
 
 function SalesReportTable({ salesData }: any) {
-  const [search, setSearch] = useState<string>("");
   const [searchList, setSearchList] = useState<any>(columnForApprover);
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
-  const [pages, setPages] = useState([]);
-  const [countPerPage, setCountForPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalCount = rowsList.length;
-  const totalPages = Math.ceil(totalCount / countPerPage);
   const [data, setData] = useState(searchList);
   const useColors = Colors();
   const [sortConfig, setSortConfig] = useState<{
@@ -56,9 +42,9 @@ function SalesReportTable({ salesData }: any) {
   });
 
   // Filtering state
-  const [filterKey, setFilterKey] = useState<
-    keyof (typeof currentPageItems)[0] | ""
-  >("");
+  const [filterKey, setFilterKey] = useState<keyof (typeof salesData)[0] | "">(
+    ""
+  );
   const [filterOperator, setFilterOperator] = useState<"equal" | "notEqual">(
     "equal"
   );
@@ -73,62 +59,45 @@ function SalesReportTable({ salesData }: any) {
 
   const tableRef = useRef<HTMLTableElement>(null);
 
+  console.log("sortData+++", salesData);
+
   useEffect(() => {
-    const arr: any = [];
-    for (let i = 1; i <= totalPages; i++) {
-      arr.push(i);
-    }
-    setPages(arr);
-  }, [totalPages]);
-
-  const currentPageItems = rowsList.slice(
-    (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
-  );
-
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
-
-  // const headers = Object.keys(salesData[0]);
+    setRows(salesData);
+  }, [salesData]);
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Employee Name": "conName",
-    "Company": "vndName",
+    Company: "vndName",
     "Customer PO Number": "cust_PO_Number",
     "Start Date": "startDate",
     "End Date": "endDate",
-    "Rate": "rate",
-    "Margin": "margin",
-    "Closer": "dealCloser",
-    "Recruiter": "recruiter",
+    Rate: "rate",
+    Margin: "margin",
+    Closer: "dealCloser",
+    Recruiter: "recruiter",
   };
 
   const headersQuery: any = {
     "Employee Name": "conName",
-    "Company": "vndName",
+    Company: "vndName",
     "Customer PO Number": "cust_PO_Number",
     "Start Date": "startDate",
     "End Date": "endDate",
-    "Rate": "rate",
-    "Margin": "margin",
-    "Closer": "dealCloser",
-    "Recruiter": "recruiter",
+    Rate: "rate",
+    Margin: "margin",
+    Closer: "dealCloser",
+    Recruiter: "recruiter",
   };
-
-  console.log("rowList+++", rowsList);
 
   // Sorting function
   const handleSort = <K extends keyof ContractDetails>(key: K) => {
-    console.log("Sorting by key:", key);
-
     let direction: "asc" | "desc" = "asc";
 
     if (sortConfig?.key === key && sortConfig?.direction === "asc") {
       direction = "desc";
     }
 
-    const sortedData = [...rowsList].sort((a, b) => {
+    const sortedData = [...salesData].sort((a, b) => {
       const valueA = a[key] ?? ""; // Handle null/undefined values
       const valueB = b[key] ?? "";
 
@@ -186,12 +155,6 @@ function SalesReportTable({ salesData }: any) {
   const handleFilter = () => {
     if (!filterKey) return;
 
-    console.log("Filter Key:", filterKey);
-    console.log("Filter Value:", filterValue);
-    console.log("Filter Operator:", filterOperator);
-    console.log("Sample Row:", rowsList[0]);
-    console.log("rowlist", rowsList);
-
     const keyMappings = {
       "Employee Name": "conName",
       Company: "vndName",
@@ -204,7 +167,7 @@ function SalesReportTable({ salesData }: any) {
       Recruiter: "recruiter",
     };
 
-    const filteredData = rowsList.filter((item: any) => {
+    const filteredData = salesData.filter((item: any) => {
       const itemValue = item[filterKey]; // Get the field value
 
       // Skip null or undefined values
@@ -233,17 +196,8 @@ function SalesReportTable({ salesData }: any) {
       }
     });
 
-    console.log("Filtered Data:", filteredData);
-
     setRows(filteredData); // Update the filtered rows
     setActiveFilterColumn(null);
-  };
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearch(query);
-    const res = SearchLogic(salesData, query);
-    setRows(res);
   };
 
   // Clear filter
@@ -257,49 +211,6 @@ function SalesReportTable({ salesData }: any) {
 
   return (
     <div>
-      {/* column, filter */}
-
-      <div className="d-flex gap-5 justify-content-end  mx-3 ">
-        <div className="d-flex gap-3 mb-3">
-          <Image src={favourite} alt="" width={24} height={24} />
-          <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
-            <div className="mt-1">
-              <SearchIcon />
-            </div>
-            <input
-              type="text"
-              placeholder="Search"
-              className="p-2 w-100"
-              value={search}
-              onChange={handleSearch}
-            />
-          </div>
-        </div>
-
-        <button
-          className="outlinebtn rounded px-3 py-1"
-          style={{
-            color: useColors.themeRed,
-            border: `1px solid ${useColors.themeRed}`,
-            height: "fit-content",
-          }}
-          onClick={() => handleCSVExport1(headersQuery, salesData)}
-        >
-          Export <SaveAltIcon className="ml-2" />
-        </button>
-        <button
-          className="outlinebtn rounded px-3 py-1"
-          style={{
-            color: useColors.themeRed,
-            border: `1px solid ${useColors.themeRed}`,
-            height: "fit-content",
-          }}
-          onClick={() => handleExcelExport(headersQuery, salesData)}
-        >
-          Excel <SaveAltIcon className="ml-2" />
-        </button>
-      </div>
-
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
         <table className="table mb-0 tabletype">
@@ -425,37 +336,33 @@ function SalesReportTable({ salesData }: any) {
           </thead>
 
           <tbody className="dashboardcard">
-            {currentPageItems?.map((item, index) => (
+            {rowsList?.map((item: any, index: number) => (
               <tr key={item.conId}>
-                <td className="para textheader">{item?.conName}</td>
-                <td className="para textheader">{item?.vndName}</td>
+                <td className="para textheader d-flex gap-2 py-3">
+                  <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
+                  {item?.conName}
+                </td>
+                <td className="para textheader py-3">{item?.vndName}</td>
                 <td
                   className="para textheader"
                   style={{ whiteSpace: "nowrap" }}
                 >
                   {item?.cust_PO_Number}
                 </td>
-                <td className="para textheader">
+                <td className="para textheader py-3">
                   {/* <ChipsForLeave label={item?.status} /> */}
                   {item?.startDate}
                 </td>
-                <td className="para textheader">{item?.endDate}</td>
-                <td className="para textheader">{item?.rate}</td>
-                <td className="para textheader">{item?.margin}</td>
-                <td className="para textheader">{item?.dealCloser}</td>
-                <td className="para textheader">{item?.recruiter}</td>
+                <td className="para textheader py-3">{item?.endDate}</td>
+                <td className="para textheader py-3">{item?.rate}</td>
+                <td className="para textheader py-3">{item?.margin}</td>
+                <td className="para textheader py-3">{item?.dealCloser}</td>
+                <td className="para textheader py-3">{item?.recruiter}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {/* table ends */}
-      <Paginationcomponent
-        currentPage={currentPage}
-        currentPageFunction={handlePageChange}
-        pages={pages}
-        totalPages={totalPages}
-      />
     </div>
   );
 }
