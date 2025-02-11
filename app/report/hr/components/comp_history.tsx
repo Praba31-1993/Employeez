@@ -365,7 +365,7 @@ function Comphistory() {
                 </table>
             </div>
             {/* table ends */}
-            <Paginationcomponent
+           
                 currentPage={currentPage}
                 currentPageFunction={handlePageChange}
                 pages={pages}

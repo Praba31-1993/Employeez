@@ -382,7 +382,7 @@ function Downloadreport() {
       <Paginationcomponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
-        pages={pages}
+        // pages={pages}
         totalPages={totalPages}
       />
     </div>

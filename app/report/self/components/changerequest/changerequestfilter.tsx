@@ -373,7 +373,7 @@ function Changerequestfilter() {
             <Paginationcomponent
                 currentPage={currentPage}
                 currentPageFunction={handlePageChange}
-                pages={pages}
+                // pages={pages}s
                 totalPages={totalPages}
             />
         </div>
