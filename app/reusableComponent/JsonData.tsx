@@ -2521,6 +2521,39 @@ export const employeeListData = [
   },
 ];
 
+export const chartdataset = [
+  // Day-wise data
+  { timeType: "day", timeValue: "Mon", london: 10, paris: 15, newYork: 8, seoul: 12 },
+  { timeType: "day", timeValue: "Tue", london: 12, paris: 18, newYork: 10, seoul: 15 },
+  { timeType: "day", timeValue: "Wed", london: 14, paris: 20, newYork: 12, seoul: 18 },
+  { timeType: "day", timeValue: "Thu", london: 16, paris: 22, newYork: 14, seoul: 20 },
+  { timeType: "day", timeValue: "Fri", london: 18, paris: 25, newYork: 16, seoul: 22 },
+  { timeType: "day", timeValue: "Sat", london: 20, paris: 28, newYork: 18, seoul: 25 },
+  { timeType: "day", timeValue: "Sun", london: 22, paris: 30, newYork: 20, seoul: 27 },
+
+  // Month-wise data
+  { timeType: "month", timeValue: "Jan", london: 300, paris: 350, newYork: 280, seoul: 320 },
+  { timeType: "month", timeValue: "Feb", london: 280, paris: 330, newYork: 260, seoul: 310 },
+  { timeType: "month", timeValue: "Mar", london: 310, paris: 360, newYork: 290, seoul: 330 },
+  { timeType: "month", timeValue: "Apr", london: 320, paris: 370, newYork: 300, seoul: 340 },
+  { timeType: "month", timeValue: "May", london: 350, paris: 400, newYork: 320, seoul: 370 },
+  { timeType: "month", timeValue: "Jun", london: 360, paris: 410, newYork: 330, seoul: 380 },
+  { timeType: "month", timeValue: "Jul", london: 370, paris: 420, newYork: 340, seoul: 390 },
+  { timeType: "month", timeValue: "Aug", london: 380, paris: 430, newYork: 350, seoul: 400 },
+  { timeType: "month", timeValue: "Sep", london: 390, paris: 440, newYork: 360, seoul: 410 },
+  { timeType: "month", timeValue: "Oct", london: 400, paris: 450, newYork: 370, seoul: 420 },
+  { timeType: "month", timeValue: "Nov", london: 410, paris: 460, newYork: 380, seoul: 430 },
+  { timeType: "month", timeValue: "Dec", london: 420, paris: 470, newYork: 390, seoul: 440 },
+
+  // Year-wise data
+  { timeType: "year", timeValue: "2020", london: 4000, paris: 4500, newYork: 3800, seoul: 4200 },
+  { timeType: "year", timeValue: "2021", london: 4200, paris: 4700, newYork: 4000, seoul: 4400 },
+  { timeType: "year", timeValue: "2022", london: 4400, paris: 4900, newYork: 4200, seoul: 4600 },
+  { timeType: "year", timeValue: "2023", london: 4600, paris: 5100, newYork: 4400, seoul: 4800 },
+  { timeType: "year", timeValue: "2024", london: 4800, paris: 5300, newYork: 4600, seoul: 5000 },
+];
+
+
 export const salesTDMReport=[
   {
       "conName": "Mekala Ramanan",
