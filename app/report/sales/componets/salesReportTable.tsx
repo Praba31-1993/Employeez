@@ -216,6 +216,7 @@ function SalesReportTable({ salesData }: any) {
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
+              <th></th>
               {Object.keys(headers).map((header) => {
                 const key: any = headers[header as keyof typeof headers]; // Get the actual column key
 
@@ -338,13 +339,15 @@ function SalesReportTable({ salesData }: any) {
           <tbody className="dashboardcard">
             {rowsList?.map((item: any, index: number) => (
               <tr key={item.conId}>
-                <td className="para textheader d-flex gap-2 py-3">
+                <td className="para textheader py-3">
                   <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
+                </td>
+                <td className="para textheader py-3">
                   {item?.conName}
                 </td>
                 <td className="para textheader py-3">{item?.vndName}</td>
                 <td
-                  className="para textheader"
+                  className="para textheader py-3"
                   style={{ whiteSpace: "nowrap" }}
                 >
                   {item?.cust_PO_Number}
