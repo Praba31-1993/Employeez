@@ -21,6 +21,7 @@ import { Colors } from "@/app/reusableComponent/styles";
 import ClickableChips from "@/app/reusableComponent/chips";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 type Row = {
     id: number | string;
@@ -253,14 +254,12 @@ function Comphistory() {
                                             <FontAwesomeIcon
                                                 icon={faSort}
                                                 style={{ cursor: "pointer", height: "10px" }}
-                                                onClick={() => handleSort(key as keyof Row)}
-                                            />
+                                                onClick={() => handleSort(key as keyof Row)} />
                                             <div style={{ position: "relative" }}>
                                                 <FontAwesomeIcon
                                                     icon={faFilter}
                                                     style={{ cursor: "pointer", height: "10px" }}
-                                                    onClick={(event) => handleFilterToggle(key, event)}
-                                                />
+                                                    onClick={(event) => handleFilterToggle(key, event)} />
                                                 {activeFilterColumn === key && (
                                                     <div
                                                         className="card card-body"
@@ -282,33 +281,28 @@ function Comphistory() {
                                                                         className="form-control"
                                                                         value={filterYear}
                                                                         onChange={(e) => setFilterYear(e.target.value)}
-                                                                        placeholder="Enter Year (YYYY)"
-                                                                    />
+                                                                        placeholder="Enter Year (YYYY)" />
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
                                                                         value={filterMonth}
                                                                         onChange={(e) => setFilterMonth(e.target.value)}
-                                                                        placeholder="Enter Month (MM)"
-                                                                    />
+                                                                        placeholder="Enter Month (MM)" />
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
                                                                         value={filterDay}
                                                                         onChange={(e) => setFilterDay(e.target.value)}
-                                                                        placeholder="Enter Day (DD)"
-                                                                    />
+                                                                        placeholder="Enter Day (DD)" />
                                                                 </>
                                                             ) : (
                                                                 <>
                                                                     <select
                                                                         className="form-control selectborder"
                                                                         value={filterOperator}
-                                                                        onChange={(e) =>
-                                                                            setFilterOperator(
-                                                                                e.target.value as "equal" | "notEqual"
-                                                                            )
-                                                                        }
+                                                                        onChange={(e) => setFilterOperator(
+                                                                            e.target.value as "equal" | "notEqual"
+                                                                        )}
                                                                     >
                                                                         <option value="equal">Equal</option>
                                                                         <option value="notEqual">Not Equal To</option>
@@ -318,8 +312,7 @@ function Comphistory() {
                                                                         className="form-control"
                                                                         value={filterValue}
                                                                         onChange={(e) => setFilterValue(e.target.value)}
-                                                                        placeholder={`Enter ${header} value`}
-                                                                    />
+                                                                        placeholder={`Enter ${header} value`} />
                                                                 </>
                                                             )}
                                                         </div>
@@ -337,8 +330,12 @@ function Comphistory() {
                                             </div>
                                         </span>
                                     </th>
+                                    
+                                    
                                 );
+                               
                             })}
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -357,8 +354,11 @@ function Comphistory() {
                                 </td>
                                 <td className="para textheader" style={{ whiteSpace: "nowrap" }}>{item?.endDate}</td>
 
-                                <td className="para textheader">
+                                <td className="para textheader" >
                                    $ {item?.amount}
+                                </td>
+                                <td className="para textheader">
+                                   <RemoveRedEyeOutlinedIcon className="cursorpointer" titleAccess="View History"  sx={{color:"#8c57ff"}} />
                                 </td>
                             </tr>
                         ))}

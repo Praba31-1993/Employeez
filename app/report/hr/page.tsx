@@ -18,7 +18,6 @@ function Hr_report() {
                         selectedTimeOff === "" ? "Vacation report" : selectedTimeOff
                     }
                 />
-
                 <div className="row">
                     <div className="col-6">
                         <p className="textheader heading my-2">Hr report</p>

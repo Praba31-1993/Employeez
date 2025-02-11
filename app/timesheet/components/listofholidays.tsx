@@ -18,7 +18,7 @@ export default function Listofholidays({
         {/* timesheet approver */}
 
         {/* list of holidays */}
-        <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
+        <div className=" mb-1 align-items-center d-flex mt-4">
           {/* <Image src={gift} alt={""} /> */}
           <ImageComponent
             width={24}
@@ -43,7 +43,7 @@ export default function Listofholidays({
         ))}
 
         {/* vacation */}
-        <div className="timesheetdetails mb-1 align-items-center d-flex mt-4">
+        <div className=" mb-1 align-items-center d-flex mt-4">
           {/* <Image src={carry} alt={""} /> */}
           <ImageComponent
             width={24}
@@ -72,7 +72,7 @@ export default function Listofholidays({
 export function Timesheetaproover() {
   return (
     <>
-      <div className="timesheetdetails  align-items-center d-flex mt-4">
+      <div className="  align-items-center d-flex mt-4">
         {/* <Image src={calendar} alt={""} /> */}
         <ImageComponent
           width={20}
