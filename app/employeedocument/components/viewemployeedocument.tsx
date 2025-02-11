@@ -260,7 +260,7 @@ function ViewEmployeeDocument({ employeeId }: any) {
                           <div className="d-flex flex-column p-2 gap-2">
                             <>
                               <select
-                                className="form-control tableselector"
+                                className="form-control selectborder"
                                 value={filterOperator}
                                 onChange={(e) =>
                                   setFilterOperator(
@@ -353,7 +353,7 @@ function ViewEmployeeDocument({ employeeId }: any) {
       <Paginationcomponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
-        pages={pages}
+        // pages={pages}
         totalPages={totalPages}
       />
     </div>

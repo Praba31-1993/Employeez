@@ -10,19 +10,19 @@ function Edit_personal_info() {
         <div className='dashboardcard px-3 py-4 rounded'>
             <div className="row">
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='First name ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='First name ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Middle name ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Middle name ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Last name ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Last name ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="email " placeholder='Alternate email id ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="email " placeholder='Alternate email id ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Mobile no ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Mobile no ' />
                 </div>
                 {/* document */}
                 <div className="col-12 px-0">

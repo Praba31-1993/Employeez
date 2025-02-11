@@ -296,7 +296,7 @@ function Changerequestfilter() {
                                                         ) : (
                                                             <>
                                                                 <select
-                                                                    className="form-control tableselector"
+                                                                    className="form-control selectborder"
                                                                     value={filterOperator}
                                                                     onChange={(e) =>
                                                                         setFilterOperator(
@@ -373,7 +373,7 @@ function Changerequestfilter() {
             <Paginationcomponent
                 currentPage={currentPage}
                 currentPageFunction={handlePageChange}
-                pages={pages}
+                // pages={pages}s
                 totalPages={totalPages}
             />
         </div>

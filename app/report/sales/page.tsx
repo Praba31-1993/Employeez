@@ -27,6 +27,13 @@ function SalesReport() {
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [pages, setPages] = useState([]);
   const useColors = Colors();
+  const ActiveEmployees = salesTDMReport?.filter(
+    (list: any) => list?.status === "InProgress"
+  );
+  const InactiveEmployees = salesTDMReport?.filter(
+    (list: any) => list?.status === "Closed"
+  );
+
   const headersQuery: any = {
     "Employee Name": "conName",
     Company: "vndName",
@@ -65,30 +72,11 @@ function SalesReport() {
     setCountForPerPage(5);
   }, []);
 
-  // useEffect(() => {
-  //   let filteredData = salesTDMReport;
-
-  //   if (search.trim() !== "") {
-  //     filteredData = SearchLogic(salesTDMReport, search);
-  //   }
-
-  //   const currentPageItems = salesReport?.slice(
-  //     (currentPage - 1) * countPerPage,
-  //     currentPage * countPerPage
-  //   );
-
-  //   console.log("current", currentPageItems);
-
-  //   setSalesReport(currentPageItems);
-  // }, [search, currentPage]);
-
   const currentPageItems = salesReport?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
 
-  console.log('currentPageItems', currentPageItems);
-  
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
@@ -139,13 +127,23 @@ function SalesReport() {
 
             <div className="d-flex gap-5 heading2 textheader">
               <p className="mn-0">
-                Total Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Total Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
+                </span>
               </p>
               <p className="mn-0">
-                Active Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Active Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {ActiveEmployees?.length.toString().padStart(2, "0")}
+
+                </span>
               </p>
               <p className="mn-0">
-                Inactive Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Inactive Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {InactiveEmployees?.length.toString().padStart(2, "0")}
+                </span>
               </p>
             </div>
 
@@ -166,18 +164,29 @@ function SalesReport() {
                 </div>
               </div>
 
-              <div
-                className="text-end mb-3"
-                style={{
-                  border: "1px solid rgb(204, 204, 204)",
-                  // width: "100px",
-                }}
-              >
-                <DropdownComponent
+              <div className="text-end mb-3">
+                {/* <DropdownComponent
                   dropdownlist={statusList}
                   selectedDatafunction={(data: any) => setStatusTab(data)}
                   color={useColors.themeRed}
-                />
+                /> */}
+                <select name="" id=""  className="para seleborder" style={{ color:useColors.themeRed,background:"transparent"}}>
+                  {statusList && statusList?.length > 0 ? (
+                    statusList?.map((item: any, index: number) => (
+                      <option
+                        key={`${item.id}-${index}`}
+                        value={item.label}
+                        className="cursorPointer textheader"
+                      >
+                        {item.label}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="" disabled>
+                      No options available
+                    </option>
+                  )}
+                </select>
               </div>
               <button
                 className="outlinebtn rounded px-3 py-1"
@@ -203,7 +212,7 @@ function SalesReport() {
             <PaginationComponent
               currentPage={currentPage}
               currentPageFunction={handlePageChange}
-              pages={pages}
+              // pages={pages}
               totalPages={totalPages}
             />
           </div>

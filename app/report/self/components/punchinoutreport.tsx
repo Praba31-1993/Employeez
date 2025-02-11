@@ -296,7 +296,7 @@ function Punchinoutreport() {
                             ) : (
                               <>
                                 <select
-                                  className="form-control tableselector"
+                                  className="form-control selectborder"
                                   value={filterOperator}
                                   onChange={(e) =>
                                     setFilterOperator(
@@ -367,7 +367,7 @@ function Punchinoutreport() {
       <Paginationcomponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
-        pages={pages}
+        // pages={pages}
         totalPages={totalPages}
       />
     </div>

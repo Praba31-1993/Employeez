@@ -34,7 +34,7 @@ function CreateProject() {
             <div className="row row-gap-4">
               <div className="col-md-4 col-12 colPadding">
                 <select
-                  className="w-100 p-3 rounded textheader tableselector"
+                  className="w-100 p-3 rounded textheader selectborder"
                   name=""
                   id=""
                 >
@@ -51,7 +51,7 @@ function CreateProject() {
               </div>
               <div className="col-xxl-4 col-md-4 col-12 colPadding">
                 <select
-                  className="w-100 p-3 rounded textheader tableselector"
+                  className="w-100 p-3 rounded textheader selectborder"
                   name=""
                   id=""
                 >

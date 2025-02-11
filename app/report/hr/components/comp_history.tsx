@@ -20,6 +20,7 @@ import {
 import { Colors } from "@/app/reusableComponent/styles";
 import ClickableChips from "@/app/reusableComponent/chips";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 
 type Row = {
     id: number | string;
@@ -301,7 +302,7 @@ function Comphistory() {
                                                             ) : (
                                                                 <>
                                                                     <select
-                                                                        className="form-control tableselector"
+                                                                        className="form-control selectborder"
                                                                         value={filterOperator}
                                                                         onChange={(e) =>
                                                                             setFilterOperator(
@@ -365,11 +366,11 @@ function Comphistory() {
                 </table>
             </div>
             {/* table ends */}
-            <Paginationcomponent
-                currentPage={currentPage}
-                currentPageFunction={handlePageChange}
-                pages={pages}
-                totalPages={totalPages}
+            <PaginationComponent
+              currentPage={currentPage}
+              currentPageFunction={handlePageChange}
+              // pages={pages}
+              totalPages={totalPages}
             />
         </div>
     );
