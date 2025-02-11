@@ -63,14 +63,14 @@ const PaginationComponent: React.FC<PaginationProps> = ({
               backgroundColor: currentPage === page ? useColors.themeRed : "transparent",
               color: currentPage === page ? "#fff" : "inherit",
               borderRadius: "50%",
-              margin: "0 5px",
-              padding: "5px 10px",
+              padding: typeof page === "number" && page > 9 ? "7px 8px" : "5px 10px", // Single vs double-digit padding
             }}
             onClick={() => typeof page === "number" && currentPageFunction(page)}
           >
             {page}
           </div>
         ))}
+
 
         <div
           className="page-item"
