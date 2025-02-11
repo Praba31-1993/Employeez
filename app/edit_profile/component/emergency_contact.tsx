@@ -10,7 +10,7 @@ function Emergency_contact({ selectedOption, setSelectedOption }: any) {
         <div className='dashboardcard px-3 py-4 rounded'>
             <div className="row">
                 <div className="col-md-3 mb-3">
-                    <select className="tableselector textheader py-2 w-100 rounded px-2"
+                    <select className="selectborder textheader py-2 w-100 rounded px-2"
                         value={selectedOption}
                         onChange={(e) => setSelectedOption(e.target.value)}>
                         <option value="2">Emergency address</option>
@@ -19,32 +19,32 @@ function Emergency_contact({ selectedOption, setSelectedOption }: any) {
                     </select>
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Contact person ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Contact person ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Relationship* ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Relationship* ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Mobile no ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Mobile no ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='Address ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='Address ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='City ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='City ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="text " placeholder='State ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="text " placeholder='State ' />
                 </div>
                 <div className="col-md-3 mb-3">
-                    <select className='tableselector textheader py-2 w-100 rounded px-2' name="" id="">
+                    <select className='selectborder textheader py-2 w-100 rounded px-2' name="" id="">
                         <option value="0">Country</option>
                         <option value="1">India</option>
                         <option value="2">Us</option>
                     </select>
                 </div>
                 <div className="col-md-3 mb-3">
-                    <input className='tableselector textheader py-2 w-100 rounded px-2' type="email " placeholder='Postal code ' />
+                    <input className='selectborder textheader py-2 w-100 rounded px-2' type="email " placeholder='Postal code ' />
                 </div>
                 {/* document */}
                 <div className="col-12 px-0">

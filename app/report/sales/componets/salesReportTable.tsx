@@ -285,7 +285,7 @@ function SalesReportTable({ salesData }: any) {
                               ) : (
                                 <>
                                   <select
-                                    className="form-control tableselector"
+                                    className="form-control selectborder"
                                     value={filterOperator}
                                     onChange={(e) =>
                                       setFilterOperator(

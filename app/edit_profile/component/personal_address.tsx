@@ -14,7 +14,7 @@ function Personal_address({ selectedOption, setSelectedOption }:any) {
           <div className="row">
             <div className="col-md-3">
               <select
-                className="tableselector textheader py-2 w-100 rounded px-2"
+                className="selectborder textheader py-2 w-100 rounded px-2"
                 value={selectedOption}
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
@@ -27,23 +27,23 @@ function Personal_address({ selectedOption, setSelectedOption }:any) {
         </div>
 
         <div className="col-md-3 mb-3">
-          <input className="tableselector textheader py-2 w-100 rounded px-2" type="text" placeholder="Address" />
+          <input className="selectborder textheader py-2 w-100 rounded px-2" type="text" placeholder="Address" />
         </div>
         <div className="col-md-3 mb-3">
-          <input className="tableselector textheader py-2 w-100 rounded px-2" type="text" placeholder="City" />
+          <input className="selectborder textheader py-2 w-100 rounded px-2" type="text" placeholder="City" />
         </div>
         <div className="col-md-3 mb-3">
-          <input className="tableselector textheader py-2 w-100 rounded px-2" type="text" placeholder="State" />
+          <input className="selectborder textheader py-2 w-100 rounded px-2" type="text" placeholder="State" />
         </div>
         <div className="col-md-3 mb-3">
-          <select className="tableselector textheader py-2 w-100 rounded px-2">
+          <select className="selectborder textheader py-2 w-100 rounded px-2">
             <option value="0">Country</option>
             <option value="1">India</option>
             <option value="2">US</option>
           </select>
         </div>
         <div className="col-md-3 mb-3">
-          <input className="tableselector textheader py-2 w-100 rounded px-2" type="email" placeholder="Postal code" />
+          <input className="selectborder textheader py-2 w-100 rounded px-2" type="email" placeholder="Postal code" />
         </div>
 
         {/* Document Upload */}

@@ -26,29 +26,34 @@ function Editprofile() {
                                 <ArrowBackOutlinedIcon className="me-1" sx={{ fontSize: "25px" }} /> Back
                             </Link>
                         </div>
-                        <div className="d-flex mt-4">
-                            <p
-                                className="para cursorpointer px-3 py-2"
-                                onClick={() => setSelectedTab("personal")}
+                        <div className="d-flex my-4">
+                            <div className="d-flex px-3 me-md-2 align-items-center" onClick={() => setSelectedTab("personal")}
                                 style={{
                                     backgroundColor: selectedTab === "personal" ? useColors.themeRed : "transparent",
                                     color: selectedTab === "personal" ? "#fff" : "#6d6777",
                                     borderRadius: "5px",
-                                }}
-                            >
-                                <GroupOutlinedIcon className="me-1" sx={{ fontSize: "18px" }} /> Personal info
-                            </p>
-                            <p
-                                className="para cursorpointer px-3 py-2"
-                                onClick={() => setSelectedTab("contact")}
+                                    transition:"1s"
+                                    
+                                }}>
+                                     <GroupOutlinedIcon className="" sx={{ fontSize: "18px" }} /> 
+                                <p className="para cursorpointer px-1 px-md-3 mb-0 py-2" >
+                                   Personal info
+                                </p>
+                            </div>
+                            <div className="d-flex px-3  align-items-center" onClick={() => setSelectedTab("contact")}
                                 style={{
                                     backgroundColor: selectedTab === "contact" ? useColors.themeRed : "transparent",
-                                    color: selectedTab === "contact" ? "#fff" : "#6d6777 ",
+                                    color: selectedTab === "contact" ? "#fff" : "#6d6777",
                                     borderRadius: "5px",
-                                }}
-                            >
-                                <ContactsOutlinedIcon className="me-1" sx={{ fontSize: "18px" }} /> Contact details
-                            </p>
+                                    transition:"1s"
+                                }}>
+                                     <ContactsOutlinedIcon className="" sx={{ fontSize: "18px" }} /> 
+                                <p className="para cursorpointer px-1 px-md-3 mb-0 py-2" >
+                                Contact details
+                                </p>
+                            </div>
+
+                            
                         </div>
                     </div>
                 </div>

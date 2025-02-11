@@ -328,7 +328,7 @@ function EmployeeDocumentTable({getEmployeeDetails}:EmployeeDocumentProps) {
                                 ) : (
                                   <>
                                     <select
-                                      className="form-control tableselector"
+                                      className="form-control selectborder"
                                       value={filterOperator}
                                       onChange={(e) =>
                                         setFilterOperator(

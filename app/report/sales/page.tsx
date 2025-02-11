@@ -164,18 +164,29 @@ function SalesReport() {
                 </div>
               </div>
 
-              <div
-                className="text-end mb-3"
-                style={{
-                  border: "1px solid rgb(204, 204, 204)",
-                  // width: "100px",
-                }}
-              >
-                <DropdownComponent
+              <div className="text-end mb-3">
+                {/* <DropdownComponent
                   dropdownlist={statusList}
                   selectedDatafunction={(data: any) => setStatusTab(data)}
                   color={useColors.themeRed}
-                />
+                /> */}
+                <select name="" id=""  className="para seleborder" style={{ color:useColors.themeRed,background:"transparent"}}>
+                  {statusList && statusList?.length > 0 ? (
+                    statusList?.map((item: any, index: number) => (
+                      <option
+                        key={`${item.id}-${index}`}
+                        value={item.label}
+                        className="cursorPointer textheader"
+                      >
+                        {item.label}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="" disabled>
+                      No options available
+                    </option>
+                  )}
+                </select>
               </div>
               <button
                 className="outlinebtn rounded px-3 py-1"
