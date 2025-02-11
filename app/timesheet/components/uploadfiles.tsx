@@ -113,7 +113,7 @@ export function Viewfiles() {
             data-bs-parent="#accordionFlushExample"
           >
             <div className="accordion-body py-2 px-3 mt-3">
-              <div className="timesheetdetails align-items-center d-flex">
+              <div className=" align-items-center d-flex">
                 <DescriptionOutlinedIcon sx={{ color: "#8C57FF" }} />
                 <p className="para ps-2 mb-0 unselectcolor">Document</p>
               </div>

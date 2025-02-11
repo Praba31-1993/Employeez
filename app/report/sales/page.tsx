@@ -130,22 +130,22 @@ function SalesReport() {
               />
             </div>
 
-            <div className="d-flex gap-5 heading2 textheader">
-              <p className="mn-0">
+            <div className="d-flex gap-2 heading2 textheader">
+              <p className="mb-0 dashboardcard   p-2  rounded">
                 Total Employee{" "}
-                <span style={{ color: "#8C57FF" }}>
+                <span  style={{ color: "#8C57FF" ,fontWeight:600 }}>
                   {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
                 </span>
               </p>
-              <p className="mn-0">
+              <p className="mb-0 dashboardcard   p-2  rounded">
                 Active Employee{" "}
-                <span style={{ color: "#8C57FF" }}>
+                <span  style={{ color: "#8C57FF" ,fontWeight:600 }}>
                   {ActiveEmployees?.length.toString().padStart(2, "0")}
                 </span>
               </p>
-              <p className="mn-0">
+              <p className="mb-0 dashboardcard   p-2  rounded">
                 Inactive Employee{" "}
-                <span style={{ color: "#8C57FF" }}>
+                <span style={{ color: "#8C57FF" ,fontWeight:600 }}>
                   {InactiveEmployees?.length.toString().padStart(2, "0")}
                 </span>
               </p>
