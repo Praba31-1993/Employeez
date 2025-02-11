@@ -27,6 +27,13 @@ function SalesReport() {
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [pages, setPages] = useState([]);
   const useColors = Colors();
+  const ActiveEmployees = salesTDMReport?.filter(
+    (list: any) => list?.status === "InProgress"
+  );
+  const InactiveEmployees = salesTDMReport?.filter(
+    (list: any) => list?.status === "Closed"
+  );
+
   const headersQuery: any = {
     "Employee Name": "conName",
     Company: "vndName",
@@ -65,14 +72,10 @@ function SalesReport() {
     setCountForPerPage(5);
   }, []);
 
- 
-
   const currentPageItems = salesReport?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
-
- 
 
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
@@ -124,13 +127,23 @@ function SalesReport() {
 
             <div className="d-flex gap-5 heading2 textheader">
               <p className="mn-0">
-                Total Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Total Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
+                </span>
               </p>
               <p className="mn-0">
-                Active Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Active Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {ActiveEmployees?.length.toString().padStart(2, "0")}
+
+                </span>
               </p>
               <p className="mn-0">
-                Inactive Employee <span style={{ color: "#8C57FF" }}>04</span>
+                Inactive Employee{" "}
+                <span style={{ color: "#8C57FF" }}>
+                  {InactiveEmployees?.length.toString().padStart(2, "0")}
+                </span>
               </p>
             </div>
 
@@ -185,14 +198,12 @@ function SalesReport() {
               ""
             )}
 
-           
-              <PaginationComponent
-                currentPage={currentPage}
-                currentPageFunction={handlePageChange}
-                // pages={pages}
-                totalPages={totalPages}
-              />
-           
+            <PaginationComponent
+              currentPage={currentPage}
+              currentPageFunction={handlePageChange}
+              // pages={pages}
+              totalPages={totalPages}
+            />
           </div>
         </div>
       </Sidebar>

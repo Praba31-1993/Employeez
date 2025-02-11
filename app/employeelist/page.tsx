@@ -123,7 +123,7 @@ function EmployeeList() {
         <PaginationComponent
           currentPage={currentPage}
           currentPageFunction={handlePageChange}
-          pages={pages}
+          // pages={pages}
           totalPages={totalPages}
         />
       </Sidebar>

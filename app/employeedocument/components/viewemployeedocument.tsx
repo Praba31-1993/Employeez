@@ -353,7 +353,7 @@ function ViewEmployeeDocument({ employeeId }: any) {
       <Paginationcomponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
-        pages={pages}
+        // pages={pages}
         totalPages={totalPages}
       />
     </div>
