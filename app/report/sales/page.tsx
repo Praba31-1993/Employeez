@@ -65,30 +65,15 @@ function SalesReport() {
     setCountForPerPage(5);
   }, []);
 
-  // useEffect(() => {
-  //   let filteredData = salesTDMReport;
-
-  //   if (search.trim() !== "") {
-  //     filteredData = SearchLogic(salesTDMReport, search);
-  //   }
-
-  //   const currentPageItems = salesReport?.slice(
-  //     (currentPage - 1) * countPerPage,
-  //     currentPage * countPerPage
-  //   );
-
-  //   console.log("current", currentPageItems);
-
-  //   setSalesReport(currentPageItems);
-  // }, [search, currentPage]);
+ 
 
   const currentPageItems = salesReport?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
 
-  console.log('currentPageItems', currentPageItems);
-  
+ 
+
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
   };
@@ -200,12 +185,14 @@ function SalesReport() {
               ""
             )}
 
-            <PaginationComponent
-              currentPage={currentPage}
-              currentPageFunction={handlePageChange}
-              pages={pages}
-              totalPages={totalPages}
-            />
+           
+              <PaginationComponent
+                currentPage={currentPage}
+                currentPageFunction={handlePageChange}
+                // pages={pages}
+                totalPages={totalPages}
+              />
+           
           </div>
         </div>
       </Sidebar>
