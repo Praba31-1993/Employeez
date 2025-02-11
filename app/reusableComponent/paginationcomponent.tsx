@@ -10,8 +10,6 @@ interface PaginationProps {
   totalPages: number;
 }
 
-
-
 const PaginationComponent: React.FC<PaginationProps> = ({
   currentPage,
   currentPageFunction,
