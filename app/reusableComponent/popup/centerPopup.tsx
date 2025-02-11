@@ -78,6 +78,7 @@ export function CenterPopup({ show, close, projectLists }: any) {
             </div>
           </div>
         </div>
+        
       </section>
     </>
   );
