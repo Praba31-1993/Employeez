@@ -151,15 +151,16 @@ function SalesReport() {
               </p>
             </div>
 
-            <div className="d-flex gap-3 justify-content-between align-items-center mb-3 pe-3">
-              <div className="d-flex gap-4">
-                <select
+            <div className="d-flex gap-3 justify-content-between align-items-center my-3 pe-3">
+              <div className="d-flex gap-4 align-items-center">
+               <div className="px-2 rounded"  style={{border: `1px solid ${useColors.themeRed}`,}}>
+               <select
                   name=""
                   id=""
                   className="para py-2 rounded"
                   style={{
                     color: useColors.themeRed,
-                    border: `1px solid ${useColors.themeRed}`,
+                    
                     background: "transparent",
                   }}
                   onChange={(e)=>setStatusTab(e.target.value)}
@@ -181,6 +182,7 @@ function SalesReport() {
                     </option>
                   )}
                 </select>
+               </div>
                 {selectedStatus === "Inactive" && <div>
                   <BarChartIcon
                     sx={{
