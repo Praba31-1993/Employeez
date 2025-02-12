@@ -237,7 +237,7 @@ function EmployeeInformation({ salesData }: any) {
 
   useEffect(() => {
     setRows(currentPageItems);
-  }, [currentPageItems]);
+  }, []);
 
   return (
     <div>

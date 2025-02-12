@@ -17,10 +17,13 @@ import Image from "next/image";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import BasicBars from "./componets/barChart";
 import EmployeeInformation from "./componets/employeeinformation";
+import FixedProject from "./componets/fixedproject";
+import InternalProject from "./componets/internalproject";
+import Commission from "./componets/commission";
 
 function SalesReport() {
   const [salesReport, setSalesReport] = useState<any>();
-  const [selectedTab, setSelectedTab] = useState<string>("T&M PO");
+  const [selectedTab, setSelectedTab] = useState<string>("");
   const [selectedStatus, setStatusTab] = useState<string>("Active");
   const [hideChart, setHideChart] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
@@ -60,6 +63,10 @@ function SalesReport() {
   ];
 
   useEffect(() => {
+    setSelectedTab("T&M PO");
+  }, []);
+
+  useEffect(() => {
     if (selectedStatus === "Active") {
       const activeStatus = salesTDMReport.filter(
         (list: any) => list?.status === "InProgress"
@@ -83,8 +90,6 @@ function SalesReport() {
     setSalesReport(res);
   };
 
-  console.log("selected", selectedStatus);
-
   return (
     <div>
       <Sidebar>
@@ -105,31 +110,37 @@ function SalesReport() {
               />
             </div>
 
-            {selectedTab === "T&M PO" && (
+            {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
               <div className="d-flex gap-2 heading2 textheader">
-                <p className="mb-0 dashboardcard   p-2  rounded">
+                <p className="mb-0 dashboardcard p-2 rounded">
                   Total Employee{" "}
                   <span style={{ color: "#8C57FF", fontWeight: 600 }}>
-                    {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
+                    {salesTDMReport?.length.toString().padStart(2, "0")}
                   </span>
                 </p>
-                <p className="mb-0 dashboardcard   p-2  rounded">
+                <p className="mb-0 dashboardcard p-2 rounded">
                   Active Employee{" "}
                   <span style={{ color: "#8C57FF", fontWeight: 600 }}>
                     {ActiveEmployees?.length.toString().padStart(2, "0")}
                   </span>
                 </p>
-                <p className="mb-0 dashboardcard   p-2  rounded">
+                <p className="mb-0 dashboardcard p-2 rounded">
                   Inactive Employee{" "}
                   <span style={{ color: "#8C57FF", fontWeight: 600 }}>
                     {InactiveEmployees?.length.toString().padStart(2, "0")}
                   </span>
                 </p>
               </div>
-            )}
+            ) : null}
 
-            <div className="d-flex gap-3 justify-content-between align-items-center my-3 pe-3">
-              {selectedTab === "T&M PO" && (
+            <div
+              className={
+                selectedTab.trim() === "" || selectedTab === "T&M PO" 
+                  ? "d-flex gap-3 justify-content-between align-items-center my-3 pe-3"
+                  : "d-flex gap-3 justify-content-end align-items-center my-3 pe-3"
+              }
+            >
+             {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
                 <div className="d-flex gap-4 align-items-center">
                   <div
                     className="px-2 rounded"
@@ -177,6 +188,8 @@ function SalesReport() {
                     </div>
                   )}
                 </div>
+              ) : (
+                null
               )}
 
               <div className="d-flex justify-content-end gap-3 align-items-center">
@@ -212,14 +225,23 @@ function SalesReport() {
 
             {selectedTab === "T&M PO" || selectedTab === "" ? (
               <>
-                <SalesReportTable salesData={salesTDMReport} />
+                <SalesReportTable salesData={salesReport} />
               </>
             ) : (
               ""
             )}
 
+            {selectedTab === "Fixed PO" && (
+              <FixedProject salesData={salesReport} />
+            )}
+            {selectedTab === "Internal PO" && (
+              <InternalProject salesData={salesReport} />
+            )}
+            {selectedTab === "Commission" && (
+              <Commission salesData={salesReport} />
+            )}
             {selectedTab === "Employee Information" && (
-              <EmployeeInformation salesData={salesTDMReport} />
+              <EmployeeInformation salesData={salesReport} />
             )}
           </div>
         </div>
