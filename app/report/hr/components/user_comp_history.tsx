@@ -13,14 +13,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import {
     handleCSVExport,
+    handleCSVExport1,
     handleExcelExport,
     SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
 
+import user from "@/public/assets/img/Ellipse 14.svg";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import Comp_history_popup from "./comp_history_popup";
+import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import SaveAltOutlinedIcon from '@mui/icons-material/SaveAltOutlined';
 
 type Row = {
     id: number | string;
@@ -29,7 +31,7 @@ type Row = {
     approved_by: string;
     status: string;
 };
-function Comphistory() {
+function User_comphistory() {
     const [search, setSearch] = useState<string>("");
     const [searchList, setSearchList] = useState<any>(columnForApprover);
     const [rowsList, setRows] = useState<any>(getCompHistory);
@@ -88,8 +90,6 @@ function Comphistory() {
     // const headers = Object.keys(getCompHistory[0]);
 
     const headers: Record<string, keyof typeof getCompHistory[0]> = {
-        "Employee Name": "emp_Name",
-        "Employee ID": "emp_Id",
         "Component": "component",
         "From Date": "fromDate",
         "End Date": "endDate",
@@ -204,40 +204,33 @@ function Comphistory() {
     const [open, setOpen] = useState(false);
     return (
         <div>
-            {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
+        
             {/* column, filter */}
 
-            <div className="d-flex gap-5 justify-content-end  mx-3 ">
-                <div className="d-flex gap-3 mb-3">
-                    <Image src={favourite} alt="" width={24} height={24} />
-                    <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
-                        <div className="mt-1">
-                            <SearchIcon />
+            <div className="col-12">
+                            <div className="d-flex my-2 pb-2 align-tems-center justify-content-between borderbottom"  >
+                                <div className="d-flex align-tems-center">
+                                    <div style={{ width: "40px", height: "40px" }}>
+                                        <Image className="w-100 h-100 rounded-circle" src={user} style={{ objectFit: "cover" }} alt={""} />
+                                    </div>
+                                    <div className="ms-2">
+                                        <h4 className="heading2 mb-0 textheader">Simi Rajan (SR3894)</h4>
+                                        <h5 className="para mb-0 textheader">Employee</h5>
+                                    </div>
+                                </div>
+                                <div className="">
+                                    <Outlinebutton
+                                        color={useColors.themeRed}
+                                        border={`1px solid ${useColors.themeRed}`}
+                                        text="Export "
+                                        fontSize="12px"
+                                        background={"transparent"}
+                                        icon={<SaveAltOutlinedIcon sx={{fontSize:"20px"}} />}
+                                        onClick={() => handleCSVExport1(headers, getCompHistory)}
+                                    />
+                                </div>
+                            </div>
                         </div>
-
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="p-2 w-100"
-                            value={search}
-                            onChange={handleSearch}
-                        />
-                    </div>
-                </div>
-
-                <button
-                    className="outlinebtn rounded px-3 py-1"
-                    style={{
-                        color: useColors.themeRed,
-                        border: `1px solid ${useColors.themeRed}`,
-                        height: "fit-content",
-                    }}
-                    onClick={() => handleExcelExport(headers, getCompHistory)}
-                >
-                    Export <SaveAltIcon className="ml-2" />
-                </button>
-
-            </div>
 
             {/* Table Section */}
             <div className="" style={{ overflowX: "auto" }}>
@@ -335,15 +328,11 @@ function Comphistory() {
                                 );
 
                             })}
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody className="dashboardcard">
                         {currentPageItems?.map((item: any, index: any) => (
                             <tr key={index}>
-
-                                <td className="para textheader">{item?.emp_Name}</td>
-                                <td className="para textheader">{item?.emp_Id}</td>
                                 <td className="para textheader"> {item?.component} </td>
                                 <td
                                     className="para textheader"
@@ -356,9 +345,7 @@ function Comphistory() {
                                 <td className="para textheader" >
                                     $ {item?.amount}
                                 </td>
-                                <td className="para textheader">
-                                    <RemoveRedEyeOutlinedIcon onClick={() => setOpen((prev) => !prev)} className="cursorpointer" titleAccess="View History" sx={{ color: "#8c57ff" }} />
-                                </td>
+                                
                             </tr>
                         ))}
                     </tbody>
@@ -375,4 +362,4 @@ function Comphistory() {
     );
 }
 
-export default Comphistory;
+export default User_comphistory;

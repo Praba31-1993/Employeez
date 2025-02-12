@@ -513,6 +513,9 @@ select {
 .selectborder {
   border: 1px solid #dee2e6 !important;
 }
+.borderbottom{
+  border-bottom: 1px solid #dee2e6 !important;
+}
 
 .sorttable.table> :not(caption)>*>* {
   background-color: transparent !important;
