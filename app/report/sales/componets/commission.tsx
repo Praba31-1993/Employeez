@@ -28,7 +28,7 @@ interface ContractDetails {
   supplierName: string;
 }
 
-function SalesReportTable({ salesData }: any) {
+function Commission({ salesData }: any) {
   const [searchList, setSearchList] = useState<any>(columnForApprover);
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
   const [data, setData] = useState(searchList);
@@ -41,6 +41,7 @@ function SalesReportTable({ salesData }: any) {
     direction: null,
   });
 
+  // Filtering state
   const [filterKey, setFilterKey] = useState<keyof (typeof salesData)[0] | "">(
     ""
   );
@@ -366,7 +367,7 @@ function SalesReportTable({ salesData }: any) {
 
           <tbody className="dashboardcard">
             {rowsList?.map((item: any, index: number) => (
-              <tr key={index}>
+              <tr key={item.conId}>
                 <td>
                   <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
                 </td>
@@ -401,4 +402,4 @@ function SalesReportTable({ salesData }: any) {
   );
 }
 
-export default SalesReportTable;
+export default Commission;
