@@ -367,7 +367,7 @@ function EmployeeInformation({ salesData }: any) {
 
           <tbody className="dashboardcard">
             {rowsList?.map((item: any, index: number) => (
-              <tr key={item.conId}>
+              <tr key={index}>
                 <td>
                   <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
                 </td>
