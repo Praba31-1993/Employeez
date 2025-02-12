@@ -14,9 +14,9 @@ import {
 } from "@/app/reusableComponent/commonlogic";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import Image from "next/image";
-import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import BasicBars from "./componets/barChart";
+import EmployeeInformation from "./componets/employeeinformation";
 
 function SalesReport() {
   const [salesReport, setSalesReport] = useState<any>();
@@ -24,11 +24,7 @@ function SalesReport() {
   const [selectedStatus, setStatusTab] = useState<string>("Active");
   const [hideChart, setHideChart] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
-  const [countPerPage, setCountForPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalCount = salesTDMReport.length;
-  const totalPages = Math.ceil(totalCount / countPerPage);
-  const [pages, setPages] = useState([]);
+
   const useColors = Colors();
   const ActiveEmployees = salesTDMReport?.filter(
     (list: any) => list?.status === "InProgress"
@@ -64,27 +60,6 @@ function SalesReport() {
   ];
 
   useEffect(() => {
-    const arr: any = [];
-    for (let i = 1; i <= totalPages; i++) {
-      arr.push(i);
-    }
-    setPages(arr);
-  }, [totalPages]);
-
-  useEffect(() => {
-    setCountForPerPage(5);
-  }, []);
-
-  const currentPageItems = salesReport?.slice(
-    (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
-  );
-
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
-
-  useEffect(() => {
     if (selectedStatus === "Active") {
       const activeStatus = salesTDMReport.filter(
         (list: any) => list?.status === "InProgress"
@@ -108,8 +83,8 @@ function SalesReport() {
     setSalesReport(res);
   };
 
-  console.log('selected',selectedStatus);
-  
+  console.log("selected", selectedStatus);
+
   return (
     <div>
       <Sidebar>
@@ -130,70 +105,79 @@ function SalesReport() {
               />
             </div>
 
-            <div className="d-flex gap-2 heading2 textheader">
-              <p className="mb-0 dashboardcard   p-2  rounded">
-                Total Employee{" "}
-                <span  style={{ color: "#8C57FF" ,fontWeight:600 }}>
-                  {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
-                </span>
-              </p>
-              <p className="mb-0 dashboardcard   p-2  rounded">
-                Active Employee{" "}
-                <span  style={{ color: "#8C57FF" ,fontWeight:600 }}>
-                  {ActiveEmployees?.length.toString().padStart(2, "0")}
-                </span>
-              </p>
-              <p className="mb-0 dashboardcard   p-2  rounded">
-                Inactive Employee{" "}
-                <span style={{ color: "#8C57FF" ,fontWeight:600 }}>
-                  {InactiveEmployees?.length.toString().padStart(2, "0")}
-                </span>
-              </p>
-            </div>
+            {selectedTab === "T&M PO" && (
+              <div className="d-flex gap-2 heading2 textheader">
+                <p className="mb-0 dashboardcard   p-2  rounded">
+                  Total Employee{" "}
+                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                    {salesTDMReport?.length.toString().padStart(2, "0")}{" "}
+                  </span>
+                </p>
+                <p className="mb-0 dashboardcard   p-2  rounded">
+                  Active Employee{" "}
+                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                    {ActiveEmployees?.length.toString().padStart(2, "0")}
+                  </span>
+                </p>
+                <p className="mb-0 dashboardcard   p-2  rounded">
+                  Inactive Employee{" "}
+                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                    {InactiveEmployees?.length.toString().padStart(2, "0")}
+                  </span>
+                </p>
+              </div>
+            )}
 
             <div className="d-flex gap-3 justify-content-between align-items-center my-3 pe-3">
-              <div className="d-flex gap-4 align-items-center">
-               <div className="px-2 rounded"  style={{border: `1px solid ${useColors.themeRed}`,}}>
-               <select
-                  name=""
-                  id=""
-                  className="para py-2 rounded"
-                  style={{
-                    color: useColors.themeRed,
-                    
-                    background: "transparent",
-                  }}
-                  onChange={(e)=>setStatusTab(e.target.value)}
-                  value={selectedStatus}
-                >
-                  {statusList && statusList?.length > 0 ? (
-                    statusList?.map((item: any, index: number) => (
-                      <option
-                        key={`${item.id}-${index}`}
-                        value={item.label}
-                        className="cursorPointer textheader"
-                      >
-                        {item.label}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="" disabled>
-                      No options available
-                    </option>
+              {selectedTab === "T&M PO" && (
+                <div className="d-flex gap-4 align-items-center">
+                  <div
+                    className="px-2 rounded"
+                    style={{ border: `1px solid ${useColors.themeRed}` }}
+                  >
+                    <select
+                      name=""
+                      id=""
+                      className="para py-2 rounded"
+                      style={{
+                        color: useColors.themeRed,
+
+                        background: "transparent",
+                      }}
+                      onChange={(e) => setStatusTab(e.target.value)}
+                      value={selectedStatus}
+                    >
+                      {statusList && statusList?.length > 0 ? (
+                        statusList?.map((item: any, index: number) => (
+                          <option
+                            key={`${item.id}-${index}`}
+                            value={item.label}
+                            className="cursorPointer textheader"
+                          >
+                            {item.label}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="" disabled>
+                          No options available
+                        </option>
+                      )}
+                    </select>
+                  </div>
+                  {selectedStatus === "Inactive" && (
+                    <div>
+                      <BarChartIcon
+                        sx={{
+                          color: useColors.themeRed,
+                          background: "transparent",
+                        }}
+                        className="cursor-pointer"
+                        onClick={() => setHideChart((p) => !p)}
+                      />
+                    </div>
                   )}
-                </select>
-               </div>
-                {selectedStatus === "Inactive" && <div>
-                  <BarChartIcon
-                    sx={{
-                      color: useColors.themeRed,
-                      background: "transparent",
-                    }}
-                    className="cursor-pointer"
-                    onClick={() => setHideChart((p) => !p)}
-                  />
-                </div>}
-              </div>
+                </div>
+              )}
 
               <div className="d-flex justify-content-end gap-3 align-items-center">
                 <div className="d-flex gap-3 ">
@@ -228,25 +212,22 @@ function SalesReport() {
 
             {selectedTab === "T&M PO" || selectedTab === "" ? (
               <>
-                <SalesReportTable salesData={currentPageItems} />
+                <SalesReportTable salesData={salesTDMReport} />
               </>
             ) : (
               ""
             )}
 
-            <PaginationComponent
-              currentPage={currentPage}
-              currentPageFunction={handlePageChange}
-              // pages={pages}
-              totalPages={totalPages}
-            />
+            {selectedTab === "Employee Information" && (
+              <EmployeeInformation salesData={salesTDMReport} />
+            )}
           </div>
         </div>
 
         {/* popup Screen */}
         <section
           className={`showpopup ${hideChart ? "showpopupactive" : ""}`}
-          onClick={()=>setHideChart(false)}
+          onClick={() => setHideChart(false)}
         >
           <div
             className="summarysection  mx-auto px-2 py-2"
@@ -262,7 +243,7 @@ function SalesReport() {
             <div className="container-fluid">
               <div className="row px-2">
                 <div className="col-12">
-                  <BasicBars close={()=>setHideChart(false)} />
+                  <BasicBars close={() => setHideChart(false)} />
                 </div>
               </div>
               <div className="row mt-3 px-2"></div>

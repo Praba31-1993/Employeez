@@ -28,7 +28,7 @@ interface ContractDetails {
   supplierName: string;
 }
 
-function TableWithFilterAndSortReusableCode({ salesData }: any) {
+function EmployeeInformation({ salesData }: any) {
   const [searchList, setSearchList] = useState<any>(columnForApprover);
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
   const [data, setData] = useState(searchList);
@@ -402,4 +402,4 @@ function TableWithFilterAndSortReusableCode({ salesData }: any) {
   );
 }
 
-export default TableWithFilterAndSortReusableCode;
+export default EmployeeInformation;
