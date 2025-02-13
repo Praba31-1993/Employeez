@@ -145,20 +145,17 @@ main {
 
     .mobileSidebar {
         display: block;
-        background: #f4f4f4;
+        background: #fff;
+        width: 50% !important;
         z-index: 1 !important;
-        height: 100% !important;
         overflow-y: scroll;
-        box-shadow: 1.95px 1.95px 2.6px #00000026;
+    }
+    .dark .mobileSidebar {
+        background: #312d4b !important;
+        color: #e7e3fc !important;
     }
 
-    .mobileSidebar:hover {
-        display: block;
-
-        background: #f4f4f4;
-        width: 300px;
-    }
-
+   
     .sidebar:hover {
         width: 300px;
     }
@@ -215,18 +212,16 @@ main {
 
     .mobileSidebar {
         display: block;
-        background: #f4f4f4;
+        background: #fff;
         width: 50% !important;
         z-index: 1 !important;
         overflow-y: scroll;
     }
-
-    .mobileSidebar:hover {
-        display: block;
-
-        background: #f4f4f4;
-        width: 300px;
+    .dark .mobileSidebar {
+        background: #312d4b !important;
+        color: #e7e3fc !important;
     }
+
 
     .sidebar:hover {
         width: 300px;
