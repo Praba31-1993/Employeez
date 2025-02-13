@@ -29,7 +29,7 @@ function Employees() {
                     <p className="textheader mb-0 heading2">Employees</p>
                 </div>
                 <div className="col-4 text-left">
-                        <p className="shade mb-0 heading2 text-end ">Month/year</p>
+                    <p className="shade mb-0 heading2 text-end ">Month/year</p>
                 </div>
             </div>
 
@@ -62,7 +62,7 @@ function Employees() {
                         <div className="col-12 pb-3 mb-1 rounded borderbottom">
                             <div className="d-flex align-items-center">
                                 <div className="timesheetdetails p-3">
-                                    <BadgeOutlinedIcon sx={{color:"#8C57FF"}} />
+                                    <BadgeOutlinedIcon sx={{ color: "#8C57FF" }} />
                                 </div>
                                 <div>
                                     <h6 className="headin2 textheader">170</h6>
