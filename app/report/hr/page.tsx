@@ -20,7 +20,7 @@ function Hr_report() {
                 />
                 <div className="row">
                     <div className="col-4">
-                        <p className="textheader heading my-2">Hr report</p>
+                        <p className="textheader heading my-2">HR report</p>
                     </div>
                     <div className="col-8 text-end">
                         <DropdownComponent

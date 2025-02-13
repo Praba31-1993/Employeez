@@ -11,9 +11,13 @@ import favourite from "@/public/assets/img/favourite.svg";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import LocalPrintshopOutlinedIcon from '@mui/icons-material/LocalPrintshopOutlined';
+
 import {
     handleCSVExport,
     handleExcelExport,
+    handlePrint,
     SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
@@ -207,10 +211,11 @@ function Comphistory() {
             {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
             {/* column, filter */}
 
-            <div className="col-12">
+            <div className="col-12 px-0">
 
-                <div className="d-flex justify-content-end gap-3 mb-3  align-items-center">
-                    <Image src={favourite} alt="" width={24} height={24} />
+                <div className="d-flex justify-content-between align-items-center gap-3 mb-3  align-items-center">
+                   <div className="d-flex gap-2 align-items-center">
+                   
                     <div className="d-flex gap-2 searchbar ps-2  align-items-center">
                         <div className="mt-1">
                             <SearchIcon />
@@ -224,20 +229,14 @@ function Comphistory() {
                             onChange={handleSearch}
                         />
                     </div>
-                    <button
-                        className="outlinebtn d-sm-block d-none rounded px-3 py-1"
-                        style={{
-                            color: useColors.themeRed,
-                            border: `1px solid ${useColors.themeRed}`,
-                            height: "fit-content",
-                        }}
-                        onClick={() => handleExcelExport(headers, getCompHistory)}
-                    >
-                        Export <SaveAltIcon className="ml-2" />
-                    </button>
+                    <Image src={favourite} alt="" width={24} height={24} />
+                   </div>
+                  <div className="d-flex align-items-center gap-2">
+                  <LocalPrintshopOutlinedIcon className=" textheader cursorpointer "  onClick={() => handlePrint()} />
+                   <SettingsOutlinedIcon  className=" textheader cursorpointer " />
                     <SaveAltIcon style={{
-                        color: useColors.themeRed,
-                    }} className="ml-2  d-sm-none d-block" onClick={() => handleExcelExport(headers, getCompHistory)} />
+                    }} className=" textheader cursorpointer " onClick={() => handleExcelExport(headers, getCompHistory)} />
+                  </div>
                 </div>
             </div>
 
