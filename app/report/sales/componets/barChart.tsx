@@ -107,25 +107,25 @@ export default function BasicBars({ close }: chartInterface) {
                 dataKey: "london",
                 label: "London",
                 valueFormatter,
-                color: "#007bff",
+                color: "#019267",
               },
               {
                 dataKey: "paris",
                 label: "Paris",
                 valueFormatter,
-                color: "#ff6384",
+                color: "#00C897",
               },
               {
                 dataKey: "newYork",
                 label: "New York",
                 valueFormatter,
-                color: "#ffcc00",
+                color: "#FFD365",
               },
               {
                 dataKey: "seoul",
                 label: "Seoul",
                 valueFormatter,
-                color: "#28a745",
+                color: "#FDFFA9",
               },
             ]}
             layout="vertical"
