@@ -22,7 +22,7 @@ body {
 }
 
 .dark {
-  background-color: #28243D !important;
+  background-color: #28243d !important;
   color: whitesmoke !important;
 }
 
@@ -39,7 +39,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 .heading {
   font-family: "Inter", sans-serif;
@@ -70,11 +69,11 @@ code {
 }
 
 .dark .textheader {
-  color: #E7E3FC !important;
+  color: #e7e3fc !important;
 }
 
 .dark .unselectcolor {
-  color: #B0ACC7 !important;
+  color: #b0acc7 !important;
 }
 
 .dark .shade {
@@ -82,11 +81,11 @@ code {
 }
 
 .dark .dropdowncolor {
-  color: #E7E3FC;
+  color: #e7e3fc;
 }
 
 .sorttablecolor {
-  color: #707070 !important
+  color: #707070 !important;
 }
 
 .para {
@@ -155,7 +154,7 @@ a {
 
 .dark .dashboardcard {
   border-radius: 10px;
-  background: #312D4B;
+  background: #312d4b;
 }
 
 .normalTextStyles {
@@ -189,7 +188,6 @@ body {
   background: #bcbbbd;
   border-radius: 10px;
   cursor: pointer !important;
-
 }
 
 .roundDot {
@@ -201,7 +199,6 @@ body {
 .dark .notificationround {
   border: 1px solid #28243d !important;
 }
-
 
 .css-1075y7p-MuiButtonBase-root-MuiButton-root.Mui-disabled {
   color: white !important;
@@ -217,7 +214,7 @@ body {
 }
 
 .dark .summarysection {
-  background: #28243D !important;
+  background: #28243d !important;
   box-shadow: rgba(38, 38, 40, 0.1) 0px 0px 16px;
 }
 
@@ -257,7 +254,7 @@ th {
   background: #312d4b;
   border-radius: 10px !important;
 }
-input{
+input {
   outline: 0px !important;
 }
 .searchbar input {
@@ -275,8 +272,8 @@ input{
   background: #fff;
   position: relative;
 }
-.dark .fileupload{
-  background: #312D4B !important;
+.dark .fileupload {
+  background: #312d4b !important;
 }
 
 .fileupload input {
@@ -302,24 +299,20 @@ input{
   .theme {
     width: 50vw !important;
   }
-
 }
-
 
 /* Login Screens styles */
 
 .login {
-
   height: 100%;
   position: absolute;
   width: 100%;
   top: 0;
 }
 
-
 .error-text {
-  color: #FF6363;
-  font-size: '12px';
+  color: #ff6363;
+  font-size: "12px";
   font-family: Inter;
   font-weight: 500;
 }
@@ -342,7 +335,6 @@ input{
   width: 35%;
 }
 
-
 .logincard {
   width: 60%;
 }
@@ -355,7 +347,7 @@ input{
 }
 
 .form_filed input::placeholder {
-  color: #A8A8A8;
+  color: #a8a8a8;
   font-size: 15px;
   font-weight: 400;
 }
@@ -377,7 +369,7 @@ th {
   white-space: nowrap !important;
 }
 
-@media (min-width:300px) and (max-width:600px) {
+@media (min-width: 300px) and (max-width: 600px) {
   .logogif {
     display: none !important;
   }
@@ -419,7 +411,7 @@ th {
   }
 }
 
-@media (min-width:600px) and (max-width:1000px) {
+@media (min-width: 600px) and (max-width: 1000px) {
   .summarysection {
     width: 70% !important;
   }
@@ -431,7 +423,7 @@ th {
 }
 
 .rotatingText-adjective {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   left: 0;
   margin-bottom: 0;
@@ -486,12 +478,9 @@ th {
   border-radius: 50%;
   height: fit-content;
   padding: 8px 12px;
-
 }
 
-
 @keyframes rotate-text-up {
-
   0%,
   20% {
     transform: translate3d(0, 0, 0);
@@ -513,11 +502,11 @@ select {
 .selectborder {
   border: 1px solid #dee2e6 !important;
 }
-.borderbottom{
+.borderbottom {
   border-bottom: 1px solid #dee2e6 !important;
 }
 
-.sorttable.table> :not(caption)>*>* {
+.sorttable.table > :not(caption) > * > * {
   background-color: transparent !important;
 }
 
