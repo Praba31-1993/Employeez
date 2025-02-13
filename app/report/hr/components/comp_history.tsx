@@ -203,14 +203,15 @@ function Comphistory() {
     };
     const [open, setOpen] = useState(false);
     return (
-        <div>
+        <div className="row" >
             {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
             {/* column, filter */}
 
-            <div className="d-flex gap-5 justify-content-end  mx-3 ">
-                <div className="d-flex gap-3 mb-3">
+            <div className="col-12">
+
+                <div className="d-flex justify-content-end gap-3 mb-3  align-items-center">
                     <Image src={favourite} alt="" width={24} height={24} />
-                    <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
+                    <div className="d-flex gap-2 searchbar ps-2  align-items-center">
                         <div className="mt-1">
                             <SearchIcon />
                         </div>
@@ -218,29 +219,30 @@ function Comphistory() {
                         <input
                             type="text"
                             placeholder="Search..."
-                            className="p-2 w-100"
+                            className="p-2 "
                             value={search}
                             onChange={handleSearch}
                         />
                     </div>
-                </div>
-
-                <button
-                    className="outlinebtn rounded px-3 py-1"
-                    style={{
+                    <button
+                        className="outlinebtn d-sm-block d-none rounded px-3 py-1"
+                        style={{
+                            color: useColors.themeRed,
+                            border: `1px solid ${useColors.themeRed}`,
+                            height: "fit-content",
+                        }}
+                        onClick={() => handleExcelExport(headers, getCompHistory)}
+                    >
+                        Export <SaveAltIcon className="ml-2" />
+                    </button>
+                    <SaveAltIcon style={{
                         color: useColors.themeRed,
-                        border: `1px solid ${useColors.themeRed}`,
-                        height: "fit-content",
-                    }}
-                    onClick={() => handleExcelExport(headers, getCompHistory)}
-                >
-                    Export <SaveAltIcon className="ml-2" />
-                </button>
-
+                    }} className="ml-2  d-sm-none d-block" onClick={() => handleExcelExport(headers, getCompHistory)} />
+                </div>
             </div>
 
             {/* Table Section */}
-            <div className="" style={{ overflowX: "auto" }}>
+            <div className="col-12 px-0" style={{ overflowX: "auto" }}>
                 <table className="table mb-0 tabletype">
                     <thead style={{ backgroundColor: "#F6F7FB" }}>
                         <tr>
