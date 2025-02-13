@@ -22,6 +22,7 @@ import Needhelp from "../components/needhelp";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "@/app/redux/slices/currencySlice";
+import Employees from "../components/employees";
 
 const SuperAdminDashboard = () => {
     const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -206,6 +207,15 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
 
+                {/* employees */}
+                <div className=" col-12 mb-3 col-md-6 col-lg-6  col-xxl-4">
+                    <div
+                        className="dashboardcard p-3  h-100"
+                        style={borderAndBoxShadowStyles}
+                    >
+                        <Employees />
+                    </div>
+                </div>
                 {/* Policy/Procedure  */}
                 <div className="col-12 mb-3 col-lg-3 col-md-4">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
