@@ -5,7 +5,10 @@ import Sidebar from "@/app/sidebar/page";
 import React, { useState, useEffect, act } from "react";
 import { Colors } from "@/app/reusableComponent/styles";
 import SalesReportTable from "./componets/salesReportTable";
-import { salesTDMReport } from "@/app/reusableComponent/JsonData";
+import {
+  salesTDMReport,
+  getemployeeinformation,
+} from "@/app/reusableComponent/JsonData";
 import SearchIcon from "@mui/icons-material/Search";
 import favourite from "@/public/assets/img/favourite.svg";
 import {
@@ -27,6 +30,7 @@ function SalesReport() {
   const [selectedStatus, setStatusTab] = useState<string>("Active");
   const [hideChart, setHideChart] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [getList, setGetList] = useState<any>();
 
   const useColors = Colors();
   const ActiveEmployees = salesTDMReport?.filter(
@@ -64,14 +68,25 @@ function SalesReport() {
 
   useEffect(() => {
     setSelectedTab("T&M PO");
+    setGetList(salesTDMReport);
   }, []);
+
+  useEffect(() => {
+    if (selectedTab === "T&M PO") {
+      setSalesReport(salesTDMReport);
+    } else if (selectedTab === "Employee Information") {
+      setSalesReport(getemployeeinformation);
+    } else {
+      setSalesReport(salesTDMReport);
+    }
+  }, [selectedTab]);
 
   useEffect(() => {
     if (selectedStatus === "Active") {
       const activeStatus = salesTDMReport.filter(
         (list: any) => list?.status === "InProgress"
       );
-      console.log("activeStatus", activeStatus);
+
       setSalesReport(activeStatus);
     } else if (selectedStatus === "Inactive") {
       const InactiveStatus = salesTDMReport.filter(
@@ -85,8 +100,9 @@ function SalesReport() {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
+
     setSearch(query);
-    const res = SearchLogic(salesTDMReport, query);
+    const res = SearchLogic(salesReport, query);
     setSalesReport(res);
   };
 
@@ -135,12 +151,12 @@ function SalesReport() {
 
             <div
               className={
-                selectedTab.trim() === "" || selectedTab === "T&M PO" 
+                selectedTab.trim() === "" || selectedTab === "T&M PO"
                   ? "d-flex gap-3 justify-content-between align-items-center my-3 pe-3"
                   : "d-flex gap-3 justify-content-end align-items-center my-3 pe-3"
               }
             >
-             {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
+              {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
                 <div className="d-flex gap-4 align-items-center">
                   <div
                     className="px-2 rounded"
@@ -188,9 +204,7 @@ function SalesReport() {
                     </div>
                   )}
                 </div>
-              ) : (
-                null
-              )}
+              ) : null}
 
               <div className="d-flex justify-content-end gap-3 align-items-center">
                 <div className="d-flex gap-3 ">
@@ -216,7 +230,7 @@ function SalesReport() {
                     border: `1px solid ${useColors.themeRed}`,
                     height: "fit-content",
                   }}
-                  onClick={() => handleCSVExport1(headersQuery, salesTDMReport)}
+                  onClick={() => handleCSVExport1(headersQuery, salesReport)}
                 >
                   Export <SaveAltIcon className="ml-2" />
                 </button>

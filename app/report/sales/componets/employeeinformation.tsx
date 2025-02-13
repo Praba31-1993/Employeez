@@ -1,37 +1,39 @@
 "use client";
-import { columnForApprover } from "@/app/reusableComponent/JsonData";
 import React, { useState, useRef, useEffect } from "react";
-import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
+import { faFilter, faSort, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Colors } from "@/app/reusableComponent/styles";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import EmployeePreviousProjects from "./employeepreviousprojects";
 
-interface ContractDetails {
-  conName: string;
-  conId: string;
-  vndName: string;
-  finder: string;
+interface employeeinformationinterface {
+  empId: string;
+  empName: string;
+  mobile: string;
+  emailId: string;
+  skillset: string;
+  empType: string;
+  salary: number | null;
+  poType: string;
+  projName: string;
+  clientName: string;
   startDate: string;
   endDate: string;
-  rate: string;
-  margin: string;
-  status: string;
-  poNumber: string;
-  dealCloser: string;
-  recruiter: string;
-  allowEdit: string;
-  cust_PO_Number: string;
-  recuId: string;
-  inc_Flag: string | null;
-  supplierName: string;
+  tnmPORate: number | null;
+  tnmPORateType: string | null;
+  customerName: string | null;
+  hiringModel: string | null;
+  hiringDate: string | null;
+  fpo_Rate: number | null;
+  fpo_RateType: string | null;
 }
 
 function EmployeeInformation({ salesData }: any) {
-  const [searchList, setSearchList] = useState<any>(columnForApprover);
-  const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
-  const [data, setData] = useState(searchList);
+  console.log("salesData", salesData);
+
+  const [rowsList, setRows] = useState<employeeinformationinterface[]>();
   const useColors = Colors();
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -61,41 +63,39 @@ function EmployeeInformation({ salesData }: any) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = salesData?.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
+  const [open, setOpen] = useState(false);
+  const [empdetail, setEmpdetail] = useState(null);
 
   const tableRef = useRef<HTMLTableElement>(null);
 
-  console.log("sortData+++", salesData);
-
-  useEffect(() => {
-    setRows(salesData);
-  }, [salesData]);
-
   const headers: Record<string, keyof (typeof salesData)[0]> = {
-    "Employee Name": "conName",
-    Company: "vndName",
-    "Customer PO Number": "cust_PO_Number",
-    "Start Date": "startDate",
+    "Emp ID": "empId",
+    Name: "empName",
+    "Contact info": "mobile",
+    "Skill set": "skillset",
+    "Project name": "projName",
+    "Client Name": "clientName",
+    "Start date": "startDate",
     "End Date": "endDate",
-    Rate: "rate",
-    Margin: "margin",
-    Closer: "dealCloser",
-    Recruiter: "recruiter",
+    "Rate per hrs": "fpo_Rate",
+    "PO type": "poType",
   };
 
   const headersQuery: any = {
-    "Employee Name": "conName",
-    Company: "vndName",
-    "Customer PO Number": "cust_PO_Number",
-    "Start Date": "startDate",
+    "Emp ID": "empId",
+    Name: "empName",
+    "Contact info": "mobile",
+    "Skill set": "skillset",
+    "Project name": "projName",
+    "Client Name": "clientName",
+    "Start date": "startDate",
     "End Date": "endDate",
-    Rate: "rate",
-    Margin: "margin",
-    Closer: "dealCloser",
-    Recruiter: "recruiter",
+    "Rate per hrs": "fpo_Rate",
+    "PO type": "poType",
   };
 
   // Sorting function
-  const handleSort = <K extends keyof ContractDetails>(key: K) => {
+  const handleSort = <K extends keyof employeeinformationinterface>(key: K) => {
     let direction: "asc" | "desc" = "asc";
 
     if (sortConfig?.key === key && sortConfig?.direction === "asc") {
@@ -115,23 +115,8 @@ function EmployeeInformation({ salesData }: any) {
     setRows(sortedData);
   };
 
-  useEffect(() => {
-    const arr: any = [];
-    for (let i = 1; i <= totalPages; i++) {
-      arr.push(i);
-    }
-    setPages(arr);
-  }, [totalPages]);
-
-  useEffect(() => {
-    setCountForPerPage(5);
-  }, []);
-
   // Function to toggle the filter box and set its position
-  const handleFilterToggle = (
-    key: keyof (typeof searchList)[0] | any,
-    event: React.MouseEvent
-  ) => {
+  const handleFilterToggle = (key: any, event: React.MouseEvent) => {
     if (activeFilterColumn === key) {
       setActiveFilterColumn(null); // Close the filter box if the same column is clicked again
     } else {
@@ -173,15 +158,16 @@ function EmployeeInformation({ salesData }: any) {
     if (!filterKey) return;
 
     const keyMappings = {
-      "Employee Name": "conName",
-      Company: "vndName",
-      "Customer PO Number": "cust_PO_Number",
-      "Start Date": "startDate",
+      "Emp ID": "empId",
+      Name: "empName",
+      "Contact info": "mobile",
+      "Skill set": "skillset",
+      "Project name": "projName",
+      "Client Name": "clientName",
+      "Start date": "startDate",
       "End Date": "endDate",
-      Rate: "rate",
-      Margin: "margin",
-      Closer: "dealCloser",
-      Recruiter: "recruiter",
+      "Rate per hrs": "fpo_Rate",
+      "PO type": "poType",
     };
 
     const filteredData = salesData.filter((item: any) => {
@@ -222,11 +208,10 @@ function EmployeeInformation({ salesData }: any) {
     setFilterKey("");
     setFilterOperator("equal");
     setFilterValue("");
-    setData(searchList);
     setActiveFilterColumn(null);
   };
 
-  const currentPageItems = salesData?.slice(
+  const currentPageItems = rowsList?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
@@ -236,8 +221,14 @@ function EmployeeInformation({ salesData }: any) {
   };
 
   useEffect(() => {
-    setRows(currentPageItems);
-  }, []);
+    setRows(salesData);
+  }, [salesData]);
+
+  const handleOpen = (detail: any) => {
+    setOpen((prev) => !prev);
+    setEmpdetail(detail);
+  };
+  console.log("empdetails", empdetail);
 
   return (
     <div>
@@ -245,8 +236,9 @@ function EmployeeInformation({ salesData }: any) {
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
-              <th></th>
               {Object.keys(headers).map((header) => {
+                console.log("header", header);
+
                 const key: any = headers[header as keyof typeof headers]; // Get the actual column key
 
                 return (
@@ -260,7 +252,9 @@ function EmployeeInformation({ salesData }: any) {
                       <FontAwesomeIcon
                         icon={faSort}
                         style={{ cursor: "pointer", height: "10px" }}
-                        onClick={() => handleSort(key as keyof ContractDetails)}
+                        onClick={() =>
+                          handleSort(key as keyof employeeinformationinterface)
+                        }
                       />
                       <div style={{ position: "relative" }}>
                         <FontAwesomeIcon
@@ -362,32 +356,34 @@ function EmployeeInformation({ salesData }: any) {
                   </th>
                 );
               })}
+              <th></th>
             </tr>
           </thead>
 
           <tbody className="dashboardcard">
-            {rowsList?.map((item: any, index: number) => (
+            {currentPageItems?.map((item: any, index: number) => (
               <tr key={index}>
-                <td>
-                  <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
-                </td>
-                <td className="para textheader py-3">{item?.conName}</td>
-                <td className="para textheader py-3">{item?.vndName}</td>
-                <td
-                  className="para textheader"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {item?.cust_PO_Number}
-                </td>
+                <td className="para textheader py-3">{item?.empId}</td>
+                <td className="para textheader py-3">{item?.empName}</td>
                 <td className="para textheader py-3">
-                  {/* <ChipsForLeave label={item?.status} /> */}
-                  {item?.startDate}
+                  {item?.mobile + " " + item?.emailId}
                 </td>
+                <td className="para textheader">{item?.skillset}</td>
+                <td className="para textheader">{item?.projName}</td>
+                <td className="para textheader">{item?.clientName}</td>
+
+                <td className="para textheader py-3">{item?.startDate}</td>
                 <td className="para textheader py-3">{item?.endDate}</td>
-                <td className="para textheader py-3">{item?.rate}</td>
-                <td className="para textheader py-3">{item?.margin}</td>
-                <td className="para textheader py-3">{item?.dealCloser}</td>
-                <td className="para textheader py-3">{item?.recruiter}</td>
+                <td className="para textheader py-3">{item?.fpo_Rate}</td>
+                <td className="para textheader py-3">{item?.poType}</td>
+                <td className="para textheader">
+                  <RemoveRedEyeOutlinedIcon
+                    onClick={() => handleOpen(item)}
+                    className="cursorpointer"
+                    titleAccess="View History"
+                    sx={{ color: "#8c57ff" }}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
@@ -398,6 +394,30 @@ function EmployeeInformation({ salesData }: any) {
           totalPages={totalPages}
         />
       </div>
+      {open && (
+        <section
+          className={`showpopup ${open ? "showpopupactive" : ""}`}
+          onClick={() => setOpen(false)}
+        >
+          <div className="summarysection" onClick={(e) => e.stopPropagation()}>
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-12 text-end">
+                  <FontAwesomeIcon
+                    className="my-2 textheader"
+                    style={{ cursor: "pointer" }}
+                    icon={faXmark}
+                    onClick={() => setOpen(false)}
+                  />
+                </div>
+              </div>
+              <div className="mt-3 px-sm-5 ">
+                <EmployeePreviousProjects detail={empdetail} />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
