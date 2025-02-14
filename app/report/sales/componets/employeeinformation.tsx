@@ -228,7 +228,6 @@ function EmployeeInformation({ salesData }: any) {
     setOpen((prev) => !prev);
     setEmpdetail(detail);
   };
-  console.log("empdetails", empdetail);
 
   return (
     <div>
