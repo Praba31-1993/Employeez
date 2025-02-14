@@ -22,9 +22,9 @@ function ProjectStatus() {
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent
+        {/* <BreadcrumbsComponent
           selectedTab={selectedTab === "" ? "New Project" : selectedTab}
-        />
+        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-6 p-0">

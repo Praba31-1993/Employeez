@@ -71,9 +71,9 @@ function EmployeeList() {
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent
+        {/* <BreadcrumbsComponent
           selectedTab={selectedTab === "" ? "Employee List" : selectedTab}
-        />
+        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 p-0">
@@ -120,12 +120,12 @@ function EmployeeList() {
               ))}
           </div>
         </div>
-        <PaginationComponent
+        {/* <PaginationComponent
           currentPage={currentPage}
           currentPageFunction={handlePageChange}
-          // pages={pages}
+          
           totalPages={totalPages}
-        />
+        /> */}
       </Sidebar>
     </div>
   );

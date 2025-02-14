@@ -1,5 +1,4 @@
 "use client";
-import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import Sidebar from "@/app/sidebar/page";
 import React, { useState, useEffect, act } from "react";
@@ -13,7 +12,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import favourite from "@/public/assets/img/favourite.svg";
 import {
   handleCSVExport1,
-  handlePrint,
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -31,7 +29,6 @@ function SalesReport() {
   const [selectedStatus, setStatusTab] = useState<string>("Active");
   const [hideChart, setHideChart] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
-  const [getList, setGetList] = useState<any>();
 
   const useColors = Colors();
   const ActiveEmployees = salesTDMReport?.filter(
@@ -69,7 +66,6 @@ function SalesReport() {
 
   useEffect(() => {
     setSelectedTab("T&M PO");
-    setGetList(salesTDMReport);
   }, []);
 
   useEffect(() => {
@@ -99,24 +95,38 @@ function SalesReport() {
     }
   }, [selectedStatus]);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
 
+
+  const handleSearch = (query: string) => {
     setSearch(query);
-    const res = SearchLogic(salesReport, query);
-    setSalesReport(res);
+
+    if (!query.trim()) {
+      setSalesReport(salesTDMReport); // Return full list if query is empty
+      return;
+    }
+
+    const SearchedResult = salesTDMReport.filter((sales: any) =>
+      Object.values(sales).some((value) =>
+        typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+
+    setSalesReport(SearchedResult);
   };
+
+
+  console.log('SalesData+++', salesReport);
 
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent
+        {/* <BreadcrumbsComponent
           selectedTab={selectedTab === "" ? "T&M PO" : selectedTab}
-        />
+        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-6 p-0">
-              <p className="textheader heading my-2">Sales Report</p>
+              {/* <p className="textheader heading my-2">Sales Report</p> */}
             </div>
 
             <div className="col-6 text-end mb-3">
@@ -219,7 +229,7 @@ function SalesReport() {
                       placeholder="Search"
                       className="p-2 w-100"
                       value={search}
-                      onChange={handleSearch}
+                      onChange={(e)=>handleSearch(e.target.value)}
                     />
                   </div>
                 </div>
@@ -234,17 +244,6 @@ function SalesReport() {
                   onClick={() => handleCSVExport1(headersQuery, salesReport)}
                 >
                   Export <SaveAltIcon className="ml-2" />
-                </button>
-                <button
-                  className="outlinebtn rounded px-3 py-1"
-                  style={{
-                    color: useColors.themeRed,
-                    border: `1px solid ${useColors.themeRed}`,
-                    height: "fit-content",
-                  }}
-                  onClick={() => handlePrint()}
-                >
-                  Print <SaveAltIcon className="ml-2" />
                 </button>
               </div>
             </div>

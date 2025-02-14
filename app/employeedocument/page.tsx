@@ -25,9 +25,9 @@ function EmployeeDocument() {
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent
+        {/* <BreadcrumbsComponent
           selectedTab={selectedTab === "" ? "" : "Employee document submission"}
-        />
+        /> */}
 
         <div className="container-fluid">
           {employeeId !== "" && (

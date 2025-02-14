@@ -2,28 +2,39 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
 export const SearchLogic = (arr: any[], search: string) => {
-  if (!search.trim()) return arr; // Return all if search is empty
+  if (!search.trim()) return arr;
 
-  let filteredRows;
+  // let filteredRows;
 
-  if (
-    search.toLowerCase() === "active" ||
-    search.toLowerCase() === "inactive"
-  ) {
-    // Exact match for status field
-    filteredRows = arr.filter(
-      (employee: any) => employee.status.toLowerCase() === search.toLowerCase()
-    );
-  } else {
-    // Partial match for any field
-    filteredRows = arr.filter((row) =>
-      Object.values(row).some((value) =>
-        String(value).toLowerCase().includes(search.trim().toLowerCase())
-      )
-    );
-  }
+  // if (
+  //   search.toLowerCase() === "active" ||
+  //   search.toLowerCase() === "inactive"
+  // ) {
 
-  return filteredRows.length > 0 ? filteredRows : arr; // Return all if no match found
+  //   filteredRows = arr.filter(
+  //     (employee: any) => employee.status.toLowerCase() === search.toLowerCase()
+  //   );
+  // } else {
+
+  //   filteredRows = arr.filter((row) =>
+  //     Object.values(row).some((value) =>
+  //       String(value).toLowerCase().includes(search.trim().toLowerCase())
+  //     )
+  //   );
+  // }
+
+  // return filteredRows.length > 0 ? filteredRows : arr;
+
+  if (!search.trim()) return arr;
+  const SearchedResult = arr.filter((sales: any) =>
+    Object.values(sales).some(
+      (value) =>
+        typeof value === "string" &&
+        value.toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
+  return SearchedResult;
 };
 
 export const handleCSVExport = (headers: string[], data: any[]) => {

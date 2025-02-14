@@ -370,12 +370,12 @@ function Changerequestfilter() {
                 </table>
             </div>
             {/* table ends */}
-            <Paginationcomponent
+            {/* <Paginationcomponent
                 currentPage={currentPage}
                 currentPageFunction={handlePageChange}
-                // pages={pages}s
+               
                 totalPages={totalPages}
-            />
+            /> */}
         </div>
     );
 }
