@@ -15,6 +15,7 @@ import {
 } from "@/app/reusableComponent/commonlogic";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import Comp_history_popup from "./comp_history_popup";
+import { Colors } from "@/app/reusableComponent/styles";
  
 type Row = {
   id: number | string;
@@ -72,7 +73,7 @@ function Comphistory() {
     setRows(res);
   };
   const [open, setOpen] = useState(false);
- 
+   const useColors = Colors();
   return (
     <div className="row">
       {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
@@ -127,7 +128,7 @@ function Comphistory() {
                   >
                     {header} {/* Display formatted column name */}
                     <NorthOutlinedIcon
-                      className={`textheader ms-1 mb-1 ${
+                      className={`textheader cursorpointer ms-1 mb-1 ${
                         sortConfig.key === key && sortConfig.direction === "asc"
                           ? "rotatearrow"
                           : ""
@@ -166,7 +167,7 @@ function Comphistory() {
                     onClick={() => setOpen((prev) => !prev)}
                     className="cursorpointer"
                     titleAccess="View History"
-                    sx={{ color: "#8c57ff" }}
+                    sx={{color:useColors.themeRed }}
                   />
                 </td>
               </tr>
