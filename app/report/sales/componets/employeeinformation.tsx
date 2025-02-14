@@ -170,7 +170,7 @@ function EmployeeInformation({ salesData }: any) {
                     onClick={() => handleOpen(item)}
                     className="cursorpointer"
                     titleAccess="View History"
-                    sx={{ color: "#8c57ff" }}
+                    sx={{ color: useColors.themeRed }}
                   />
                 </td>
               </tr>
