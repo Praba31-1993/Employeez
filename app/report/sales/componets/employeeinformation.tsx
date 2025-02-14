@@ -117,7 +117,7 @@ function EmployeeInformation({ salesData }: any) {
 
   return (
     <div>
-      <div className="" style={{ overflowX: "auto" }}>
+      <div className="stickyheader" style={{ overflowX: "auto" }}>
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>

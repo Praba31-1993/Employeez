@@ -251,6 +251,27 @@ th {
   background: white;
   border-radius: 10px !important;
 }
+.tabletype {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabletype thead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #F6F7FB; /* Ensure background is set */
+}
+
+.tabletype th {
+  padding: 10px;
+  text-align: left;
+}
+
+.stickyheader {
+  overflow-x: auto;
+  max-height: 400px; /* Adjust height as needed */
+}
 
 .dark .searchbar {
   background: #312d4b;
