@@ -13,12 +13,8 @@ function Hr_report() {
     return (
         <div>
             <Sidebar>
-                <BreadcrumbsComponent
-                    selectedTab={
-                        selectedTimeOff === "" ? "Vacation report" : selectedTimeOff
-                    }
-                />
-                <div className="row">
+           
+                <div className="row mt-1">
                     <div className="col-4">
                         <p className="textheader heading my-2">HR report</p>
                     </div>
