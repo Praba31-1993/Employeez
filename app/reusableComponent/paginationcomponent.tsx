@@ -48,6 +48,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
           onChange={(e) => setItemsPerPage(Number(e.target.value))}
           style={{ marginRight: "10px", padding: "5px" }}
         >
+          <option value={5}>5</option>
           <option value={10}>10</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
