@@ -14,7 +14,7 @@ function Profile() {
         <div>
             <Sidebar >
                 <div className="container-fluid">
-                    <BreadcrumbsComponent selectedTab={""} />
+                    {/* <BreadcrumbsComponent selectedTab={""} /> */}
                     <Profile_update />
                 </div>
                 <div className="container-fluid mb-3">

@@ -71,9 +71,9 @@ function EmployeeList() {
   return (
     <div>
       <Sidebar>
-        <BreadcrumbsComponent
+        {/* <BreadcrumbsComponent
           selectedTab={selectedTab === "" ? "Employee List" : selectedTab}
-        />
+        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 p-0">

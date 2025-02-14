@@ -19,7 +19,7 @@ function Editprofile() {
         <div>
             <Sidebar>
                 <div className="container-fluid">
-                    <BreadcrumbsComponent selectedTab={""} />
+                    {/* <BreadcrumbsComponent selectedTab={""} /> */}
                     <div className="row mt-3">
                         <div className="col-12 ">
                             <Link className="unselectcolor para2" href="/profile" passHref>
