@@ -15,7 +15,7 @@ import {
 } from "@/app/reusableComponent/commonlogic";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import Comp_history_popup from "./comp_history_popup";
-
+ 
 type Row = {
   id: number | string;
   request_type: string;
@@ -33,7 +33,7 @@ function Comphistory() {
     key: "",
     direction: null,
   });
-
+ 
   const headers: Record<string, keyof (typeof getCompHistory)[0]> = {
     "Employee Name": "emp_Name",
     "Employee ID": "emp_Id",
@@ -42,29 +42,29 @@ function Comphistory() {
     "End Date": "endDate",
     Amount: "amount",
   };
-
+ 
   // Sorting function
   const handleSort = <K extends keyof Row>(key: K) => {
     console.log("key,", key);
-
+ 
     let direction: "asc" | "desc" = "asc";
-
+ 
     if (sortConfig.key === key && sortConfig.direction === "asc") {
       direction = "desc";
     }
-
+ 
     const sortedData = [...rowsList].sort((a, b) => {
       if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
       if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
       return 0;
     });
-
+ 
     setSortConfig({ key, direction });
     setRows(sortedData);
   };
-
+ 
   console.log("rowList", rowsList);
-
+ 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
@@ -72,12 +72,12 @@ function Comphistory() {
     setRows(res);
   };
   const [open, setOpen] = useState(false);
-
+ 
   return (
     <div className="row">
       {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
       {/* column, filter */}
-
+ 
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3  align-items-center">
           <div className="d-flex gap-2 align-items-center">
@@ -85,7 +85,7 @@ function Comphistory() {
               <div className="mt-1">
                 <SearchIcon />
               </div>
-
+ 
               <input
                 type="text"
                 placeholder="Search..."
@@ -110,7 +110,7 @@ function Comphistory() {
           </div>
         </div>
       </div>
-
+ 
       {/* Table Section */}
       <div className="col-12 px-0" style={{ overflowX: "auto" }}>
         <table className="table mb-0 tabletype">
@@ -118,7 +118,7 @@ function Comphistory() {
             <tr>
               {Object.keys(headers).map((header) => {
                 const key = headers[header as keyof typeof headers]; // Get the actual column key
-
+ 
                 return (
                   <th
                     key={key}
@@ -159,7 +159,7 @@ function Comphistory() {
                 >
                   {item?.endDate}
                 </td>
-
+ 
                 <td className="para textheader">$ {item?.amount}</td>
                 <td className="para textheader">
                   <RemoveRedEyeOutlinedIcon
@@ -178,5 +178,5 @@ function Comphistory() {
     </div>
   );
 }
-
+ 
 export default Comphistory;

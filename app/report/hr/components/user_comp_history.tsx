@@ -10,6 +10,7 @@ import { Colors } from "@/app/reusableComponent/styles";
 import user from "@/public/assets/img/Ellipse 14.svg";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
 
 type Row = {
@@ -120,13 +121,15 @@ function User_comphistory() {
                     className="position-relative textheader para"
                   >
                     {header} {/* Display formatted column name */}
-                    <span className="d-inline-flex align-items-center gap-2 ms-2">
-                      <FontAwesomeIcon
-                        icon={faSort}
-                        style={{ cursor: "pointer", height: "10px" }}
-                        onClick={() => handleSort(key as keyof Row)}
-                      />
-                    </span>
+                    <NorthOutlinedIcon
+                      className={`textheader ms-1 mb-1 ${
+                        sortConfig.key === key && sortConfig.direction === "asc"
+                          ? "rotatearrow"
+                          : ""
+                      }`}
+                      sx={{ fontSize: "20px" }}
+                      onClick={() => handleSort(key as keyof Row)}
+                    />
                   </th>
                 );
               })}
