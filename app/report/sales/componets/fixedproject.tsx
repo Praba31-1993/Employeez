@@ -163,11 +163,11 @@ function FixedProject({ salesData }: any) {
             ))}
           </tbody>
         </table>
-        <PaginationComponent
+        {/* <PaginationComponent
           currentPage={currentPage}
           currentPageFunction={handlePageChange}
           totalPages={totalPages}
-        />
+        /> */}
       </div>
     </div>
   );

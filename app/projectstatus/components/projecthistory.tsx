@@ -234,12 +234,11 @@ function ProjectHistory() {
         </table>
       </div>
       {/* table ends */}
-      <Paginationcomponent
+      {/* <Paginationcomponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
-        // pages={pages}
         totalPages={totalPages}
-      />
+      /> */}
     </div>
   );
 }

@@ -40,6 +40,8 @@ function SalesReportTable({ salesData }: any) {
   const [pages, setPages] = useState([]);
 
   const [countPerPage, setCountForPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = salesData?.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
@@ -163,11 +165,13 @@ function SalesReportTable({ salesData }: any) {
             ))}
           </tbody>
         </table>
-        <PaginationComponent
-          currentPage={currentPage}
-          currentPageFunction={handlePageChange}
-          totalPages={totalPages}
-        />
+       {/* <PaginationComponent
+        currentPage={currentPage}
+        currentPageFunction={setCurrentPage}
+        totalPages={totalPages}
+        itemsPerPage={itemsPerPage}
+        setItemsPerPage={setItemsPerPage}
+      /> */}
       </div>
     </div>
   );

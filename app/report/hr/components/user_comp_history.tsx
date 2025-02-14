@@ -156,11 +156,11 @@ function User_comphistory() {
         </table>
       </div>
       {/* table ends */}
-      <PaginationComponent
+      {/* <PaginationComponent
         currentPage={currentPage}
         currentPageFunction={handlePageChange}
         totalPages={totalPages}
-      />
+      /> */}
     </div>
   );
 }

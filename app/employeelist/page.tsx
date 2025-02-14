@@ -120,12 +120,12 @@ function EmployeeList() {
               ))}
           </div>
         </div>
-        <PaginationComponent
+        {/* <PaginationComponent
           currentPage={currentPage}
           currentPageFunction={handlePageChange}
-          // pages={pages}
+          
           totalPages={totalPages}
-        />
+        /> */}
       </Sidebar>
     </div>
   );
