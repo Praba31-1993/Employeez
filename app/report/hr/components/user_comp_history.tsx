@@ -103,15 +103,6 @@ function User_comphistory() {
               onClick={() => handleCSVExport1(headers, getCompHistory)}
             />
             <SettingsOutlinedIcon className=" textheader cursorpointer " />
-            {/* <Outlinebutton
-              color={useColors.themeRed}
-              border={`1px solid ${useColors.themeRed}`}
-              text="Export "
-              fontSize="12px"
-              background={"transparent"}
-              icon={<SaveAltOutlinedIcon sx={{ fontSize: "20px" }} />}
-              onClick={() => handleCSVExport1(headers, getCompHistory)}
-            /> */}
           </div>
         </div>
       </div>
@@ -132,7 +123,7 @@ function User_comphistory() {
                   >
                     {header} {/* Display formatted column name */}
                     <NorthOutlinedIcon
-                      className={`textheader ms-1 mb-1 ${
+                      className={`textheader cursorpointer ms-1 mb-1 ${
                         sortConfig.key === key && sortConfig.direction === "asc"
                           ? "rotatearrow"
                           : ""

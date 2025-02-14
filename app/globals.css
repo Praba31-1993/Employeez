@@ -269,9 +269,13 @@ th {
 
 .stickyheader {
   overflow-x: auto;
-  max-height: 400px; /* Adjust height as needed */
+  height: 400px; /* Adjust height as needed */
 }
+.stickyheader::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
 
+}
 .dark .searchbar {
   background: #312d4b;
   border-radius: 10px !important;
@@ -545,7 +549,9 @@ select {
 tbody td {
   background-color: unset !important;
 }
-
+tbody{
+  cursor: n-resize;
+}
 .dark select {
   background-color: #312d4b !important;
 }

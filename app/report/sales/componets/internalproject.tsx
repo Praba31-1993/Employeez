@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
+import { Colors } from "@/app/reusableComponent/styles";
 
 interface ContractDetails {
   conName: string;
@@ -61,7 +62,7 @@ function InternalProject({ salesData }: any) {
     Closer: "dealCloser",
     Recruiter: "recruiter",
   };
-
+const useColors = Colors();
   // Sorting function
   const handleSort = <K extends keyof ContractDetails>(key: K) => {
     let direction: "asc" | "desc" = "asc";
@@ -142,7 +143,7 @@ function InternalProject({ salesData }: any) {
             {rowsList?.map((item: any, index: number) => (
               <tr key={index}>
                 <td>
-                  <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
+                  <ShoppingCartRoundedIcon className="cursorpointer" sx={{ color: useColors.themeRed }} />
                 </td>
                 <td className="para textheader py-3">{item?.conName}</td>
                 <td className="para textheader py-3">{item?.vndName}</td>
