@@ -12,6 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import favourite from "@/public/assets/img/favourite.svg";
 import {
   handleCSVExport1,
+  handleExcelExport,
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -22,6 +23,9 @@ import EmployeeInformation from "./componets/employeeinformation";
 import FixedProject from "./componets/fixedproject";
 import InternalProject from "./componets/internalproject";
 import Commission from "./componets/commission";
+import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
+import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 function SalesReport() {
   const [salesReport, setSalesReport] = useState<any>();
@@ -95,8 +99,6 @@ function SalesReport() {
     }
   }, [selectedStatus]);
 
-
-
   const handleSearch = (query: string) => {
     setSearch(query);
 
@@ -106,16 +108,17 @@ function SalesReport() {
     }
 
     const SearchedResult = salesTDMReport.filter((sales: any) =>
-      Object.values(sales).some((value) =>
-        typeof value === "string" && value.toLowerCase().includes(query.toLowerCase())
+      Object.values(sales).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(query.toLowerCase())
       )
     );
 
     setSalesReport(SearchedResult);
   };
 
-
-  console.log('SalesData+++', salesReport);
+  console.log("SalesData+++", salesReport);
 
   return (
     <div>
@@ -138,113 +141,113 @@ function SalesReport() {
             </div>
 
             {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
-              <div className="d-flex gap-2 heading2 textheader">
-                <p className="mb-0 dashboardcard p-2 rounded">
-                  Total Employee{" "}
-                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
-                    {salesTDMReport?.length.toString().padStart(2, "0")}
-                  </span>
-                </p>
-                <p className="mb-0 dashboardcard p-2 rounded">
-                  Active Employee{" "}
-                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
-                    {ActiveEmployees?.length.toString().padStart(2, "0")}
-                  </span>
-                </p>
-                <p className="mb-0 dashboardcard p-2 rounded">
-                  Inactive Employee{" "}
-                  <span style={{ color: "#8C57FF", fontWeight: 600 }}>
-                    {InactiveEmployees?.length.toString().padStart(2, "0")}
-                  </span>
-                </p>
+              <div className="row px-0 mb-3">
+                <div className="col-8 px-0">
+                  <div className="d-flex gap-2 heading2 textheader">
+                    <p className="mb-0 dashboardcard p-2 rounded">
+                      Total Employee{" "}
+                      <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                        {salesTDMReport?.length.toString().padStart(2, "0")}
+                      </span>
+                    </p>
+                    <p className="mb-0 dashboardcard p-2 rounded">
+                      Active Employee{" "}
+                      <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                        {ActiveEmployees?.length.toString().padStart(2, "0")}
+                      </span>
+                    </p>
+                    <p className="mb-0 dashboardcard p-2 rounded">
+                      Inactive Employee{" "}
+                      <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                        {InactiveEmployees?.length.toString().padStart(2, "0")}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div className="col-4">
+                  {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
+                    <div className="d-flex gap-4 align-items-center justify-content-end">
+                      <div
+                        className="px-2 rounded"
+                        style={{ border: `1px solid ${useColors.themeRed}` }}
+                      >
+                        <select
+                          name=""
+                          id=""
+                          className="para py-2 rounded"
+                          style={{
+                            color: useColors.themeRed,
+
+                            background: "transparent",
+                          }}
+                          onChange={(e) => setStatusTab(e.target.value)}
+                          value={selectedStatus}
+                        >
+                          {statusList && statusList?.length > 0 ? (
+                            statusList?.map((item: any, index: number) => (
+                              <option
+                                key={`${item.id}-${index}`}
+                                value={item.label}
+                                className="cursorPointer textheader"
+                              >
+                                {item.label}
+                              </option>
+                            ))
+                          ) : (
+                            <option value="" disabled>
+                              No options available
+                            </option>
+                          )}
+                        </select>
+                      </div>
+                      {selectedStatus === "Inactive" && (
+                        <div>
+                          <BarChartIcon
+                            sx={{
+                              color: useColors.themeRed,
+                              background: "transparent",
+                            }}
+                            className="cursor-pointer"
+                            onClick={() => setHideChart((p) => !p)}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             ) : null}
 
-            <div
-              className={
-                selectedTab.trim() === "" || selectedTab === "T&M PO"
-                  ? "d-flex gap-3 justify-content-between align-items-center my-3 pe-3"
-                  : "d-flex gap-3 justify-content-end align-items-center my-3 pe-3"
-              }
-            >
-              {selectedTab.trim() === "" || selectedTab === "T&M PO" ? (
-                <div className="d-flex gap-4 align-items-center">
-                  <div
-                    className="px-2 rounded"
-                    style={{ border: `1px solid ${useColors.themeRed}` }}
-                  >
-                    <select
-                      name=""
-                      id=""
-                      className="para py-2 rounded"
-                      style={{
-                        color: useColors.themeRed,
-
-                        background: "transparent",
-                      }}
-                      onChange={(e) => setStatusTab(e.target.value)}
-                      value={selectedStatus}
-                    >
-                      {statusList && statusList?.length > 0 ? (
-                        statusList?.map((item: any, index: number) => (
-                          <option
-                            key={`${item.id}-${index}`}
-                            value={item.label}
-                            className="cursorPointer textheader"
-                          >
-                            {item.label}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="" disabled>
-                          No options available
-                        </option>
-                      )}
-                    </select>
-                  </div>
-                  {selectedStatus === "Inactive" && (
-                    <div>
-                      <BarChartIcon
-                        sx={{
-                          color: useColors.themeRed,
-                          background: "transparent",
-                        }}
-                        className="cursor-pointer"
-                        onClick={() => setHideChart((p) => !p)}
-                      />
-                    </div>
-                  )}
-                </div>
-              ) : null}
-
-              <div className="d-flex justify-content-end gap-3 align-items-center">
-                <div className="d-flex gap-3 ">
-                  <Image src={favourite} alt="" width={24} height={24} />
-                  <div className="d-flex gap-1 w-100 searchbar ps-2 align-items-center">
+            <div className="col-12 px-0 mb-3">
+              <div className="d-flex justify-content-between align-items-center gap-3 mb-0 align-items-center">
+                <div className="d-flex gap-2 align-items-center">
+                  <div className="d-flex gap-2 searchbar ps-2  align-items-center">
                     <div className="mt-1">
                       <SearchIcon />
                     </div>
+
                     <input
                       type="text"
-                      placeholder="Search"
-                      className="p-2 w-100"
+                      placeholder="Search..."
+                      className="p-2 "
                       value={search}
-                      onChange={(e)=>handleSearch(e.target.value)}
+                      onChange={(e) => handleSearch(e.target.value)}
                     />
                   </div>
+                  <Image src={favourite} alt="" width={24} height={24} />
                 </div>
-
-                <button
-                  className="outlinebtn rounded px-3 py-1"
-                  style={{
-                    color: useColors.themeRed,
-                    border: `1px solid ${useColors.themeRed}`,
-                    height: "fit-content",
-                  }}
-                  onClick={() => handleCSVExport1(headersQuery, salesReport)}
-                >
-                  Export <SaveAltIcon className="ml-2" />
-                </button>
+                <div className="d-flex align-items-center gap-3">
+                  <LocalPrintshopOutlinedIcon
+                    className=" textheader cursorpointer "
+                    // onClick={() => handlePrint()}
+                  />
+                  <SaveAltIcon
+                    style={{}}
+                    className=" textheader cursorpointer "
+                    onClick={() => handleExcelExport(headersQuery, salesReport)}
+                  />
+                  <SettingsOutlinedIcon className=" textheader cursorpointer " />
+                </div>
               </div>
             </div>
 
