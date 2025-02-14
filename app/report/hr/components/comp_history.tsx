@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LocalPrintshopOutlinedIcon from '@mui/icons-material/LocalPrintshopOutlined';
+import NorthOutlinedIcon from '@mui/icons-material/NorthOutlined';
 
 import {
     handleCSVExport,
@@ -214,29 +215,29 @@ function Comphistory() {
             <div className="col-12 px-0">
 
                 <div className="d-flex justify-content-between align-items-center gap-3 mb-3  align-items-center">
-                   <div className="d-flex gap-2 align-items-center">
-                   
-                    <div className="d-flex gap-2 searchbar ps-2  align-items-center">
-                        <div className="mt-1">
-                            <SearchIcon />
-                        </div>
+                    <div className="d-flex gap-2 align-items-center">
 
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="p-2 "
-                            value={search}
-                            onChange={handleSearch}
-                        />
+                        <div className="d-flex gap-2 searchbar ps-2  align-items-center">
+                            <div className="mt-1">
+                                <SearchIcon />
+                            </div>
+
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="p-2 "
+                                value={search}
+                                onChange={handleSearch}
+                            />
+                        </div>
+                        <Image src={favourite} alt="" width={24} height={24} />
                     </div>
-                    <Image src={favourite} alt="" width={24} height={24} />
-                   </div>
-                  <div className="d-flex align-items-center gap-2">
-                  <LocalPrintshopOutlinedIcon className=" textheader cursorpointer "  onClick={() => handlePrint()} />
-                   <SettingsOutlinedIcon  className=" textheader cursorpointer " />
-                    <SaveAltIcon style={{
-                    }} className=" textheader cursorpointer " onClick={() => handleExcelExport(headers, getCompHistory)} />
-                  </div>
+                    <div className="d-flex align-items-center gap-3">
+                        <LocalPrintshopOutlinedIcon className=" textheader cursorpointer " onClick={() => handlePrint()} />
+                        <SaveAltIcon style={{
+                        }} className=" textheader cursorpointer " onClick={() => handleExcelExport(headers, getCompHistory)} />
+                        <SettingsOutlinedIcon className=" textheader cursorpointer " />
+                    </div>
                 </div>
             </div>
 
@@ -249,90 +250,17 @@ function Comphistory() {
                                 const key = headers[header as keyof typeof headers]; // Get the actual column key
 
                                 return (
-                                    <th key={key} scope="col" className="position-relative textheader para">
+                                    <th key={key} scope="col" className="position-relative textheader para" >
                                         {header} {/* Display formatted column name */}
-                                        <span className="d-inline-flex align-items-center gap-2 ms-2">
-                                            <FontAwesomeIcon
-                                                icon={faSort}
-                                                style={{ cursor: "pointer", height: "10px" }}
-                                                onClick={() => handleSort(key as keyof Row)} />
-                                            <div style={{ position: "relative" }}>
-                                                <FontAwesomeIcon
-                                                    icon={faFilter}
-                                                    style={{ cursor: "pointer", height: "10px" }}
-                                                    onClick={(event) => handleFilterToggle(key, event)} />
-                                                {activeFilterColumn === key && (
-                                                    <div
-                                                        className="card card-body"
-                                                        style={{
-                                                            width: "18em",
-                                                            position: "absolute",
-                                                            top: "0%",
-                                                            zIndex: 1000,
-                                                            backgroundColor: "white",
-                                                            border: "1px solid #ddd",
-                                                            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                                                        }}
-                                                    >
-                                                        <div className="d-flex flex-column p-2 gap-2">
-                                                            {filterKey === "submitted_date" ? (
-                                                                <>
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        value={filterYear}
-                                                                        onChange={(e) => setFilterYear(e.target.value)}
-                                                                        placeholder="Enter Year (YYYY)" />
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        value={filterMonth}
-                                                                        onChange={(e) => setFilterMonth(e.target.value)}
-                                                                        placeholder="Enter Month (MM)" />
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        value={filterDay}
-                                                                        onChange={(e) => setFilterDay(e.target.value)}
-                                                                        placeholder="Enter Day (DD)" />
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <select
-                                                                        className="form-control selectborder"
-                                                                        value={filterOperator}
-                                                                        onChange={(e) => setFilterOperator(
-                                                                            e.target.value as "equal" | "notEqual"
-                                                                        )}
-                                                                    >
-                                                                        <option value="equal">Equal</option>
-                                                                        <option value="notEqual">Not Equal To</option>
-                                                                    </select>
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control"
-                                                                        value={filterValue}
-                                                                        onChange={(e) => setFilterValue(e.target.value)}
-                                                                        placeholder={`Enter ${header} value`} />
-                                                                </>
-                                                            )}
-                                                        </div>
+                                        <NorthOutlinedIcon
+                                           className={`textheader ms-1 mb-1 ${
+                                            sortConfig.key === key && sortConfig.direction === "asc" ? "rotatearrow" : ""
+                                          }`}
+                                            sx={{ fontSize: "20px" }}
+                                            onClick={() => handleSort(key as keyof Row)}
+                                        />
 
-                                                        <div className="d-flex gap-2 justify-content-end mt-2">
-                                                            <button className="btn btn-primary" onClick={handleFilter}>
-                                                                Filter
-                                                            </button>
-                                                            <button className="btn btn-secondary" onClick={handleClear}>
-                                                                Close
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </span>
                                     </th>
-
-
                                 );
 
                             })}
