@@ -40,8 +40,10 @@ function EmployeePreviousProjects({ detail }: any) {
         <p className="mb-1 heading2 dropdowncolor">Primary Skills</p>
         <div className="">
           <div className="div d-flex gap-3">
-            {["a", "b"].map((skill: any) => (
+            {["a", "b"].map((skill: any,index:any) => (
+              <div key={index}>
               <p className="skillsetCardstyle mb-0">{skill}</p>
+              </div>
             ))}
           </div>
         </div>
