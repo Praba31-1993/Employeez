@@ -4,14 +4,14 @@ import Image from "next/image";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { handleCSVExport1 } from "@/app/reusableComponent/commonlogic";
+import { handleCSVExport1, handleExcelExport, handlePrint } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
-
-import user from "@/public/assets/img/Ellipse 14.svg";
-import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
-import Outlinebutton from "@/app/reusableComponent/outlinebtn";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
-import SaveAltOutlinedIcon from "@mui/icons-material/SaveAltOutlined";
+import user from "@/public/assets/img/Ellipse 14.svg";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
 
 type Row = {
   id: number | string;
@@ -92,8 +92,18 @@ function User_comphistory() {
               <h5 className="para mb-0 textheader">Employee</h5>
             </div>
           </div>
-          <div className="">
-            <Outlinebutton
+          <div className="d-flex align-items-center gap-3 ">
+          <LocalPrintshopOutlinedIcon
+              className=" textheader cursorpointer "
+              onClick={() => handlePrint()}
+            />
+            <SaveAltIcon
+              style={{}}
+              className=" textheader cursorpointer "
+              onClick={() => handleCSVExport1(headers, getCompHistory)}
+            />
+            <SettingsOutlinedIcon className=" textheader cursorpointer " />
+            {/* <Outlinebutton
               color={useColors.themeRed}
               border={`1px solid ${useColors.themeRed}`}
               text="Export "
@@ -101,7 +111,7 @@ function User_comphistory() {
               background={"transparent"}
               icon={<SaveAltOutlinedIcon sx={{ fontSize: "20px" }} />}
               onClick={() => handleCSVExport1(headers, getCompHistory)}
-            />
+            /> */}
           </div>
         </div>
       </div>
