@@ -244,7 +244,9 @@ body {
 th {
   font-weight: 600 !important;
 }
-
+.rotatearrow{
+  rotate: -180deg;
+}
 .searchbar {
   background: white;
   border-radius: 10px !important;

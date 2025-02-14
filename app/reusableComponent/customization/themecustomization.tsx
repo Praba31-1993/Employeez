@@ -32,7 +32,7 @@ export function Themecustomization({ show, close }: any) {
       <div className="summarysection theme" style={{ width: "30vw" }}  onClick={(e) => e.stopPropagation()}>
         <div className="container-fluid">
           <div className="row px-2 summary" style={{ borderBottom: "0px" }}>
-            <div className="col-12">
+            <div className="col-12 px-0">
               <div className="row">
                 <div
                   className="col-8 pb-2"
