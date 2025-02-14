@@ -26,7 +26,7 @@ interface ContractDetails {
   supplierName: string;
 }
 
-function SalesReportTable({ salesData }: any) {
+function SalesReportTable({ salesData}: any) {
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
 
   const [sortConfig, setSortConfig] = useState<{
@@ -40,8 +40,8 @@ function SalesReportTable({ salesData }: any) {
   const [pages, setPages] = useState([]);
 
   const [countPerPage, setCountForPerPage] = useState(5);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
-  
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = salesData?.length;
   const totalPages = Math.ceil(totalCount / countPerPage);
@@ -49,6 +49,8 @@ function SalesReportTable({ salesData }: any) {
   useEffect(() => {
     setRows(salesData);
   }, [salesData]);
+
+ 
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Employee Name": "conName",
@@ -95,22 +97,24 @@ function SalesReportTable({ salesData }: any) {
     setCountForPerPage(5);
   }, []);
 
-  const currentPageItems = salesData?.slice(
+  const currentPageItems = rowsList?.slice(
     (currentPage - 1) * countPerPage,
     currentPage * countPerPage
   );
 
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = rowsList.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     setRows(currentPageItems);
   }, []);
 
+  console.log("currentItems", currentItems);
+
   return (
     <div>
-      <div className="stickyheader" style={{ overflowX: "auto" }}>
+      <div className="stickyheader mb-4" style={{ overflowX: "auto" }}>
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
@@ -139,7 +143,7 @@ function SalesReportTable({ salesData }: any) {
           </thead>
 
           <tbody className="dashboardcard">
-            {rowsList?.map((item: any, index: number) => (
+            {currentItems?.map((item: any, index: number) => (
               <tr key={index}>
                 <td>
                   <ShoppingCartRoundedIcon sx={{ color: "#8A94FF" }} />
@@ -165,13 +169,16 @@ function SalesReportTable({ salesData }: any) {
             ))}
           </tbody>
         </table>
-       {/* <PaginationComponent
-        currentPage={currentPage}
-        currentPageFunction={setCurrentPage}
-        totalPages={totalPages}
-        itemsPerPage={itemsPerPage}
-        setItemsPerPage={setItemsPerPage}
-      /> */}
+      </div>
+
+      <div className="">
+        <PaginationComponent
+          currentPage={currentPage}
+          currentPageFunction={setCurrentPage}
+          totalPages={totalPages}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+        />
       </div>
     </div>
   );
