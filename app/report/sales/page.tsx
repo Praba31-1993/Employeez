@@ -13,6 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import favourite from "@/public/assets/img/favourite.svg";
 import {
   handleCSVExport1,
+  handlePrint,
   SearchLogic,
 } from "@/app/reusableComponent/commonlogic";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
@@ -233,6 +234,17 @@ function SalesReport() {
                   onClick={() => handleCSVExport1(headersQuery, salesReport)}
                 >
                   Export <SaveAltIcon className="ml-2" />
+                </button>
+                <button
+                  className="outlinebtn rounded px-3 py-1"
+                  style={{
+                    color: useColors.themeRed,
+                    border: `1px solid ${useColors.themeRed}`,
+                    height: "fit-content",
+                  }}
+                  onClick={() => handlePrint()}
+                >
+                  Print <SaveAltIcon className="ml-2" />
                 </button>
               </div>
             </div>

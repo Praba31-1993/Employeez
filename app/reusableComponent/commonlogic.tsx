@@ -86,53 +86,67 @@ export const handlePrint = () => {
   const printSection = document.getElementById("printSection");
 
   if (printSection) {
-    // Open a new window for printing
     const printWindow = window.open("", "", "height=500,width=800");
 
     if (printWindow) {
-      // Write content to the new window
-      printWindow.document.write(
-        "<html><head><title>Print</title></head><body>"
-      );
-      printWindow.document.write(printSection.innerHTML); // Use the content inside the div
-      printWindow.document.write("</body></html>");
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Print</title>
+            <style>
+              /* Add necessary styles to preserve layout */
+              body { font-family: Arial, sans-serif; margin: 20px; }
+            </style>
+          </head>
+          <body>
+            ${printSection.innerHTML}
+          </body>
+        </html>
+      `);
 
-      // Close the document and trigger the print dialog
       printWindow.document.close();
-      printWindow.focus();
-      printWindow.print();
+
+      // Ensure content is fully loaded before printing
+      printWindow.onload = () => {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      };
     }
   }
 };
 
+export const handleExcelExport = (
+  headers: Record<string, string>,
+  data: any[]
+) => {
+  if (!data || data?.length === 0) {
+    alert("No data available for export!");
+    return;
+  }
 
-export const handleExcelExport = (headers: Record<string, string>, data: any[]) => {
-    if (!data || data?.length === 0) {
-        alert("No data available for export!");
-        return;
-    }
-
-    // Convert data to an array of objects with formatted keys
-    const formattedData = data.map((item) => {
-        const row: Record<string, any> = {};
-        Object.entries(headers).forEach(([header, key]) => {
-            row[header] = item[key as keyof typeof item]; // Map correct data fields
-        });
-        return row;
+  // Convert data to an array of objects with formatted keys
+  const formattedData = data.map((item) => {
+    const row: Record<string, any> = {};
+    Object.entries(headers).forEach(([header, key]) => {
+      row[header] = item[key as keyof typeof item]; // Map correct data fields
     });
+    return row;
+  });
 
-    // Create a worksheet
-    const ws = XLSX.utils.json_to_sheet(formattedData);
+  // Create a worksheet
+  const ws = XLSX.utils.json_to_sheet(formattedData);
 
-    // Create a new workbook and append the worksheet
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Compensation History");
+  // Create a new workbook and append the worksheet
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Compensation History");
 
-    // Write the file
-    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  // Write the file
+  const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
 
-    // Save the file
-    const fileData = new Blob([excelBuffer], { type: "application/octet-stream" });
-    saveAs(fileData, "Compensation_History.xlsx");
-
+  // Save the file
+  const fileData = new Blob([excelBuffer], {
+    type: "application/octet-stream",
+  });
+  saveAs(fileData, "Compensation_History.xlsx");
 };
