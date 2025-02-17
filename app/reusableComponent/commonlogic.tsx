@@ -75,7 +75,7 @@ export const handleCSVExport1 = (
 
 // Print Logic
 export const handlePrint = () => {
-  const printSection = document.getElementById("printSection");
+  const printSection = document.querySelector("table"); // Select the table directly
 
   if (printSection) {
     const printWindow = window.open("", "", "height=500,width=800");
@@ -88,17 +88,21 @@ export const handlePrint = () => {
             <style>
               /* Add necessary styles to preserve layout */
               body { font-family: Arial, sans-serif; margin: 20px; }
+              table { border-collapse: collapse; width: 100%; }
+              theade{background-color: rgb(246, 247, 251);}
+              tbody{background-color: fff;}
+              th, td { border: 1px solid black; padding: 8px; text-align: left; }
+              th svg{display:none} 
             </style>
           </head>
           <body>
-            ${printSection.innerHTML}
+            ${printSection.outerHTML}  <!-- Use outerHTML to include the table element -->
           </body>
         </html>
       `);
 
       printWindow.document.close();
 
-      // Ensure content is fully loaded before printing
       printWindow.onload = () => {
         printWindow.focus();
         printWindow.print();
@@ -107,6 +111,7 @@ export const handlePrint = () => {
     }
   }
 };
+
 
 export const handleExcelExport = (
   headers: any,

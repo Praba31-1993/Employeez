@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
-import favourite from "@/public/assets/img/favourite.svg";
 import Paginationcomponent from "@/app/reusableComponent/paginationcomponent";
 import { faFilter, faSort } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

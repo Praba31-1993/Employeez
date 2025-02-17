@@ -109,7 +109,7 @@ function User_comphistory() {
 
       {/* Table Section */}
       <div className="" style={{ overflowX: "auto" }}>
-        <table className="table mb-0 tabletype">
+        <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               {Object.keys(headers).map((header) => {

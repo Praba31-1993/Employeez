@@ -84,10 +84,7 @@ const SuperAdminDashboard = () => {
 
                 {/* To Do List */}
                 <div className=" col-12 mb-3 col-xxl-4 col-lg-4 col-md-7 ">
-                    <div
-                        className="dashboardcard p-3 h-100"
-                        style={borderAndBoxShadowStyles}
-                    >
+                    <div className="dashboardcard p-3 h-100" style={borderAndBoxShadowStyles}>
                         <ToDoList title={"My Request"} />{" "}
                     </div>
                 </div>
@@ -198,8 +195,8 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
 
-                <div className="col-12 mb-3 pendinghrsolution col-lg-4  col-md-5">
-                    <div className="dashboardcard  p-3" style={borderAndBoxShadowStyles}>
+                <div className="col-12 mb-3 pendinghrsolution  col-xxl-5 col-lg-4  col-md-6">
+                    <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
                         <p className="textheader mb-0 heading2">Pending HR action</p>
                         <div className="" style={{ overflowX: "auto" }}>
                             <HorizontalBars />
@@ -208,7 +205,7 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 {/* employees */}
-                <div className=" col-12 mb-3 col-md-6 col-lg-6  col-xxl-4">
+                <div className=" col-12 mb-3 col-md-6 col-lg-6  col-xxl-5">
                     <div
                         className="dashboardcard p-3  h-100"
                         style={borderAndBoxShadowStyles}
@@ -217,7 +214,7 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
                 {/* Policy/Procedure  */}
-                <div className="col-12 mb-3 col-lg-3 col-md-4">
+                <div className="col-12 mb-3 col-lg-4 col-md-6">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
                         <p className="textheader heading2">Policy/Procedure </p>
                         <div className="d-flex flex-wrap flex-column gap-3">
@@ -229,7 +226,7 @@ const SuperAdminDashboard = () => {
                 </div>
 
                 {/* Need help? */}
-                <div className="col-12 mb-3 col-md-3">
+                <div className="col-12 mb-3 col-lg-4 col-md-6  ">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
                         <Needhelp />
                     </div>
