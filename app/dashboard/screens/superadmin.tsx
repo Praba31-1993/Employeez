@@ -84,10 +84,7 @@ const SuperAdminDashboard = () => {
 
                 {/* To Do List */}
                 <div className=" col-12 mb-3 col-xxl-4 col-lg-4 col-md-7 ">
-                    <div
-                        className="dashboardcard p-3 h-100"
-                        style={borderAndBoxShadowStyles}
-                    >
+                    <div className="dashboardcard p-3 h-100" style={borderAndBoxShadowStyles}>
                         <ToDoList title={"My Request"} />{" "}
                     </div>
                 </div>
