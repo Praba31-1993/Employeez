@@ -18,7 +18,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Checkbox } from "@mui/material";
-
+ 
 interface ContractDetails {
     conName: string;
     conId: string;
@@ -38,7 +38,7 @@ interface ContractDetails {
     inc_Flag: string | null;
     supplierName: string;
 }
-
+ 
 function SalesReportTable({ salesData }: any) {
     const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
     const [currentPage, setCurrentPage] = useState(1);
@@ -51,7 +51,7 @@ function SalesReportTable({ salesData }: any) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const tableRef = useRef<HTMLDivElement>(null);
-
+ 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -66,18 +66,18 @@ function SalesReportTable({ salesData }: any) {
     const InactiveEmployees = salesData?.filter(
         (list: any) => list?.status === "Closed"
     );
-
+ 
     const statusList = [
         { id: 20, label: "Active" },
         { id: 21, label: "Inactive" },
         { id: 22, label: "Both" },
     ];
-
+ 
     const downlistList = [
         { id: 20, label: "CSV" },
         { id: 21, label: "Excel" },
     ];
-
+ 
     const headers: Record<string, keyof (typeof salesData)[0]> = {
         "Employee Name": "conName",
         Company: "vndName",
@@ -93,7 +93,7 @@ function SalesReportTable({ salesData }: any) {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
-
+ 
     const [sortConfig, setSortConfig] = useState<{
         key: string;
         direction: "asc" | "desc" | null;
@@ -101,40 +101,40 @@ function SalesReportTable({ salesData }: any) {
         key: "",
         direction: null,
     });
-
+ 
     // Sorting function
     const handleSort = <K extends keyof ContractDetails>(key: K) => {
         let direction: "asc" | "desc" = "asc";
-
+ 
         if (sortConfig?.key === key && sortConfig?.direction === "asc") {
             direction = "desc";
         }
-
+ 
         const sortedData = [...salesData].sort((a, b) => {
             const valueA = a[key] ?? ""; // Handle null/undefined values
             const valueB = b[key] ?? "";
-
+ 
             if (valueA < valueB) return direction === "asc" ? -1 : 1;
             if (valueA > valueB) return direction === "asc" ? 1 : -1;
             return 0;
         });
-
+ 
         setSortConfig({ key, direction });
         setRows(sortedData);
     };
-
+ 
     const handleSearch = (query: string) => {
         setSearch(query);
-
+ 
         if (currentPage > 1) {
             setCurrentPage(1);
         }
-
+ 
         if (!query.trim()) {
             setRows(salesData); // Return full list if query is empty
             return;
         }
-
+ 
         const SearchedResult = rowsList.filter((sales: any) =>
             Object.values(sales).some(
                 (value) =>
@@ -142,14 +142,14 @@ function SalesReportTable({ salesData }: any) {
                     value.toLowerCase().includes(query.toLowerCase())
             )
         );
-
+ 
         setRows(SearchedResult);
     };
-
+ 
     useEffect(() => {
         setRows(currentPageItems);
     }, []);
-
+ 
     useEffect(() => {
         if (selectedStatus === "Active") {
             setRows(ActiveEmployees);
@@ -159,7 +159,7 @@ function SalesReportTable({ salesData }: any) {
             setRows(salesData);
         }
     }, [selectedStatus]);
-
+ 
     const handlePrint = () => {
         if (tableRef.current) {
             const printWindow = window.open("", "_blank");
@@ -183,7 +183,7 @@ function SalesReportTable({ salesData }: any) {
             printWindow?.print();
         }
     };
-
+ 
     return (
         <div>
             <div className="row px-0 mb-3">
@@ -258,7 +258,7 @@ function SalesReportTable({ salesData }: any) {
                     </div>
                 </div>
             </div>
-
+ 
             <div className="col-12 px-0 mb-3">
                 <div className="d-flex justify-content-between align-items-center gap-3 mb-0 align-items-center">
                     <div className="d-flex gap-2 align-items-center">
@@ -266,7 +266,7 @@ function SalesReportTable({ salesData }: any) {
                             <div className="mt-1">
                                 <SearchIcon />
                             </div>
-
+ 
                             <input
                                 type="text"
                                 placeholder="Search..."
@@ -311,7 +311,7 @@ function SalesReportTable({ salesData }: any) {
                                 ))}
                             </Menu>
                         </div>
-
+ 
                         <div>
                             <Button
                                 id="basic-button"
@@ -354,7 +354,7 @@ function SalesReportTable({ salesData }: any) {
                             <th></th>
                             {Object.keys(headers).map((header) => {
                                 const key: any = headers[header as keyof typeof headers]; // Get the actual column key
-
+ 
                                 return (
                                     <th
                                         key={key}
@@ -374,7 +374,7 @@ function SalesReportTable({ salesData }: any) {
                             })}
                         </tr>
                     </thead>
-
+ 
                     <tbody className="dashboardcard">
                         {currentPageItems?.map((item: any, index: number) => (
                             <tr key={index}>
@@ -406,7 +406,7 @@ function SalesReportTable({ salesData }: any) {
                     </tbody>
                 </table>
             </div>
-
+ 
             <div className="">
                 <PaginationComponent
                     currentPage={currentPage}
@@ -416,7 +416,7 @@ function SalesReportTable({ salesData }: any) {
                     setItemsPerPage={setItemsPerPage}
                 />
             </div>
-
+ 
             {/* Popup Open barchart */}
             {hideChart && (
                 <section
@@ -448,5 +448,5 @@ function SalesReportTable({ salesData }: any) {
         </div>
     );
 }
-
+ 
 export default SalesReportTable;
