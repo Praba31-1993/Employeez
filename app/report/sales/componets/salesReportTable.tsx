@@ -6,6 +6,18 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import { Colors } from "@/app/reusableComponent/styles";
+import SearchIcon from "@mui/icons-material/Search";
+import favourite from "@/public/assets/img/favourite.svg";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import Image from "next/image";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import BasicBars from "./barChart";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Checkbox } from "@mui/material";
 
 interface ContractDetails {
   conName: string;
@@ -29,26 +41,42 @@ interface ContractDetails {
 
 function SalesReportTable({ salesData }: any) {
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
-
-  const [sortConfig, setSortConfig] = useState<{
-    key: string;
-    direction: "asc" | "desc" | null;
-  }>({
-    key: "",
-    direction: null,
-  });
-
-  const [pages, setPages] = useState([]);
-
-  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const totalCount = salesData?.length;
+  const [selectedStatus, setStatusTab] = useState<string>("Both");
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+  const [hideChart, setHideChart] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const totalCount = rowsList?.length;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const tableRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setRows(salesData);
-  }, [salesData]);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const useColors = Colors();
+  // We use only SalesData, if you use rowList it will change for every api iteration
+  const ActiveEmployees = salesData?.filter(
+    (list: any) => list?.status === "InProgress"
+  );
+  const InactiveEmployees = salesData?.filter(
+    (list: any) => list?.status === "Closed"
+  );
+
+  const statusList = [
+    { id: 20, label: "Active" },
+    { id: 21, label: "Inactive" },
+    { id: 22, label: "Both" },
+  ];
+
+  const downlistList = [
+    { id: 20, label: "CSV" },
+    { id: 21, label: "Excel" },
+  ];
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Employee Name": "conName",
@@ -61,7 +89,19 @@ function SalesReportTable({ salesData }: any) {
     Closer: "dealCloser",
     Recruiter: "recruiter",
   };
-  const useColors = Colors();
+  const currentPageItems = rowsList?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "asc" | "desc" | null;
+  }>({
+    key: "",
+    direction: null,
+  });
+
   // Sorting function
   const handleSort = <K extends keyof ContractDetails>(key: K) => {
     let direction: "asc" | "desc" = "asc";
@@ -83,32 +123,231 @@ function SalesReportTable({ salesData }: any) {
     setRows(sortedData);
   };
 
-  useEffect(() => {
-    const arr: any = [];
-    for (let i = 1; i <= totalPages; i++) {
-      arr.push(i);
+  const handleSearch = (query: string) => {
+    setSearch(query);
+
+    if (currentPage > 1) {
+      setCurrentPage(1);
     }
-    setPages(arr);
-  }, [totalPages]);
 
-  useEffect(() => {
-    setItemsPerPage(5);
-  }, []);
+    if (!query.trim()) {
+      setRows(salesData); // Return full list if query is empty
+      return;
+    }
 
-  const currentPageItems = rowsList?.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+    const SearchedResult = rowsList.filter((sales: any) =>
+      Object.values(sales).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+
+    setRows(SearchedResult);
+  };
 
   useEffect(() => {
     setRows(currentPageItems);
   }, []);
 
-  console.log("rowsList", rowsList, "currentPageItems", currentPageItems);
+  useEffect(() => {
+    if (selectedStatus === "Active") {
+      setRows(ActiveEmployees);
+    } else if (selectedStatus === "Inactive") {
+      setRows(InactiveEmployees);
+    } else {
+      setRows(salesData);
+    }
+  }, [selectedStatus]);
+
+  const handlePrint = () => {
+    if (tableRef.current) {
+      const printWindow = window.open("", "_blank");
+      printWindow?.document.write(`
+        <html>
+          <head>
+            <title>Print Table</title>
+            <style>
+              table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+              th, td { border: 1px solid black; padding: 8px; text-align: left; }
+              th { background-color: #f2f2f2; }
+              body { padding: 20px; }
+            </style>
+          </head>
+          <body>
+            ${tableRef.current.innerHTML}
+          </body>
+        </html>
+      `);
+      printWindow?.document.close();
+      printWindow?.print();
+    }
+  };
 
   return (
     <div>
-      <div className="stickyheader mb-4" style={{ overflowX: "auto" }}>
+      <div className="row px-0 mb-3">
+        <div className="col-8 px-0">
+          <div className="d-flex gap-2 heading2 textheader">
+            <p className="mb-0 dashboardcard p-2 rounded">
+              Total Employee{" "}
+              <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                {salesData?.length.toString().padStart(2, "0")}
+              </span>
+            </p>
+            <p className="mb-0 dashboardcard p-2 rounded">
+              Active Employee{" "}
+              <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                {ActiveEmployees?.length.toString().padStart(2, "0")}
+              </span>
+            </p>
+            <p className="mb-0 dashboardcard p-2 rounded">
+              Inactive Employee{" "}
+              <span style={{ color: "#8C57FF", fontWeight: 600 }}>
+                {InactiveEmployees?.length.toString().padStart(2, "0")}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div className="col-4">
+          <div className="d-flex gap-4 align-items-center justify-content-end">
+            <div
+              className="px-2 rounded"
+              style={{ border: `1px solid ${useColors.themeRed}` }}
+            >
+              <select
+                name=""
+                id=""
+                className="para py-2 rounded"
+                style={{
+                  color: useColors.themeRed,
+                  background: "transparent",
+                }}
+                onChange={(e) => setStatusTab(e.target.value)}
+                value={selectedStatus}
+              >
+                {statusList && statusList?.length > 0 ? (
+                  statusList?.map((item: any, index: number) => (
+                    <option
+                      key={`${item.id}-${index}`}
+                      value={item.label}
+                      className="cursorPointer textheader"
+                    >
+                      {item.label}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    No options available
+                  </option>
+                )}
+              </select>
+            </div>
+            {selectedStatus === "Inactive" && (
+              <div>
+                <BarChartIcon
+                  sx={{
+                    color: useColors.themeRed,
+                    background: "transparent",
+                  }}
+                  className="cursor-pointer"
+                  onClick={() => setHideChart((p) => !p)}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="col-12 px-0 mb-3">
+        <div className="d-flex justify-content-between align-items-center gap-3 mb-0 align-items-center">
+          <div className="d-flex gap-2 align-items-center">
+            <div className="d-flex gap-2 searchbar ps-2  align-items-center">
+              <div className="mt-1">
+                <SearchIcon />
+              </div>
+
+              <input
+                type="text"
+                placeholder="Search..."
+                className="p-2 "
+                value={search}
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+            </div>
+            <Image src={favourite} alt="" width={24} height={24} />
+          </div>
+          <div className="d-flex align-items-center gap-3">
+            <LocalPrintshopOutlinedIcon
+              className=" textheader cursorpointer "
+              onClick={() => handlePrint()}
+            />
+            <div>
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <SaveAltIcon
+                  style={{}}
+                  className=" textheader cursorpointer "
+                />
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {downlistList.map((download: any, index: number) => (
+                  <div key={index}>
+                    <MenuItem onClick={handleClose}>{download?.label}</MenuItem>
+                  </div>
+                ))}
+              </Menu>
+            </div>
+
+            <div>
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <SettingsOutlinedIcon className=" textheader cursorpointer " />
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                {Object.keys(headers).map((header: any, index: number) => (
+                  <div key={index}>
+                    <MenuItem>
+                      <Checkbox /> {header}
+                    </MenuItem>
+                  </div>
+                ))}
+              </Menu>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="stickyheader mb-2"
+        style={{ overflowX: "auto" }}
+        ref={tableRef}
+      >
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
@@ -148,7 +387,7 @@ function SalesReportTable({ salesData }: any) {
                 <td className="para textheader py-3">{item?.conName}</td>
                 <td className="para textheader py-3">{item?.vndName}</td>
                 <td
-                  className="para textheader"
+                  className="para textheader py-3"
                   style={{ whiteSpace: "nowrap" }}
                 >
                   {item?.cust_PO_Number}
@@ -177,6 +416,35 @@ function SalesReportTable({ salesData }: any) {
           setItemsPerPage={setItemsPerPage}
         />
       </div>
+
+      {/* Popup Open barchart */}
+      {hideChart && (
+        <section
+          className={`showpopup ${hideChart ? "showpopupactive" : ""}`}
+          onClick={() => setHideChart(false)}
+        >
+          <div
+            className="summarysection  mx-auto px-2 py-2"
+            style={{
+              height: "fit-content",
+              alignSelf: "center",
+              width: "1000px",
+              overflowY: "auto",
+              borderRadius: "8px",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="container-fluid">
+              <div className="row px-2">
+                <div className="col-12">
+                  <BasicBars close={() => setHideChart(false)} />
+                </div>
+              </div>
+              <div className="row mt-3 px-2"></div>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
