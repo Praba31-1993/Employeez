@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
-import favourite from "@/public/assets/img/favourite.svg";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
@@ -15,6 +14,7 @@ import {
 } from "@/app/reusableComponent/commonlogic";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import Comp_history_popup from "./comp_history_popup";
+import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import { Colors } from "@/app/reusableComponent/styles";
  
 type Row = {
@@ -95,7 +95,9 @@ function Comphistory() {
                 onChange={handleSearch}
               />
             </div>
-            <Image src={favourite} alt="" width={24} height={24} />
+            <div className="rounded-circle cursorpointer" style={{border:`1px solid ${useColors.themeRed}`}} >
+                <BookmarkAddOutlinedIcon className="m-1" sx={{color:useColors.themeRed}} />
+            </div>
           </div>
           <div className="d-flex align-items-center gap-3">
             <LocalPrintshopOutlinedIcon
@@ -114,7 +116,7 @@ function Comphistory() {
  
       {/* Table Section */}
       <div className="col-12 stickyheader px-0" style={{ overflowX: "auto" }}>
-        <table className="table mb-0 tabletype">
+        <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               {Object.keys(headers).map((header) => {

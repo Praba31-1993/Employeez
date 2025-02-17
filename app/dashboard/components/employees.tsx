@@ -86,7 +86,7 @@ function Employees() {
                                     </div>
                                 ))
                             : arrayList.map((list, index) => (
-                                <div className="col-xxl-6" key={index}>
+                                <div className="col-6" key={index}>
                                     <div className="mt-2 ps-lg-1">
                                         <div>
                                             <p className="mb-0 textheader para">
