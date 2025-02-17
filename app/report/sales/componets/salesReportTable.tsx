@@ -18,6 +18,11 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Checkbox } from "@mui/material";
+import {
+  handleCSVExport,
+  handleCSVExport1,
+  handleExcelExport,
+} from "@/app/reusableComponent/commonlogic";
 
 interface ContractDetails {
   conName: string;
@@ -49,7 +54,11 @@ function SalesReportTable({ salesData }: any) {
   const totalCount = rowsList?.length;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [setting, setSetting] = React.useState<null | HTMLElement>(null);
+  const [header, setHeader] = React.useState<any>([]);
+
   const open = Boolean(anchorEl);
+  const openSetting = Boolean(setting);
   const tableRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,6 +66,13 @@ function SalesReportTable({ salesData }: any) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSettingClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setSetting(event.currentTarget);
+  };
+  const handleSetingClose = () => {
+    setSetting(null);
   };
   const useColors = Colors();
   // We use only SalesData, if you use rowList it will change for every api iteration
@@ -74,8 +90,8 @@ function SalesReportTable({ salesData }: any) {
   ];
 
   const downlistList = [
-    { id: 20, label: "CSV" },
-    { id: 21, label: "Excel" },
+    { id: "csv", label: "CSV" },
+    { id: "excel", label: "Excel" },
   ];
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
@@ -101,6 +117,8 @@ function SalesReportTable({ salesData }: any) {
     key: "",
     direction: null,
   });
+
+  console.log("rowlist", rowsList);
 
   // Sorting function
   const handleSort = <K extends keyof ContractDetails>(key: K) => {
@@ -148,6 +166,13 @@ function SalesReportTable({ salesData }: any) {
 
   useEffect(() => {
     setRows(currentPageItems);
+    const arr: any = Object.entries(headers).map(([key, value]) => ({
+      [key]: value,
+      checked: true,
+    }));
+
+    console.log("arr123", arr);
+    setHeader(arr);
   }, []);
 
   useEffect(() => {
@@ -183,6 +208,56 @@ function SalesReportTable({ salesData }: any) {
       printWindow?.print();
     }
   };
+
+  const handleDownload = (id: any) => {
+    if (id === "csv") {
+      handleCSVExport1(headers, salesData);
+    } else {
+      handleExcelExport(headers, salesData);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (salesData?.length > 0) {
+  //     const addCheckedValueinSalesData = salesData.map((list: any) => ({
+  //       ...list,
+  //       checked: true,
+  //     }));
+  //     console.log("add+++", addCheckedValueinSalesData);
+
+  //     setRows(addCheckedValueinSalesData);
+  //   }
+  // }, []);
+
+  const handleResizeHeader = (data: any) => {
+    const newArr = [];
+
+    console.log("data", data, headers, newArr.push(data));
+  };
+
+  console.log("header++", header);
+
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const handleCheckboxClick = (id: number) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+
+    const updatedData = header.map((item: any) => {
+      const key = Object.keys(item)[0]; // Get the key (column name)
+      const value = item[key]; // Get the corresponding value
+
+      return {
+        ...item,
+        checked: selectedIds.includes(value) ? false : item.checked, // Set checked to false if value is in arr
+      };
+    });
+
+    setHeader(updatedData);
+  };
+
+  console.log("selected", selectedIds, "header", header);
 
   return (
     <div>
@@ -306,7 +381,9 @@ function SalesReportTable({ salesData }: any) {
               >
                 {downlistList.map((download: any, index: number) => (
                   <div key={index}>
-                    <MenuItem onClick={handleClose}>{download?.label}</MenuItem>
+                    <MenuItem onClick={() => handleDownload(download?.id)}>
+                      {download?.label}
+                    </MenuItem>
                   </div>
                 ))}
               </Menu>
@@ -315,29 +392,38 @@ function SalesReportTable({ salesData }: any) {
             <div>
               <Button
                 id="basic-button"
-                aria-controls={open ? "basic-menu" : undefined}
+                aria-controls={openSetting ? "basic-menu" : undefined}
                 aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
+                aria-expanded={openSetting ? "true" : undefined}
+                onClick={handleSettingClick}
               >
                 <SettingsOutlinedIcon className=" textheader cursorpointer " />
               </Button>
               <Menu
                 id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
+                anchorEl={setting}
+                open={openSetting}
+                onClose={handleSetingClose}
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
               >
-                {Object.keys(headers).map((header: any, index: number) => (
-                  <div key={index}>
-                    <MenuItem>
-                      <Checkbox /> {header}
-                    </MenuItem>
-                  </div>
-                ))}
+                <div>
+                  {header.length > 0 &&
+                    header.map((list: any, index: number) => {
+                      const key = Object.keys(list)[0]; // Assuming the key represents the unique identifier
+                      const id = list[key]; // Assuming id is stored in list[key]
+
+                      return (
+                        <div key={index}>
+                          <MenuItem onClick={() => handleCheckboxClick(id)}>
+                            <Checkbox checked={selectedIds.includes(id)} />
+                            {key}
+                          </MenuItem>
+                        </div>
+                      );
+                    })}
+                </div>
               </Menu>
             </div>
           </div>

@@ -16,7 +16,6 @@ import Commission from "./componets/commission";
 function SalesReport() {
   const [salesReport, setSalesReport] = useState<any>();
   const [selectedTab, setSelectedTab] = useState<string>("");
-  const [selectedStatus, setStatusTab] = useState<string>("Active");
 
   const useColors = Colors();
 
@@ -28,11 +27,6 @@ function SalesReport() {
     { id: 5, label: "Employee Information" },
   ];
 
-  const statusList = [
-    { id: 20, label: "Active" },
-    { id: 21, label: "Inactive" },
-    { id: 22, label: "Both" },
-  ];
 
   useEffect(() => {
     setSelectedTab("T&M PO");
@@ -48,23 +42,8 @@ function SalesReport() {
     }
   }, [selectedTab]);
 
-  useEffect(() => {
-    if (selectedStatus === "Active") {
-      const activeStatus = salesTDMReport.filter(
-        (list: any) => list?.status === "InProgress"
-      );
-
-      setSalesReport(activeStatus);
-    } else if (selectedStatus === "Inactive") {
-      const InactiveStatus = salesTDMReport.filter(
-        (list: any) => list?.status === "Closed"
-      );
-      setSalesReport(InactiveStatus);
-    } else {
-      setSalesReport(salesTDMReport);
-    }
-  }, [selectedStatus]);
-
+  
+  
   return (
     <div>
       <Sidebar>

@@ -4,26 +4,7 @@ import { saveAs } from "file-saver";
 export const SearchLogic = (arr: any[], search: string) => {
   if (!search.trim()) return arr;
 
-  // let filteredRows;
 
-  // if (
-  //   search.toLowerCase() === "active" ||
-  //   search.toLowerCase() === "inactive"
-  // ) {
-
-  //   filteredRows = arr.filter(
-  //     (employee: any) => employee.status.toLowerCase() === search.toLowerCase()
-  //   );
-  // } else {
-
-  //   filteredRows = arr.filter((row) =>
-  //     Object.values(row).some((value) =>
-  //       String(value).toLowerCase().includes(search.trim().toLowerCase())
-  //     )
-  //   );
-  // }
-
-  // return filteredRows.length > 0 ? filteredRows : arr;
 
   if (!search.trim()) return arr;
   const SearchedResult = arr.filter((sales: any) =>
@@ -62,7 +43,7 @@ export const handleCSVExport = (headers: string[], data: any[]) => {
 };
 
 export const handleCSVExport1 = (
-  headers: Record<string, string>,
+  headers: any,
   data: any[]
 ) => {
   // Extract CSV headers (Human-readable names)
@@ -76,7 +57,7 @@ export const handleCSVExport1 = (
     csvHeaders.join(","), // CSV Header Row
     ...data.map((item) =>
       csvKeys
-        .map((key) => (item[key] !== undefined ? `"${item[key]}"` : `""`))
+        .map((key:any) => (item[key] !== undefined ? `"${item[key]}"` : `""`))
         .join(",")
     ),
   ].join("\n");
@@ -128,7 +109,7 @@ export const handlePrint = () => {
 };
 
 export const handleExcelExport = (
-  headers: Record<string, string>,
+  headers: any,
   data: any[]
 ) => {
   if (!data || data?.length === 0) {
