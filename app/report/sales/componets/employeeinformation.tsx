@@ -43,10 +43,10 @@ function EmployeeInformation({ salesData }: any) {
     direction: null,
   });
 
-  const [countPerPage, setCountForPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = salesData?.length;
-  const totalPages = Math.ceil(totalCount / countPerPage);
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [open, setOpen] = useState(false);
   const [empdetail, setEmpdetail] = useState(null);
 
@@ -98,13 +98,13 @@ function EmployeeInformation({ salesData }: any) {
   };
 
   const currentPageItems = rowsList?.slice(
-    (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
 
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
+
+  console.log('currendtPage', currentPageItems);
+  
 
   useEffect(() => {
     setRows(salesData);
@@ -157,9 +157,9 @@ function EmployeeInformation({ salesData }: any) {
                 <td className="para textheader py-3">
                   {item?.mobile + " " + item?.emailId}
                 </td>
-                <td className="para textheader">{item?.skillset}</td>
-                <td className="para textheader">{item?.projName}</td>
-                <td className="para textheader">{item?.clientName}</td>
+                <td className="para textheader py-3">{item?.skillset}</td>
+                <td className="para textheader py-3">{item?.projName}</td>
+                <td className="para textheader py-3">{item?.clientName}</td>
 
                 <td className="para textheader py-3">{item?.startDate}</td>
                 <td className="para textheader py-3">{item?.endDate}</td>
@@ -177,11 +177,16 @@ function EmployeeInformation({ salesData }: any) {
             ))}
           </tbody>
         </table>
-        {/* <PaginationComponent
+    
+      </div>
+      <div className="">
+        <PaginationComponent
           currentPage={currentPage}
-          currentPageFunction={handlePageChange}
+          currentPageFunction={setCurrentPage}
           totalPages={totalPages}
-        /> */}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+        />
       </div>
       {open && (
         <section
