@@ -35,7 +35,6 @@ function SalesReport() {
   const [search, setSearch] = useState<string>("");
   const [Issearched, setIsSearch] = useState<boolean>(false);
 
-
   const useColors = Colors();
   const ActiveEmployees = salesTDMReport?.filter(
     (list: any) => list?.status === "InProgress"
@@ -103,7 +102,7 @@ function SalesReport() {
 
   const handleSearch = (query: string) => {
     setSearch(query);
-    setIsSearch(true)
+    setIsSearch(true);
 
     if (!query.trim()) {
       setSalesReport(salesTDMReport); // Return full list if query is empty
@@ -120,8 +119,6 @@ function SalesReport() {
 
     setSalesReport(SearchedResult);
   };
-
-
 
   return (
     <div>
