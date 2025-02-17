@@ -27,7 +27,7 @@ interface ContractDetails {
   supplierName: string;
 }
 
-function SalesReportTable({ salesData}: any) {
+function SalesReportTable({ salesData }: any) {
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
 
   const [sortConfig, setSortConfig] = useState<{
@@ -40,18 +40,15 @@ function SalesReportTable({ salesData}: any) {
 
   const [pages, setPages] = useState([]);
 
-  const [countPerPage, setCountForPerPage] = useState(5);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalCount = salesData?.length;
-  const totalPages = Math.ceil(totalCount / countPerPage);
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   useEffect(() => {
     setRows(salesData);
   }, [salesData]);
-
- 
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Employee Name": "conName",
@@ -64,7 +61,7 @@ function SalesReportTable({ salesData}: any) {
     Closer: "dealCloser",
     Recruiter: "recruiter",
   };
-const useColors = Colors();
+  const useColors = Colors();
   // Sorting function
   const handleSort = <K extends keyof ContractDetails>(key: K) => {
     let direction: "asc" | "desc" = "asc";
@@ -95,23 +92,19 @@ const useColors = Colors();
   }, [totalPages]);
 
   useEffect(() => {
-    setCountForPerPage(5);
+    setItemsPerPage(5);
   }, []);
 
   const currentPageItems = rowsList?.slice(
-    (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
   );
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = rowsList.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     setRows(currentPageItems);
   }, []);
 
-  console.log("currentItems", currentItems);
+  console.log("rowsList", rowsList, "currentPageItems", currentPageItems);
 
   return (
     <div>
@@ -144,10 +137,13 @@ const useColors = Colors();
           </thead>
 
           <tbody className="dashboardcard">
-            {currentItems?.map((item: any, index: number) => (
+            {currentPageItems?.map((item: any, index: number) => (
               <tr key={index}>
                 <td>
-                  <ShoppingCartRoundedIcon className="cursorpointer" sx={{ color: useColors.themeRed }} />
+                  <ShoppingCartRoundedIcon
+                    className="cursorpointer"
+                    sx={{ color: useColors.themeRed }}
+                  />
                 </td>
                 <td className="para textheader py-3">{item?.conName}</td>
                 <td className="para textheader py-3">{item?.vndName}</td>
