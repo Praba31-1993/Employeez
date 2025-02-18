@@ -1,4 +1,5 @@
 import React from "react";
+import { Colors } from "./styles";
 
 interface PaginationProps {
     currentPage: number;
@@ -36,8 +37,9 @@ const PaginationComponent: React.FC<PaginationProps> = ({
 
         return pages;
     };
-
+    
     const pages = generatePages();
+    const useColors = Colors();
 
     return (
         <div>
@@ -71,7 +73,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                         disabled={page === "..."}
                         style={{
                             ...buttonStyle,
-                            backgroundColor: currentPage === page ? "red" : "transparent",
+                            backgroundColor: currentPage === page ? useColors.themeRed : "transparent",
                             color: currentPage === page ? "#fff" : "black",
                             fontWeight: currentPage === page ? "bold" : "normal",
                         }}

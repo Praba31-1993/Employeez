@@ -274,7 +274,7 @@ function SalesReportTable({ salesData }: any) {
         style={{ overflowX: "auto" }}
         ref={tableRef}
       >
-        <table className="table mb-0 tabletype">
+        <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               <th></th>
