@@ -44,7 +44,7 @@ input[type="number"] {
   width: 500px;
 }
 .deletePopupTopHeaderStyle {
- opacity: 0.5;
+  opacity: 0.5;
   height: 50px;
 }
 .deletePopupContentSection {
@@ -59,4 +59,16 @@ input[type="number"] {
   top: -30px;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Adjust scrollbar width */
+}
 
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar color */
+  border-radius: 4px;
+}

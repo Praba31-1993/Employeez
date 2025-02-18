@@ -10,6 +10,7 @@ import {
   handleExcelExport,
   handlePrint,
 } from "@/app/reusableComponent/commonlogic";
+import './stylessheetforreusablecomponent.css'
 
 function PrintExportColumnCustomize({ headers, rowList, hiddenDatas }: any) {
   const [ColumnsList, setColumnsList] = useState<string[]>([]);
@@ -70,8 +71,9 @@ function PrintExportColumnCustomize({ headers, rowList, hiddenDatas }: any) {
             <SettingsOutlinedIcon className="textheader cursorpointer" />
           </a>
           <ul
-            className="dropdown-menu dashboardcard"
+            className="dropdown-menu dashboardcard custom-scrollbar"
             aria-labelledby="dropdownMenuLink"
+            style={{ height: "400px", overflowY: "auto" }}
           >
             {Object.keys(headers).map((header) => {
               const key: any = headers[header as keyof typeof headers];

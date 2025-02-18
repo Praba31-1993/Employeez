@@ -7,6 +7,8 @@ import { Colors } from "@/app/reusableComponent/styles";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import EmployeePreviousProjects from "./employeepreviousprojects";
+import SearchIcon from "@mui/icons-material/Search";
+import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 
 interface employeeinformationinterface {
   empId: string;
@@ -31,9 +33,9 @@ interface employeeinformationinterface {
 }
 
 function EmployeeInformation({ salesData }: any) {
-  console.log("salesData", salesData);
-
-  const [rowsList, setRows] = useState<employeeinformationinterface[]>();
+  const [search, setSearch] = useState<string>("");
+  const [rowsList, setRows] =
+    useState<employeeinformationinterface[]>(salesData);
   const useColors = Colors();
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -49,6 +51,7 @@ function EmployeeInformation({ salesData }: any) {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [open, setOpen] = useState(false);
   const [empdetail, setEmpdetail] = useState(null);
+  const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Emp ID": "empId",
@@ -102,9 +105,7 @@ function EmployeeInformation({ salesData }: any) {
     currentPage * itemsPerPage
   );
 
-
-  console.log('currendtPage', currentPageItems);
-  
+  console.log("currendtPage", currentPageItems);
 
   useEffect(() => {
     setRows(salesData);
@@ -115,8 +116,57 @@ function EmployeeInformation({ salesData }: any) {
     setEmpdetail(detail);
   };
 
+  const handleSearch = (query: string) => {
+    setSearch(query);
+
+    if (currentPage > 1) {
+      setCurrentPage(1);
+    }
+
+    if (!query.trim()) {
+      setRows(salesData); // Return full list if query is empty
+      return;
+    }
+
+    const SearchedResult = rowsList.filter((sales: any) =>
+      Object.values(sales).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(query.toLowerCase())
+      )
+    );
+
+    setRows(SearchedResult);
+  };
+
   return (
     <div>
+      <div className="col-12 px-0 mb-3">
+        <div className="d-flex justify-content-between align-items-center gap-3 mb-0 align-items-center">
+          <div className="d-flex gap-2 align-items-center">
+            <div className="d-flex gap-2 searchbar ps-2  align-items-center">
+              <div className="mt-1">
+                <SearchIcon />
+              </div>
+
+              <input
+                type="text"
+                placeholder="Search..."
+                className="p-2 "
+                value={search}
+                onChange={(e) => handleSearch(e.target.value)}
+              />
+            </div>
+            {/* <Image src={favourite} alt="" width={24} height={24} /> */}
+          </div>
+
+          <PrintExportColumnCustomize
+            headers={headers}
+            rowList={rowsList}
+            hiddenDatas={(data: any) => setHiddenColumns(data)}
+          />
+        </div>
+      </div>
       <div className="stickyheader" style={{ overflowX: "auto" }}>
         <table className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
@@ -125,7 +175,7 @@ function EmployeeInformation({ salesData }: any) {
                 console.log("header", header);
 
                 const key: any = headers[header as keyof typeof headers]; // Get the actual column key
-
+                if (hiddenColumns.includes(key)) return null; // Hide column
                 return (
                   <th
                     key={key}
@@ -152,19 +202,39 @@ function EmployeeInformation({ salesData }: any) {
           <tbody className="dashboardcard">
             {currentPageItems?.map((item: any, index: number) => (
               <tr key={index}>
-                <td className="para textheader py-3">{item?.empId}</td>
-                <td className="para textheader py-3">{item?.empName}</td>
-                <td className="para textheader py-3">
-                  {item?.mobile + " " + item?.emailId}
-                </td>
-                <td className="para textheader py-3">{item?.skillset}</td>
-                <td className="para textheader py-3">{item?.projName}</td>
-                <td className="para textheader py-3">{item?.clientName}</td>
+                {!hiddenColumns.includes("empId") && (
+                  <td className="para textheader py-3">{item?.empId}</td>
+                )}
+                {!hiddenColumns.includes("empName") && (
+                  <td className="para textheader py-3">{item?.empName}</td>
+                )}
+                {!hiddenColumns.includes("mobile") && (
+                  <td className="para textheader py-3">
+                    {item?.mobile + " " + item?.emailId}
+                  </td>
+                )}
+                {!hiddenColumns.includes("skillset") && (
+                  <td className="para textheader py-3">{item?.skillset}</td>
+                )}
+                {!hiddenColumns.includes("projName") && (
+                  <td className="para textheader py-3">{item?.projName}</td>
+                )}
+                {!hiddenColumns.includes("clientName") && (
+                  <td className="para textheader py-3">{item?.clientName}</td>
+                )}
 
-                <td className="para textheader py-3">{item?.startDate}</td>
-                <td className="para textheader py-3">{item?.endDate}</td>
-                <td className="para textheader py-3">{item?.fpo_Rate}</td>
-                <td className="para textheader py-3">{item?.poType}</td>
+                {!hiddenColumns.includes("startDate") && (
+                  <td className="para textheader py-3">{item?.startDate}</td>
+                )}
+                {!hiddenColumns.includes("endDate") && (
+                  <td className="para textheader py-3">{item?.endDate}</td>
+                )}
+                {!hiddenColumns.includes("fpo_Rate") && (
+                  <td className="para textheader py-3">{item?.fpo_Rate}</td>
+                )}
+                {!hiddenColumns.includes("poType") && (
+                  <td className="para textheader py-3">{item?.poType}</td>
+                )}
                 <td className="para textheader">
                   <RemoveRedEyeOutlinedIcon
                     onClick={() => handleOpen(item)}
@@ -177,7 +247,6 @@ function EmployeeInformation({ salesData }: any) {
             ))}
           </tbody>
         </table>
-    
       </div>
       <div className="">
         <PaginationComponent
