@@ -1,26 +1,13 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { faSort } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import { Colors } from "@/app/reusableComponent/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import favourite from "@/public/assets/img/favourite.svg";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import Image from "next/image";
+import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BarChartIcon from "@mui/icons-material/BarChart";
-import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import BasicBars from "./barChart";
-import { Checkbox } from "@mui/material";
-
-import {
-  handleCSVExport1,
-  handleExcelExport,
-  handlePrint,
-} from "@/app/reusableComponent/commonlogic";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 
@@ -270,7 +257,9 @@ function SalesReportTable({ salesData }: any) {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
-            <Image src={favourite} alt="" width={24} height={24} />
+            <div className="rounded-circle cursorpointer" style={{ border: `1px solid ${useColors.themeRed}` }} >
+              <BookmarkAddOutlinedIcon className="m-1" sx={{ color: useColors.themeRed }} />
+            </div>
           </div>
 
           <PrintExportColumnCustomize
@@ -302,11 +291,10 @@ function SalesReportTable({ salesData }: any) {
                   >
                     {header}
                     <NorthOutlinedIcon
-                      className={`textheader cursorpointer ms-1 mb-1 ${
-                        sortConfig.key === key && sortConfig.direction === "asc"
+                      className={`textheader cursorpointer ms-1 mb-1 ${sortConfig.key === key && sortConfig.direction === "asc"
                           ? "rotatearrow"
                           : ""
-                      }`}
+                        }`}
                       sx={{ fontSize: "20px" }}
                       onClick={() => handleSort(key as keyof ContractDetails)}
                     />
