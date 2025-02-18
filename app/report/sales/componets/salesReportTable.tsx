@@ -412,7 +412,7 @@ function SalesReportTable({ salesData }: any) {
                     {item?.startDate}
                   </td>
                 )}
-                {!hiddenColumns.includes("endtDate") && (
+                {!hiddenColumns.includes("endDate") && (
                   <td className="para textheader py-3">{item?.endDate}</td>
                 )}
                 {!hiddenColumns.includes("rate") && (
