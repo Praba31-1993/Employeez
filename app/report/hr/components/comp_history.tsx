@@ -8,6 +8,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LocalPrintshopOutlinedIcon from "@mui/icons-material/LocalPrintshopOutlined";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import {
+    handleCSVExport1,
     handleExcelExport,
     handlePrint,
     SearchLogic,
@@ -17,6 +18,7 @@ import Comp_history_popup from "./comp_history_popup";
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import { Colors } from "@/app/reusableComponent/styles";
 import { Checkbox } from "@mui/material";
+
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 type Row = {
@@ -26,13 +28,12 @@ type Row = {
     approved_by: string;
     status: string;
 };
+
 function Comphistory() {
     const [search, setSearch] = useState<string>("");
     const [rowsList, setRows] = useState<any>(getCompHistory);
-    const [sortConfig, setSortConfig] = useState<{
-        key: string;
-        direction: "asc" | "desc" | null;
-    }>({
+    const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
+    const [sortConfig, setSortConfig] = useState<{ key: string; direction: "asc" | "desc" | null }>({
         key: "",
         direction: null,
     });
@@ -48,10 +49,7 @@ function Comphistory() {
 
     // Sorting function
     const handleSort = <K extends keyof Row>(key: K) => {
-        console.log("key,", key);
-
         let direction: "asc" | "desc" = "asc";
-
         if (sortConfig.key === key && sortConfig.direction === "asc") {
             direction = "desc";
         }
@@ -66,33 +64,40 @@ function Comphistory() {
         setRows(sortedData);
     };
 
-    console.log("rowList", rowsList);
-
+    // Search function
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
         setSearch(query);
         const res = SearchLogic(getCompHistory, query);
         setRows(res);
     };
+
+    // Toggle column visibility
+    const handleColumnToggle = (key: string) => {
+        setHiddenColumns((prev) =>
+            prev.includes(key) ? prev.filter((col) => col !== key) : [...prev, key]
+        );
+    };
+
     const [open, setOpen] = useState(false);
     const useColors = Colors();
+
     return (
         <div className="row">
             {open && <Comp_history_popup show={open} close={() => setOpen(false)} />}
-            {/* column, filter */}
 
+            {/* Search and Tools Section */}
             <div className="col-12 px-0">
-                <div className="d-flex justify-content-between align-items-center gap-3 mb-3  align-items-center">
+                <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
                     <div className="d-flex gap-2 align-items-center">
-                        <div className="d-flex gap-2 searchbar ps-2  align-items-center">
+                        <div className="d-flex gap-2 searchbar ps-2 align-items-center">
                             <div className="mt-1">
                                 <SearchIcon />
                             </div>
-
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                className="p-2 "
+                                className="p-2"
                                 value={search}
                                 onChange={handleSearch}
                             />
@@ -103,35 +108,42 @@ function Comphistory() {
                     </div>
                     <div className="d-flex tools align-items-center gap-3">
                         <LocalPrintshopOutlinedIcon
-                            className=" textheader cursorpointer "
+                            className="textheader cursorpointer"
                             onClick={() => handlePrint()}
                         />
                         <div className="dropdown">
-                            <a className=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                <SaveAltIcon
-                                    style={{}}
-                                    className=" textheader cursorpointer "
-
-                                />
+                            <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <SaveAltIcon className="textheader cursorpointer" />
                             </a>
-
                             <ul className="dropdown-menu dashboardcard" aria-labelledby="dropdownMenuLink">
                                 <li onClick={() => handleExcelExport(headers, getCompHistory)}><a className="dropdown-item textheader" href="#">Excel</a></li>
-                                <li onClick={() => handleExcelExport(headers, getCompHistory)}><a className="dropdown-item textheader" href="#">Csv</a></li>
+                                <li onClick={() => handleCSVExport1(headers, getCompHistory)}><a className="dropdown-item textheader" href="#">Csv</a></li>
                             </ul>
                         </div>
                         <div className="dropdown">
-                            <a className=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                <SettingsOutlinedIcon
-                                    
-                                    className=" textheader cursorpointer "
-
-                                />
+                            <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <SettingsOutlinedIcon className="textheader cursorpointer" />
                             </a>
-
                             <ul className="dropdown-menu dashboardcard" aria-labelledby="dropdownMenuLink">
-                                <li onClick={() => handleExcelExport(headers, getCompHistory)}><a className="dropdown-item textheader" href="#"><Checkbox {...label} /> Employee Name </a></li>
-                                <li onClick={() => handleExcelExport(headers, getCompHistory)}><a className="dropdown-item textheader" href="#"><Checkbox {...label} /> Employee Id </a></li>
+                                {Object.keys(headers).map((header) => {
+                                    const key = headers[header as keyof typeof headers];
+
+                                    return (
+                                        <li key={key}>
+                                            <label className="dropdown-item textheader">
+                                                <Checkbox
+                                                    checked={!hiddenColumns.includes(key)}
+                                                    onChange={() => handleColumnToggle(key)}
+                                                    sx={{
+                                                        cursor: "pointer",
+                                                        "&.Mui-checked": { color: useColors.themeRed },
+                                                    }}
+                                                />
+                                                {header}
+                                            </label>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     </div>
@@ -144,20 +156,17 @@ function Comphistory() {
                     <thead style={{ backgroundColor: "#F6F7FB" }}>
                         <tr>
                             {Object.keys(headers).map((header) => {
-                                const key = headers[header as keyof typeof headers]; // Get the actual column key
+                                const key = headers[header as keyof typeof headers];
+
+                                if (hiddenColumns.includes(key)) return null; // Hide column
 
                                 return (
-                                    <th
-                                        key={key}
-                                        scope="col"
-                                        className="position-relative textheader para"
-                                    >
-                                        {header} {/* Display formatted column name */}
+                                    <th key={key} scope="col" className="position-relative textheader para">
+                                        {header}
                                         <NorthOutlinedIcon
-                                            className={`textheader cursorpointer ms-1 mb-1 ${sortConfig.key === key && sortConfig.direction === "asc"
-                                                ? "rotatearrow"
-                                                : ""
-                                                }`}
+                                            className={`textheader cursorpointer ms-1 mb-1 ${
+                                                sortConfig.key === key && sortConfig.direction === "asc" ? "rotatearrow" : ""
+                                            }`}
                                             sx={{ fontSize: "20px" }}
                                             onClick={() => handleSort(key as keyof Row)}
                                         />
@@ -168,39 +177,22 @@ function Comphistory() {
                         </tr>
                     </thead>
                     <tbody className="dashboardcard">
-                        {rowsList?.map((item: any, index: any) => (
+                        {rowsList?.map((item: any, index: number) => (
                             <tr key={index}>
-                                <td className="para textheader">{item?.emp_Name}</td>
-                                <td className="para textheader">{item?.emp_Id}</td>
-                                <td className="para textheader"> {item?.component} </td>
-                                <td
-                                    className="para textheader"
-                                    style={{ whiteSpace: "nowrap" }}
-                                >
-                                    {item?.fromDate}
-                                </td>
-                                <td
-                                    className="para textheader"
-                                    style={{ whiteSpace: "nowrap" }}
-                                >
-                                    {item?.endDate}
-                                </td>
-
-                                <td className="para textheader">$ {item?.amount}</td>
+                                {!hiddenColumns.includes("emp_Name") && <td className="para textheader">{item?.emp_Name}</td>}
+                                {!hiddenColumns.includes("emp_Id") && <td className="para textheader">{item?.emp_Id}</td>}
+                                {!hiddenColumns.includes("component") && <td className="para textheader">{item?.component}</td>}
+                                {!hiddenColumns.includes("fromDate") && <td className="para textheader">{item?.fromDate}</td>}
+                                {!hiddenColumns.includes("endDate") && <td className="para textheader">{item?.endDate}</td>}
+                                {!hiddenColumns.includes("amount") && <td className="para textheader">$ {item?.amount}</td>}
                                 <td className="para textheader">
-                                    <RemoveRedEyeOutlinedIcon
-                                        onClick={() => setOpen((prev) => !prev)}
-                                        className="cursorpointer"
-                                        titleAccess="View History"
-                                        sx={{ color: useColors.themeRed }}
-                                    />
+                                    <RemoveRedEyeOutlinedIcon onClick={() => setOpen((prev) => !prev)} className="cursorpointer" sx={{ color: useColors.themeRed }} />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-            {/* table ends */}
         </div>
     );
 }
