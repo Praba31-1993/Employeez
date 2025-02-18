@@ -54,16 +54,9 @@ function SalesReportTable({ salesData }: any) {
   const totalCount = rowsList?.length;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
   const useColors = Colors();
   // We use only SalesData, if you use rowList it will change for every api iteration
   const ActiveEmployees = salesData?.filter(
