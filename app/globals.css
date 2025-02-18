@@ -242,6 +242,7 @@ body {
 }
 
 th {
+  white-space: nowrap !important;
   font-weight: 600 !important;
 }
 .rotatearrow{
@@ -391,9 +392,6 @@ input {
   margin: 0px !important;
 }
 
-th {
-  white-space: nowrap !important;
-}
 
 @media (min-width: 300px) and (max-width: 600px) {
   .logogif {
