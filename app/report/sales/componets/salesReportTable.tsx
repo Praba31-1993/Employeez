@@ -19,9 +19,10 @@ import { Checkbox } from "@mui/material";
 import {
   handleCSVExport1,
   handleExcelExport,
-  handlePrint
+  handlePrint,
 } from "@/app/reusableComponent/commonlogic";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
+import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 
 interface ContractDetails {
   conName: string;
@@ -165,13 +166,8 @@ function SalesReportTable({ salesData }: any) {
     }
   }, [selectedStatus]);
 
- 
-
-  // Toggle column visibility
-  const handleColumnToggle = (key: string) => {
-    setHiddenColumns((prev) =>
-      prev.includes(key) ? prev.filter((col) => col !== key) : [...prev, key]
-    );
+  const getHiddenData = (data: any) => {
+    setHiddenColumns(data);
   };
 
   return (
@@ -276,75 +272,12 @@ function SalesReportTable({ salesData }: any) {
             </div>
             <Image src={favourite} alt="" width={24} height={24} />
           </div>
-          <div className="d-flex tools align-items-center gap-3">
-            <LocalPrintshopOutlinedIcon
-              className="textheader cursorpointer"
-              onClick={() => handlePrint()}
-            />
-            <div className="dropdown">
-              <a
-                className="dropdown-toggle"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <SaveAltIcon className="textheader cursorpointer" />
-              </a>
-              <ul
-                className="dropdown-menu dashboardcard"
-                aria-labelledby="dropdownMenuLink"
-              >
-                <li onClick={() => handleExcelExport(headers, rowsList)}>
-                  <a className="dropdown-item textheader" href="#">
-                    Excel
-                  </a>
-                </li>
-                <li onClick={() => handleCSVExport1(headers, rowsList)}>
-                  <a className="dropdown-item textheader" href="#">
-                    Csv
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="dropdown">
-              <a
-                className="dropdown-toggle"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <SettingsOutlinedIcon className="textheader cursorpointer" />
-              </a>
-              <ul
-                className="dropdown-menu dashboardcard"
-                aria-labelledby="dropdownMenuLink"
-              >
-                {Object.keys(headers).map((header) => {
-                  const key: any = headers[header as keyof typeof headers];
 
-                  return (
-                    <li key={key}>
-                      <label className="dropdown-item textheader">
-                        <Checkbox
-                          checked={!hiddenColumns.includes(key)}
-                          onChange={() => handleColumnToggle(key)}
-                          sx={{
-                            cursor: "pointer",
-                            "&.Mui-checked": { color: useColors.themeRed },
-                          }}
-                        />
-                        {header}
-                      </label>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
+          <PrintExportColumnCustomize
+            headers={headers}
+            rowList={rowsList}
+            hiddenDatas={(data: any) => setHiddenColumns(data)}
+          />
         </div>
       </div>
       <div
@@ -412,7 +345,7 @@ function SalesReportTable({ salesData }: any) {
                     {item?.startDate}
                   </td>
                 )}
-                {!hiddenColumns.includes("endtDate") && (
+                {!hiddenColumns.includes("endDate") && (
                   <td className="para textheader py-3">{item?.endDate}</td>
                 )}
                 {!hiddenColumns.includes("rate") && (
