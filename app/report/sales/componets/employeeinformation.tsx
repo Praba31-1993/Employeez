@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { faFilter, faSort, faXmark } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
+import { faSort, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Colors } from "@/app/reusableComponent/styles";
@@ -9,6 +9,7 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import EmployeePreviousProjects from "./employeepreviousprojects";
 import SearchIcon from "@mui/icons-material/Search";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 
 interface employeeinformationinterface {
   empId: string;
@@ -157,7 +158,15 @@ function EmployeeInformation({ salesData }: any) {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
-            {/* <Image src={favourite} alt="" width={24} height={24} /> */}
+            <div
+              className="rounded-circle cursorpointer"
+              style={{ border: `1px solid ${useColors.themeRed}` }}
+            >
+              <BookmarkAddOutlinedIcon
+                className="m-1"
+                sx={{ color: useColors.themeRed }}
+              />
+            </div>
           </div>
 
           <PrintExportColumnCustomize

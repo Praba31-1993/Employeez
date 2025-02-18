@@ -5,7 +5,7 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import { Colors } from "@/app/reusableComponent/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import BasicBars from "./barChart";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
@@ -43,9 +43,7 @@ function SalesReportTable({ salesData }: any) {
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const tableRef = useRef<HTMLDivElement>(null);
 
-
   const useColors = Colors();
-  // We use only SalesData, if you use rowList it will change for every api iteration
   const ActiveEmployees = salesData?.filter(
     (list: any) => list?.status === "InProgress"
   );
@@ -57,11 +55,6 @@ function SalesReportTable({ salesData }: any) {
     { id: 20, label: "Active" },
     { id: 21, label: "Inactive" },
     { id: 22, label: "Both" },
-  ];
-
-  const downlistList = [
-    { id: 20, label: "CSV" },
-    { id: 21, label: "Excel" },
   ];
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
@@ -117,7 +110,7 @@ function SalesReportTable({ salesData }: any) {
     }
 
     if (!query.trim()) {
-      setRows(salesData); // Return full list if query is empty
+      setRows(salesData);
       return;
     }
 
@@ -145,10 +138,6 @@ function SalesReportTable({ salesData }: any) {
       setRows(salesData);
     }
   }, [selectedStatus]);
-
-  const getHiddenData = (data: any) => {
-    setHiddenColumns(data);
-  };
 
   return (
     <div>
@@ -250,8 +239,14 @@ function SalesReportTable({ salesData }: any) {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
-            <div className="rounded-circle cursorpointer" style={{ border: `1px solid ${useColors.themeRed}` }} >
-              <BookmarkAddOutlinedIcon className="m-1" sx={{ color: useColors.themeRed }} />
+            <div
+              className="rounded-circle cursorpointer"
+              style={{ border: `1px solid ${useColors.themeRed}` }}
+            >
+              <BookmarkAddOutlinedIcon
+                className="m-1"
+                sx={{ color: useColors.themeRed }}
+              />
             </div>
           </div>
 
@@ -271,6 +266,7 @@ function SalesReportTable({ salesData }: any) {
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               <th></th>
+              
               {Object.keys(headers).map((header) => {
                 const key: any = headers[header as keyof typeof headers];
 
@@ -284,10 +280,11 @@ function SalesReportTable({ salesData }: any) {
                   >
                     {header}
                     <NorthOutlinedIcon
-                      className={`textheader cursorpointer ms-1 mb-1 ${sortConfig.key === key && sortConfig.direction === "asc"
+                      className={`textheader cursorpointer ms-1 mb-1 ${
+                        sortConfig.key === key && sortConfig.direction === "asc"
                           ? "rotatearrow"
                           : ""
-                        }`}
+                      }`}
                       sx={{ fontSize: "20px" }}
                       onClick={() => handleSort(key as keyof ContractDetails)}
                     />
