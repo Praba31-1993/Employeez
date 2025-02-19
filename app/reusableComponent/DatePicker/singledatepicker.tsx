@@ -7,7 +7,7 @@ import { Colors } from "../styles";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
-export default function BasicDatePicker({ startDate, endDate }: any) {
+export default function SingleDatePicker({ startDate, endDate }: any) {
   const useColors = Colors();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -48,22 +48,13 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["DatePicker"]}>
               <DatePicker
-                label="Start date"
+                label="Select date"
                 value={selectedDate}
                 onChange={handleDateChange}
               />
             </DemoContainer>
           </LocalizationProvider>
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
-              <DatePicker
-                label="End date"
-                value={selectedEndDate}
-                onChange={handleDateEndChange}
-              />
-            </DemoContainer>
-          </LocalizationProvider>
 
           <div className="text-end py-3">
             <FilterAltOutlinedIcon sx={{ color: useColors.themeRed }} />
