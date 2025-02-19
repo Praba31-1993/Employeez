@@ -27,7 +27,6 @@ function SalesReport() {
     { id: 5, label: "Employee Information" },
   ];
 
-
   useEffect(() => {
     setSelectedTab("T&M PO");
   }, []);
@@ -42,8 +41,6 @@ function SalesReport() {
     }
   }, [selectedTab]);
 
-  
-  
   return (
     <div>
       <Sidebar>

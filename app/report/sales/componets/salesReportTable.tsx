@@ -142,8 +142,45 @@ function SalesReportTable({ salesData }: any) {
     }
   }, [selectedStatus]);
 
-  console.log("startDate", startDate, "endDate", endDate);
-
+  const handleDateFilter = () => {
+    const filteredData = rowsList?.filter((list: any) => {
+      if (!list.startDate || !list.endDate) return false; // Skip invalid data
+  
+      const listStartDate = new Date(list.startDate);
+      const listEndDate = new Date(list.endDate);
+      const filterStartDate = startDate ? new Date(startDate) : null;
+      const filterEndDate = endDate ? new Date(endDate) : null;
+  
+      // Normalize dates to remove time component
+      listStartDate.setHours(0, 0, 0, 0);
+      listEndDate.setHours(0, 0, 0, 0);
+      if (filterStartDate) filterStartDate.setHours(0, 0, 0, 0);
+      if (filterEndDate) filterEndDate.setHours(23, 59, 59, 999); // Include full day for end date
+  
+      console.log('List Start:', listStartDate, 'List End:', listEndDate);
+      console.log('Filter Start:', filterStartDate, 'Filter End:', filterEndDate);
+  
+      if (filterStartDate && filterEndDate) {
+        return listStartDate >= filterStartDate && listEndDate <= filterEndDate;
+      } else if (filterStartDate) {
+        return listStartDate.getTime() === filterStartDate.getTime(); // Exact match for startDate
+      } else if (filterEndDate) {
+        return listEndDate.getTime() === filterEndDate.getTime(); // Exact match for endDate
+      }
+  
+      return true; // If both are null, return all data
+    });
+  
+    console.log("Filtered Data:", filteredData);
+    setRows(filteredData);
+  };
+  
+  useEffect(() => {
+    if (endDate !== null) {
+      handleDateFilter();
+    }
+  }, [endDate]);
+  
   return (
     <div>
       <div className="row px-0 mb-3">
@@ -255,11 +292,20 @@ function SalesReportTable({ salesData }: any) {
             </div>
           </div>
 
-          <PrintExportColumnCustomize
-            headers={headers}
-            rowList={rowsList}
-            hiddenDatas={(data: any) => setHiddenColumns(data)}
-          />
+          <div className="d-flex gap-3 justify-content-between" style={{width:'20%'}}>
+            <div className="d-flex gap-5">
+              <BasicDatePicker
+                startDate={(data: any) => setStartDate(data)}
+                endDate={(data: any) => setEndDate(data)}
+              />
+            </div>
+
+            <PrintExportColumnCustomize
+              headers={headers}
+              rowList={rowsList}
+              hiddenDatas={(data: any) => setHiddenColumns(data)}
+            />
+          </div>
         </div>
       </div>
       <div
@@ -267,12 +313,6 @@ function SalesReportTable({ salesData }: any) {
         style={{ overflowX: "auto" }}
         ref={tableRef}
       >
-        <div className="d-flex gap-3">
-          <BasicDatePicker
-            startDate={(data: any) => setStartDate(data)}
-            endDate={(data: any) => setEndDate(data)}
-          />
-        </div>
         <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
