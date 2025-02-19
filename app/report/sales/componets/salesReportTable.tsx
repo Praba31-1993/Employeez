@@ -10,6 +10,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import BasicBars from "./barChart";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
+import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
 
 interface ContractDetails {
   conName: string;
@@ -42,6 +43,8 @@ function SalesReportTable({ salesData }: any) {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const tableRef = useRef<HTMLDivElement>(null);
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
 
   const useColors = Colors();
   const ActiveEmployees = salesData?.filter(
@@ -138,6 +141,8 @@ function SalesReportTable({ salesData }: any) {
       setRows(salesData);
     }
   }, [selectedStatus]);
+
+  console.log("startDate", startDate, "endDate", endDate);
 
   return (
     <div>
@@ -262,11 +267,17 @@ function SalesReportTable({ salesData }: any) {
         style={{ overflowX: "auto" }}
         ref={tableRef}
       >
+        <div className="d-flex gap-3">
+          <BasicDatePicker
+            startDate={(data: any) => setStartDate(data)}
+            endDate={(data: any) => setEndDate(data)}
+          />
+        </div>
         <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               <th></th>
-              
+
               {Object.keys(headers).map((header) => {
                 const key: any = headers[header as keyof typeof headers];
 
