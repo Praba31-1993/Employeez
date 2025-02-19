@@ -5,11 +5,12 @@ import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import PaginationComponent from "@/app/reusableComponent/paginationcomponent";
 import { Colors } from "@/app/reusableComponent/styles";
 import SearchIcon from "@mui/icons-material/Search";
-import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import BasicBars from "./barChart";
 import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
+import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
 
 interface ContractDetails {
   conName: string;
@@ -41,18 +42,11 @@ function SalesReportTable({ salesData }: any) {
   const totalCount = rowsList?.length;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const tableRef = useRef<HTMLDivElement>(null);
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const useColors = Colors();
-  // We use only SalesData, if you use rowList it will change for every api iteration
   const ActiveEmployees = salesData?.filter(
     (list: any) => list?.status === "InProgress"
   );
@@ -64,11 +58,6 @@ function SalesReportTable({ salesData }: any) {
     { id: 20, label: "Active" },
     { id: 21, label: "Inactive" },
     { id: 22, label: "Both" },
-  ];
-
-  const downlistList = [
-    { id: 20, label: "CSV" },
-    { id: 21, label: "Excel" },
   ];
 
   const headers: Record<string, keyof (typeof salesData)[0]> = {
@@ -124,7 +113,7 @@ function SalesReportTable({ salesData }: any) {
     }
 
     if (!query.trim()) {
-      setRows(salesData); // Return full list if query is empty
+      setRows(salesData);
       return;
     }
 
@@ -153,9 +142,7 @@ function SalesReportTable({ salesData }: any) {
     }
   }, [selectedStatus]);
 
-  const getHiddenData = (data: any) => {
-    setHiddenColumns(data);
-  };
+  console.log("startDate", startDate, "endDate", endDate);
 
   return (
     <div>
@@ -257,8 +244,14 @@ function SalesReportTable({ salesData }: any) {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
-            <div className="rounded-circle cursorpointer" style={{ border: `1px solid ${useColors.themeRed}` }} >
-              <BookmarkAddOutlinedIcon className="m-1" sx={{ color: useColors.themeRed }} />
+            <div
+              className="rounded-circle cursorpointer"
+              style={{ border: `1px solid ${useColors.themeRed}` }}
+            >
+              <BookmarkAddOutlinedIcon
+                className="m-1"
+                sx={{ color: useColors.themeRed }}
+              />
             </div>
           </div>
 
@@ -274,10 +267,17 @@ function SalesReportTable({ salesData }: any) {
         style={{ overflowX: "auto" }}
         ref={tableRef}
       >
+        <div className="d-flex gap-3">
+          <BasicDatePicker
+            startDate={(data: any) => setStartDate(data)}
+            endDate={(data: any) => setEndDate(data)}
+          />
+        </div>
         <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               <th></th>
+
               {Object.keys(headers).map((header) => {
                 const key: any = headers[header as keyof typeof headers];
 
@@ -291,10 +291,11 @@ function SalesReportTable({ salesData }: any) {
                   >
                     {header}
                     <NorthOutlinedIcon
-                      className={`textheader cursorpointer ms-1 mb-1 ${sortConfig.key === key && sortConfig.direction === "asc"
+                      className={`textheader cursorpointer ms-1 mb-1 ${
+                        sortConfig.key === key && sortConfig.direction === "asc"
                           ? "rotatearrow"
                           : ""
-                        }`}
+                      }`}
                       sx={{ fontSize: "20px" }}
                       onClick={() => handleSort(key as keyof ContractDetails)}
                     />
