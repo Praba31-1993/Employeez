@@ -4,8 +4,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Colors } from "../styles";
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 
 export default function BasicDatePicker({ startDate, endDate }: any) {
   const useColors = Colors();
@@ -18,7 +18,6 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
     if (newDate) {
       const formattedDate = newDate.format("dddd, YYYY-MM-DD").toLowerCase();
       startDate(formattedDate);
-      console.log(formattedDate);
     }
   };
 
@@ -27,7 +26,6 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
     if (newDate) {
       const formattedDate = newDate.format("dddd, YYYY-MM-DD").toLowerCase();
       endDate(formattedDate);
-      console.log(formattedDate);
     }
   };
 
@@ -36,7 +34,7 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
   };
 
   return (
-    <div style={{position:"relative"}}>
+    <div style={{ position: "relative" }}>
       {/* Label with click handler to toggle visibility */}
       <p className="mb-0 text-header" onClick={toggleCardVisibility}>
         Select range <KeyboardArrowDownOutlinedIcon />
@@ -44,7 +42,10 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
 
       {/* Conditionally render dashboardcard */}
       {showCard && (
-        <div className="dashboardcard p-3" style={{ position: "absolute", top: "30px", left: "0", zIndex: "1" }}>
+        <div
+          className="dashboardcard p-3"
+          style={{ position: "absolute", top: "30px", left: "0", zIndex: "1" }}
+        >
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={["DatePicker"]}>
               <DatePicker
@@ -65,7 +66,7 @@ export default function BasicDatePicker({ startDate, endDate }: any) {
             </DemoContainer>
           </LocalizationProvider>
 
-          <div className="text-end py-3">
+          <div className="text-end py-3" onClick={() => setShowCard(false)}>
             <FilterAltOutlinedIcon sx={{ color: useColors.themeRed }} />
           </div>
         </div>

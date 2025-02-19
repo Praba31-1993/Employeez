@@ -10,6 +10,7 @@ import EmployeePreviousProjects from "./employeepreviousprojects";
 import SearchIcon from "@mui/icons-material/Search";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
 
 interface employeeinformationinterface {
   empId: string;
@@ -53,7 +54,8 @@ function EmployeeInformation({ salesData }: any) {
   const [open, setOpen] = useState(false);
   const [empdetail, setEmpdetail] = useState(null);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
-
+  const [startDate, setStartDate] = useState<any>(null);
+  const [endDate, setEndDate] = useState<any>(null);
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Emp ID": "empId",
     Name: "empName",
@@ -140,6 +142,52 @@ function EmployeeInformation({ salesData }: any) {
     setRows(SearchedResult);
   };
 
+  const handleDateFilter = () => {
+    const filteredData = rowsList?.filter((list: any) => {
+      if (!list.startDate || !list.endDate) return false; // Skip invalid data
+
+      const listStartDate = new Date(list.startDate);
+      const listEndDate = new Date(list.endDate);
+      const filterStartDate = startDate ? new Date(startDate) : null;
+      const filterEndDate = endDate ? new Date(endDate) : null;
+
+      // Normalize dates to remove time component
+      listStartDate.setHours(0, 0, 0, 0);
+      listEndDate.setHours(0, 0, 0, 0);
+      if (filterStartDate) filterStartDate.setHours(0, 0, 0, 0);
+      if (filterEndDate) filterEndDate.setHours(23, 59, 59, 999); // Include full day for end date
+
+      console.log("List Start:", listStartDate, "List End:", listEndDate);
+      console.log(
+        "Filter Start:",
+        filterStartDate,
+        "Filter End:",
+        filterEndDate
+      );
+
+      if (filterStartDate && filterEndDate) {
+        return listStartDate >= filterStartDate && listEndDate <= filterEndDate;
+      } else if (filterStartDate) {
+        return listStartDate.getTime() === filterStartDate.getTime(); // Exact match for startDate
+      } else if (filterEndDate) {
+        return listEndDate.getTime() === filterEndDate.getTime(); // Exact match for endDate
+      }
+
+      return true; // If both are null, return all data
+    });
+
+    console.log("Filtered266:", filteredData);
+    setRows(filteredData);
+  };
+
+  useEffect(() => {
+    if (endDate !== null) {
+      handleDateFilter();
+    }
+  }, [endDate]);
+
+  console.log('rowslistsfds++',rowsList);
+  
   return (
     <div>
       <div className="col-12 px-0 mb-3">
@@ -169,11 +217,23 @@ function EmployeeInformation({ salesData }: any) {
             </div>
           </div>
 
-          <PrintExportColumnCustomize
-            headers={headers}
-            rowList={rowsList}
-            hiddenDatas={(data: any) => setHiddenColumns(data)}
-          />
+          <div
+            className="d-flex gap-3 justify-content-between"
+            style={{ width: "20%" }}
+          >
+            <div className="d-flex gap-5">
+              <BasicDatePicker
+                startDate={(data: any) => setStartDate(data)}
+                endDate={(data: any) => setEndDate(data)}
+              />
+            </div>
+
+            <PrintExportColumnCustomize
+              headers={headers}
+              rowList={rowsList}
+              hiddenDatas={(data: any) => setHiddenColumns(data)}
+            />
+          </div>
         </div>
       </div>
       <div className="stickyheader" style={{ overflowX: "auto" }}>
