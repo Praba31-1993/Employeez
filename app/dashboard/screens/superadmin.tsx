@@ -23,6 +23,7 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "@/app/redux/slices/currencySlice";
 import Employees from "../components/employees";
+import Prehiredashboard from "../components/prehiredashboard";
 
 const SuperAdminDashboard = () => {
     const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -115,6 +116,39 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
 
+
+
+                {/* Sales Report */}
+                <div className=" col-12 mb-3 col-lg-6 col-md-9">
+                    <div
+                        className="dashboardcard h-100 p-3"
+                        style={{ border: useColors.border, boxShadow: useColors.boxshadow }}
+                    >
+                        <div className="row">
+                            <p className="textheader heading2">Sales Report</p>
+                            <div className=" col-12 mb-3 col-md-8 ">
+                                <BarChartComponent />
+                            </div>
+                            <div className="col-12 mb-3 col-md-4  leftborders">
+                                <Salesreport />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Pending HR action */}
+
+                <div className="col-12 mb-3 col-lg-2 col-md-3 ">
+                    <div className="row w-100 m-0 h-100 align-content-between">
+                        <Hrdatas />
+                    </div>
+                </div>
+
+                <div className="col-12 mb-3 pendinghrsolution  col-xxl-4 col-lg-4  col-md-6">
+                    <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
+                      <Prehiredashboard />
+                    </div>
+                </div>
                 {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
                 <div className=" col-12 mb-3 col-md-6 col-lg-3 px-0">
                     <div className="row  h-100 align-content-between">
@@ -168,51 +202,18 @@ const SuperAdminDashboard = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* Sales Report */}
-                <div className=" col-12 mb-3 col-lg-6 col-md-9">
-                    <div
-                        className="dashboardcard h-100 p-3"
-                        style={{ border: useColors.border, boxShadow: useColors.boxshadow }}
-                    >
-                        <div className="row">
-                            <p className="textheader heading2">Sales Report</p>
-                            <div className=" col-12 mb-3 col-md-8 ">
-                                <BarChartComponent />
-                            </div>
-                            <div className="col-12 mb-3 col-md-4  leftborders">
-                                <Salesreport />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Pending HR action */}
-
+                {/* employees */}
                 <div className="col-12 mb-3 col-lg-2 col-md-3 ">
                     <div className="row w-100 m-0 h-100 align-content-between">
-                        <Hrdatas />
+                    <Employees />
+
                     </div>
                 </div>
-
-                <div className="col-12 mb-3 pendinghrsolution  col-xxl-5 col-lg-4  col-md-6">
+                <div className="col-12 mb-3 pendinghrsolution  col-xxl-4 col-lg-4  col-md-6">
                     <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
-                        <p className="textheader mb-0 heading2">Pending HR action</p>
-                        <div className="" style={{ overflowX: "auto" }}>
-                            <HorizontalBars />
-                        </div>
+                      <Prehiredashboard />
                     </div>
-                </div>
-
-                {/* employees */}
-                <div className=" col-12 mb-3 col-md-6 col-lg-6  col-xxl-5">
-                    <div
-                        className="dashboardcard p-3  h-100"
-                        style={borderAndBoxShadowStyles}
-                    >
-                        <Employees />
-                    </div>
-                </div>
+                </div> 
                 {/* Policy/Procedure  */}
                 <div className="col-12 mb-3 col-lg-4 col-md-6">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
