@@ -203,14 +203,17 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
                 {/* employees */}
-                <div className=" col-12 mb-3 col-md-6 col-lg-5  col-xxl-5">
-                    <div
-                        className="dashboardcard p-3  h-100"
-                        style={borderAndBoxShadowStyles}
-                    >
-                        <Employees />
+                <div className="col-12 mb-3 col-lg-2 col-md-3 ">
+                    <div className="row w-100 m-0 h-100 align-content-between">
+                    <Employees />
+
                     </div>
                 </div>
+                <div className="col-12 mb-3 pendinghrsolution  col-xxl-4 col-lg-4  col-md-6">
+                    <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
+                      <Prehiredashboard />
+                    </div>
+                </div> 
                 {/* Policy/Procedure  */}
                 <div className="col-12 mb-3 col-lg-4 col-md-6">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
