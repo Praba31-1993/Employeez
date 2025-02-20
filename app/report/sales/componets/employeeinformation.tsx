@@ -156,15 +156,6 @@ function EmployeeInformation({ salesData }: any) {
       listEndDate.setHours(0, 0, 0, 0);
       if (filterStartDate) filterStartDate.setHours(0, 0, 0, 0);
       if (filterEndDate) filterEndDate.setHours(23, 59, 59, 999); // Include full day for end date
-
-      console.log("List Start:", listStartDate, "List End:", listEndDate);
-      console.log(
-        "Filter Start:",
-        filterStartDate,
-        "Filter End:",
-        filterEndDate
-      );
-
       if (filterStartDate && filterEndDate) {
         return listStartDate >= filterStartDate && listEndDate <= filterEndDate;
       } else if (filterStartDate) {
@@ -176,7 +167,6 @@ function EmployeeInformation({ salesData }: any) {
       return true; // If both are null, return all data
     });
 
-    console.log("Filtered266:", filteredData);
     setRows(filteredData);
   };
 
@@ -186,8 +176,6 @@ function EmployeeInformation({ salesData }: any) {
     }
   }, [endDate]);
 
-  console.log('rowslistsfds++',rowsList);
-  
   return (
     <div>
       <div className="col-12 px-0 mb-3">
