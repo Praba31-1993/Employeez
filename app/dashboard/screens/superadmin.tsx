@@ -24,6 +24,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "@/app/redux/slices/currencySlice";
 import Employees from "../components/employees";
 import Prehiredashboard from "../components/prehiredashboard";
+import Workforce from "../components/workforce";
 
 const SuperAdminDashboard = () => {
     const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
@@ -138,15 +139,21 @@ const SuperAdminDashboard = () => {
 
                 {/* Pending HR action */}
 
-                <div className="col-12 mb-3 col-lg-2 col-md-3 ">
+                {/* <div className="col-12 mb-3 col-lg-2 col-md-3 ">
                     <div className="row w-100 m-0 h-100 align-content-between">
                         <Hrdatas />
                     </div>
-                </div>
+                </div> */}
 
-                <div className="col-12 mb-3 pendinghrsolution  col-xxl-4 col-lg-4  col-md-6">
+                <div className="col-12 mb-3 pendinghrsolution    col-md-6">
                     <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
-                      <Prehiredashboard />
+                        <Prehiredashboard />
+                    </div>
+                </div>
+                 {/* workforce */}
+                 <div className="col-12 mb-3 pendinghrsolution    col-md-6">
+                    <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
+                        <Workforce />
                     </div>
                 </div>
                 {/* Project extension, Vacation report, Open jobs, I-9 Verify */}
@@ -176,6 +183,7 @@ const SuperAdminDashboard = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className=" col-12 mb-3 col-lg-3 col-md-6 px-0">
                     <div className="row  h-100 align-content-between">
                         <div className="col-sm-12  mb-sm-2 mb-3">
@@ -202,18 +210,7 @@ const SuperAdminDashboard = () => {
                         </div>
                     </div>
                 </div>
-                {/* employees */}
-                <div className="col-12 mb-3 col-lg-2 col-md-3 ">
-                    <div className="row w-100 m-0 h-100 align-content-between">
-                    <Employees />
-
-                    </div>
-                </div>
-                <div className="col-12 mb-3 pendinghrsolution  col-xxl-4 col-lg-4  col-md-6">
-                    <div className="dashboardcard h-100 p-3" style={borderAndBoxShadowStyles}>
-                      <Prehiredashboard />
-                    </div>
-                </div> 
+               
                 {/* Policy/Procedure  */}
                 <div className="col-12 mb-3 col-lg-4 col-md-6">
                     <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
