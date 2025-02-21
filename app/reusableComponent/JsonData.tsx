@@ -6771,7 +6771,6 @@ export const salesTDMReport = [
   },
 ];
 
-
 export const employeeDetails = [
   {
     employeeId: "SR253",
@@ -82149,3 +82148,127 @@ export const getemployeeinformation = [
     fpo_RateType: null,
   },
 ];
+
+export const preHireReport = [
+  {
+    empId: "ab0101",
+    employeename: "Suresh",
+    mobile: "7845693251",
+    emailaddress: "suresh@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0102",
+    employeename: "Ramesh",
+    mobile: "9856231478",
+    emailaddress: "ramesh@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0103",
+    employeename: "Mahesh",
+    mobile: "7896541230",
+    emailaddress: "mahesh@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0104",
+    employeename: "Anil",
+    mobile: "8975463215",
+    emailaddress: "anil@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0105",
+    employeename: "Rajesh",
+    mobile: "7458963210",
+    emailaddress: "rajesh@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0106",
+    employeename: "Vikram",
+    mobile: "9876541235",
+    emailaddress: "vikram@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0107",
+    employeename: "Kiran",
+    mobile: "7845963214",
+    emailaddress: "kiran@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0108",
+    employeename: "Manoj",
+    mobile: "6987451230",
+    emailaddress: "manoj@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0109",
+    employeename: "Surya",
+    mobile: "7895412369",
+    emailaddress: "surya@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0110",
+    employeename: "Dinesh",
+    mobile: "9654781236",
+    emailaddress: "dinesh@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0111",
+    employeename: "Naveen",
+    mobile: "7894561230",
+    emailaddress: "naveen@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0112",
+    employeename: "Arjun",
+    mobile: "8745963215",
+    emailaddress: "arjun@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0113",
+    employeename: "Karthik",
+    mobile: "7854691236",
+    emailaddress: "karthik@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+  {
+    empId: "ab0114",
+    employeename: "Harish",
+    mobile: "6958741236",
+    emailaddress: "harish@gmail.com",
+    agreementstatus: "inactive",
+    onboardingstatus: "active",
+  },
+  {
+    empId: "ab0115",
+    employeename: "Varun",
+    mobile: "7412589630",
+    emailaddress: "varun@gmail.com",
+    agreementstatus: "active",
+    onboardingstatus: "inactive",
+  },
+];
+
