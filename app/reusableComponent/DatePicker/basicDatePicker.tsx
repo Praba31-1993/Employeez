@@ -45,7 +45,7 @@ export default function BasicDatePicker({
         className="mb-0 textheader cursorpointer"
         onClick={toggleCardVisibility}
       >
-        Select range <KeyboardArrowDownOutlinedIcon />
+        Filter by Date <KeyboardArrowDownOutlinedIcon />
       </p>
 
       {/* Conditionally render dashboardcard */}
