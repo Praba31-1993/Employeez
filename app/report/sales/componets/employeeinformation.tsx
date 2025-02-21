@@ -56,6 +56,7 @@ function EmployeeInformation({ salesData }: any) {
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
+  const [isFilteredDate, setisFilteredDate] = useState<boolean>(false);
   const headers: Record<string, keyof (typeof salesData)[0]> = {
     "Emp ID": "empId",
     Name: "empName",
@@ -143,38 +144,38 @@ function EmployeeInformation({ salesData }: any) {
   };
 
   const handleDateFilter = () => {
-    const filteredData = rowsList?.filter((list: any) => {
-      if (!list.startDate || !list.endDate) return false; // Skip invalid data
+    const startDates: string | null = startDate;
+    const endDates: string | null = endDate; // Can be null
 
-      const listStartDate = new Date(list.startDate);
-      const listEndDate = new Date(list.endDate);
-      const filterStartDate = startDate ? new Date(startDate) : null;
-      const filterEndDate = endDate ? new Date(endDate) : null;
+    const filteredData = rowsList.filter((list: any) => {
+      if (!list.startDate || !list.endDate) return false; // Skip if dates are missing
 
-      // Normalize dates to remove time component
-      listStartDate.setHours(0, 0, 0, 0);
-      listEndDate.setHours(0, 0, 0, 0);
-      if (filterStartDate) filterStartDate.setHours(0, 0, 0, 0);
-      if (filterEndDate) filterEndDate.setHours(23, 59, 59, 999); // Include full day for end date
-      if (filterStartDate && filterEndDate) {
-        return listStartDate >= filterStartDate && listEndDate <= filterEndDate;
-      } else if (filterStartDate) {
-        return listStartDate.getTime() === filterStartDate.getTime(); // Exact match for startDate
-      } else if (filterEndDate) {
-        return listEndDate.getTime() === filterEndDate.getTime(); // Exact match for endDate
+      const startDate = new Date(list.startDate).getTime();
+      const endDate = new Date(list.endDate).getTime();
+
+      const filterStart = startDates ? new Date(startDates).getTime() : null;
+      const filterEnd = endDates ? new Date(endDates).getTime() : null;
+
+      if (filterStart !== null && filterEnd === null) {
+        return startDate === filterStart; // Only filter by start date
+      }
+      if (filterStart === null && filterEnd !== null) {
+        return endDate === filterEnd; // Only filter by end date
+      }
+      if (filterStart !== null && filterEnd !== null) {
+        return startDate >= filterStart && endDate <= filterEnd; // Filter by both
       }
 
-      return true; // If both are null, return all data
+      return true; // Default case (if no filter is applied)
     });
 
+    console.log("Filtered Data:", filteredData);
     setRows(filteredData);
   };
 
   useEffect(() => {
-    if (endDate !== null) {
-      handleDateFilter();
-    }
-  }, [endDate]);
+    handleDateFilter();
+  }, [isFilteredDate]);
 
   return (
     <div>
@@ -203,25 +204,17 @@ function EmployeeInformation({ salesData }: any) {
                 sx={{ color: useColors.themeRed }}
               />
             </div>
-          </div>
-
-          <div
-            className="d-flex gap-3 justify-content-between"
-            style={{ width: "20%" }}
-          >
-            <div className="d-flex gap-5">
-              <BasicDatePicker
-                startDate={(data: any) => setStartDate(data)}
-                endDate={(data: any) => setEndDate(data)}
-              />
-            </div>
-
-            <PrintExportColumnCustomize
-              headers={headers}
-              rowList={rowsList}
-              hiddenDatas={(data: any) => setHiddenColumns(data)}
+            <BasicDatePicker
+              startDate={(data: any) => setStartDate(data)}
+              endDate={(data: any) => setEndDate(data)}
+              clickFilterDate={() => setisFilteredDate(true)}
             />
           </div>
+          <PrintExportColumnCustomize
+            headers={headers}
+            rowList={rowsList}
+            hiddenDatas={(data: any) => setHiddenColumns(data)}
+          />
         </div>
       </div>
       <div className="stickyheader" style={{ overflowX: "auto" }}>

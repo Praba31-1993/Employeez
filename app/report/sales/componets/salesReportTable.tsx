@@ -12,6 +12,7 @@ import NorthOutlinedIcon from "@mui/icons-material/NorthOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
 import moment from "moment";
+import OrgChartTree from "@/app/reusableComponent/hierachyTree";
 
 interface ContractDetails {
   conName: string;
@@ -157,7 +158,6 @@ function SalesReportTable({ salesData }: any) {
       const filterStart = startDates ? new Date(startDates).getTime() : null;
       const filterEnd = endDates ? new Date(endDates).getTime() : null;
 
-      // Filtering logic based on given values
       if (filterStart !== null && filterEnd === null) {
         return startDate === filterStart; // Only filter by start date
       }
@@ -427,6 +427,7 @@ function SalesReportTable({ salesData }: any) {
           </div>
         </section>
       )}
+    {/* <OrgChartTree/> */}
     </div>
   );
 }
