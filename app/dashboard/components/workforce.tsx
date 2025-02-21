@@ -9,8 +9,8 @@ import {
 
 import { Colors } from "@/app/reusableComponent/styles";
 import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
-import Employees from "./employees";
 import Hrdatas from "./hrdatas";
+import Employees from "./employees";
 import Reportspoup from "./reportspoup";
 
 type Row = {
@@ -21,8 +21,7 @@ type Row = {
     status: string;
 };
 
-function Prehiredashboard() {
-    const [open, setOpen] = useState(false);
+function Workforce() {
     const [search, setSearch] = useState<string>("");
     const [rowsList, setRows] = useState<any>(getCompHistory);
     const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
@@ -62,16 +61,16 @@ function Prehiredashboard() {
         setRows(res);
     };
 
-    
+    // Toggle column visibility
+    const [open, setOpen] = useState(false);
 
     return (
-         
         <div className="row">
             {open && <Reportspoup show={open} close={() => setOpen(false)} />}
             {/* Search and Tools Section */}
             <div className="col-12 px-0">
                 <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
-                    <h4 className="textheader heading2">HR pending action</h4>
+                    <h4 className="textheader heading2">Employees List</h4>
                     <div className="d-flex gap-2 align-items-center">
                         <div className="d-flex gap-2 selectborder searchbar ps-2 align-items-center">
                             <div className="mt-1">
@@ -85,13 +84,13 @@ function Prehiredashboard() {
                                 onChange={handleSearch}
                             />
                         </div>
-                        <UnfoldMoreOutlinedIcon className="cursorpointer"  onClick={() => setOpen((prev) => !prev)} sx={{ color: useColors.themeRed, rotate: "36deg" }} />
+                        <UnfoldMoreOutlinedIcon className="cursorpointer" onClick={() => setOpen((prev) => !prev)} sx={{ color: useColors.themeRed, rotate: "36deg" }} />
                     </div>
 
                 </div>
             </div>
             <div className="col-6">
-                <Hrdatas />
+                <Employees />
             </div>
             {/* Table Section */}
             <div className="col-6  px-0" style={{ overflowX: "auto" }}>
@@ -142,4 +141,4 @@ function Prehiredashboard() {
     );
 }
 
-export default Prehiredashboard;
+export default Workforce;
