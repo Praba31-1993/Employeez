@@ -108,31 +108,31 @@ function Prehiredashboard() {
                     </thead>
                     <tbody className="dashboardcard">
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">Sales</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">Sales</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">It</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">It</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">Sales</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">Sales</td>
                         </tr>
                         <tr>
-                            <td className="para textheader">Manish yadav</td>
+                            <td className="para textheader" onClick={() => setOpen((prev) => !prev)} >Manish yadav</td>
                             <td className="para textheader">It</td>
                         </tr>
                     </tbody>
