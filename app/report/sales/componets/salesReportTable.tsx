@@ -171,7 +171,6 @@ function SalesReportTable({ salesData }: any) {
       return true; // Default case (if no filter is applied)
     });
 
-    console.log("Filtered Data:", filteredData);
     setRows(filteredData);
   };
 
@@ -427,7 +426,7 @@ function SalesReportTable({ salesData }: any) {
           </div>
         </section>
       )}
-    {/* <OrgChartTree/> */}
+      {/* <OrgChartTree/> */}
     </div>
   );
 }
