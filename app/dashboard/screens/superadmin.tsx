@@ -28,7 +28,7 @@ const SuperAdminDashboard = () => {
   const [dummyUser, setDummyUser] = useState<any>();
 
   const selectedMeedingModeBorder = useSelector(
-    (state: RootState) => state.meetingmode.border
+    (state: RootState) => state.meetingmode.background
   );
 
   const useColors = Colors();
