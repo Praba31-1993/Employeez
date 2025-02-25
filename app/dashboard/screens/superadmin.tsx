@@ -34,9 +34,7 @@ const SuperAdminDashboard = () => {
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border:
-      useColors.boxshadow == "unset"
-        ? selectedMeedingModeBorder
-        : useColors.border,
+      useColors.border,
     boxShadow: useColors.boxshadow,
   };
 
