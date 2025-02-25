@@ -24,7 +24,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Messages } from "../reusableComponent/messages";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Colors } from "../reusableComponent/styles";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -50,6 +49,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import BubbleChartOutlinedIcon from "@mui/icons-material/BubbleChartOutlined";
 import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { Colors } from "../reusableComponent/styles";
 interface SidebarProps {
   children: ReactNode;
 }
@@ -67,6 +67,11 @@ const Sidebar = ({ children }: SidebarProps) => {
   const [auth, setAuth] = useState<String | null>(null);
 
   const selectedColor = useSelector((state: RootState) => state.color.color);
+  const selectedMeedingModeBorder = useSelector(
+    (state: RootState) => state.meetingmode.background
+  );
+
+  console.log("selcetdfdssfds", selectedMeedingModeBorder);
 
   const router = useRouter();
 
@@ -287,9 +292,7 @@ const Sidebar = ({ children }: SidebarProps) => {
             <Link
               href="/dashboard"
               className={`link ${
-                pathname === "/dashboard"
-                  ? "dashboardActive" 
-                  : ""
+                pathname === "/dashboard" ? "dashboardActive" : ""
               } mb-0 w-100`}
               style={{
                 display: "flex",
@@ -630,7 +633,12 @@ const Sidebar = ({ children }: SidebarProps) => {
             <div className="mainContentNavbar">
               <NavbarComponent />
             </div>
-            <div style={{ padding: "0 10px 0 10px" }}>{children}</div>
+           
+            <div
+              style={{ padding: "0 10px 0 10px", background: selectedMeedingModeBorder,marginTop:'1px'  }}
+            >
+              {children}
+            </div>
           </main>
           <ToastContainer />
         </div>

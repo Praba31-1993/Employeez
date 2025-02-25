@@ -27,20 +27,11 @@ const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
   const [dummyUser, setDummyUser] = useState<any>();
 
-  const selectedMeedingModeBorder = useSelector(
-    (state: RootState) => state.meetingmode.border
-  );
-
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
-    border:
-      useColors.boxshadow == "unset"
-        ? selectedMeedingModeBorder
-        : useColors.border,
+    border: useColors.border,
     boxShadow: useColors.boxshadow,
   };
-
-  console.log("borderColor++++", borderAndBoxShadowStyles);
 
   const dispatch = useDispatch();
   const dummyUserData = useSelector((state: any) => state.currency);
@@ -55,7 +46,7 @@ const SuperAdminDashboard = () => {
   }, [dummyUserData]);
 
   return (
-    <div className="container-fluid px-lg-0 my-3">
+    <div className="container-fluid px-lg-0 pt-3">
       {/* <p> {moment("2024-07-30").format(`${dummyUser?.dateFormat}`)}</p>
       <p>{dummyUser?.currency + "15000"}</p>
       */}

@@ -2,10 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const meetingModeBorder =
-  localStorage.getItem("meetingModeborder") || "#FF7074"; // Default to #FF7074 if null
+  localStorage.getItem("meetingModeborder") ; // Default to #FF7074 if null
 
 const initialState = {
-  border: `1px solid ${meetingModeBorder}`,
+  background: "#F4F4F4",
 };
 
 const meetingModeBorderColorSlice = createSlice({
@@ -13,7 +13,7 @@ const meetingModeBorderColorSlice = createSlice({
   initialState,
   reducers: {
     setMeetingModeBorderColor: (state, action) => {
-      if (action.payload.border) state.border = action.payload.border;
+      if (action.payload.background) state.background = action.payload.background;
     },
   },
 });
