@@ -29,8 +29,15 @@ export function Themecustomization({ show, close }: any) {
   }, [dashboardLayout]);
 
   return (
-    <section className={`showpopup ${show ? "showpopupactive" : ""} draggable`} onClick={close}>
-      <div className="summarysection theme" style={{ width: "30vw" }}  onClick={(e) => e.stopPropagation()}>
+    <section
+      className={`showpopup ${show ? "showpopupactive" : ""} draggable`}
+      onClick={close}
+    >
+      <div
+        className="summarysection theme"
+        style={{ width: "30vw" }}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="container-fluid">
           <div className="row px-2 summary" style={{ borderBottom: "0px" }}>
             <div className="col-12 px-0">
@@ -58,7 +65,8 @@ export function Themecustomization({ show, close }: any) {
                   <RestartAltIcon className="shade mx-1 " />
                 </div>
                 <div className="col-1 pb-2 pt-1">
-                  <FontAwesomeIcon style={{cursor:"pointer"}}
+                  <FontAwesomeIcon
+                    style={{ cursor: "pointer" }}
                     className="textheader"
                     icon={faXmark}
                     onClick={close}
@@ -67,12 +75,12 @@ export function Themecustomization({ show, close }: any) {
               </div>
             </div>
             <Colorcustomization />
-            <BorderColorPicker/>
             <Skincustomization />
+            <BorderColorPicker />
             <Modecustomization />
             <div>
               <h5 className="para  mb-0">Dashboard customization</h5>
-              {layoutDatas?.map((layout: any, index:number) => (
+              {layoutDatas?.map((layout: any, index: number) => (
                 <div key={index}>
                   <Dashboardcustomization
                     dashboardLayout={layout}
