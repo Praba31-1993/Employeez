@@ -67,7 +67,7 @@ function Prehiredashboard() {
       {/* Search and Tools Section */}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
-          <h4 className="textheader heading2">Requirement Report</h4>
+          <h4 className="textheader heading2">Recruitment Report</h4>
           <div className="d-flex gap-2 align-items-center">
             <div className="d-flex gap-2 selectborder searchbar ps-2 align-items-center">
               <div className="mt-1">
@@ -89,11 +89,11 @@ function Prehiredashboard() {
           </div>
         </div>
       </div>
-      <div className="col-6">
+      <div className="col-4">
         <Hrdatas />
       </div>
       {/* Table Section */}
-      <div className="col-6  px-0" style={{ overflowX: "auto" }}>
+      <div className="col-8 px-0" style={{ overflowX: "auto" }}>
         <table id="printSection" className="table mb-0 tabletype">
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>

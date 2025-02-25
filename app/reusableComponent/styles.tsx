@@ -14,6 +14,7 @@ export const Colors = () => {
   const selectedborder = useSelector((state: RootState) => state.color.border);
   const selectedshadow = useSelector((state: RootState) => state.color.shadow);
 
+
   return {
     themeRed: selectedColor,
     buttonsFill: "#FF6363",
@@ -23,9 +24,8 @@ export const Colors = () => {
     white: "#FFFFFF",
     grey: "#F4F4F4",
     iconGray: "#E4E4E4",
-    border:selectedborder,
-    boxshadow:selectedshadow
-
+    border: selectedborder ,
+    boxshadow: selectedshadow,
   };
 };
 

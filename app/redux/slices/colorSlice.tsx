@@ -1,7 +1,6 @@
 "use client"
 import { createSlice } from "@reduxjs/toolkit";
 
-const themeColorfromLocalStorage = localStorage.getItem("themeColor")
 const initialState = {
   color: localStorage.getItem("themeColor") || "#FF7074", // Default to "#FF7074" if no saved color
   border: "0px", // Default border

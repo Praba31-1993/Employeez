@@ -59,7 +59,7 @@ export function Skincustomization() {
                   : "2px solid transparent",
             }}
           >
-                                            <Image className="p-1" src={Default} alt="default" />
+            <Image className="p-1" src={Default} alt="default" />
           </div>
           <p className="mb-0 py-1 shade" style={{ fontSize: "10px" }}>
             Default
