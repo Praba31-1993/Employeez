@@ -11,6 +11,7 @@ import { dashboardLayoutData } from "../JsonData";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { toggleCheckbox } from "@/app/redux/slices/dashboardLayoutSlice";
+import { BorderColorPicker } from "./meetingmodeborder";
 
 export function Themecustomization({ show, close }: any) {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export function Themecustomization({ show, close }: any) {
               </div>
             </div>
             <Colorcustomization />
+            <BorderColorPicker/>
             <Skincustomization />
             <Modecustomization />
             <div>

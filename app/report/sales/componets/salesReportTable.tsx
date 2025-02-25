@@ -37,7 +37,7 @@ interface ContractDetails {
 function SalesReportTable({ salesData }: any) {
   const [rowsList, setRows] = useState<ContractDetails[]>(salesData);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedStatus, setStatusTab] = useState<string>("Both");
+  const [selectedStatus, setStatusTab] = useState<string>("");
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [hideChart, setHideChart] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
@@ -48,7 +48,7 @@ function SalesReportTable({ salesData }: any) {
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
   const [isFilteredDate, setisFilteredDate] = useState<boolean>(false);
-
+  const [currentPageItems, setcurrentPageItems] = useState<any>([]);
   const useColors = Colors();
   const ActiveEmployees = salesData?.filter(
     (list: any) => list?.status === "InProgress"
@@ -74,10 +74,14 @@ function SalesReportTable({ salesData }: any) {
     Closer: "dealCloser",
     Recruiter: "recruiter",
   };
-  const currentPageItems = rowsList?.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+
+  useEffect(() => {
+    const res = rowsList?.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
+    setcurrentPageItems(res);
+  }, [salesData, rowsList]);
 
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -120,7 +124,7 @@ function SalesReportTable({ salesData }: any) {
       return;
     }
 
-    const SearchedResult = rowsList.filter((sales: any) =>
+    const SearchedResult = rowsList?.filter((sales: any) =>
       Object.values(sales).some(
         (value) =>
           typeof value === "string" &&
@@ -133,6 +137,7 @@ function SalesReportTable({ salesData }: any) {
 
   useEffect(() => {
     setRows(currentPageItems);
+    setStatusTab("Active")
   }, []);
 
   useEffect(() => {
@@ -149,7 +154,7 @@ function SalesReportTable({ salesData }: any) {
     const startDates: string | null = startDate;
     const endDates: string | null = endDate; // Can be null
 
-    const filteredData = rowsList.filter((list: any) => {
+    const filteredData = rowsList?.filter((list: any) => {
       if (!list.startDate || !list.endDate) return false; // Skip if dates are missing
 
       const startDate = new Date(list.startDate).getTime();
@@ -177,6 +182,8 @@ function SalesReportTable({ salesData }: any) {
   useEffect(() => {
     handleDateFilter();
   }, [isFilteredDate]);
+
+  console.log("rowList", currentPageItems);
 
   return (
     <div>

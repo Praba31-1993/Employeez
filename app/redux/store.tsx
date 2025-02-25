@@ -6,6 +6,7 @@ import dashboardLayoutSlice from "./slices/dashboardLayoutSlice";
 import userCurrencySlice from "./slices/currencySlice";
 import roleSlice from "./slices/roleSlice";
 import loginSlice from "./slices/loginSlice";
+import meetingModeBorderColorSlice from "./slices/meetingmodeSlice";
 // Create a store and add all reducers
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     dashboardLayout: dashboardLayoutSlice,
     currency: userCurrencySlice,
     role: roleSlice,
+    meetingmode: meetingModeBorderColorSlice,
   },
 });
 
