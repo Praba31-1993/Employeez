@@ -6,6 +6,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Colors } from "@/app/reusableComponent/styles";
 import Basicinfo from "./basicinfo";
+import Workauthrizeddashboardreports from "./workauthorized";
 
 export default function Employreportdetails({ show, close }: any) {
     const useColors = Colors();
@@ -63,11 +64,11 @@ export default function Employreportdetails({ show, close }: any) {
 
                     </div>
                     <div className="row my-2">
-                        <div className="col-6 text-end">
-                       <Basicinfo />
+                        <div className="col-lg-6 text-end">
+                            <Basicinfo />
                         </div>
-                        <div className="col-4 text-end ">
-
+                        <div className="col-lg-6 text-end ">
+                            <Workauthrizeddashboardreports />
 
                         </div>
                     </div>
