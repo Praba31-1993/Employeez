@@ -15,7 +15,8 @@ import {
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
-import Employreportdetails from "./emplyoyeesdetailreportpopup";
+import Profile_update from "@/app/profile/component/profile_update";
+import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import ClickableChips from "@/app/reusableComponent/chips";
 
