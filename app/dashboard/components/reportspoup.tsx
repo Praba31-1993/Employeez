@@ -227,20 +227,17 @@ export default function Reportspoup({ show, close }: any) {
                         <td className="para textheader">
                           <Chip
                             label={
-                              item?.agreementstatus
-                                ? item?.agreementstatus
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                  item?.agreementstatus.slice(1)
-                                : ""
+                              item?.agreementstatus === "available"
+                                ? "Active"
+                                : "Inactive"
                             }
                             sx={{
                               color:
-                                item?.agreementstatus === "active"
+                                item?.agreementstatus === "available"
                                   ? "#14E002"
                                   : "#FF4C51",
                               background:
-                                item?.agreementstatus === "active"
+                                item?.agreementstatus === "available"
                                   ? "rgba(86, 202, 0, 0.16)"
                                   : "#F7DADB",
                             }}
@@ -249,20 +246,17 @@ export default function Reportspoup({ show, close }: any) {
                         <td className="para textheader">
                           <Chip
                             label={
-                              item?.onboardingstatus
-                                ? item?.onboardingstatus
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                  item?.onboardingstatus.slice(1)
-                                : ""
+                              item?.onboardingstatus === "available"
+                                ? "Active"
+                                : "Inactive"
                             }
                             sx={{
                               color:
-                                item?.onboardingstatus === "active"
+                                item?.onboardingstatus === "available"
                                   ? "#14E002"
                                   : "#FF4C51",
                               background:
-                                item?.onboardingstatus === "active"
+                                item?.onboardingstatus === "available"
                                   ? "rgba(86, 202, 0, 0.16)"
                                   : "#F7DADB",
                             }}
@@ -393,18 +387,17 @@ export default function Reportspoup({ show, close }: any) {
                         <td className="para textheader">
                           <Chip
                             label={
-                              item?.status
-                                ? item?.status.charAt(0).toUpperCase() +
-                                  item?.status.slice(1)
-                                : ""
+                              item?.status==="available"
+                                ? "Active"
+                                : "Inactive"
                             }
                             sx={{
                               color:
-                                item?.status === "active"
+                                item?.status === "available"
                                   ? "#14E002"
                                   : "#FF4C51",
                               background:
-                                item?.status === "active"
+                                item?.status === "available"
                                   ? "rgba(86, 202, 0, 0.16)"
                                   : "#F7DADB",
                             }}
