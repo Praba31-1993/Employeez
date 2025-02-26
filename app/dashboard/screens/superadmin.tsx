@@ -25,6 +25,7 @@ import { RootState } from "@/app/redux/store";
 
 const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
+
   const [dummyUser, setDummyUser] = useState<any>();
 
   const selectedMeedingModeBorder = useSelector(
@@ -33,8 +34,7 @@ const SuperAdminDashboard = () => {
 
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
-    border:
-      useColors.border,
+    border: useColors.border,
     boxShadow: useColors.boxshadow,
   };
 

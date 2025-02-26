@@ -7,86 +7,112 @@ import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCale
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
 import { Colors } from "@/app/reusableComponent/styles";
 
-function Hrdatas() {
-    const arrayList = [
-        { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
-        { id: 2, hractionlist: "Hiring", value: 26, fill: "#41A4FF" },
-        { id: 3, hractionlist: "Onboarding", value: 108, fill: "#00FF47" },
-        { id: 4, hractionlist: "Supplier Onboarding", value: 22, fill: "#935AFF" },
-    ];
+interface hrprops {
+  hrlist?: any;
+  selectedListId?: (data: any) => void;
+}
+function Hrdatas({ hrlist, selectedListId }: hrprops) {
+  const [loading, setLoading] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
-    const [loading, setLoading] = useState(true);
+  const useColors = Colors();
+  const borderAndBoxShadowStyles = {
+    border: useColors.border,
+    boxShadow: useColors.boxshadow,
+  };
 
-    useEffect(() => {
-        // Simulate data fetching delay
-        const timer = setTimeout(() => setLoading(false), 2000); // Adjust timeout as necessary
-        return () => clearTimeout(timer);
-    }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000); // Adjust timeout as necessary
+    return () => clearTimeout(timer);
+  }, []);
 
-    const useColors = Colors();
-    const borderAndBoxShadowStyles = {
-        border: useColors.border,
-        boxShadow: useColors.boxshadow,
-    };
+  useEffect(() => {
 
-    return (
-        <>
-            {loading
-                ? // Render Skeleton Loaders
-                Array(4)
-                    .fill(null)
-                    .map((_, index) => (
-                        <div
-                            key={index}
-                            className="dashboardcard p-3 d-flex align-items-center mb-3"
-                            style={borderAndBoxShadowStyles}
-                        >
-                            <Skeleton circle={true} height={40} width={40} className="me-2" />
-                            <div>
-                                <Skeleton height={20} width={50} className="mb-1" />
-                                <Skeleton height={16} width={120} />
-                            </div>
-                        </div>
-                    ))
-                : // Render Actual Data
-                arrayList.map((item) => (
-                    <div
-                        key={item.id}
-                        className="dashboardcard p-3 d-flex align-items-center mb-3"
-                        style={borderAndBoxShadowStyles}
-                    >
-                        <div
-                            className="headingicons rounded"
-                            style={{
-                                background: item.fill + "33", // Light background color
-                                height: "fit-content",
-                                width: "fit-content",
-                            }}
-                        >
-                            {item.id === 1 && (
-                                <BadgeOutlinedIcon className="m-1" sx={{ color: item.fill }} />
-                            )}
-                            {item.id === 2 && (
-                                <GroupAddOutlinedIcon className="m-1" sx={{ color: item.fill }} />
-                            )}
-                            {item.id === 3 && (
-                                <PermContactCalendarOutlinedIcon
-                                    className="m-1"
-                                    sx={{ color: item.fill }}
-                                />
-                            )}
-                            {item.id === 4 && (
-                                <InventoryOutlinedIcon className="m-1" sx={{ color: item.fill }} />
-                            )}
-                        </div>
-                        <div>
-                            <h5 className="heading2 ps-2 mb-0 ">{item.value}</h5>
-                            <p className="shade para2 ps-2 mb-0 ">{item.hractionlist}</p>
-                        </div>
-                    </div>
-                ))}
-        </>
-    );
+    if (selectedItem !== null && selectedListId) {
+      selectedListId(selectedItem);
+    }
+  }, [selectedItem, selectedListId]);
+
+  //   const arrayList = [
+  //     { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
+  //     { id: 2, hractionlist: "Hiring", value: 26, fill: "#41A4FF" },
+  //     { id: 3, hractionlist: "Onboarding", value: 108, fill: "#00FF47" },
+  //     { id: 4, hractionlist: "Supplier Onboarding", value: 22, fill: "#935AFF" },
+  //   ];
+
+  return (
+    <>
+      {loading
+        ? // Render Skeleton Loaders
+          Array(4)
+            .fill(null)
+            .map((_, index) => (
+              <div
+                key={index}
+                className="dashboardcard p-3 d-flex align-items-center mb-3"
+                style={borderAndBoxShadowStyles}
+              >
+                <Skeleton
+                  circle={true}
+                  height={40}
+                  width={40}
+                  className="me-2"
+                />
+                <div>
+                  <Skeleton height={20} width={50} className="mb-1" />
+                  <Skeleton height={16} width={120} />
+                </div>
+              </div>
+            ))
+        : // Render Actual Data
+          hrlist?.map((item: any) => (
+            <div
+              key={item.id}
+              className="dashboardcard p-3 d-flex align-items-center mb-3"
+              style={borderAndBoxShadowStyles}
+              onClick={() => setSelectedItem(item?.id)}
+            >
+              <div
+                className="headingicons rounded"
+                style={{
+                  background: item.fill + "33", // Light background color
+                  height: "fit-content",
+                  width: "fit-content",
+                }}
+              >
+                {item.id === 1 && (
+                  <BadgeOutlinedIcon
+                    className="m-1"
+                    sx={{ color: item.fill }}
+                  />
+                )}
+                {item.id === 2 && (
+                  <GroupAddOutlinedIcon
+                    className="m-1"
+                    sx={{ color: item.fill }}
+                  />
+                )}
+                {item.id === 3 && (
+                  <PermContactCalendarOutlinedIcon
+                    className="m-1"
+                    sx={{ color: item.fill }}
+                  />
+                )}
+                {item.id === 4 && (
+                  <InventoryOutlinedIcon
+                    className="m-1"
+                    sx={{ color: item.fill }}
+                  />
+                )}
+              </div>
+              <div>
+                <h5 className="heading2 ps-2 mb-0 ">{item.value}</h5>
+                <p className="shade para2 ps-2 mb-0 ">{item.hractionlist}</p>
+              </div>
+            </div>
+          ))}
+    </>
+  );
 }
 
 export default Hrdatas;
