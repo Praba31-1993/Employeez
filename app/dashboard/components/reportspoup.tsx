@@ -18,7 +18,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
 import Profile_update from "@/app/profile/component/profile_update";
-import Employreportdetails from "./emplyoyeesdetailreportpopup";
+import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 
 export default function Reportspoup({ show, close }: any) {
   const [value, setValue] = useState(0);

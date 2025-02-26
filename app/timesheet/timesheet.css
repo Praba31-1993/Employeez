@@ -22,39 +22,6 @@
   color: #6d6777;
 }
 
-.accordion-button:focus {
-  box-shadow: unset !important;
-}
-
-.accordion-button {
-  background-color: transparent;
-}
-
-.accordion-button:after {
-  margin-left: 10%;
-}
-
-.accordion-button:not(.collapsed) {
-  box-shadow: unset !important;
-  background-color: transparent !important;
-}
-
-.collapse {
-  visibility: inherit !important;
-}
-
-.accordion-item {
-  background-color: unset !important;
-}
-
-.accordion-body {
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-}
-.accordion-button:after {
-  background-image: url(/assets/img/keyboard_arrow_down.png) !important;
-}
 .summary {
   border-bottom: 1px solid #8d8d8d4f;
 }
