@@ -2,10 +2,14 @@ import { getCompHistory } from "@/app/reusableComponent/JsonData";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
-
 import { Colors } from "@/app/reusableComponent/styles";
+import {
+  preHireReport,
+  hiringReport,
+  onboardingReport,
+  supplieronboardingReport,
+} from "@/app/reusableComponent/JsonData";
 import UnfoldMoreOutlinedIcon from "@mui/icons-material/UnfoldMoreOutlined";
 import Employees from "./employees";
 import Hrdatas from "./hrdatas";
@@ -24,13 +28,14 @@ function Prehiredashboard() {
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
-  const [sortConfig, setSortConfig] = useState<{
-    key: string;
-    direction: "asc" | "desc" | null;
-  }>({
-    key: "",
-    direction: null,
-  });
+  const [selectedTableList, setTableList] = useState<any>(1);
+  const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
+  const [hiringDetails, sethiringdetails] = useState<any>(hiringReport);
+  const [onboardingDetails, setOnboardingdetails] =
+    useState<any>(onboardingReport);
+  const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
+    supplieronboardingReport
+  );
 
   const arrayList = [
     { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
@@ -40,6 +45,25 @@ function Prehiredashboard() {
   ];
 
   const [loading, setLoading] = useState(true);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearch(query);
+    if (selectedTableList === 1) {
+      const res = SearchLogic(preHireReport, query);
+
+      setPrehiredetails(res);
+    } else if (selectedTableList === 2) {
+      const res = SearchLogic(hiringReport, query);
+      sethiringdetails(res);
+    } else if (selectedTableList === 3) {
+      const res = SearchLogic(onboardingReport, query);
+      setOnboardingdetails(res);
+    } else {
+      const res = SearchLogic(supplieronboardingReport, query);
+      setsupplierOnboardingdetails(res);
+    }
+  };
 
   useEffect(() => {
     // Simulate data fetching delay
@@ -51,14 +75,6 @@ function Prehiredashboard() {
   const borderAndBoxShadowStyles = {
     border: useColors.border,
     boxShadow: useColors.boxshadow,
-  };
-
-  // Search function
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearch(query);
-    const res = SearchLogic(getCompHistory, query);
-    setRows(res);
   };
 
   return (
@@ -90,88 +106,147 @@ function Prehiredashboard() {
         </div>
       </div>
       <div className="col-4">
-        <Hrdatas />
+        <Hrdatas
+          hrlist={arrayList}
+          selectedListId={(data: any) => setTableList(data)}
+        />
       </div>
       {/* Table Section */}
-      <div className="col-8 px-0" style={{ overflowX: "auto" }}>
-        <table id="printSection" className="table mb-0 tabletype">
-          <thead style={{ backgroundColor: "#F6F7FB" }}>
-            <tr>
-              <th scope="col" className="position-relative textheader para">
-                Employee name
-              </th>
-              <th scope="col" className="position-relative textheader para">
-                Department
-              </th>
-            </tr>
-          </thead>
-          <tbody className="dashboardcard">
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">Sales</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">Sales</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">It</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">It</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">Sales</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">Sales</td>
-            </tr>
-            <tr>
-              <td
-                className="para cursorpointer textheader"
-                onClick={() => setOpen((prev) => !prev)}
-              >
-                Manish yadav
-              </td>
-              <td className="para cursorpointer textheader">It</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      {selectedTableList === 1 && (
+        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {prehireDetails?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      onClick={() => setOpen((prev) => !prev)}
+                    >
+                      {prehire?.employeename}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.department}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {selectedTableList === 2 && (
+        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {hiringDetails?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      onClick={() => setOpen((prev) => !prev)}
+                    >
+                      {prehire?.employeename}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.department}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {selectedTableList === 3 && (
+        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {onboardingDetails?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      onClick={() => setOpen((prev) => !prev)}
+                    >
+                      {prehire?.employeename}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.department}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {selectedTableList === 4 && (
+        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Contractor name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Supplier
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {supplierboardingDetails?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      onClick={() => setOpen((prev) => !prev)}
+                    >
+                      {prehire?.contractorname}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.supplier}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

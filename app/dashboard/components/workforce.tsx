@@ -22,22 +22,6 @@ type Row = {
 function Workforce() {
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<any>(getCompHistory);
-  const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
-  const [sortConfig, setSortConfig] = useState<{
-    key: string;
-    direction: "asc" | "desc" | null;
-  }>({
-    key: "",
-    direction: null,
-  });
-
-  const arrayList = [
-    { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
-    { id: 2, hractionlist: "Hiring", value: 26, fill: "#41A4FF" },
-    { id: 3, hractionlist: "Onboarding", value: 108, fill: "#00FF47" },
-    { id: 4, hractionlist: "Supplier Onboarding", value: 22, fill: "#935AFF" },
-  ];
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
