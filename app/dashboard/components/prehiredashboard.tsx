@@ -112,8 +112,8 @@ function Prehiredashboard() {
         />
       </div>
       {/* Table Section */}
-      {selectedTableList === 1 && (
-        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+      <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+        {selectedTableList === 1 && (
           <table id="printSection" className="table mb-0 tabletype">
             <thead style={{ backgroundColor: "#F6F7FB" }}>
               <tr>
@@ -143,11 +143,9 @@ function Prehiredashboard() {
               )}
             </tbody>
           </table>
-        </div>
-      )}
+        )}
 
-      {selectedTableList === 2 && (
-        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+        {selectedTableList === 2 && (
           <table id="printSection" className="table mb-0 tabletype">
             <thead style={{ backgroundColor: "#F6F7FB" }}>
               <tr>
@@ -177,11 +175,9 @@ function Prehiredashboard() {
               )}
             </tbody>
           </table>
-        </div>
-      )}
+        )}
 
-      {selectedTableList === 3 && (
-        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+        {selectedTableList === 3 && (
           <table id="printSection" className="table mb-0 tabletype">
             <thead style={{ backgroundColor: "#F6F7FB" }}>
               <tr>
@@ -211,11 +207,9 @@ function Prehiredashboard() {
               )}
             </tbody>
           </table>
-        </div>
-      )}
+        )}
 
-      {selectedTableList === 4 && (
-        <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+        {selectedTableList === 4 && (
           <table id="printSection" className="table mb-0 tabletype">
             <thead style={{ backgroundColor: "#F6F7FB" }}>
               <tr>
@@ -245,8 +239,8 @@ function Prehiredashboard() {
               )}
             </tbody>
           </table>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

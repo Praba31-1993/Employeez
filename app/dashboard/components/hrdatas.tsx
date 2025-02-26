@@ -27,18 +27,10 @@ function Hrdatas({ hrlist, selectedListId }: hrprops) {
   }, []);
 
   useEffect(() => {
-
     if (selectedItem !== null && selectedListId) {
       selectedListId(selectedItem);
     }
   }, [selectedItem, selectedListId]);
-
-  //   const arrayList = [
-  //     { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
-  //     { id: 2, hractionlist: "Hiring", value: 26, fill: "#41A4FF" },
-  //     { id: 3, hractionlist: "Onboarding", value: 108, fill: "#00FF47" },
-  //     { id: 4, hractionlist: "Supplier Onboarding", value: 22, fill: "#935AFF" },
-  //   ];
 
   return (
     <>

@@ -26,12 +26,6 @@ import { RootState } from "@/app/redux/store";
 const SuperAdminDashboard = () => {
   const [birthdayAnniversaryReport, setbirthdayAnniversaryReport] = useState();
 
-  const [dummyUser, setDummyUser] = useState<any>();
-
-  const selectedMeedingModeBorder = useSelector(
-    (state: RootState) => state.meetingmode.background
-  );
-
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
     border: useColors.border,
@@ -47,10 +41,6 @@ const SuperAdminDashboard = () => {
     setbirthdayAnniversaryReport(arrayList);
     dispatch(updateUser({ name: "Vikram", countryCode: "CAD" }));
   }, []);
-
-  useEffect(() => {
-    setDummyUser(dummyUserData);
-  }, [dummyUserData]);
 
   return (
     <div className="container-fluid px-lg-0 pt-3">
