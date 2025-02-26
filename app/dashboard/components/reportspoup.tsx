@@ -18,6 +18,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
 import Profile_update from "@/app/profile/component/profile_update";
+import Employreportdetails from "./emplyoyeesdetailreportpopup";
 
 export default function Reportspoup({ show, close }: any) {
   const [value, setValue] = useState(0);
@@ -35,7 +36,8 @@ export default function Reportspoup({ show, close }: any) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
+  // Toggle column visibility
+  const [open, setOpen] = useState(false);
   const handleSearch = (query: string) => {
     setSearch(query);
   };
@@ -64,6 +66,7 @@ export default function Reportspoup({ show, close }: any) {
       className={`showpopup ${show ? "showpopupactive" : ""}`}
       onClick={close}
     >
+       {open && <Employreportdetails show={open} close={() => setOpen(false)} />}
       <div
         className="summarysection rounded m-auto"
         style={{ width: "90%", height: "95%", background: "#F5F5F5" }}
@@ -81,7 +84,7 @@ export default function Reportspoup({ show, close }: any) {
             </div>
           </div>
 
-          {!showDetails && (
+         
             <div className="row mt-3 px-sm-5 ">
               {/* Tab Section */}
               <div className="col-12 col-md-8 col-lg-8 col-xxl-10 ">
@@ -253,13 +256,14 @@ export default function Reportspoup({ show, close }: any) {
                         </td>
 
                         <td className="para textheader">
-                          <div className="flex gap-3">
+                          <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => {
-                                setShowDetails(true);
-                                setEmployeeId(item?.empId);
-                              }}
+                              // onClick={() => {
+                              //   setShowDetails(true);
+                              //   setEmployeeId(item?.empId);
+                              // }}
+                              onClick={() => setOpen((prev) => !prev)}
                             />
                           </div>
                         </td>
@@ -269,42 +273,8 @@ export default function Reportspoup({ show, close }: any) {
                 </table>
               </div>
             </div>
-          )}
 
-          {showDetails && (
-            <div className="">
-              <div className="container-fluid">
-                <Profile_update />
-              </div>
-              <div className="container-fluid mb-3">
-                <div className="row">
-                  <div className="col-lg-4 col-md-6 mb-3">
-                    <Personal_info />
-                  </div>
-                  <div className="col-lg-4 col-md-6"> 
-                    <div className="row">
-                      <div className="col-12 px-0">
-                        <Work_status />
-                      </div>
-                      <div className="col-12 px-0">
-                        <General_document />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <div className="row">
-                      <div className="col-lg-12 col-md-6 px-lg-0 px-md-2 px-0">
-                        <Work_site />
-                      </div>
-                      <div className="col-lg-12 col-md-6  px-lg-0 px-md-2 px-0">
-                        <Emergencycontact_details />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+         
         </div>
       </div>
     </section>
