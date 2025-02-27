@@ -17,6 +17,7 @@ import Hrdatas from "./hrdatas";
 import Employees from "./employees";
 import Reportspoup from "./reportspoup";
 import EmployeePopup from "./employeepopup";
+import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 
 type Row = {
   id: number | string;
@@ -70,7 +71,7 @@ function Workforce() {
 
   // Toggle column visibility
   const [open, setOpen] = useState(false);
-
+  const [opens, setOpens] = useState(false);
   const arrayList = [
     { id: 1, hractionlist: "Total Employee", value: 55, fill: "#FFBA27" },
     { id: 2, hractionlist: "W2S", value: 26, fill: "#41A4FF" },
@@ -81,6 +82,7 @@ function Workforce() {
   return (
     <div className="row">
       {open && <EmployeePopup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList}/>}
+      {opens && <Employreportdetails show={opens} close={() => setOpens(false)} selectedTableList={selectedTableList}/>}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
           <h4 className="textheader heading2">Workforce Details</h4>
@@ -131,7 +133,7 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -163,7 +165,7 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -195,7 +197,7 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -227,7 +229,7 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>

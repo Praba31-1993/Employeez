@@ -14,6 +14,7 @@ import UnfoldMoreOutlinedIcon from "@mui/icons-material/UnfoldMoreOutlined";
 import Employees from "./employees";
 import Hrdatas from "./hrdatas";
 import Reportspoup from "./reportspoup";
+import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 
 type Row = {
   id: number | string;
@@ -25,6 +26,7 @@ type Row = {
 
 function Prehiredashboard() {
   const [open, setOpen] = useState(false);
+  const [opens, setOpens] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
@@ -77,12 +79,13 @@ function Prehiredashboard() {
     boxShadow: useColors.boxshadow,
   };
 
-  console.log('tableList',selectedTableList);
-  
+  console.log('tableList', selectedTableList);
+
 
   return (
     <div className="row">
-      {open && <Reportspoup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList}/>}
+      {open && <Reportspoup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList} />}
+      {opens && <Employreportdetails show={opens} close={() => setOpens(false)} selectedTableList={selectedTableList} />}
       {/* Search and Tools Section */}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
@@ -134,7 +137,7 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -166,7 +169,7 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -198,7 +201,7 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.employeename}
                     </td>
@@ -230,7 +233,7 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpen((prev) => !prev)}
+                      onClick={() => setOpens((prev) => !prev)}
                     >
                       {prehire?.contractorname}
                     </td>
