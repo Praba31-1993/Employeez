@@ -16,6 +16,7 @@ import UnfoldMoreOutlinedIcon from "@mui/icons-material/UnfoldMoreOutlined";
 import Hrdatas from "./hrdatas";
 import Employees from "./employees";
 import Reportspoup from "./reportspoup";
+import EmployeePopup from "./employeepopup";
 
 type Row = {
   id: number | string;
@@ -83,8 +84,7 @@ function Workforce() {
 
   return (
     <div className="row">
-      {open && <Reportspoup show={open} close={() => setOpen(false)} />}
-      {/* Search and Tools Section */}
+      {open && <EmployeePopup show={open} close={() => setOpen(false)} />}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
           <h4 className="textheader heading2">Workforce Details</h4>
