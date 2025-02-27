@@ -122,7 +122,6 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
     acc[key] = key; // or use '' or any default value
     return acc;
   }, {} as Record<string, any>);
-  console.log("list", headers, "hiddens", hiddenColumns);
 
   return (
     <section
