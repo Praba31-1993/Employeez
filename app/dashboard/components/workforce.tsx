@@ -44,12 +44,8 @@ function Workforce() {
   }, []);
 
   const useColors = Colors();
-  const borderAndBoxShadowStyles = {
-    border: useColors.border,
-    boxShadow: useColors.boxshadow,
-  };
 
-  console.log('selectedTableList',selectedTableList);
+
   
 
   // Search function
@@ -84,7 +80,7 @@ function Workforce() {
 
   return (
     <div className="row">
-      {open && <EmployeePopup show={open} close={() => setOpen(false)} />}
+      {open && <EmployeePopup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList}/>}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
           <h4 className="textheader heading2">Workforce Details</h4>

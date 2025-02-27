@@ -9,7 +9,7 @@ import { Colors } from "@/app/reusableComponent/styles";
 
 function Employees({ employeelist, selectedListId }: any) {
   const [loading, setLoading] = useState(true);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<any>(1);
 
   useEffect(() => {
     // Simulate data fetching delay
@@ -56,15 +56,20 @@ function Employees({ employeelist, selectedListId }: any) {
         : // Render Actual Data
           employeelist.map((item: any) => (
             <div
-              key={item.id}
+              key={item?.id}
               className="dashboardcard p-3 d-flex align-items-center mb-3"
-              style={borderAndBoxShadowStyles}
+              style={{
+                border:
+                  item?.id === selectedItem
+                    ? `1px solid ${useColors.themeRed}`
+                    : "",
+              }}
               onClick={() => setSelectedItem(item?.id)}
             >
               <div
                 className="headingicons rounded"
                 style={{
-                  background: item.fill + "33", // Light background color
+                  background: item?.fill + "33", // Light background color
                   height: "fit-content",
                   width: "fit-content",
                 }}
@@ -72,25 +77,25 @@ function Employees({ employeelist, selectedListId }: any) {
                 {item.id === 1 && (
                   <BadgeOutlinedIcon
                     className="m-1"
-                    sx={{ color: item.fill }}
+                    sx={{ color: item?.fill }}
                   />
                 )}
                 {item.id === 2 && (
                   <GroupAddOutlinedIcon
                     className="m-1"
-                    sx={{ color: item.fill }}
+                    sx={{ color: item?.fill }}
                   />
                 )}
                 {item.id === 3 && (
                   <PermContactCalendarOutlinedIcon
                     className="m-1"
-                    sx={{ color: item.fill }}
+                    sx={{ color: item?.fill }}
                   />
                 )}
                 {item.id === 4 && (
                   <InventoryOutlinedIcon
                     className="m-1"
-                    sx={{ color: item.fill }}
+                    sx={{ color: item?.fill }}
                   />
                 )}
               </div>
