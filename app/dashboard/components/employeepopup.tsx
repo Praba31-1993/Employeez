@@ -7,29 +7,26 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import SearchIcon from "@mui/icons-material/Search";
 import {
-  preHireReport,
-  hiringReport,
-  onboardingReport,
-  supplieronboardingReport,
+  workforceReports,
+  w2sReports,
+  w2hReports,
+  c2cReports,
 } from "@/app/reusableComponent/JsonData";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
-import Profile_update from "@/app/profile/component/profile_update";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import ClickableChips from "@/app/reusableComponent/chips";
 
-export default function Reportspoup({ show, close }: any) {
+export default function EmployeePopup({ show, close }: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
-  const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
-  const [hiringDetails, sethiringdetails] = useState<any>(hiringReport);
-  const [onboardingDetails, setOnboardingdetails] =
-    useState<any>(onboardingReport);
-  const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
-    supplieronboardingReport
-  );
+  const [workforceDetails, setWorkforceDetails] =
+    useState<any>(workforceReports);
+  const [w2SDetails, setW2SDetails] = useState<any>(w2sReports);
+  const [w2HDetails, setw2hDetails] = useState<any>(w2hReports);
+  const [c2cDetails, setc2cDetails] = useState<any>(c2cReports);
   const [open, setOpen] = useState(false);
   const [sortConfig, setSortConfig] = useState<{
     key: keyof any;
@@ -44,18 +41,18 @@ export default function Reportspoup({ show, close }: any) {
     const query = event.target.value;
     setSearch(query);
     if (value === 0) {
-      const res = SearchLogic(preHireReport, query);
+      const res = SearchLogic(workforceReports, query);
 
-      setPrehiredetails(res);
+      setWorkforceDetails(res);
     } else if (value === 1) {
-      const res = SearchLogic(hiringReport, query);
-      sethiringdetails(res);
+      const res = SearchLogic(w2sReports, query);
+      setW2SDetails(res);
     } else if (value === 2) {
-      const res = SearchLogic(onboardingReport, query);
-      setOnboardingdetails(res);
+      const res = SearchLogic(w2hReports, query);
+      setw2hDetails(res);
     } else {
-      const res = SearchLogic(supplieronboardingReport, query);
-      setsupplierOnboardingdetails(res);
+      const res = SearchLogic(c2cReports, query);
+      setc2cDetails(res);
     }
   };
 
@@ -71,33 +68,33 @@ export default function Reportspoup({ show, close }: any) {
     setSortConfig({ key, direction });
 
     if (value === 0) {
-      const sortedRows = [...prehireDetails].sort((a, b) => {
+      const sortedRows = [...workforceDetails].sort((a, b) => {
         if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
         if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
         return 0;
       });
-      setPrehiredetails(sortedRows);
+      setWorkforceDetails(sortedRows);
     } else if (value === 1) {
-      const sortedRows = [...hiringDetails].sort((a, b) => {
+      const sortedRows = [...w2SDetails].sort((a, b) => {
         if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
         if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
         return 0;
       });
-      sethiringdetails(sortedRows);
+      setW2SDetails(sortedRows);
     } else if (value === 2) {
-      const sortedRows = [...onboardingDetails].sort((a, b) => {
+      const sortedRows = [...w2HDetails].sort((a, b) => {
         if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
         if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
         return 0;
       });
-      setOnboardingdetails(sortedRows);
-    } else {
-      const sortedRows = [...supplierboardingDetails].sort((a, b) => {
+      setw2hDetails(sortedRows);
+    } else if (value === 3) {
+      const sortedRows = [...c2cDetails].sort((a, b) => {
         if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
         if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
         return 0;
       });
-      setsupplierOnboardingdetails(sortedRows);
+      setc2cDetails(sortedRows);
     }
   };
 
@@ -132,10 +129,10 @@ export default function Reportspoup({ show, close }: any) {
                 value={value}
                 aria-label="Tabs where each tab needs to be selected manually"
               >
-                <Tab label="Prehire" className="text-capitalize" />
-                <Tab label="Hiring" className="text-capitalize" />
-                <Tab label="Onboarding" className="text-capitalize" />
-                <Tab label="Supplier onboarding" className="text-capitalize" />
+                <Tab label="Total Employee" className="text-capitalize" />
+                <Tab label="W2S" className="text-capitalize" />
+                <Tab label="W2H" className="text-capitalize" />
+                <Tab label="C2C" className="text-capitalize" />
               </Tabs>
             </div>
             {/* Search Section */}
@@ -179,7 +176,7 @@ export default function Reportspoup({ show, close }: any) {
 
                               transition: "transform 0.3s ease",
                             }}
-                            onClick={() => handleSort("empId")}
+                            onClick={() => handleSort("employeeId")}
                           />
                         </span>
                       </th>
@@ -203,6 +200,28 @@ export default function Reportspoup({ show, close }: any) {
                             transition: "transform 0.3s ease",
                           }}
                           onClick={() => handleSort("employeename")}
+                        />
+                      </th>
+                      <th className="textheader para" scope="col">
+                        {" "}
+                        Department
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("department")}
                         />
                       </th>
                       <th className="textheader para" scope="col">
@@ -248,7 +267,7 @@ export default function Reportspoup({ show, close }: any) {
                         />
                       </th>
                       <th className="textheader para" scope="col">
-                        Agreement Status
+                        Hiring Type
                         <NorthSharpIcon
                           fontSize="small"
                           className="inline-block"
@@ -265,11 +284,12 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("agreementstatus")}
+                          onClick={() => handleSort("hiringtype")}
                         />
                       </th>
+
                       <th className="textheader para" scope="col">
-                        Onboarding Status
+                        Status
                         <NorthSharpIcon
                           fontSize="small"
                           className="inline-block"
@@ -286,60 +306,45 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("onboardingstatus")}
+                          onClick={() => handleSort("status")}
                         />
                       </th>
                       <th className="textheader para" scope="col"></th>
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {prehireDetails?.map((item: any, index: number) => (
+                    {workforceDetails?.map((item: any, index: number) => (
                       <tr key={index}>
-                        <td className="para textheader ">{item?.empId}</td>
+                        <td className="para textheader ">{item?.employeeId}</td>
                         <td
                           className="para textheader"
                           style={{ whiteSpace: "nowrap" }}
                         >
                           {item?.employeename}
                         </td>
+                        <td className="para textheader">{item?.department}</td>
+
                         <td className="para textheader">{item?.mobile}</td>
                         <td className="para textheader">
                           {item?.emailaddress}
                         </td>
 
+                        <td className="para textheader">{item?.hiringtype}</td>
+
                         <td className="para textheader">
                           <Chip
                             label={
-                              item?.agreementstatus === "available"
+                              item?.status === "available"
                                 ? "Active"
                                 : "Inactive"
                             }
                             sx={{
                               color:
-                                item?.agreementstatus === "available"
+                                item?.status === "available"
                                   ? "#14E002"
                                   : "#FF4C51",
                               background:
-                                item?.agreementstatus === "available"
-                                  ? "rgba(86, 202, 0, 0.16)"
-                                  : "#F7DADB",
-                            }}
-                          />
-                        </td>
-                        <td className="para textheader">
-                          <Chip
-                            label={
-                              item?.onboardingstatus === "available"
-                                ? "Active"
-                                : "Inactive"
-                            }
-                            sx={{
-                              color:
-                                item?.onboardingstatus === "available"
-                                  ? "#14E002"
-                                  : "#FF4C51",
-                              background:
-                                item?.onboardingstatus === "available"
+                                item?.status === "available"
                                   ? "rgba(86, 202, 0, 0.16)"
                                   : "#F7DADB",
                             }}
@@ -386,7 +391,7 @@ export default function Reportspoup({ show, close }: any) {
 
                               transition: "transform 0.3s ease",
                             }}
-                            onClick={() => handleSort("empId")}
+                            onClick={() => handleSort("employeeId")}
                           />
                         </span>
                       </th>
@@ -410,6 +415,28 @@ export default function Reportspoup({ show, close }: any) {
                             transition: "transform 0.3s ease",
                           }}
                           onClick={() => handleSort("employeename")}
+                        />
+                      </th>
+                      <th className="textheader para" scope="col">
+                        {" "}
+                        Department
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("department")}
                         />
                       </th>
                       <th className="textheader para" scope="col">
@@ -455,7 +482,7 @@ export default function Reportspoup({ show, close }: any) {
                         />
                       </th>
                       <th className="textheader para" scope="col">
-                        Employee Type
+                        Hiring Type
                         <NorthSharpIcon
                           fontSize="small"
                           className="inline-block"
@@ -472,30 +499,10 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("agreementstatus")}
+                          onClick={() => handleSort("hiringtype")}
                         />
                       </th>
-                      <th className="textheader para" scope="col">
-                        Hiring Date
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
 
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("onboardingstatus")}
-                        />
-                      </th>
                       <th className="textheader para" scope="col">
                         Status
                         <NorthSharpIcon
@@ -514,30 +521,30 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("onboardingstatus")}
+                          onClick={() => handleSort("status")}
                         />
                       </th>
                       <th className="textheader para" scope="col"></th>
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {hiringDetails?.map((item: any, index: number) => (
+                    {w2SDetails?.map((item: any, index: number) => (
                       <tr key={index}>
-                        <td className="para textheader ">{item?.empId}</td>
+                        <td className="para textheader ">{item?.employeeId}</td>
                         <td
                           className="para textheader"
                           style={{ whiteSpace: "nowrap" }}
                         >
                           {item?.employeename}
                         </td>
+                        <td className="para textheader">{item?.department}</td>
+
                         <td className="para textheader">{item?.mobile}</td>
                         <td className="para textheader">
                           {item?.emailaddress}
                         </td>
-                        <td className="para textheader">
-                          {item?.employeetype}
-                        </td>
-                        <td className="para textheader">{item?.hiringdate}</td>
+
+                        <td className="para textheader">{item?.hiringtype}</td>
 
                         <td className="para textheader">
                           <Chip
@@ -599,7 +606,7 @@ export default function Reportspoup({ show, close }: any) {
 
                               transition: "transform 0.3s ease",
                             }}
-                            onClick={() => handleSort("empId")}
+                            onClick={() => handleSort("employeeId")}
                           />
                         </span>
                       </th>
@@ -626,6 +633,28 @@ export default function Reportspoup({ show, close }: any) {
                         />
                       </th>
                       <th className="textheader para" scope="col">
+                        {" "}
+                        Department
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("department")}
+                        />
+                      </th>
+                      <th className="textheader para" scope="col">
                         Mobile
                         <NorthSharpIcon
                           fontSize="small"
@@ -668,7 +697,7 @@ export default function Reportspoup({ show, close }: any) {
                         />
                       </th>
                       <th className="textheader para" scope="col">
-                        Employee Type
+                        Hiring Type
                         <NorthSharpIcon
                           fontSize="small"
                           className="inline-block"
@@ -685,30 +714,71 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("agreementstatus")}
+                          onClick={() => handleSort("hiringtype")}
                         />
                       </th>
 
+                      <th className="textheader para" scope="col">
+                        Status
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("status")}
+                        />
+                      </th>
                       <th className="textheader para" scope="col"></th>
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {onboardingDetails?.map((item: any, index: number) => (
+                    {w2HDetails?.map((item: any, index: number) => (
                       <tr key={index}>
-                        <td className="para textheader ">{item?.empId}</td>
+                        <td className="para textheader ">{item?.employeeId}</td>
                         <td
                           className="para textheader"
                           style={{ whiteSpace: "nowrap" }}
                         >
                           {item?.employeename}
                         </td>
+                        <td className="para textheader">{item?.department}</td>
+
                         <td className="para textheader">{item?.mobile}</td>
                         <td className="para textheader">
                           {item?.emailaddress}
                         </td>
 
+                        <td className="para textheader">{item?.hiringtype}</td>
+
                         <td className="para textheader">
-                          {item?.employeetype}
+                          <Chip
+                            label={
+                              item?.status === "available"
+                                ? "Active"
+                                : "Inactive"
+                            }
+                            sx={{
+                              color:
+                                item?.status === "available"
+                                  ? "#14E002"
+                                  : "#FF4C51",
+                              background:
+                                item?.status === "available"
+                                  ? "rgba(86, 202, 0, 0.16)"
+                                  : "#F7DADB",
+                            }}
+                          />
                         </td>
 
                         <td className="para textheader">
@@ -732,7 +802,7 @@ export default function Reportspoup({ show, close }: any) {
                   <thead style={{ backgroundColor: "#F6F7FB" }}>
                     <tr>
                       <th className="textheader para" scope="col">
-                        Contarctor Name
+                        Employee Id
                         <span>
                           <NorthSharpIcon
                             fontSize="small"
@@ -750,13 +820,13 @@ export default function Reportspoup({ show, close }: any) {
 
                               transition: "transform 0.3s ease",
                             }}
-                            onClick={() => handleSort("empId")}
+                            onClick={() => handleSort("employeeId")}
                           />
                         </span>
                       </th>
                       <th className="textheader para" scope="col">
                         {" "}
-                        Supplier Name
+                        Employee Name
                         <NorthSharpIcon
                           fontSize="small"
                           className="inline-block"
@@ -774,6 +844,28 @@ export default function Reportspoup({ show, close }: any) {
                             transition: "transform 0.3s ease",
                           }}
                           onClick={() => handleSort("employeename")}
+                        />
+                      </th>
+                      <th className="textheader para" scope="col">
+                        {" "}
+                        Department
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("department")}
                         />
                       </th>
                       <th className="textheader para" scope="col">
@@ -819,6 +911,28 @@ export default function Reportspoup({ show, close }: any) {
                         />
                       </th>
                       <th className="textheader para" scope="col">
+                        Hiring Type
+                        <NorthSharpIcon
+                          fontSize="small"
+                          className="inline-block"
+                          sx={{
+                            fill: "#CCC",
+                            height: "15px",
+                            width: "15px",
+                            transform:
+                              sortConfig?.direction === "asc"
+                                ? "rotate(0deg)"
+                                : sortConfig?.direction === "desc"
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)",
+
+                            transition: "transform 0.3s ease",
+                          }}
+                          onClick={() => handleSort("hiringtype")}
+                        />
+                      </th>
+
+                      <th className="textheader para" scope="col">
                         Status
                         <NorthSharpIcon
                           fontSize="small"
@@ -836,52 +950,61 @@ export default function Reportspoup({ show, close }: any) {
 
                             transition: "transform 0.3s ease",
                           }}
-                          onClick={() => handleSort("emailaddress")}
+                          onClick={() => handleSort("status")}
                         />
                       </th>
-
                       <th className="textheader para" scope="col"></th>
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {supplierboardingDetails?.map(
-                      (item: any, index: number) => (
-                        <tr key={index}>
-                          <td
-                            className="para textheader"
-                            style={{ whiteSpace: "nowrap" }}
-                          >
-                            {item?.contractorname}
-                          </td>
-                          <td className="para textheader ">
-                            {item?.suppliername}
-                          </td>
+                    {c2cDetails?.map((item: any, index: number) => (
+                      <tr key={index}>
+                        <td className="para textheader ">{item?.employeeId}</td>
+                        <td
+                          className="para textheader"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          {item?.employeename}
+                        </td>
+                        <td className="para textheader">{item?.department}</td>
 
-                          <td className="para textheader">{item?.mobile}</td>
-                          <td className="para textheader">
-                            {item?.emailaddress}
-                          </td>
+                        <td className="para textheader">{item?.mobile}</td>
+                        <td className="para textheader">
+                          {item?.emailaddress}
+                        </td>
 
-                          <td className="para textheader">
-                            <ClickableChips
-                              label={
-                                item?.status.charAt(0).toUpperCase() +
-                                item?.status.slice(1)
-                              }
+                        <td className="para textheader">{item?.hiringtype}</td>
+
+                        <td className="para textheader">
+                          <Chip
+                            label={
+                              item?.status === "available"
+                                ? "Active"
+                                : "Inactive"
+                            }
+                            sx={{
+                              color:
+                                item?.status === "available"
+                                  ? "#14E002"
+                                  : "#FF4C51",
+                              background:
+                                item?.status === "available"
+                                  ? "rgba(86, 202, 0, 0.16)"
+                                  : "#F7DADB",
+                            }}
+                          />
+                        </td>
+
+                        <td className="para textheader">
+                          <div className="flex cursorpointer gap-3">
+                            <RemoveRedEyeIcon
+                              sx={{ color: "#8A8D93" }}
+                              onClick={() => setOpen((prev) => !prev)}
                             />
-                          </td>
-
-                          <td className="para textheader">
-                            <div className="flex cursorpointer gap-3">
-                              <RemoveRedEyeIcon
-                                sx={{ color: "#8A8D93" }}
-                                onClick={() => setOpen((prev) => !prev)}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                      )
-                    )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

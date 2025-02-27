@@ -82727,7 +82727,7 @@ export const workforceReports = [
     mobile: "7485962536",
     emailaddress: "suresh@gmail.com",
     hiringtype: "C2C",
-    status: "active",
+    status: "available",
     supplier:'Raw steel Manufacturer'
   },
   {
@@ -82746,7 +82746,7 @@ export const workforceReports = [
     mobile: "7485962538",
     emailaddress: "mahesh@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1024,
@@ -82764,7 +82764,7 @@ export const workforceReports = [
     mobile: "7485962540",
     emailaddress: "rajesh@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1026,
@@ -82782,7 +82782,7 @@ export const workforceReports = [
     mobile: "7485962542",
     emailaddress: "kiran@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1028,
@@ -82800,7 +82800,7 @@ export const workforceReports = [
     mobile: "7485962544",
     emailaddress: "surya@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1030,
@@ -82818,7 +82818,7 @@ export const workforceReports = [
     mobile: "7485962546",
     emailaddress: "naveen@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1032,
@@ -82836,7 +82836,7 @@ export const workforceReports = [
     mobile: "7485962548",
     emailaddress: "karthik@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 1034,
@@ -82854,7 +82854,7 @@ export const workforceReports = [
     mobile: "7485962550",
     emailaddress: "varun@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
 ];
 
@@ -82866,7 +82866,7 @@ export const w2sReports = [
     mobile: "9876543210",
     emailaddress: "amit@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
     supplier: "Tech Solutions Ltd",
   },
   {
@@ -82885,7 +82885,7 @@ export const w2sReports = [
     mobile: "9865321470",
     emailaddress: "rohit@gmail.com",
     hiringtype: "C2C",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2004,
@@ -82903,7 +82903,7 @@ export const w2sReports = [
     mobile: "9821365478",
     emailaddress: "sandeep@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2006,
@@ -82921,7 +82921,7 @@ export const w2sReports = [
     mobile: "9874123650",
     emailaddress: "vikas@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2008,
@@ -82939,7 +82939,7 @@ export const w2sReports = [
     mobile: "9512346870",
     emailaddress: "manish@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2010,
@@ -82960,7 +82960,7 @@ export const w2hReports = [
     mobile: "9871236540",
     emailaddress: "tarun@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
     supplier: "Alpha Corp",
   },
   {
@@ -82979,7 +82979,7 @@ export const w2hReports = [
     mobile: "9784521036",
     emailaddress: "deepak@gmail.com",
     hiringtype: "C2C",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2014,
@@ -82997,7 +82997,7 @@ export const w2hReports = [
     mobile: "9623547891",
     emailaddress: "raj@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2016,
@@ -83015,7 +83015,7 @@ export const w2hReports = [
     mobile: "9865472103",
     emailaddress: "saurabh@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2018,
@@ -83033,7 +83033,7 @@ export const w2hReports = [
     mobile: "9532146870",
     emailaddress: "vivek@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2020,
@@ -83055,7 +83055,7 @@ export const c2cReports = [
     mobile: "9876541230",
     emailaddress: "amit@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
     supplier: "Omega Solutions",
   },
   {
@@ -83074,7 +83074,7 @@ export const c2cReports = [
     mobile: "9856213470",
     emailaddress: "yash@gmail.com",
     hiringtype: "C2C",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2024,
@@ -83092,7 +83092,7 @@ export const c2cReports = [
     mobile: "9658741205",
     emailaddress: "rohan@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2026,
@@ -83110,7 +83110,7 @@ export const c2cReports = [
     mobile: "9745123067",
     emailaddress: "siddharth@gmail.com",
     hiringtype: "Contract",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2028,
@@ -83128,7 +83128,7 @@ export const c2cReports = [
     mobile: "9546213078",
     emailaddress: "vikas@gmail.com",
     hiringtype: "Full-Time",
-    status: "active",
+    status: "available",
   },
   {
     employeeId: 2030,
