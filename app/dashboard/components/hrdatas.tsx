@@ -13,7 +13,7 @@ interface hrprops {
 }
 function Hrdatas({ hrlist, selectedListId }: hrprops) {
   const [loading, setLoading] = useState(true);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<any>(1);
 
   const useColors = Colors();
   const borderAndBoxShadowStyles = {
@@ -61,13 +61,18 @@ function Hrdatas({ hrlist, selectedListId }: hrprops) {
             <div
               key={item.id}
               className="dashboardcard p-3 d-flex align-items-center mb-3"
-              style={borderAndBoxShadowStyles}
+              style={{
+                border:
+                  item.id === selectedItem
+                    ? `1px solid ${useColors.themeRed}`
+                    : "",
+              }}
               onClick={() => setSelectedItem(item?.id)}
             >
               <div
                 className="headingicons rounded"
                 style={{
-                  background: item.fill + "33", // Light background color
+                  background: item?.fill + "33", // Light background color
                   height: "fit-content",
                   width: "fit-content",
                 }}

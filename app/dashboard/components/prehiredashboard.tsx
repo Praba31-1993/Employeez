@@ -77,9 +77,12 @@ function Prehiredashboard() {
     boxShadow: useColors.boxshadow,
   };
 
+  console.log('tableList',selectedTableList);
+  
+
   return (
     <div className="row">
-      {open && <Reportspoup show={open} close={() => setOpen(false)} />}
+      {open && <Reportspoup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList}/>}
       {/* Search and Tools Section */}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">

@@ -1,5 +1,5 @@
 "use Client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -20,7 +20,7 @@ import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup"
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import ClickableChips from "@/app/reusableComponent/chips";
 
-export default function Reportspoup({ show, close }: any) {
+export default function Reportspoup({ show, close, selectedTableList }: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
   const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
@@ -58,6 +58,14 @@ export default function Reportspoup({ show, close }: any) {
       setsupplierOnboardingdetails(res);
     }
   };
+
+  useEffect(() => {
+    if (!selectedTableList) {
+      setValue(0);
+    } else {
+      setValue(selectedTableList - 1);
+    }
+  }, [selectedTableList]);
 
   const handleSort = (key: keyof any) => {
     let direction: "asc" | "desc" = "asc";
