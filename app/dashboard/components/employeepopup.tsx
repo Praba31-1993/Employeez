@@ -1,5 +1,5 @@
 "use Client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -17,9 +17,8 @@ import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
-import ClickableChips from "@/app/reusableComponent/chips";
 
-export default function EmployeePopup({ show, close }: any) {
+export default function EmployeePopup({ show, close, selectedTableList }: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
   const [workforceDetails, setWorkforceDetails] =
@@ -98,6 +97,13 @@ export default function EmployeePopup({ show, close }: any) {
     }
   };
 
+  useEffect(() => {
+    if (!selectedTableList) {
+      setValue(0);
+    } else {
+      setValue(selectedTableList - 1);
+    }
+  }, selectedTableList);
   return (
     <section
       className={`showpopup ${show ? "showpopupactive" : ""}`}
