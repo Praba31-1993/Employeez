@@ -60,7 +60,7 @@ function Hrdatas({ hrlist, selectedListId }: hrprops) {
           hrlist?.map((item: any) => (
             <div
               key={item.id}
-              className="dashboardcard p-3 d-flex align-items-center mb-3"
+              className="dashboardcard timesheetdetails p-3 d-flex align-items-center mb-3"
               style={{
                 border:
                   item.id === selectedItem
