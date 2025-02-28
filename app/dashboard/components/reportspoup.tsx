@@ -11,6 +11,7 @@ import {
   hiringReport,
   onboardingReport,
   supplieronboardingReport,
+  employeeDetails,
 } from "@/app/reusableComponent/JsonData";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
@@ -43,6 +44,7 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
     supplieronboardingReport
   );
   const [open, setOpen] = useState(false);
+  const [selectedEmployeeDetails, setEmployeeDetails] = useState<any>();
   const [sortConfig, setSortConfig] = useState<{
     key: keyof any;
     direction: "asc" | "desc";
@@ -171,7 +173,13 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
       className={`showpopup ${show ? "showpopupactive" : ""}`}
       onClick={close}
     >
-      {open && <Employreportdetails show={open} close={() => setOpen(false)} />}
+      {open && (
+        <Employreportdetails
+          show={open}
+          close={() => setOpen(false)}
+          selectedEmployeeDetails={selectedEmployeeDetails}
+        />
+      )}
       <div
         className="summarysection rounded m-auto"
         style={{ width: "90%", height: "95%", background: "#F5F5F5" }}
@@ -365,7 +373,14 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    prehireDetails?.filter(
+                                      (list: any) => list.empId === item?.empId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -482,7 +497,14 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    prehireDetails?.filter(
+                                      (list: any) => list.empId === item?.empId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -634,7 +656,14 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    prehireDetails?.filter(
+                                      (list: any) => list.empId === item?.empId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -794,7 +823,14 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                             <div className="flex cursorpointer gap-3">
                               <RemoveRedEyeIcon
                                 sx={{ color: "#8A8D93" }}
-                                onClick={() => setOpen((prev) => !prev)}
+                                onClick={() => {
+                                  setOpen((prev) => !prev),
+                                    setEmployeeDetails(() =>
+                                      prehireDetails?.filter(
+                                        (list: any) => list?.id === item?.id
+                                      )
+                                    );
+                                }}
                               />
                             </div>
                           </td>
