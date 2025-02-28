@@ -28,6 +28,11 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
   const [startDate, setStartDate] = useState<any>(null);
   const [endDate, setEndDate] = useState<any>(null);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
+  const [prehireheaders, setprehireheaders] = useState<any>({});
+  const [hiringheaders, sethiringheaders] = useState<any>({});
+  const [onboardingheaders, setonboardingheaders] = useState<any>({});
+  const [supplieronboardingheaders, setsupplieronboardingheaders] =
+    useState<any>({});
 
   const [isFilteredDate, setisFilteredDate] = useState<boolean>(false);
   const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
@@ -46,8 +51,6 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  const useColors = Colors();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
@@ -118,10 +121,50 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
     }
   };
 
-  const headers = Object.keys(prehireDetails[0]).reduce((acc, key) => {
-    acc[key] = key; // or use '' or any default value
-    return acc;
-  }, {} as Record<string, any>);
+  useEffect(() => {
+    let newHeaders: Record<string, string> = {}; // Start with an empty object
+
+    if (value === 0) {
+      newHeaders = {
+        "Employee Id": "empId",
+        "Employee Name": "employeename",
+        Mobile: "mobile",
+        "Email Address": "emailaddress",
+        "Agreement Status": "agreementstatus",
+        "Onboarding Status": "onboardingstatus",
+      };
+      setprehireheaders(newHeaders);
+    } else if (value === 1) {
+      newHeaders = {
+        "Employee Id": "empId",
+        "Employee Name": "employeename",
+        Mobile: "mobile",
+        "Email Address": "emailaddress",
+        "Empoyee Type": "employeetype",
+        "Hiring Date": "hiringdate",
+        Status: "status",
+      };
+      sethiringheaders(newHeaders);
+    } else if (value === 2) {
+      newHeaders = {
+        "Employee Id": "empId",
+        "Employee Name": "employeename",
+        Mobile: "mobile",
+        "Email Address": "emailaddress",
+        "Empoyee Type": "employeetype",
+      };
+      setonboardingheaders(newHeaders);
+    } else if (value === 3) {
+      newHeaders = {
+        "Contractor Name": "contractorname",
+        "Supplier Name": "suppliername",
+        Mobile: "mobile",
+        "Email Address": "emailaddress",
+        Supplier: "supplier",
+      };
+      setsupplieronboardingheaders(newHeaders);
+    }
+  }, [value]);
 
   return (
     <section
@@ -162,23 +205,48 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
             </div>
             {/* Search Section */}
             <div className="col-12 col-md-4 col-lg-4 col-xxl-2 ">
-              <PrintExportColumnCustomize
-                headers={headers}
-                rowList={prehireDetails}
-                hiddenDatas={(data: any) => setHiddenColumns(data)}
-              />
-              <div className="d-flex gap-2 searchbar ps-2  align-items-center">
-                <div className="mt-1">
-                  <SearchIcon />
-                </div>
+              <div className="d-flex align-items-center gap-3">
+                {value === 0 && (
+                  <PrintExportColumnCustomize
+                    headers={prehireheaders}
+                    rowList={prehireDetails}
+                    hiddenDatas={(data: any) => setHiddenColumns(data)}
+                  />
+                )}
+                {value === 1 && (
+                  <PrintExportColumnCustomize
+                    headers={hiringheaders}
+                    rowList={hiringDetails}
+                    hiddenDatas={(data: any) => setHiddenColumns(data)}
+                  />
+                )}
+                {value === 2 && (
+                  <PrintExportColumnCustomize
+                    headers={onboardingheaders}
+                    rowList={onboardingDetails}
+                    hiddenDatas={(data: any) => setHiddenColumns(data)}
+                  />
+                )}
+                {value === 3 && (
+                  <PrintExportColumnCustomize
+                    headers={supplieronboardingheaders}
+                    rowList={supplierboardingDetails}
+                    hiddenDatas={(data: any) => setHiddenColumns(data)}
+                  />
+                )}
+                <div className="d-flex gap-2 searchbar ps-2  align-items-center">
+                  <div className="mt-1">
+                    <SearchIcon />
+                  </div>
 
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="p-2 "
-                  value={search}
-                  onChange={handleSearch}
-                />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="p-2 "
+                    value={search}
+                    onChange={handleSearch}
+                  />
+                </div>
               </div>
             </div>
 
@@ -188,9 +256,9 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                 <table className="table mb-0 tabletype">
                   <thead style={{ backgroundColor: "#F6F7FB" }}>
                     <tr>
-                      {Object.keys(headers).map((header) => {
+                      {Object?.keys(prehireheaders)?.map((header) => {
                         const key: any =
-                          headers[header as keyof typeof headers];
+                          prehireheaders[header as keyof typeof prehireheaders];
 
                         if (hiddenColumns.includes(key)) return null; // Hide column
 
@@ -314,197 +382,101 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                 <table className="table mb-0 tabletype">
                   <thead style={{ backgroundColor: "#F6F7FB" }}>
                     <tr>
-                      <th className="textheader para" scope="col">
-                        Employee Id
-                        <span>
-                          <NorthSharpIcon
-                            fontSize="small"
-                            className="inline-block"
-                            sx={{
-                              fill: "#CCC",
-                              height: "15px",
-                              width: "15px",
-                              transform:
-                                sortConfig?.direction === "asc"
-                                  ? "rotate(0deg)"
-                                  : sortConfig?.direction === "desc"
-                                  ? "rotate(180deg)"
-                                  : "rotate(0deg)",
+                      {Object?.keys(hiringheaders)?.map((header) => {
+                        const key: any =
+                          hiringheaders[header as keyof typeof hiringheaders];
 
-                              transition: "transform 0.3s ease",
-                            }}
-                            onClick={() => handleSort("empId")}
-                          />
-                        </span>
-                      </th>
-                      <th className="textheader para" scope="col">
-                        {" "}
-                        Employee Name
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
+                        if (hiddenColumns.includes(key)) return null; // Hide column
 
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("employeename")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Mobile
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
+                        return (
+                          <th
+                            key={key}
+                            scope="col"
+                            className="position-relative textheader para"
+                          >
+                            {header}
+                            <NorthSharpIcon
+                              fontSize="small"
+                              className="inline-block"
+                              sx={{
+                                fill: "#CCC",
+                                height: "15px",
+                                width: "15px",
+                                transform:
+                                  sortConfig?.direction === "asc"
+                                    ? "rotate(0deg)"
+                                    : sortConfig?.direction === "desc"
+                                    ? "rotate(180deg)"
+                                    : "rotate(0deg)",
 
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("mobile")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Email Address
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("emailaddress")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Employee Type
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("agreementstatus")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Hiring Date
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("onboardingstatus")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Status
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("onboardingstatus")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col"></th>
+                                transition: "transform 0.3s ease",
+                              }}
+                              onClick={() => handleSort("mobile")}
+                            />
+                          </th>
+                        );
+                      })}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
                     {hiringDetails?.map((item: any, index: number) => (
                       <tr key={index}>
-                        <td className="para textheader ">{item?.empId}</td>
-                        <td
-                          className="para textheader"
-                          style={{ whiteSpace: "nowrap" }}
-                        >
-                          {item?.employeename}
-                        </td>
-                        <td className="para textheader">{item?.mobile}</td>
-                        <td className="para textheader">
-                          {item?.emailaddress}
-                        </td>
-                        <td className="para textheader">
-                          {item?.employeetype}
-                        </td>
-                        <td className="para textheader">{item?.hiringdate}</td>
+                        {!hiddenColumns.includes("empId") && (
+                          <td className="para textheader py-3">
+                            {item?.empId}
+                          </td>
+                        )}
 
-                        <td className="para textheader">
-                          <Chip
-                            label={
-                              item?.status === "available"
-                                ? "Active"
-                                : "Inactive"
-                            }
-                            sx={{
-                              color:
+                        {!hiddenColumns.includes("employeename") && (
+                          <td className="para textheader py-3">
+                            {item?.employeename}
+                          </td>
+                        )}
+
+                        {!hiddenColumns.includes("mobile") && (
+                          <td className="para textheader py-3">
+                            {item?.mobile}
+                          </td>
+                        )}
+                        {!hiddenColumns.includes("emailaddress") && (
+                          <td className="para textheader py-3">
+                            {item?.emailaddress}
+                          </td>
+                        )}
+
+                        {!hiddenColumns.includes("employeetype") && (
+                          <td className="para textheader">
+                            {item?.employeetype}
+                          </td>
+                        )}
+
+                        {!hiddenColumns.includes("hiringdate") && (
+                          <td className="para textheader">
+                            {item?.hiringdate}
+                          </td>
+                        )}
+
+                        {!hiddenColumns.includes("status") && (
+                          <td className="para textheader">
+                            <Chip
+                              label={
                                 item?.status === "available"
-                                  ? "#14E002"
-                                  : "#FF4C51",
-                              background:
-                                item?.status === "available"
-                                  ? "rgba(86, 202, 0, 0.16)"
-                                  : "#F7DADB",
-                            }}
-                          />
-                        </td>
+                                  ? "Active"
+                                  : "Inactive"
+                              }
+                              sx={{
+                                color:
+                                  item?.status === "available"
+                                    ? "#14E002"
+                                    : "#FF4C51",
+                                background:
+                                  item?.status === "available"
+                                    ? "rgba(86, 202, 0, 0.16)"
+                                    : "#F7DADB",
+                              }}
+                            />
+                          </td>
+                        )}
 
                         <td className="para textheader">
                           <div className="flex cursorpointer gap-3">
