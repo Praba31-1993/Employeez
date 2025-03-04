@@ -95,7 +95,7 @@ export function Viewfiles() {
       <div className="accordion accordion-flush mt-4" id="accordionFlushExample">
         <div className="accordion-item">
           <h2 className="accordion-header" id="flush-headingOne">
-            <button
+            <button style={{background:"transparent"}}
               className="accordion-button p-0 unselectcolor para collapsed"
               type="button"
               data-bs-toggle="collapse"
