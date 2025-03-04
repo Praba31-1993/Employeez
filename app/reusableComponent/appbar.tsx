@@ -190,7 +190,7 @@ export default function NavbarComponent() {
 
               {/* <DropdownComponent dropdownlist={dropdownData}/> */}
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                {/* <Image src={questionIcon} alt="" /> */}
+                {/* <Image fill src={"/assets/img/question.svg"} alt="" /> */}
                 <ImageComponent
                   width={30}
                   height={30}

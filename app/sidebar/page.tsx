@@ -71,7 +71,6 @@ const Sidebar = ({ children }: SidebarProps) => {
     (state: RootState) => state.meetingmode.background
   );
 
-  console.log("selcetdfdssfds", selectedMeedingModeBorder);
 
   const router = useRouter();
 

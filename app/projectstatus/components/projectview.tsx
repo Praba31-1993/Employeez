@@ -22,7 +22,6 @@ function ProjectView({ show, close, projectlist }: any) {
   const useColors = Colors();
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  console.log("projectData", projectData);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {

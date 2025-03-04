@@ -137,7 +137,7 @@ function SalesReportTable({ salesData }: any) {
 
   useEffect(() => {
     setRows(currentPageItems);
-    setStatusTab("Active")
+    setStatusTab("Active");
   }, []);
 
   useEffect(() => {
@@ -182,8 +182,6 @@ function SalesReportTable({ salesData }: any) {
   useEffect(() => {
     handleDateFilter();
   }, [isFilteredDate]);
-
-  console.log("rowList", currentPageItems);
 
   return (
     <div>
