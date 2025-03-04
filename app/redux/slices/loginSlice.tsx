@@ -8,7 +8,7 @@ export interface LoginInterface {
 // Async thunk for login API call
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (params: { usernameOrEmail: string; password: string }, { rejectWithValue }) => {
+  async (params: { usernameOrEmail: string; password: string }) => {
     try {
       const response = await axiosInstance.post("/api/auth/signin", params);
       return response.data;
@@ -19,13 +19,15 @@ export const loginUser = createAsyncThunk(
         // Check for Axios error format
         const axiosError = error as any;
         if (axiosError.response) {
-          return rejectWithValue({ status: axiosError.response.status, message: axiosError.response.data.message });
+          return {
+            status: axiosError.response.status,
+            message: axiosError.response.data.message,
+          };
         }
-        return rejectWithValue({ status: 500, message: error.message });
+        return { status: 500, message: error.message };
       }
 
-      // Fallback for unknown error types
-      return rejectWithValue({ status: 500, message: "An unknown error occurred" });
+      return { status: 500, message: "An unknown error occurred" };
     }
   }
 );
@@ -42,7 +44,7 @@ const loginSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.status = null; // Reset status on logout
-      state.error = null;  // Reset error on logout
+      state.error = null; // Reset error on logout
     },
   },
   extraReducers: (builder) => {
@@ -56,7 +58,10 @@ const loginSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        const { status, message } = action.payload as { status: number; message: string };
+        const { status, message } = action.payload as {
+          status: number;
+          message: string;
+        };
         state.status = status; // Set the status code from the rejected action
         state.error = message || "Failed to login"; // Set the error message
       });

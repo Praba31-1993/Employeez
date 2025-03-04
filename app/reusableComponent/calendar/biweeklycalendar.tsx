@@ -137,7 +137,6 @@ const BiWeeklyCalendar: React.FC<Props> = ({
 
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
 
-  console.log("today", selectedDate);
 
   useEffect(() => {
     if (weekData.length > 0) {

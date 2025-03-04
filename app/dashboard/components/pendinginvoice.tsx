@@ -3,6 +3,7 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Circle from "@/app/reusableComponent/circle";
+import BarChartComponent from "@/app/reusableComponent/chart/barchart";
 
 function Pendinginvoice() {
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,9 @@ function Pendinginvoice() {
                 style={{ borderRadius: "50%" }}
               />
             ) : (
-              <Piechart data={arrayList} />
+              // <Piechart data={arrayList} />
+              <BarChartComponent/>
+
             )}
           </div>
         </div>

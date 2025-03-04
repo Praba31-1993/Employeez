@@ -109,7 +109,6 @@ function EmployeeInformation({ salesData }: any) {
     currentPage * itemsPerPage
   );
 
-  console.log("currendtPage", currentPageItems);
 
   useEffect(() => {
     setRows(salesData);
@@ -169,7 +168,6 @@ function EmployeeInformation({ salesData }: any) {
       return true; // Default case (if no filter is applied)
     });
 
-    console.log("Filtered Data:", filteredData);
     setRows(filteredData);
   };
 
@@ -222,7 +220,6 @@ function EmployeeInformation({ salesData }: any) {
           <thead style={{ backgroundColor: "#F6F7FB" }}>
             <tr>
               {Object.keys(headers).map((header) => {
-                console.log("header", header);
 
                 const key: any = headers[header as keyof typeof headers]; // Get the actual column key
                 if (hiddenColumns.includes(key)) return null; // Hide column

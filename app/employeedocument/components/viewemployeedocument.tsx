@@ -74,15 +74,9 @@ function ViewEmployeeDocument({ employeeId }: any) {
     currentPage * countPerPage
   );
 
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
-
   const headers = Object.keys(employeeDetails?.[0] || {}).filter(
     (key) => key !== "id"
   );
-
-  console.log("headers", headers);
 
   // Sorting function
   const handleSort = (key: keyof DocumentViewInterface) => {
@@ -176,8 +170,6 @@ function ViewEmployeeDocument({ employeeId }: any) {
   };
 
   const handleOpen = (id: any) => {
-    console.log("id", id);
-
     if (rowsList.length > 0) {
       const filteredList = rowsList?.filter(
         (list: any) => list?.projectId === id
@@ -189,8 +181,6 @@ function ViewEmployeeDocument({ employeeId }: any) {
       setOpen(false);
     }
   };
-
-  console.log("employeeId", employeeId);
 
   return (
     <div>

@@ -54,7 +54,6 @@ function User_comphistory() {
 
   // Sorting function
   const handleSort = <K extends keyof Row>(key: K) => {
-    console.log("key,", key);
 
     let direction: "asc" | "desc" = "asc";
 
