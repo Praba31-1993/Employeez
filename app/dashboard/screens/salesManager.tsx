@@ -56,13 +56,13 @@ function SalesManagerDashboard() {
                 className="dashboardcard p-3 h-100 mb-3"
                 style={borderAndBoxShadowStyles}
               >
-                <ToDoList title={"My Request"} />{" "}
+                <ToDoList />{" "}
               </div>
             </div>
             <div className="col-8 mb-3">
               <div className="dashboardcard h-100 p-3">
                 <div className="row">
-                  <p className="textheader heading2">Sales Report</p>
+                  <p className="textheader heading2 fw-bold">Sales Report</p>
 
                   <div className="col-12 mb-3 col-md-8 ">
                     <BarChartComponent />
@@ -78,7 +78,7 @@ function SalesManagerDashboard() {
             </div>
             <div className="col-4 mb-3">
               <div className="dashboardcard h-100 p-3">
-                <p className="textheader heading2">Policy/Procedure </p>
+                <p className="textheader heading2 fw-bold">Policy/Procedure </p>
                 <Policyprocedure />{" "}
               </div>
             </div>

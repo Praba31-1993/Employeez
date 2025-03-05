@@ -137,7 +137,6 @@ const BiWeeklyCalendar: React.FC<Props> = ({
 
   const { totalDaysInRange, startDate, prefixDays } = generateDays();
 
-
   useEffect(() => {
     if (weekData.length > 0) {
       weeklyList(weekData); // Pass updated weekData to parent when it changes

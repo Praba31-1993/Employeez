@@ -18,7 +18,7 @@ function Vacationreport() {
         <>
             {/* Header Section */}
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">Vacation report</p>
+                <p className="textheader heading2 mb-0 fw-bold">Vacation report</p>
                 {loading ? (
                     <Skeleton circle={true} height={40} width={40} />
                 ) : (

@@ -15,6 +15,7 @@ import Employees from "./employees";
 import Hrdatas from "./hrdatas";
 import Reportspoup from "./reportspoup";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
+import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
 
 type Row = {
   id: number | string;
@@ -26,18 +27,21 @@ type Row = {
 
 function Prehiredashboard() {
   const [open, setOpen] = useState(false);
-  const [opens, setOpens] = useState(false);
+  const [openReportdetailpopup, setReportdetailpopup] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
   const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
+  const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>(hiringReport);
   const [onboardingDetails, setOnboardingdetails] =
     useState<any>(onboardingReport);
   const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
     supplieronboardingReport
   );
+  const [isSupplierOnboardedclicked, setIsSupplierOnboardedClicked] =
+    useState(false);
 
   const arrayList = [
     { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
@@ -75,6 +79,10 @@ function Prehiredashboard() {
 
   const useColors = Colors();
 
+  useEffect(() => {
+    console.log("selectedEmployeeDetails", selectedEmployeeDetails);
+  }, [selectedEmployeeDetails]);
+
   return (
     <div className="row">
       {open && (
@@ -82,19 +90,21 @@ function Prehiredashboard() {
           show={open}
           close={() => setOpen(false)}
           selectedTableList={selectedTableList}
+          selectedEmployee={(data: any) => setselectedEmployeeDetails(data)}
         />
       )}
-      {opens && (
-        <Employreportdetails
-          show={opens}
-          close={() => setOpens(false)}
-          selectedTableList={selectedTableList}
+      {openReportdetailpopup && (
+        <ReportDetailsPopup
+          show={openReportdetailpopup}
+          close={() => setReportdetailpopup(false)}
+          selectedEmployeeDetails={selectedEmployeeDetails?.[0]}
+          isSuppliedOnboarded={isSupplierOnboardedclicked}
         />
       )}
       {/* Search and Tools Section */}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
-          <h4 className="textheader heading2">Recruitment Report</h4>
+          <h4 className="textheader heading2 fw-bold">Recruitment Report</h4>
           <div className="d-flex gap-2 align-items-center">
             <div className="d-flex gap-2 selectborder searchbar ps-2 align-items-center">
               <div className="mt-1">
@@ -142,7 +152,15 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setReportdetailpopup((prev) => !prev),
+                          setIsSupplierOnboardedClicked(true),
+                          setselectedEmployeeDetails(() =>
+                            prehireDetails?.filter(
+                              (list: any) => list.empId === prehire?.empId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -174,7 +192,15 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setReportdetailpopup((prev) => !prev),
+                          setIsSupplierOnboardedClicked(true),
+                          setselectedEmployeeDetails(() =>
+                            hiringDetails?.filter(
+                              (list: any) => list.empId === prehire?.empId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -206,7 +232,15 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setReportdetailpopup((prev) => !prev),
+                          setIsSupplierOnboardedClicked(false),
+                          setselectedEmployeeDetails(() =>
+                            onboardingDetails?.filter(
+                              (list: any) => list.empId === prehire?.empId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -238,7 +272,15 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setReportdetailpopup((prev) => !prev),
+                          setIsSupplierOnboardedClicked(true),
+                          setselectedEmployeeDetails(() =>
+                            supplierboardingDetails?.filter(
+                              (list: any) => list?.id === prehire?.id
+                            )
+                          );
+                      }}
                     >
                       {prehire?.contractorname}
                     </td>

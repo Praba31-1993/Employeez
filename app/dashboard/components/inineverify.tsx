@@ -19,7 +19,7 @@ function Inineverify() {
         <>
             {/* Header Section */}
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">I-9 Verify</p>
+                <p className="textheader heading2 mb-0 fw-bold">I-9 Verify</p>
             </div>
 
             {/* Content Section */}

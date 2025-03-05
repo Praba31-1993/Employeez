@@ -12,7 +12,7 @@ import Insurancedashboardreports from "./insurancebenefits";
 import Worksitedreports from "./worksitereports";
 import Emergencycontactdashboardreport from "./emergencycontactdashboard";
 
-export default function Employreportdetails({
+export default function ReportDetailsPopup({
   show,
   close,
   selectedEmployeeDetails,
@@ -45,6 +45,7 @@ export default function Employreportdetails({
       [key]: !prev[key],
     }));
   };
+  console.log("selkecttes", selectedEmployeeDetails);
 
   return (
     <section
@@ -61,9 +62,7 @@ export default function Employreportdetails({
             <div>
               <p className="heading mb-0 textheader">
                 {selectedEmployeeDetails?.employeename}
-                <span className="ml-2">
-                  ({selectedEmployeeDetails?.employeeId})
-                </span>
+                <span className="ml-2">({selectedEmployeeDetails?.empId})</span>
               </p>
             </div>
             <div className="d-flex gap-4 align-items-center justify-content-end cursorpointer">
@@ -125,9 +124,7 @@ export default function Employreportdetails({
           </div>
           <div className="row my-2">
             <div className="col-lg-6">
-              {selectedReports.basicInfo && (
-                <Basicinfo employeeDetails={selectedEmployeeDetails} />
-              )}
+              {selectedReports.basicInfo && <Basicinfo  employeeDetails={selectedEmployeeDetails}/>}
               {selectedReports.emergencyContact && (
                 <Emergencycontactdashboardreport />
               )}

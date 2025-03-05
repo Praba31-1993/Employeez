@@ -80,7 +80,7 @@ const SuperAdminDashboard = () => {
             className="dashboardcard p-3 h-100"
             style={borderAndBoxShadowStyles}
           >
-            <ToDoList title={"My Request"} />{" "}
+            <ToDoList />{" "}
           </div>
         </div>
 
@@ -117,7 +117,7 @@ const SuperAdminDashboard = () => {
             style={{ border: useColors.border, boxShadow: useColors.boxshadow }}
           >
             <div className="row">
-              <p className="textheader heading2">Sales Report</p>
+              <p className="textheader heading2 fw-bold">Sales Report</p>
               <div className=" col-12 mb-3 col-md-8 ">
                 <BarChartComponent />
               </div>
@@ -203,7 +203,7 @@ const SuperAdminDashboard = () => {
         {/* Policy/Procedure  */}
         <div className="col-12 mb-3 col-lg-4 col-md-6">
           <div className="dashboardcard p-3" style={borderAndBoxShadowStyles}>
-            <p className="textheader heading2">Policy/Procedure </p>
+            <p className="textheader heading2 fw-bold">Policy/Procedure </p>
             <div className="d-flex flex-wrap flex-column gap-3">
               <div className="row p-0 mb-0">
                 <Policyprocedure />

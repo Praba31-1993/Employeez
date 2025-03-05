@@ -4,7 +4,7 @@ import Image from "next/image";
 import profilepicture from "@/public/assets/img/profilepic.svg";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const Basicinfo = ({ persondetaiks }: any) => {
+const Basicinfo = ({ employeeDetails }: any) => {
   return (
     <div
       className="accordion dashboardcard mb-2 accordion-flush "
@@ -48,7 +48,9 @@ const Basicinfo = ({ persondetaiks }: any) => {
               </div>
               <div className="col-md-4 mb-2 ">
                 <h5 className="para2 shade">First Name</h5>
-                <h3 className="para textheader">Suresh</h3>
+                <h3 className="para textheader">
+                  {employeeDetails?.employeename}
+                </h3>
               </div>
               <div className="col-md-4 mb-2 ">
                 <h5 className="para2 shade">Last Name</h5>
@@ -60,7 +62,7 @@ const Basicinfo = ({ persondetaiks }: any) => {
               </div>
               <div className="col-md-4 mb-2 ">
                 <h5 className="para2 shade">Mobile no </h5>
-                <h3 className="para textheader">123456789</h3>
+                <h3 className="para textheader">{employeeDetails?.mobile}</h3>
               </div>
               <div className="col-md-4 mb-2 ">
                 <h5 className="para2 shade">Gender</h5>

@@ -20,7 +20,7 @@ function Openjobs() {
         <>
             {/* Header Section */}
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">Open jobs</p>
+                <p className="textheader heading2 mb-0 fw-bold">Open jobs</p>
                 {loading ? (
                     <Skeleton circle={true} height={40} width={40} />
                 ) : (

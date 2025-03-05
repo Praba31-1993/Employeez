@@ -18,7 +18,12 @@ import { Chip } from "@mui/material";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 
-export default function EmployeePopup({ show, close, selectedTableList }: any) {
+export default function EmployeePopup({
+  show,
+  close,
+  selectedTableList,
+  selectedEmployee,
+}: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
   const [workforceDetails, setWorkforceDetails] =
@@ -31,6 +36,7 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
     key: keyof any;
     direction: "asc" | "desc";
   } | null>(null);
+  const [selectedEmployeeDetails, setEmployeeDetails] = useState<any>();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -104,12 +110,21 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
       setValue(selectedTableList - 1);
     }
   }, selectedTableList);
+
+  console.log("selectedEmployeeDetails", selectedEmployeeDetails);
+
   return (
     <section
       className={`showpopup ${show ? "showpopupactive" : ""}`}
       onClick={close}
     >
-      {open && <Employreportdetails show={open} close={() => setOpen(false)} />}
+      {open && (
+        <Employreportdetails
+          show={open}
+          close={() => setOpen(false)}
+          selectedEmployeeDetails={selectedEmployeeDetails?.[0]}
+        />
+      )}
       <div
         className="summarysection rounded m-auto"
         style={{ width: "90%", height: "95%", background: "#F5F5F5" }}
@@ -361,7 +376,14 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    workforceDetails?.filter(
+                                      (list: any) => list.employeeId === item?.employeeId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -576,7 +598,14 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    w2SDetails?.filter(
+                                      (list: any) => list.employeeId === item?.employeeId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -791,7 +820,14 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    w2HDetails?.filter(
+                                      (list: any) => list.employeeId === item?.employeeId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
@@ -1005,7 +1041,14 @@ export default function EmployeePopup({ show, close, selectedTableList }: any) {
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
                               sx={{ color: "#8A8D93" }}
-                              onClick={() => setOpen((prev) => !prev)}
+                              onClick={() => {
+                                setOpen((prev) => !prev),
+                                  setEmployeeDetails(() =>
+                                    c2cDetails?.filter(
+                                      (list: any) => list.employeeId === item?.employeeId
+                                    )
+                                  );
+                              }}
                             />
                           </div>
                         </td>
