@@ -37,6 +37,7 @@ function Workforce() {
   const [w2SDetails, setW2SDetails] = useState<any>(w2sReports);
   const [w2HDetails, setw2hDetails] = useState<any>(w2hReports);
   const [c2cDetails, setc2cDetails] = useState<any>(c2cReports);
+  const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
 
   useEffect(() => {
     // Simulate data fetching delay
@@ -45,9 +46,6 @@ function Workforce() {
   }, []);
 
   const useColors = Colors();
-
-
-  
 
   // Search function
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +69,7 @@ function Workforce() {
 
   // Toggle column visibility
   const [open, setOpen] = useState(false);
-  const [opens, setOpens] = useState(false);
+  const [workforcedetailpopup, setWorkForcedetailpopup] = useState(false);
   const arrayList = [
     { id: 1, hractionlist: "Total Employee", value: 55, fill: "#FFBA27" },
     { id: 2, hractionlist: "W2S", value: 26, fill: "#41A4FF" },
@@ -81,8 +79,21 @@ function Workforce() {
 
   return (
     <div className="row">
-      {open && <EmployeePopup show={open} close={() => setOpen(false)} selectedTableList={selectedTableList}/>}
-      {opens && <Employreportdetails show={opens} close={() => setOpens(false)} selectedTableList={selectedTableList}/>}
+      {open && (
+        <EmployeePopup
+          show={open}
+          close={() => setOpen(false)}
+          selectedTableList={selectedTableList}
+          selectedEmployee={(data: any) => setselectedEmployeeDetails(data)}
+        />
+      )}
+      {workforcedetailpopup && (
+        <Employreportdetails
+          show={workforcedetailpopup}
+          close={() => setWorkForcedetailpopup(false)}
+          selectedEmployeeDetails={selectedEmployeeDetails?.[0]}
+        />
+      )}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
           <h4 className="textheader heading2 fw-bold">Workforce Details</h4>
@@ -133,7 +144,15 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setWorkForcedetailpopup((prev) => !prev),
+                          setselectedEmployeeDetails(() =>
+                            workforceDetails?.filter(
+                              (list: any) =>
+                                list?.employeeId === prehire?.employeeId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -165,7 +184,15 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setWorkForcedetailpopup((prev) => !prev),
+                          setselectedEmployeeDetails(() =>
+                            w2SDetails?.filter(
+                              (list: any) =>
+                                list?.employeeId === prehire?.employeeId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -197,7 +224,15 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setWorkForcedetailpopup((prev) => !prev),
+                          setselectedEmployeeDetails(() =>
+                            w2HDetails?.filter(
+                              (list: any) =>
+                                list?.employeeId === prehire?.employeeId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
@@ -229,7 +264,15 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => setOpens((prev) => !prev)}
+                      onClick={() => {
+                        setWorkForcedetailpopup((prev) => !prev),
+                          setselectedEmployeeDetails(() =>
+                            c2cDetails?.filter(
+                              (list: any) =>
+                                list?.employeeId === prehire?.employeeId
+                            )
+                          );
+                      }}
                     >
                       {prehire?.employeename}
                     </td>
