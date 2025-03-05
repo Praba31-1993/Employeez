@@ -26,7 +26,7 @@ function Pendinginvoice() {
       {/* Header */}
       <div className="row" style={{ alignItems: "center" }}>
         <div className="col-8">
-          <p className="textheader mb-0 heading2">Pending Invoices</p>
+          <p className="textheader mb-0 heading2 fw-bold">Pending Invoices</p>
         </div>
         <div className="col-4 text-left">
           <select
@@ -60,8 +60,8 @@ function Pendinginvoice() {
                 style={{ borderRadius: "50%" }}
               />
             ) : (
-              // <Piechart data={arrayList} />
-              <BarChartComponent/>
+              <Piechart data={arrayList} />
+              // <BarChartComponent/>
 
             )}
           </div>

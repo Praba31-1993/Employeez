@@ -69,7 +69,7 @@ const HrDashboard = () => {
             className="dashboardcard p-3 h-100"
             style={borderAndBoxShadowStyles}
           >
-            <ToDoList title={"My Request"} />
+            <ToDoList  />
           </div>
         </div>
 
@@ -125,7 +125,7 @@ const HrDashboard = () => {
               headerImage={anniversary}
               items={birthdayAnniversaryReport}
             /> */}
-            <ToDoList title={"Pending Timesheet"} />
+            <ToDoList />
           </div>
         </div>
 
@@ -156,7 +156,7 @@ const HrDashboard = () => {
               <ListCard />
             </div>
             <div className="dashboardcard p-3">
-              <p className="textheader heading2">Policy/Procedure </p>
+              <p className="textheader heading2 fw-bold">Policy/Procedure </p>
               <div
                 className="d-flex flex-wrap flex-column gap-3"
                 style={{ height: "10rem" }}
@@ -207,7 +207,7 @@ const HrDashboard = () => {
         <div className="col-12 mb-3 col-md-3">
           <div className="dashboardcard p-3">
             <div className="d-flex justify-content-between ">
-              <p className="textheader heading2">Need help?</p>
+              <p className="textheader heading2 fw-bold">Need help?</p>
 
               {/* <Image src={ToDoIcon} alt="" /> */}
               <ImageComponent

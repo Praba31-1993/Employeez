@@ -32,7 +32,7 @@ function Menulistforbirthdayworkvacation({
         <div>
             {/* Header Section */}
             <div className="d-flex justify-content-between align-items-center">
-                <p className="textheader heading2 mb-0">{title}</p>
+                <p className="textheader heading2 mb-0 fw-bold">{title}</p>
 
                 {!isSalesReport && (
                     loading ? (

@@ -14,7 +14,7 @@ function PendingTimeSheet({ title }: PendingTimeSheetProps) {
   const useColors = Colors();
   return (
     <div>
-      <div>{title}</div>
+      <div className="fw-bold">{title}</div>
 
       {[0, 1, 2].map((value, index) => {
         return (
