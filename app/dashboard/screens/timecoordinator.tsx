@@ -56,7 +56,7 @@ function TimecoordinatorDashboard() {
                 className="dashboardcard  p-3 h-100  "
                 style={borderAndBoxShadowStyles}
               >
-                <ToDoList title={"My Request"} />{" "}
+                <ToDoList />{" "}
               </div>
             </div>
             <div className="col-12 col-md-8 mb-3">

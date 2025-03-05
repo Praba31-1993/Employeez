@@ -8,11 +8,9 @@ import "../dashboard.css";
 import { Colors } from "../../reusableComponent/styles";
 import ImageComponent from "@/app/reusableComponent/image";
 
-interface ToDoListProps {
-  title: string;
-}
 
-function ToDoList({ title }: ToDoListProps) {
+
+function ToDoList() {
   const useColors = Colors();
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +22,7 @@ function ToDoList({ title }: ToDoListProps) {
 
   return (
     <div>
-      <h4 className="textheader heading2">To do list</h4>
+      <h4 className="textheader heading2 fw-bold">To do list</h4>
 
       {loading
         ? // Skeleton loader while data is loading

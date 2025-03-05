@@ -21,7 +21,7 @@ export default function ListCard() {
 
     return (
         <List dense sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
-            <h4 className="textheader heading2 pb-2">My Request</h4>
+            <h4 className="textheader heading2 pb-2 fw-bold">My Request</h4>
             {loading
                 ? // Skeleton loader for the list items
                 Array(3)

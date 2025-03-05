@@ -71,7 +71,6 @@ const Sidebar = ({ children }: SidebarProps) => {
     (state: RootState) => state.meetingmode.background
   );
 
-
   const router = useRouter();
 
   useEffect(() => {
@@ -632,9 +631,13 @@ const Sidebar = ({ children }: SidebarProps) => {
             <div className="mainContentNavbar">
               <NavbarComponent />
             </div>
-           
+
             <div
-              style={{ padding: "0 10px 0 10px", background: selectedMeedingModeBorder,marginTop:'1px'  }}
+              style={{
+                padding: "0 10px 0 10px",
+                background: selectedMeedingModeBorder,
+                marginTop: "1px",
+              }}
             >
               {children}
             </div>

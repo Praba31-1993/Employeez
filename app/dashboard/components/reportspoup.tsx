@@ -23,7 +23,14 @@ import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
 import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
 import { Colors } from "@/app/reusableComponent/styles";
-export default function Reportspoup({ show, close, selectedTableList }: any) {
+import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
+
+export default function Reportspoup({
+  show,
+  close,
+  selectedTableList,
+  selectedEmployee,
+}: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
   const [startDate, setStartDate] = useState<any>(null);
@@ -168,16 +175,18 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
     }
   }, [value]);
 
+
+
   return (
     <section
       className={`showpopup ${show ? "showpopupactive" : ""}`}
       onClick={close}
     >
       {open && (
-        <Employreportdetails
+        <ReportDetailsPopup
           show={open}
           close={() => setOpen(false)}
-          selectedEmployeeDetails={selectedEmployeeDetails}
+          selectedEmployeeDetails={selectedEmployeeDetails?.[0]}
         />
       )}
       <div
@@ -375,6 +384,7 @@ export default function Reportspoup({ show, close, selectedTableList }: any) {
                               sx={{ color: "#8A8D93" }}
                               onClick={() => {
                                 setOpen((prev) => !prev),
+                               
                                   setEmployeeDetails(() =>
                                     prehireDetails?.filter(
                                       (list: any) => list.empId === item?.empId

@@ -85,7 +85,7 @@ function Workforce() {
       {opens && <Employreportdetails show={opens} close={() => setOpens(false)} selectedTableList={selectedTableList}/>}
       <div className="col-12 px-0">
         <div className="d-flex justify-content-between align-items-center gap-3 mb-3 align-items-center">
-          <h4 className="textheader heading2">Workforce Details</h4>
+          <h4 className="textheader heading2 fw-bold">Workforce Details</h4>
           <div className="d-flex gap-2 align-items-center">
             <div className="d-flex gap-2 selectborder searchbar ps-2 align-items-center">
               <div className="mt-1">
