@@ -15,8 +15,8 @@ import Emergencycontactdashboardreport from "./emergencycontactdashboard";
 export default function Employreportdetails({
   show,
   close,
-}: //   selectedEmployeeDetails,
-any) {
+  selectedEmployeeDetails,
+}: any) {
   const useColors = Colors();
 
   // Define the type for selectedReports keys
@@ -59,7 +59,12 @@ any) {
         <div className="container-fluid">
           <div className="d-flex px-2 my-2 align-items-center justify-content-between">
             <div>
-              <p className="heading mb-0 textheader">Suresh (109091)</p>
+              <p className="heading mb-0 textheader">
+                {selectedEmployeeDetails?.employeename}
+                <span className="ml-2">
+                  ({selectedEmployeeDetails?.employeeId})
+                </span>
+              </p>
             </div>
             <div className="d-flex gap-4 align-items-center justify-content-end cursorpointer">
               <div className="tools">
@@ -120,7 +125,9 @@ any) {
           </div>
           <div className="row my-2">
             <div className="col-lg-6">
-              {selectedReports.basicInfo && <Basicinfo />}
+              {selectedReports.basicInfo && (
+                <Basicinfo employeeDetails={selectedEmployeeDetails} />
+              )}
               {selectedReports.emergencyContact && (
                 <Emergencycontactdashboardreport />
               )}

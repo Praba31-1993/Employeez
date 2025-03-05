@@ -175,8 +175,6 @@ export default function Reportspoup({
     }
   }, [value]);
 
-
-
   return (
     <section
       className={`showpopup ${show ? "showpopupactive" : ""}`}
@@ -384,7 +382,6 @@ export default function Reportspoup({
                               sx={{ color: "#8A8D93" }}
                               onClick={() => {
                                 setOpen((prev) => !prev),
-                               
                                   setEmployeeDetails(() =>
                                     prehireDetails?.filter(
                                       (list: any) => list.empId === item?.empId
