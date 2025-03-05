@@ -17,7 +17,6 @@ function Self() {
   const useColors = Colors(); // Declare useColors once
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
 
-  console.log("selectedTimeOff", selectedTimeOff);
 
   return (
     <Sidebar>

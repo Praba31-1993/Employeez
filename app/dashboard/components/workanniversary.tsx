@@ -19,7 +19,6 @@ function Workanniversary() {
             <div className="d-flex justify-content-between align-items-center">
                 <p className="textheader heading2 mb-0"> Work anniversary </p>
                 <Image src={headerImage} alt="" />
-                {/* <ImageComponent width={0}  height={0} user={"/assets/img/todo.svg"} /> */}
             </div>
             <div>
                 {loading

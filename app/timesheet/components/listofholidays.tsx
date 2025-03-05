@@ -9,8 +9,6 @@ export default function Listofholidays({
   holidayPerMonth,
   vacationPerMonth,
 }: any) {
-  console.log("holidayPerMonth", holidayPerMonth);
-
   const useColors = Colors();
   return (
     <>

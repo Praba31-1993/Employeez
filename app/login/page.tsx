@@ -89,7 +89,6 @@ export default function Login() {
       const loginResponse = await dispatch(loginUser(params));
       dispatch(initializeRole(loginResponse.payload.userInfo));
 
-      console.log("logs", loginResponse.payload.status, loginResponse);
       setIsLoading(true);
 
       if (loginResponse.payload.status === undefined) {

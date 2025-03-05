@@ -137,7 +137,6 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({
   const startDay = startRange.getDay() === 0 ? 7 : startRange.getDay();
 
   useEffect(() => {
-    console.log("weekData++++", weekData);
 
     if (weekData.length > 0) {
       weeklyList(weekData); // Pass updated weekData to parent when it changes

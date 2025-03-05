@@ -5,7 +5,6 @@ import '../salesReport.css'
 
 
 function EmployeePreviousProjects({ detail }: any) {
-  console.log("detail", detail);
 
   return (
     <div className="row">

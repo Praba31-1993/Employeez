@@ -88,15 +88,11 @@ function EmployeeDocumentTable({getEmployeeDetails}:EmployeeDocumentProps) {
     currentPage * countPerPage
   );
 
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
-  };
 
   const headers = Object.keys(employeeDocumentData?.[0] || {}).filter(
     (key) => key !== "id"
   );
 
-  console.log("headers", headers);
 
   // Sorting function
   const handleSort = (key: keyof DocumentData) => {
@@ -207,7 +203,6 @@ function EmployeeDocumentTable({getEmployeeDetails}:EmployeeDocumentProps) {
   };
 
   const handleOpen = (id: any) => {
-    console.log("id", id);
     getEmployeeDetails(id)
 
     if (rowsList.length > 0) {

@@ -64,8 +64,6 @@ function TableWithFilterAndSortReusableCode({ salesData }: any) {
 
   const tableRef = useRef<HTMLTableElement>(null);
 
-  console.log("sortData+++", salesData);
-
   useEffect(() => {
     setRows(salesData);
   }, [salesData]);

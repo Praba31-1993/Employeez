@@ -82,7 +82,6 @@ function Disciplinaryreport() {
     (key) => key !== "id"
   );
 
-  console.log("headers", headers);
 
   // Sorting function
   const handleSort = (key: keyof ApproverRow) => {
