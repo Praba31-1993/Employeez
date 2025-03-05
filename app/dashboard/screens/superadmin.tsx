@@ -65,7 +65,7 @@ const SuperAdminDashboard = () => {
         </div>
 
         {/* Pending Invoice */}
-        <div className=" col-12 mb-3 col-md-6 col-lg-5  col-xxl-4">
+        <div className=" col-12 mb-3 col-md-6 col-lg-5  col-xxl-5">
           <div
             className="dashboardcard p-3  h-100"
             style={borderAndBoxShadowStyles}
@@ -75,7 +75,7 @@ const SuperAdminDashboard = () => {
         </div>
 
         {/* To Do List */}
-        <div className=" col-12 mb-3 col-xxl-4 col-lg-4 col-md-7 ">
+        <div className=" col-12 mb-3 col-xxl-3 col-lg-4 col-md-7 ">
           <div
             className="dashboardcard p-3 h-100"
             style={borderAndBoxShadowStyles}
