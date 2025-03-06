@@ -95,7 +95,9 @@ export default function Login() {
         setUserDetails(loginResponse?.payload?.userInfo);
         toast.success("Login successful");
         localStorage.setItem("token", loginResponse?.payload?.token);
-
+        localStorage.setItem("Firstname", loginResponse?.payload?.userInfo.firstName);
+        localStorage.setItem("Lastname", loginResponse?.payload?.userInfo.lastName);
+        localStorage.setItem("Role", loginResponse?.payload?.userInfo.role);
         setTimeout(() => {
           setIsLoading(false); // Stop loading after navigation
           router.push("/dashboard");
