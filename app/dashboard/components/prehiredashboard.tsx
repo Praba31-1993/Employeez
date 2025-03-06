@@ -16,6 +16,7 @@ import Hrdatas from "./hrdatas";
 import Reportspoup from "./reportspoup";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
+import { getEmployeeHiringDetailsByBunit } from "@/app/api/Listingapis";
 
 type Row = {
   id: number | string;
@@ -32,9 +33,9 @@ function Prehiredashboard() {
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
-  const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
+  const [prehireDetails, setPrehiredetails] = useState<any>();
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
-  const [hiringDetails, sethiringdetails] = useState<any>(hiringReport);
+  const [hiringDetails, sethiringdetails] = useState<any>();
   const [onboardingDetails, setOnboardingdetails] =
     useState<any>(onboardingReport);
   const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
@@ -56,11 +57,11 @@ function Prehiredashboard() {
     const query = event.target.value;
     setSearch(query);
     if (selectedTableList === 1) {
-      const res = SearchLogic(preHireReport, query);
+      const res = SearchLogic(prehireDetails, query);
 
       setPrehiredetails(res);
     } else if (selectedTableList === 2) {
-      const res = SearchLogic(hiringReport, query);
+      const res = SearchLogic(hiringDetails, query);
       sethiringdetails(res);
     } else if (selectedTableList === 3) {
       const res = SearchLogic(onboardingReport, query);
@@ -80,8 +81,55 @@ function Prehiredashboard() {
   const useColors = Colors();
 
   useEffect(() => {
-    console.log("selectedEmployeeDetails", selectedEmployeeDetails);
-  }, [selectedEmployeeDetails]);
+    if (selectedTableList === 1) {
+      const fetchPrehireData = async () => {
+        try {
+          const prehireData = await getEmployeeHiringDetailsByBunit("ph");
+
+          if (prehireData.status === 200) {
+            setPrehiredetails(prehireData?.data);
+          } else if (prehireData.status === 400) {
+            console.error("Bad Request: Invalid input parameters.");
+          } else if (prehireData.status === 500) {
+            console.error("Server Error: Something went wrong on the backend.");
+          } else {
+            console.error(
+              `Unexpected Error: Status Code ${prehireData.status}`
+            );
+          }
+
+          console.log("prehiredata", prehireData);
+        } catch (error) {
+          console.error("Failed to fetch prehire data:", error);
+        }
+      };
+
+      fetchPrehireData();
+    } else if (selectedTableList === 2) {
+      const fetchPrehireData = async () => {
+        try {
+          const hiringData = await getEmployeeHiringDetailsByBunit("to");
+
+          if (hiringData.status === 200) {
+            console.log("hiringData", hiringData.data);
+            sethiringdetails(hiringData.data);
+          } else if (hiringData.status === 400) {
+            console.error("Bad Request: Invalid input parameters.");
+          } else if (hiringData.status === 500) {
+            console.error("Server Error: Something went wrong on the backend.");
+          } else {
+            console.error(`Unexpected Error: Status Code ${hiringData.status}`);
+          }
+
+          console.log("hiringData", hiringData);
+        } catch (error) {
+          console.error("Failed to fetch prehire data:", error);
+        }
+      };
+
+      fetchPrehireData();
+    }
+  }, [selectedTableList]);
 
   return (
     <div className="row">
@@ -91,6 +139,8 @@ function Prehiredashboard() {
           close={() => setOpen(false)}
           selectedTableList={selectedTableList}
           selectedEmployee={(data: any) => setselectedEmployeeDetails(data)}
+          prehiringdatas={prehireDetails}
+          hiringdatas={hiringDetails}
         />
       )}
       {openReportdetailpopup && (
@@ -162,10 +212,12 @@ function Prehiredashboard() {
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName + " " + prehire?.lastName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -187,7 +239,7 @@ function Prehiredashboard() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {hiringDetails?.map((prehire: any, index: number) =>
+              {hiringDetails?.map((hiring: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
@@ -197,15 +249,17 @@ function Prehiredashboard() {
                           setIsSupplierOnboardedClicked(true),
                           setselectedEmployeeDetails(() =>
                             hiringDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
+                              (list: any) => list.empId === hiring?.empId
                             )
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {hiring?.firstName + " " + hiring?.lastName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {hiring?.department !== undefined
+                        ? hiring?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null

@@ -7,34 +7,26 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import SearchIcon from "@mui/icons-material/Search";
 import {
-  preHireReport,
-  hiringReport,
   onboardingReport,
   supplieronboardingReport,
-  employeeDetails,
 } from "@/app/reusableComponent/JsonData";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NorthSharpIcon from "@mui/icons-material/NorthSharp";
 import { Chip } from "@mui/material";
-import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import ClickableChips from "@/app/reusableComponent/chips";
-import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import PrintExportColumnCustomize from "@/app/reusableComponent/printexportcolumncustomize";
-import BasicDatePicker from "@/app/reusableComponent/DatePicker/basicDatePicker";
-import { Colors } from "@/app/reusableComponent/styles";
 import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
 
 export default function Reportspoup({
   show,
   close,
   selectedTableList,
-  selectedEmployee,
+  prehiringdatas,
+  hiringdatas,
 }: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
-  const [startDate, setStartDate] = useState<any>(null);
-  const [endDate, setEndDate] = useState<any>(null);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [prehireheaders, setprehireheaders] = useState<any>({});
   const [hiringheaders, sethiringheaders] = useState<any>({});
@@ -42,9 +34,8 @@ export default function Reportspoup({
   const [supplieronboardingheaders, setsupplieronboardingheaders] =
     useState<any>({});
 
-  const [isFilteredDate, setisFilteredDate] = useState<boolean>(false);
-  const [prehireDetails, setPrehiredetails] = useState<any>(preHireReport);
-  const [hiringDetails, sethiringdetails] = useState<any>(hiringReport);
+  const [prehireDetails, setPrehiredetails] = useState<any>(prehiringdatas);
+  const [hiringDetails, sethiringdetails] = useState<any>(hiringdatas);
   const [onboardingDetails, setOnboardingdetails] =
     useState<any>(onboardingReport);
   const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
@@ -65,11 +56,11 @@ export default function Reportspoup({
     const query = event.target.value;
     setSearch(query);
     if (value === 0) {
-      const res = SearchLogic(preHireReport, query);
+      const res = SearchLogic(prehiringdatas, query);
 
       setPrehiredetails(res);
     } else if (value === 1) {
-      const res = SearchLogic(hiringReport, query);
+      const res = SearchLogic(hiringdatas, query);
       sethiringdetails(res);
     } else if (value === 2) {
       const res = SearchLogic(onboardingReport, query);
@@ -136,22 +127,23 @@ export default function Reportspoup({
     if (value === 0) {
       newHeaders = {
         "Employee Id": "empId",
-        "Employee Name": "employeename",
+        "Employee Name": "firstname",
         Mobile: "mobile",
-        "Email Address": "emailaddress",
-        "Agreement Status": "agreementstatus",
-        "Onboarding Status": "onboardingstatus",
+        "Email Address": "email",
+        Status: "status",
+        "Hiring Date": "hiringDate",
+        Salary: "salary",
       };
       setprehireheaders(newHeaders);
     } else if (value === 1) {
       newHeaders = {
         "Employee Id": "empId",
-        "Employee Name": "employeename",
+        "Employee Name": "firstname",
         Mobile: "mobile",
-        "Email Address": "emailaddress",
-        "Empoyee Type": "employeetype",
-        "Hiring Date": "hiringdate",
+        "Email Address": "email",
         Status: "status",
+        "Hiring Date": "hiringDate",
+        Salary: "salary",
       };
       sethiringheaders(newHeaders);
     } else if (value === 2) {
@@ -316,9 +308,9 @@ export default function Reportspoup({
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("employeename") && (
+                        {!hiddenColumns.includes("firstname") && (
                           <td className="para textheader py-3">
-                            {item?.employeename}
+                            {item?.firstName + " " + item?.lastName}
                           </td>
                         )}
 
@@ -327,27 +319,23 @@ export default function Reportspoup({
                             {item?.mobile}
                           </td>
                         )}
-                        {!hiddenColumns.includes("emailaddress") && (
+                        {!hiddenColumns.includes("email") && (
                           <td className="para textheader py-3">
-                            {item?.emailaddress}
+                            {item?.email}
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("agreementstatus") && (
+                        {!hiddenColumns.includes("status") && (
                           <td className="para textheader">
                             <Chip
-                              label={
-                                item?.agreementstatus === "available"
-                                  ? "Active"
-                                  : "Inactive"
-                              }
+                              label={item?.status}
                               sx={{
                                 color:
-                                  item?.agreementstatus === "available"
+                                  item?.status === "Active"
                                     ? "#14E002"
                                     : "#FF4C51",
                                 background:
-                                  item?.agreementstatus === "available"
+                                  item?.status === "Active"
                                     ? "rgba(86, 202, 0, 0.16)"
                                     : "#F7DADB",
                               }}
@@ -355,25 +343,16 @@ export default function Reportspoup({
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("onboardingstatus") && (
+                        {!hiddenColumns.includes("hiringDate") && (
                           <td className="para textheader">
-                            <Chip
-                              label={
-                                item?.onboardingstatus === "available"
-                                  ? "Active"
-                                  : "Inactive"
-                              }
-                              sx={{
-                                color:
-                                  item?.onboardingstatus === "available"
-                                    ? "#14E002"
-                                    : "#FF4C51",
-                                background:
-                                  item?.onboardingstatus === "available"
-                                    ? "rgba(86, 202, 0, 0.16)"
-                                    : "#F7DADB",
-                              }}
-                            />
+                            {item?.hiringDate !== null
+                              ? item?.hiringDate
+                              : "--"}
+                          </td>
+                        )}
+                        {!hiddenColumns.includes("salary") && (
+                          <td className="para textheader">
+                            {item?.salary !== null ? item?.salary : "--"}
                           </td>
                         )}
                         <td className="para textheader">
@@ -441,7 +420,7 @@ export default function Reportspoup({
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {hiringDetails?.map((item: any, index: number) => (
+                    {prehireDetails?.map((item: any, index: number) => (
                       <tr key={index}>
                         {!hiddenColumns.includes("empId") && (
                           <td className="para textheader py-3">
@@ -449,9 +428,9 @@ export default function Reportspoup({
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("employeename") && (
+                        {!hiddenColumns.includes("firstname") && (
                           <td className="para textheader py-3">
-                            {item?.employeename}
+                            {item?.firstName + " " + item?.lastName}
                           </td>
                         )}
 
@@ -460,39 +439,23 @@ export default function Reportspoup({
                             {item?.mobile}
                           </td>
                         )}
-                        {!hiddenColumns.includes("emailaddress") && (
+                        {!hiddenColumns.includes("email") && (
                           <td className="para textheader py-3">
-                            {item?.emailaddress}
-                          </td>
-                        )}
-
-                        {!hiddenColumns.includes("employeetype") && (
-                          <td className="para textheader">
-                            {item?.employeetype}
-                          </td>
-                        )}
-
-                        {!hiddenColumns.includes("hiringdate") && (
-                          <td className="para textheader">
-                            {item?.hiringdate}
+                            {item?.email}
                           </td>
                         )}
 
                         {!hiddenColumns.includes("status") && (
                           <td className="para textheader">
                             <Chip
-                              label={
-                                item?.status === "available"
-                                  ? "Active"
-                                  : "Inactive"
-                              }
+                              label={item?.status}
                               sx={{
                                 color:
-                                  item?.status === "available"
+                                  item?.status === "Active"
                                     ? "#14E002"
                                     : "#FF4C51",
                                 background:
-                                  item?.status === "available"
+                                  item?.status === "Active"
                                     ? "rgba(86, 202, 0, 0.16)"
                                     : "#F7DADB",
                               }}
@@ -500,6 +463,18 @@ export default function Reportspoup({
                           </td>
                         )}
 
+                        {!hiddenColumns.includes("hiringDate") && (
+                          <td className="para textheader">
+                            {item?.hiringDate !== null
+                              ? item?.hiringDate
+                              : "--"}
+                          </td>
+                        )}
+                        {!hiddenColumns.includes("salary") && (
+                          <td className="para textheader">
+                            {item?.salary !== null ? item?.salary : "--"}
+                          </td>
+                        )}
                         <td className="para textheader">
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
