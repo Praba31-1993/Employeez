@@ -24,6 +24,7 @@ export default function Reportspoup({
   selectedTableList,
   prehiringdatas,
   hiringdatas,
+  onboardingdatas
 }: any) {
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState<string>("");
@@ -37,7 +38,7 @@ export default function Reportspoup({
   const [prehireDetails, setPrehiredetails] = useState<any>(prehiringdatas);
   const [hiringDetails, sethiringdetails] = useState<any>(hiringdatas);
   const [onboardingDetails, setOnboardingdetails] =
-    useState<any>(onboardingReport);
+    useState<any>(onboardingdatas);
   const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
     supplieronboardingReport
   );
@@ -63,7 +64,7 @@ export default function Reportspoup({
       const res = SearchLogic(hiringdatas, query);
       sethiringdetails(res);
     } else if (value === 2) {
-      const res = SearchLogic(onboardingReport, query);
+      const res = SearchLogic(onboardingdatas, query);
       setOnboardingdetails(res);
     } else {
       const res = SearchLogic(supplieronboardingReport, query);
@@ -138,21 +139,23 @@ export default function Reportspoup({
     } else if (value === 1) {
       newHeaders = {
         "Employee Id": "empId",
-        "Employee Name": "firstname",
+        "Employee Name": "name",
         Mobile: "mobile",
         "Email Address": "email",
-        Status: "status",
-        "Hiring Date": "hiringDate",
-        Salary: "salary",
+        "Employer Type": "empType",
+        "Approver Name": "approverName",
+        "Cost Center": "costCenter",
       };
       sethiringheaders(newHeaders);
     } else if (value === 2) {
       newHeaders = {
         "Employee Id": "empId",
-        "Employee Name": "employeename",
+        "Employee Name": "name",
         Mobile: "mobile",
-        "Email Address": "emailaddress",
-        "Empoyee Type": "employeetype",
+        "Email Address": "email",
+        "Employer Type": "empType",
+        "Approver Name": "approverName",
+        "Cost Center": "costCenter",
       };
       setonboardingheaders(newHeaders);
     } else if (value === 3) {
@@ -420,7 +423,7 @@ export default function Reportspoup({
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
-                    {prehireDetails?.map((item: any, index: number) => (
+                    {hiringDetails?.map((item: any, index: number) => (
                       <tr key={index}>
                         {!hiddenColumns.includes("empId") && (
                           <td className="para textheader py-3">
@@ -428,10 +431,8 @@ export default function Reportspoup({
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("firstname") && (
-                          <td className="para textheader py-3">
-                            {item?.firstName + " " + item?.lastName}
-                          </td>
+                        {!hiddenColumns.includes("name") && (
+                          <td className="para textheader py-3">{item?.name}</td>
                         )}
 
                         {!hiddenColumns.includes("mobile") && (
@@ -445,34 +446,18 @@ export default function Reportspoup({
                           </td>
                         )}
 
-                        {!hiddenColumns.includes("status") && (
-                          <td className="para textheader">
-                            <Chip
-                              label={item?.status}
-                              sx={{
-                                color:
-                                  item?.status === "Active"
-                                    ? "#14E002"
-                                    : "#FF4C51",
-                                background:
-                                  item?.status === "Active"
-                                    ? "rgba(86, 202, 0, 0.16)"
-                                    : "#F7DADB",
-                              }}
-                            />
-                          </td>
+                        {!hiddenColumns.includes("empType") && (
+                          <td className="para textheader">{item?.empType}</td>
                         )}
 
-                        {!hiddenColumns.includes("hiringDate") && (
+                        {!hiddenColumns.includes("approverName") && (
                           <td className="para textheader">
-                            {item?.hiringDate !== null
-                              ? item?.hiringDate
-                              : "--"}
+                            {item?.approverName}
                           </td>
                         )}
-                        {!hiddenColumns.includes("salary") && (
+                        {!hiddenColumns.includes("costCenter") && (
                           <td className="para textheader">
-                            {item?.salary !== null ? item?.salary : "--"}
+                            {item?.costCenter}
                           </td>
                         )}
                         <td className="para textheader">
@@ -503,137 +488,80 @@ export default function Reportspoup({
                 <table className="table mb-0 tabletype">
                   <thead style={{ backgroundColor: "#F6F7FB" }}>
                     <tr>
-                      <th className="textheader para" scope="col">
-                        Employee Id
-                        <span>
-                          <NorthSharpIcon
-                            fontSize="small"
-                            className="inline-block"
-                            sx={{
-                              fill: "#CCC",
-                              height: "15px",
-                              width: "15px",
-                              transform:
-                                sortConfig?.direction === "asc"
-                                  ? "rotate(0deg)"
-                                  : sortConfig?.direction === "desc"
-                                  ? "rotate(180deg)"
-                                  : "rotate(0deg)",
+                      {Object?.keys(onboardingheaders)?.map((header) => {
+                        const key: any =
+                        onboardingheaders[header as keyof typeof onboardingheaders];
 
-                              transition: "transform 0.3s ease",
-                            }}
-                            onClick={() => handleSort("empId")}
-                          />
-                        </span>
-                      </th>
-                      <th className="textheader para" scope="col">
-                        {" "}
-                        Employee Name
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
+                        if (hiddenColumns.includes(key)) return null; // Hide column
 
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("employeename")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Mobile
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
+                        return (
+                          <th
+                            key={key}
+                            scope="col"
+                            className="position-relative textheader para"
+                          >
+                            {header}
+                            <NorthSharpIcon
+                              fontSize="small"
+                              className="inline-block"
+                              sx={{
+                                fill: "#CCC",
+                                height: "15px",
+                                width: "15px",
+                                transform:
+                                  sortConfig?.direction === "asc"
+                                    ? "rotate(0deg)"
+                                    : sortConfig?.direction === "desc"
+                                    ? "rotate(180deg)"
+                                    : "rotate(0deg)",
 
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("mobile")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Email Address
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("emailaddress")}
-                        />
-                      </th>
-                      <th className="textheader para" scope="col">
-                        Employee Type
-                        <NorthSharpIcon
-                          fontSize="small"
-                          className="inline-block"
-                          sx={{
-                            fill: "#CCC",
-                            height: "15px",
-                            width: "15px",
-                            transform:
-                              sortConfig?.direction === "asc"
-                                ? "rotate(0deg)"
-                                : sortConfig?.direction === "desc"
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
-
-                            transition: "transform 0.3s ease",
-                          }}
-                          onClick={() => handleSort("agreementstatus")}
-                        />
-                      </th>
-
-                      <th className="textheader para" scope="col"></th>
+                                transition: "transform 0.3s ease",
+                              }}
+                              onClick={() => handleSort("mobile")}
+                            />
+                          </th>
+                        );
+                      })}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
                     {onboardingDetails?.map((item: any, index: number) => (
                       <tr key={index}>
-                        <td className="para textheader ">{item?.empId}</td>
-                        <td
-                          className="para textheader"
-                          style={{ whiteSpace: "nowrap" }}
-                        >
-                          {item?.employeename}
-                        </td>
-                        <td className="para textheader">{item?.mobile}</td>
-                        <td className="para textheader">
-                          {item?.emailaddress}
-                        </td>
+                        {!hiddenColumns.includes("empId") && (
+                          <td className="para textheader py-3">
+                            {item?.empId}
+                          </td>
+                        )}
 
-                        <td className="para textheader">
-                          {item?.employeetype}
-                        </td>
+                        {!hiddenColumns.includes("name") && (
+                          <td className="para textheader py-3">{item?.name}</td>
+                        )}
 
+                        {!hiddenColumns.includes("mobile") && (
+                          <td className="para textheader py-3">
+                            {item?.mobile}
+                          </td>
+                        )}
+                        {!hiddenColumns.includes("email") && (
+                          <td className="para textheader py-3">
+                            {item?.email}
+                          </td>
+                        )}
+
+                        {!hiddenColumns.includes("empType") && (
+                          <td className="para textheader">{item?.empType}</td>
+                        )}
+
+                        {!hiddenColumns.includes("approverName") && (
+                          <td className="para textheader">
+                            {item?.approverName}
+                          </td>
+                        )}
+                        {!hiddenColumns.includes("costCenter") && (
+                          <td className="para textheader">
+                            {item?.costCenter}
+                          </td>
+                        )}
                         <td className="para textheader">
                           <div className="flex cursorpointer gap-3">
                             <RemoveRedEyeIcon
