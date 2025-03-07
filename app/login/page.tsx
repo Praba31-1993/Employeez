@@ -24,6 +24,7 @@ import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../redux/slices/loginSlice";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
+import { setBunit } from "../redux/slices/bunitSlice";
 
 export default function Login() {
   const useColors = Colors();
@@ -66,7 +67,7 @@ export default function Login() {
   const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
     if (e.target.checked === false) {
-      localStorage.removeItem("rememberedUserId");
+      localStorage.removeItem("rememberedUserId")
       localStorage.removeItem("rememberedUserPassword");
     } else {
       localStorage.setItem("rememberedUserId", userId);
@@ -93,6 +94,7 @@ export default function Login() {
 
       if (loginResponse.payload.status === undefined) {
         setUserDetails(loginResponse?.payload?.userInfo);
+        dispatch(setBunit({ bunit: loginResponse?.payload?.userInfo?.businessUnit }));
         toast.success("Login successful");
         localStorage.setItem("token", loginResponse?.payload?.token);
         localStorage.setItem(
@@ -104,10 +106,10 @@ export default function Login() {
           loginResponse?.payload?.userInfo?.lastName
         );
         localStorage.setItem("Role", loginResponse?.payload?.userInfo?.role);
-        localStorage.setItem(
-          "bunit",
-          loginResponse?.payload?.userInfo?.businessUnit
-        );
+        // localStorage.setItem(
+        //   "bunit",
+        //   loginResponse?.payload?.userInfo?.businessUnit
+        // );
 
         setTimeout(() => {
           setIsLoading(false); // Stop loading after navigation
