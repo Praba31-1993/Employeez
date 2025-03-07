@@ -33,30 +33,29 @@ function Prehiredashboard() {
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
+
   const [prehireDetails, setPrehiredetails] = useState<any>();
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>();
   const [onboardingDetails, setOnboardingdetails] = useState<any>();
-  const [supplierboardingDetails, setsupplierOnboardingdetails] = useState<any>(
-    supplieronboardingReport
-  );
+  const [supplierboardingDetails, setsupplierOnboardingdetails] =
+    useState<any>();
   const [isSupplierOnboardedclicked, setIsSupplierOnboardedClicked] =
     useState(false);
 
-  const arrayList = [
-    { id: 1, hractionlist: "Prehire", value: 55, fill: "#FFBA27" },
-    { id: 2, hractionlist: "Hiring", value: 26, fill: "#41A4FF" },
-    { id: 3, hractionlist: "Onboarding", value: 108, fill: "#00FF47" },
-    { id: 4, hractionlist: "Supplier Onboarding", value: 22, fill: "#935AFF" },
-  ];
-
+  const bunit = localStorage.getItem("bunit");
   const [loading, setLoading] = useState(true);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
     if (selectedTableList === 1) {
-      const res = SearchLogic(prehireDetails, query);
+      const resizing0to4index = prehireDetails.filter(
+        (prehire: any, index: number) => (index <= 4 ? prehire : "")
+      );
+      console.log("resizingindds", resizing0to4index);
+
+      const res = SearchLogic(resizing0to4index, query);
 
       setPrehiredetails(res);
     } else if (selectedTableList === 2) {
@@ -79,92 +78,154 @@ function Prehiredashboard() {
 
   const useColors = Colors();
 
+  const fetchPrehireData = async () => {
+    try {
+      const prehireData = await getEmployeeHiringDetailsByBunit(bunit, "ph");
+
+      if (prehireData.status === 200) {
+        if (prehireData?.data?.PreHireInfo) {
+          setPrehiredetails(prehireData?.data?.PreHireInfo);
+        } else {
+          console.warn("PreHireInfo key not found in response data.");
+          setPrehiredetails([]); // Set an empty array or default value to avoid errors
+        }
+      } else if (prehireData.status === 400) {
+        console.error("Bad Request: Invalid input parameters.");
+      } else if (prehireData.status === 500) {
+        console.error("Server Error: Something went wrong on the backend.");
+      } else {
+        console.error(`Unexpected Error: Status Code ${prehireData.status}`);
+      }
+
+      console.log("prehiredata", prehireData);
+    } catch (error) {
+      console.error("Failed to fetch prehire data:", error);
+    }
+  };
+
+  const fetchhiringData = async () => {
+    try {
+      const hiringData = await getEmployeeHiringDetailsByBunit(bunit, "Active");
+
+      if (hiringData.status === 200) {
+        if (hiringData?.data?.EmpInfo) {
+          sethiringdetails(hiringData?.data?.EmpInfo);
+        } else {
+          console.warn("PreHireInfo key not found in response data.");
+          sethiringdetails([]);
+        }
+      } else if (hiringData.status === 400) {
+        console.error("Bad Request: Invalid input parameters.");
+      } else if (hiringData.status === 500) {
+        console.error("Server Error: Something went wrong on the backend.");
+      } else {
+        console.error(`Unexpected Error: Status Code ${hiringData.status}`);
+      }
+
+      console.log("hiringData", hiringData);
+    } catch (error) {
+      console.error("Failed to fetch prehire data:", error);
+    }
+  };
+
+  const fetchOnboardingData = async () => {
+    try {
+      const onboardingData = await getEmployeeHiringDetailsByBunit(bunit, "to");
+
+      if (onboardingData.status === 200) {
+        if (onboardingData?.data?.TempOnboardInfo) {
+          setOnboardingdetails(onboardingData?.data?.TempOnboardInfo);
+        } else {
+          console.warn("PreHireInfo key not found in response data.");
+          setOnboardingdetails([]); // Set an empty array or default value to avoid errors
+        }
+      } else if (onboardingData.status === 400) {
+        console.error("Bad Request: Invalid input parameters.");
+      } else if (onboardingData.status === 500) {
+        console.error("Server Error: Something went wrong on the backend.");
+      } else {
+        console.error(`Unexpected Error: Status Code ${onboardingData.status}`);
+      }
+    } catch (error) {
+      console.error("Failed to fetch prehire data:", error);
+    }
+  };
+
+  const fetchSupplierOnboardingData = async () => {
+    try {
+      const supplieronboardingData = await getEmployeeHiringDetailsByBunit(
+        bunit,
+        "so"
+      );
+
+      if (supplieronboardingData.status === 200) {
+        if (supplieronboardingData?.data?.SuppInfo) {
+          setsupplierOnboardingdetails(supplieronboardingData?.data?.SuppInfo);
+        } else {
+          console.warn("PreHireInfo key not found in response data.");
+          setsupplierOnboardingdetails([]);
+        }
+      } else if (supplieronboardingData.status === 400) {
+        console.error("Bad Request: Invalid input parameters.");
+      } else if (supplieronboardingData.status === 500) {
+        console.error("Server Error: Something went wrong on the backend.");
+      } else {
+        console.error(
+          `Unexpected Error: Status Code ${supplieronboardingData.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch prehire data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPrehireData();
+    fetchhiringData();
+    fetchOnboardingData();
+    fetchSupplierOnboardingData();
+  }, []);
+
   useEffect(() => {
     if (selectedTableList === 1) {
-      const fetchPrehireData = async () => {
-        try {
-          const prehireData = await getEmployeeHiringDetailsByBunit("ph");
-
-          if (prehireData.status === 200) {
-            if (prehireData?.data?.PreHireInfo) {
-              setPrehiredetails(prehireData?.data?.PreHireInfo);
-            } else {
-              console.warn("PreHireInfo key not found in response data.");
-              setPrehiredetails([]); // Set an empty array or default value to avoid errors
-            }
-          } else if (prehireData.status === 400) {
-            console.error("Bad Request: Invalid input parameters.");
-          } else if (prehireData.status === 500) {
-            console.error("Server Error: Something went wrong on the backend.");
-          } else {
-            console.error(
-              `Unexpected Error: Status Code ${prehireData.status}`
-            );
-          }
-
-          console.log("prehiredata", prehireData);
-        } catch (error) {
-          console.error("Failed to fetch prehire data:", error);
-        }
-      };
-
       fetchPrehireData();
     } else if (selectedTableList === 2) {
-      const fetchPrehireData = async () => {
-        try {
-          const hiringData = await getEmployeeHiringDetailsByBunit("Active");
-
-          if (hiringData.status === 200) {
-            if (hiringData?.data?.EmpInfo) {
-              sethiringdetails(hiringData?.data?.EmpInfo);
-            } else {
-              console.warn("PreHireInfo key not found in response data.");
-              sethiringdetails([]); // Set an empty array or default value to avoid errors
-            }
-          } else if (hiringData.status === 400) {
-            console.error("Bad Request: Invalid input parameters.");
-          } else if (hiringData.status === 500) {
-            console.error("Server Error: Something went wrong on the backend.");
-          } else {
-            console.error(`Unexpected Error: Status Code ${hiringData.status}`);
-          }
-
-          console.log("hiringData", hiringData);
-        } catch (error) {
-          console.error("Failed to fetch prehire data:", error);
-        }
-      };
-
-      fetchPrehireData();
+      fetchhiringData();
     } else if (selectedTableList === 3) {
-      const fetchPrehireData = async () => {
-        try {
-          const onboardingData = await getEmployeeHiringDetailsByBunit("to");
-
-          if (onboardingData.status === 200) {
-            if (onboardingData?.data?.TempOnboardInfo) {
-              setOnboardingdetails(onboardingData?.data?.TempOnboardInfo);
-            } else {
-              console.warn("PreHireInfo key not found in response data.");
-              setOnboardingdetails([]); // Set an empty array or default value to avoid errors
-            }
-          } else if (onboardingData.status === 400) {
-            console.error("Bad Request: Invalid input parameters.");
-          } else if (onboardingData.status === 500) {
-            console.error("Server Error: Something went wrong on the backend.");
-          } else {
-            console.error(
-              `Unexpected Error: Status Code ${onboardingData.status}`
-            );
-          }
-        } catch (error) {
-          console.error("Failed to fetch prehire data:", error);
-        }
-      };
-
-      fetchPrehireData();
+      fetchOnboardingData();
+    } else if (selectedTableList === 4) {
+      fetchSupplierOnboardingData();
     }
   }, [selectedTableList]);
+
+  console.log("hiringDeatils", hiringDetails);
+
+  const arrayList = [
+    {
+      id: 1,
+      hractionlist: "Prehire",
+      value: prehireDetails?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 2,
+      hractionlist: "Hiring",
+      value: hiringDetails?.length,
+      fill: "#41A4FF",
+    },
+    {
+      id: 3,
+      hractionlist: "Onboarding",
+      value: onboardingDetails?.length,
+      fill: "#00FF47",
+    },
+    {
+      id: 4,
+      hractionlist: "Supplier Onboarding",
+      value: supplierboardingDetails?.length,
+      fill: "#935AFF",
+    },
+  ];
 
   return (
     <div className="row">
@@ -177,6 +238,7 @@ function Prehiredashboard() {
           prehiringdatas={prehireDetails}
           hiringdatas={hiringDetails}
           onboardingdatas={onboardingDetails}
+          supplieronboardingDatas={supplierboardingDetails}
         />
       )}
       {openReportdetailpopup && (
@@ -238,17 +300,21 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            prehireDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setReportdetailpopup((prev) => !prev),
+                      //     setIsSupplierOnboardedClicked(true),
+                      //     setselectedEmployeeDetails(() =>
+                      //       prehireDetails?.filter(
+                      //         (list: any) => list.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.firstName + " " + prehire?.lastName}
+                      {prehire?.firstName.charAt(0).toUpperCase() +
+                        prehire?.firstName.slice(1).toLowerCase() +
+                        " " +
+                        prehire?.lastName.charAt(0).toUpperCase() +
+                        prehire?.lastName.slice(1).toLowerCase()}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.department !== undefined
@@ -280,17 +346,18 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            hiringDetails?.filter(
-                              (list: any) => list.empId === hiring?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setReportdetailpopup((prev) => !prev),
+                      //     setIsSupplierOnboardedClicked(true),
+                      //     setselectedEmployeeDetails(() =>
+                      //       hiringDetails?.filter(
+                      //         (list: any) => list.empId === hiring?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {hiring?.name}
+                      {hiring?.name.charAt(0).toUpperCase() +
+                        hiring?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {hiring?.department !== undefined
@@ -322,17 +389,18 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(false),
-                          setselectedEmployeeDetails(() =>
-                            onboardingDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setReportdetailpopup((prev) => !prev),
+                      //     setIsSupplierOnboardedClicked(false),
+                      //     setselectedEmployeeDetails(() =>
+                      //       onboardingDetails?.filter(
+                      //         (list: any) => list.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.name}
+                      {prehire?.name.charAt(0).toUpperCase() +
+                        prehire?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.department !== undefined
@@ -364,20 +432,22 @@ function Prehiredashboard() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            supplierboardingDetails?.filter(
-                              (list: any) => list?.id === prehire?.id
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setReportdetailpopup((prev) => !prev),
+                      //     setIsSupplierOnboardedClicked(true),
+                      //     setselectedEmployeeDetails(() =>
+                      //       supplierboardingDetails?.filter(
+                      //         (list: any) => list?.id === prehire?.id
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.contractorname}
+                      {prehire?.contractorname.charAt(0).toUpperCase() +
+                        prehire?.contractorname.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.supplier}
+                      {prehire?.supplierName.charAt(0).toUpperCase() +
+                        prehire?.supplierName.slice(0)}
                     </td>
                   </tr>
                 ) : null
