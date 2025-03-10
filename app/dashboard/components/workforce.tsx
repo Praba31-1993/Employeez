@@ -89,37 +89,37 @@ function Workforce() {
   const arrayList = [
     {
       id: 1,
-      hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModel,
       value: w2sapidata?.length,
       fill: "#FFBA27",
     },
     {
       id: 2,
-      hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModel,
       value: w2hapidata?.length,
       fill: "#FFBA27",
     },
     {
       id: 3,
-      hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModel,
       value: c2capidata?.length,
       fill: "#FFBA27",
     },
     {
       id: 4,
-      hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModel,
       value: eightytwentyapidata?.length,
       fill: "#FFBA27",
     },
     {
       id: 5,
-      hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModel,
       value: seventythirtyapidata?.length,
       fill: "#FFBA27",
     },
     {
       id: 6,
-      hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModelCode,
+      hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModel,
       value: independentcontractorapidata?.length,
       fill: "#FFBA27",
     },
@@ -161,7 +161,7 @@ function Workforce() {
 
     setndependentcontractorapidata(
       employeeList?.empListInfo?.filter(
-        (emp: any) => emp.hiringModelCode === "Independent Contractor"
+        (emp: any) => emp.hiringModelCode === "1099"
       )
     );
   }, [employeeList]);
@@ -190,6 +190,8 @@ function Workforce() {
     }
   }, [selectedBunites?.bunit]);
 
+  console.log("inddfs", independentcontractorapidata);
+
   return (
     <div className="row">
       {open && (
@@ -198,6 +200,12 @@ function Workforce() {
           close={() => setOpen(false)}
           selectedTableList={selectedTableList}
           selectedEmployee={(data: any) => setselectedEmployeeDetails(data)}
+          w2semployeeeList={w2sapidata}
+          w2hemployeeeList={w2hapidata}
+          c2cemployeeeList={c2capidata}
+          seventythirtyemployeeeList={seventythirtyapidata}
+          eightytwentyemployeeList={eightytwentyapidata}
+          independentcontractoremployeeList={independentcontractorapidata}
         />
       )}
       {workforcedetailpopup && (
@@ -252,7 +260,7 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {workforceDetails?.map((prehire: any, index: number) =>
+              {w2sapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
@@ -260,17 +268,18 @@ function Workforce() {
                       onClick={() => {
                         setWorkForcedetailpopup((prev) => !prev),
                           setselectedEmployeeDetails(() =>
-                            workforceDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
+                            w2sapidata?.filter(
+                              (list: any) => list?.empId === prehire?.empId
                             )
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -292,7 +301,7 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {w2SDetails?.map((prehire: any, index: number) =>
+              {w2hapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
@@ -300,17 +309,18 @@ function Workforce() {
                       onClick={() => {
                         setWorkForcedetailpopup((prev) => !prev),
                           setselectedEmployeeDetails(() =>
-                            w2SDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
+                            w2hapidata?.filter(
+                              (list: any) => list?.empId === prehire?.empId
                             )
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -332,7 +342,7 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {w2HDetails?.map((prehire: any, index: number) =>
+              {c2capidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
@@ -340,17 +350,18 @@ function Workforce() {
                       onClick={() => {
                         setWorkForcedetailpopup((prev) => !prev),
                           setselectedEmployeeDetails(() =>
-                            w2HDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
+                            c2capidata?.filter(
+                              (list: any) => list?.empId === prehire?.empId
                             )
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -372,7 +383,7 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {c2cDetails?.map((prehire: any, index: number) =>
+              {eightytwentyapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
@@ -380,20 +391,104 @@ function Workforce() {
                       onClick={() => {
                         setWorkForcedetailpopup((prev) => !prev),
                           setselectedEmployeeDetails(() =>
-                            c2cDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
+                            eightytwentyapidata?.filter(
+                              (list: any) => list?.empId === prehire?.empId
                             )
                           );
                       }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
+              )}
+            </tbody>
+          </table>
+        )}
+
+        {selectedTableList === 5 && (
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {seventythirtyapidata?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      onClick={() => {
+                        setWorkForcedetailpopup((prev) => !prev),
+                          setselectedEmployeeDetails(() =>
+                            seventythirtyapidata?.filter(
+                              (list: any) => list?.empId === prehire?.empId
+                            )
+                          );
+                      }}
+                    >
+                      {prehire?.firstName}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        )}
+
+        {selectedTableList === 6 && (
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {independentcontractorapidata?.map(
+                (prehire: any, index: number) =>
+                  index <= 4 ? (
+                    <tr key={index}>
+                      <td
+                        className="para cursorpointer textheader"
+                        onClick={() => {
+                          setWorkForcedetailpopup((prev) => !prev),
+                            setselectedEmployeeDetails(() =>
+                              independentcontractorapidata?.filter(
+                                (list: any) => list?.empId === prehire?.empId
+                              )
+                            );
+                        }}
+                      >
+                        {prehire?.firstName}
+                      </td>
+                      <td className="para cursorpointer textheader">
+                        {prehire?.department !== undefined
+                          ? prehire?.department
+                          : "--"}
+                      </td>
+                    </tr>
+                  ) : null
               )}
             </tbody>
           </table>
