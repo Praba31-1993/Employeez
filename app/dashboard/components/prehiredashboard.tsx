@@ -57,8 +57,8 @@ function Prehiredashboard() {
   const selectedBunites: any = useSelector(
     (state: RootState) => state.bussinessunit.bunit
   );
-  console.log("selectedBUnitres", selectedBunites.bunit);
-  console.log("bunit990", bunit);
+  // console.log("selectedBUnitres", selectedBunites.bunit);
+  // console.log("bunit990", bunit);
 
   const [loading, setLoading] = useState(true);
 
@@ -248,7 +248,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     }
   }, [selectedTableList, selectedBunites.bunit]);
 
-  console.log("hiringDeatils", hiringDetails);
+  
 
   const arrayList = [
     {
