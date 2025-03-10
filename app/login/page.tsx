@@ -24,6 +24,7 @@ import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../redux/slices/loginSlice";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
+import { setBunit } from "../redux/slices/bunitSlice";
 
 export default function Login() {
   const useColors = Colors();
@@ -93,6 +94,9 @@ export default function Login() {
 
       if (loginResponse.payload.status === undefined) {
         setUserDetails(loginResponse?.payload?.userInfo);
+        dispatch(
+          setBunit({ bunit: loginResponse?.payload?.userInfo?.businessUnit })
+        );
         toast.success("Login successful");
         localStorage.setItem("token", loginResponse?.payload?.token);
         localStorage.setItem(

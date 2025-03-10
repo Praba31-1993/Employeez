@@ -8,12 +8,11 @@ export default function Home() {
   const animationData = require("@/public/assets/EZ animation.json"); // Ensure JSON path is correct
 
   useEffect(() => {
-    // Set timeout for 10 seconds
     const timer = setTimeout(() => {
-      router.replace("./login"); // Redirect to the Login page
+      router.replace("./login"); 
     }, 5000);
 
-    return () => clearTimeout(timer); // Cleanup timeout on component unmount
+    return () => clearTimeout(timer);
   }, [router]);
 
   return (
