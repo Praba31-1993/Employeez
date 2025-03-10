@@ -363,10 +363,10 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
                       // }}
                     >
                       {prehire?.firstName?.charAt(0).toUpperCase() +
-                        prehire?.firstName.slice(1).toLowerCase() +
+                        prehire?.firstName?.slice(1).toLowerCase() +
                         " " +
                         prehire?.lastName?.charAt(0).toUpperCase() +
-                        prehire?.lastName.slice(1).toLowerCase()}
+                        prehire?.lastName?.slice(1).toLowerCase()}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.department !== undefined
@@ -409,7 +409,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
                       // }}
                     >
                       {hiring?.name?.charAt(0).toUpperCase() +
-                        hiring?.name.slice(0)}
+                        hiring?.name?.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {hiring?.department !== undefined
@@ -452,7 +452,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
                       // }}
                     >
                       {prehire?.name?.charAt(0).toUpperCase() +
-                        prehire?.name.slice(0)}
+                        prehire?.name?.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.department !== undefined
@@ -495,11 +495,11 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
                       // }}
                     >
                       {prehire?.contractorname?.charAt(0).toUpperCase() +
-                        prehire?.contractorname.slice(0)}
+                        prehire?.contractorname?.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.supplierName?.charAt(0).toUpperCase() +
-                        prehire?.supplierName.slice(0)}
+                        prehire?.supplierName?.slice(0)}
                     </td>
                   </tr>
                 ) : null

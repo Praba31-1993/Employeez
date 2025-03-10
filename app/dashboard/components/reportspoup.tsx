@@ -211,7 +211,7 @@ export default function Reportspoup({
 
           <div className="row mt-3 px-sm-5 ">
             {/* Tab Section */}
-            <div className="col-12 col-md-8 col-lg-8 col-xxl-10 ">
+            <div className="col-12 col-md-8 col-lg-8 col-xxl-8 ">
               <Tabs
                 onChange={handleChange}
                 value={value}
@@ -224,8 +224,8 @@ export default function Reportspoup({
               </Tabs>
             </div>
             {/* Search Section */}
-            <div className="col-12 col-md-4 col-lg-4 col-xxl-2 ">
-              <div className="d-flex align-items-center gap-3">
+            <div className="col-12 col-md-4 col-lg-4 col-xxl-4 ">
+              <div className="d-flex align-items-center justify-content-end gap-3">
                 {value === 0 && (
                   <PrintExportColumnCustomize
                     headers={prehireheaders}

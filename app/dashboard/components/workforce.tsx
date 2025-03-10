@@ -18,6 +18,7 @@ import Employees from "./employees";
 import Reportspoup from "./reportspoup";
 import EmployeePopup from "./employeepopup";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
+import { getWorkForceReportByBunit } from "@/app/reusableComponent/JsonData";
 
 type Row = {
   id: number | string;
@@ -38,14 +39,15 @@ function Workforce() {
   const [w2HDetails, setw2hDetails] = useState<any>(w2hReports);
   const [c2cDetails, setc2cDetails] = useState<any>(c2cReports);
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
+  const [w2sapidata, setw2sapidata] = useState<any>();
+  const [w2hapidata, setw2hapidata] = useState<any>();
+  const [c2capidata, setc2capidata] = useState<any>();
+  const useColors = Colors();
 
   useEffect(() => {
-    // Simulate data fetching delay
     const timer = setTimeout(() => setLoading(false), 2000); // Adjust timeout as necessary
     return () => clearTimeout(timer);
   }, []);
-
-  const useColors = Colors();
 
   // Search function
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +79,24 @@ function Workforce() {
     { id: 4, hractionlist: "C2C", value: 22, fill: "#935AFF" },
   ];
 
+  useEffect(() => {
+    const w2sList = getWorkForceReportByBunit.employeeList.filter(
+      (emp) => emp.hiringmodecode === "w2s"
+    );
+    const w2hList = getWorkForceReportByBunit.employeeList.filter(
+      (emp) => emp.hiringmodecode === "w2h"
+    );
+    const c2cList = getWorkForceReportByBunit.employeeList.filter(
+      (emp) => emp.hiringmodecode === "c2c"
+    );
+
+    setw2sapidata(w2sList);
+    setw2hapidata(w2hList);
+    setc2capidata(c2cList);
+  }, []);
+
+  console.log('wwwwewe',w2sapidata);
+  
   return (
     <div className="row">
       {open && (
