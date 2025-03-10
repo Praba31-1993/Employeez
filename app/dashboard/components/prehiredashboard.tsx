@@ -26,7 +26,8 @@ function Prehiredashboard() {
   const [openReportdetailpopup, setReportdetailpopup] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [selectedTableList, setTableList] = useState<any>(1);
-  const [prehireDetails, setPrehiredetails] = useState<any>();
+  const [prehireDetails, setPrehiredetails] = useState<any[]>([]);
+  const [originalDetails, setoriginalDetails] = useState<any[]>([]); // Store the original data
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>();
   const [onboardingDetails, setOnboardingdetails] = useState<any>();
@@ -46,24 +47,44 @@ function Prehiredashboard() {
     (state: RootState) => state?.bussinessunit?.bunit
   );
 
+  useEffect(() => {
+    // Store original data only once (when it's empty)
+    if (originalDetails.length === 0 && prehireDetails.length > 0) {
+      setoriginalDetails(prehireDetails);
+    }
+  }, [prehireDetails]); // Runs when prehireDetails updates
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
+
+    let res: any[] = [];
+
     if (selectedTableList === 1) {
-      const resizing0to4index = prehireDetails.filter(
-        (prehire: any, index: number) => (index <= 4 ? prehire : "")
-      );
-      const res = SearchLogic(resizing0to4index, query);
+      // Filter the first 5 items from prehireDetails
+      const resizedData = originalDetails.slice(0, 5);
+      res = SearchLogic(resizedData, query);
       setPrehiredetails(res);
     } else if (selectedTableList === 2) {
-      const res = SearchLogic(hiringDetails, query);
+      if (hiringDetails.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for hiringDetails
+        setoriginalDetails([...hiringDetails]);
+      }
+      res = SearchLogic(originalDetails, query);
       sethiringdetails(res);
     } else if (selectedTableList === 3) {
-      const res = SearchLogic(onboardingDetails, query);
+      if (onboardingDetails.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for onboardingDetails
+        setoriginalDetails([...onboardingDetails]);
+      }
+      res = SearchLogic(originalDetails, query);
       setOnboardingdetails(res);
     } else {
-      const res = SearchLogic(supplieronboardingReport, query);
+      if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for supplieronboardingReport
+        setoriginalDetails([...supplieronboardingReport]);
+      }
+      res = SearchLogic(originalDetails, query);
       setsupplierOnboardingdetails(res);
     }
   };
@@ -72,7 +93,6 @@ function Prehiredashboard() {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
-
 
   const fetchPrehireData = async () => {
     try {
@@ -86,21 +106,13 @@ function Prehiredashboard() {
           setPrehiredetails(prehireData?.data?.PreHireInfo);
           setlengthofprehirereport(prehireData?.data?.PreHireInfo?.length);
         } else {
-          console.warn("PreHireInfo key not found in response data.");
           setPrehiredetails([]); // Set an empty array or default value to avoid errors
         }
       } else if (prehireData.status === 400) {
-        console.error("Bad Request: Invalid input parameters.");
       } else if (prehireData.status === 500) {
-        console.error("Server Error: Something went wrong on the backend.");
       } else {
-        console.error(`Unexpected Error: Status Code ${prehireData.status}`);
       }
-
-      console.log("prehiredata", prehireData);
-    } catch (error) {
-      console.error("Failed to fetch prehire data:", error);
-    }
+    } catch (error) {}
   };
 
   const fetchhiringData = async () => {
@@ -115,21 +127,13 @@ function Prehiredashboard() {
           sethiringdetails(hiringData?.data?.EmpInfo);
           setlengthofhiringreport(hiringData?.data?.EmpInfo?.length);
         } else {
-          console.warn("PreHireInfo key not found in response data.");
           sethiringdetails([]);
         }
       } else if (hiringData.status === 400) {
-        console.error("Bad Request: Invalid input parameters.");
       } else if (hiringData.status === 500) {
-        console.error("Server Error: Something went wrong on the backend.");
       } else {
-        console.error(`Unexpected Error: Status Code ${hiringData.status}`);
       }
-
-      console.log("hiringData", hiringData);
-    } catch (error) {
-      console.error("Failed to fetch prehire data:", error);
-    }
+    } catch (error) {}
   };
 
   const fetchOnboardingData = async () => {
@@ -146,19 +150,13 @@ function Prehiredashboard() {
             onboardingData?.data?.TempOnboardInfo?.length
           );
         } else {
-          console.warn("PreHireInfo key not found in response data.");
           setOnboardingdetails([]); // Set an empty array or default value to avoid errors
         }
       } else if (onboardingData.status === 400) {
-        console.error("Bad Request: Invalid input parameters.");
       } else if (onboardingData.status === 500) {
-        console.error("Server Error: Something went wrong on the backend.");
       } else {
-        console.error(`Unexpected Error: Status Code ${onboardingData.status}`);
       }
-    } catch (error) {
-      console.error("Failed to fetch prehire data:", error);
-    }
+    } catch (error) {}
   };
 
   const fetchSupplierOnboardingData = async () => {
@@ -175,21 +173,13 @@ function Prehiredashboard() {
             supplieronboardingData?.data?.SuppInfo?.length
           );
         } else {
-          console.warn("PreHireInfo key not found in response data.");
           setsupplierOnboardingdetails([]);
         }
       } else if (supplieronboardingData.status === 400) {
-        console.error("Bad Request: Invalid input parameters.");
       } else if (supplieronboardingData.status === 500) {
-        console.error("Server Error: Something went wrong on the backend.");
       } else {
-        console.error(
-          `Unexpected Error: Status Code ${supplieronboardingData.status}`
-        );
       }
-    } catch (error) {
-      console.error("Failed to fetch prehire data:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -313,10 +303,10 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.firstName.charAt(0).toUpperCase() +
+                      {prehire?.firstName?.charAt(0).toUpperCase() +
                         prehire?.firstName.slice(1).toLowerCase() +
                         " " +
-                        prehire?.lastName.charAt(0).toUpperCase() +
+                        prehire?.lastName?.charAt(0).toUpperCase() +
                         prehire?.lastName.slice(1).toLowerCase()}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -359,7 +349,7 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {hiring?.name.charAt(0).toUpperCase() +
+                      {hiring?.name?.charAt(0).toUpperCase() +
                         hiring?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -402,7 +392,7 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.name.charAt(0).toUpperCase() +
+                      {prehire?.name?.charAt(0).toUpperCase() +
                         prehire?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -446,11 +436,11 @@ function Prehiredashboard() {
                       // }}
                     >
                       {prehire?.contractorname?.charAt(0).toUpperCase() +
-                        prehire?.contractorname?.slice(0)}
+                        prehire?.contractorname.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
                       {prehire?.supplierName?.charAt(0).toUpperCase() +
-                        prehire?.supplierName?.slice(0)}
+                        prehire?.supplierName.slice(0)}
                     </td>
                   </tr>
                 ) : null
