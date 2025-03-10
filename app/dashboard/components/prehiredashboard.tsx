@@ -36,7 +36,8 @@ function Prehiredashboard() {
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
-  const [prehireDetails, setPrehiredetails] = useState<any>();
+  const [prehireDetails, setPrehiredetails] = useState<any[]>([]);
+  const [originalDetails, setoriginalDetails] = useState<any[]>([]); // Store the original data
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>();
   const [onboardingDetails, setOnboardingdetails] = useState<any>();
@@ -61,29 +62,53 @@ function Prehiredashboard() {
 
   const [loading, setLoading] = useState(true);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearch(query);
-    if (selectedTableList === 1) {
-      const resizing0to4index = prehireDetails.filter(
-        (prehire: any, index: number) => (index <= 4 ? prehire : "")
-      );
-      console.log("resizingindds", resizing0to4index);
 
-      const res = SearchLogic(resizing0to4index, query);
+useEffect(() => {
+  // Store original data only once (when it's empty)
+  if (originalDetails.length === 0 && prehireDetails.length > 0) {
+    setoriginalDetails(prehireDetails);
+  }
+}, [prehireDetails]); // Runs when prehireDetails updates
 
-      setPrehiredetails(res);
-    } else if (selectedTableList === 2) {
-      const res = SearchLogic(hiringDetails, query);
-      sethiringdetails(res);
-    } else if (selectedTableList === 3) {
-      const res = SearchLogic(onboardingDetails, query);
-      setOnboardingdetails(res);
-    } else {
-      const res = SearchLogic(supplieronboardingReport, query);
-      setsupplierOnboardingdetails(res);
+const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const query = event.target.value;
+  setSearch(query);
+  console.log("Original Details:", originalDetails);
+
+  let res: any[] = [];
+
+  if (selectedTableList === 1) {
+    // Filter the first 5 items from prehireDetails
+    const resizedData = originalDetails.slice(0, 5);
+    console.log("Resized Data (first 5):", resizedData);
+    res = SearchLogic(resizedData, query);
+    setPrehiredetails(res);
+  } else if (selectedTableList === 2) {
+    if (hiringDetails.length > 0 && originalDetails.length === 0) {
+      // Only set originalDetails once for hiringDetails
+      setoriginalDetails([...hiringDetails]);
     }
-  };
+    res = SearchLogic(originalDetails, query);
+    sethiringdetails(res);
+  } else if (selectedTableList === 3) {
+    if (onboardingDetails.length > 0 && originalDetails.length === 0) {
+      // Only set originalDetails once for onboardingDetails
+      setoriginalDetails([...onboardingDetails]);
+    }
+    res = SearchLogic(originalDetails, query);
+    setOnboardingdetails(res);
+  } else {
+    if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
+      // Only set originalDetails once for supplieronboardingReport
+      setoriginalDetails([...supplieronboardingReport]);
+    }
+    res = SearchLogic(originalDetails, query);
+    setsupplierOnboardingdetails(res);
+  }
+
+  console.log("Filtered Results:", res);
+};
+
 
   useEffect(() => {
     // Simulate data fetching delay
@@ -337,10 +362,10 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.firstName.charAt(0).toUpperCase() +
+                      {prehire?.firstName?.charAt(0).toUpperCase() +
                         prehire?.firstName.slice(1).toLowerCase() +
                         " " +
-                        prehire?.lastName.charAt(0).toUpperCase() +
+                        prehire?.lastName?.charAt(0).toUpperCase() +
                         prehire?.lastName.slice(1).toLowerCase()}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -383,7 +408,7 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {hiring?.name.charAt(0).toUpperCase() +
+                      {hiring?.name?.charAt(0).toUpperCase() +
                         hiring?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -426,7 +451,7 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.name.charAt(0).toUpperCase() +
+                      {prehire?.name?.charAt(0).toUpperCase() +
                         prehire?.name.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
@@ -469,11 +494,11 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.contractorname.charAt(0).toUpperCase() +
+                      {prehire?.contractorname?.charAt(0).toUpperCase() +
                         prehire?.contractorname.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.supplierName.charAt(0).toUpperCase() +
+                      {prehire?.supplierName?.charAt(0).toUpperCase() +
                         prehire?.supplierName.slice(0)}
                     </td>
                   </tr>
