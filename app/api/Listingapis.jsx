@@ -11,6 +11,9 @@ export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
   };
 
   export const getWorkForceReportByBunit = async (Bunit) => {
+    console.log('Bunit5556',Bunit);
+    
+    
     try {
       const response = await axiosInstance.get(`/api/dashboard/getWorkForceReportByBunit/${Bunit}`);
       return response; 

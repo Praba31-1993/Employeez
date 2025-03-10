@@ -59,7 +59,6 @@ function Prehiredashboard() {
 
     setSearch(query);
 
-    console.log("Original Details:", originalDetails);
 
     let res: any[] = [];
 
@@ -68,7 +67,6 @@ function Prehiredashboard() {
 
       const resizedData = originalDetails.slice(0, 5);
 
-      console.log("Resized Data (first 5):", resizedData);
 
       res = SearchLogic(resizedData, query);
 
@@ -105,7 +103,6 @@ function Prehiredashboard() {
       setsupplierOnboardingdetails(res);
     }
 
-    console.log("Filtered Results:", res);
   };
 
   useEffect(() => {

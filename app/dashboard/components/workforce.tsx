@@ -18,7 +18,9 @@ import Employees from "./employees";
 import Reportspoup from "./reportspoup";
 import EmployeePopup from "./employeepopup";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
-import { getWorkForceReportByBunit } from "@/app/reusableComponent/JsonData";
+import { getWorkForceReportByBunit } from "@/app/api/Listingapis";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 type Row = {
   id: number | string;
@@ -39,10 +41,19 @@ function Workforce() {
   const [w2HDetails, setw2hDetails] = useState<any>(w2hReports);
   const [c2cDetails, setc2cDetails] = useState<any>(c2cReports);
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
+  const [employeeList, setEmployeeList] = useState<any>();
   const [w2sapidata, setw2sapidata] = useState<any>();
   const [w2hapidata, setw2hapidata] = useState<any>();
   const [c2capidata, setc2capidata] = useState<any>();
+  const [seventythirtyapidata, setseventythirtyapidata] = useState<any>();
+  const [eightytwentyapidata, seteightytwentyapidata] = useState<any>();
+  const [independentcontractorapidata, setndependentcontractorapidata] =
+    useState<any>();
+
   const useColors = Colors();
+  const selectedBunites: any = useSelector(
+    (state: RootState) => state?.bussinessunit?.bunit
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000); // Adjust timeout as necessary
@@ -72,31 +83,113 @@ function Workforce() {
   // Toggle column visibility
   const [open, setOpen] = useState(false);
   const [workforcedetailpopup, setWorkForcedetailpopup] = useState(false);
+
+  // cons ListedData =
+
   const arrayList = [
-    { id: 1, hractionlist: "Total Employee", value: 55, fill: "#FFBA27" },
-    { id: 2, hractionlist: "W2S", value: 26, fill: "#41A4FF" },
-    { id: 3, hractionlist: "W2H", value: 108, fill: "#00FF47" },
-    { id: 4, hractionlist: "C2C", value: 22, fill: "#935AFF" },
+    {
+      id: 1,
+      hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModelCode,
+      value: w2sapidata?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 2,
+      hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModelCode,
+      value: w2hapidata?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 3,
+      hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModelCode,
+      value: c2capidata?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 4,
+      hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModelCode,
+      value: eightytwentyapidata?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 5,
+      hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModelCode,
+      value: seventythirtyapidata?.length,
+      fill: "#FFBA27",
+    },
+    {
+      id: 6,
+      hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModelCode,
+      value: independentcontractorapidata?.length,
+      fill: "#FFBA27",
+    },
   ];
 
   useEffect(() => {
-    const w2sList = getWorkForceReportByBunit.employeeList.filter(
-      (emp) => emp.hiringmodecode === "w2s"
+    setw2sapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2S"
+      )
     );
-    const w2hList = getWorkForceReportByBunit.employeeList.filter(
-      (emp) => emp.hiringmodecode === "w2h"
+    setw2sapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2S"
+      )
     );
-    const c2cList = getWorkForceReportByBunit.employeeList.filter(
-      (emp) => emp.hiringmodecode === "c2c"
+    setw2hapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2H"
+      )
     );
 
-    setw2sapidata(w2sList);
-    setw2hapidata(w2hList);
-    setc2capidata(c2cList);
-  }, []);
+    setc2capidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "C2C"
+      )
+    );
+    seteightytwentyapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "80_20"
+      )
+    );
 
-  console.log('wwwwewe',w2sapidata);
-  
+    setseventythirtyapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "70_30"
+      )
+    );
+
+    setndependentcontractorapidata(
+      employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "Independent Contractor"
+      )
+    );
+  }, [employeeList]);
+
+  const fetchPrehireData = async () => {
+    try {
+      const workforceData = await getWorkForceReportByBunit(
+        selectedBunites?.bunit
+      );
+
+      if (workforceData.status === 200) {
+        if (workforceData?.data) {
+          setEmployeeList(workforceData?.data);
+        } else {
+        }
+      } else if (workforceData.status === 400) {
+      } else if (workforceData.status === 500) {
+      } else {
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    if (selectedBunites?.bunit !== undefined) {
+      fetchPrehireData();
+    }
+  }, [selectedBunites?.bunit]);
+
   return (
     <div className="row">
       {open && (
