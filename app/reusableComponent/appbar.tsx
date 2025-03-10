@@ -21,6 +21,9 @@ import { dropdownData } from "./JsonData";
 import user from "@/public/assets/img/Ellipse 14.svg";
 import Link from "next/link";
 import { getBusinessUnitList } from "../api/Listingapis";
+import { useDispatch, useSelector } from "react-redux";
+import { setBunit } from "../redux/slices/bunitSlice";
+import { RootState } from "../redux/store";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -31,6 +34,12 @@ export default function NavbarComponent() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+  const selectedBunites: any = useSelector(
+    (state: RootState) => state.bussinessunit.bunit
+  );
+  console.log("selectedBUnitres", selectedBunites.bunit);
+
+  const dispatch = useDispatch();
 
   const router = useRouter();
   const bunit = localStorage.getItem("bunit");
@@ -100,6 +109,14 @@ export default function NavbarComponent() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  useEffect(() => {
+    if (selectedBunit !== bunit) {
+      dispatch(setBunit({ bunit: selectedBunit }));
+    } else {
+      dispatch(setBunit({ bunit: bunit }));
+    }
+  }, [selectedBunit]);
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -163,11 +180,9 @@ export default function NavbarComponent() {
           value={selectedBunit}
         >
           {getbussinessunit?.map((bunitlist: any, index: number) => (
-            <div key={index}>
-              <option value={bunitlist?.bunitId}>
-                {bunitlist?.description}
-              </option>
-            </div>
+            <option key={index} value={bunitlist?.bunitId}>
+              {bunitlist?.description}
+            </option>
           ))}
         </select>
       </MenuItem>
@@ -260,8 +275,8 @@ export default function NavbarComponent() {
                 onChange={(e) => setSelectedBunit(e.target.value)}
                 value={selectedBunit}
               >
-                {getbussinessunit?.map((bunitlist: any) => (
-                  <option value={bunitlist?.bunitId}>
+                {getbussinessunit?.map((bunitlist: any, index: number) => (
+                  <option key={index} value={bunitlist?.bunitId}>
                     {bunitlist?.description}
                   </option>
                 ))}

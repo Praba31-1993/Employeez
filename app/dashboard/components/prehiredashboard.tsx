@@ -17,6 +17,9 @@ import Reportspoup from "./reportspoup";
 import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
 import { getEmployeeHiringDetailsByBunit } from "@/app/api/Listingapis";
+import { AppDispatch, RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+
 
 type Row = {
   id: number | string;
@@ -33,7 +36,6 @@ function Prehiredashboard() {
   const [rowsList, setRows] = useState<any>(getCompHistory);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
-
   const [prehireDetails, setPrehiredetails] = useState<any>();
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>();
@@ -42,8 +44,21 @@ function Prehiredashboard() {
     useState<any>();
   const [isSupplierOnboardedclicked, setIsSupplierOnboardedClicked] =
     useState(false);
+  const [lengthofprehirereport, setlengthofprehirereport] = useState(null);
+  const [lengthofhiringreport, setlengthofhiringreport] = useState(null);
+  const [lengthofonboardingreport, setlengthofonboardingreport] =
+    useState(null);
+  const [lengthofSupplierOnboadingreport, setlengthofSupplierOnboardingreport] =
+    useState(null);
 
   const bunit = localStorage.getItem("bunit");
+
+  const selectedBunites: any = useSelector(
+    (state: RootState) => state.bussinessunit.bunit
+  );
+  console.log("selectedBUnitres", selectedBunites.bunit);
+  console.log("bunit990", bunit);
+
   const [loading, setLoading] = useState(true);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,13 +93,16 @@ function Prehiredashboard() {
 
   const useColors = Colors();
 
+
+  
   const fetchPrehireData = async () => {
     try {
-      const prehireData = await getEmployeeHiringDetailsByBunit(bunit, "ph");
+      const prehireData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "ph");
 
       if (prehireData.status === 200) {
         if (prehireData?.data?.PreHireInfo) {
           setPrehiredetails(prehireData?.data?.PreHireInfo);
+          setlengthofprehirereport(prehireData?.data?.PreHireInfo?.length);
         } else {
           console.warn("PreHireInfo key not found in response data.");
           setPrehiredetails([]); // Set an empty array or default value to avoid errors
@@ -105,11 +123,12 @@ function Prehiredashboard() {
 
   const fetchhiringData = async () => {
     try {
-      const hiringData = await getEmployeeHiringDetailsByBunit(bunit, "Active");
+      const hiringData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "Active");
 
       if (hiringData.status === 200) {
         if (hiringData?.data?.EmpInfo) {
           sethiringdetails(hiringData?.data?.EmpInfo);
+          setlengthofhiringreport(hiringData?.data?.EmpInfo?.length);
         } else {
           console.warn("PreHireInfo key not found in response data.");
           sethiringdetails([]);
@@ -130,11 +149,14 @@ function Prehiredashboard() {
 
   const fetchOnboardingData = async () => {
     try {
-      const onboardingData = await getEmployeeHiringDetailsByBunit(bunit, "to");
+      const onboardingData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "to");
 
       if (onboardingData.status === 200) {
         if (onboardingData?.data?.TempOnboardInfo) {
           setOnboardingdetails(onboardingData?.data?.TempOnboardInfo);
+          setlengthofonboardingreport(
+            onboardingData?.data?.TempOnboardInfo?.length
+          );
         } else {
           console.warn("PreHireInfo key not found in response data.");
           setOnboardingdetails([]); // Set an empty array or default value to avoid errors
@@ -154,13 +176,16 @@ function Prehiredashboard() {
   const fetchSupplierOnboardingData = async () => {
     try {
       const supplieronboardingData = await getEmployeeHiringDetailsByBunit(
-        bunit,
+        selectedBunites.bunit,
         "so"
       );
 
       if (supplieronboardingData.status === 200) {
         if (supplieronboardingData?.data?.SuppInfo) {
           setsupplierOnboardingdetails(supplieronboardingData?.data?.SuppInfo);
+          setlengthofSupplierOnboardingreport(
+            supplieronboardingData?.data?.SuppInfo?.length
+          );
         } else {
           console.warn("PreHireInfo key not found in response data.");
           setsupplierOnboardingdetails([]);
@@ -196,7 +221,7 @@ function Prehiredashboard() {
     } else if (selectedTableList === 4) {
       fetchSupplierOnboardingData();
     }
-  }, [selectedTableList]);
+  }, [selectedTableList, selectedBunites.bunit]);
 
   console.log("hiringDeatils", hiringDetails);
 
@@ -204,25 +229,27 @@ function Prehiredashboard() {
     {
       id: 1,
       hractionlist: "Prehire",
-      value: prehireDetails?.length,
+      value: lengthofprehirereport ? lengthofprehirereport : "--",
       fill: "#FFBA27",
     },
     {
       id: 2,
       hractionlist: "Hiring",
-      value: hiringDetails?.length,
+      value: lengthofhiringreport ? lengthofhiringreport : "--",
       fill: "#41A4FF",
     },
     {
       id: 3,
       hractionlist: "Onboarding",
-      value: onboardingDetails?.length,
+      value: lengthofonboardingreport ? lengthofonboardingreport : "--",
       fill: "#00FF47",
     },
     {
       id: 4,
       hractionlist: "Supplier Onboarding",
-      value: supplierboardingDetails?.length,
+      value: lengthofSupplierOnboadingreport
+        ? lengthofSupplierOnboadingreport
+        : "--",
       fill: "#935AFF",
     },
   ];
