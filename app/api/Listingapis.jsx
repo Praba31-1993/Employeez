@@ -10,6 +10,17 @@ export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
     }
   };
 
+  export const getWorkForceReportByBunit = async (Bunit,type) => {
+    try {
+      const response = await axiosInstance.get(`/api/dashboard/getWorkForceReportByBunit/${Bunit}/${type}`);
+      return response; 
+    } catch (error) {
+      console.error("Error fetching prehire details:", error);
+      throw error; 
+    }
+  };
+ 
+
   export const getBusinessUnitList = async () => {
     try {
       const response = await axiosInstance.get(`/api/dashboard/getBusinessUnitList`);

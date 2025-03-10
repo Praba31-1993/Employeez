@@ -4,20 +4,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { SearchLogic } from "@/app/reusableComponent/commonlogic";
 import { Colors } from "@/app/reusableComponent/styles";
-import {
-  preHireReport,
-  hiringReport,
-  onboardingReport,
-  supplieronboardingReport,
-} from "@/app/reusableComponent/JsonData";
+import { supplieronboardingReport } from "@/app/reusableComponent/JsonData";
 import UnfoldMoreOutlinedIcon from "@mui/icons-material/UnfoldMoreOutlined";
-import Employees from "./employees";
 import Hrdatas from "./hrdatas";
 import Reportspoup from "./reportspoup";
-import Employreportdetails from "./reportscomponent/emplyoyeesdetailreportpopup";
 import ReportDetailsPopup from "./reportscomponent/reportdetailpopup";
 import { getEmployeeHiringDetailsByBunit } from "@/app/api/Listingapis";
-import { AppDispatch, RootState } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 type Row = {
@@ -32,8 +25,6 @@ function Prehiredashboard() {
   const [open, setOpen] = useState(false);
   const [openReportdetailpopup, setReportdetailpopup] = useState(false);
   const [search, setSearch] = useState<string>("");
-  const [rowsList, setRows] = useState<any>(getCompHistory);
-  const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
   const [prehireDetails, setPrehiredetails] = useState<any>();
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
@@ -49,16 +40,12 @@ function Prehiredashboard() {
     useState(null);
   const [lengthofSupplierOnboadingreport, setlengthofSupplierOnboardingreport] =
     useState(null);
-
-  const bunit = localStorage.getItem("bunit");
-
-  const selectedBunites: any = useSelector(
-    (state: RootState) => state.bussinessunit.bunit
-  );
-  console.log("selectedBUnitres", selectedBunites.bunit);
-  console.log("bunit990", bunit);
-
+  const useColors = Colors();
   const [loading, setLoading] = useState(true);
+  const selectedBunites: any = useSelector(
+    (state: RootState) => state?.bussinessunit?.bunit
+  );
+
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
@@ -67,10 +54,7 @@ function Prehiredashboard() {
       const resizing0to4index = prehireDetails.filter(
         (prehire: any, index: number) => (index <= 4 ? prehire : "")
       );
-      console.log("resizingindds", resizing0to4index);
-
       const res = SearchLogic(resizing0to4index, query);
-
       setPrehiredetails(res);
     } else if (selectedTableList === 2) {
       const res = SearchLogic(hiringDetails, query);
@@ -85,17 +69,15 @@ function Prehiredashboard() {
   };
 
   useEffect(() => {
-    // Simulate data fetching delay
-    const timer = setTimeout(() => setLoading(false), 2000); // Adjust timeout as necessary
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  const useColors = Colors();
 
   const fetchPrehireData = async () => {
     try {
       const prehireData = await getEmployeeHiringDetailsByBunit(
-        selectedBunites.bunit,
+        selectedBunites?.bunit,
         "ph"
       );
 
@@ -124,7 +106,7 @@ function Prehiredashboard() {
   const fetchhiringData = async () => {
     try {
       const hiringData = await getEmployeeHiringDetailsByBunit(
-        selectedBunites.bunit,
+        selectedBunites?.bunit,
         "Active"
       );
 
@@ -182,7 +164,7 @@ function Prehiredashboard() {
   const fetchSupplierOnboardingData = async () => {
     try {
       const supplieronboardingData = await getEmployeeHiringDetailsByBunit(
-        selectedBunites.bunit,
+        selectedBunites?.bunit,
         "so"
       );
 
@@ -211,32 +193,13 @@ function Prehiredashboard() {
   };
 
   useEffect(() => {
-    fetchPrehireData();
-    fetchhiringData();
-    fetchOnboardingData();
-    fetchSupplierOnboardingData();
-  }, []);
-
-  useEffect(() => {
-    fetchPrehireData();
-    fetchhiringData();
-    fetchOnboardingData();
-    fetchSupplierOnboardingData();
-  }, [selectedBunites.bunit]);
-
-  useEffect(() => {
-    if (selectedTableList === 1) {
+    if (selectedBunites?.bunit !== undefined) {
       fetchPrehireData();
-    } else if (selectedTableList === 2) {
       fetchhiringData();
-    } else if (selectedTableList === 3) {
       fetchOnboardingData();
-    } else if (selectedTableList === 4) {
       fetchSupplierOnboardingData();
     }
-  }, [selectedTableList]);
-
-  console.log("hiringDeatils", hiringDetails);
+  }, [selectedBunites?.bunit]);
 
   const arrayList = [
     {
@@ -482,12 +445,12 @@ function Prehiredashboard() {
                       //     );
                       // }}
                     >
-                      {prehire?.contractorname.charAt(0).toUpperCase() +
-                        prehire?.contractorname.slice(0)}
+                      {prehire?.contractorname?.charAt(0).toUpperCase() +
+                        prehire?.contractorname?.slice(0)}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.supplierName.charAt(0).toUpperCase() +
-                        prehire?.supplierName.slice(0)}
+                      {prehire?.supplierName?.charAt(0).toUpperCase() +
+                        prehire?.supplierName?.slice(0)}
                     </td>
                   </tr>
                 ) : null
