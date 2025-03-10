@@ -82287,7 +82287,6 @@ export const preHireReport = [
   },
 ];
 
-
 export const hiringReport = [
   {
     empId: "ab0101",
@@ -82441,7 +82440,6 @@ export const hiringReport = [
   },
 ];
 
-
 export const onboardingReport = [
   {
     empId: "ab0101",
@@ -82565,7 +82563,6 @@ export const onboardingReport = [
   },
 ];
 
-
 export const supplieronboardingReport = [
   {
     id: 1,
@@ -82603,7 +82600,7 @@ export const supplieronboardingReport = [
     mobile: "7485962539",
     emailaddress: "manoj@gmail.com",
     status: "approved",
-    department: "Operations", 
+    department: "Operations",
     supplier: "Guna Steel Manufacturer",
   },
   {
@@ -82718,7 +82715,6 @@ export const supplieronboardingReport = [
   },
 ];
 
-
 export const workforceReports = [
   {
     employeeId: 1021,
@@ -82728,7 +82724,7 @@ export const workforceReports = [
     emailaddress: "suresh@gmail.com",
     hiringtype: "C2C",
     status: "available",
-    supplier:'Raw steel Manufacturer'
+    supplier: "Raw steel Manufacturer",
   },
   {
     employeeId: 1022,
@@ -83046,7 +83042,6 @@ export const w2hReports = [
   },
 ];
 
-
 export const c2cReports = [
   {
     employeeId: 2021,
@@ -83149,7 +83144,14 @@ export const pendinginvoiceemployeedetails = [
     period: "12/24/2024 - 05/30/2025",
     tsstatus: "Yet to enter",
     calinvamt: [
-      { hours: "00", terms: "15", timeamt: "$12,000", corpamt: "$100", perdiemm: "$100", expense: "$00" },
+      {
+        hours: "00",
+        terms: "15",
+        timeamt: "$12,000",
+        corpamt: "$100",
+        perdiemm: "$100",
+        expense: "$00",
+      },
     ],
     duedate: "12/24/2024",
     invoiceno: "DI142719VSISM1",
@@ -83163,7 +83165,14 @@ export const pendinginvoiceemployeedetails = [
     period: "01/01/2025 - 06/15/2025",
     tsstatus: "Submitted",
     calinvamt: [
-      { hours: "10", terms: "30", timeamt: "$14,500", corpamt: "$120", perdiemm: "$90", expense: "$50" },
+      {
+        hours: "10",
+        terms: "30",
+        timeamt: "$14,500",
+        corpamt: "$120",
+        perdiemm: "$90",
+        expense: "$50",
+      },
     ],
     duedate: "01/10/2025",
     invoiceno: "DI142720VSISM2",
@@ -83177,7 +83186,14 @@ export const pendinginvoiceemployeedetails = [
     period: "02/01/2025 - 07/20/2025",
     tsstatus: "Approved",
     calinvamt: [
-      { hours: "20", terms: "45", timeamt: "$20,000", corpamt: "$200", perdiemm: "$110", expense: "$75" },
+      {
+        hours: "20",
+        terms: "45",
+        timeamt: "$20,000",
+        corpamt: "$200",
+        perdiemm: "$110",
+        expense: "$75",
+      },
     ],
     duedate: "02/10/2025",
     invoiceno: "DI142721VSISM3",
@@ -83191,7 +83207,14 @@ export const pendinginvoiceemployeedetails = [
     period: "03/01/2025 - 08/25/2025",
     tsstatus: "Yet to enter",
     calinvamt: [
-      { hours: "00", terms: "20", timeamt: "$11,000", corpamt: "$90", perdiemm: "$80", expense: "$30" },
+      {
+        hours: "00",
+        terms: "20",
+        timeamt: "$11,000",
+        corpamt: "$90",
+        perdiemm: "$80",
+        expense: "$30",
+      },
     ],
     duedate: "03/10/2025",
     invoiceno: "DI142722VSISM4",
@@ -83205,7 +83228,14 @@ export const pendinginvoiceemployeedetails = [
     period: "04/01/2025 - 09/30/2025",
     tsstatus: "Pending",
     calinvamt: [
-      { hours: "15", terms: "40", timeamt: "$16,500", corpamt: "$180", perdiemm: "$95", expense: "$60" },
+      {
+        hours: "15",
+        terms: "40",
+        timeamt: "$16,500",
+        corpamt: "$180",
+        perdiemm: "$95",
+        expense: "$60",
+      },
     ],
     duedate: "04/10/2025",
     invoiceno: "DI142723VSISM5",
@@ -83219,7 +83249,14 @@ export const pendinginvoiceemployeedetails = [
     period: "05/01/2025 - 10/05/2025",
     tsstatus: "Rejected",
     calinvamt: [
-      { hours: "00", terms: "25", timeamt: "$10,000", corpamt: "$80", perdiemm: "$85", expense: "$20" },
+      {
+        hours: "00",
+        terms: "25",
+        timeamt: "$10,000",
+        corpamt: "$80",
+        perdiemm: "$85",
+        expense: "$20",
+      },
     ],
     duedate: "05/10/2025",
     invoiceno: "DI142724VSISM6",
@@ -83233,7 +83270,14 @@ export const pendinginvoiceemployeedetails = [
     period: "06/01/2025 - 11/10/2025",
     tsstatus: "Approved",
     calinvamt: [
-      { hours: "25", terms: "50", timeamt: "$25,000", corpamt: "$250", perdiemm: "$120", expense: "$90" },
+      {
+        hours: "25",
+        terms: "50",
+        timeamt: "$25,000",
+        corpamt: "$250",
+        perdiemm: "$120",
+        expense: "$90",
+      },
     ],
     duedate: "06/10/2025",
     invoiceno: "DI142725VSISM7",
@@ -83247,7 +83291,14 @@ export const pendinginvoiceemployeedetails = [
     period: "07/01/2025 - 12/15/2025",
     tsstatus: "Yet to enter",
     calinvamt: [
-      { hours: "00", terms: "30", timeamt: "$13,000", corpamt: "$110", perdiemm: "$105", expense: "$40" },
+      {
+        hours: "00",
+        terms: "30",
+        timeamt: "$13,000",
+        corpamt: "$110",
+        perdiemm: "$105",
+        expense: "$40",
+      },
     ],
     duedate: "07/10/2025",
     invoiceno: "DI142726VSISM8",
@@ -83261,7 +83312,14 @@ export const pendinginvoiceemployeedetails = [
     period: "08/01/2025 - 01/20/2026",
     tsstatus: "Submitted",
     calinvamt: [
-      { hours: "30", terms: "55", timeamt: "$28,000", corpamt: "$280", perdiemm: "$140", expense: "$100" },
+      {
+        hours: "30",
+        terms: "55",
+        timeamt: "$28,000",
+        corpamt: "$280",
+        perdiemm: "$140",
+        expense: "$100",
+      },
     ],
     duedate: "08/10/2025",
     invoiceno: "DI142727VSISM9",
@@ -83275,7 +83333,14 @@ export const pendinginvoiceemployeedetails = [
     period: "09/01/2025 - 02/25/2026",
     tsstatus: "Pending",
     calinvamt: [
-      { hours: "10", terms: "35", timeamt: "$15,000", corpamt: "$130", perdiemm: "$115", expense: "$70" },
+      {
+        hours: "10",
+        terms: "35",
+        timeamt: "$15,000",
+        corpamt: "$130",
+        perdiemm: "$115",
+        expense: "$70",
+      },
     ],
     duedate: "09/10/2025",
     invoiceno: "DI142728VSISM10",
@@ -83289,7 +83354,14 @@ export const pendinginvoiceemployeedetails = [
     period: "10/01/2025 - 03/30/2026",
     tsstatus: "Yet to enter",
     calinvamt: [
-      { hours: "00", terms: "40", timeamt: "$18,000", corpamt: "$150", perdiemm: "$130", expense: "$80" },
+      {
+        hours: "00",
+        terms: "40",
+        timeamt: "$18,000",
+        corpamt: "$150",
+        perdiemm: "$130",
+        expense: "$80",
+      },
     ],
     duedate: "10/10/2025",
     invoiceno: "DI142729VSISM11",
@@ -83303,7 +83375,14 @@ export const pendinginvoiceemployeedetails = [
     period: "11/01/2025 - 04/05/2026",
     tsstatus: "Approved",
     calinvamt: [
-      { hours: "20", terms: "60", timeamt: "$30,000", corpamt: "$300", perdiemm: "$160", expense: "$120" },
+      {
+        hours: "20",
+        terms: "60",
+        timeamt: "$30,000",
+        corpamt: "$300",
+        perdiemm: "$160",
+        expense: "$120",
+      },
     ],
     duedate: "11/10/2025",
     invoiceno: "DI142730VSISM12",
@@ -83317,7 +83396,14 @@ export const pendinginvoiceemployeedetails = [
     period: "12/01/2025 - 05/10/2026",
     tsstatus: "Submitted",
     calinvamt: [
-      { hours: "25", terms: "70", timeamt: "$35,000", corpamt: "$350", perdiemm: "$180", expense: "$150" },
+      {
+        hours: "25",
+        terms: "70",
+        timeamt: "$35,000",
+        corpamt: "$350",
+        perdiemm: "$180",
+        expense: "$150",
+      },
     ],
     duedate: "12/10/2025",
     invoiceno: "DI142731VSISM13",
@@ -83325,4 +83411,31 @@ export const pendinginvoiceemployeedetails = [
     amount: "$350",
   },
 ];
+
+export const getWorkForceReportByBunit = {
+  hiringList: [
+    { hiringmodecode: "w2s", emptype: "EMPV", hiringmodelname: "Salary" },
+    { hiringmodecode: "w2h", emptype: "EMPV", hiringmodelname: "Hourly" },
+    { hiringmodecode: "c2c", emptype: "CONV", hiringmodelname: "Contract" },
+    { hiringmodecode: "w2s", emptype: "TEMP", hiringmodelname: "Temporary" },
+    { hiringmodecode: "w2h", emptype: "FTE", hiringmodelname: "Full-Time" },
+    { hiringmodecode: "c2c", emptype: "CONV", hiringmodelname: "Freelance" },
+    { hiringmodecode: "w2s", emptype: "PART", hiringmodelname: "Part-Time" },
+    { hiringmodecode: "w2h", emptype: "CONS", hiringmodelname: "Independent" },
+    { hiringmodecode: "c2c", emptype: "CONT", hiringmodelname: "Consultant" },
+    { hiringmodecode: "w2s", emptype: "STAFF", hiringmodelname: "Staffing" },
+  ],
+  employeeList: [
+    { id: "emp001", name: "Suresh", type: "EMPV", hiringmodecode: "w2s" },
+    { id: "emp002", name: "Ramesh", type: "EMPV", hiringmodecode: "w2H" },
+    { id: "emp003", name: "Mahesh", type: "CONV", hiringmodecode: "c2C" },
+    { id: "emp004", name: "Ganesh", type: "TEMP", hiringmodecode: "w2s" },
+    { id: "emp005", name: "Dinesh", type: "FTE", hiringmodecode: "w2h" },
+    { id: "emp006", name: "Rajesh", type: "CONV", hiringmodecode: "c2c" },
+    { id: "emp007", name: "Lokesh", type: "PART", hiringmodecode: "w2s" },
+    { id: "emp008", name: "Naresh", type: "CONS", hiringmodecode: "c2c" },
+    { id: "emp009", name: "Manoj", type: "CONT", hiringmodecode: "w2h" },
+    { id: "emp010", name: "Vinay", type: "STAFF", hiringmodecode: "c2S" },
+  ],
+};
 
