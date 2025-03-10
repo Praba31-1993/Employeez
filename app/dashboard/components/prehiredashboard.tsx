@@ -20,7 +20,6 @@ import { getEmployeeHiringDetailsByBunit } from "@/app/api/Listingapis";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
-
 type Row = {
   id: number | string;
   request_type: string;
@@ -93,11 +92,12 @@ function Prehiredashboard() {
 
   const useColors = Colors();
 
-
-  
   const fetchPrehireData = async () => {
     try {
-      const prehireData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "ph");
+      const prehireData = await getEmployeeHiringDetailsByBunit(
+        selectedBunites.bunit,
+        "ph"
+      );
 
       if (prehireData.status === 200) {
         if (prehireData?.data?.PreHireInfo) {
@@ -123,7 +123,10 @@ function Prehiredashboard() {
 
   const fetchhiringData = async () => {
     try {
-      const hiringData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "Active");
+      const hiringData = await getEmployeeHiringDetailsByBunit(
+        selectedBunites.bunit,
+        "Active"
+      );
 
       if (hiringData.status === 200) {
         if (hiringData?.data?.EmpInfo) {
@@ -149,7 +152,10 @@ function Prehiredashboard() {
 
   const fetchOnboardingData = async () => {
     try {
-      const onboardingData = await getEmployeeHiringDetailsByBunit(selectedBunites.bunit, "to");
+      const onboardingData = await getEmployeeHiringDetailsByBunit(
+        selectedBunites.bunit,
+        "to"
+      );
 
       if (onboardingData.status === 200) {
         if (onboardingData?.data?.TempOnboardInfo) {
@@ -212,6 +218,13 @@ function Prehiredashboard() {
   }, []);
 
   useEffect(() => {
+    fetchPrehireData();
+    fetchhiringData();
+    fetchOnboardingData();
+    fetchSupplierOnboardingData();
+  }, [selectedBunites.bunit]);
+
+  useEffect(() => {
     if (selectedTableList === 1) {
       fetchPrehireData();
     } else if (selectedTableList === 2) {
@@ -221,7 +234,7 @@ function Prehiredashboard() {
     } else if (selectedTableList === 4) {
       fetchSupplierOnboardingData();
     }
-  }, [selectedTableList, selectedBunites.bunit]);
+  }, [selectedTableList]);
 
   console.log("hiringDeatils", hiringDetails);
 
