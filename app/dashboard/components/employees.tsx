@@ -98,6 +98,18 @@ function Employees({ employeelist, selectedListId }: any) {
                                     sx={{ color: item?.fill }}
                                 />
                             )}
+                             {item.id === 5 && (
+                                <InventoryOutlinedIcon
+                                    className="m-1"
+                                    sx={{ color: item?.fill }}
+                                />
+                            )}
+                             {item.id === 6 && (
+                                <InventoryOutlinedIcon
+                                    className="m-1"
+                                    sx={{ color: item?.fill }}
+                                />
+                            )}
                         </div>
                         <div>
                             <h5 className="heading2 ps-2 mb-0 ">{item?.value}</h5>
