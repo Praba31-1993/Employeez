@@ -34,8 +34,10 @@ export default function NavbarComponent() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
-    const selectedBunites = useSelector((state: RootState) => state.bussinessunit.bunit);
-  console.log("selectedBUnitres", selectedBunites);
+  const selectedBunites: any = useSelector(
+    (state: RootState) => state.bussinessunit.bunit
+  );
+  console.log("selectedBUnitres", selectedBunites.bunit);
 
   const dispatch = useDispatch();
 
@@ -106,10 +108,6 @@ export default function NavbarComponent() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setBunit({ bunit: event.target.value })); // Update Redux state
-    localStorage.setItem("bunit", event.target.value); // Persist value
-  };
 
   useEffect(() => {
     if (selectedBunit !== bunit) {
@@ -178,8 +176,8 @@ export default function NavbarComponent() {
         <select
           name=""
           id=""
-          onChange={handleChange}
-          value={selectedBunites}
+          onChange={(e) => setSelectedBunit(e.target.value)}
+          value={selectedBunit}
         >
           {getbussinessunit?.map((bunitlist: any, index: number) => (
             <option key={index} value={bunitlist?.bunitId}>
@@ -274,8 +272,8 @@ export default function NavbarComponent() {
                 style={{ background: "transparent" }}
                 name=""
                 id=""
-                onChange={handleChange}
-                value={selectedBunites}
+                onChange={(e) => setSelectedBunit(e.target.value)}
+                value={selectedBunit}
               >
                 {getbussinessunit?.map((bunitlist: any, index: number) => (
                   <option key={index} value={bunitlist?.bunitId}>
