@@ -28,10 +28,10 @@ function PrintExportColumnCustomize({ headers, rowList, hiddenDatas }: any) {
     return (
         <div>
             <div className="d-flex tools align-items-center gap-3">
-                <LocalPrintshopOutlinedIcon
+                {/* <LocalPrintshopOutlinedIcon
                     className="textheader cursorpointer"
                     onClick={() => handlePrint()}
-                />
+                /> */}
                 <div className="dropdown">
                     <a
                         className="dropdown-toggle"
@@ -59,7 +59,7 @@ function PrintExportColumnCustomize({ headers, rowList, hiddenDatas }: any) {
                         </li>
                     </ul>
                 </div>
-                <div className="dropdown">
+                {/* <div className="dropdown">
                     <a
                         className="dropdown-toggle"
                         href="#"
@@ -95,7 +95,7 @@ function PrintExportColumnCustomize({ headers, rowList, hiddenDatas }: any) {
                             );
                         })}
                     </ul>
-                </div>
+                </div> */}
             </div>
         </div>
     );

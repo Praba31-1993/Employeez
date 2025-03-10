@@ -46,6 +46,8 @@ function Workforce() {
   const [w2hapidata, setw2hapidata] = useState<any>();
   const [c2capidata, setc2capidata] = useState<any>();
   const [seventythirtyapidata, setseventythirtyapidata] = useState<any>();
+  const [originalDetails, setoriginalDetails] = useState<any[]>([]); // Store the original data
+
   const [eightytwentyapidata, seteightytwentyapidata] = useState<any>();
   const [independentcontractorapidata, setndependentcontractorapidata] =
     useState<any>();
@@ -60,23 +62,131 @@ function Workforce() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Search function
+  console.log("w2sap", w2sapidata);
+
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const query = event.target.value;
+  //   setSearch(query);
+
+  // };
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
     if (selectedTableList === 1) {
-      const res = SearchLogic(workforceReports, query);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "W2S")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
 
-      setWorkforceDetails(res);
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setw2sapidata(resw2s);
     } else if (selectedTableList === 2) {
-      const res = SearchLogic(w2sReports, query);
-      setW2SDetails(res);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "W2H")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setw2hapidata(resw2s);
     } else if (selectedTableList === 3) {
-      const res = SearchLogic(w2hReports, query);
-      setw2hDetails(res);
-    } else {
-      const res = SearchLogic(c2cReports, query);
-      setc2cDetails(res);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "C2C")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setc2capidata(resw2s);
+    } else if (selectedTableList === 4) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "80_20")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      seteightytwentyapidata(resw2s);
+    } else if (selectedTableList === 5) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "70_30")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setseventythirtyapidata(resw2s);
+    } else if (selectedTableList === 6) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "1099")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setndependentcontractorapidata(resw2s);
     }
   };
 
@@ -265,14 +375,14 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            w2sapidata?.filter(
-                              (list: any) => list?.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       w2sapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
                       {prehire?.firstName}
                     </td>
@@ -306,14 +416,14 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            w2hapidata?.filter(
-                              (list: any) => list?.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       w2hapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
                       {prehire?.firstName}
                     </td>
@@ -347,14 +457,14 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            c2capidata?.filter(
-                              (list: any) => list?.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       c2capidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
                       {prehire?.firstName}
                     </td>
@@ -388,14 +498,14 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            eightytwentyapidata?.filter(
-                              (list: any) => list?.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       eightytwentyapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
                       {prehire?.firstName}
                     </td>
@@ -429,14 +539,14 @@ function Workforce() {
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            seventythirtyapidata?.filter(
-                              (list: any) => list?.empId === prehire?.empId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       seventythirtyapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
                       {prehire?.firstName}
                     </td>
@@ -471,14 +581,14 @@ function Workforce() {
                     <tr key={index}>
                       <td
                         className="para cursorpointer textheader"
-                        onClick={() => {
-                          setWorkForcedetailpopup((prev) => !prev),
-                            setselectedEmployeeDetails(() =>
-                              independentcontractorapidata?.filter(
-                                (list: any) => list?.empId === prehire?.empId
-                              )
-                            );
-                        }}
+                        // onClick={() => {
+                        //   setWorkForcedetailpopup((prev) => !prev),
+                        //     setselectedEmployeeDetails(() =>
+                        //       independentcontractorapidata?.filter(
+                        //         (list: any) => list?.empId === prehire?.empId
+                        //       )
+                        //     );
+                        // }}
                       >
                         {prehire?.firstName}
                       </td>
