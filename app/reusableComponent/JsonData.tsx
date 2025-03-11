@@ -83439,3 +83439,124 @@ export const getWorkForceReportByBunit = {
   ],
 };
 
+export const menuItemForEmployee: IRoleGroup[] = [
+  {
+    id: "2",
+    role: "Basic",
+    roleItems: [
+      {
+        name: "Timesheet",
+        path: "/timesheet",
+        icon: timesheetWhite,
+        inactive: timesheetGrey,
+        checked: true,
+      },
+      {
+        name: "Expenses",
+        path: "/expenses",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+      {
+        name: "Time Off",
+        path: "/timeoff",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+      {
+        name: "Project status",
+        path: "/projectstatus",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+      {
+        name: "Employee list",
+        path: "/employeelist",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+      {
+        name: "Report",
+        path: "",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+        childItems: [
+          {
+            name: "Self",
+            path: "/report/self",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Approver",
+            path: "/report/approver",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Payroll",
+            path: "/report/payroll",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "HR",
+            path: "/report/hr",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Sales",
+            path: "/report/sales",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Utilization",
+            path: "/report/utilization",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Financial",
+            path: "/report/financial",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+          {
+            name: "Public accesss doc",
+            path: "/report/publicaccesssdoc",
+            icon: dashboardGrey,
+            inactive: dashboardGrey,
+            checked: true,
+          },
+        ],
+      },
+      {
+        name: "Employee document",
+        path: "/employeedocument",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+    ],
+  },
+  
+ 
+ 
+ 
+ 
+ 
+];

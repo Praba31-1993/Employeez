@@ -89,7 +89,7 @@ function EmployeeDashboard() {
                 <ListCard />
               </div>
             </div>
-            <div className="col-12 mb-3">
+            {/* <div className="col-12 mb-3">
               <div
                 className="dashboardcard  p-3 h-100  "
                 style={borderAndBoxShadowStyles}
@@ -100,15 +100,15 @@ function EmployeeDashboard() {
                   items={birthdayAnniversaryReport}
                 />
               </div>
-            </div>
-            <div className="col-12 mb-3">
+            </div> */}
+            {/* <div className="col-12 mb-3">
               <div
                 className="dashboardcard  p-3 h-100  "
                 style={borderAndBoxShadowStyles}
               >
                 <Workanniversary />
               </div>
-            </div>
+            </div> */}
 
             <div className="col-12 mb-3">
               <div

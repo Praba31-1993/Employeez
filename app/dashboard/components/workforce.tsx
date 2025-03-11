@@ -200,37 +200,49 @@ function Workforce() {
     {
       id: 1,
       hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModel,
-      value: w2sapidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2S"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 2,
       hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModel,
-      value: w2hapidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2H"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 3,
       hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModel,
-      value: c2capidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "C2C"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 4,
       hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModel,
-      value: eightytwentyapidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "80_20"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 5,
       hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModel,
-      value: seventythirtyapidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "70_30"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 6,
       hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModel,
-      value: independentcontractorapidata?.length,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "1099"
+      )?.length,
       fill: "#FFBA27",
     },
   ];
@@ -350,10 +362,12 @@ function Workforce() {
         </div>
       </div>
       <div className="col-4">
-        <Employees
-          employeelist={arrayList}
-          selectedListId={(data: any) => setTableList(data)}
-        />
+        <div className="" style={{ height: "300px", overflowY: "auto" }}>
+          <Employees
+            employeelist={arrayList}
+            selectedListId={(data: any) => setTableList(data)}
+          />
+        </div>
       </div>
       {/* Table Section */}
       <div className="col-8 px-0" style={{ overflowX: "auto" }}>
