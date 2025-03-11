@@ -57,8 +57,8 @@ function Prehiredashboard() {
   const selectedBunites: any = useSelector(
     (state: RootState) => state.bussinessunit.bunit
   );
-  // console.log("selectedBUnitres", selectedBunites.bunit);
-  // console.log("bunit990", bunit);
+  console.log("selectedBUnitres", selectedBunites.bunit);
+  console.log("bunit990", bunit);
 
   const [loading, setLoading] = useState(true);
 
@@ -71,43 +71,43 @@ useEffect(() => {
 }, [prehireDetails]); // Runs when prehireDetails updates
 
 const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const query = event.target.value;
-  setSearch(query);
-  console.log("Original Details:", originalDetails);
-
-  let res: any[] = [];
-
-  if (selectedTableList === 1) {
-    // Filter the first 5 items from prehireDetails
-    const resizedData = originalDetails.slice(0, 5);
-    console.log("Resized Data (first 5):", resizedData);
-    res = SearchLogic(resizedData, query);
-    setPrehiredetails(res);
-  } else if (selectedTableList === 2) {
-    if (hiringDetails.length > 0 && originalDetails.length === 0) {
-      // Only set originalDetails once for hiringDetails
-      setoriginalDetails([...hiringDetails]);
+    const query = event.target.value;
+    setSearch(query);
+    console.log("Original Details:", originalDetails);
+   
+    let res: any[] = [];
+   
+    if (selectedTableList === 1) {
+      // Filter the first 5 items from prehireDetails
+      const resizedData = originalDetails.slice(0, 5);
+      console.log("Resized Data (first 5):", resizedData);
+      res = SearchLogic(resizedData, query);
+      setPrehiredetails(res);
+    } else if (selectedTableList === 2) {
+      if (hiringDetails.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for hiringDetails
+        setoriginalDetails([...hiringDetails]);
+      }
+      res = SearchLogic(originalDetails, query);
+      sethiringdetails(res);
+    } else if (selectedTableList === 3) {
+      if (onboardingDetails.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for onboardingDetails
+        setoriginalDetails([...onboardingDetails]);
+      }
+      res = SearchLogic(originalDetails, query);
+      setOnboardingdetails(res);
+    } else {
+      if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
+        // Only set originalDetails once for supplieronboardingReport
+        setoriginalDetails([...supplieronboardingReport]);
+      }
+      res = SearchLogic(originalDetails, query);
+      setsupplierOnboardingdetails(res);
     }
-    res = SearchLogic(originalDetails, query);
-    sethiringdetails(res);
-  } else if (selectedTableList === 3) {
-    if (onboardingDetails.length > 0 && originalDetails.length === 0) {
-      // Only set originalDetails once for onboardingDetails
-      setoriginalDetails([...onboardingDetails]);
-    }
-    res = SearchLogic(originalDetails, query);
-    setOnboardingdetails(res);
-  } else {
-    if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
-      // Only set originalDetails once for supplieronboardingReport
-      setoriginalDetails([...supplieronboardingReport]);
-    }
-    res = SearchLogic(originalDetails, query);
-    setsupplierOnboardingdetails(res);
-  }
-
-  console.log("Filtered Results:", res);
-};
+   
+    console.log("Filtered Results:", res);
+  };
 
 
   useEffect(() => {
@@ -229,26 +229,16 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
-  useEffect(() => {
-    fetchPrehireData();
-    fetchhiringData();
-    fetchOnboardingData();
-    fetchSupplierOnboardingData();
-  }, []);
-
-  useEffect(() => {
-    if (selectedTableList === 1) {
+   useEffect(() => {
+    if (selectedBunites?.bunit !== undefined) {
       fetchPrehireData();
-    } else if (selectedTableList === 2) {
       fetchhiringData();
-    } else if (selectedTableList === 3) {
       fetchOnboardingData();
-    } else if (selectedTableList === 4) {
       fetchSupplierOnboardingData();
     }
-  }, [selectedTableList, selectedBunites.bunit]);
+  }, [selectedBunites?.bunit]);
 
-  
+  console.log("hiringDeatils", hiringDetails);
 
   const arrayList = [
     {
