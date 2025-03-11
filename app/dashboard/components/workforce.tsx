@@ -46,6 +46,8 @@ function Workforce() {
   const [w2hapidata, setw2hapidata] = useState<any>();
   const [c2capidata, setc2capidata] = useState<any>();
   const [seventythirtyapidata, setseventythirtyapidata] = useState<any>();
+  const [originalDetails, setoriginalDetails] = useState<any[]>([]); // Store the original data
+
   const [eightytwentyapidata, seteightytwentyapidata] = useState<any>();
   const [independentcontractorapidata, setndependentcontractorapidata] =
     useState<any>();
@@ -60,23 +62,131 @@ function Workforce() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Search function
+  console.log("w2sap", w2sapidata);
+
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const query = event.target.value;
+  //   setSearch(query);
+
+  // };
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
     if (selectedTableList === 1) {
-      const res = SearchLogic(workforceReports, query);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "W2S")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
 
-      setWorkforceDetails(res);
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setw2sapidata(resw2s);
     } else if (selectedTableList === 2) {
-      const res = SearchLogic(w2sReports, query);
-      setW2SDetails(res);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "W2H")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setw2hapidata(resw2s);
     } else if (selectedTableList === 3) {
-      const res = SearchLogic(w2hReports, query);
-      setw2hDetails(res);
-    } else {
-      const res = SearchLogic(c2cReports, query);
-      setc2cDetails(res);
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "C2C")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setc2capidata(resw2s);
+    } else if (selectedTableList === 4) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "80_20")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      seteightytwentyapidata(resw2s);
+    } else if (selectedTableList === 5) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "70_30")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setseventythirtyapidata(resw2s);
+    } else if (selectedTableList === 6) {
+      const filteredResults = employeeList?.empListInfo
+        ?.filter((emp: any) => emp.hiringModelCode === "1099")
+        .filter((emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+        );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults.slice(0, 5)
+          : w2sapidata.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setndependentcontractorapidata(resw2s);
     }
   };
 
@@ -89,38 +199,50 @@ function Workforce() {
   const arrayList = [
     {
       id: 1,
-      hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModelCode,
-      value: w2sapidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[5]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2S"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 2,
-      hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModelCode,
-      value: w2hapidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[4]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "W2H"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 3,
-      hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModelCode,
-      value: c2capidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[3]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "C2C"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 4,
-      hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModelCode,
-      value: eightytwentyapidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[2]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "80_20"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 5,
-      hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModelCode,
-      value: seventythirtyapidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[1]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "70_30"
+      )?.length,
       fill: "#FFBA27",
     },
     {
       id: 6,
-      hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModelCode,
-      value: independentcontractorapidata?.length,
+      hractionlist: employeeList?.hiringModelInfo?.[0]?.hiringModel,
+      value: employeeList?.empListInfo?.filter(
+        (emp: any) => emp.hiringModelCode === "1099"
+      )?.length,
       fill: "#FFBA27",
     },
   ];
@@ -161,7 +283,7 @@ function Workforce() {
 
     setndependentcontractorapidata(
       employeeList?.empListInfo?.filter(
-        (emp: any) => emp.hiringModelCode === "Independent Contractor"
+        (emp: any) => emp.hiringModelCode === "1099"
       )
     );
   }, [employeeList]);
@@ -190,6 +312,8 @@ function Workforce() {
     }
   }, [selectedBunites?.bunit]);
 
+  console.log("inddfs", independentcontractorapidata);
+
   return (
     <div className="row">
       {open && (
@@ -198,6 +322,12 @@ function Workforce() {
           close={() => setOpen(false)}
           selectedTableList={selectedTableList}
           selectedEmployee={(data: any) => setselectedEmployeeDetails(data)}
+          w2semployeeeList={w2sapidata}
+          w2hemployeeeList={w2hapidata}
+          c2cemployeeeList={c2capidata}
+          seventythirtyemployeeeList={seventythirtyapidata}
+          eightytwentyemployeeList={eightytwentyapidata}
+          independentcontractoremployeeList={independentcontractorapidata}
         />
       )}
       {workforcedetailpopup && (
@@ -232,10 +362,12 @@ function Workforce() {
         </div>
       </div>
       <div className="col-4">
-        <Employees
-          employeelist={arrayList}
-          selectedListId={(data: any) => setTableList(data)}
-        />
+        <div className="" style={{ height: "300px", overflowY: "auto" }}>
+          <Employees
+            employeelist={arrayList}
+            selectedListId={(data: any) => setTableList(data)}
+          />
+        </div>
       </div>
       {/* Table Section */}
       <div className="col-8 px-0" style={{ overflowX: "auto" }}>
@@ -252,25 +384,26 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {workforceDetails?.map((prehire: any, index: number) =>
+              {w2sapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            workforceDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       w2sapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -292,25 +425,26 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {w2SDetails?.map((prehire: any, index: number) =>
+              {w2hapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            w2SDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       w2hapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -332,25 +466,26 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {w2HDetails?.map((prehire: any, index: number) =>
+              {c2capidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            w2HDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       c2capidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
@@ -372,28 +507,112 @@ function Workforce() {
               </tr>
             </thead>
             <tbody className="dashboardcard">
-              {c2cDetails?.map((prehire: any, index: number) =>
+              {eightytwentyapidata?.map((prehire: any, index: number) =>
                 index <= 4 ? (
                   <tr key={index}>
                     <td
                       className="para cursorpointer textheader"
-                      onClick={() => {
-                        setWorkForcedetailpopup((prev) => !prev),
-                          setselectedEmployeeDetails(() =>
-                            c2cDetails?.filter(
-                              (list: any) =>
-                                list?.employeeId === prehire?.employeeId
-                            )
-                          );
-                      }}
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       eightytwentyapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
                     >
-                      {prehire?.employeename}
+                      {prehire?.firstName}
                     </td>
                     <td className="para cursorpointer textheader">
-                      {prehire?.department}
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
                     </td>
                   </tr>
                 ) : null
+              )}
+            </tbody>
+          </table>
+        )}
+
+        {selectedTableList === 5 && (
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {seventythirtyapidata?.map((prehire: any, index: number) =>
+                index <= 4 ? (
+                  <tr key={index}>
+                    <td
+                      className="para cursorpointer textheader"
+                      // onClick={() => {
+                      //   setWorkForcedetailpopup((prev) => !prev),
+                      //     setselectedEmployeeDetails(() =>
+                      //       seventythirtyapidata?.filter(
+                      //         (list: any) => list?.empId === prehire?.empId
+                      //       )
+                      //     );
+                      // }}
+                    >
+                      {prehire?.firstName}
+                    </td>
+                    <td className="para cursorpointer textheader">
+                      {prehire?.department !== undefined
+                        ? prehire?.department
+                        : "--"}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        )}
+
+        {selectedTableList === 6 && (
+          <table id="printSection" className="table mb-0 tabletype">
+            <thead style={{ backgroundColor: "#F6F7FB" }}>
+              <tr>
+                <th scope="col" className="position-relative textheader para">
+                  Employee name
+                </th>
+                <th scope="col" className="position-relative textheader para">
+                  Department
+                </th>
+              </tr>
+            </thead>
+            <tbody className="dashboardcard">
+              {independentcontractorapidata?.map(
+                (prehire: any, index: number) =>
+                  index <= 4 ? (
+                    <tr key={index}>
+                      <td
+                        className="para cursorpointer textheader"
+                        // onClick={() => {
+                        //   setWorkForcedetailpopup((prev) => !prev),
+                        //     setselectedEmployeeDetails(() =>
+                        //       independentcontractorapidata?.filter(
+                        //         (list: any) => list?.empId === prehire?.empId
+                        //       )
+                        //     );
+                        // }}
+                      >
+                        {prehire?.firstName}
+                      </td>
+                      <td className="para cursorpointer textheader">
+                        {prehire?.department !== undefined
+                          ? prehire?.department
+                          : "--"}
+                      </td>
+                    </tr>
+                  ) : null
               )}
             </tbody>
           </table>

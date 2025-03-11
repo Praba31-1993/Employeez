@@ -55,7 +55,7 @@ function ToDoList() {
         : // Render actual content after loading
           [0, 1, 2].map((value, index) => (
             <div key={index}>
-              <div className="d-flex align-items-start mt-3 p-1 todoList">
+              {/* <div className="d-flex align-items-start mt-3 p-1 todoList">
                 <ImageComponent
                   width={40}
                   height={40}
@@ -83,7 +83,7 @@ function ToDoList() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           ))}
     </div>

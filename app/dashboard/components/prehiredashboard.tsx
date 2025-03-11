@@ -37,12 +37,27 @@ function Prehiredashboard() {
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([]);
   const [selectedTableList, setTableList] = useState<any>(1);
   const [prehireDetails, setPrehiredetails] = useState<any[]>([]);
+  const [filteringprehireDetails, setFilteringPrehiredetails] = useState<any[]>(
+    []
+  );
+
   const [originalDetails, setoriginalDetails] = useState<any[]>([]); // Store the original data
   const [selectedEmployeeDetails, setselectedEmployeeDetails] = useState<any>();
   const [hiringDetails, sethiringdetails] = useState<any>();
+  const [filteringhiringDetails, setfilteringhiringdetails] = useState<any>();
+
   const [onboardingDetails, setOnboardingdetails] = useState<any>();
+  const [filteringonboardingDetails, setfilteringOnboardingdetails] =
+    useState<any>();
+
   const [supplierboardingDetails, setsupplierOnboardingdetails] =
     useState<any>();
+
+  const [
+    filteringsupplierboardingDetails,
+    setfilteringsupplierOnboardingdetails,
+  ] = useState<any>();
+
   const [isSupplierOnboardedclicked, setIsSupplierOnboardedClicked] =
     useState(false);
   const [lengthofprehirereport, setlengthofprehirereport] = useState(null);
@@ -57,56 +72,136 @@ function Prehiredashboard() {
   const selectedBunites: any = useSelector(
     (state: RootState) => state.bussinessunit.bunit
   );
-  console.log("selectedBUnitres", selectedBunites.bunit);
-  console.log("bunit990", bunit);
 
-  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Store original data only once (when it's empty)
+    if (originalDetails.length === 0 && prehireDetails.length > 0) {
+      setoriginalDetails(prehireDetails);
+    }
+  }, [prehireDetails]); // Runs when prehireDetails updates
 
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const query = event.target.value;
 
-useEffect(() => {
-  // Store original data only once (when it's empty)
-  if (originalDetails.length === 0 && prehireDetails.length > 0) {
-    setoriginalDetails(prehireDetails);
-  }
-}, [prehireDetails]); // Runs when prehireDetails updates
+  //   setSearch(query);
 
-const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   let res: any[] = [];
+
+  //   if (selectedTableList === 1) {
+  //     // Filter the first 5 items from prehireDetails
+
+  //     const resizedData = originalDetails?.slice(0, 5);
+
+  //     res = SearchLogic(resizedData, query);
+
+  //     setPrehiredetails(res);
+  //   } else if (selectedTableList === 2) {
+  //     if (hiringDetails.length > 0 && originalDetails.length === 0) {
+  //       // Only set originalDetails once for hiringDetails
+
+  //       setoriginalDetails([...hiringDetails]);
+  //     }
+
+  //     res = SearchLogic(originalDetails, query);
+
+  //     sethiringdetails(res);
+  //   } else if (selectedTableList === 3) {
+  //     if (onboardingDetails.length > 0 && originalDetails.length === 0) {
+  //       // Only set originalDetails once for onboardingDetails
+
+  //       setoriginalDetails([...onboardingDetails]);
+  //     }
+
+  //     res = SearchLogic(originalDetails, query);
+
+  //     setOnboardingdetails(res);
+  //   } else {
+  //     if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
+  //       // Only set originalDetails once for supplieronboardingReport
+
+  //       setoriginalDetails([...supplieronboardingReport]);
+  //     }
+
+  //     res = SearchLogic(originalDetails, query);
+
+  //     setsupplierOnboardingdetails(res);
+  //   }
+
+  // };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearch(query);
-    console.log("Original Details:", originalDetails);
-   
-    let res: any[] = [];
-   
     if (selectedTableList === 1) {
-      // Filter the first 5 items from prehireDetails
-      const resizedData = originalDetails.slice(0, 5);
-      console.log("Resized Data (first 5):", resizedData);
-      res = SearchLogic(resizedData, query);
-      setPrehiredetails(res);
+      const filteredResults = filteringprehireDetails.filter((emp: any) =>
+        Object.values(emp).some(
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults?.slice(0, 5)
+          : prehireDetails?.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setPrehiredetails(resw2s);
     } else if (selectedTableList === 2) {
-      if (hiringDetails.length > 0 && originalDetails.length === 0) {
-        // Only set originalDetails once for hiringDetails
-        setoriginalDetails([...hiringDetails]);
-      }
-      res = SearchLogic(originalDetails, query);
-      sethiringdetails(res);
-    } else if (selectedTableList === 3) {
-      if (onboardingDetails.length > 0 && originalDetails.length === 0) {
-        // Only set originalDetails once for onboardingDetails
-        setoriginalDetails([...onboardingDetails]);
-      }
-      res = SearchLogic(originalDetails, query);
-      setOnboardingdetails(res);
-    } else {
-      if (supplieronboardingReport.length > 0 && originalDetails.length === 0) {
-        // Only set originalDetails once for supplieronboardingReport
-        setoriginalDetails([...supplieronboardingReport]);
-      }
-      res = SearchLogic(originalDetails, query);
-      setsupplierOnboardingdetails(res);
+      const filteredResults = filteringhiringDetails.filter((emp: any) =>
+        Object.values(emp).some(
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults?.slice(0, 5)
+          : hiringDetails?.slice(0, 5);
+
+      sethiringdetails(resw2s);
     }
-   
-    console.log("Filtered Results:", res);
+
+    else if (selectedTableList === 3) {
+      const filteredResults = filteringonboardingDetails.filter((emp: any) =>
+        Object.values(emp).some(
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults?.slice(0, 5)
+          : onboardingDetails?.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setOnboardingdetails(resw2s);
+    } else if (selectedTableList === 4) {
+      const filteredResults = filteringsupplierboardingDetails.filter(
+        (emp: any) =>
+          Object.values(emp).some(
+            (value) =>
+              typeof value === "string" &&
+              value.toLowerCase().includes(query.toLowerCase())
+          )
+      );
+
+      const resw2s =
+        filteredResults.length > 0
+          ? filteredResults?.slice(0, 5)
+          : supplierboardingDetails?.slice(0, 5);
+
+      console.log("resw2s", resw2s);
+
+      setsupplierOnboardingdetails(resw2s);
+    }
   };
 
 
@@ -127,6 +222,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (prehireData.status === 200) {
         if (prehireData?.data?.PreHireInfo) {
           setPrehiredetails(prehireData?.data?.PreHireInfo);
+          setFilteringPrehiredetails(prehireData?.data?.PreHireInfo);
           setlengthofprehirereport(prehireData?.data?.PreHireInfo?.length);
         } else {
           console.warn("PreHireInfo key not found in response data.");
@@ -153,6 +249,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (hiringData.status === 200) {
         if (hiringData?.data?.EmpInfo) {
           sethiringdetails(hiringData?.data?.EmpInfo);
+          setfilteringhiringdetails(hiringData?.data?.EmpInfo);
           setlengthofhiringreport(hiringData?.data?.EmpInfo?.length);
         } else {
           console.warn("PreHireInfo key not found in response data.");
@@ -179,6 +276,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (onboardingData.status === 200) {
         if (onboardingData?.data?.TempOnboardInfo) {
           setOnboardingdetails(onboardingData?.data?.TempOnboardInfo);
+          setfilteringOnboardingdetails(onboardingData?.data?.TempOnboardInfo);
           setlengthofonboardingreport(
             onboardingData?.data?.TempOnboardInfo?.length
           );
@@ -208,6 +306,9 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (supplieronboardingData.status === 200) {
         if (supplieronboardingData?.data?.SuppInfo) {
           setsupplierOnboardingdetails(supplieronboardingData?.data?.SuppInfo);
+          setfilteringsupplierOnboardingdetails(
+            supplieronboardingData?.data?.SuppInfo
+          );
           setlengthofSupplierOnboardingreport(
             supplieronboardingData?.data?.SuppInfo?.length
           );
@@ -503,3 +604,7 @@ const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 }
 
 export default Prehiredashboard;
+function setLoading(arg0: boolean): void {
+  throw new Error("Function not implemented.");
+}
+
