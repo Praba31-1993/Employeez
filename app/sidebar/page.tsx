@@ -14,7 +14,6 @@ import { TextStyles } from "../reusableComponent/styles";
 import ToggleSwitch from "../reusableComponent/toggleSwitch";
 import logo from "@/public/assets/img/employeez.png";
 import logo2 from "@/public/assets/img/Ez.svg";
-import { dashboard } from "../reusableComponent/JsonData";
 import DraggableComponent from "../reusableComponent/draggable";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -27,7 +26,6 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useRouter } from "next/navigation";
 import { Timeloader } from "../reusableComponent/loader/timeloader";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
@@ -53,354 +51,30 @@ import timesheetGrey from "@/public/assets/img/timesheet_grey.svg";
 import timesheetWhite from "@/public/assets/img/timesheet_white.svg";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Colors } from "../reusableComponent/styles";
+import {
+  menuForSuperAdmin,
+  menuItemForEmployee,
+} from "../reusableComponent/sidebarJson";
+
 interface SidebarProps {
   children: ReactNode;
 }
-interface IRoleGroup {
-  id: string;
-  role: string;
-  roleItems: ISidebarItem[];
-}
-interface ISidebarItem {
-  name: string;
-  path: string;
-  icon: string;
-  inactive: string;
-  checked: boolean;
-  childItems?: ISidebarItem[]; // Optional childItems array
-}
 
-export const menuItem: IRoleGroup[] = [
-  {
-    id: "2",
-    role: "Basic",
-    roleItems: [
-      {
-        name: "Timesheet",
-        path: "/timesheet",
-        icon: timesheetWhite,
-        inactive: timesheetGrey,
-        checked: true,
-      },
-      {
-        name: "Expenses",
-        path: "/expenses",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Time Off",
-        path: "/timeoff",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Project status",
-        path: "/projectstatus",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Employee list",
-        path: "/employeelist",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Report",
-        path: "",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-        childItems: [
-          {
-            name: "Self",
-            path: "/report/self",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Approver",
-            path: "/report/approver",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Payroll",
-            path: "/report/payroll",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "HR",
-            path: "/report/hr",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Sales",
-            path: "/report/sales",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Utilization",
-            path: "/report/utilization",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Financial",
-            path: "/report/financial",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-          {
-            name: "Public accesss doc",
-            path: "/report/publicaccesssdoc",
-            icon: dashboardGrey,
-            inactive: dashboardGrey,
-            checked: true,
-          },
-        ],
-      },
-      {
-        name: "Employee document",
-        path: "/employeedocument",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "17",
-    role: "Delegation",
-    roleItems: [
-      {
-        name: "Timesheet",
-        path: "/timesheet",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Expenses",
-        path: "/expenses",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "19",
-    role: "Manager",
-    roleItems: [
-      {
-        name: "Approval System",
-        path: "/approval system",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Resource allocation",
-        path: "/resource allocation",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Project status approval",
-        path: "/projectstatusapproval",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Disciplinary action",
-        path: "/disciplinaryaction",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "23",
-    role: "Human Resources",
-    roleItems: [
-      {
-        name: "Employee Prehire",
-        path: "/employeeprehire",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Employee create/Edit",
-        path: "/employeecreate/Edit",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "I-9/E - verify",
-        path: "/I-9/E-verify",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Employee doc resources",
-        path: "/employeedocresources",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "27",
-    role: "Immigration",
-    roleItems: [
-      {
-        name: "Immigration docs",
-        path: "/immigrationdocs",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "28",
-    role: "Sales",
-    roleItems: [
-      {
-        name: "Work order",
-        path: "/workorder",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Job posting",
-        path: "/jobposting",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "30",
-    role: "Sub-Contract onboarding",
-    roleItems: [
-      {
-        name: "Onboarding dashboard",
-        path: "/onboardingdashboard",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Onboarding request",
-        path: "/onboardingrequest",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "32",
 
-    role: "Accounting",
-    roleItems: [
-      {
-        name: "Receivable",
-        path: "/receivable ",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "Payable",
-        path: "/payable",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "34",
+const getMenuItems = (role: string) => {
+  return role === "SA"
+    ? menuForSuperAdmin
+    : role === "E"
+    ? menuItemForEmployee
+    : [];
+};
 
-    role: "Payroll",
-    roleItems: [
-      {
-        name: "Extract payroll",
-        path: "/extractpayroll ",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
-        name: "India payroll",
-        path: "/indiapayroll",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "36",
-
-    role: "Admin",
-    roleItems: [
-      {
-        name: "Settings",
-        path: "/setting",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-  {
-    id: "37",
-    role: "Subscription",
-    roleItems: [
-      {
-        name: "Employee subscription",
-        path: "/employeesubscription",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-    ],
-  },
-];
 const Sidebar = ({ children }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hideToggle, sethideToggle] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
-  const [menuLists, setMenuLists] = useState(menuItem);
+
   const [visibleMenus, setVisibleMenus] = useState(false);
   const pathname = usePathname();
   const [expanded, setExpanded] = React.useState<string | false>(false);
@@ -412,13 +86,14 @@ const Sidebar = ({ children }: SidebarProps) => {
     (state: RootState) => state.meetingmode.background
   );
 
-  const role = useSelector(
-    (state: RootState) => state.role.role
-  );
+  const role = useSelector((state: RootState) => state.role.role);
+
+  const menuItems = getMenuItems(role);
+  const [menuLists, setMenuLists] = useState(menuItems);
   const router = useRouter();
 
-  console.log('Roles',role);
-  
+  console.log("Roles", role);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     setAuth(token);
@@ -491,7 +166,7 @@ const Sidebar = ({ children }: SidebarProps) => {
     itemIndex: number,
     checkeddata: boolean
   ) => {
-    const newMenuItems = [...menuItem];
+    const newMenuItems = [...menuItems];
     const roleItem = newMenuItems[roleIndex]?.roleItems[itemIndex];
 
     if (roleItem) {
@@ -501,9 +176,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const ApprovedToggle = () => {
-    const newList = menuLists?.map((list) => ({
+    const newList = menuLists?.map((list:any) => ({
       ...list,
-      roleItems: list.roleItems.filter((item) => item.checked),
+      roleItems: list.roleItems.filter((item:any) => item.checked),
     }));
 
     setMenuLists(newList);
@@ -512,9 +187,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const RejectedToggle = () => {
-    const newList = menuLists?.map((list) => ({
+    const newList = menuLists?.map((list:any) => ({
       ...list,
-      roleItems: list.roleItems?.map((item) => ({
+      roleItems: list.roleItems?.map((item:any) => ({
         ...item,
         checked: true,
       })),
@@ -526,9 +201,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const RefreshToggle = () => {
-    const newList = menuItem?.map((list) => ({
+    const newList = menuItems?.map((list:any) => ({
       ...list,
-      roleItems: list.roleItems?.map((item) => ({
+      roleItems: list.roleItems?.map((item:any) => ({
         ...item,
         checked: true,
       })),
@@ -666,7 +341,7 @@ const Sidebar = ({ children }: SidebarProps) => {
               </div>
             </Link>
             {/* end */}
-            {menuLists?.map((roleGroup, index) => (
+            {menuLists?.map((roleGroup:any, index:any) => (
               <div key={index}>
                 <Accordion
                   sx={{
@@ -752,7 +427,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                   </AccordionSummary>
 
                   <AccordionDetails>
-                    {roleGroup.roleItems?.map((item, itemIndex) => (
+                    {roleGroup.roleItems?.map((item:any, itemIndex:any) => (
                       <div key={itemIndex}>
                         <div className="d-flex justify-content-between align-items-center">
                           <Link
@@ -835,7 +510,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     textTransform: TextStyles.textTransform,
                                   }}
                                 >
-                                  {item.childItems?.map((child, childIndex) => (
+                                  {item.childItems?.map((child:any, childIndex:any) => (
                                     <div
                                       style={{
                                         display: "flex",
@@ -892,7 +567,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         : "none",
                                   }}
                                 >
-                                  {item.childItems?.map((child, childIndex) => (
+                                  {item.childItems?.map((child:any, childIndex:any) => (
                                     <div
                                       className="menuTextStyle "
                                       key={childIndex}
