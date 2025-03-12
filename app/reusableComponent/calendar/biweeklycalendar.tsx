@@ -193,7 +193,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({
 
   return (
     <div className=" pb-4 pe-3">
-      <h4 className="textheader heading mt-2">Biweekly Timesheet</h4>
+      <h4 className="textheader heading mt-2">Bi-Weekly Timesheet</h4>
       <div className="flex">
         <FormControl sx={{ width: "fit-content" }}>
           <Select

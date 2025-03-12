@@ -188,7 +188,7 @@ const SemiMonthlyCalendar: React.FC<SemiMonthlyCalendarProps> = ({
 
   return (
     <div className="pb-4 pe-3">
-      <h4 className="textheader heading mt-2">Semimonthly Timesheet</h4>
+      <h4 className="textheader heading mt-2">Semi-Monthly Timesheet</h4>
       <div className="flex">
         <FormControl sx={{ width: "fit-content" }}>
           <Select
