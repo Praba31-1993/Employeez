@@ -417,14 +417,17 @@ function Prehiredashboard() {
                     </div>
                 </div>
             </div>
-            <div className="col-4">
+            <div className="col-md-4">
+                <div className="d-flex employreports align-items-center flex-lg-column gap-3 gap-md-0" style={{ overflowY: "auto" }}>
                 <Hrdatas
                     hrlist={arrayList}
                     selectedListId={(data: any) => setTableList(data)}
                 />
+                </div>
+                
             </div>
             {/* Table Section */}
-            <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+            <div className="col-md-8 px-0" style={{ overflowX: "auto" }}>
                 {selectedTableList === 1 && (
                     <table id="printSection" className="table mb-0 tabletype">
                         <thead style={{ backgroundColor: "#F6F7FB" }}>

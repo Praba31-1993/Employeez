@@ -361,8 +361,8 @@ function Workforce() {
           </div>
         </div>
       </div>
-      <div className="col-4">
-        <div className="" style={{ height: "300px", overflowY: "auto" }}>
+      <div className="col-md-4">
+        <div className="d-flex employreports align-items-center flex-lg-column gap-3 gap-md-1" style={{ overflowY: "auto" }}>
           <Employees
             employeelist={arrayList}
             selectedListId={(data: any) => setTableList(data)}
@@ -370,7 +370,7 @@ function Workforce() {
         </div>
       </div>
       {/* Table Section */}
-      <div className="col-8 px-0" style={{ overflowX: "auto" }}>
+      <div className="col-md-8 px-0" style={{ overflowX: "auto" }}>
         {selectedTableList === 1 && (
           <table id="printSection" className="table mb-0 tabletype">
             <thead style={{ backgroundColor: "#F6F7FB" }}>

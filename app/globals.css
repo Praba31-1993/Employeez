@@ -173,6 +173,10 @@ body {
 .cursorpointer {
   cursor: pointer;
 }
+.employreports::-webkit-scrollbar {
+  width: 0px;
+  height: 5px;
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -321,10 +325,14 @@ input {
 .timesheetdetails {
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
+.employreports{
+  height: 300px;
+}
 @media (max-width: "600px") {
   .theme {
     width: 50vw !important;
   }
+  
 }
 
 /* Login Screens styles */
@@ -396,7 +404,9 @@ input {
   .logogif {
     display: none !important;
   }
-
+  .employreports{
+    height:  fit-content !important;
+  }
   .login {
     background: #ffffff;
   }
