@@ -335,7 +335,8 @@ export const menuItemForEmployee: any = [
   {
     id: "2",
     role: "Basic",
-    roleItems: [
+    roleItems:
+     [
       {
         name: "Timesheet",
         path: "/timesheet",
@@ -365,19 +366,20 @@ export const menuItemForEmployee: any = [
         checked: true,
       },
       {
-        name: "Employee list",
-        path: "/employeelist",
-        icon: dashboardWhite,
-        inactive: dashboardGrey,
-        checked: true,
-      },
-      {
         name: "Employee document",
         path: "/employeedocument",
         icon: dashboardWhite,
         inactive: dashboardGrey,
         checked: true,
       },
+      {
+        name: "Employee list",
+        path: "/employeelist",
+        icon: dashboardWhite,
+        inactive: dashboardGrey,
+        checked: true,
+      },
+     
       {
         name: "Report",
         path: "",

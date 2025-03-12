@@ -112,25 +112,12 @@ export default function Timesheetcalendar({
               icon={faFileCircleExclamation}
               style={{ color: useColors.themeRed }}
             />
-            <h2 className="para ms-2 d-sm-block d-none mb-0 shade">
+            <h2 className="para ms-2 d-sm-block d-none mb-0 shade fw-bold">
               Annual leave summary
             </h2>
           </div>
           {/* Annula leave summary */}
-          <div
-            onClick={() => setOpen((prev) => !prev)}
-            className="ms-sm-4 px-3 py-1"
-          >
-            <button
-              className="outlinebtn ms-sm-4 px-3 py-1"
-              style={{
-                color: useColors.themeRed,
-                border: `1px solid ${useColors.themeRed}`,
-              }}
-            >
-              Upload <FontAwesomeIcon className="ms-2" icon={faCirclePlus} />
-            </button>
-          </div>
+         
         </div>
       </div>
       <div className="row mt-2">
@@ -170,7 +157,6 @@ export default function Timesheetcalendar({
           ))}
         </div>
         <div className="col-12 d-flex  justify-content-end mt-4">
-          <div className="ms-3"></div>
           <div className="ms-3">
             <Outlinebutton
               color={useColors.themeRed}
@@ -191,6 +177,22 @@ export default function Timesheetcalendar({
               disabled={true}
               variant={"outlined"}
             />
+          </div>
+          <div className="">
+            <div
+              onClick={() => setOpen((prev) => !prev)}
+              className="ms-sm-4  y-1"
+            >
+              <button
+                className="outlinebtn ms-sm-4 px-3 py-1"
+                style={{
+                  color: useColors.themeRed,
+                  border: `1px solid ${useColors.themeRed}`,
+                }}
+              >
+                Upload <FontAwesomeIcon className="ms-2" icon={faCirclePlus} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
