@@ -188,6 +188,7 @@ const WeeklyCalendar: React.FC<Props> = ({
 
   return (
     <div className="pb-4 pe-3">
+      <h4 className="textheader heading mt-2">Weekly Timesheet</h4>
       <div className="flex">
         {/* Week Range Dropdown */}
         <FormControl sx={{ width: "fit-content" }}>
