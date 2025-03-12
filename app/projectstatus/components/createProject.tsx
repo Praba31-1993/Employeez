@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import "../projectstatus.css";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
 import { Colors } from "@/app/reusableComponent/styles";
+import TextField from "@mui/material/TextField";
 
 function CreateProject() {
   const useColors = Colors();
@@ -83,23 +84,33 @@ function CreateProject() {
           <div className="dashboardcard p-3 rounded">
             <p className="textheader para my-2">Add Comments</p>
 
-            <textarea
-              className="form-control mt-3 w-100"
-              id="exampleFormControlTextarea1"
-              rows={5}
-            ></textarea>
-
-            <textarea
-              className="form-control mt-3 w-100"
-              id="exampleFormControlTextarea1"
-              rows={5}
-            ></textarea>
-
-            <textarea
-              className="form-control mt-3 w-100"
-              id="exampleFormControlTextarea1"
-              rows={5}
-            ></textarea>
+            <div className="mt-3 p-0">
+              <TextField
+                id="outlined-multiline-static"
+                label="*Key Accomplish Last Period"
+                multiline
+                rows={4}
+                fullWidth
+              />
+            </div>
+            <div className="mt-3 p-0">
+              <TextField
+                id="outlined-multiline-static"
+                label="*Upcoming Task:"
+                multiline
+                rows={4}
+                fullWidth
+              />
+            </div>
+            <div className="mt-3 p-0">
+              <TextField
+                id="outlined-multiline-static"
+                label="Issues"
+                multiline
+                rows={4}
+                fullWidth
+              />
+            </div>
           </div>
         </div>
 

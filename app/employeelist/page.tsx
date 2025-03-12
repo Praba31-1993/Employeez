@@ -33,6 +33,7 @@ function EmployeeList() {
   const totalPages = Math.ceil(totalCount / countPerPage);
   const [pages, setPages] = useState([]);
   const useColors = Colors();
+  const role = localStorage.getItem("Role");
 
   const tabs = [
     { id: 1, label: "Select Department" },
@@ -40,14 +41,22 @@ function EmployeeList() {
     { id: 3, label: "HR" },
   ];
 
-    useEffect(() => {
-      const arr: any = [];
-      for (let i = 1; i <= totalPages; i++) {
-        arr.push(i);
-      }
-      setPages(arr);
-    }, [totalPages]);
+  useEffect(() => {
+    if (role === "E") {
+      setRows([]);
+    }
+    else(
+      setRows(employeeListData)
+    )
+  }, [role]);
 
+  useEffect(() => {
+    const arr: any = [];
+    for (let i = 1; i <= totalPages; i++) {
+      arr.push(i);
+    }
+    setPages(arr);
+  }, [totalPages]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
@@ -58,11 +67,10 @@ function EmployeeList() {
     setRows(res);
   };
 
-  const currentPageItems = rowsList.slice(
-    (currentPage - 1) * countPerPage,
-    currentPage * countPerPage
-  );
-
+  // const currentPageItems = rowsList.slice(
+  //   (currentPage - 1) * countPerPage,
+  //   currentPage * countPerPage
+  // );
 
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
@@ -108,8 +116,8 @@ function EmployeeList() {
             </div>
           </div>
           <div className="row">
-            {currentPageItems?.length > 0 &&
-              currentPageItems?.map((employee: any) => (
+            {rowsList?.length > 0 &&
+              rowsList?.map((employee: any) => (
                 <div
                   className="col-12 col-md-6 col-xxl-3 g-3 "
                   key={employee?.employeeId}
