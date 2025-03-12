@@ -26,7 +26,6 @@ function Policyprocedure({ isManagerScreen }: PolicyprocedureProps) {
         const items = [
             { icon: <AccountBalanceOutlinedIcon className="m-1 text-white" />, title: "Federal holiday", bgColor: "#FFCC5F", color: "#FFBA27" },
             { icon: <DownhillSkiingOutlinedIcon className="m-1 text-white" />, title: "Vacation policy", bgColor: "#6C63FF", color: "#41A4FF" },
-            { icon: <PersonAddAltOutlinedIcon className="m-1 text-white" />, title: "Recruitment process", bgColor: "#FF6970", color: "#FF6970" },
             { icon: <ApartmentOutlinedIcon className="m-1 text-white" />, title: "Marvel", bgColor: "#16B1FF", color: "#00FF47" },
             { icon: <AutoStoriesOutlinedIcon className="m-1 text-white" />, title: "Handbook", bgColor: "#FFB054", color: "#935AFF" },
         ];

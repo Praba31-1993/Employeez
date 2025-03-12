@@ -44,10 +44,7 @@ function EmployeeList() {
   useEffect(() => {
     if (role === "E") {
       setRows([]);
-    }
-    else(
-      setRows(employeeListData)
-    )
+    } else setRows(employeeListData);
   }, [role]);
 
   useEffect(() => {
