@@ -32,8 +32,12 @@ function Typeofduration() {
             </div>
           </div>
           <div className="col-6 px-0  d-flex justify-content-end">
-            <div className="  " style={{ width: "90%" }}>
-              <TimePickerComponent />
+            <div style={{ width: "90%" }}>
+              <select className="w-100 p-3 rounded textheader" name="" id="">
+                <option value={10}>Ten</option>
+                <option value={20}>Twenty</option>
+                <option value={30}>Thirty</option>
+              </select>
             </div>
           </div>
         </div>
@@ -48,11 +52,21 @@ function Typeofduration() {
           </div>
           <div className="col-6 px-0  d-flex justify-content-end mb-3">
             <div style={{ width: "90%" }}>
-              <TimePickerComponent />
+              <div style={{ width: "90%" }}>
+                <select className="w-100 p-3 rounded textheader" name="" id="">
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                  <option value={7}>7</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="col-6 px-0 ">
-            <div style={{ width: "90%",  }}>
+            <div style={{ width: "90%" }}>
               <select className="w-100 p-3 rounded textheader" name="" id="">
                 <option value={10}>Ten</option>
                 <option value={20}>Twenty</option>
@@ -88,11 +102,11 @@ function Typeofduration() {
       )}
       <div className="row px-0">
         <div className="col-12 px-0">
-        <textarea
-          className="form-control mt-3 w-100"
-          id="exampleFormControlTextarea1"
-          rows={5}
-        ></textarea>
+          <textarea
+            className="form-control mt-3 w-100"
+            id="exampleFormControlTextarea1"
+            rows={5}
+          ></textarea>
         </div>
       </div>
     </div>

@@ -184,6 +184,10 @@ const Timeoffstatus = ({ statusHistory }: any) => {
                       sx={{ color: "#8A8D93" }}
                       onClick={() => setDetails(true)}
                     />
+                     <HighlightOffIcon
+                      sx={{ color: "#FF4C51" }}
+                      onClick={() => setDelete(true)}
+                    />
                   </div>
                 ) : (
                   <div className="flex gap-3">
@@ -191,10 +195,7 @@ const Timeoffstatus = ({ statusHistory }: any) => {
                       sx={{ color: "#8A8D93" }}
                       onClick={() => setDetails(true)}
                     />
-                    <HighlightOffIcon
-                      sx={{ color: "#FF4C51" }}
-                      onClick={() => setDelete(true)}
-                    />
+                   
                   </div>
                 )}
               </td>
