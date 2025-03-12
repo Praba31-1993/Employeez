@@ -11,11 +11,10 @@ import TimecoordinatorDashboard from "./screens/timecoordinator";
 import PayRoleExecutiveDashboard from "./screens/payrollexecutive";
 import SalesManagerDashboard from "./screens/salesManager";
 import Sidebar from "../sidebar/page";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+
 
 const Dashboard = () => {
-  const role: string = useSelector((state: RootState) => state.role.role);
+  const role = localStorage.getItem("Role");
 
   return (
     <Sidebar>

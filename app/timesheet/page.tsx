@@ -99,13 +99,13 @@ export default function Timesheet() {
                   <div className="col-lg-12 px-0 col-sm-6">
                     {loginDatas === null ? (
                       <div className="calendar">
-                        <MonthlyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                          calendardatas={ConvertedTimeSheetForCalendar}
-                          weeklyList={handleWeekList}
-                          handleSelectedMonth={handleSelectedMonth}
-                        />
+                        <WeeklyCalendar
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
                       </div>
                     ) : (
                       <div className="calendar">

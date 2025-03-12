@@ -60,7 +60,6 @@ interface SidebarProps {
   children: ReactNode;
 }
 
-
 const getMenuItems = (role: string) => {
   return role === "SA"
     ? menuForSuperAdmin
@@ -86,13 +85,10 @@ const Sidebar = ({ children }: SidebarProps) => {
     (state: RootState) => state.meetingmode.background
   );
 
-  const role = useSelector((state: RootState) => state.role.role);
-
+  const role: any = localStorage.getItem("Role");
   const menuItems = getMenuItems(role);
   const [menuLists, setMenuLists] = useState(menuItems);
   const router = useRouter();
-
-  console.log("Roles", role);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -176,9 +172,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const ApprovedToggle = () => {
-    const newList = menuLists?.map((list:any) => ({
+    const newList = menuLists?.map((list: any) => ({
       ...list,
-      roleItems: list.roleItems.filter((item:any) => item.checked),
+      roleItems: list.roleItems.filter((item: any) => item.checked),
     }));
 
     setMenuLists(newList);
@@ -187,9 +183,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const RejectedToggle = () => {
-    const newList = menuLists?.map((list:any) => ({
+    const newList = menuLists?.map((list: any) => ({
       ...list,
-      roleItems: list.roleItems?.map((item:any) => ({
+      roleItems: list.roleItems?.map((item: any) => ({
         ...item,
         checked: true,
       })),
@@ -201,9 +197,9 @@ const Sidebar = ({ children }: SidebarProps) => {
   };
 
   const RefreshToggle = () => {
-    const newList = menuItems?.map((list:any) => ({
+    const newList = menuItems?.map((list: any) => ({
       ...list,
-      roleItems: list.roleItems?.map((item:any) => ({
+      roleItems: list.roleItems?.map((item: any) => ({
         ...item,
         checked: true,
       })),
@@ -341,7 +337,7 @@ const Sidebar = ({ children }: SidebarProps) => {
               </div>
             </Link>
             {/* end */}
-            {menuLists?.map((roleGroup:any, index:any) => (
+            {menuLists?.map((roleGroup: any, index: any) => (
               <div key={index}>
                 <Accordion
                   sx={{
@@ -427,7 +423,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                   </AccordionSummary>
 
                   <AccordionDetails>
-                    {roleGroup.roleItems?.map((item:any, itemIndex:any) => (
+                    {roleGroup.roleItems?.map((item: any, itemIndex: any) => (
                       <div key={itemIndex}>
                         <div className="d-flex justify-content-between align-items-center">
                           <Link
@@ -510,46 +506,48 @@ const Sidebar = ({ children }: SidebarProps) => {
                                     textTransform: TextStyles.textTransform,
                                   }}
                                 >
-                                  {item.childItems?.map((child:any, childIndex:any) => (
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                      }}
-                                      key={childIndex}
-                                    >
-                                      <Link
-                                        key={childIndex}
-                                        href={child.path}
-                                        className={`link ${
-                                          pathname === child.path
-                                            ? "active"
-                                            : ""
-                                        }`}
+                                  {item.childItems?.map(
+                                    (child: any, childIndex: any) => (
+                                      <div
                                         style={{
                                           display: "flex",
                                           alignItems: "center",
-                                          padding: "10px 20px",
-                                          textDecoration: "none",
                                         }}
+                                        key={childIndex}
                                       >
-                                        <DnsOutlinedIcon className="menuicons" />
-                                        <div>{child.name}</div>
-                                      </Link>
-                                      {hideToggle && (
-                                        <ToggleSwitch
-                                          isChecked={child?.checked}
-                                          onToggle={() =>
-                                            handleToggleChange(
-                                              index,
-                                              childIndex,
-                                              child?.checked
-                                            )
-                                          }
-                                        />
-                                      )}{" "}
-                                    </div>
-                                  ))}
+                                        <Link
+                                          key={childIndex}
+                                          href={child.path}
+                                          className={`link ${
+                                            pathname === child.path
+                                              ? "active"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            padding: "10px 20px",
+                                            textDecoration: "none",
+                                          }}
+                                        >
+                                          <DnsOutlinedIcon className="menuicons" />
+                                          <div>{child.name}</div>
+                                        </Link>
+                                        {hideToggle && (
+                                          <ToggleSwitch
+                                            isChecked={child?.checked}
+                                            onToggle={() =>
+                                              handleToggleChange(
+                                                index,
+                                                childIndex,
+                                                child?.checked
+                                              )
+                                            }
+                                          />
+                                        )}{" "}
+                                      </div>
+                                    )
+                                  )}
                                 </div>
                               </>
                             )}
@@ -567,33 +565,35 @@ const Sidebar = ({ children }: SidebarProps) => {
                                         : "none",
                                   }}
                                 >
-                                  {item.childItems?.map((child:any, childIndex:any) => (
-                                    <div
-                                      className="menuTextStyle "
-                                      key={childIndex}
-                                    >
-                                      <Link
+                                  {item.childItems?.map(
+                                    (child: any, childIndex: any) => (
+                                      <div
+                                        className="menuTextStyle "
                                         key={childIndex}
-                                        href={child.path}
-                                        className={`link ${
-                                          pathname === child.path
-                                            ? "active"
-                                            : ""
-                                        } mb-0 w-100`}
-                                        style={{
-                                          display: "flex",
-                                          alignItems: "center",
-                                          color:
-                                            pathname === child.path
-                                              ? useColors.themeRed
-                                              : "", // Apply themeRed to the active link
-                                        }}
                                       >
-                                        <DnsOutlinedIcon className="menuicons" />
-                                        <div>{child.name}</div>
-                                      </Link>
-                                    </div>
-                                  ))}
+                                        <Link
+                                          key={childIndex}
+                                          href={child.path}
+                                          className={`link ${
+                                            pathname === child.path
+                                              ? "active"
+                                              : ""
+                                          } mb-0 w-100`}
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            color:
+                                              pathname === child.path
+                                                ? useColors.themeRed
+                                                : "", // Apply themeRed to the active link
+                                          }}
+                                        >
+                                          <DnsOutlinedIcon className="menuicons" />
+                                          <div>{child.name}</div>
+                                        </Link>
+                                      </div>
+                                    )
+                                  )}
                                 </div>
                               </>
                             )}

@@ -335,7 +335,8 @@ export const menuItemForEmployee: any = [
   {
     id: "2",
     role: "Basic",
-    roleItems: [
+    roleItems:
+     [
       {
         name: "Timesheet",
         path: "/timesheet",
