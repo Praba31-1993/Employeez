@@ -88,12 +88,10 @@ export default function Timesheet() {
   return (
     <>
       <Sidebar>
-        <section className="timesheet">
+        <section className="timesheet mt-3">
           <div className="container-fluid px-0  mb-3">
             <div className="row">
-              <div className="col-12 pt-3 pb-0">
-                <h2 className="heading textheader mb-0">Timesheet</h2>
-              </div>
+            
               <div className="col-lg-4 col-xxl-3 borderright">
                 <div className="row px-0">
                   <div className="col-lg-12 px-0 col-sm-6">

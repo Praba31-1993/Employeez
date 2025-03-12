@@ -135,5 +135,8 @@
 .dark .holiday .inputdats input {
   background: var(--Timesheet-holiday, #ede4ff) !important;
 }
-
+.timesheetentrytable{
+  height: 33vw;
+  overflow: auto;
+}
 
