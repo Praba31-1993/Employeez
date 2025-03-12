@@ -60,7 +60,7 @@ function Hrdatas({ hrlist, selectedListId }: hrprops) {
           hrlist?.map((item: any) => (
             <div
               key={item.id}
-              className="dashboardcard timesheetdetails p-3 d-flex align-items-center mb-3"
+              className="dashboardcard h-100 w-100 timesheetdetails p-3 d-flex align-items-center mb-3"
               style={{
                 border:
                   item.id === selectedItem
@@ -104,7 +104,7 @@ function Hrdatas({ hrlist, selectedListId }: hrprops) {
               </div>
               <div>
                 <h5 className="heading2 ps-2 mb-0 ">{item.value}</h5>
-                <p className="shade para2 ps-2 mb-0 ">{item.hractionlist}</p>
+                <p className="shade para2 ps-2 mb-0 " style={{whiteSpace:"nowrap"}} >{item.hractionlist}</p>
               </div>
             </div>
           ))}

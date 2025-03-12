@@ -57,7 +57,7 @@ function Employees({ employeelist, selectedListId }: any) {
                 employeelist.map((item: any) => (
                     <div
                         key={item?.id}
-                        className="dashboardcard timesheetdetails p-3 d-flex align-items-center mb-3"
+                        className="dashboardcard timesheetdetails p-3 d-flex align-items-center gap-2 w-100 mb-3"
                         style={{
                             border:
                                 item?.id === selectedItem

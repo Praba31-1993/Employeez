@@ -155,7 +155,6 @@ export default function EmployeePopup({
     }
   }, selectedTableList);
 
-  console.log("c2cemployeeeList", c2cemployeeeList);
 
   return (
     <section
@@ -188,7 +187,7 @@ export default function EmployeePopup({
 
           <div className="row mt-3 px-sm-5 ">
             {/* Tab Section */}
-            <div className="col-12 col-md-8 col-lg-8 col-xxl-10 ">
+            <div className="col-12 col-md-8 col-lg-8 col-xxl-8 ">
               <Tabs
                 onChange={handleChange}
                 value={value}
@@ -376,7 +375,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
@@ -550,7 +549,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
@@ -722,7 +721,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
@@ -895,7 +894,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
@@ -1066,7 +1065,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
@@ -1237,7 +1236,7 @@ export default function EmployeePopup({
                           onClick={() => handleSort("status")}
                         />
                       </th>
-                      <th className="textheader para" scope="col"></th>
+                      {/* <th className="textheader para" scope="col"></th> */}
                     </tr>
                   </thead>
                   <tbody className="dashboardcard">
