@@ -34,9 +34,9 @@ function Typeofduration() {
           <div className="col-6 px-0  d-flex justify-content-end">
             <div style={{ width: "90%" }}>
               <select className="w-100 p-3 rounded textheader" name="" id="">
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
+                <option value="">Select Type of Time off</option>
+                <option value="pto">PTO</option>
+                <option value="lop">LOP</option>
               </select>
             </div>
           </div>
@@ -54,6 +54,7 @@ function Typeofduration() {
             <div style={{ width: "90%" }}>
               <div style={{ width: "90%" }}>
                 <select className="w-100 p-3 rounded textheader" name="" id="">
+                  <option value="">Select Hours</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
@@ -68,9 +69,9 @@ function Typeofduration() {
           <div className="col-6 px-0 ">
             <div style={{ width: "90%" }}>
               <select className="w-100 p-3 rounded textheader" name="" id="">
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
+                <option value="">Select Type of Time off</option>
+                <option value="pto">PTO</option>
+                <option value="lop">LOP</option>
               </select>
             </div>
           </div>
@@ -92,9 +93,9 @@ function Typeofduration() {
           <div className="col-6 px-0  ">
             <div style={{ width: "90%", background: "white" }}>
               <select className="w-100 p-3 rounded textheader" name="" id="">
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
+                <option value="">Select Type of Time off</option>
+                <option value="pto">PTO</option>
+                <option value="lop">LOP</option>
               </select>
             </div>
           </div>

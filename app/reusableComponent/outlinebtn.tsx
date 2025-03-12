@@ -69,7 +69,7 @@ export function IconOutlinebutton({
         <Button
           variant={variant}
           disabled={disabled}
-          onClick={onClick}
+          
           sx={{
             // color: { color },
             // border: { border },

@@ -15,14 +15,17 @@ function CreateProject() {
     {
       id: 1,
       name: "Green",
+      color:'#00FF00'
     },
     {
       id: 2,
       name: "Red",
+      color:'#FF0000'
     },
     {
       id: 3,
       name: "Yellow",
+      color:'#FFFF00'
     },
   ];
 
@@ -39,9 +42,9 @@ function CreateProject() {
                   name=""
                   id=""
                 >
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
+                  <option value="">Select Project Name</option>
+                  <option value="Marvel">Marvel</option>
+                  <option value="Employeez">Employeez</option>
                 </select>
               </div>
               <div className="col-xxl-4 col-md-4 col-12 colPadding">
@@ -56,9 +59,10 @@ function CreateProject() {
                   name=""
                   id=""
                 >
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
+                  <option value="">Select Priority</option>
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
                 </select>
               </div>
               <div className="col-xxl-8 col-md-8 col-12 colPadding">
