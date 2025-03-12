@@ -82,11 +82,11 @@ export default function Requesttimeoff() {
                                     <IconComponent className="textheader m-1" />
                                 </div>
                                 <h6 className="mb-0 textheader heading2">
-                                    {timeoffrequest?.count}
+                                    {timeoffrequest?.hrs}
                                 </h6>
                             </div>
                             <p className="para2 pt-2 mb-0 shade">
-                                {timeoffrequest?.name} ({timeoffrequest?.hrs})
+                                {timeoffrequest?.name} (Day)
                             </p>
                         </div>
                     </div>
