@@ -11,6 +11,7 @@ export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
   };
 
   export const getWorkForceReportByBunit = async (Bunit) => {
+    console.log('Bunit5556',Bunit);
     
     
     try {

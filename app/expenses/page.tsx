@@ -36,16 +36,6 @@ export default function Expenses({ weekListDatas }: any) {
   const [selectedYear, setSelectedYear] = useState("");
   const loginDatas: any = useSelector((state: RootState) => state.login.user);
 
-  const [role, setRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Ensure this runs only on the client side
-    if (typeof window !== "undefined") {
-      const storedRole = localStorage.getItem("Role");
-      setRole(storedRole);
-    }
-  }, []);
-
   // Filter for objects with codeId and codeLabel (relevant data)
   const codeItems = timesheetDataConvertedToFetchCalendar?.filter(
     (item: any) => item.codeId && item.codeLabel

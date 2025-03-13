@@ -62,6 +62,7 @@ function Workforce() {
     return () => clearTimeout(timer);
   }, []);
 
+  console.log("w2sap", w2sapidata);
 
   // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   const query = event.target.value;
@@ -88,6 +89,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       setw2sapidata(resw2s);
     } else if (selectedTableList === 2) {
@@ -106,6 +108,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       setw2hapidata(resw2s);
     } else if (selectedTableList === 3) {
@@ -124,6 +127,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       setc2capidata(resw2s);
     } else if (selectedTableList === 4) {
@@ -142,6 +146,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       seteightytwentyapidata(resw2s);
     } else if (selectedTableList === 5) {
@@ -160,6 +165,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       setseventythirtyapidata(resw2s);
     } else if (selectedTableList === 6) {
@@ -178,6 +184,7 @@ function Workforce() {
           ? filteredResults.slice(0, 5)
           : w2sapidata.slice(0, 5);
 
+      console.log("resw2s", resw2s);
 
       setndependentcontractorapidata(resw2s);
     }
@@ -305,6 +312,7 @@ function Workforce() {
     }
   }, [selectedBunites?.bunit]);
 
+  console.log("inddfs", independentcontractorapidata);
 
   return (
     <div className="row">

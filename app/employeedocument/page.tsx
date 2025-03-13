@@ -14,16 +14,9 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 function EmployeeDocument() {
   const [selectedTab, setSelectedTab] = useState<string>("Employee Document");
   const [employeeId, setEmployeeId] = useState<any>("");
+  const role: string = useSelector((state: RootState) => state.role.role);
   const useColors = Colors();
 
-  const [role, setRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedRole = localStorage.getItem("Role");
-      setRole(storedRole || null);
-    }
-  }, []);
   const tabs = [
     { id: 1, label: "Employee Document" },
     { id: 2, label: "Employee document submission" },
