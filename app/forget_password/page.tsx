@@ -11,7 +11,6 @@ import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import { validateField } from "../reusableComponent/validation";
-import ImageComponent from "../reusableComponent/image";
 
 export default function forgetpassword() {
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
@@ -32,6 +31,16 @@ export default function forgetpassword() {
       return () => clearInterval(countdown);
     }
   }, [otpVisible, timer]);
+
+   const [role, setRole] = useState<string | null>(null);
+  
+      useEffect(() => {
+        // Ensure this runs only on the client side
+        if (typeof window !== "undefined") {
+          const storedRole = localStorage.getItem("Role");
+          setRole(storedRole);
+        }
+      }, []);
 
   // Handler for Verify button click
   const handleVerifyClick = () => {
@@ -79,7 +88,6 @@ export default function forgetpassword() {
                 Forgot password
                 <Image src={lock} className="" alt={""} />
                 {/* <ImageComponent width={0}  height={0} user={"/assets/img/lock.png"}/> */}
-
               </h4>
               <p className="shade para pt-1">
                 Please enter your registered email or mobile no{" "}
@@ -127,9 +135,13 @@ export default function forgetpassword() {
                 {/* Verify button only shown when OTP is not visible */}
                 {!otpVisible && (
                   <button
-                    className="mutlicolourbtn mt-3 py-1 text-center" 
+                    className="mutlicolourbtn mt-3 py-1 text-center"
                     onClick={handleVerifyClick} // Trigger the state change on click
-                    style={{ cursor: "pointer", width: "100%" , background: useColors.themeRed}}
+                    style={{
+                      cursor: "pointer",
+                      width: "100%",
+                      background: useColors.themeRed,
+                    }}
                   >
                     Continue
                   </button>
@@ -138,7 +150,10 @@ export default function forgetpassword() {
                 {otpVisible && (
                   <div
                     className="mutlicolourbtn mt-3 py-1 text-center"
-                    style={{ cursor: "pointer", background: useColors.themeRed }}
+                    style={{
+                      cursor: "pointer",
+                      background: useColors.themeRed,
+                    }}
                     onClick={handleClick}
                   >
                     Verify OTP

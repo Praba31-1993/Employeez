@@ -18,8 +18,8 @@ import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import Logintextanimation from "../reusableComponent/logintextanimation";
 import { initializeRole } from "../redux/slices/roleSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
 import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../redux/slices/loginSlice";
@@ -29,30 +29,39 @@ import { setBunit } from "../redux/slices/bunitSlice";
 export default function Login() {
   const useColors = Colors();
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
-  const [userDetails, setUserDetails] = useState<User>();
+  const [userDetails, setUserDetails] = useState<User | null>(null);
   const [checked, setChecked] = useState(false);
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ userId: "", password: "" });
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginToken, setLoginToken] = useState();
+  const [loginfirstName, setLoginfirstName] = useState();
+  const [loginlastName, setLoginlastName] = useState();
+  const [loginrole, setLoginRole] = useState();
+  const [loginbunit, setLoginBunit] = useState();
+  const [role, setRole] = useState<string | null>(null);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
 
+  // ✅ Use `useEffect` for accessing localStorage safely
   useEffect(() => {
-    const rememberedUserId = localStorage.getItem("rememberedUserId");
-    const rememberedUserPassword = localStorage.getItem(
-      "rememberedUserPassword"
-    );
+    if (typeof window !== "undefined") {
+      const storedRole = window.localStorage.getItem("Role");
+      setRole(storedRole || null);
+    }
+  }, []);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      // 👈 Prevent SSR errors
+      const rememberedUserId = localStorage.getItem("rememberedUserId") || "";
+      const rememberedUserPassword =
+        localStorage.getItem("rememberedUserPassword") || "";
 
-    if (rememberedUserId && rememberedUserPassword) {
       setUserId(rememberedUserId);
       setPassword(rememberedUserPassword);
-      setChecked(true);
-    } else {
-      setUserId("");
-      setPassword("");
-      setChecked(false);
+      setChecked(!!(rememberedUserId && rememberedUserPassword));
     }
   }, []);
 
@@ -66,55 +75,50 @@ export default function Login() {
 
   const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
-    if (e.target.checked === false) {
-      localStorage.removeItem("rememberedUserId");
-      localStorage.removeItem("rememberedUserPassword");
-    } else {
-      localStorage.setItem("rememberedUserId", userId);
-      localStorage.setItem("rememberedUserPassword", password);
+
+    if (typeof window !== "undefined") {
+      if (e.target.checked) {
+        localStorage.setItem("rememberedUserId", userId);
+        localStorage.setItem("rememberedUserPassword", password);
+      } else {
+        localStorage.removeItem("rememberedUserId");
+        localStorage.removeItem("rememberedUserPassword");
+      }
     }
   };
 
   const handleSubmit = async () => {
     const userIdError = validateUserId(userId);
     const passwordError = validatePassword(password);
-
-    // Set errors for form fields
+  
     setErrors({ userId: userIdError, password: passwordError });
-
+  
     if (!userIdError && !passwordError) {
       const params = {
         usernameOrEmail: userId,
         password: password,
       };
+  
+      setIsLoading(true);
       const loginResponse = await dispatch(loginUser(params));
       dispatch(initializeRole(loginResponse.payload.userInfo));
-
-      setIsLoading(true);
-
+  
       if (loginResponse.payload.status === undefined) {
-        setUserDetails(loginResponse?.payload?.userInfo);
-        dispatch(
-          setBunit({ bunit: loginResponse?.payload?.userInfo?.businessUnit })
-        );
+        setUserDetails(loginResponse.payload.userInfo);
+        dispatch(setBunit({ bunit: loginResponse.payload.userInfo.businessUnit }));
         toast.success("Login successful");
-        localStorage.setItem("token", loginResponse?.payload?.token);
-        localStorage.setItem(
-          "Firstname",
-          loginResponse?.payload?.userInfo?.firstName
-        );
-        localStorage.setItem(
-          "Lastname",
-          loginResponse?.payload?.userInfo?.lastName
-        );
-        localStorage.setItem("Role", loginResponse?.payload?.userInfo?.role);
-        localStorage.setItem(
-          "bunit",
-          loginResponse?.payload?.userInfo?.businessUnit
-        );
-
+  
+        // ✅ Store data in localStorage only if available
+        if (typeof window !== "undefined") {
+          localStorage.setItem("token", loginResponse.payload.token);
+          localStorage.setItem("Firstname", loginResponse.payload.userInfo.firstName);
+          localStorage.setItem("Lastname", loginResponse.payload.userInfo.lastName);
+          localStorage.setItem("Role", loginResponse.payload.userInfo.role);
+          localStorage.setItem("bunit", loginResponse.payload.userInfo.businessUnit);
+        }
+  
         setTimeout(() => {
-          setIsLoading(false); // Stop loading after navigation
+          setIsLoading(false);
           router.push("/dashboard");
         }, 2000);
       } else {
@@ -123,16 +127,15 @@ export default function Login() {
       }
     }
   };
+  
 
   return (
     <section className="login">
-      {/* Show Timeloader while loading */}
       {isLoading && <Timeloader />}
-
       <div className="container-fluid px-0 d-flex align-items-center justify-content-center h-100">
         <div className="row h-100 w-100">
           <div
-            className="col-md-6  p-0 d-sm-flex d-none align-items-center flex-column  h-100 justify-content-center"
+            className="col-md-6 p-0 d-sm-flex d-none align-items-center flex-column h-100 justify-content-center"
             style={{ background: useColors.themeRed }}
           >
             <h1 className="heading fw-bold text-center py-3 text-white">
@@ -140,8 +143,8 @@ export default function Login() {
             </h1>
             <Player
               autoplay
-              loop={true} // Stops animation after completing one cycle
-              animationData={loginanimationData} // Use animationData for the Player
+              loop
+              animationData={loginanimationData}
               style={{ height: "60%", width: "60%" }}
             />
             <Logintextanimation />
@@ -209,29 +212,26 @@ export default function Login() {
                   <p className="error-text mb-0 para mt-1">{errors.password}</p>
                 )}
 
-                <div className="d-flex align-items-center justify-content-between  mt-3 ">
+                <div className="d-flex align-items-center justify-content-between mt-3">
                   <FormControlLabel
                     control={
                       <Checkbox
                         sx={{
                           cursor: "pointer",
-                          "&.Mui-checked": {
-                            color: useColors.themeRed,
-                          },
+                          "&.Mui-checked": { color: useColors.themeRed },
                         }}
                         checked={checked}
-                        onChange={(e) => handleChangeCheckbox(e)}
+                        onChange={handleChangeCheckbox}
                       />
                     }
                     label="Remember Me"
                   />
-
                   <Link
                     href="./forget_password"
                     className="forgetpassword para"
                   >
                     {" "}
-                    Forget password?
+                    Forget password?{" "}
                   </Link>
                 </div>
                 <div

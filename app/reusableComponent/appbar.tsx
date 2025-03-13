@@ -37,7 +37,6 @@ export default function NavbarComponent() {
   const selectedBunites: any = useSelector(
     (state: RootState) => state.bussinessunit.bunit
   );
-  console.log("selectedBUnitres", selectedBunites.bunit);
 
   const dispatch = useDispatch();
 
