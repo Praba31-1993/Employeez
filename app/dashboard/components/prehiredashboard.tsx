@@ -146,7 +146,6 @@ function Prehiredashboard() {
                     ? filteredResults?.slice(0, 5)
                     : prehireDetails?.slice(0, 5);
 
-            console.log("resw2s", resw2s);
 
             setPrehiredetails(resw2s);
         } else if (selectedTableList === 2) {
@@ -180,7 +179,6 @@ function Prehiredashboard() {
                     ? filteredResults?.slice(0, 5)
                     : onboardingDetails?.slice(0, 5);
 
-            console.log("resw2s", resw2s);
 
             setOnboardingdetails(resw2s);
         } else if (selectedTableList === 4) {
@@ -198,7 +196,6 @@ function Prehiredashboard() {
                     ? filteredResults?.slice(0, 5)
                     : supplierboardingDetails?.slice(0, 5);
 
-            console.log("resw2s", resw2s);
 
             setsupplierOnboardingdetails(resw2s);
         }
@@ -236,7 +233,6 @@ function Prehiredashboard() {
                 console.error(`Unexpected Error: Status Code ${prehireData.status}`);
             }
 
-            console.log("prehiredata", prehireData);
         } catch (error) {
             console.error("Failed to fetch prehire data:", error);
         }
@@ -263,7 +259,6 @@ function Prehiredashboard() {
                 console.error(`Unexpected Error: Status Code ${hiringData.status}`);
             }
 
-            console.log("hiringData", hiringData);
         } catch (error) {
             console.error("Failed to fetch prehire data:", error);
         }
@@ -339,7 +334,6 @@ function Prehiredashboard() {
         }
     }, [selectedBunites?.bunit]);
 
-    console.log("hiringDeatils", hiringDetails);
 
     const arrayList = [
         {

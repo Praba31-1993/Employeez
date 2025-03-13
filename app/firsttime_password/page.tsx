@@ -1,18 +1,22 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import logogif from "/assets/img/loginanimation.gif";
-import logo from "@/public/assets/imgemployeez.png";
-import * as React from "react";
+import logo from "@/public/assets/img/employeez.png";
+import React, { useEffect } from "react";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";
 import Logintextanimation from "../reusableComponent/logintextanimation";
-import ImageComponent from "../reusableComponent/image";
 
 export default function FirstTimepassword() {
   const useColors = Colors();
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
   const [checked, setChecked] = React.useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const value = localStorage.getItem("Role");
+    }
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -63,7 +67,14 @@ export default function FirstTimepassword() {
                   type="text"
                   placeholder="Conform password"
                 />
-                <div className="orangebtn mt-3 py-1 text-center"  style={{ cursor: "pointer", width: "100%" , background: useColors.themeRed}}>
+                <div
+                  className="orangebtn mt-3 py-1 text-center"
+                  style={{
+                    cursor: "pointer",
+                    width: "100%",
+                    background: useColors.themeRed,
+                  }}
+                >
                   Set password
                 </div>
               </div>
