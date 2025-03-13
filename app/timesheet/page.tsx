@@ -8,6 +8,7 @@ import {
   Totalsummarycards,
 } from "./components/totalsummarydetails";
 import Uploadfiles, { Viewfiles } from "./components/uploadfiles";
+import { loginResponse } from "../reusableComponent/JsonData";
 import MonthlyCalendar from "../reusableComponent/calendar/monthlyCalendar";
 import WeeklyCalendar from "../reusableComponent/calendar/weeklycalendar";
 import SemiMonthlyCalendar from "../reusableComponent/calendar/semimonthlyCalendar";
@@ -30,10 +31,6 @@ export default function Timesheet() {
   const [selectedYear, setSelectedYear] = useState("");
 
   const loginDatas: any = useSelector((state: RootState) => state.login.user);
-
-  useEffect(() => {
-    setTimeSheetList(TimesheetDataByMonth);
-  }, [TimesheetDataByMonth]);
 
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
@@ -94,18 +91,19 @@ export default function Timesheet() {
         <section className="timesheet mt-3">
           <div className="container-fluid px-0  mb-3">
             <div className="row">
+            
               <div className="col-lg-4 col-xxl-3 borderright">
                 <div className="row px-0">
                   <div className="col-lg-12 px-0 col-sm-6">
                     {loginDatas === null ? (
                       <div className="calendar">
                         <WeeklyCalendar
-                          value={currentDate}
-                          onChange={setCurrentDate}
-                          calendardatas={ConvertedTimeSheetForCalendar}
-                          weeklyList={handleWeekList}
-                          handleSelectedMonth={handleSelectedMonth}
-                        />
+                            value={currentDate}
+                            onChange={setCurrentDate}
+                            calendardatas={ConvertedTimeSheetForCalendar}
+                            weeklyList={handleWeekList}
+                            handleSelectedMonth={handleSelectedMonth}
+                          />
                       </div>
                     ) : (
                       <div className="calendar">

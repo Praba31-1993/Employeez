@@ -57,7 +57,7 @@ import {
 } from "../reusableComponent/sidebarJson";
 
 interface SidebarProps {
-  children?: React.ReactNode;
+  children: ReactNode;
 }
 
 const getMenuItems = (role: string) => {
@@ -85,10 +85,10 @@ const Sidebar = ({ children }: SidebarProps) => {
     (state: RootState) => state.meetingmode.background
   );
 
-  const router = useRouter();
   const role: any = localStorage.getItem("Role");
   const menuItems = getMenuItems(role);
   const [menuLists, setMenuLists] = useState(menuItems);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

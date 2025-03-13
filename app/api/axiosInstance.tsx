@@ -9,6 +9,7 @@ const base_url = "http://192.168.10.126:8080/employez/";
 const accessToken =
 localStorage.getItem('token')
 
+console.log('accesssToken', accessToken);
 
 export const axiosInstance = axios.create({
   baseURL: base_url,
