@@ -80,6 +80,7 @@ function PendingInvoiceTable({ gotochart }: any) {
   const useColors = Colors();
 
   useEffect(() => {
+    console.log("selectedEmployeeDetails", selectedEmployeeDetails);
   }, [selectedEmployeeDetails]);
 
   return (

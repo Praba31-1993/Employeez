@@ -1,6 +1,8 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+
 import { approverrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
 
@@ -10,8 +12,7 @@ const Punchinoutapprover = dynamic(() => import("./components/punchinoutapprover
 const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
 
 function Approver() {
-  const useColors = Colors();
-  const [role, setRole] = useState<string | null>(null);
+  const useColors = Colors(); // Declare useColors once
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
 
   // ✅ Use `useEffect` for accessing localStorage safely
@@ -22,9 +23,15 @@ function Approver() {
     }
   }, []);
 
+
   return (
     <div>
       <Sidebar>
+        {/* <BreadcrumbsComponent
+          selectedTab={
+            selectedTimeOff === "" ? "Vacation report" : selectedTimeOff
+          }
+        /> */}
         <div className="row">
           <div className="col-6">
             <p className="textheader heading my-2">Approver report</p>
@@ -36,7 +43,7 @@ function Approver() {
               selectedDatafunction={(data: any) => setSelectedTimeOff(data)}
             />
           </div>
-          <div>
+          <div className="">
             <Punchinoutapprover />
           </div>
         </div>

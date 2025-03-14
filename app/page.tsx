@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+
 const Player = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
     }
   }, []);
 
+
   useEffect(() => {
     // ✅ Import animation JSON dynamically inside useEffect
     import("@/public/assets/EZ animation.json")
@@ -27,7 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.replace("./login");
+      router.replace("./login"); 
     }, 5000);
 
     return () => clearTimeout(timer);

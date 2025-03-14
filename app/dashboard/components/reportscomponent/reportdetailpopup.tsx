@@ -55,6 +55,7 @@ export default function ReportDetailsPopup({
             [key]: !prev[key],
         }));
     };
+    console.log("selkecttes", selectedEmployeeDetails);
 
     return (
         <section className={`showpopup ${show ? "showpopupactive" : ""}`} onClick={close} >

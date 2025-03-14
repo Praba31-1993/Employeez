@@ -50,6 +50,15 @@ export default function Reportspoup({
     direction: "asc" | "desc";
   } | null>(null);
 
+  console.log(
+    "preiefisdsoifsd",
+    prehireDetails,
+    "hdata",
+    hiringdatas,
+    onboardingDetails,
+    supplierboardingDetails
+  );
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

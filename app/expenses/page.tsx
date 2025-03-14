@@ -38,6 +38,7 @@ export default function Expenses({ weekListDatas }: any) {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
 
+
   const loginDatas: any = useSelector((state: RootState) => state.login.user);
   const [role, setRole] = useState<string | null>(null);
 
@@ -49,9 +50,14 @@ export default function Expenses({ weekListDatas }: any) {
 
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
 
-  // Filter for objects with codeId and codeLabel
-  const codeItems = timesheetDataConvertedToFetchCalendar?.filter((item: any) => item.codeId && item.codeLabel);
-  const timesheetItems = timesheetDataConvertedToFetchCalendar?.filter((item: any) => item.codeId && item.day);
+ 
+  // Filter for objects with codeId and codeLabel (relevant data)
+  const codeItems = timesheetDataConvertedToFetchCalendar?.filter(
+    (item: any) => item.codeId && item.codeLabel
+  );
+  const timesheetItems = timesheetDataConvertedToFetchCalendar?.filter(
+    (item: any) => item.codeId && item.day
+  );
 
   // Merge data by matching codeId
   const ConvertedTimeSheetForCalendar = timesheetItems?.map((timesheetItem: any) => {

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+
 import dynamic from "next/dynamic";
 import logo from "@/public/assets/img/employeez.png";
 import React, { useEffect, useState } from "react";
@@ -12,10 +13,12 @@ const Logintextanimation = dynamic(() => import("../reusableComponent/logintexta
   ssr: false,
 });
 
+
 export default function FirstTimepassword() {
   const useColors = Colors();
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
   const [checked, setChecked] = useState(true);
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -57,6 +60,7 @@ export default function FirstTimepassword() {
               <p className="shade para pt-1">Please setup your password</p>
 
               <div className="form_filed">
+
                 <input className="ps-3 py-2 mt-2" type="password" placeholder="Current password" />
                 <input className="ps-3 py-2 mt-2" type="password" placeholder="New password" />
                 <input className="ps-3 py-2 mt-2" type="password" placeholder="Confirm password" />
@@ -69,6 +73,7 @@ export default function FirstTimepassword() {
                     background: useColors.themeRed,
                   }}
                 >
+
                   Set password
                 </div>
               </div>

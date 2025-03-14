@@ -10,6 +10,7 @@ import logo from "@/public/assets/img/employeez.png";
 import lock from "@/public/assets/img/lock.png";
 import { Colors } from "../reusableComponent/styles";
 import { validateField } from "../reusableComponent/validation";
+import ImageComponent from "../reusableComponent/image";
 
 // ⏬ Dynamic Imports (SSR Disabled)
 const Player = dynamic(() => import("lottie-react"), { ssr: false });
@@ -41,7 +42,7 @@ export default function ForgetPassword() {
     }
   }, [otpVisible, timer]);
 
-  // Handle verification button click
+
   const handleVerifyClick = () => {
     const error = validateField(emailOrPassword);
     setEmailOrPasswordError(error);
@@ -72,7 +73,10 @@ export default function ForgetPassword() {
                 <Image src={logo} alt="Employeez Logo" />
               </div>
               <h4 className="heading d-flex align-items-center pt-4">
+
                 Forgot password <Image src={lock} alt="Lock Icon" />
+
+               
               </h4>
               <p className="shade para pt-1">Please enter your registered email or mobile no</p>
 
@@ -111,6 +115,7 @@ export default function ForgetPassword() {
                 {/* Buttons */}
                 {!otpVisible ? (
                   <button
+
                     className="mutlicolourbtn mt-3 py-1 w-100"
                     onClick={handleVerifyClick}
                     style={{ background: useColors.themeRed }}
@@ -122,6 +127,8 @@ export default function ForgetPassword() {
                     className="mutlicolourbtn mt-3 py-1 w-100"
                     onClick={() => router.push("/set_password")}
                     style={{ background: useColors.themeRed }}
+
+                  
                   >
                     Verify OTP
                   </button>
