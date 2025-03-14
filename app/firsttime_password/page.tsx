@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logogif from "/assets/img/loginanimation.gif";
-import logo from "@/public/assets/imgemployeez.png";
+import logo from "@/public/assets/img/employeez.png";
 import * as React from "react";
 import Player from "lottie-react";
 import { Colors } from "../reusableComponent/styles";

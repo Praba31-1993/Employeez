@@ -45,10 +45,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import BubbleChartOutlinedIcon from "@mui/icons-material/BubbleChartOutlined";
 import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
-import dashboardWhite from "@/public/assets/img/dashboard-white.svg";
-import dashboardGrey from "@/public/assets/img/dashboard-grey.svg";
-import timesheetGrey from "@/public/assets/img/timesheet_grey.svg";
-import timesheetWhite from "@/public/assets/img/timesheet_white.svg";
+
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Colors } from "../reusableComponent/styles";
 import {
@@ -78,7 +75,7 @@ const Sidebar = ({ children }: SidebarProps) => {
   const pathname = usePathname();
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
-  const [auth, setAuth] = useState<String | null>(null);
+  const [auth, setAuth] = useState<string | null>(null);
 
   const selectedColor = useSelector((state: RootState) => state.color.color);
   const selectedMeedingModeBorder = useSelector(

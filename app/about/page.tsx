@@ -34,26 +34,35 @@ function About() {
   const handlePrint = () => {
     if (tableRef.current) {
       const printWindow = window.open("", "_blank");
-      printWindow?.document.write(`
-        <html>
-          <head>
-            <title>Print Table</title>
-            <style>
-              table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
-              th, td { border: 1px solid black; padding: 8px; text-align: left; }
-              th { background-color: #f2f2f2; }
-              body { padding: 20px; }
-            </style>
-          </head>
-          <body>
-            ${tableRef.current.innerHTML}
-          </body>
-        </html>
-      `);
-      printWindow?.document.close();
-      printWindow?.print();
+      if (printWindow) {
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print Table</title>
+              <style>
+                table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+                th, td { border: 1px solid black; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                body { padding: 20px; }
+              </style>
+            </head>
+            <body>
+              ${tableRef.current.outerHTML}
+            </body>
+          </html>
+        `);
+  
+        printWindow.document.close();
+  
+        // Ensure printing happens after the document is fully loaded
+        printWindow.onload = () => {
+          printWindow.print();
+          printWindow.close();
+        };
+      }
     }
   };
+  
 
   return (
     <div>

@@ -344,7 +344,7 @@ function Changerequestfilter() {
                         </tr>
                     </thead>
                     <tbody className="dashboardcard">
-                        {currentPageItems?.map((item: any, index: Number) => (
+                        {currentPageItems?.map((item: any, index: number) => (
                             <tr key={item.id}>
                                 <td className="para textheader">{item?.id}</td>
                                 <td className="para textheader">{item?.request_type}</td>

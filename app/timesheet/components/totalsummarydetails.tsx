@@ -35,53 +35,7 @@ export function Totalsummary({ showsummarycards }: any) {
 }
 export function Totalsummarycards() {
   const useColors = Colors();
-  const LeaveTypes = [
-    {
-      name: "LOP",
-      noOfLeave: "12",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Maternity leave",
-      noOfLeave: "23",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Sick leave",
-      noOfLeave: "32",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Comp Off",
-      noOfLeave: "22",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Holiday",
-      noOfLeave: "2",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Traning",
-      noOfLeave: "30",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Earned leave",
-      noOfLeave: "24",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Paternity leave",
-      noOfLeave: "22",
-      img: "/assets/img/account_child_invert.png",
-    },
-    {
-      name: "Casual leave",
-      noOfLeave: "80",
-      img: "/assets/img/account_child_invert.png",
-    },
-  ];
+ 
   return (
     <>
       <div className="row">

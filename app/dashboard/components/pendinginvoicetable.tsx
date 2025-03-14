@@ -148,14 +148,15 @@ function PendingInvoiceTable({ gotochart }: any) {
                     <td
                       className="para cursorpointer textheader"
                       onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            prehireDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
-                            )
-                          );
+                        setReportdetailpopup((prev) => !prev);
+                        setIsSupplierOnboardedClicked(true);
+                        setselectedEmployeeDetails(
+                          supplierboardingDetails?.filter(
+                            (list: any) => list?.id === prehire?.id
+                          )
+                        );
                       }}
+                      
                     >
                       {prehire?.employeename}
                     </td>
@@ -188,14 +189,15 @@ function PendingInvoiceTable({ gotochart }: any) {
                     <td
                       className="para cursorpointer textheader"
                       onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            hiringDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
-                            )
-                          );
+                        setReportdetailpopup((prev) => !prev);
+                        setIsSupplierOnboardedClicked(true);
+                        setselectedEmployeeDetails(
+                          supplierboardingDetails?.filter(
+                            (list: any) => list?.id === prehire?.id
+                          )
+                        );
                       }}
+                      
                     >
                       {prehire?.employeename}
                     </td>
@@ -228,14 +230,15 @@ function PendingInvoiceTable({ gotochart }: any) {
                     <td
                       className="para cursorpointer textheader"
                       onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(false),
-                          setselectedEmployeeDetails(() =>
-                            onboardingDetails?.filter(
-                              (list: any) => list.empId === prehire?.empId
-                            )
-                          );
+                        setReportdetailpopup((prev) => !prev);
+                        setIsSupplierOnboardedClicked(true);
+                        setselectedEmployeeDetails(
+                          supplierboardingDetails?.filter(
+                            (list: any) => list?.id === prehire?.id
+                          )
+                        );
                       }}
+                      
                     >
                       {prehire?.employeename}
                     </td>
@@ -268,14 +271,15 @@ function PendingInvoiceTable({ gotochart }: any) {
                     <td
                       className="para cursorpointer textheader"
                       onClick={() => {
-                        setReportdetailpopup((prev) => !prev),
-                          setIsSupplierOnboardedClicked(true),
-                          setselectedEmployeeDetails(() =>
-                            supplierboardingDetails?.filter(
-                              (list: any) => list?.id === prehire?.id
-                            )
-                          );
+                        setReportdetailpopup((prev) => !prev);
+                        setIsSupplierOnboardedClicked(true);
+                        setselectedEmployeeDetails(
+                          supplierboardingDetails?.filter(
+                            (list: any) => list?.id === prehire?.id
+                          )
+                        );
                       }}
+                      
                     >
                       {prehire?.contractorname}
                     </td>

@@ -13,7 +13,7 @@ import Logintextanimation from "../reusableComponent/logintextanimation";
 import { validateField } from "../reusableComponent/validation";
 import ImageComponent from "../reusableComponent/image";
 
-export default function forgetpassword() {
+export default function Forgetpassword() {
   const loginanimationData = require("@/public/assets/EmployEz-login-animation.json");
   const [otpVisible, setOtpVisible] = useState(false);
   const [emailOrPassword, setEmailOrPassword] = useState<string>("");

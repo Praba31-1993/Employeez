@@ -1,7 +1,6 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faCirclePlus,
     faFileCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
@@ -12,7 +11,6 @@ import { Colors } from "@/app/reusableComponent/styles";
 import { Addprojectpopup } from "./addprojectpopup";
 import { Idetails } from "./idetail";
 import { customsheet } from "@/app/reusableComponent/JsonData";
-import { AssinedProjectlist } from "@/app/reusableComponent/JsonData";
 import { TimesheetExpenceAndHoursField } from "@/app/reusableComponent/timesheetexpenceandhoursfield";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
@@ -24,9 +22,8 @@ export default function Timesheetcalendar({
     const useColors = Colors();
 
     const [open, setOpen] = useState(false);
-    const [getAllProjectLists, setallProjectLists] = useState<any>();
-    const [selectedProjected, setSelectedProjected] = useState<any>(0); // Accepts string values
-    const [unSelectedProjectedData, setshowUnSelectedProjectedData] =
+    const [ setallProjectLists] = useState<any>();
+    const [unSelectedProjectedData] =
         useState<any>();
 
     const [addproject, openproject] = useState(false);
@@ -38,28 +35,11 @@ export default function Timesheetcalendar({
         setallProjectLists(data);
     };
 
-    const openideatail = () => {
-        openidealPopUp((prev) => !prev);
-    };
+    // const openideatail = () => {
+    //     openidealPopUp((prev) => !prev);
+    // };
 
-    const handleProjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedIndex = parseInt(e.target.value, 10); // Parse the selected value as a number
-        setSelectedProjected(selectedIndex); // Update the state with the selected index
 
-        // Fetch selected project data
-        const selectedProject = AssinedProjectlist[selectedIndex];
-
-        if (selectedProject) {
-            // Update the selected project name
-
-            // Filter out the unselected projects
-            const unSelectedData = AssinedProjectlist.filter(
-                (list: any) => list.projectid !== selectedProject.projectid
-            );
-
-            setshowUnSelectedProjectedData(unSelectedData);
-        }
-    };
 
     return (
         <>

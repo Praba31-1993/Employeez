@@ -54,7 +54,7 @@ const BiWeeklyCalendar: React.FC<Props> = ({
     const start = startOfYear(new Date(selectedYear, 0, 1)); // Start of the selected year
     const end = endOfYear(new Date(selectedYear, 0, 1)); // End of the selected year
 
-    let weeksInYear: string[] = [];
+    const weeksInYear: string[] = [];
     let currentRange = "";
     let currentStart = start;
 

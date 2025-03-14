@@ -3,7 +3,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import ImageComponent from "./image";
 interface OutlinebuttonProps {
-  iscontactus?: Boolean;
+  iscontactus?: boolean;
   disabled?: any;
   text?: any;
   color?: any;

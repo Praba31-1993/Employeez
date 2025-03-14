@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Providers from "@/app/redux/Providers";
+import Script from "next/script";
 
 config.autoAddCss = false;
 
@@ -58,11 +59,13 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <Providers>{children}</Providers>
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossOrigin="anonymous"
-        ></script>
+        <Script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossOrigin="anonymous"
+  strategy="afterInteractive"
+/>
+
       </body>
     </html>
   );

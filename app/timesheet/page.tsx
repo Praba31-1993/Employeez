@@ -8,7 +8,6 @@ import {
   Totalsummarycards,
 } from "./components/totalsummarydetails";
 import Uploadfiles, { Viewfiles } from "./components/uploadfiles";
-import { loginResponse } from "../reusableComponent/JsonData";
 import MonthlyCalendar from "../reusableComponent/calendar/monthlyCalendar";
 import WeeklyCalendar from "../reusableComponent/calendar/weeklycalendar";
 import SemiMonthlyCalendar from "../reusableComponent/calendar/semimonthlyCalendar";
@@ -23,7 +22,7 @@ import { RootState } from "../redux/store";
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [timesheetList, setTimeSheetList] = useState<any>(TimesheetDataByMonth);
+  const [timesheetList] = useState<any>(TimesheetDataByMonth);
   const [getWeeklyList, setgetWeeklyList] = useState<Array<any>>([]);
   const [holidayPerMonth, setHolidayPerMonth] = useState<Array<any>>([]);
   const [vacationPerMonth, setVacationPerMonth] = useState<Array<any>>([]);
@@ -42,7 +41,6 @@ export default function Timesheet() {
     (item: any) => item.codeId && item.day
   );
 
-  const role = useSelector((state: RootState) => state.role.role);
 
   // Merge data by matching codeId
   const ConvertedTimeSheetForCalendar = timesheetItems?.map(
@@ -76,7 +74,7 @@ export default function Timesheet() {
   };
 
   const handleSelectedMonth = (month: any, year: any) => {
-    let convertedMonth = moment(month + 1, "M").format("MMMM");
+    const convertedMonth = moment(month + 1, "M").format("MMMM");
     setSelectedMonth(convertedMonth);
     setSelectedYear(year);
   };

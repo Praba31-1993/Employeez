@@ -2,9 +2,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Outlinebutton from "@/app/reusableComponent/outlinebtn";
-import ImageComponent from "@/app/reusableComponent/image";
 import Listicon from "@/app/reusableComponent/listicon";
 import LogoutIcon from '@mui/icons-material/Logout';
 import "bootstrap/dist/js/bootstrap.bundle.min.js";

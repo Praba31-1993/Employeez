@@ -5,9 +5,7 @@ import "./stylessheetforreusablecomponent.css";
 
 export function TimesheetExpenceAndHoursField({
     text,
-    timesheetData,
     weekListDataList,
-    calendardatas
 }: any) {
     const useColors = Colors();
 

@@ -1,9 +1,10 @@
 "use client";
+
 import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { setMeetingModeBorderColor } from "@/app/redux/slices/meetingmodeSlice";
 import { RootState } from "../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export function BorderColorPicker() {
     const dispatch = useDispatch();
@@ -13,41 +14,36 @@ export function BorderColorPicker() {
         (state: RootState) => state.meetingmode.background
     );
 
-    // Default color
-    const defaultColor = "transparent";
+    // Preset colors (memoized for performance)
+    const colors = useMemo(
+        () => ["#f4433626", "#2196f31c", "#ffc10745", "#3f51b53d"],
+        []
+    );
 
-    // On component mount, set default color if nothing is stored
+    // On mount, read from localStorage if available (only on client-side)
     useEffect(() => {
-        const storedColor = localStorage.getItem("meetingModeborder");
-        if (storedColor) {
+        if (typeof window !== "undefined") {
+            const storedColor = localStorage.getItem("meetingModeborder") || "transparent";
             dispatch(setMeetingModeBorderColor({ background: storedColor }));
-        } else {
-            dispatch(setMeetingModeBorderColor({ background: defaultColor }));
         }
     }, [dispatch]);
 
     // Update localStorage when selectedBorder changes
     useEffect(() => {
-        if (selectedBorder) {
+        if (typeof window !== "undefined" && selectedBorder) {
             localStorage.setItem("meetingModeborder", selectedBorder);
         }
     }, [selectedBorder]);
 
-    // Handle color selection from preset
+    // Handle color selection
     const handlePresetClick = (color: string) => {
         dispatch(setMeetingModeBorderColor({ background: color }));
     };
 
-    // Preset colors
-    const colors = ["#f4433626", "#2196f31c", "#ffc10745", "#3f51b53d",];
-
     return (
         <div className="col-12 mt-3">
             <h5 className="para mb-0">Meeting Mode Border Color</h5>
-            <div
-                className="d-flex ps-1 mt-2 align-items-center"
-                style={{ gap: "10px" }}
-            >
+            <div className="d-flex ps-1 mt-2 align-items-center" style={{ gap: "10px" }}>
                 {colors.map((color, index) => (
                     <div
                         key={index}
@@ -70,11 +66,11 @@ export function BorderColorPicker() {
                         />
                     </div>
                 ))}
+                {/* Transparent color option */}
                 <div
-
                     className="colortheme text-center"
                     style={{
-                        border: `1px solid rgb(244, 244, 244)`,
+                        border: "1px solid rgb(244, 244, 244)",
                         borderRadius: "5px",
                     }}
                 >
@@ -90,7 +86,6 @@ export function BorderColorPicker() {
                         onClick={() => handlePresetClick("transparent")}
                     />
                 </div>
-
             </div>
         </div>
     );
