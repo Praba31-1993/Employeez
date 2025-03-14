@@ -1,15 +1,29 @@
 "use client";
-import DropdownComponent from "@/app/reusableComponent/dropdown";
-import React, { useState } from "react";
-import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
+
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
 import { approverrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Punchinoutapprover from "./components/punchinoutapprover";
-import Sidebar from "@/app/sidebar/page";
+
+// ⏬ Dynamic Imports (SSR Disabled for Client-Only Components)
+const DropdownComponent = dynamic(() => import("@/app/reusableComponent/dropdown"), { ssr: false });
+const Punchinoutapprover = dynamic(() => import("./components/punchinoutapprover"), { ssr: false });
+const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
 
 function Approver() {
   const useColors = Colors(); // Declare useColors once
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
+
+  // ✅ Use `useEffect` for accessing localStorage safely
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedRole = window.localStorage.getItem("Role");
+      setRole(storedRole || null);
+    }
+  }, []);
+
+
   return (
     <div>
       <Sidebar>

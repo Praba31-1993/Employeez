@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SuperAdminDashboard from "./screens/superadmin";
 import HrDashboard from "./screens/hr";
 import ManagerDashboard from "./screens/manager";
@@ -12,9 +12,14 @@ import PayRoleExecutiveDashboard from "./screens/payrollexecutive";
 import SalesManagerDashboard from "./screens/salesManager";
 import Sidebar from "../sidebar/page";
 
-
 const Dashboard = () => {
-  const role = localStorage.getItem("Role");
+  const [role, setRole] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userRole = localStorage.getItem("Role");
+      setRole(userRole);
+    }
+  }, []);
 
   return (
     <Sidebar>

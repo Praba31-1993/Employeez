@@ -27,7 +27,6 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { useRouter } from "next/navigation";
-import { Timeloader } from "../reusableComponent/loader/timeloader";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
@@ -55,6 +54,7 @@ import {
   menuForSuperAdmin,
   menuItemForEmployee,
 } from "../reusableComponent/sidebarJson";
+import Timeloader from "../reusableComponent/loader/timeloader";
 
 interface SidebarProps {
   children: ReactNode;

@@ -1,23 +1,24 @@
 "use client";
-import DropdownComponent from "@/app/reusableComponent/dropdown";
+
+import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
 import Sidebar from "@/app/sidebar/page";
-import React, { useState, useEffect, act } from "react";
+import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { Colors } from "@/app/reusableComponent/styles";
-import SalesReportTable from "./componets/salesReportTable";
-import {
-  salesTDMReport,
-  getemployeeinformation,
-} from "@/app/reusableComponent/JsonData";
-import EmployeeInformation from "./componets/employeeinformation";
-import FixedProject from "./componets/fixedproject";
-import InternalProject from "./componets/internalproject";
-import Commission from "./componets/commission";
+import { salesTDMReport, getemployeeinformation } from "@/app/reusableComponent/JsonData";
+
+// ✅ Dynamic imports (SSR Disabled)
+const SalesReportTable = dynamic(() => import("./componets/salesReportTable"), { ssr: false });
+const EmployeeInformation = dynamic(() => import("./componets/employeeinformation"), { ssr: false });
+const FixedProject = dynamic(() => import("./componets/fixedproject"), { ssr: false });
+const InternalProject = dynamic(() => import("./componets/internalproject"), { ssr: false });
+const Commission = dynamic(() => import("./componets/commission"), { ssr: false });
 
 function SalesReport() {
-  const [salesReport, setSalesReport] = useState<any>();
-  const [selectedTab, setSelectedTab] = useState<string>("");
-
   const useColors = Colors();
+  const [salesReport, setSalesReport] = useState<any>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("T&M PO"); // Default Tab
+  const [isMounted, setIsMounted] = useState(false); // ✅ Ensure Client-Side Rendering
 
   const tabs = [
     { id: 1, label: "T&M PO" },
@@ -27,32 +28,35 @@ function SalesReport() {
     { id: 5, label: "Employee Information" },
   ];
 
+  // ✅ Ensure this runs only on the client
   useEffect(() => {
-    setSelectedTab("T&M PO");
+    setIsMounted(true);
+    const storedTab = typeof window !== "undefined" ? localStorage.getItem("selectedTab") : null;
+    if (storedTab) setSelectedTab(storedTab);
   }, []);
 
   useEffect(() => {
-    if (selectedTab === "T&M PO") {
-      setSalesReport(salesTDMReport);
-    } else if (selectedTab === "Employee Information") {
-      setSalesReport(getemployeeinformation);
-    } else {
-      setSalesReport(salesTDMReport);
+    if (!isMounted) return; // ✅ Prevent SSR issues
+
+    localStorage.setItem("selectedTab", selectedTab);
+
+    switch (selectedTab) {
+      case "Employee Information":
+        setSalesReport(getemployeeinformation);
+        break;
+      default:
+        setSalesReport(salesTDMReport);
     }
-  }, [selectedTab]);
+  }, [selectedTab, isMounted]);
 
   return (
     <div>
       <Sidebar>
-        {/* <BreadcrumbsComponent
-          selectedTab={selectedTab === "" ? "T&M PO" : selectedTab}
-        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-6 p-0">
-              {/* <p className="textheader heading my-2">Sales Report</p> */}
+              <p className="textheader heading my-2">Sales Report</p>
             </div>
-
             <div className="col-6 text-end mb-3">
               <DropdownComponent
                 dropdownlist={tabs}
@@ -60,28 +64,18 @@ function SalesReport() {
                 color={useColors.themeRed}
               />
             </div>
-
-            {selectedTab === "T&M PO" || selectedTab === "" ? (
-              <>
-                <SalesReportTable salesData={salesReport} />
-              </>
-            ) : (
-              ""
-            )}
-
-            {selectedTab === "Fixed PO" && (
-              <FixedProject salesData={salesReport} />
-            )}
-            {selectedTab === "Internal PO" && (
-              <InternalProject salesData={salesReport} />
-            )}
-            {selectedTab === "Commission" && (
-              <Commission salesData={salesReport} />
-            )}
-            {selectedTab === "Employee Information" && (
-              <EmployeeInformation salesData={salesReport} />
-            )}
           </div>
+
+          {/* ✅ Render only after component is mounted */}
+          {isMounted && (
+            <>
+              {selectedTab === "T&M PO" && <SalesReportTable salesData={salesReport} />}
+              {selectedTab === "Fixed PO" && <FixedProject salesData={salesReport} />}
+              {selectedTab === "Internal PO" && <InternalProject salesData={salesReport} />}
+              {selectedTab === "Commission" && <Commission salesData={salesReport} />}
+              {selectedTab === "Employee Information" && <EmployeeInformation salesData={salesReport} />}
+            </>
+          )}
         </div>
       </Sidebar>
     </div>
