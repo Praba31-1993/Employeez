@@ -1,10 +1,13 @@
 "use client";
-import DropdownComponent from "@/app/reusableComponent/dropdown";
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { approverrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Punchinoutapprover from "./components/punchinoutapprover";
-import Sidebar from "@/app/sidebar/page";
+
+// ⏬ Dynamic Imports (SSR Disabled for Client-Only Components)
+const DropdownComponent = dynamic(() => import("@/app/reusableComponent/dropdown"), { ssr: false });
+const Punchinoutapprover = dynamic(() => import("./components/punchinoutapprover"), { ssr: false });
+const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
 
 function Approver() {
   const useColors = Colors();
@@ -18,7 +21,6 @@ function Approver() {
       setRole(storedRole || null);
     }
   }, []);
-
 
   return (
     <div>

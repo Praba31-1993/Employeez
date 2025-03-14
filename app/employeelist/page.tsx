@@ -1,7 +1,6 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from "react";
 import Sidebar from "../sidebar/page";
-import BreadcrumbsComponent from "../reusableComponent/breadcrumbs";
 import DropdownComponent from "../reusableComponent/dropdown";
 import { Colors } from "@/app/reusableComponent/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,7 +8,6 @@ import { SearchLogic } from "../reusableComponent/commonlogic";
 import { employeeListData } from "../reusableComponent/JsonData";
 import WorkIcon from "@mui/icons-material/Work";
 import EmployeeCard from "./employeecard";
-import PaginationComponent from "../reusableComponent/paginationcomponent";
 
 export interface Employee {
   employeeId: string;
@@ -27,13 +25,9 @@ function EmployeeList() {
   const [selectedTab, setSelectedTab] = useState("Employee List");
   const [search, setSearch] = useState<string>("");
   const [rowsList, setRows] = useState<Employee[]>(employeeListData);
-  const [countPerPage, setCountForPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalCount = rowsList.length;
-  const totalPages = Math.ceil(totalCount / countPerPage);
-  const [pages, setPages] = useState([]);
+  const [role, setRole] = useState<string | null>(null); 
+  const [isClient, setIsClient] = useState(false); // ✅ Ensure Client-Side Check
   const useColors = Colors();
-  const role = localStorage.getItem("Role");
 
   const tabs = [
     { id: 1, label: "Select Department" },
@@ -41,44 +35,33 @@ function EmployeeList() {
     { id: 3, label: "HR" },
   ];
 
+  // ✅ Ensure `localStorage` runs only on the client
+  useEffect(() => {
+    setIsClient(true);
+    if (typeof window !== "undefined") {
+      const userRole = localStorage.getItem("Role");
+      setRole(userRole);
+    }
+  }, []);
+
   useEffect(() => {
     if (role === "E") {
       setRows([]);
-    } else setRows(employeeListData);
-  }, [role]);
-
-  useEffect(() => {
-    const arr: any = [];
-    for (let i = 1; i <= totalPages; i++) {
-      arr.push(i);
+    } else {
+      setRows(employeeListData);
     }
-    setPages(arr);
-  }, [totalPages]);
+  }, [role]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-
     setSearch(query);
     const res = SearchLogic(employeeListData, query);
-
     setRows(res);
-  };
-
-  // const currentPageItems = rowsList.slice(
-  //   (currentPage - 1) * countPerPage,
-  //   currentPage * countPerPage
-  // );
-
-  const handlePageChange = (page: any) => {
-    setCurrentPage(page);
   };
 
   return (
     <div>
       <Sidebar>
-        {/* <BreadcrumbsComponent
-          selectedTab={selectedTab === "" ? "Employee List" : selectedTab}
-        /> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 p-0">
@@ -86,7 +69,7 @@ function EmployeeList() {
             </div>
           </div>
           {/* Search Field */}
-          <div className="row ">
+          <div className="row">
             <div className="col-12 col-xxl-9 col-md-9 p-0">
               <div className="d-flex gap-1">
                 <WorkIcon sx={{ mt: 1 }} />
@@ -112,25 +95,23 @@ function EmployeeList() {
               </div>
             </div>
           </div>
-          <div className="row">
-            {rowsList?.length > 0 &&
-              rowsList?.map((employee: any) => (
-                <div
-                  className="col-12 col-md-6 col-xxl-3 g-3 "
-                  key={employee?.employeeId}
-                  style={{ height: "fit-content" }}
-                >
-                  <EmployeeCard employeelist={employee} />
-                </div>
-              ))}
-          </div>
+
+          {/* ✅ Render UI only after `isClient` is true */}
+          {isClient && (
+            <div className="row">
+              {rowsList.length > 0 &&
+                rowsList.map((employee: Employee) => (
+                  <div
+                    className="col-12 col-md-6 col-xxl-3 g-3"
+                    key={employee.employeeId}
+                    style={{ height: "fit-content" }}
+                  >
+                    <EmployeeCard employeelist={employee} />
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
-        {/* <PaginationComponent
-          currentPage={currentPage}
-          currentPageFunction={handlePageChange}
-          
-          totalPages={totalPages}
-        /> */}
       </Sidebar>
     </div>
   );

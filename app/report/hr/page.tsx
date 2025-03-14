@@ -1,22 +1,24 @@
 "use client";
-import DropdownComponent from "@/app/reusableComponent/dropdown";
+import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
-import BreadcrumbsComponent from "@/app/reusableComponent/breadcrumbs";
 import { hrrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
-import Sidebar from "@/app/sidebar/page";
-import Comp_history from "./components/comp_history";
+
+// ❌ Sidebar and DropdownComponent might be using `document`, so disable SSR
+const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
+const DropdownComponent = dynamic(() => import("@/app/reusableComponent/dropdown"), { ssr: false });
+const Comp_history = dynamic(() => import("./components/comp_history"), { ssr: false });
 
 function Hr_report() {
-  const useColors = Colors(); // Declare useColors once
+  // ✅ Prevent `document is not defined` errors by checking for `window`
+  const useColors = typeof window !== "undefined" ? Colors() : { themeRed: "#ff0000" };
+  
   const [selectedTimeOff, setSelectedTimeOff] = useState("");
   const [role, setRole] = useState<string | null>(null);
 
-
-  // ✅ Use `useEffect` for accessing localStorage safely
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedRole = window.localStorage.getItem("Role");
+      const storedRole = localStorage.getItem("Role");
       setRole(storedRole || null);
     }
   }, []);

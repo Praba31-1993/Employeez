@@ -23,8 +23,8 @@ import { AppDispatch } from "../redux/store";
 import { User } from "../reusableComponent/interfacetypes";
 import { useRouter } from "next/navigation";
 import { loginUser } from "../redux/slices/loginSlice";
-import { Timeloader } from "../reusableComponent/loader/timeloader";
 import { setBunit } from "../redux/slices/bunitSlice";
+import Timeloader from "../reusableComponent/loader/timeloader";
 
 export default function Login() {
   const useColors = Colors();

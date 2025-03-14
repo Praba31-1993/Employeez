@@ -1,13 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Sidebar from "../sidebar/page";
-import Profile_update from "./component/profile_update";
+import dynamic from "next/dynamic";
 import "../profile/Profile.css";
-import Personal_info from "./component/personal_info";
-import Work_status from "./component/work_status";
-import General_document from "./component/general_document";
-import Work_site from "./component/work_site";
-import Emergencycontact_details from "./component/emergencycontact_details";
+
+// ❌ Sidebar & other components might be using `document`, so disable SSR
+const Sidebar = dynamic(() => import("../sidebar/page"), { ssr: false });
+const Profile_update = dynamic(() => import("./component/profile_update"), { ssr: false });
+const Personal_info = dynamic(() => import("./component/personal_info"), { ssr: false });
+const Work_status = dynamic(() => import("./component/work_status"), { ssr: false });
+const General_document = dynamic(() => import("./component/general_document"), { ssr: false });
+const Work_site = dynamic(() => import("./component/work_site"), { ssr: false });
+const Emergencycontact_details = dynamic(() => import("./component/emergencycontact_details"), { ssr: false });
 
 function Profile() {
   const [role, setRole] = useState<string | null>(null);
