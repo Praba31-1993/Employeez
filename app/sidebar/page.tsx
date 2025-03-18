@@ -45,6 +45,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import BubbleChartOutlinedIcon from "@mui/icons-material/BubbleChartOutlined";
 import DnsOutlinedIcon from "@mui/icons-material/DnsOutlined";
+import dynamic from "next/dynamic";
 
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Colors } from "../reusableComponent/styles";
